@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	
+	
+	<!--  
+	<resources mapping="/resources/**" location="/resources/" />
+ 	 -->
+ 	
+ 	<default-servlet-handler/>
+ 	
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="3"/>
+	</beans:bean>
+	
+	<context:component-scan base-package="com.kosmo.shoong" />
+	
+	
+     
+     <!-- tiles 사용하기 위한 bean 등록 -->
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/views/templates/layouts.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+		
+	<beans:bean  class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="order" value="2"/>
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+	</beans:bean>
+	
+	<beans:bean  id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+ 		<beans:property name="maxUploadSize" value="1048576"/><!-- 1M로 설정 --> 	
+ 	</beans:bean>
+ 	
+ 	<!-- 스프링에서 제공하는 API 사용해서 다운로드 구현시
+	         아래 빈 등록 과정 반드시 필요
+	         단,스프링에서 제공하는 API 미 사용시에는 불필요-->
+	<!-- 1]InternalResourceViewResolver 빈 등록 
+	       -다른 ViewResolver사용시 더 이상 제공해주지 않음
+	       -View객체로 InternalResourceView객체사용
+	        InternalResourceView객체는 JSP페이지를
+	               뷰로 사용 즉 JSP페이지로 매핑하는 리졸버(order=3으로 변경)
+	 -->
+	 <!-- 
+	 2]org.springframework.web.servlet.view.BeanNameViewResolver
+	  등록
+	  -View객체로 JSP가 아닌 View타입의 객체를 매핑하는 리졸버
+	  -이 뷰리졸버를 기본 뷰리졸버보다 우선 순위가 높게 설정	  
+	 -->
+ 	
+ 	<beans:bean p:order="1" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+ 	<!-- 
+		 3]실제 다운로드를 처리하는 View타입의 클래스를 빈 으로 등록
+		  - View계열 인터페이스 나 클래스를 상속받아서 구현	
+	      - 빈 등록시 반드시 id값 부여.
+	         다운로드 요청을 처리하는 다운로드 컨트롤러에서
+	         반환시 id에 지정한 이름 지정
+	         예]id값이 id="downloadview"이면
+	        return "downloadview";
+	         즉 id에 지정한 이름을 컨틀로러 클래스에서 
+	         리턴함.
+		  --> 
+	<!--  -->
+	<beans:bean id="downloadView" class="com.kosmo.shoong.common.DownloadView"/> 
+
+	
+	<!-- 페이징 properti설정 -->
+	<context:property-placeholder location="classpath:com/kosmo/shoong/pack/resource/notice.properties"/>
+	
+	<beans:bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com" />
+		<beans:property name="port" value="587" />
+		<beans:property name="username" value="gw6451@gmail.com" />
+		<beans:property name="password" value="dbrudzla6451@" />
+		<beans:property name="defaultEncoding" value="utf-8" />
+		<beans:property name="javaMailProperties">
+			<beans:props>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.debug">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	
+</beans:beans>

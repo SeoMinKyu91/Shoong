@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<!-- template에 최상위 페이지명 -->
+	<definition name="layouts" template="/WEB-INF/views/templates/Layouts.jsp">
+		
+		<!--Top footer 만들어야 함. --> 
+		<put-attribute name="top" value="/WEB-INF/views/templates/Top.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/templates/Footer.jsp" />
+		
+	</definition>
+	
+	<definition name="*" extends="layouts">
+		<put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+
+	
+	<definition name="*/*" extends="layouts">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+
+	<definition name="*/*/*" extends="layouts">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+	</definition>
+	
+	<definition name="*/*/*/*" extends="layouts">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}/{4}.jsp" />
+	</definition>
+	
+
+</tiles-definitions>

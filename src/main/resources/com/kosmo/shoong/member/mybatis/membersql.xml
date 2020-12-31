@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosmo.shoong.member.mybatis.membersql">
+
+	<resultMap type="memberDTO" id="MemberDTO">
+		<result property="userId" column="USER_ID"/>
+		<result property="userPWD" column="PWD"/>
+		<result property="userName" column="NAME"/>
+		<result property="userRRN" column="RRN"/>
+		<result property="userAddr" column="ADDRESS"/>
+		<result property="lastAccess" column="LASTCONNECT"/>
+		<result property="userJoinDate" column="USERJOINDATE"/>
+		<result property="userFrequeny" column="FREQUENCY"/>
+	</resultMap>
+	
+	<resultMap type="com.kosmo.shoong.service.gallery.GalleryDTO" id="galleryDTO">
+		<result property="diaryImgCode" column="DIARY_IMG_CODE"/>
+		<result property="diaryCode" column="DIARY_CODE"/>
+		<result property="diaryImgName" column="DIARY_IMG_NAME"/>
+		<result property="diaryImgDate" column="DIARY_IMG_DATE"/>
+		<result property="diaryImgTitle" column="DIARY_IMG_TITLE"/>
+		<result property="diaryImgContent" column="DIARY_IMG_CONTENT"/>
+		<result property="userId" column="USER_ID"/>
+	</resultMap>
+	
+
+	
+	<select id="selectOne" parameterType="java.util.Map" resultMap="MemberDTO">
+		SELECT * FROM member WHERE user_id=#{userId}
+	</select>
+	
+	<select id="showImg" parameterType="java.util.Map" resultType="java.util.Map">
+		<!-- 
+		SELECT diary_img_name,유저아이디 들어가는 곳 
+		FROM diary_img i JOIN diary d ON i.diary_code=d.diary_code
+		(SELECT (SELECT user_id FROM diary d JOIN (SELECT user_id FROM member m JOIN record r ON m.user_id=r.user_id) r1 ON d.) FROM )
+				
+		select diary_img_name
+		from diary_img i join ( select diary_code,t1.* from diary d join 
+			(SELECT r.user_id,r.record_id FROM member m JOIN record r ON m.user_id=r.user_id WHERE m.user_id='wkungh93@naver.com') t1 
+				on d.record_id=t1.record_id ) t2 on i.diary_code = t2.diary_code
+		 -->
+		SELECT diary_img_name
+		FROM diary_img i JOIN (SELECT diary_code,t1.* FROM diary d JOIN 
+			(SELECT r.user_id,r.record_id FROM member m JOIN record r ON m.user_id=r.user_id WHERE m.user_id=#{userId}) t1 
+				ON d.record_id=t1.record_id ) t2 ON i.diary_code = t2.diary_code
+	</select>
+	
+	<select id="showCourse" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM course c join member m ON c.user_id=#{userId}
+	</select>
+	
+	<select id="memberIsMember" parameterType="java.util.Map"
+		resultType="int">
+		SELECT COUNT(*) 
+		FROM MEMBER 
+		WHERE user_id=#{userId} AND pwd=#{userPWD}
+	</select>
+	<select id="duplEmail" parameterType="java.lang.String"
+		resultType="int">
+		SELECT COUNT(*) FROM member WHERE user_id=#{userId}
+	</select>
+	<!---->
+	<insert id="memberInsert" parameterType="java.util.Map">
+		INSERT INTO member(user_id,pwd,name,rrn,address,userjoindate,usertel)
+		VALUES(#{userId},#{userPWD},#{userName},#{userRRN},#{userAddr},SYSDATE,#{userTel})
+	</insert>
+	<insert id="memberVerify" parameterType="java.lang.String">
+		INSERT INTO verify
+		VALUES(#{userId},'Y')
+	</insert>
+	<update id="memberUpdate" parameterType="java.util.Map">
+		UPDATE member 
+		<set>
+			<if test="surveyResult!=null">frequency=#{surveyResult},</if>
+			<if test="userPWD!=null">pwd=#{userPWD},</if>
+			<if test="userName!=null">name=#{userName},</if>
+			<if test="userAddr!=null">addr=#{userAddr},</if>
+			<if test="userTel!=null">usertel=#{userTel},</if>
+		</set> 
+		<if test="userId!=null">
+			WHERE user_id=#{userId}
+		</if>
+	</update>
+	
+	<select id="memberHasPack" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT pack_id FROM pack_join WHERE user_id=#{userId} AND pack_join_accept='yes'
+	</select>
+	
+</mapper>

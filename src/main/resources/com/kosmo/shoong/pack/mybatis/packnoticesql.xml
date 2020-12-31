@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kosmo.shoong.pack.mybatis.packnoticesql">
+
+
+
+	<resultMap type="packNoticeDTO" id="packNoticeDTOResult">
+			<result property="packNoticeNo" column="PACK_NOTICE_NO"/>
+			<result property="userName" column="NAME"/>
+			<result property="userID" column="USER_ID"/>
+			<result property="packID" column="PACK_ID"/>
+			<result property="packNoticeTitle" column="PACK_NOTICE_TITLE"/>
+			<result property="packNoticeDate" column="PACK_NOTICE_DATE"/>
+			<result property="packNoticeContent" column="PACK_NOTICE_CONTENT"/>
+	</resultMap>
+	
+	<select id="PackNoticeSelectList" parameterType="java.util.Map" resultMap="packNoticeDTOResult">
+		
+		SELECT * FROM
+		(SELECT T.*,ROWNUM R FROM (SELECT p.*,m.name FROM member m JOIN pack_notice p ON m.user_id = p.user_id WHERE p.pack_id = #{packId}
+		ORDER BY pack_notice_no DESC) T)
+		WHERE R BETWEEN #{start} AND #{end}	 
+		
+	</select>
+	
+	<select id="PackNoticeSelectOne" parameterType="java.util.Map" resultMap="packNoticeDTOResult">
+		SELECT * from PACK_NOTICE WHERE PACK_NOTICE_NO = #{packNoticeNo}
+	</select>
+	
+	<select id="isManager" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM pack_manager WHERE user_id = #{loginId}
+		
+	</select>
+	
+	
+	<select  id="noticeGetTotalRecord" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM pack_notice WHERE pack_id = #{packId}
+		
+	</select>
+	
+	
+	<insert id="PackNoticeInsert" parameterType="java.util.Map">
+		insert into PACK_NOTICE values(SEQ_P_NOTICE.NEXTVAL,#{userId},#{packId},#{packNoticeTitle},sysdate,#{packNoticeContent})
+	</insert>
+	
+	<update id="PackNoticeUpdate" parameterType="java.util.Map">
+		UPDATE pack_notice SET pack_notice_title = #{packNoticeTitle}, pack_notice_content = #{packNoticeContent} WHERE pack_notice_no = #{packNoticeNo}
+	</update>
+	
+	<delete id="PackNoticeDelete">
+		DELETE FROM pack_notice WHERE pack_notice_no = #{packNoticeNo}
+	</delete>
+
+
+</mapper>
