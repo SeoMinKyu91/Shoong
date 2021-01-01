@@ -181,10 +181,14 @@
 			<artifactId>cglib</artifactId>
 			<version>3.3.0</version>
 		</dependency>
-
 		<!-- missing artifact에러시 라이브러리 다운받아 프로젝트에 추가 -->
-		<!-- <dependency> <groupId>net.sourceforge.cglib</groupId> <artifactId>com.springsource.net.sf.cglib</artifactId> 
-			<version>2.2.0</version> </dependency> -->
+		<!-- 
+		<dependency> 
+			<groupId>net.sourceforge.cglib</groupId> 
+			<artifactId>com.springsource.net.sf.cglib</artifactId> 
+			<version>2.2.0</version> 
+		</dependency> 
+		-->
 		<!-- 웹 소켓용 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
