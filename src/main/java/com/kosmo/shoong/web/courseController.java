@@ -53,6 +53,7 @@ public class courseController {
 	@ResponseBody
 	public String uploadCourse(MultipartHttpServletRequest mhsr) {
 		String filePath = mhsr.getServletContext().getRealPath("/upload");
+		System.out.println("courseupload:"+filePath);
 		Iterator<String> itr = mhsr.getFileNames();
 
 		String fileFullPath = null;

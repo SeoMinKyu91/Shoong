@@ -180,7 +180,7 @@
 	function sendFileToServer(formData) {
 		var extraData = {}; //Extra Data.
 		var jqXHR = $.ajax({
-			url : "<c:url value="/pack/fileUpload/post"/>",
+			url : "<c:url value="/course/fileUpload"/>",
 			type : "POST",
 			contentType : false,
 			processData : false,
