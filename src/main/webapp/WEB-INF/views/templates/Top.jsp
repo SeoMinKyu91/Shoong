@@ -51,7 +51,8 @@
 		<nav id="colorlib-main-menu" role="navigation">
 	
 			<ul>
-				<li class="colorlib-active"><a href="<c:url value="/"/>">HOME</a></li>
+				<li><a href="<c:url value="/"/>">HOME</a></li>
+				<li><a href="<c:url value="/course/navi.do"/>">Navi</a></li>
 				<c:if test="${empty sessionScope.userId}" var="isNotLogin">
 					<li><a href="<c:url value="/Member/Login.do"/>">LOGIN</a></li>
 				</c:if>

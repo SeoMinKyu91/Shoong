@@ -13,21 +13,23 @@ import com.kosmo.shoong.service.course.CourseService;
 
 
 @Controller
-@RequestMapping("/course/")
+@RequestMapping("/course")
 public class courseController {
 	
 	@Resource(name="courseService")
 	private CourseService service;
 	
-	@RequestMapping("main.do")
-	public String packMain(Model model,Map map) {
+	@RequestMapping("/main.do")
+	public String courseMain(Model model,Map map) {
 		map.put("user_ID","kim");
 		CourseDTO record = service.selectOne(map);
-		
 		model.addAttribute("courseList",record);
-		
-		
 		return "course/courseList/courseList";
+	}
+	
+	@RequestMapping("/navi.do")
+	public String courseNavi() {
+		return "course/Navi";
 	}
 	
 }
