@@ -182,7 +182,7 @@ width: 100%;
 </div>
 </div>
 <script>
-// 이미지 다운로드 모달 정보 변경 
+		// 이미지 다운로드 모달 정보 변경 
 		$(".galleryImg").click(function(){
 			var fileName = $(this).next().val()
 			var imgDownloadHref = '<c:url value="/pack/fileDownload.do?filename='+fileName+'"/>'
@@ -193,7 +193,7 @@ width: 100%;
 			$('#galleryViewModal').modal();
 		})
 
-//이미지 드래그앤 드랍.
+		//이미지 드래그앤 드랍.
         var objDragAndDrop = $(".dragAndDropDiv");
         
         $(document).on("dragenter",".dragAndDropDiv",function(e){
@@ -302,7 +302,7 @@ width: 100%;
 				                 });
 				                
 				              $('#imgArry').val(imgarr);  
-				        }
+		}
 				
 </script>
 
