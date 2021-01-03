@@ -11,13 +11,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.kosmo.shoong.service.impl.member.MemberServiceImpl;
 import com.kosmo.shoong.service.impl.pack.PackNoticeServiceImpl;
+import com.kosmo.shoong.service.pack.PackCommentDTO;
 import com.kosmo.shoong.service.pack.PackDTO;
 import com.kosmo.shoong.service.pack.PackGalleryDTO;
 import com.kosmo.shoong.service.pack.PackGalleryService;
@@ -79,7 +82,6 @@ public class packController {
       if(mamberHasPack !=null) {
          req.getSession().setAttribute("packId", mamberHasPack.get("PACK_ID"));
       }
-      
 
       return "forward:/pack/main.do";
    }
@@ -157,8 +159,20 @@ public class packController {
       return check;
    }//////////////   
    
-   
-   
+   @RequestMapping(value="comment.do", method=RequestMethod.GET)
+   public String packComment(@RequestParam Map map, HttpServletRequest req, Model model,@ModelAttribute("id") String id) {
+	   //데이터 저장]	
+	   String path = req.getContextPath();
+	   map.put("id", id);
+	   memoService.insert(map);
+	   PackCommentDTO record = memoService.slectOne(map);
+	   record.setContent(record.getContent().replace("\r\n","<br/>"));
+	   model.addAttribute("record",record);
+	   commentService.update(map);
+	   commentService.delete(map);
+	   
+	   return "pack/PackComment";
+   }
    
    
 }

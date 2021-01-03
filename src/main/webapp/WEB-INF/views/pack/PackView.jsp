@@ -110,7 +110,7 @@
 							<h3>Comment</h3>
 						</div>
 						<div class="col-lg-3 col-sm-4" style="padding-top: 13px;">
-							<a href="<c:url value="#"/>" class="btn-custom">Read More 
+							<a href="<c:url value="/pack/comment.do"/>" class="btn-custom">Read More 
 								<small><span class="ion-ios-arrow-forward"></span></small>
 							</a>
 						</div>
