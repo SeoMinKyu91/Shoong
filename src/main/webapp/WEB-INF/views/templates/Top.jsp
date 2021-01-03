@@ -52,7 +52,6 @@
 	
 			<ul>
 				<li><a href="<c:url value="/"/>">HOME</a></li>
-				<li><a href="<c:url value="/course/navi.do"/>">Navi</a></li>
 				<c:if test="${empty sessionScope.userId}" var="isNotLogin">
 					<li><a href="<c:url value="/Member/Login.do"/>">LOGIN</a></li>
 				</c:if>
@@ -72,7 +71,7 @@
 				<c:if test="${!isNotId}">
 				</c:if>
 				<li><a href="<c:url value="/course/navi.do"/>">Navi</a></li>
-				<li><a href="<c:url value="/course/navi.do"/>" data-toggle="modal" data-target="#galleryModal">Route Upload</a></li>
+				<li><a href="#" data-toggle="modal" data-target="#galleryModal">Route Upload</a></li>
 			</ul>
 		</nav>
 		

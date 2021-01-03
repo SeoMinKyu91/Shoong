@@ -1,16 +1,23 @@
 package com.kosmo.shoong.web;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.Map;
 
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -42,9 +49,24 @@ public class courseController {
 	
 	@RequestMapping(value = "",produces = "text/html; charset=UTF-8")
 	@ResponseBody
-	public String courseRouteInsert() {
+	public String routeLoad(
+			@RequestParam String fileName,HttpServletRequest req) 
+											throws IOException {
+		String routePath = req.getServletContext().getRealPath("/upload")+fileName;
+		File file = new File(fileName);
+		
+		BufferedReader br = 
+				new BufferedReader(
+						new InputStreamReader(new FileInputStream(file)));
+		String data;
+		while((data=br.readLine())!=null) {
+			data += data;
+		}
+		
+		
 		
 		JSONObject obj = new JSONObject();
+		
 		
 		return obj.toJSONString();
 	}
