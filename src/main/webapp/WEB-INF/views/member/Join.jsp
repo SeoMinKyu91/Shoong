@@ -28,18 +28,22 @@ input {
 	<div class="container">
 		<div class="col-xs-12 col-md-12">
 			<div class="page-header" style="text-align: center">
-				<img alt="shoongLogo" src="<c:url value="/images/shooongLogo.png"/>"
-					style="width: 100px; padding-bottom: 50px">
+				<a href="<c:url value="/"/>"><img alt="shoongLogo" src="<c:url value="/images/shooongLogo.png"/>"
+					style="width: 100px; padding-bottom: 50px"></a>
 			</div>
 		</div>
 	</div>
 	<!-- 실제 내용 시작 -->
-	<div>
+	<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2" style="padding-bottom: 50px">
 		<form class="form-horizontal" method="post" name="join"
+		style="background-color: white; box-shadow: 0px 0px 5px #000; border-radius: 100px;"
 			action="<c:url value='/Member/Join.do'/>">
 			<div class="form-group">
-				<div class=" col-xs-10 offset-xs-1 col-md-4 offset-md-4"></div>
-				<div class=" col-xs-10 offset-xs-1 col-md-4 offset-md-4">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2" 
+					style="padding-top: 40px; padding-bottom: 40px; text-align: center">
+					<h3 style="font-weight: bold">회원 가입</h3>
+				</div>
+				<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 					<!-- 이메일 입력란 -->
 					<label for="userId">이메일 </label>
 					<Button type="button" id="emailDuplCheck" class="btn btn-sm"
@@ -66,26 +70,26 @@ input {
 			</div>
 			<h1></h1>
 			<!-- 비밀번호 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-4 offset-md-4">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userPWD">비밀번호</label> <input type="password"
 					class="form-control input-sm" id="userPWD" name="userPWD"
 					style="font-size: .8em" placeholder="비밀번호를 입력하세요">
 			</div>
 			<!-- 비밀번호 확인 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-4 offset-md-4">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userPWDOk">비밀번호 확인</label> <input type="password"
 					class="form-control input-sm" id="userPWDOk" name="userPWDOk"
 					style="font-size: .8em" placeholder="위와 같은 비밀번호를 입력하세요"> <span
 					id="passwordCheck" style="font-size: .8em; color: gray"></span>
 			</div>
 			<!-- 이름 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-4 offset-md-4">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userName">이름</label> <input type="text"
 					class="form-control input-sm" id="userName" name="userName"
 					style="font-size: .8em" placeholder="이름을 입력하세요">
 			</div>
 			<!-- 생년월일 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-4 offset-md-4">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userRRN">생년월일</label> <br /> <input name="userRRN1" id="userRRN1"
 					type="text" size="25" maxlength="6" OnKeyUp="check();"
 					onChange="inputbirth()" style="height: 50px"
@@ -102,13 +106,13 @@ input {
 					disabled="disabled" onBlur="checknum(document.join.userrrn3.value)">일
 			</div>
 			<!-- 성별 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-4 offset-md-4">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userGender">성별</label> <br /> <input name="userGender"
 					type="text" size="20" maxlength="2" disabled="disabled"
 					onBlur="checknum(document.join.userGender.value)">
 			</div>
 			<!-- 연락처 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-4 offset-md-4">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userTel">연락처</label><br /> <select name="userTel1"
 					id="userTel1"
 					style="font-size: .8em; height: 50px; width: 26.5%; padding-left: 10px; border: #ced4da 1.5px solid;">
@@ -124,21 +128,20 @@ input {
 					style="height: 50px; width: 26.5%" OnKeyUp="checkTel();">
 			</div>
 			<!-- 활동지역 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-4 offset-md-4">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userAddr">활동지역</label>
 				<div >
 					<input type="text" class="form-control" id="userAddr" name="userAddr" style="font-size:.8em">
 				</div>
 			</div>
-			<div class="form-group col-xs-10 offset-xs-1 col-md-4 offset-md-4">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<div id="map"></div>
 			</div>
 			<div class="form-group">
 				<input type="hidden"  id="memberLat"  name= "memberLat" class="form-group"/>
 				<input type="hidden"  id="memberLng"  name= "memberLng" class="form-group"/>
 			</div>
-			<br />
-			<div class="form-group col-xs-10 offset-xs-1 col-md-4 offset-md-4">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2" style="padding-bottom: 50px">
 				<button type="submit" class="btn btn-primary btn-lg btn-block">가입하기</button>
 			</div>
 		</form>
