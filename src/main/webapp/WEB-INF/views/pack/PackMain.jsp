@@ -194,14 +194,15 @@ color:white;
 		var markerLng;
 		var geocoder = new kakao.maps.services.Geocoder(); 
 		//0]사용자 위치 구하기
- 		if (navigator.geolocation) {
- 	
-           var options = { timeout: 3000, maxinumAge: 5000 };
-           navigator.geolocation.getCurrentPosition(successCallback);
+       if (navigator.geolocation) {
+    
+            var options = { timeout: 3000, maxinumAge: 5000 };
+           // navigator.geolocation.getCurrentPosition(successCallback);
+           
             //이거 실패하는코드도 입력. 경복궁 37.57801416976735  /  126.97658868798284 
-            //displayKaKaoMap(37.57801416976735,  126.97658868798284 );
             //실패하면 displayKaKaoMap(lat, lng); 여기에 저값담아보내기
         }
+       displayKaKaoMap(37.57801416976735,  126.97658868798284 );
  		
  		//0-1]사용자 위치 구하기 성공시 좌표값 displayKaKaoMap로 넘김
  		//실패시도 계산..

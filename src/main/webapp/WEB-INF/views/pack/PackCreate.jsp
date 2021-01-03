@@ -230,11 +230,13 @@ width: 20%
  		if (navigator.geolocation) {
  	
             var options = { timeout: 3000, maxinumAge: 5000 };
-            navigator.geolocation.getCurrentPosition(successCallback);
+            //navigator.geolocation.getCurrentPosition(successCallback);
             //이거 실패하는코드도 입력. 경복궁 37.57801416976735  /  126.97658868798284 
             //실패하면 displayKaKaoMap(lat, lng); 여기에 저값담아보내기
         }
- 		
+ 		 $("#packLat").val("37.57801416976735");
+		 $("#packLng").val("126.97658868798284");
+ 		 displayKaKaoMap(37.57801416976735, 126.97658868798284 );
  		//0-1]사용자 위치 구하기 성공시 좌표값 displayKaKaoMap로 넘김
         function successCallback(position) {
              
