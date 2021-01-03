@@ -238,9 +238,9 @@ public class MemberController {
 		List<Map> lists = galleryService.imgSelectList(map);
 		model.addAttribute("imgList", lists);
 		List<Map> courselists = courseService.showCourse(map);
-		for(Map courseList:courselists)
-			courseList.put("COURSE_DATE", courseList.get("COURSE_DATE").toString().substring(0,10));
-		model.addAttribute("courseList", courselists);
+		//for(Map courseList:courselists)
+			//courseList.put("COURSE_DATE", courseList.get("COURSE_DATE").toString().substring(0,10));
+		//model.addAttribute("courseList", courselists);
 		return "mypage/mypage";
 	}
 		

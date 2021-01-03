@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +20,8 @@ public class GalleryController {
 	private GalleryService galleryService;
 
 	@RequestMapping("/myGallery.do")
-	public String myGallery(Model model, Map map) {
-		map.put("userID", "test");
+	public String myGallery(HttpServletRequest req, Model model, Map map) {
+		map.put("userId", req.getSession().getAttribute("userId").toString());
 		List<Map> lists = galleryService.imgSelectList(map);
 		//model.addAttribute("images","/images/"+src);
 		model.addAttribute("imgList", lists);
