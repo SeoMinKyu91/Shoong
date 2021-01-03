@@ -41,11 +41,22 @@ public class packController {
    
    
    
+   
+   
    @RequestMapping("main.do")
-   public String packMain(@RequestParam Map map ,Model model) {
-      
+   public String packMain(@RequestParam Map map ,Model model,HttpServletRequest req) {
+      /*유저 id 값 */
+      /* 유저정보에 ADDRESS로는 정확도 부족 lat,lng 받아서 기반 검색. 주석 풀지 마세요.
+     map.put("userId", req.getSession().getAttribute("userId").toString()); 
+     Map userAddress =  service.selectOneUserAddr(map);
+     if(userAddress.get("ADDRESS") != null) {
+        
+        map.put("searchRegion", userAddress.get("ADDRESS"));
+        model.addAttribute("searchRegion",userAddress.get("ADDRESS"));
+     }*/
       List<PackDTO> packList=service.selectList(map);
       model.addAttribute("packList",packList);
+      
       if(map.get("searchRegion") != null) {
          model.addAttribute("searchLat",map.get("lat"));
          model.addAttribute("searchLng",map.get("lng"));
@@ -53,6 +64,12 @@ public class packController {
       
       return "pack/PackMain";
    }
+   
+   
+   
+   
+   
+   
 
    //팩 생성 페이지로 이동 get
    @RequestMapping("create.do")
