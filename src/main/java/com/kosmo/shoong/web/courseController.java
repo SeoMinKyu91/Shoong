@@ -3,12 +3,10 @@ package com.kosmo.shoong.web;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.Map;
-
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -30,47 +28,46 @@ import com.kosmo.shoong.service.course.CourseService;
 @Controller
 @RequestMapping("/course")
 public class courseController {
-	
+
 	@Resource(name="courseService")
 	private CourseService service;
-	
+
 	@RequestMapping("/main.do")
 	public String courseMain(Model model,Map map) {
 		map.put("user_ID","kim");
 		CourseDTO record = service.selectOne(map);
 		model.addAttribute("courseList",record);
-		return "course/courseList/courseList";
+		return "course/CourseList";
 	}
-	
+
 	@RequestMapping("/navi.do")
 	public String courseNavi() {
 		return "course/Navi";
 	}
-	
+
 	@RequestMapping(value = "",produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String routeLoad(
-			@RequestParam String fileName,HttpServletRequest req) 
+			@RequestParam String fileName,HttpServletRequest req)
 											throws IOException {
 		String routePath = req.getServletContext().getRealPath("/upload")+fileName;
 		File file = new File(fileName);
-		
-		BufferedReader br = 
+
+		BufferedReader br =
 				new BufferedReader(
 						new InputStreamReader(new FileInputStream(file)));
 		String data;
 		while((data=br.readLine())!=null) {
 			data += data;
 		}
-		
-		
-		
+
+
 		JSONObject obj = new JSONObject();
-		
-		
+
+
 		return obj.toJSONString();
 	}
-	
+
 	@RequestMapping(value = "/fileUpload", produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String uploadCourse(MultipartHttpServletRequest mhsr) {
@@ -100,5 +97,5 @@ public class courseController {
 		obj.put("fileName", obj);
 		return obj.toJSONString();
 	}
-	
+
 }

@@ -85,7 +85,7 @@
 				<c:if test="${!isEmpty}">
 					<c:forEach var="item" items="${imgList}">
 						<div class="swiper-slide">
-							<img src="<c:url value='/images/${item.DIARY_IMG_NAME}'/>">
+							<img src="<c:url value='/images/gallery/${item.DIARY_IMG_NAME}'/>">
 						</div>
 					</c:forEach>
 				</c:if>
