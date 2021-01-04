@@ -1,4 +1,4 @@
-package com.kosmo.shoong.service.pack;
+package com.kosmo.shoong.common.utility;
 
 public class PagingUtil {
 

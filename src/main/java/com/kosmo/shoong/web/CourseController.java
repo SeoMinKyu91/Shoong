@@ -27,7 +27,7 @@ import com.kosmo.shoong.service.course.CourseService;
 
 @Controller
 @RequestMapping("/course")
-public class courseController {
+public class CourseController {
 
 	@Resource(name="courseService")
 	private CourseService service;

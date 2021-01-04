@@ -25,7 +25,7 @@ import com.kosmo.shoong.service.pack.PackService;
 
 @Controller
 @RequestMapping("/pack/")
-public class packController {
+public class PackController {
 
    @Resource(name="packService")
    private PackService service;
