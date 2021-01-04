@@ -55,6 +55,16 @@
 	select count(*) from pack_manager where user_id = #{userId}
 </select>
 
+<select id="packIntroSelect" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT * FROM pack WHERE pack_id  = #{packId}
+</select>
 
+<!-- 팩 정보 수정 -->
+<update id="packInfoUpdate" parameterType="java.util.Map">
+	update pack set pack_name = #{packName}, pack_tag = #{packTag}, 
+	pack_act_time = #{packActTime}, pack_act_age = #{packActAge}, pack_intro = #{packIntro},
+	pack_thumbnail = #{packThumbnail} where pack_id = #{packId}
+	
+</update>
 
 </mapper>

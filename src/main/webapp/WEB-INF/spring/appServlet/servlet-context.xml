@@ -55,7 +55,7 @@
 	</beans:bean>
 	
 	<beans:bean  id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
- 		<beans:property name="maxUploadSize" value="1048576"/><!-- 1M로 설정 --> 	
+ 		<beans:property name="maxUploadSize" value="4096000"/><!-- 1M로 설정 --> 	
  	</beans:bean>
  	
  	<!-- 스프링에서 제공하는 API 사용해서 다운로드 구현시
