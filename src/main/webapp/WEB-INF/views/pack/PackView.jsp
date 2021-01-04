@@ -42,7 +42,10 @@
 				</div>
 			</div>
 		</c:if>
-		
+		<div class="col-lg-12">
+			<a class="btn btn-info" href="<c:url value="/pack/calendar.do"/>">팩 일정</a>
+		</div>
+
 		
 		<div class="row">
 				<div class="offset-md-1 col-md-5">
@@ -110,7 +113,7 @@
 							<h3>Comment</h3>
 						</div>
 						<div class="col-lg-3 col-sm-4" style="padding-top: 13px;">
-							<a href="<c:url value="#"/>" class="btn-custom">Read More 
+							<a href="<c:url value="/pack/comment.do"/>" class="btn-custom">Read More 
 								<small><span class="ion-ios-arrow-forward"></span></small>
 							</a>
 						</div>

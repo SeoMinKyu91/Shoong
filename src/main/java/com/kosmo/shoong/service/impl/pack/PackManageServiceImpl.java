@@ -55,6 +55,16 @@ public class PackManageServiceImpl {
 		
 		return dao.packSelectManager(map);
 	}//////////
+
+	public Map packIntroSelect(Map map) {
+		
+		return dao.packIntroSelect(map);
+	}////////////////////////
+
+	public int packInfoUpdate(Map map) {
+		
+		return dao.packInfoUpdate(map);
+	}////////
 	
 	
 }///////////////class
