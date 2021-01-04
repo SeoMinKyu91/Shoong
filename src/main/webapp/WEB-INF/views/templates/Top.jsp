@@ -51,7 +51,7 @@
 		<nav id="colorlib-main-menu" role="navigation">
 	
 			<ul>
-				<li class="colorlib-active"><a href="<c:url value="/"/>">HOME</a></li>
+				<li><a href="<c:url value="/"/>">HOME</a></li>
 				<c:if test="${empty sessionScope.userId}" var="isNotLogin">
 					<li><a href="<c:url value="/Member/Login.do"/>">LOGIN</a></li>
 				</c:if>
@@ -70,9 +70,11 @@
 				</c:if>
 				<c:if test="${!isNotId}">
 				</c:if>
+				<li><a href="<c:url value="/course/navi.do"/>">Navi</a></li>
+				<li><a href="#" data-toggle="modal" data-target="#galleryModal">Route Upload</a></li>
 			</ul>
-			
 		</nav>
+		
 
 
 	<!-- 여기는 정확히 무슨 기능인지 잘모르겠지만 활용도가 있을 수도 있을거 같아서 냅뒀습니다 -->
@@ -89,3 +91,4 @@
 	<!-- 여기는 정확히 무슨 기능인지 잘모르겠지만 활용도가 있을 수도 있을거 같아서 냅뒀습니다 -->
 	</aside> <!-- END COLORLIB-ASIDE -->
 </div>
+
