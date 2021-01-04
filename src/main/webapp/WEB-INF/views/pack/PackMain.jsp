@@ -194,17 +194,16 @@ color:white;
 		var markerLng;
 		var geocoder = new kakao.maps.services.Geocoder(); 
 		//0]사용자 위치 구하기
- 		if (navigator.geolocation) {
- 	
-           var options = { timeout: 3000, maxinumAge: 5000 };
-           navigator.geolocation.getCurrentPosition(successCallback);
-            //이거 실패하는코드도 입력. 경복궁 37.57801416976735  /  126.97658868798284 
-            //displayKaKaoMap(37.57801416976735,  126.97658868798284 );
-            //실패하면 displayKaKaoMap(lat, lng); 여기에 저값담아보내기
-        }
+		
+		
+		if (navigator.geolocation) {
+            var options = { timeout: 3000, maxinumAge: 5000 };
+           navigator.geolocation.getCurrentPosition(successCallback,error);
+     	 }
+	
  		
  		//0-1]사용자 위치 구하기 성공시 좌표값 displayKaKaoMap로 넘김
- 		//실패시도 계산..
+ 		
         function successCallback(position) {
            
             <c:if test="${empty searchLat}" var="isEmpty">
@@ -219,13 +218,18 @@ color:white;
             //if문
             
         }
+ 		
+ 		//0-2]사용자 위치 구하기 실패시
+ 		function error(position){
+ 			displayKaKaoMap(37.57801416976735,  126.97658868798284 );
+ 		}
         
  		//1]사용자 뷰에 지도 생성 지도 정보 map에 저장
         function displayKaKaoMap(lat, lng) {
         	var mapContainer = document.getElementById('map');
            	 mapOption = {
                 center: new kakao.maps.LatLng(lat, lng), // 현재 위치 중심으로 지도의 중심좌표
-                level:10
+                level:11
             };
 
             map = new kakao.maps.Map(mapContainer, mapOption); 

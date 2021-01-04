@@ -32,5 +32,16 @@
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}/{4}.jsp" />
 	</definition>
 	
+	<definition name="adminlayouts" template="/WEB-INF/views/templates/AdminLayouts.jsp">
+		<put-attribute name="top" value="/WEB-INF/views/templates/AdminTop.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/templates/AdminFooter.jsp" />
+	</definition>
+	<definition name="*/*.admin" extends="adminlayouts">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	<definition name="*/*/*.admin" extends="adminlayouts">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+	</definition>
 
 </tiles-definitions>

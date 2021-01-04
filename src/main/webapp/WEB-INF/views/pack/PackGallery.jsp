@@ -146,7 +146,7 @@ width: 100%;
 								 <div id="fileUpload" class="dragAndDropDiv col-sm-12"><span class="dragAndDropDivSpan">Drag & Drop Files Here</span></div>
 								 <input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/>
 							</form>
-							<button class="dragAndDropBtn col-sm-2  col-sm-offset-10">추가</button>
+							<!-- <button class="dragAndDropBtn col-sm-2  col-sm-offset-10">추가</button> -->
 						</div>
 						
 	            </div>
@@ -182,6 +182,10 @@ width: 100%;
 </div>
 </div>
 <script>
+
+	
+
+
 // 이미지 다운로드 모달 정보 변경 
 		$(".galleryImg").click(function(){
 			var fileName = $(this).next().val()
@@ -209,7 +213,20 @@ width: 100%;
             $(this).css('border', '2px dotted #0B85A1');
             e.preventDefault();
             var files = e.originalEvent.dataTransfer.files;
+            if (files.length > 3) {
+                alert('이미지는 3개까지 올릴 수 있습니다.');
+                return;
+            }
+            var size =$("#imgArry").val().split(",").length+files.length;
+            console.log(size)   
+            if(size > 3){
+            	 alert('이미지는 3개까지 올릴 수 있습니다.');
+                 return;
+            }    
+
             handleFileUpload(files,objDragAndDrop);
+          
+            
         });
        
         //1]drag 영역 클릭시 파일 선택창
