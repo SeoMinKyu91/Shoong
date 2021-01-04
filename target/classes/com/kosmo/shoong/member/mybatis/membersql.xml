@@ -49,6 +49,13 @@
 				ON d.record_id=t1.record_id ) t2 ON i.diary_code = t2.diary_code
 	</select>
 	
+	<select id="imgFirst">
+		SELECT diary_img_name, 
+		FROM diary_img i JOIN (SELECT diary_code,t1.* FROM diary d JOIN 
+			(SELECT r.user_id,r.record_id FROM member m JOIN record r ON m.user_id=r.user_id WHERE m.user_id=#{userId}) t1 
+				ON d.record_id=t1.record_id ) t2 ON i.diary_code = t2.diary_code
+	</select>
+	
 	<select id="showCourse" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM course c join member m ON c.user_id=#{userId}
 	</select>

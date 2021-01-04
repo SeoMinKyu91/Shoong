@@ -46,6 +46,12 @@ public class GalleryServiceImpl implements GalleryService{
 		return galleryDAO.imgSelectList(map);
 	}
 
+	@Override
+	public List<Map> imgFirstList(Map map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	
 }

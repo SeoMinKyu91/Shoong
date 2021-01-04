@@ -49,5 +49,11 @@ public class GalleryDAO implements GalleryService{
 		return sqlMapper.selectList("showImg",map);
 	}
 
+	@Override
+	public List<Map> imgFirstList(Map map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
