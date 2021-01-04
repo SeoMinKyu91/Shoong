@@ -228,7 +228,6 @@ width: 20%
 		
 		//0]사용자 위치 구하기
  		if (navigator.geolocation) {
- 	
             var options = { timeout: 3000, maxinumAge: 5000 };
             navigator.geolocation.getCurrentPosition(successCallback);
             //이거 실패하는코드도 입력. 경복궁 37.57801416976735  /  126.97658868798284 
