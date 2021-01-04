@@ -37,7 +37,7 @@ public class courseController {
 		map.put("user_ID","kim");
 		CourseDTO record = service.selectOne(map);
 		model.addAttribute("courseList",record);
-		return "course/courseList";
+		return "course/CourseList";
 	}
 
 	@RequestMapping("/navi.do")
