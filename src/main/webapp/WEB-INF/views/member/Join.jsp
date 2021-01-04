@@ -52,12 +52,12 @@ input {
 							style="color: #a39bbd; text-decoration: underline;">중복체크</span>
 					</Button>
 					<br /> <input type="text" id="userId" name="userId"
-						style="font-size: .8em; height: 50px; width: 34%"
+						style="font-size: .8em; height: 50px; width: 34.5%"
 						placeholder="이메일을 입력하세요"> @ <input type="text"
 						id="emailStrinput" name="emailStrinput" placeholder="직접 입력"
-						style="font-size: .8em; height: 50px; width: 29%"> <select
+						style="font-size: .8em; height: 50px; width: 30%"> <select
 						name="emailStr" id="emailStr"
-						style="font-size: .8em; height: 50px; width: 29%; border: #ced4da 1.5px solid; color:#7e757d">
+						style="font-size: .8em; height: 50px; width: 30%; border: #ced4da 1.5px solid; color:#7e757d">
 						<option value="">==선택하세요==</option>
 						<option value="naver.com">naver.com</option>
 						<option value="gmail.com">gmail.com</option>
