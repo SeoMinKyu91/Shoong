@@ -42,7 +42,10 @@
 				</div>
 			</div>
 		</c:if>
-		
+		<div class="col-lg-12">
+			<a class="btn btn-info" href="<c:url value="/pack/calendar.do"/>">팩 일정</a>
+		</div>
+
 		
 		<div class="row">
 				<div class="offset-md-1 col-md-5">
