@@ -7,10 +7,12 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.shoong.service.impl.pack.PackManageServiceImpl;
 
@@ -21,31 +23,20 @@ public class PackManageCotroller {
 	@Resource(name="packManageService")
 	private PackManageServiceImpl service;
 	
-	//팩 프로필 수정용 (임시작업이라 놔뒀어요)
-//	@RequestMapping("pack/infoEdit.do")
-//	public String infoEdit() {
-//		
-//		
-//		return "pack/PackInfoEdit";
-//		return "pack/PackInfoEdit";
-//	}///////////infoEdit()
-	
-//	@RequestMapping("pack/introEdit.do")
-//	public String introEdit() {
-//		return "pack/PackIntroEdit";
-//	}//////////////introEdit
-	
 	@RequestMapping("manage.do")
 	public String packManage(@RequestParam Map map, Model model,HttpServletRequest req) {
 		
 		
 		//세션에 있는 pack_id 얻어오기
-		map.put("packId", req.getSession().getAttribute("packId").toString());
-		
+		if(req.getSession().getAttribute("packId").toString() != null) {
+			map.put("packId", req.getSession().getAttribute("packId").toString());
+		}
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
 		List<Map> joinList =  service.packJoinList(map);
 		List<Map> memberList = service.packMemberList(map);
+		Map packIntroSelect = service.packIntroSelect(map);
+		System.out.println("팩 인트로 가져옴 db에서:"+packIntroSelect.get("PACK_NAME"));
 		
 		for(Map item : joinList) {
 			item.put("PACK_JOIN_DATE", dateFormat.format(item.get("PACK_JOIN_DATE")));
@@ -73,6 +64,10 @@ public class PackManageCotroller {
 		
 		//팩 가입자 목록
 		model.addAttribute("packMemberList",memberList);
+		
+		//팩 정보
+		model.addAttribute("packInfo",packIntroSelect);
+		
 		return "pack/PackManage";
 	}/////////
 	
@@ -124,7 +119,45 @@ public class PackManageCotroller {
 		
 		
 		return "forward:/pack/manage.do";
-	}
+	}/////////////
+	
+	
+	//팩 프로필 수정용 (임시작업이라 놔뒀어요)
+	@RequestMapping("infoEdit.do")
+	public String introEdit(@RequestParam Map map,Model model) {
+		System.out.println("들어왔어요 팩 정보수정");
+		
+		Map packInfo = service.packIntroSelect(map);
+		
+		model.addAttribute("packInfo",packInfo);
+		
+		return "pack/PackInfoEdit";
+		
+		
+	}///////////infoEdit()
+	
+	@RequestMapping("infoEditOk.do")
+	public String infoEditOk(@RequestParam Map map,Model model,HttpServletRequest req) {
+		System.out.println(map.get("packActTime"));
+		System.out.println(map.get("packThumbnail"));
+		System.out.println("잘들어옴");
+		
+		if(req.getSession().getAttribute("packId").toString() != null) {
+			map.put("packId", req.getSession().getAttribute("packId").toString());
+		}
+		
+		service.packInfoUpdate(map);
+		
+		
+		
+		return "forward:/pack/manage.do";
+	}/////////
+	
+	@RequestMapping("calendar.do")
+	public String packCaledar() {
+		
+		return "pack/test";
+	}/////////
 	
 	
 	

@@ -11,24 +11,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 위 3개의 메타 태그는 *반드시* head 태그의 처음에 와야합니다; 어떤 다른 콘텐츠들은 반드시 이 태그들 *다음에* 와야 합니다 -->
 <title>관리자 페이지</title>
+<tiles:insertAttribute name="css"/>
 </head>
 
-<body>
-	
-	<!-- top 시작 -->
-	<tiles:insertAttribute name="top"/>
-	<!-- top끝 -->
-	
-	<!-- body 시작 -->
-	<tiles:insertAttribute name="body"/>	
-	<!-- body 끝 -->
-	
-	<!-- footer 시작 -->
-	<tiles:insertAttribute name="footer"/>
-	<!-- footer 끝 -->
-	
-
-
-    
+<body class="nav-md">
+   <div class="container body">
+      <div class="main_container">
+			<!-- top 시작 -->
+			<tiles:insertAttribute name="top"/>
+			<!-- top끝 -->
+			
+			<!-- body 시작 -->
+			<tiles:insertAttribute name="body"/>	
+			<!-- body 끝 -->
+			
+			<!-- footer 시작 -->
+			<tiles:insertAttribute name="footer"/>
+			<!-- footer 끝 -->
+	  </div>
+  </div>	
 </body>
 </html>
