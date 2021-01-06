@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,7 +28,7 @@ import com.kosmo.shoong.service.course.CourseService;
 
 @Controller
 @RequestMapping("/course")
-public class courseController {
+public class CourseController {
 
 	@Resource(name="courseService")
 	private CourseService service;
@@ -45,30 +46,59 @@ public class courseController {
 		return "course/Navi";
 	}
 
-	@RequestMapping(value = "",produces = "text/html; charset=UTF-8")
+	@PostMapping(value = "/routeLoad",produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String routeLoad(
 			@RequestParam String fileName,HttpServletRequest req)
 											throws IOException {
-		String routePath = req.getServletContext().getRealPath("/upload")+fileName;
-		File file = new File(fileName);
+		String filePath = req.getServletContext().getRealPath("/upload")+File.separator+fileName;
+		System.out.println("routePath:"+filePath);
+		BufferedReader br =
+				new BufferedReader(
+						new InputStreamReader(
+								new FileInputStream(new File(filePath))));
+		StringBuffer sb = new StringBuffer();
 
+		int data = -1;
+		char[] chars = new char[1024];
+
+		while((data=br.read(chars))!=-1) {
+			sb.append(chars,0,data);
+		}
+		if(br!=null) br.close();
+		return sb.toString();
+		/*
+		File file = new File(routePath);
 		BufferedReader br =
 				new BufferedReader(
 						new InputStreamReader(new FileInputStream(file)));
 		String data;
+		String result="";
 		while((data=br.readLine())!=null) {
-			data += data;
+			result += data;
 		}
+		br.close();
+		System.out.println(result);
+		JsonParser parser = new JsonParser();
+		JsonObject obj = parser.parse(result).getAsJsonObject();
 
+		return obj.toString();
+		*/
+		/*
+		Gson gson = new Gson();
+		Reader reader = Files.newBufferedReader(Paths.get(routePath));
+		Map<?, ?> map = gson.fromJson(reader, Map.class);
+		// print map entries
+	    for (Map.Entry<?, ?> entry : map.entrySet()) {
+	        System.out.println(entry.getKey() + "=" + entry.getValue());
+	    }
+	    // close reader
+	    reader.close();
+		 */
 
-		JSONObject obj = new JSONObject();
-
-
-		return obj.toJSONString();
 	}
 
-	@RequestMapping(value = "/fileUpload", produces = "text/html; charset=UTF-8")
+	@PostMapping(value = "/fileUpload", produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String uploadCourse(MultipartHttpServletRequest mhsr) {
 		String filePath = mhsr.getServletContext().getRealPath("/upload");
@@ -94,7 +124,7 @@ public class courseController {
 			}
 		}
 		JSONObject obj = new JSONObject();
-		obj.put("fileName", obj);
+		obj.put("fileName", renameFilename);
 		return obj.toJSONString();
 	}
 

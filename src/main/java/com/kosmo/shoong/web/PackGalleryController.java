@@ -26,7 +26,7 @@ import com.kosmo.shoong.service.pack.PackGalleryService;
 
 @Controller
 @RequestMapping("/pack/")
-public class packGalleryController {
+public class PackGalleryController {
 
 	@Resource(name="packGalleryService")
 	private PackGalleryService service;
