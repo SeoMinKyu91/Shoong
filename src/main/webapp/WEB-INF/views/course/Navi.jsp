@@ -263,7 +263,7 @@ h1 {
 						}
 				});
 				map.setCenter(data.features[0].geometry.coordinates[0][0]);
-				map.setZoom(12);
+				map.setZoom(11);
 			}
 		});
 		
