@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.kosmo.shoong.common.FileUpDownUtils;
 import com.kosmo.shoong.service.course.CourseDTO;
 import com.kosmo.shoong.service.course.CourseService;
@@ -53,9 +51,23 @@ public class CourseController {
 	public String routeLoad(
 			@RequestParam String fileName,HttpServletRequest req)
 											throws IOException {
-		String routePath = req.getServletContext().getRealPath("/upload")+File.separator+fileName;
-		System.out.println("routePath:"+routePath);
+		String filePath = req.getServletContext().getRealPath("/upload")+File.separator+fileName;
+		System.out.println("routePath:"+filePath);
+		BufferedReader br =
+				new BufferedReader(
+						new InputStreamReader(
+								new FileInputStream(new File(filePath))));
+		StringBuffer sb = new StringBuffer();
 
+		int data = -1;
+		char[] chars = new char[1024];
+
+		while((data=br.read(chars))!=-1) {
+			sb.append(chars,0,data);
+		}
+		if(br!=null) br.close();
+		return sb.toString();
+		/*
 		File file = new File(routePath);
 		BufferedReader br =
 				new BufferedReader(
@@ -67,12 +79,15 @@ public class CourseController {
 		}
 		br.close();
 		System.out.println(result);
+		JsonParser parser = new JsonParser();
+		JsonObject obj = parser.parse(result).getAsJsonObject();
+
+		return obj.toString();
+		*/
 		/*
 		Gson gson = new Gson();
 		Reader reader = Files.newBufferedReader(Paths.get(routePath));
-
 		Map<?, ?> map = gson.fromJson(reader, Map.class);
-
 		// print map entries
 	    for (Map.Entry<?, ?> entry : map.entrySet()) {
 	        System.out.println(entry.getKey() + "=" + entry.getValue());
@@ -81,10 +96,6 @@ public class CourseController {
 	    reader.close();
 		 */
 
-		JsonParser parser = new JsonParser();
-		JsonObject obj = parser.parse(result).getAsJsonObject();
-
-		return obj.toString();
 	}
 
 	@PostMapping(value = "/fileUpload", produces = "text/html; charset=UTF-8")

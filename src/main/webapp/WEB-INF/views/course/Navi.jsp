@@ -225,10 +225,10 @@ h1 {
 		marker.setLngLat(point).addTo(map); 
 	});
 	
+	var json;
 	//modal-footer의 두번째 자식
 	$(".modal-footer button:eq(1)").click(function() {
 		console.log("로드 버튼 누름");
-		var json;
 		
 		$.ajax({
 			url:"<c:url value='/course/routeLoad'/>",
@@ -238,28 +238,35 @@ h1 {
 				"fileName":$('#imgArry').val()
 			},
 			success:function(data){
-				console.log('성공');
-				console.log('data:%O',data);
+				console.log('요청 성공');
+				console.log('data:%O',data.features[0]);
+				json = data.features[0];
+				//console.log('data:%O',data);
+				//json = data;
+				
+				//source와 layer를 변수로 받아서 존재여부에 따라 remove필요
+				map.addSource('route', {
+					"type":"geojson",
+					"data":json
+				});
+				map.addLayer({
+						'id': 'route',
+						'type': 'line',
+						'source': 'route',
+						'layout': {
+							'line-join': 'round',
+							'line-cap': 'round'
+						},
+						'paint': {
+							'line-color': '#ff0000',
+							'line-width': 8
+						}
+				});
+				map.setCenter(data.features[0].geometry.coordinates[0][0]);
+				map.setZoom(12);
 			}
 		});
 		
-		map.addSource('route', {
-			'type': 'geojson',
-			'data': json
-		});
-		map.addLayer({
-				'id': 'route',
-				'type': 'line',
-				'source': 'route',
-				'layout': {
-					'line-join': 'round',
-					'line-cap': 'round'
-				},
-				'paint': {
-					'line-color': '#ff0000',
-					'line-width': 8
-				}
-		});
 		$(".modal-footer button:eq(2)").click();
 	});
 	
@@ -298,7 +305,7 @@ h1 {
 		}
 		var size = $("#imgArry").val().split(",").length + files.length;
 		console.log(size)
-		if (size > 1) {
+		if (size > 2) {
 			alert('루트는 1개까지 올릴 수 있습니다.');
 			return;
 		}
