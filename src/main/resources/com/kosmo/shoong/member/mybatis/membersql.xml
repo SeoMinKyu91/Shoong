@@ -49,11 +49,12 @@
 				ON d.record_id=t1.record_id ) t2 ON i.diary_code = t2.diary_code
 	</select>
 	
-	<select id="imgFirst">
-		SELECT diary_img_name, 
-		FROM diary_img i JOIN (SELECT diary_code,t1.* FROM diary d JOIN 
-			(SELECT r.user_id,r.record_id FROM member m JOIN record r ON m.user_id=r.user_id WHERE m.user_id=#{userId}) t1 
-				ON d.record_id=t1.record_id ) t2 ON i.diary_code = t2.diary_code
+	<select id="imgFirst" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT i.diary_img_name, t2.*
+		FROM diary_img i JOIN (SELECT * FROM diary d  
+		JOIN (SELECT * FROM member m
+		JOIN record r ON m.user_id = r.user_id WHERE m.user_id =#{userId}) t1 
+		ON d.record_id = t1.record_id) t2 ON i.diary_code = t2.diary_code
 	</select>
 	
 	<select id="showCourse" parameterType="java.util.Map" resultType="java.util.Map">
@@ -72,8 +73,8 @@
 	</select>
 	<!---->
 	<insert id="memberInsert" parameterType="java.util.Map">
-		INSERT INTO member(user_id,pwd,name,rrn,address,userjoindate,usertel)
-		VALUES(#{userId},#{userPWD},#{userName},#{userRRN},#{userAddr},SYSDATE,#{userTel})
+		INSERT INTO member(user_id,pwd,name,address,userjoindate,usertel)
+		VALUES(#{userId},#{userPWD},#{userName},#{userAddr},SYSDATE,#{userTel})
 	</insert>
 	<insert id="memberVerify" parameterType="java.lang.String">
 		INSERT INTO verify
@@ -96,5 +97,29 @@
 	<select id="memberHasPack" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT pack_id FROM pack_join WHERE user_id=#{userId} AND pack_join_accept='yes'
 	</select>
+	
+	
+	<select id="memberEditList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM member
+	</select>
+	
+	<update id="memberEditDo" parameterType="java.util.Map">
+		UPDATE member
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="pwd != null">pwd=#{pwd},</if>
+				<if test="name != null">name=#{name},</if>
+				<if test="gender != null">gender=#{gender},</if>
+				<if test="age != null">age=#{age},</if>
+				<if test="usertel != null">usertel=#{usertel},</if>
+				<if test="address != null">address=#{address},</if>
+			</trim>
+		<if test="userId!=null">
+			WHERE user_id=#{userId}
+		</if>
+	</update>
+	
+	<delete id="memberEditDelete" parameterType="java.util.Map">
+		DELETE FROM member WHERE user_id = #{userId}
+	</delete>
 	
 </mapper>

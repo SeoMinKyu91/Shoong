@@ -8,7 +8,7 @@
 
 <div id="colorlib-main"
 	style="padding-top: 30px; padding-left: 30px; padding-right: 30px">
-	<div style="margin-bottom: 2%">${sessionScope.id}님의갤러리</div>
+	<div style="margin-bottom: 2%">${name}님의갤러리</div>
 	<div class="row align-items-start">
 		<c:if test="${empty imgList}" var="notEmpty">
 			<div>등록된 이미지가 없어요</div>

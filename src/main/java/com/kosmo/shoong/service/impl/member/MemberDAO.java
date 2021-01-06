@@ -62,9 +62,12 @@ public class MemberDAO implements MemberService{
 	
 	@Override
 	public MemberDTO selectOne(Map map) {
-		System.out.println("dao안------------------------");
+		
 		return sqlMapper.selectOne("selectOne",map);
 	}
+	
+	
+	
 
 	public Map memberHasPack(Map map) {
 		return sqlMapper.selectOne("memberHasPack",map);

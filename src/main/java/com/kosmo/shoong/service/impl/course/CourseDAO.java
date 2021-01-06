@@ -49,7 +49,7 @@ public class CourseDAO implements CourseService {
 	@Override
 	public List<Map> showCourse(Map map) {
 		Set keys = map.keySet();
-		for(Object key:keys) System.out.println(key+":"+map.get(key));
+		for(Object key:keys) System.out.println(key+"-:-"+map.get(key));
 		return sqlMapper.selectList("showCourse",map);
 	}
 	/*

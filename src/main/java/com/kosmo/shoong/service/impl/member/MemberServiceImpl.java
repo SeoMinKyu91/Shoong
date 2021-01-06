@@ -97,7 +97,6 @@ public class MemberServiceImpl  implements MemberService{
 	
 	@Override
 	public MemberDTO selectOne(Map map) {
-		System.out.println("implㅇ안---------------------");
 		return memberDAO.selectOne(map);
 	}
 

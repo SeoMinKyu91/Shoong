@@ -44,15 +44,13 @@ public class GalleryDAO implements GalleryService{
 
 	@Override
 	public List<Map> imgSelectList(Map map) {
-		Set keys = map.keySet();
-		for(Object key:keys) System.out.println(key+":"+map.get(key));
 		return sqlMapper.selectList("showImg",map);
 	}
 
 	@Override
 	public List<Map> imgFirstList(Map map) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return sqlMapper.selectList("imgFirst",map);
 	}
 
 
