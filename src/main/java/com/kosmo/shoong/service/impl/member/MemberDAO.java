@@ -48,6 +48,10 @@ public class MemberDAO implements MemberService{
 		System.out.println("userId:"+userId);
 		return (Integer)sqlMapper.insert("memberVerify",userId);
 	}
+	
+//	public int insertAddr(String userId) {
+//		return (Integer)sqlMapper.insert("userId",userId);
+//	}
 
 
 //	@Override

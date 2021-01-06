@@ -51,10 +51,9 @@ public class MemberController {
 	public String joinOk(@RequestParam Map map,Model model) throws MessagingException {
 		//맵에서 유저아이디와 유저아이디 뒷자리(@gmail.com) 따로따로 받아서
 		map.put("userId", map.get("userId").toString()+"@"+map.get("emailStrinput").toString());
-		map.put("userRRN", map.get("userRRN1").toString()+map.get("userRRN2").toString());
 		map.put("userTel", map.get("userTel1").toString()+map.get("userTel2").toString()+map.get("userTel3").toString());
-		Set keys = map.keySet();
-		for(Object key:keys) System.out.println(key+":"+map.get(key));
+		//Set keys = map.keySet();
+		//for(Object key:keys) System.out.println(key+":"+map.get(key));
 		//다시 맵에 userId 키값으로 유저아이디@gamil.com을 밸류로 넣기
 		memberService.mailSendWithUserKey(map.get("userId").toString(), map.get("userName").toString(), map);
 		//활동량 설문조사페이지로 이동
@@ -78,23 +77,23 @@ public class MemberController {
 		return json.toJSONString();
 	}/////pwdOk
 
-	//이메일 형식 판단
-	@RequestMapping(value="EmailCheck.do",produces="text/html; charset=UTF-8")
-	@ResponseBody
-	public String emailOk(@RequestParam Map map) {
-		String userId = map.get("userId").toString();
-		JSONObject json = new JSONObject();
-		if(userId.trim().equals("")) {
-			json.put("emailCheck", "정확한 이메일 형식이 아닙니다.");
-			return json.toJSONString();
-		}
-		if(!CommonUtilities.isCorrectNaming(userId)) {
-			json.put("emailCheck", "정확한 이메일 형식이 아닙니다.");
-			return json.toJSONString();
-		}
-		json.put("emailCheck", "ok");
-		return json.toJSONString();
-	}////////emailOk
+//	//이메일 형식 판단
+//	@RequestMapping(value="EmailCheck.do",produces="text/html; charset=UTF-8")
+//	@ResponseBody
+//	public String emailOk(@RequestParam Map map) {
+//		String userId = map.get("userId").toString();
+//		JSONObject json = new JSONObject();
+//		if(userId.trim().equals("")) {
+//			json.put("emailCheck", "정확한 이메일 형식이 아닙니다.");
+//			return json.toJSONString();
+//		}
+//		if(!CommonUtilities.isCorrectNaming(userId)) {
+//			json.put("emailCheck", "정확한 이메일 형식이 아닙니다.");
+//			return json.toJSONString();
+//		}
+//		json.put("emailCheck", "ok");
+//		return json.toJSONString();
+//	}////////emailOk
 
 	//이메일(아이디)중복체크
 	@RequestMapping(value = "EmailDuplCheck.do", produces = "text/html; charset=UTF-8")
