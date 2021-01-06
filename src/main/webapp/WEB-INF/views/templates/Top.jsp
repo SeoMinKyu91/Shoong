@@ -72,6 +72,7 @@
 				</c:if>
 				<li><a href="<c:url value="/course/navi.do"/>">Navi</a></li>
 				<li><a href="#" data-toggle="modal" data-target="#galleryModal">Route Upload</a></li>
+				<li><a href="<c:url value="/admin/home/main.do"/>">관리자페이지</a></li>
 			</ul>
 		</nav>
 		
