@@ -49,9 +49,9 @@ public class MemberDAO implements MemberService{
 		return (Integer)sqlMapper.insert("memberVerify",userId);
 	}
 	
-//	public int insertAddr(String userId) {
-//		return (Integer)sqlMapper.insert("userId",userId);
-//	}
+	public int insertAddr(Map map) {
+		return (Integer)sqlMapper.insert("insertAddr",map);
+	}
 
 
 //	@Override

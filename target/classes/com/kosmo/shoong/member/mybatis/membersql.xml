@@ -68,12 +68,10 @@
 		INSERT INTO member(user_id,pwd,name,age,gender,address,userjoindate,usertel)
 		VALUES(#{userId},#{userPWD},#{userName},#{userAge},#{userGender},#{userAddr},SYSDATE,#{userTel})
 	</insert>
-	<!--
-	<insert id="userAddr" parameterType="">
+	<insert id="insertAddr" parameterType="java.util.Map">
 		INSERT INTO useraddr 
 		VALUES(#{userId},#{userAddr},#{memberLat},#{memberLng})
 	</insert>
-	-->
 	<insert id="memberVerify" parameterType="java.lang.String">
 		INSERT INTO verify
 		VALUES(#{userId},'Y')

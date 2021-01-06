@@ -20,6 +20,8 @@ public class MemberDTO {
 	private String userFrequeny;
 	
 	//latlng 칼럼명을 가진 멤버 추가 setter getter 추가
+	private String user_lat;
+	private String user_lng;
 	
 	public String getUserId() {
 		return userId;
@@ -80,6 +82,19 @@ public class MemberDTO {
 	}
 	public void setUserFrequeny(String userFrequeny) {
 		this.userFrequeny = userFrequeny;
+	}
+	//latlng
+	public String getUser_lat() {
+		return user_lat;
+	}
+	public void setUser_lat(String user_lat) {
+		this.user_lat = user_lat;
+	}
+	public String getUser_lng() {
+		return user_lng;
+	}
+	public void setUser_lng(String user_lng) {
+		this.user_lng = user_lng;
 	}
 	
 	@Override

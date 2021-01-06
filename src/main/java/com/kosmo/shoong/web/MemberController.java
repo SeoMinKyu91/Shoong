@@ -52,8 +52,8 @@ public class MemberController {
 		//맵에서 유저아이디와 유저아이디 뒷자리(@gmail.com) 따로따로 받아서
 		map.put("userId", map.get("userId").toString()+"@"+map.get("emailStrinput").toString());
 		map.put("userTel", map.get("userTel1").toString()+map.get("userTel2").toString()+map.get("userTel3").toString());
-		//Set keys = map.keySet();
-		//for(Object key:keys) System.out.println(key+":"+map.get(key));
+		Set keys = map.keySet();
+		for(Object key:keys) System.out.println(key+":"+map.get(key));
 		//다시 맵에 userId 키값으로 유저아이디@gamil.com을 밸류로 넣기
 		memberService.mailSendWithUserKey(map.get("userId").toString(), map.get("userName").toString(), map);
 		//활동량 설문조사페이지로 이동
