@@ -65,8 +65,8 @@
 	</select>
 	
 	<insert id="memberInsert" parameterType="java.util.Map">
-		INSERT INTO member(user_id,pwd,name,age,gender,address,userjoindate,usertel)
-		VALUES(#{userId},#{userPWD},#{userName},#{userAge},#{userGender},#{userAddr},SYSDATE,#{userTel})
+		INSERT INTO member(user_id,pwd,name,age,gender,userjoindate,usertel)
+		VALUES(#{userId},#{userPWD},#{userName},#{userAge},#{userGender},SYSDATE,#{userTel})
 	</insert>
 	<insert id="insertAddr" parameterType="java.util.Map">
 		INSERT INTO useraddr 
