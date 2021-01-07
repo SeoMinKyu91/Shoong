@@ -24,8 +24,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/locales-all.min.js"></script>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.5.0/main.min.css,npm/fullcalendar@5.5.0/main.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.css">
+
+<!-- 데이트 피커 -->
+<script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
 
 
 
@@ -39,6 +43,11 @@
   #calendar {
     max-width: 1100px;
     margin: 0 auto;
+  }
+  
+  .fc-event-title-container{
+  	text-align: center;
+  	background-color: black;
   }
 
 </style>
@@ -68,82 +77,115 @@
 </div>
 <!-- END COLORLIB-PAGE -->
 
+<!-- 팩 일정 등록 모달창 시작 -->
+<div class="modal fade" id="packScheduleModal" data-backdrop="false">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title"style="margin: 5px;">공지사항 등록</h4>
+			</div>
+
+			<div class="modal-body">
+				<form action="<c:url value="/pack/schedule/insert.do"/>" class="bg-light p-5 contact-form" id="packSchedule" method="post">
+					<label for="packScheduleTitle">일정 제목</label>
+					<div class="form-group">
+						<input type="text" class="form-control" name="packScheduleTitle" id="packScheduleTitle">
+					</div>
+
+					<label for="startDatePicker">시작 날짜</label>
+					<div class="form-group">
+						<input type="text" name="packScheduleStart" id="startDatePicker" class="form-control" value="">
+					</div>
+					
+					<label for="endDatePicker">끝 날짜</label>
+					<div class="form-group">
+						<input type="text" name="packScheduleEnd" id="endDatePicker" class="form-control" value="">
+					</div>
+					
+					<label for="packScheduleContent">일정 내용</label>
+					<div class="form-group">
+						<textarea cols="30" rows="7" class="form-control"  name="packScheduleContent" id="packScheduleContent"></textarea>
+					</div>
+					
+				</form>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal" id="btnPackSchedule">등록</button>
+				<button type="button" class="btn btn-info" data-dismiss="modal" id="btnPackScheduleClose">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 팩 일정 등록 모달창 끝 -->
 
 
 
 <script>
 
-
-	 
 	document.addEventListener('DOMContentLoaded', function() {
+		console.log(${calendarJson})
+		
 		var calendarEl = document.getElementById('calendar');
-
+	
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			headerToolbar : {
 				left : 'prevYear,prev,next,nextYear today',
 				center : 'title',
 				right : 'dayGridMonth,dayGridWeek,dayGridDay'
 			},
-			initialDate : '2020-09-12',
 			navLinks : true, // can click day/week names to navigate views
 			editable : true,
 			dayMaxEvents : true, // allow "more" link when too many events
 			locale : 'ko',
 			timezone : 'local',
 			firstDay : 0,
-			events : [ {
-				title : 'All Day Event',
-				start : '2020-09-04'
-			}, {
-				title : 'Long Event',
-				start : '2020-09-07',
-				end : '2020-09-10'
-			}, {
-				groupId : 999,
-				title : 'Repeating Event',
-				start : '2020-09-09T16:00:00'
-			}, {
-				groupId : 999,
-				title : 'Repeating Event',
-				start : '2020-09-16T16:00:00'
-			}, {
-				title : 'Conference',
-				start : '2020-09-11',
-				end : '2020-09-13'
-			}, {
-				title : 'Meeting',
-				start : '2020-09-12T10:30:00',
-				end : '2020-09-12T12:30:00'
-			}, {
-				title : 'Lunch',
-				start : '2020-09-12T12:00:00'
-			}, {
-				title : 'Meeting',
-				start : '2020-09-12T14:30:00'
-			}, {
-				title : 'Happy Hour',
-				start : '2020-09-12T17:30:00'
-			}, {
-				title : 'Dinner',
-				start : '2020-09-12T20:00:00'
-			}, {
-				title : 'Birthday Party',
-				start : '2020-09-13T07:00:00'
-			}, {
-				title : 'Click for Google',
-				url : 'http://google.com/',
-				start : '2020-09-28'
-			} ]
+			eventLimit : true,
+			format: 'yy-mm-dd',
 			
+			events: 
+		        <c:if test="${empty calendarJson}" var="emp" >
+		               [{}]
+		        </c:if>
+		        <c:if test="${!emp}"  >
+		              ${calendarJson}
+		        </c:if>
+		    
 			
+		});
+		//클릭시 모달창 제어
+		calendar.on('dateClick', function(info) {
+			console.log(info);
+			$('#packScheduleModal').modal();
+			$('#startDatePicker').attr('value',info.dateStr);
+	
 		});
 		
-		calendar.on('dateClick', function(info) {
-			alert(info.dateStr)
-		});
-
+		calendar.on('eventClick',function(){
+			console.log('이벤트 클릭');
+		})
+	
 		calendar.render();
 	});
+	
+	 
+	$('#startDatePicker, #endDatePicker').datepicker({
+		format: "yyyy-mm-dd",
+		startDate: '0d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+	    language : "ko",
+	    todayHighlight: true//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+		})//여기까지가 기본 사용 방법
+	$('#startDatePicker','#endDatePicker').on("changeDate",function(e){
+		console.log('들어옴');
+	})
+	
+	$('#btnPackSchedule').click(function(){
+		$('#packSchedule').submit();
+	})
+	
+	$('#btnPackScheduleClose').click(function(){
+		$('#endDatePicker').prop('value',"");
+	})
 	
 
 </script>
