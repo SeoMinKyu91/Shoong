@@ -29,6 +29,14 @@
 		<mapper	resource="com/kosmo/shoong/pack/mybatis/packmanagesql.xml" />
 		<mapper	resource="com/kosmo/shoong/course/mybatis/coursesql.xml" />
 		<mapper	resource="com/kosmo/shoong/member/mybatis/membersql.xml"/>
+		<!-- 관리자 페이지 매퍼파일-->
+		<mapper	resource="com/kosmo/shoong/admin/mybatis/courseAdminsql.xml"/>
+		<mapper	resource="com/kosmo/shoong/admin/mybatis/homeAdminsql.xml"/>
+		<mapper	resource="com/kosmo/shoong/admin/mybatis/memberAdminsql.xml"/>
+		<mapper	resource="com/kosmo/shoong/admin/mybatis/packAdminsql.xml"/>
+		<mapper	resource="com/kosmo/shoong/admin/mybatis/rankingAdminsql.xml"/>
+		<mapper	resource="com/kosmo/shoong/admin/mybatis/reportAdminsql.xml"/>
+		<mapper	resource="com/kosmo/shoong/admin/mybatis/settingAdminsql.xml"/>
 	</mappers>
 
 </configuration>

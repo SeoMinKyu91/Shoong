@@ -135,6 +135,7 @@ width: 100%;
    </div>
    
   <div class="modal fade" id="galleryModal" data-backdrop="false"  >
+
        <div class="modal-dialog modal-lg" >
            <div class="modal-content">
                <div class="modal-header">
@@ -182,6 +183,7 @@ width: 100%;
 </div>
 </div>
 <script>
+
 	// 이미지 다운로드 모달 정보 변경 
 	$(".galleryImg").click(function() {
 		var fileName = $(this).next().val()
@@ -195,8 +197,93 @@ width: 100%;
 		$('#galleryViewModal').modal();
 	});
 
+//이미지 드래그앤 드랍.
+        var objDragAndDrop = $(".dragAndDropDiv");
+        
+        $(document).on("dragenter",".dragAndDropDiv",function(e){
+            e.stopPropagation();
+            e.preventDefault();
+            $(this).css('border', '2px solid #0B85A1');
+        });
+        $(document).on("dragover",".dragAndDropDiv",function(e){
+            e.stopPropagation();
+            e.preventDefault();
+        });
+        $(document).on("drop",".dragAndDropDiv",function(e){
+            $(this).css('border', '2px dotted #0B85A1');
+            e.preventDefault();
+            var files = e.originalEvent.dataTransfer.files;
+            if (files.length > 3) {
+                alert('이미지는 3개까지 올릴 수 있습니다.');
+                return;
+            }
+            var size =$("#imgArry").val().split(",").length+files.length;
+            console.log(size)   
+            if(size > 3){
+            	 alert('이미지는 3개까지 올릴 수 있습니다.');
+                 return;
+            }    
+
+            handleFileUpload(files,objDragAndDrop);
+          
+            
+        });
+       
+        //1]drag 영역 클릭시 파일 선택창
+      
+        $(".dragAndDropBtn").on('click',function (e){
+            $('input[type=file]').trigger('click');
+        });
+        $('input[type=file]').on('change', function(e) {
+            var files = e.originalEvent.target.files;
+            handleFileUpload(files,objDragAndDrop);
+        });
+        //1-1]만들어진 다이브 클릭시는 삭제 
+       
+        //2]서버에 파일 전송 메소드
+        function handleFileUpload(files,obj)
+        {
+           for (var i = 0; i < files.length; i++) 
+           {
+                var fd = new FormData();
+                fd.append('file', files[i]);
+                sendFileToServer(fd);
+           }
+        }
+        
+        
+        var rowCount=0;
+ 
+      //4] Ajax 이용 해서 서버에 이미지 저장하는 핵심로직
+      var imgarr =[];
+      function sendFileToServer(formData)
+        {
+        	
+      
+            var extraData ={}; //Extra Data.
+            var jqXHR=$.ajax({
+                url: "<c:url value="/pack/fileUpload/post"/>",
+                type: "POST",
+                contentType:false,
+                processData: false,
+                cache: false,
+                data: formData,
+                dataType:'json',
+                success: function(data){
+                	imgarr.push(data.fileName);
+                	imageDivShow()
+                }
+            }); 
+  
+        }//파일저장 
+        
+        //5] Ajax 이용 해서 서버에 이미지 삭제하기 
+        
+        function deleteFileToServer(filename){
+=======
 	//이미지 드래그앤 드랍.
 	var objDragAndDrop = $(".dragAndDropDiv");
+>>>>>>> branch 'master' of https://github.com/SeoMinKyu91/Shoong.git
 
 	$(document).on("dragenter", ".dragAndDropDiv", function(e) {
 		e.stopPropagation();

@@ -244,13 +244,14 @@ width: 20%
           $("#packLng").val(lng);
             displayKaKaoMap(lat, lng);
         }
-       
+
+ 		
       //0-2]사용자 위치 구하기 실패시
        function error(position){
           displayKaKaoMap(37.57801416976735,  126.97658868798284 );
        }
        
-       //1]사용자 뷰에 지도 생성 지도 정보 map에 저장
+
         function displayKaKaoMap(lat, lng) {
            var mapContainer = document.getElementById('map');
                mapOption = {

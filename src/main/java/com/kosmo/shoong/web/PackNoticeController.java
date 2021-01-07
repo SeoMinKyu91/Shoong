@@ -16,9 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kosmo.shoong.common.utility.PagingUtil;
 import com.kosmo.shoong.service.impl.pack.PackNoticeServiceImpl;
 import com.kosmo.shoong.service.pack.PackNoticeDTO;
-import com.kosmo.shoong.service.pack.PagingUtil;
 
 @Controller
 @RequestMapping("/pack/")
