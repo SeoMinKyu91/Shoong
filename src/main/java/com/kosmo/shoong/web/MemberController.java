@@ -255,7 +255,11 @@ public class MemberController {
 	}
 		
 	@RequestMapping("/myInfoEdit.do")
-	public String myInfoEdit() {
+	public String myInfoEdit(HttpServletRequest req, Map map, Model model) {
+		map.put("userId", req.getSession().getAttribute("userId").toString());
+		Map memberInfo = memberService.memberEditView(map);
+		model.addAttribute("memberInfo", memberInfo);
+		System.out.println(memberInfo);
 		return "mypage/myInfoEdit";
 	}
 	

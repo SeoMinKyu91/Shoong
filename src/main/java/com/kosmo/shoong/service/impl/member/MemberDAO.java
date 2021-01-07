@@ -57,7 +57,7 @@ public class MemberDAO implements MemberService{
 
 	@Override
 	public int update(Map map) {
-		return sqlMapper.update("memberUpdate", map);
+		return sqlMapper.update("memberEditDo", map);
 	}///////update
 	
 	@Override
@@ -66,7 +66,9 @@ public class MemberDAO implements MemberService{
 		return sqlMapper.selectOne("selectOne",map);
 	}
 	
-	
+	public Map memberEditView(Map map) {
+		return sqlMapper.selectOne("memberEditList",map);
+	}
 	
 
 	public Map memberHasPack(Map map) {

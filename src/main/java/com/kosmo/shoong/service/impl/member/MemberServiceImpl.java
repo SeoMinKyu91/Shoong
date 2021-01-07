@@ -106,4 +106,12 @@ public class MemberServiceImpl  implements MemberService{
 		return memberDAO.memberHasPack(map);
 	}
 
+	@Override
+	public Map memberEditView(Map map) {
+		Map memberInfo = memberDAO.memberEditView(map);
+		
+		
+		return memberInfo;
+	}
+
 }/////////////////////////////////////////////

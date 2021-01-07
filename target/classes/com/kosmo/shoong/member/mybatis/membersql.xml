@@ -100,7 +100,7 @@
 	
 	
 	<select id="memberEditList" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT * FROM member
+		SELECT * FROM member WHERE user_id=#{userId}
 	</select>
 	
 	<update id="memberEditDo" parameterType="java.util.Map">
