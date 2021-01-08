@@ -19,7 +19,7 @@
 <!-- 팩 가입/승인/거절 -->
 <select id="PackJoinList" parameterType="java.util.Map" resultType="java.util.Map">
 	SELECT m.user_id,m.name,m.RRN,m.frequency,p.* 
-	from member m join pack_join p on m.user_id = p.user_id 
+	from member_ m join pack_join p on m.user_id = p.user_id 
 	WHERE p.pack_id = #{packId} and p.pack_join_accept = 'no'
 </select>
 
@@ -43,7 +43,7 @@
 <!-- 팩 맴버 조회/제명/직책변경 -->
 <select id="PackMemberList" parameterType="java.util.Map" resultType="java.util.Map">
 	select a.*, b.pack_lastaccess, b.pack_join_date,b.pack_join_no, c.authority from 
-	(member a join pack_join b on a.user_id = b.user_id) 
+	(member_ a join pack_join b on a.user_id = b.user_id) 
 	left join pack_manager c on a.user_id = c.user_id where b.pack_id = #{packId} and b.pack_join_accept = 'yes'
 </select>
 
