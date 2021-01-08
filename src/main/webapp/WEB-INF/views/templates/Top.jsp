@@ -67,11 +67,13 @@
 				<c:if test="${!isNotLogin}"></c:if>
 				<c:if test="${sessionScope.userId == 'guest'}" var="isNotId">
 					<li><span style="font-size: .8em">${sessionScope.userId}님 어서오세요</span></li>
+					<li><a href="<c:url value="/course/main.do"/>">Course</a></li>
 				</c:if>
 				<c:if test="${!isNotId}">
 				</c:if>
 				<li><a href="<c:url value="/course/navi.do"/>">Navi</a></li>
 				<li><a href="#" data-toggle="modal" data-target="#galleryModal">Route Upload</a></li>
+				<li><a href="<c:url value="/admin/home/main.do"/>">관리자페이지</a></li>
 			</ul>
 		</nav>
 
