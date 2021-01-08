@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="<c:url value="/css/test.css"/>">
 <!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
 <style>
-
 </style>
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
@@ -25,17 +24,19 @@
 	<div class="container">
 		<div class="col-xs-12 col-md-12">
 			<div class="page-header" style="text-align: center">
-				<a href="<c:url value="/"/>"><img alt="shoongLogo" src="<c:url value="/images/shooongLogo.png"/>"
+				<a href="<c:url value="/"/>"><img alt="shoongLogo"
+					src="<c:url value="/images/shooongLogo.png"/>"
 					style="width: 100px; padding-bottom: 50px"></a>
 			</div>
 		</div>
 	</div>
-	<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2" style="padding-bottom: 50px">
+	<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
+		style="padding-bottom: 50px">
 		<form class="form-horizontal" method="post" name="join"
-		style="background-color: white; box-shadow: 0px 0px 5px #000; border-radius: 100px;"
+			style="background-color: white; box-shadow: 0px 0px 5px #000; border-radius: 100px;"
 			action="<c:url value='/Member/Login.do'/>">
 			<div class="form-group">
-				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2" 
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
 					style="padding-top: 40px; padding-bottom: 30px; text-align: center">
 					<h3 style="font-weight: bold">로그인</h3>
 				</div>
@@ -57,23 +58,32 @@
 				</div>
 				<div class="form-group text-center">
 					<a href=<c:url value='/Member/GuestLogin.do'/>
-						class="btn btn-block" id="guestId" name="guestId" style="font-size: 1em">비회원 로그인</a> <a
+						class="btn btn-block" id="guestId" name="guestId"
+						style="font-size: 1em">비회원 로그인</a> <a
 						href="<c:url value="/Member/Join.do"/>" class="btn" id="join"
 						name="join"><span style="color: grey;">회원이 아닌가요?</span></a> <span
 						style="color: grey; font-size: 1em">/</span> <a
 						href="<c:url value="/Member/IDCheck.do"/>" class="btn"
-						id="idpwdCheck" name="idpwdCheck"><span style="color: grey; font-size: 1em">ID찾기</span></a>
-					<a href="<c:url value="/Member/PWDCheck1.do"/>" class="btn"
-						id="idpwdCheck" name="idpwdCheck"><span style="color: grey; font-size: 1em">PW찾기</span></a>
+						id="idpwdCheck" name="idpwdCheck"><span
+						style="color: grey; font-size: 1em">ID찾기</span></a> <a
+						href="<c:url value="/Member/PWDCheck1.do"/>" class="btn"
+						id="idpwdCheck" name="idpwdCheck"><span
+						style="color: grey; font-size: 1em">PW찾기</span></a>
 				</div>
 				<h1></h1>
-				<hr class="line" style="width: 70%"/>
+				<hr class="line" style="width: 70%" />
 				<h1></h1>
-				<div class="form-group " style="text-align: center; padding-bottom: 50px">
-					<a id="custom-login-btn" href="javascript:loginWithKakao()"> <img
+				<div class="form-group "
+					style="text-align: center; padding-bottom: 50px">
+					<a href="https://kauth.kakao.com/oauth/authorize?response_type=code
+						&client_id=616834812e97e8f82a462cd2cc2e5e4e
+						&redirect_uri=http://localhost:8080/shoong/kakao/login"
+						style="margin-top: 20px"><img
 						src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
-						width="200" />
-					</a>
+						width="200" /></a>
+					<!-- 
+						<a href="logout" style="margin-top: 20px">로그아웃
+ 					-->
 					<p id="token-result"></p>
 				</div>
 			</div>
@@ -99,36 +109,36 @@
 	});
 	
 	//카카오 api
-	  function loginWithKakao() {
-	    Kakao.Auth.authorize({
-	    	redirectUri: 'http://localhost:8080/shoong/Member/Login.do'
-		});
-	  }
-	  displayToken()
-	  function displayToken() {
-	    const token = getCookie('authorize-access-token')
-	    if(token) {
-	      Kakao.Auth.setAccessToken(token)
-	      Kakao.Auth.getStatusInfo(({ status }) => {
-	        if(status === 'connected') {
-	          document.getElementById('token-result').innerText = 'login success. token: ' + bS5LqtwQR07ScH1h3DiwpVx8vhsSmZJ8
-	        } else {
-	          Kakao.Auth.setAccessToken(null)
-	        }
-	      })
-	    }
-	  }
-	  function getCookie(name) {
-	    const value = "; " + document.cookie;
-	    const parts = value.split("; " + name + "=");
-	    if (parts.length === 2) return parts.pop().split(";").shift();
-	  } 
-	  
-	  //로그인 (아이디/비밀번호) 입력 관련
-	  $('#loginCheck').click(function() {
-		  	if($('#userId').val().length==0 && $('#userPWD').val().length==0){
-		  		alert('아이디와 비밀번호를 입력하세요.');
-		  		location.reload();
-		  	}
-	 });
+  function loginWithKakao() {
+    Kakao.Auth.authorize({
+    	redirectUri: 'http://localhost:8080/shoong/kakao/login'
+	});
+  }
+  displayToken()
+  function displayToken() {
+    const token = getCookie('authorize-access-token')
+    if(token) {
+      Kakao.Auth.setAccessToken(token)
+      Kakao.Auth.getStatusInfo(({ status }) => {
+        if(status === 'connected') {
+          document.getElementById('token-result').innerText = 'login success. token: ' + bS5LqtwQR07ScH1h3DiwpVx8vhsSmZJ8
+        } else {
+          Kakao.Auth.setAccessToken(null)
+        }
+      })
+    }
+  }
+  function getCookie(name) {
+    const value = "; " + document.cookie;
+    const parts = value.split("; " + name + "=");
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  }
+  
+  //로그인 (아이디/비밀번호) 입력 관련
+  $('#loginCheck').click(function() {
+	  	if($('#userId').val().length==0 && $('#userPWD').val().length==0){
+	  		alert('아이디와 비밀번호를 입력하세요.');
+	  		location.reload();
+	  	}
+ });
 </script>

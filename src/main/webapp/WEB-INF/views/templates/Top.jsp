@@ -67,6 +67,7 @@
 				<c:if test="${!isNotLogin}"></c:if>
 				<c:if test="${sessionScope.userId == 'guest'}" var="isNotId">
 					<li><span style="font-size: .8em">${sessionScope.userId}님 어서오세요</span></li>
+					<li><a href="<c:url value="/course/main.do"/>">Course</a></li>
 				</c:if>
 				<c:if test="${!isNotId}">
 				</c:if>

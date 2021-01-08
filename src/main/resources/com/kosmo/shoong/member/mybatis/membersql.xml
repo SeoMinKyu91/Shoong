@@ -63,10 +63,14 @@
 		resultType="int">
 		SELECT COUNT(*) FROM member WHERE user_id=#{userId}
 	</select>
-	<!---->
+	
 	<insert id="memberInsert" parameterType="java.util.Map">
-		INSERT INTO member(user_id,pwd,name,rrn,address,userjoindate,usertel)
-		VALUES(#{userId},#{userPWD},#{userName},#{userRRN},#{userAddr},SYSDATE,#{userTel})
+		INSERT INTO member(user_id,pwd,name,age,gender,userjoindate,usertel)
+		VALUES(#{userId},#{userPWD},#{userName},#{userAge},#{userGender},SYSDATE,#{userTel})
+	</insert>
+	<insert id="insertAddr" parameterType="java.util.Map">
+		INSERT INTO useraddr 
+		VALUES(#{userId},#{userAddr},#{memberLat},#{memberLng})
 	</insert>
 	<insert id="memberVerify" parameterType="java.lang.String">
 		INSERT INTO verify
