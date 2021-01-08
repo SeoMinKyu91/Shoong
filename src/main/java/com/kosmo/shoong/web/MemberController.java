@@ -69,7 +69,7 @@ public class MemberController {
 		String userPWDOk = map.get("userPWDOk").toString();
 		JSONObject json = new JSONObject();
 		if(userPWD.equals(userPWDOk)) {
-			json.put("passwordCheck", "비밀번호가 일치합니다.");
+			json.put("passwordCheck", "");
 		}
 		else {
 			json.put("passwordCheck", "비밀번호가 일치하지 않습니다.");
@@ -213,7 +213,7 @@ public class MemberController {
 		session = req.getSession();
 		//로그아웃 처리-세션영역 데이타 삭제
 		session.invalidate();
-		//뷰정보 번환]
+		//뷰정보 반환]
 		return "/templates/Main";
 	}/////////////logout
 
