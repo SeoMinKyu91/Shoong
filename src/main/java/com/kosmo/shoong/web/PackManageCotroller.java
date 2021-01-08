@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -153,11 +154,7 @@ public class PackManageCotroller {
 		return "forward:/pack/manage.do";
 	}/////////
 	
-	@RequestMapping("calendar.do")
-	public String packCaledar() {
-		
-		return "pack/test";
-	}/////////
+
 	
 	
 	
