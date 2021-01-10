@@ -3,39 +3,11 @@
 <%@ page language="java" 
 	contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-<!-- mapbox core-->
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
-<!-- mapbox geocoder -->
-<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
-<link
-	rel="stylesheet"
-	href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
-	type="text/css" />
-<!-- mapbox directions -->
-<script
-	src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
-<link rel="stylesheet"
-	href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
-	type="text/css" />
-<!-- mapbox draw -->
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css' type='text/css' />
 
 <style>
-body {
-	margin: 0;
-	padding: 0;
-}
+/*
 
-#map {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	width: 70%;
-	height: 100%;
-}
+
 
 .mapboxgl-popup {
 	max-width: 200px;
@@ -44,6 +16,25 @@ body {
 .mapboxgl-popup-content {
 	text-align: center;
 	font-family: 'Open Sans', sans-serif;
+}
+
+
+*/
+
+nav{
+	position: relative;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#map {
+	position: relative;
+	top: 0;
+	bottom: 0;
+	width: 70%;
 }
 
 .mapboxgl-ctrl-geocoder {
@@ -126,8 +117,8 @@ h1 {
 	width: 100%;
 }
 </style>
-<div id="colorlib-main" style="padding-top: 0;">
-	<div class="popular-location section-padding30">
+<div id="colorlib-main" class="container" style="padding-top: 0;">
+	<div class="container">
 		<div id="map"></div>
 		<div class="modal fade" id="galleryModal" data-backdrop="false"  >
 		     <div class="modal-dialog modal-lg" >
@@ -162,7 +153,8 @@ h1 {
 </div>
 
 <script>
-	//맵박스 토큰
+//맵박스 토큰
+$(function(){
 	mapboxgl.accessToken = 'pk.eyJ1Ijoid2t1bmdoOTMiLCJhIjoiY2tpd2hpNnZ0MHF3YzMwcnd5ZG1obzh2biJ9.EW26scaL6pDX7yQhFNnwMw';
 
 	var monument = [ 126.87870025634767, 37.478732138068445 ];
@@ -393,4 +385,5 @@ h1 {
 
 		$('#imgArry').val(imgarr);
 	}
+});
 </script>

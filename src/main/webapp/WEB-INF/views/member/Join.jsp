@@ -25,7 +25,7 @@ input {
 	margin-bottom: 50px;
 }
 </style>
-<div id="colorlib-main" style="padding-top: 100px">
+<div id="colorlib-main" style="padding-top: 50px">
 	<!-- 위에 딱 붙는게 싫어서 임시로 padding-top: 100px 주었음 수정하고싶으면 수정  -->
 	<div class="container">
 		<div class="col-xs-12 col-md-12">
@@ -37,17 +37,17 @@ input {
 		</div>
 	</div>
 	<!-- 실제 내용 시작 -->
-	<div class="col-xs-10 offset-xs-1 col-md-10 offset-md-1"
+	<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
 		style="padding-bottom: 50px">
 		<form class="form-horizontal" method="post" name="join" onsubmit="return checked()"
 			style="background-color: white; box-shadow: 0px 0px 5px #000; border-radius: 100px;"
 			action="<c:url value='/Member/Join.do'/>">
 			<div class="form-group">
-				<div class="col-xs-10 offset-xs-1 col-md-6 offset-md-3"
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
 					style="padding-top: 40px; padding-bottom: 40px; text-align: center">
 					<h3 style="font-weight: bold">회원 가입</h3>
 				</div>
-				<div class=" col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 					<!-- 이메일 입력란 -->
 					<label for="userId">이메일 </label>
 					<Button type="button" id="emailDuplCheck" class="btn btn-sm"
@@ -69,30 +69,29 @@ input {
 						<option value="nate.com">nate.com</option>
 						<option value="1">직접입력</option>
 					</select> <br />
-					<br />
 				</div>
 			</div>
 			<!-- 비밀번호 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
-				<label for="userPWD">비밀번호(4~12자의 영문 대소문자와 숫자로만 입력)</label> <input type="password" 
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+				<label for="userPWD">비밀번호<span style="font-size: .8em">&nbsp;(4~12자의 영문 대소문자와 숫자로만 입력)</span></label> <input type="password" 
 					class="form-control input-sm" id="userPWD" name="userPWD" minlength="4" maxlength="12"
-					style="font-size: .8em" placeholder="비밀번호를 입력하세요"> <br />
+					style="font-size: .8em" placeholder="비밀번호를 입력하세요"> 
 			</div>
 			<!-- 비밀번호 확인 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userPWDOk">비밀번호 확인</label> <input type="password"
 					class="form-control input-sm" id="userPWDOk" name="userPWDOk" minlength="4" maxlength="12"
 					style="font-size: .8em" placeholder="위와 같은 비밀번호를 입력하세요"> <span
 					id="passwordCheck" style="font-size: .8em; color: gray"></span>
 			</div>
 			<!-- 이름 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userName">이름</label> <input type="text"
 					class="form-control input-sm" id="userName" name="userName"
-					style="font-size: .8em" placeholder="이름을 입력하세요"><br />
+					style="font-size: .8em" placeholder="이름을 입력하세요">
 			</div>
 			<!-- 생년월일 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userRRN">생년월일</label> <br /> <input name="userRRN1"
 					id="userRRN1" type="text" size="25" maxlength="6"
 					OnKeyUp="check();" onChange="inputbirthNage(); inputGender()"
@@ -125,10 +124,10 @@ input {
 					onBlur="checknum(document.join.userGender.value)"><br />
 			</div>
 			<!-- 연락처 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userTel">연락처</label><br /> <select name="userTel1"
 					id="userTel1"
-					style="font-size: .8em; height: 50px; width: 26.5%; padding-left: 10px; border: #ced4da 1.5px solid;">
+					style="font-size: .8em; height: 50px; width: 28%; padding-left: 10px; border: #ced4da 1.5px solid;">
 					<option value="010">010</option>
 					<option value="011">011</option>
 					<option value="016">016</option>
@@ -136,26 +135,26 @@ input {
 					<option value="018">018</option>
 					<option value="019">019</option>
 				</select> &nbsp; ㅡ &nbsp; <input name="userTel2" id="userTel2" type="text"
-					maxlength="4" style="height: 50px; width: 26.5%"
+					maxlength="4" style="height: 50px; width: 28%"
 					OnKeyUp="checkTel();">&nbsp; ㅡ &nbsp; <input
 					name="userTel3" id="userTel3" type="text" maxlength="4"
-					style="height: 50px; width: 26.5%" OnKeyUp="checkTel();"> <br />
+					style="height: 50px; width: 28%" OnKeyUp="checkTel();"> <br />
 			</div>
 			<!-- 활동지역 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userAddr">활동지역</label>
 				<div>
 					<input type="text" class="form-control" id="userAddr"
 						name="userAddr" style="font-size: .8em">
 				</div>
 			</div>
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<div id="map"></div>
 				<input type="hidden" id="memberLat" name="memberLat"
 					class="form-group" /> <input type="hidden" id="memberLng"
 					name="memberLng" class="form-group" />
 			</div>
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3"
+			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2"
 				style="padding-bottom: 50px">
 				<button type="submit" class="btn btn-primary btn-lg btn-block">가입하기</button>
 			</div>

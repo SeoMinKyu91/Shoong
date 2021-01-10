@@ -18,7 +18,7 @@
 <!-- ※colorlib-main으로 일단 감싸고 안에다가 작업해야 왼쪽 탑에 안먹히고 작업할 수 있어요 -->
 <!-- 설명이 이해가 잘 안되시면  따로 연락주세요...-->
 
-<div id="colorlib-main" style="padding-top: 100px">
+<div id="colorlib-main" style="padding-top: 50px">
 	<!-- 위에 딱 붙는게 싫어서 임시로 padding-top: 100px 주었음 수정하고싶으면 수정  -->
 
 	<div class="container">
