@@ -57,7 +57,7 @@
 				</c:if>
 				<c:if test="${!isNotLogin}">
 					<li><a href="<c:url value="/Member/Logout.do"/>">LOGOUT</a></li>
-					<li><a href="<c:url value="/Member/mypage.do"/>">MY PAGE</a></li>
+					<li><a href="<c:url value="/mypage/main.do"/>">MY PAGE</a></li>
 					<li><a href="<c:url value="/pack/main.do"/>">PACK</a></li>
 					<li><a href="<c:url value="/course/main.do"/>">Course</a></li>
 				</c:if>
