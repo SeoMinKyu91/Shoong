@@ -56,6 +56,12 @@
 	.custom-border:nth-child(1):hover{
 		background-color: white;
 	}
+	.introbox div{
+		margin-top: 10px; 
+	}
+	.introEdit:hover {
+		cursor: pointer;
+	}
 	
 </style>
 
@@ -71,8 +77,51 @@
 			</div>
 		</div>
 		<hr>
+		
+		
+		
+		<div class="container" style="margin-top:50px;">
+			<div class="row">
+				<div class="offset-md-2 col-md-8 col-lg-offset-2 col-lg-8">
+					<div class="row">
+						<div class="col-md-4">
+							<img style="width: 100%; height: 100%; border-radius: 40px;" src="<c:url value="/images/pack/${packInfo.PACK_THUMBNAIL }"/>" alt="팩 마크">
+						</div>
+						<div class="col-md-7 introbox" style="margin-left:30px;">
+							<div class="row">
+								<div class="col-md-11 col-xs-11">
+									<h2 style="font-style: bold;">${packInfo.PACK_NAME}</h2>
+								</div>
+								<div class="col-md-1 col-xs-1">
+									<a href="<c:url value="/pack/infoEdit.do?packId=${sessionScope.packId }"/>" class="introEdit"><span class="glyphicon glyphicon-edit" aria-hidden="true" ></span></a> 
+								</div>
+							</div>
+							<div class="row">
+								<p class="col-md-4">#${packInfo.PACK_ACT_REGION }</p>
+								<p class="col-md-3">#${packInfo.PACK_ACT_TIME }</p>
+								<p class="col-md-3">#${packInfo.PACK_ACT_AGE }</p>
+							</div>
+							<div class="row" style="margin-top: 0px;">
+								<p class="col-md-3">${packInfo.PACK_TAG }</p>
+							</div>
+							<div class="row">
+								<p style="font-size: 15px;line-height:2.0;">${packInfo.PACK_INTRO}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
 			
-		<div class="container">	
+		<div class="container" style="margin-top: 50px;">	
+			<div class="row">
+				<div class="offset-md-2 col-md-8 col-lg-offset-2 col-lg-8">
+					<hr>
+				</div>
+			</div>
+			
 			<div class="row">
 				<div class="offset-md-2 col-md-8 col-lg-offset-2 col-lg-8">
 					<div role="tabpanel">
@@ -92,7 +141,9 @@
 							<div role="tabpanel" class="tab-pane active" id="home">
 								<c:if test="${empty packJoinList }" var="noPackJoinList">
 									<div class="row custom-border">
-										<div class="col-lg-12 col-xs-12 text-center">가입 신청자가 없습니다</div>
+										<div class="col-lg-12 col-xs-12 text-center custom-border" style="background-color: #F5F5F5;">
+											<div>가입 신청자가 없습니다</div>
+										</div>
 									</div>
 								</c:if>
 
@@ -247,12 +298,9 @@
 <!-- END COLORLIB-PAGE -->
 
 <!-- 팩 정보수정 모달창 시작 -->
-<div class="modal fade" id="packIntroEdit">
-	<div class="modal-dialog">
+<div class="modal fade" id="packIntroEdit" data-backdrop="false">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">팩 정보 수정</h4>
-			</div>
 
 			<div class="modal-body">
 				<form action="#" class="bg-light p-5 contact-form" method="post"
@@ -263,20 +311,14 @@
 							id="packName">
 					</div>
 
+					<label for="packName">팩 나이</label>
 					<div class="form-group">
 						<input type="text" class="form-control" name="packName"
 							id="packName">
 					</div>
 
-					<label for="packOrigin">팩 지역</label>
-					<div class="form-group">
-						<input type="text" class="form-control" name="packOrigin"
-							id="packOrigin">
-					</div>
-					<label for="packBedge">팩 뱃지선택</label>
-					<div class="form-group">
-						<input type="file" name="packBedge" id="packBedge">
-					</div>
+					
+					
 
 					<label for="packIntro">팩 소개글</label>
 					<div class="form-group">
@@ -285,12 +327,10 @@
 					</div>
 
 				</form>
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" id="edit">수정</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal">수정</button>
 				<button type="button" class="btn btn-info" data-dismiss="modal">닫기</button>
 			</div>
+
 		</div>
 	</div>
 </div>
@@ -299,13 +339,29 @@
 
 
 
+
 <script>
 	$(function() {
-		
-		$(".removeMember").click(function(){
+		/*
+		$(".introEdit").click(function(){
+			console.log('팩정보수정 클릭');
+			$.ajax({
+				url:"<c:url value="/pack/manager/info/Edit.do"/>",//요청할 서버의 URL주소
+				type:'post',//데이타 전송방식(디폴트는 get방식) 
+				dataType:'text',//서버로 부터 응답 받을 데이타의 형식 설정
+				data: "packId="+${sessionScope.packId},
+				success:function(data){
+					console.log('성공 메소드 실행');
+				
+				},
+				error:function(error){//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
+					console.log('에러 : ',error.responseText);
+				}
+				
+				});
 			
-			console.log('ㄱㅁㄴㅇ');
 		})
+		*/
 		
 		$("#profile").click(function(){
 			console.log('됩니다');
@@ -361,33 +417,6 @@
 		});
 		
 		
-
-		//자스로 backdrop구현
-		$('#packIntroEdit').modal({
-			backdrop : 'static',
-			show : false
-		});
-
-		$('#btnPackInfoEdit').on('click', function(e) {
-			console.log('버튼 클릭');
-			$('#packIntroEdit').modal('show');
-			//5초후에 자동으로 닫기
-			/* ()=> {} : 에로우펑션(화살표 함수)
-			setTimeout(()=>{
-				$('#js-modal').modal('hide');
-			},5000)
-			 */
-			/*
-			setTimeout(function(){
-				$('#js-modal').modal('hide');
-			},5000);
-			 */
-
-		})
-
-		$('#close').on('click', function() {
-			$('#js-modal').modal('hide');
-		})
 
 	});
 </script>

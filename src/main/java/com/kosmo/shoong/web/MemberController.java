@@ -33,11 +33,11 @@ public class MemberController {
 
 	@Resource(name="galleryService")
 	private GalleryService galleryService;
-	
+
 	@Resource(name="courseService")
 	private CourseService courseService;
-	
-	
+
+
 	/////회원 가입//////
 
 	//회원가입 입력폼
@@ -50,7 +50,9 @@ public class MemberController {
 	@RequestMapping(value = "Join.do", method = RequestMethod.POST)
 	public String joinOk(@RequestParam Map map,Model model) throws MessagingException {
 		//맵에서 유저아이디와 유저아이디 뒷자리(@gmail.com) 따로따로 받아서
-		map.put("userId", map.get("userId").toString()+map.get("emailStr").toString());
+		map.put("userId", map.get("userId").toString()+"@"+map.get("emailStrinput").toString());
+		map.put("userRRN", map.get("userRRN1").toString()+map.get("userRRN2").toString());
+		map.put("userTel", map.get("userTel1").toString()+map.get("userTel2").toString()+map.get("userTel3").toString());
 		Set keys = map.keySet();
 		for(Object key:keys) System.out.println(key+":"+map.get(key));
 		//다시 맵에 userId 키값으로 유저아이디@gamil.com을 밸류로 넣기
@@ -172,7 +174,6 @@ public class MemberController {
 		memberService.update(map);
 		//맵넘겨주기
 		return "templates/Main";
-		
 	}
 	/////로그인//////
 	//kakao login api 전용 컨트롤러
@@ -187,17 +188,17 @@ public class MemberController {
 	//로그인 처리]
 	@RequestMapping(value = "Login.do",method = RequestMethod.POST)
 	public String loginOk(HttpSession session, @RequestParam Map map,HttpServletRequest req) {
-		
+
 		session = req.getSession();
 		boolean flag = memberService.isMember(map);
-		
+
 		Map mamberHasPack = memberService.memberHasPack(map);
 		if(flag) {
 			session.setAttribute("userId", map.get("userId"));
 			if(mamberHasPack != null) {
 				session.setAttribute("packId", mamberHasPack.get("PACK_ID"));
 			}
-			
+
 		}
 		else {
 			session.setAttribute("error", "아이디와 비밀번호가 일치하지 않습니다.");
@@ -227,8 +228,7 @@ public class MemberController {
 	}///////guestLogin
 
 	//ID/PW 찾기용]
-	
-	
+
 	////
 	@RequestMapping("/mypage.do")
 	public String mypage(HttpServletRequest req, Map map, Model model) {
@@ -238,15 +238,15 @@ public class MemberController {
 		List<Map> lists = galleryService.imgSelectList(map);
 		model.addAttribute("imgList", lists);
 		List<Map> courselists = courseService.showCourse(map);
-		for(Map courseList:courselists)
-			courseList.put("COURSE_DATE", courseList.get("COURSE_DATE").toString().substring(0,10));
-		model.addAttribute("courseList", courselists);
+		//for(Map courseList:courselists)
+			//courseList.put("COURSE_DATE", courseList.get("COURSE_DATE").toString().substring(0,10));
+		//model.addAttribute("courseList", courselists);
 		return "mypage/mypage";
 	}
-		
+
 	@RequestMapping("/myInfoEdit.do")
 	public String myInfoEdit() {
 		return "mypage/myInfoEdit";
 	}
-	
+
 }/////class

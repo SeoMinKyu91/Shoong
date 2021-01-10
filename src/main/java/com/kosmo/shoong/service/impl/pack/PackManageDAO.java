@@ -56,6 +56,16 @@ public class PackManageDAO {
 		
 		return (Integer)sqlMapper.selectOne("PackManagerSelect",map)==1?true:false;
 	}///////
+
+	public Map packIntroSelect(Map map) {
+		
+		return sqlMapper.selectOne("packIntroSelect",map);
+	}////
+
+	public int packInfoUpdate(Map map) {
+	
+		return sqlMapper.update("packInfoUpdate",map);
+	}////////////////
 	
 	
 }////////////////class
