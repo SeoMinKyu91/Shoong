@@ -60,8 +60,8 @@ public class KakaoLoginController {
 	@RequestMapping(value = "KakaoJoin.do", method = RequestMethod.POST)
 	public String joinOk(@RequestParam Map map,Model model) throws MessagingException {
 		map.put("userTel", map.get("userTel1").toString()+map.get("userTel2").toString()+map.get("userTel3").toString());
-//			Set keys = map.keySet();
-//			for(Object key:keys) System.out.println(key+":"+map.get(key));
+		Set keys = map.keySet();
+		for(Object key:keys) System.out.println(key+":"+map.get(key));
 		//활동량 설문조사페이지로 이동
 		model.addAttribute("userId", map.get("userId"));
 		//VERIFY UPDATE

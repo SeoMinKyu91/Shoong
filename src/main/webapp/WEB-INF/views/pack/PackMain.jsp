@@ -342,5 +342,4 @@ color:white;
 	          
 	       }
 	});
-      
 </script>
