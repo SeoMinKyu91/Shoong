@@ -144,7 +144,6 @@ color:white;
 </div><!-- 모달 -->
 
 <script>
-
 	$(function(){
 		   var packId="";
 		   $(".joinPackBtn").click(function(){
