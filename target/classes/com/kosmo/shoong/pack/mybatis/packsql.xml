@@ -68,7 +68,7 @@
 </select>
 
 <select id="UserAddrCheckSelect" parameterType="java.util.Map" resultType="java.util.Map" >
-	SELECT ADDRESS FROM MEMBER WHERE USER_ID = #{userId} 
+	SELECT ADDRESS FROM member_ WHERE USER_ID = #{userId} 
 </select>
 
 </mapper>
