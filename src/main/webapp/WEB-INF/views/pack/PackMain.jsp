@@ -143,209 +143,205 @@ color:white;
        </div>
 </div><!-- 모달 -->
 
-
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4aaa4b242f112a823dd2ef5541569589&libraries=services,clusterer"></script>
-<script>
-   var packId="";
-   $(".joinPackBtn").click(function(){
-      packId = $(this).attr("id")
-      $('#packJoinModal').modal();
-   })
-
-   $(function() {
-      $("#accordion").accordion(
-            {
-                  collapsible: true,
-                  active: false,
-                  animate:500,
-                  icons: false
-            });
-      //게터 호출
-      var animate = $("#accordion").accordion("option", "animate" );
-      //세터-accordion()함수 다음에
-      $("#accordion").accordion( "option", "animate", 1000 );
-      
-   });
-   
-   
-   
-   $("#packJoinModalBtn").click(function(){
-      $.ajax({
-         url:"<c:url value="/pack/joinPack.do"/>",//요청할 서버의 URL주소
-         type:'post',//데이타 전송방식(디폴트는 get방식) 
-         dataType:'text',//서버로 부터 응답 받을 데이타의 형식 설정
-         data: "packId="+packId,
-         success:function(data){
-            $("#packJoinSpan").html("가입신청이 완료되었습니다.")
-         },
-         error:function(error){//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
-            $("#packJoinSpan").html("죄송합니다. 다시시도해주세요")
-         }
-      })
-   });
-   
-</script>
 <script>
 
+	$(function(){
+		   var packId="";
+		   $(".joinPackBtn").click(function(){
+		      packId = $(this).attr("id")
+		      $('#packJoinModal').modal();
+		   })
 
-      var map;
-      var clusterer;
-      var markerLat;
-      var markerLng;
-      var geocoder = new kakao.maps.services.Geocoder(); 
-      //0]사용자 위치 구하기
+		   $(function() {
+		      $("#accordion").accordion(
+		            {
+		                  collapsible: true,
+		                  active: false,
+		                  animate:500,
+		                  icons: false
+		            });
+		      //게터 호출
+		      var animate = $("#accordion").accordion("option", "animate" );
+		      //세터-accordion()함수 다음에
+		      $("#accordion").accordion( "option", "animate", 1000 );
+		      
+		   });
+		   
+		   
+		   
+		   $("#packJoinModalBtn").click(function(){
+		      $.ajax({
+		         url:"<c:url value="/pack/joinPack.do"/>",//요청할 서버의 URL주소
+		         type:'post',//데이타 전송방식(디폴트는 get방식) 
+		         dataType:'text',//서버로 부터 응답 받을 데이타의 형식 설정
+		         data: "packId="+packId,
+		         success:function(data){
+		            $("#packJoinSpan").html("가입신청이 완료되었습니다.")
+		         },
+		         error:function(error){//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
+		            $("#packJoinSpan").html("죄송합니다. 다시시도해주세요")
+		         }
+		      })
+		   });
+		  var map;
+	      var clusterer;
+	      var markerLat;
+	      var markerLng;
+	      var geocoder = new kakao.maps.services.Geocoder(); 
+	      //0]사용자 위치 구하기
+	      
+	      
+	      if (navigator.geolocation) {
+	            var options = { timeout: 3000, maxinumAge: 5000 };
+	           navigator.geolocation.getCurrentPosition(successCallback,error);
+	         }
+	   
+	       
+	       //0-1]사용자 위치 구하기 성공시 좌표값 displayKaKaoMap로 넘김
+	       function successCallback(position) {
+	           
+	            <c:if test="${empty searchLat}" var="isEmpty">
+	               var lat = position.coords.latitude;
+	               var lng = position.coords.longitude;
+	            displayKaKaoMap(lat, lng);    
+	         </c:if>
+	         <c:if test="${!isEmpty}">
+	             displayKaKaoMap(${searchLat},${searchLng});
+	         </c:if>
+	           
+	            //if문
+	            
+	        }
+
+	 		
+	 		//0-2]사용자 위치 구하기 실패시
+	 		function error(position){
+	 			displayKaKaoMap(37.57801416976735,  126.97658868798284 );
+	 		}
+	   
+	       //1]사용자 뷰에 지도 생성 지도 정보 map에 저장
+	        function displayKaKaoMap(lat, lng) {
+	           var mapContainer = document.getElementById('map');
+	               mapOption = {
+	                center: new kakao.maps.LatLng(lat, lng), // 현재 위치 중심으로 지도의 중심좌표
+	                level:11
+	            };
+
+	            map = new kakao.maps.Map(mapContainer, mapOption); 
+	            //맵 컨트롤
+	            var mapTypeControl = new kakao.maps.MapTypeControl();
+	           // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의! TOPRIGHT는 오른쪽 위
+	           map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+	           // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+	           var zoomControl = new kakao.maps.ZoomControl();
+	           map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+	          //클러스터 
+	           clustererCreate();
+	           //주소
+	          searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+	          displayCentermarker(map);
+	          addeventmap(map);
+	          
+	      }
+	      
+	       /////
+	       function clustererCreate(){
+	          
+	           clusterer = new kakao.maps.MarkerClusterer({
+	                  map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+	                  averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+	                  minLevel: 8// 클러스터 할 최소 지도 레벨 
+	             });
+	           // 데이터에서 좌표 값을 가지고 마커를 표시합니다
+
+	          var markerPosition= null;
+	          var marker=null;
+	            <c:forEach var="item" items="${packList }">
+	            
+	               // 마커가 표시될 위치입니다  
+	               markerPosition  = new kakao.maps.LatLng(${item.packLat}, ${item.packLng}); 
+	               
+	               // 마커를 생성합니다
+	               marker = new kakao.maps.Marker({
+	                   position: markerPosition
+	               });
+	               
+	               clusterer.addMarker(marker);      
+	            </c:forEach>
+
+	          }
+	       
+	       /////////////////////////////주소 관련 ////////////////////
+	       //주소 클릭 마커 없앨시 삭제
+	      var marker;
+	      
+	      function displayCentermarker(map){
+	         var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+	         var imageSize = new kakao.maps.Size(24, 35); 
+	          var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+	          //마커생성
+	          marker = new kakao.maps.Marker({ 
+	                position: map.getCenter(),
+	                image : markerImage 
+	         }); 
+	          //마커 셋팅
+	         marker.setMap(map);
+	       }   
+	       //주소 클릭 마커 없앨시 삭제
+	       
+	       
+	       //지도에 이벤트를 등록합니다
+	       function addeventmap(map) {
+	         kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+	             
+	                //주소 클릭 마커 없앨시 삭제
+	                  marker.setPosition(mouseEvent.latLng);
+	                  marker.setMap(map);
+	                  //주소 클릭 마커 없앨시 삭제
+	                  markerLat = mouseEvent.latLng.getLat();
+	                  markerLng = mouseEvent.latLng.getLng();
+	                  //
+	                  searchAddrFromCoords(mouseEvent.latLng, displayCenterInfo);
+	      
+	        }); 
+	       }
+	       
+
+	       function searchAddrFromCoords(coords, callback) {
+	           geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);     
+	       }
+
+	       //행정동 위치 구해서 띄어주느 함수 
+	       var firstAccess = false;
+	       function displayCenterInfo(result, status) {
+
+	          if (status === kakao.maps.services.Status.OK) {
+	               var Region = document.getElementById('packRegionSearch');
+
+	               for(var i = 0; i < result.length; i++) {
+	                   // 행정동의 region_type 값은 'H' 이므로
+	                   if (result[i].region_type === 'H') {
+	                      var regionArray = result[i].address_name.split(" ");
+	                      var resionCut = regionArray[0]+" "+regionArray[1];
+	                      if(resionCut!=Region.innerHTML){
+	                         Region.innerHTML =resionCut;
+	                         if(firstAccess){
+	                         reSearch(resionCut);
+	                         }
+	                         firstAccess = true;
+	                      }
+	                       break;
+	                   }
+	               }
+	           } 
+	           
+	       }
+
+	       function reSearch(searchRegion) {
+	         
+	          location.href = "<c:url value='/pack/main.do?lat="+markerLat+"&lng="+markerLng+"&searchRegion="+searchRegion+"'/>";
+	          
+	       }
+	});
       
-      
-      if (navigator.geolocation) {
-            var options = { timeout: 3000, maxinumAge: 5000 };
-           navigator.geolocation.getCurrentPosition(successCallback,error);
-         }
-   
-       
-       //0-1]사용자 위치 구하기 성공시 좌표값 displayKaKaoMap로 넘김
-       function successCallback(position) {
-           
-            <c:if test="${empty searchLat}" var="isEmpty">
-               var lat = position.coords.latitude;
-               var lng = position.coords.longitude;
-            displayKaKaoMap(lat, lng);    
-         </c:if>
-         <c:if test="${!isEmpty}">
-             displayKaKaoMap(${searchLat},${searchLng});
-         </c:if>
-           
-            //if문
-            
-        }
-
- 		
- 		//0-2]사용자 위치 구하기 실패시
- 		function error(position){
- 			displayKaKaoMap(37.57801416976735,  126.97658868798284 );
- 		}
-   
-       //1]사용자 뷰에 지도 생성 지도 정보 map에 저장
-        function displayKaKaoMap(lat, lng) {
-           var mapContainer = document.getElementById('map');
-               mapOption = {
-                center: new kakao.maps.LatLng(lat, lng), // 현재 위치 중심으로 지도의 중심좌표
-                level:11
-            };
-
-            map = new kakao.maps.Map(mapContainer, mapOption); 
-            //맵 컨트롤
-            var mapTypeControl = new kakao.maps.MapTypeControl();
-           // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의! TOPRIGHT는 오른쪽 위
-           map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-           // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-           var zoomControl = new kakao.maps.ZoomControl();
-           map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-          //클러스터 
-           clustererCreate();
-           //주소
-          searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-          displayCentermarker(map);
-          addeventmap(map);
-          
-      }
-      
-       /////
-       function clustererCreate(){
-          
-           clusterer = new kakao.maps.MarkerClusterer({
-                  map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-                  averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-                  minLevel: 8// 클러스터 할 최소 지도 레벨 
-             });
-           // 데이터에서 좌표 값을 가지고 마커를 표시합니다
-
-          var markerPosition= null;
-          var marker=null;
-            <c:forEach var="item" items="${packList }">
-            
-               // 마커가 표시될 위치입니다  
-               markerPosition  = new kakao.maps.LatLng(${item.packLat}, ${item.packLng}); 
-               
-               // 마커를 생성합니다
-               marker = new kakao.maps.Marker({
-                   position: markerPosition
-               });
-               
-               clusterer.addMarker(marker);      
-            </c:forEach>
-
-          }
-       
-       /////////////////////////////주소 관련 ////////////////////
-       //주소 클릭 마커 없앨시 삭제
-      var marker;
-      
-      function displayCentermarker(map){
-         var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-         var imageSize = new kakao.maps.Size(24, 35); 
-          var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-          //마커생성
-          marker = new kakao.maps.Marker({ 
-                position: map.getCenter(),
-                image : markerImage 
-         }); 
-          //마커 셋팅
-         marker.setMap(map);
-       }   
-       //주소 클릭 마커 없앨시 삭제
-       
-       
-       //지도에 이벤트를 등록합니다
-       function addeventmap(map) {
-         kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-             
-                //주소 클릭 마커 없앨시 삭제
-                  marker.setPosition(mouseEvent.latLng);
-                  marker.setMap(map);
-                  //주소 클릭 마커 없앨시 삭제
-                  markerLat = mouseEvent.latLng.getLat();
-                  markerLng = mouseEvent.latLng.getLng();
-                  //
-                  searchAddrFromCoords(mouseEvent.latLng, displayCenterInfo);
-      
-        }); 
-       }
-       
-
-       function searchAddrFromCoords(coords, callback) {
-           geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);     
-       }
-
-       //행정동 위치 구해서 띄어주느 함수 
-       var firstAccess = false;
-       function displayCenterInfo(result, status) {
-
-          if (status === kakao.maps.services.Status.OK) {
-               var Region = document.getElementById('packRegionSearch');
-
-               for(var i = 0; i < result.length; i++) {
-                   // 행정동의 region_type 값은 'H' 이므로
-                   if (result[i].region_type === 'H') {
-                      var regionArray = result[i].address_name.split(" ");
-                      var resionCut = regionArray[0]+" "+regionArray[1];
-                      if(resionCut!=Region.innerHTML){
-                         Region.innerHTML =resionCut;
-                         if(firstAccess){
-                         reSearch(resionCut);
-                         }
-                         firstAccess = true;
-                      }
-                       break;
-                   }
-               }
-           } 
-           
-       }
-
-       function reSearch(searchRegion) {
-         
-          location.href = "<c:url value='/pack/main.do?lat="+markerLat+"&lng="+markerLng+"&searchRegion="+searchRegion+"'/>";
-          
-       }
 </script>

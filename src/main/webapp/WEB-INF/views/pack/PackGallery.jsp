@@ -98,7 +98,6 @@ width: 100%;
 </style>
 
 
-<div id="colorlib-page">
 <div id="colorlib-main" class="popular-location section-padding30">
    <div class="container">
       <div class="row">
@@ -180,7 +179,6 @@ width: 100%;
            </div>
        </div>
    </div><!-- 모달 -->
-</div>
 </div>
 <script>
 
