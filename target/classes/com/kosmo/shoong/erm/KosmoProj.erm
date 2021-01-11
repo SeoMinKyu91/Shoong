@@ -89,7 +89,7 @@
 				<is_open_after_saved>true</is_open_after_saved>
 			</export_html_setting>
 			<export_image_setting>
-				<output_file_path>C:\Users\Kosmo\Desktop\SHOOONG_ERD_4RD.png</output_file_path>
+				<output_file_path>src\main\resources\com\kosmo\shoong\erm\SHOOONG_ERD_5th.png</output_file_path>
 				<category_dir_path></category_dir_path>
 				<with_category_image>true</with_category_image>
 				<is_open_after_saved>true</is_open_after_saved>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2020-11-30 12:56:52</creation_date>
-			<updated_date>2021-01-10 19:44:52</updated_date>
+			<updated_date>2021-01-11 17:38:00</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
