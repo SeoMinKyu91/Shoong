@@ -18,8 +18,8 @@
 
 <!-- 팩 가입/승인/거절 -->
 <select id="PackJoinList" parameterType="java.util.Map" resultType="java.util.Map">
-	SELECT m.user_id,m.name,m.RRN,m.frequency,p.* 
-	from member_ m join pack_join p on m.user_id = p.user_id 
+	SELECT m.user_id,m.name,m.age,m.frequency,p.* 
+	FROM member_ m JOIN pack_join p on m.user_id = p.user_id 
 	WHERE p.pack_id = #{packId} and p.pack_join_accept = 'no'
 </select>
 
@@ -42,9 +42,9 @@
 
 <!-- 팩 맴버 조회/제명/직책변경 -->
 <select id="PackMemberList" parameterType="java.util.Map" resultType="java.util.Map">
-	select a.*, b.pack_lastaccess, b.pack_join_date,b.pack_join_no, c.authority from 
-	(member_ a join pack_join b on a.user_id = b.user_id) 
-	left join pack_manager c on a.user_id = c.user_id where b.pack_id = #{packId} and b.pack_join_accept = 'yes'
+	SELECT a.*, b.pack_lastaccess, b.pack_join_date,b.pack_join_no, c.authority 
+	FROM (member_ a JOIN pack_join b ON a.user_id = b.user_id) 
+	LEFT JOIN pack_manager c ON a.user_id = c.user_id WHERE b.pack_id = #{packId} AND b.pack_join_accept = 'yes'
 </select>
 
 <delete id="PackManagerDelete">
@@ -52,7 +52,7 @@
 </delete>
 
 <select id="PackManagerSelect" parameterType="java.util.Map" resultType="int">
-	select count(*) from pack_manager where user_id = #{userId}
+	SELECT count(*) from pack_manager where user_id = #{userId}
 </select>
 
 <select id="packIntroSelect" parameterType="java.util.Map" resultType="java.util.Map">
