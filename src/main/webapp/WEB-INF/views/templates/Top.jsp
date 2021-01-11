@@ -39,6 +39,8 @@
             <li><a href="<c:url value="/admin/home/main.do"/>">관리자페이지</a></li>
          </ul>
       </nav>
+<script src="<c:url value="/js/main.js"/>"></script>
+	
 
    <!-- 여기는 정확히 무슨 기능인지 잘모르겠지만 활용도가 있을 수도 있을거 같아서 냅뒀습니다 -->
    <div class="colorlib-footer">
