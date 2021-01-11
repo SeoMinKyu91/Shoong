@@ -110,11 +110,13 @@ width: 20%
 		  
 		  	  <label class="col-xs-2 control-label">팩 로고</label>
 			   <div class="packThumbnails col-xs-9  col-xs-offset-2">
-					<img id="Pack1.png" src="<c:url value='/images/pack/Pack1.png'/>" alt="팩 1번마크" />
-					<img id="Pack2.png" src="<c:url value='/images/pack/Pack2.png'/>" alt="팩 2번마크" />
-					<img id="Pack3.png" src="<c:url value='/images/pack/Pack3.png'/>" alt="팩 3번마크" />
-					<img id="Pack4.png" src="<c:url value='/images/pack/Pack4.png'/>" alt="팩 4번마크" />
-					<img id="Pack5.png" src="<c:url value='/images/pack/Pack5.png'/>" alt="팩 5번마크" />			
+					<img id="packLogo1.png" src="<c:url value='/images/pack/packLogo1.png'/>" alt="팩 1번마크" />
+					<img id="packLogo2.png" src="<c:url value='/images/pack/packLogo2.png'/>" alt="팩 2번마크" />
+					<img id="packLogo3.png" src="<c:url value='/images/pack/packLogo3.png'/>" alt="팩 3번마크" />
+					<img id="packLogo4.png" src="<c:url value='/images/pack/packLogo4.png'/>" alt="팩 4번마크" />
+					<img id="packLogo5.png" src="<c:url value='/images/pack/packLogo5.png'/>" alt="팩 5번마크" />
+					<img id="packLogo6.png" src="<c:url value='/images/pack/packLogo6.png'/>" alt="팩 6번마크" />
+					<img id="packLogo7.png" src="<c:url value='/images/pack/packLogo7.png'/>" alt="팩 7번마크" />
 				</div>
 		  </div>
 		  <div class="form-group">

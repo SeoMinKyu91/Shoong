@@ -78,7 +78,7 @@ color:white;
             <th class="text-left col-sm-9">
               <form class="form-inline" method="post" action="<c:url value="/pack/main.do"/>">
                <div class="packAddr">
-                  [<span id="packRegionSearch"></span>] 근처 팩 &nbsp
+                  [<span id="packRegionSearch"></span>] 근처 팩 &nbsp;
                </div>
                <input type="text" class="form-group" name="searchWord" style="width: 180px;" />
                <button class="glyphiconBtn"> 
