@@ -7,15 +7,21 @@ import lombok.Setter;
 import lombok.ToString;
 
 public class MemberDTO {
+
 	private String userId;
 	private String userPWD;
 	private String userName;
-	private String userRRN; //주민등록 번호
+	private String userGender;
+	private String userAge;
 	private String userAddr; // 주 활동지
 	private String userTel; // 핸드폰 번호
 	private Date lastAccess; //최근접속일
 	private Date userJoinDate; //회원 가입 한 날
 	private String userFrequeny;
+	
+	//latlng 칼럼명을 가진 멤버 추가 setter getter 추가
+	private String user_lat;
+	private String user_lng;
 	
 	public String getUserId() {
 		return userId;
@@ -35,11 +41,17 @@ public class MemberDTO {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getUserRRN() {
-		return userRRN;
+	public String getUserGender() {
+		return userGender;
 	}
-	public void setUserRRN(String userRRN) {
-		this.userRRN = userRRN;
+	public void setUserGender(String userGender) {
+		this.userGender = userGender;
+	}
+	public String getUserAge() {
+		return userAge;
+	}
+	public void setUserAge(String userAge) {
+		this.userAge = userAge;
 	}
 	public String getUserAddr() {
 		return userAddr;
@@ -71,11 +83,24 @@ public class MemberDTO {
 	public void setUserFrequeny(String userFrequeny) {
 		this.userFrequeny = userFrequeny;
 	}
+	//latlng
+	public String getUser_lat() {
+		return user_lat;
+	}
+	public void setUser_lat(String user_lat) {
+		this.user_lat = user_lat;
+	}
+	public String getUser_lng() {
+		return user_lng;
+	}
+	public void setUser_lng(String user_lng) {
+		this.user_lng = user_lng;
+	}
 	
 	@Override
 	public String toString() {
-		return "MemberDTO [userId=" + userId + ", userPWD=" + userPWD + ", userName=" + userName + ", userRRN="
-				+ userRRN + ", userAddr=" + userAddr + ", userTel=" + userTel + ", lastAccess=" + lastAccess
+		return "MemberDTO [userId=" + userId + ", userPWD=" + userPWD + ", userName=" + userName + ", userGender="
+				+ userGender + ", userAge=" + userAge +", userAddr=" + userAddr + ", userTel=" + userTel + ", lastAccess=" + lastAccess
 				+ ", userJoinDate=" + userJoinDate + ", userFrequeny=" + userFrequeny + "]";
 	}
 	

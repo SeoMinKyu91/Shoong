@@ -25,7 +25,7 @@ input {
 	margin-bottom: 50px;
 }
 </style>
-<div id="colorlib-main" style="padding-top: 50px">
+<div id="colorlib-main" style="padding-top: 100px">
 	<!-- 위에 딱 붙는게 싫어서 임시로 padding-top: 100px 주었음 수정하고싶으면 수정  -->
 	<div class="container">
 		<div class="col-xs-12 col-md-12">
@@ -37,61 +37,46 @@ input {
 		</div>
 	</div>
 	<!-- 실제 내용 시작 -->
-	<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
+	<div class="col-xs-10 offset-xs-1 col-md-10 offset-md-1"
 		style="padding-bottom: 50px">
-		<form class="form-horizontal" method="post" name="join" onsubmit="return checked()"
+		<form class="form-horizontal" method="post" name="join"
+			onsubmit="return checked()"
 			style="background-color: white; box-shadow: 0px 0px 5px #000; border-radius: 100px;"
-			action="<c:url value='/Member/Join.do'/>">
+			action="<c:url value='/kakao/KakaoJoin.do'/>">
 			<div class="form-group">
-				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
+				<div class="col-xs-10 offset-xs-1 col-md-6 offset-md-3"
 					style="padding-top: 40px; padding-bottom: 40px; text-align: center">
-					<h3 style="font-weight: bold">회원 가입</h3>
+					<h3 style="font-weight: bold">추가 정보 입력</h3>
 				</div>
-				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+				<div class=" col-xs-10 offset-xs-1 col-md-6 offset-md-3">
 					<!-- 이메일 입력란 -->
-					<label for="userId">이메일 </label>
-					<Button type="button" id="emailDuplCheck" class="btn btn-sm"
-						style="float: right; background-color: white;">
-						<span id="duplCheck" role="button"
-							style="color: #a39bbd; text-decoration: underline;">중복체크</span>
-					</Button>
-					<br /> <input type="text" id="userId" name="userId"
-						style="font-size: .8em; height: 50px; width: 34.5%"
-						placeholder="이메일을 입력하세요"> @ <input type="text"
-						id="emailStrinput" name="emailStrinput" placeholder="직접 입력"
-						style="font-size: .8em; height: 50px; width: 30%"> <select
-						name="emailStr" id="emailStr"
-						style="font-size: .8em; height: 50px; width: 30%; border: #ced4da 1.5px solid; color: #7e757d">
-						<option value="">==선택하세요==</option>
-						<option value="naver.com">naver.com</option>
-						<option value="gmail.com">gmail.com</option>
-						<option value="daum.net">daum.net</option>
-						<option value="nate.com">nate.com</option>
-						<option value="1">직접입력</option>
-					</select> <br />
+					<input type="hidden" id="userId" name="userId"
+						style="font-size: .8em; height: 50px; value="${userInfo.email}"> <br />
 				</div>
 			</div>
 			<!-- 비밀번호 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
-				<label for="userPWD">비밀번호<span style="font-size: .8em">&nbsp;(4~12자의 영문 대소문자와 숫자로만 입력)</span></label> <input type="password" 
-					class="form-control input-sm" id="userPWD" name="userPWD" minlength="4" maxlength="12"
-					style="font-size: .8em" placeholder="비밀번호를 입력하세요"> 
+			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+				<label for="userPWD">비밀번호(4~12자의 영문 대소문자와 숫자로만 입력)</label> <input
+					type="password" class="form-control input-sm" id="userPWD"
+					name="userPWD" minlength="4" maxlength="12" style="font-size: .8em"
+					placeholder="비밀번호를 입력하세요"> <br />
 			</div>
 			<!-- 비밀번호 확인 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
 				<label for="userPWDOk">비밀번호 확인</label> <input type="password"
-					class="form-control input-sm" id="userPWDOk" name="userPWDOk" minlength="4" maxlength="12"
-					style="font-size: .8em" placeholder="위와 같은 비밀번호를 입력하세요"> <span
-					id="passwordCheck" style="font-size: .8em; color: gray"></span>
+					class="form-control input-sm" id="userPWDOk" name="userPWDOk"
+					minlength="4" maxlength="12" style="font-size: .8em"
+					placeholder="위와 같은 비밀번호를 입력하세요"> <span id="passwordCheck"
+					style="font-size: .8em; color: gray"></span>
 			</div>
 			<!-- 이름 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
 				<label for="userName">이름</label> <input type="text"
 					class="form-control input-sm" id="userName" name="userName"
-					style="font-size: .8em" placeholder="이름을 입력하세요">
+					style="font-size: .8em" placeholder="이름을 입력하세요"><br />
 			</div>
 			<!-- 생년월일 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
 				<label for="userRRN">생년월일</label> <br /> <input name="userRRN1"
 					id="userRRN1" type="text" size="25" maxlength="6"
 					OnKeyUp="check();" onChange="inputbirthNage(); inputGender()"
@@ -119,15 +104,15 @@ input {
 					style="border: none; color: gray" maxlength="2"
 					onBlur="checknum(document.join.userAge.value)"><span
 					style="font-size: .8em; color: gray">살&emsp;&emsp;</span> <input
-					name="userGender" type="text" size="3" maxlength="2"
-					style="border: none; color: gray"
+					name="userGender" type="hidden" size="3" maxlength="2"
+					style="border: none; color: gray" value="${userInfo.gender}"
 					onBlur="checknum(document.join.userGender.value)"><br />
 			</div>
 			<!-- 연락처 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
 				<label for="userTel">연락처</label><br /> <select name="userTel1"
 					id="userTel1"
-					style="font-size: .8em; height: 50px; width: 28%; padding-left: 10px; border: #ced4da 1.5px solid;">
+					style="font-size: .8em; height: 50px; width: 26.5%; padding-left: 10px; border: #ced4da 1.5px solid;">
 					<option value="010">010</option>
 					<option value="011">011</option>
 					<option value="016">016</option>
@@ -135,26 +120,26 @@ input {
 					<option value="018">018</option>
 					<option value="019">019</option>
 				</select> &nbsp; ㅡ &nbsp; <input name="userTel2" id="userTel2" type="text"
-					maxlength="4" style="height: 50px; width: 28%"
+					maxlength="4" style="height: 50px; width: 26.5%"
 					OnKeyUp="checkTel();">&nbsp; ㅡ &nbsp; <input
 					name="userTel3" id="userTel3" type="text" maxlength="4"
-					style="height: 50px; width: 28%" OnKeyUp="checkTel();"> <br />
+					style="height: 50px; width: 26.5%" OnKeyUp="checkTel();"> <br />
 			</div>
 			<!-- 활동지역 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
 				<label for="userAddr">활동지역</label>
 				<div>
 					<input type="text" class="form-control" id="userAddr"
 						name="userAddr" style="font-size: .8em">
 				</div>
 			</div>
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
 				<div id="map"></div>
 				<input type="hidden" id="memberLat" name="memberLat"
 					class="form-group" /> <input type="hidden" id="memberLng"
 					name="memberLng" class="form-group" />
 			</div>
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2"
+			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3"
 				style="padding-bottom: 50px">
 				<button type="submit" class="btn btn-primary btn-lg btn-block">가입하기</button>
 			</div>
@@ -165,17 +150,6 @@ input {
 
 <!-- -----------------입력시 변환 스크립트---------------- -->
 <script>
-	//이메일 직접 입력 선택 시 입력란 활성화
-	$('#emailStr').change(function() {
-		$("#emailStr option:selected").each(function() {
-			if ($(this).val() == '1') { //직접입력일 경우
-				$("#emailStrinput").val(''); //값 초기화
-			} else { //직접입력이 아닐경우
-				$("#emailStrinput").val($(this).text()); //선택값 입력 
-			}
-		});
-	});
-
 	//----주민번호 입력하면 생년월일, 성별 자동으로 입력----//
 	function checknum(num) {
 		var val = "0123456789";
@@ -203,10 +177,12 @@ input {
 		var birthYear = jumin1.substring(0);
 		if (birthYear > 2) {
 			age = yy - (1900 + parseInt(jumin1.substring(0, 2)));
-			document.join.userrrn1.value = 1900 + parseInt(jumin1.substring(0,2));
+			document.join.userrrn1.value = 1900 + parseInt(jumin1.substring(0,
+					2));
 		} else {
 			age = yy - (2000 + parseInt(jumin1.substring(0, 2)));
-			document.join.userrrn1.value = 2000 + parseInt(jumin1.substring(0,2));
+			document.join.userrrn1.value = 2000 + parseInt(jumin1.substring(0,
+					2));
 		}
 		if (jumin1.substring(2, 4) < 13) {
 			document.join.userrrn2.value = parseInt(jumin1.substring(2, 4));
@@ -233,27 +209,11 @@ input {
 		if (str1 == 4) {
 			document.join.userTel3.focus();
 		}
-
 	}
 </script>
 
 <!-- ----------------유효성 검증 스크립트----------------- -->
 <script>
-	////////이메일 중복체크////////
-	$('#emailDuplCheck').click(function() {
-		$.ajax({
-			url : "<c:url value='/Member/EmailDuplCheck.do'/>",
-			type : 'post',
-			dataType : 'json',
-			data : {
-				"userId" : $('#userId').val() + $('#emailStr').val()
-			},
-			success : function(data) {
-				console.log('서버로부터 받는 데이타 : ', data);
-				$('#duplCheck').html(data.duplCheck);
-			}
-		});
-	});
 	////////비밀번호 , 비밀번호 확인 일치 여부 판단////////
 	$('#userPWDOk').keyup(function() {
 		console.log("userPWDOk:", $('#userPWDOk').val());
@@ -272,43 +232,33 @@ input {
 		});
 	});
 	////////전체 유효성 체크////////
-	function checked(){
-		//이메일 공백검사	
-		var id = document.getElementById('userId').value;
-		var domain = document.getElementById('emailStr').value;
-		if(id == "" || domain == ""){
-			alert("이메일을 입력해주세요.");
-			document.getElementById('userId').focus();
-			//추가 작업 예정 : 이메일 중복체크 누르지 않았을때 유효성 검사
-			
-			return false;
-		}
+	function checked() {
 		//비밀번호, 비밀번호 확인 공백 및 유효성 검사//
 		var pwd = document.getElementById('userPWD').value;
 		var pwdOk = document.getElementById('userPWDOk').value;
 		var pwdPattern = /^[a-zA-Z0-9]{4,12}$/
-		if(!pwdPattern.test(pwd) && pwd != ""){
+		if (!pwdPattern.test(pwd) && pwd != "") {
 			alert("비밀번호 형식에 맞지 않습니다. 다시 입력해주세요.");
 			document.getElementById('userPWD').focus();
 			return false;
-		} else if(pwd == ""){
+		} else if (pwd == "") {
 			alert("비밀번호를 입력해주세요.");
 			document.getElementById('userPWD').focus();
 			return false;
 		}
-		if(pwdOk == ""){
+		if (pwdOk == "") {
 			alert("비밀번호 확인을 입력해주세요.");
 			document.getElementById('userPWDOk').focus();
 			return false;
 		}
-		if(pwd != pwdOk){
+		if (pwd != pwdOk) {
 			alert("비밀번호가 일치하지 않습니다.");
 			document.getElementById('userPWD').focus();
 			return false;
 		}
 		//이름 공백검사//
 		var name = document.getElementById('userName').value;
-		if(name == ""){
+		if (name == "") {
 			alert("이름을 입력해주세요.");
 			document.getElementById('userName').focus();
 			return false;
@@ -316,12 +266,12 @@ input {
 		//주민번호 공백검사
 		var rrn1 = document.getElementById('userRRN1').value;
 		var rrn2 = document.getElementById('userRRN2').value;
-		if(rrn1 == ""){
+		if (rrn1 == "") {
 			alert("주민번호 앞 6자리를 입력해주세요.");
 			document.getElementById('userRRN1').focus();
 			return false;
 		}
-		if(rrn2 == ""){
+		if (rrn2 == "") {
 			alert("주민번호 뒤 1자리를 입력해주세요.");
 			document.getElementById('userRRN2').focus();
 			return false;
@@ -329,12 +279,12 @@ input {
 		//연락처 공백검사(중간, 뒷번호 입력 여부)
 		var tel2 = document.getElementById('userTel2').value;
 		var tel3 = document.getElementById('userTel3').value;
-		if(tel2 == ""){
+		if (tel2 == "") {
 			alert("휴대폰번호 중간 4자리를 입력해주세요.");
 			document.getElementById('userTel2').focus();
 			return false;
 		}
-		if(tel3 == ""){
+		if (tel3 == "") {
 			alert("휴대폰번호 뒷 4자리를 입력해주세요.");
 			document.getElementById('userTel3').focus();
 			return false;

@@ -15,6 +15,10 @@
 			type="com.kosmo.shoong.service.pack.PackGalleryDTO" />
 		<typeAlias alias="packNoticeDTO"
 			type="com.kosmo.shoong.service.pack.PackNoticeDTO" />
+		<typeAlias alias="packScheduleDTO"
+			type="com.kosmo.shoong.service.pack.PackScheduleDTO"/>
+		<typeAlias alias="packScheduleEventsDTO"
+			type="com.kosmo.shoong.service.pack.PackScheduleEventsDTO" />
 		<typeAlias alias="courseDTO"
 			type="com.kosmo.shoong.service.course.CourseDTO" />
 		<typeAlias alias="memberDTO"

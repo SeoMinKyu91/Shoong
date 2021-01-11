@@ -3,49 +3,11 @@
 <%@ page language="java" 
 	contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-<!-- mapbox core-->
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
-<!-- mapbox geocoder -->
-<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
-<link
-	rel="stylesheet"
-	href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
-	type="text/css" />
-<!-- mapbox directions -->
-<script
-	src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
-<link rel="stylesheet"
-	href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
-	type="text/css" />
-<!-- mapbox draw -->
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css' type='text/css' />
 
 <style>
-body {
-	margin: 0;
-	padding: 0;
-}
+/*
 
-#map {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%
-}
 
-.marker {
-	background-image:
-		url('http://localhost:8080/springapp/images/mapbox-icon.png');
-	background-size: cover;
-	width: 50px;
-	height: 50px;
-	border-radius: 50%;
-	cursor: pointer;
-}
 
 .mapboxgl-popup {
 	max-width: 200px;
@@ -54,6 +16,25 @@ body {
 .mapboxgl-popup-content {
 	text-align: center;
 	font-family: 'Open Sans', sans-serif;
+}
+
+
+*/
+
+nav{
+	position: relative;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#map {
+	position: relative;
+	top: 0;
+	bottom: 0;
+	width: 70%;
 }
 
 .mapboxgl-ctrl-geocoder {
@@ -136,42 +117,50 @@ h1 {
 	width: 100%;
 }
 </style>
-<div id="colorlib-main" class="popular-location section-padding30" style="padding-top: 100px">
-	<div id="map"></div>
-	<div class="modal fade" id="galleryModal" data-backdrop="false"  >
-	     <div class="modal-dialog modal-lg" >
-	         <div class="modal-content">
-	             <div class="modal-header">
-	                 <h4>사진 올리기</h4>
-	             </div>
-	             <div class="modal-body">
-                   	<div class="col-sm-12" style="margin-top:10px ">
-	                  <form method="post" enctype="multipart/form-data" class="col-sm-12">
-	                      <div id="fileUpload" class="dragAndDropDiv col-sm-12">
-	                      	<span class="dragAndDropDivSpan">Drag & Drop Files Here</span>
-	                      </div>
-	                      <input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/>
-	                  </form>
-	               	</div>
-	            </div>
-	            <div class="modal-footer"> 
-               		<form method="post" action="<c:url value="/pack/pictureInput.do"/>">
-	               		<input class="form-control" name="imgArry" id="imgArry"  type="hidden">
-	               		<button type="submit" class="btn btn-default">Save</button>   
-	            	</form>
-                	<button type="button" class="btn btn-default">Load</button>
-                	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	            </div>
-	        </div>
+<div id="colorlib-main" class="container" style="padding-top: 0;">
+	<div class="container">
+		<div id="map"></div>
+		<div class="modal fade" id="galleryModal" data-backdrop="false"  >
+		     <div class="modal-dialog modal-lg" >
+		         <div class="modal-content">
+		             <div class="modal-header">
+		                 <h4>사진 올리기</h4>
+		             </div>
+		             <div class="modal-body">
+	                   	<div class="col-sm-12" style="margin-top:10px ">
+		                  <form method="post" enctype="multipart/form-data" class="col-sm-12">
+		                      <div id="fileUpload" class="dragAndDropDiv col-sm-12">
+		                      	<span class="dragAndDropDivSpan">Drag & Drop Files Here</span>
+		                      </div>
+		                      <input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/>
+		                  </form>
+		               	</div>
+		            </div>
+		            <div class="modal-footer"> 
+	               		<form method="post" action="<c:url value="/pack/pictureInput.do"/>">
+		               		<input class="form-control" name="imgArry" id="imgArry"  type="hidden">
+		               		<!-- 
+		               		<button type="submit" class="btn btn-default">Save</button>
+		               		 -->   
+		            	</form>
+	                	<button type="button" class="btn btn-default">Load</button>
+	                	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		            </div>
+		        </div>
+		    </div>
 	    </div>
 	</div>
 </div>
 
 <script>
-	//맵박스 토큰
+//맵박스 토큰
+$(function(){
 	mapboxgl.accessToken = 'pk.eyJ1Ijoid2t1bmdoOTMiLCJhIjoiY2tpd2hpNnZ0MHF3YzMwcnd5ZG1obzh2biJ9.EW26scaL6pDX7yQhFNnwMw';
 
 	var monument = [ 126.87870025634767, 37.478732138068445 ];
+	
+	var imgarr = [];
+	
 	var map = new mapboxgl.Map({
 		container : 'map',
 		style : 'mapbox://styles/mapbox/streets-v11',
@@ -189,14 +178,13 @@ h1 {
 		}
 	);
 	 */
-	
 
-	/**/
 	//맵박스 다이렉션 컨트롤러 추가
 	map.addControl(new MapboxDirections({
 		accessToken : mapboxgl.accessToken
 	}), 'bottom-left');
-
+	
+	//주소검색기 컨트롤러 얻어옴
 	var geocoder = new MapboxGeocoder({
 		accessToken : mapboxgl.accessToken,
 		mapboxgl : mapboxgl
@@ -210,7 +198,7 @@ h1 {
 	//맵박스 지오코더 컨트롤러 추가
 	map.addControl(geocoder, 'top-left');
 
-	//맵박스 현재위치 추적 https 필요
+	//맵박스 현재위치 컨트롤러
 	map.addControl(new mapboxgl.GeolocateControl({
 		positionOptions : {
 			enableHighAccuracy : true
@@ -225,9 +213,11 @@ h1 {
 		marker.setLngLat(point).addTo(map); 
 	});
 	
+	//geojson
 	var json;
-	//modal-footer의 두번째 자식
-	$(".modal-footer button:eq(1)").click(function() {
+	
+	//load
+	$(".modal-footer button:eq(0)").click(function() {
 		console.log("로드 버튼 누름");
 		
 		$.ajax({
@@ -241,10 +231,7 @@ h1 {
 				console.log('요청 성공');
 				console.log('data:%O',data.features[0]);
 				json = data.features[0];
-				//console.log('data:%O',data);
-				//json = data;
 				
-				//source와 layer를 변수로 받아서 존재여부에 따라 remove필요
 				map.addSource('route', {
 					"type":"geojson",
 					"data":json
@@ -335,7 +322,7 @@ h1 {
 	var rowCount = 0;
 
 	//4] Ajax 이용 해서 서버에 이미지 저장하는 핵심로직
-	var imgarr = [];
+	
 	function sendFileToServer(formData) {
 		var extraData = {}; //Extra Data.
 		var jqXHR = $.ajax({
@@ -366,6 +353,10 @@ h1 {
 				console.log(data);
 				imgarr.splice(imgarr.indexOf(filename), 1);
 				imageDivShow();
+				if(map.getSource('route')) {
+					map.removeLayer('route');
+					map.removeSource('route');
+				}
 			},
 			error : function(error) {//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
 				console.log('에러 : ', error.responseText);
@@ -394,4 +385,5 @@ h1 {
 
 		$('#imgArry').val(imgarr);
 	}
+});
 </script>
