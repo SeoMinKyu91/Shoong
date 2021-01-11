@@ -61,14 +61,19 @@ public class MemberDAO implements MemberService{
 
 	@Override
 	public int update(Map map) {
-		return sqlMapper.update("memberUpdate", map);
+		return sqlMapper.update("memberEditDo", map);
 	}///////update
 	
 	@Override
 	public MemberDTO selectOne(Map map) {
-		System.out.println("dao안------------------------");
+		
 		return sqlMapper.selectOne("selectOne",map);
 	}
+	
+	public Map memberEditView(Map map) {
+		return sqlMapper.selectOne("memberEditList",map);
+	}
+	
 
 	public Map memberHasPack(Map map) {
 		return sqlMapper.selectOne("memberHasPack",map);

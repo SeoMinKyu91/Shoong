@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kosmo.shoong.common.utility.CommonUtilities;
 import com.kosmo.shoong.service.course.CourseService;
 import com.kosmo.shoong.service.gallery.GalleryService;
 import com.kosmo.shoong.service.impl.member.MemberServiceImpl;
@@ -51,6 +50,7 @@ public class MemberController {
 	public String joinOk(@RequestParam Map map,Model model) throws MessagingException {
 		//맵에서 유저아이디와 유저아이디 뒷자리(@gmail.com) 따로따로 받아서
 		map.put("userId", map.get("userId").toString()+"@"+map.get("emailStrinput").toString());
+		//map.put("userRRN", map.get("userRRN1").toString()+map.get("userRRN2").toString());
 		map.put("userTel", map.get("userTel1").toString()+map.get("userTel2").toString()+map.get("userTel3").toString());
 		Set keys = map.keySet();
 		for(Object key:keys) System.out.println(key+":"+map.get(key));
@@ -232,10 +232,17 @@ public class MemberController {
 	@RequestMapping("/mypage.do")
 	public String mypage(HttpServletRequest req, Map map, Model model) {
 		map.put("userId", req.getSession().getAttribute("userId").toString());
+
 		System.out.println("mypage()"+req.getSession().getAttribute("userId").toString());
+
 		MemberDTO dto = memberService.selectOne(map);
-		List<Map> lists = galleryService.imgSelectList(map);
+		model.addAttribute("name",dto.getUserName());
+
+		List<Map> lists = galleryService.imgFirstList(map);
+		System.out.println(lists);
 		model.addAttribute("imgList", lists);
+		for(Map list : lists) System.out.println(list);
+
 		List<Map> courselists = courseService.showCourse(map);
 		//for(Map courseList:courselists)
 			//courseList.put("COURSE_DATE", courseList.get("COURSE_DATE").toString().substring(0,10));
@@ -244,7 +251,11 @@ public class MemberController {
 	}
 
 	@RequestMapping("/myInfoEdit.do")
-	public String myInfoEdit() {
+	public String myInfoEdit(HttpServletRequest req, Map map, Model model) {
+		map.put("userId", req.getSession().getAttribute("userId").toString());
+		Map memberInfo = memberService.memberEditView(map);
+		model.addAttribute("memberInfo", memberInfo);
+		System.out.println(memberInfo);
 		return "mypage/myInfoEdit";
 	}
 
