@@ -159,7 +159,7 @@
 									<c:forEach var="list" items="${packJoinList}">
 										<div class="row custom-border joinList">
 											<div class="col-lg-2 col-xs-2">${list.NAME}</div>
-											<div class="col-lg-2 col-xs-1">18</div>
+											<div class="col-lg-2 col-xs-1">${list.AGE}</div>
 											<div class="col-lg-3 col-xs-3">${list.PACK_JOIN_DATE}</div>
 											<div class="col-lg-3 col-xs-4">${list.FREQUENCY}</div>
 											<div class="col-lg-1 col-xs-1 surak">
