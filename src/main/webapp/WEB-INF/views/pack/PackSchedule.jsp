@@ -3,33 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-<link rel="stylesheet" href="<c:url value="/css/packInfoEdit.css"/>">
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
 <!-- 제이쿼리 UI용 CSS -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- 제이쿼리 코어용 라이브러리 임베드 -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- 제이쿼리 UI용 라이브러리 임베드 -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 폰트 -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-<!-- 모달  -->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<!-- 모달 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/locales-all.min.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.5.0/main.min.css,npm/fullcalendar@5.5.0/main.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.css">
-
-<!-- 데이트 피커 -->
-<script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
 
 
 
@@ -243,7 +227,7 @@
 
 <script>
 
-	document.addEventListener('DOMContentLoaded', function() {
+	$(function(){
 		console.log(${calendarJson})
 		
 		var calendarEl = document.getElementById('calendar');
@@ -320,58 +304,68 @@
 		})
 	
 		calendar.render();
+
+			$('#startDatePicker, #endDatePicker').datepicker({
+				dateFormat: "yy-mm-dd",
+				startDate: '0d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+			    language : "ko",
+			    todayHighlight: true//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+			});//여기까지가 기본 사용 방법
+				
+			$('#startDatePickerUpdate, #endDatePickerUpdate').datepicker({
+				dateFormat: "yy-mm-dd",
+				startDate: '0d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+			    language : "ko"
+			});	
+				
+				
+			$('#startDatePicker','#endDatePicker').on("changeDate",function(e){
+				console.log('들어옴');
+			})
+			
+			$('#btnPackSchedule').click(function(){
+				$('#packSchedule').submit();
+			});
+			
+			$('#btnPackScheduleClose').click(function(){
+				$('#endDatePicker').prop('value',"");
+			});
+			
+			$('#btnPackScheduleUpdate').click(function(){
+				$('#packScheduleTitleUpdate').prop('value',$('#packScheduleViewTitle').text());
+				$('#startDatePickerUpdate').prop('value',$('#packScheduleViewStart').text());
+				$('#endDatePickerUpdate').prop('value',$('#packScheduleViewEnd').text());
+				$('#packScheduleContentUpdate').prop('value',$('#packScheduleViewContent').text());
+				$('#packScheduleNoUpdate').prop('value',$('#packScheduleViewNo').text());
+				
+				
+				
+				$('#packSchedulUpdateModal').modal();
+			});
+			
+			$('#btnPackScheduleUpdateOk').click(function(){
+				console.log('수정버튼 들어옴');
+				$('#packScheduleUpdate').submit();
+			});
+			
+			$('#btnPackScheduleDelete').click(function(){
+				console.log('삭제버튼 들어옴')
+				$('#packScheduelDeleteModal').modal();
+				
+			});
+			
+			$('#btnScheduleDeleteOk').click(function(){
+				$('#packScheduleDeleteNo').prop('value',$('#packScheduleViewNo').text());
+				$('#packScheduleDeleteForm').submit();
+			})
+
 	});
+
+
+
 	
 	 
-	$('#startDatePicker, #endDatePicker').datepicker({
-		format: "yyyy-mm-dd",
-		startDate: '0d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
-	    language : "ko",
-	    todayHighlight: true//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
-		})//여기까지가 기본 사용 방법
-	$('#startDatePicker','#endDatePicker').on("changeDate",function(e){
-		console.log('들어옴');
-	})
 	
-	$('#btnPackSchedule').click(function(){
-		$('#packSchedule').submit();
-	});
-	
-	$('#btnPackScheduleClose').click(function(){
-		$('#endDatePicker').prop('value',"");
-	});
-	
-	$('#btnPackScheduleUpdate').click(function(){
-		$('#packScheduleTitleUpdate').prop('value',$('#packScheduleViewTitle').text());
-		$('#startDatePickerUpdate').prop('value',$('#packScheduleViewStart').text());
-		$('#endDatePickerUpdate').prop('value',$('#packScheduleViewEnd').text());
-		$('#packScheduleContentUpdate').prop('value',$('#packScheduleViewContent').text());
-		$('#packScheduleNoUpdate').prop('value',$('#packScheduleViewNo').text());
-		
-		$('#startDatePickerUpdate, #endDatePickerUpdate').datepicker({
-			format: "yyyy-mm-dd",
-			startDate: '0d',	//달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
-		    language : "ko"
-		});
-		
-		$('#packSchedulUpdateModal').modal();
-	});
-	
-	$('#btnPackScheduleUpdateOk').click(function(){
-		console.log('수정버튼 들어옴');
-		$('#packScheduleUpdate').submit();
-	});
-	
-	$('#btnPackScheduleDelete').click(function(){
-		console.log('삭제버튼 들어옴')
-		$('#packScheduelDeleteModal').modal();
-		
-	});
-	
-	$('#btnScheduleDeleteOk').click(function(){
-		$('#packScheduleDeleteNo').prop('value',$('#packScheduleViewNo').text());
-		$('#packScheduleDeleteForm').submit();
-	})
 	
 	
 </script>
