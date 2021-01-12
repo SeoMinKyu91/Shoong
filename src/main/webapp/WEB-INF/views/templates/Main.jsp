@@ -560,7 +560,4 @@
 </div>
 <!-- END COLORLIB-MAIN -->
 
-<!-- 
-</div>
-END COLORLIB-PAGE -->
 

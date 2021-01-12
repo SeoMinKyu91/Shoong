@@ -59,7 +59,6 @@
 		</div>
 	</form>
 </div>
-<!-- END COLORLIB-PAGE -->
 <!-- 카카오 회원가입 -->
 <script type="text/javascript">
 	 //로그인 (아이디/비밀번호) 입력 관련

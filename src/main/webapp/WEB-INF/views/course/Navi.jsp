@@ -6,9 +6,6 @@
 
 <style>
 /*
-
-
-
 .mapboxgl-popup {
 	max-width: 200px;
 }
@@ -17,8 +14,6 @@
 	text-align: center;
 	font-family: 'Open Sans', sans-serif;
 }
-
-
 */
 
 nav{
@@ -120,11 +115,11 @@ h1 {
 <div id="colorlib-main" class="container" style="padding-top: 0;">
 	<div class="container">
 		<div id="map"></div>
-		<div class="modal fade" id="galleryModal" data-backdrop="false"  >
+		<div class="modal fade" id="naviModal" data-backdrop="false">
 		     <div class="modal-dialog modal-lg" >
 		         <div class="modal-content">
 		             <div class="modal-header">
-		                 <h4>사진 올리기</h4>
+		                 <h4>경로 올리기</h4>
 		             </div>
 		             <div class="modal-body">
 	                   	<div class="col-sm-12" style="margin-top:10px ">
