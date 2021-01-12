@@ -2,10 +2,8 @@ package com.kosmo.shoong.service.pack;
 
 import java.sql.Date;
 
-import lombok.Getter;
-import lombok.Setter;
-
 public class PackScheduleDTO {
+
 	private String packScheduleNo;
 	private String userId;
 	private String packId;
@@ -13,7 +11,7 @@ public class PackScheduleDTO {
 	private Date packScheduleEnd;
 	private String packScheduleTitle;
 	private String packScheduleContent;
-	
+
 	public String getPackScheduleNo() {
 		return packScheduleNo;
 	}
@@ -56,5 +54,5 @@ public class PackScheduleDTO {
 	public void setPackScheduleContent(String packScheduleContent) {
 		this.packScheduleContent = packScheduleContent;
 	}
-	
+
 }///////////class
