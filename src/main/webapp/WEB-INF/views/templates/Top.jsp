@@ -8,7 +8,7 @@
    <script src="<c:url value="/js/google-map.js"/>"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     -->
-<div id="colorlib-page">	
+	
 	<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 	<aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
 		<a href="<c:url value="/"/>" id="colorlib-logo"><img alt="shoongLogo" src="<c:url value="/images/shooongLogo.png"/>" style="width:100px"></a>
