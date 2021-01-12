@@ -1,66 +1,128 @@
-.feed-rows {
-	width: 975px;
-	display: flex;
-	border: 1px solid red;
-}
-
 .feed {
 	margin-top: 20px;
-	width: 616px;
-	background-color: lightgrey;
+	border: 1px solid lightgrey;
+	background-color: white;
 }
-
 .feed-top-row {
-	margin-top: 4px;
-	margin-bottom: 4px;
+	margin-top: 6px;
+	margin-bottom: 6px;
 }
-
 .feed-top-imgs {
 	padding-right: 0px;
 }
-
 .feed-top-img-src {
 	width: 50px;
 	height: 50px;
 	margin-left: 10px;
 	border-radius: 100%;
 }
-
 .feed-top-nick {
 	color: black;
 	font-weight: bold;
 	padding-left: 0px;
 	line-height: 50px;
 }
-
 .carousel-control.left {
 	background-image: linear-gradient(to right, rgba(0, 0, 0, .5) 0,
 		rgba(0, 0, 0, .0001) 0%);
 }
-
 .carousel-control.right {
 	background-image: linear-gradient(to right, rgba(0, 0, 0, .5) 0,
 		rgba(0, 0, 0, .0001) 0%);
 }
-
 .feed-img-row {
 	height: 500px;
 }
-
 .carousel-inner .item {
 	width: 100%;
 	height: 500px;
 }
-
 .carousel-inner .item img {
 	width: 100%;
 	height: 100%;
+}
+.carousel-inner{
+	border: 1px solid lightgrey;
+}
+
+.feed-content-row{
+	margin-left:0px;
+	margin-right:0px;
+	border-bottom: 1px solid lightgrey;
+}
+.feed-content{
+	padding: 10px;
+}
+
+.feed-content span{
+	font-size: 16px;
+}
+
+.feed-bottoms{
+	margin-top:5px;
+}
+
+.feed-bottoms .feed-bottom-row{
+	margin-top: 0px;	
 }
 
 .feed-bottom-icon .icon{
 	width: 25px;
 	height: 25px;
 }
+.feed-bottom-row .feed-likely-row span{
+	font-size: 12px;
+	font-weight: bold;
+	margin-left: 5px;
+	
+}
+.feed-reply-content{
+	height: 50px;
+	text-align: center;
+}
+.feed-reply-content-input{
+	border:none;
+	width: 100%;
+	height: 100%;
+}
+.feed-reply-content-input:focus{
+	outline: none;
+}
+.feed-reply-write span{
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 50px;
+	opacity: 0.7;
+}
+
+#top-var{
+	text-align: center;
+}
+
+.top-menus{
+	background-color: lightgrey;
+	height: 50px; 
+}
+
+.top-menus button{
+	line-height: 50px;
+	border:none;
+	width: 100%;
+	height: 100%;
+}
+
+
+/*모달창*/
+.feed-story{
+	border: none;
+	font-size:18px;
+	opacity: 0.7;
+}
+.feed-story:focus{
+	outline: none;
+}
+
+
 
 
 

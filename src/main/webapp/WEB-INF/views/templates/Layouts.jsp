@@ -16,6 +16,7 @@
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
 
+
 <link rel="stylesheet" href="<c:url value="/css/open-iconic-bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/animate.css"/>">
 
@@ -93,7 +94,9 @@
 <script src="<c:url value="/js/aos.js"/>"></script>
 <script src="<c:url value="/js/jquery.animateNumber.min.js"/>"></script>
 <script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
+<!--  
 <script src="<c:url value="/js/jquery.timepicker.min.js"/>"></script>
+-->
 <script src="<c:url value="/js/scrollax.min.js"/>"></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
@@ -102,6 +105,7 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4aaa4b242f112a823dd2ef5541569589&libraries=services,clusterer"></script>
 <script src="<c:url value="/js/main.js"/>"></script>
+
 
 </body>
 </html>
