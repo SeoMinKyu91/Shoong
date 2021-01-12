@@ -90,7 +90,6 @@
 		</form>
 	</div>
 </div>
-<!-- END COLORLIB-PAGE -->
 <!-- 카카오 회원가입 -->
 <script type="text/javascript">
 	//게스트 로그인
