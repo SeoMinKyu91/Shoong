@@ -34,6 +34,10 @@
 <link rel="stylesheet" href="<c:url value="/css/icomoon.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
 
+<!-- 달력 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.5.0/main.min.css,npm/fullcalendar@5.5.0/main.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.css">
+
 <!-- 모달 -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
@@ -42,7 +46,7 @@
 
 <!-- 제이쿼리 UI용 CSS -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 <!-- mapbox core-->
@@ -63,7 +67,7 @@
 <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
 <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
 <body>
@@ -91,11 +95,6 @@
 			stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 </div>
 
-
-<!-- 
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
-<script src="<c:url value="/js/jquery.min.js"/>"></script> 
-<script src="<c:url value="/js/jquery-migrate-3.0.1.min.js"/>"></script>-->
 <script src="<c:url value="/js/jquery-migrate-3.0.1.min.js"/>"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -111,6 +110,9 @@
 <script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/js/jquery.timepicker.min.js"/>"></script>
 <script src="<c:url value="/js/scrollax.min.js"/>"></script>
+<!-- 달력 -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/locales-all.min.js"></script>
 <!-- 지도 -->
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
