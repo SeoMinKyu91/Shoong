@@ -3,48 +3,68 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
-#colorlib-main{
-margin-top: 50px;
-}
-#map{
-height: 300px;
-width : 100%;
-overflow: hidden;
-position: relative;
-}.PackMainTop{
-font-family: 'Do Hyeon', sans-serif;
-margin-top: 0px;
-margin-bottom: 20px;
-}.PackMainTop input{
-width: 100px;
-border-radius: 10px;
-border-color:  #333333; 
-}.PackMainTop input:focus{
-outline: none;
-}
-.PackMainTop .packAddr{
-font-size: 30px;
-}.PackMainTop .glyphiconBtn{
-background-color: white;
-border :none;
-font-size: 20px;
-}.packCreateBtn{
-border:none;
-background-color: #555555;
-}.packCreateBtn:hover{
-background-color: #444444;
-}#accordion table tr:nth-child(1){
-font-size: 17px; font-weight: 600;
-}#accordion table tr:nth-child(2){
-font-size: 7px;
-}#accordion h3{
-background-color: #ff8827;
-height: 40px;
-font-size: 20px;
-font-family: 'Do Hyeon', sans-serif;
-color:white;
+#colorlib-main {
+	margin-top: 50px;
 }
 
+#map {
+	height: 300px;
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+.PackMainTop {
+	font-family: 'Do Hyeon', sans-serif;
+	margin-top: 0px;
+	margin-bottom: 20px;
+}
+
+.PackMainTop input {
+	width: 100px;
+	border-radius: 10px;
+	border-color: #333333;
+}
+
+.PackMainTop input:focus {
+	outline: none;
+}
+
+.PackMainTop .packAddr {
+	font-size: 30px;
+}
+
+.PackMainTop .glyphiconBtn {
+	background-color: white;
+	border: none;
+	font-size: 20px;
+}
+
+.packCreateBtn {
+	border: none;
+	background-color: #555555;
+}
+
+.packCreateBtn:hover {
+	background-color: #444444;
+}
+
+#accordion table tr:nth-child(1) {
+	font-size: 17px;
+	font-weight: 600;
+}
+
+#accordion table tr:nth-child(2) {
+	font-size: 7px;
+}
+
+#accordion h3 {
+	background-color: #ff8827;
+	height: 40px;
+	font-size: 20px;
+	font-family: 'Do Hyeon', sans-serif;
+	color: white;
+}
 </style>
 
 <div id="colorlib-main" class="container">
@@ -349,9 +369,7 @@ color:white;
 	       }
 
 	       function reSearch(searchRegion) {
-	         
 	          location.href = "<c:url value='/pack/main.do?lat="+markerLat+"&lng="+markerLng+"&searchRegion="+searchRegion+"'/>";
-	          
 	       }
 	});
 </script>
