@@ -29,7 +29,7 @@
 
 	
 	<select id="selectOne" parameterType="java.util.Map" resultMap="MemberDTO">
-		SELECT * FROM member WHERE user_id=#{userId}
+		SELECT * FROM member_ WHERE user_id=#{userId}
 	</select>
 	
 	<select id="showImg" parameterType="java.util.Map" resultType="java.util.Map">
@@ -45,35 +45,47 @@
 		 -->
 		SELECT diary_img_name
 		FROM diary_img i JOIN (SELECT diary_code,t1.* FROM diary d JOIN 
-			(SELECT r.user_id,r.record_id FROM member m JOIN record r ON m.user_id=r.user_id WHERE m.user_id=#{userId}) t1 
-				ON d.record_id=t1.record_id ) t2 ON i.diary_code = t2.diary_code
+		(SELECT r.user_id,r.record_id FROM member_ m JOIN record r ON m.user_id=r.user_id WHERE m.user_id=#{userId}) t1 
+		ON d.record_id=t1.record_id ) t2 ON i.diary_code = t2.diary_code
+	</select>
+	
+	<select id="imgFirst" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT i.diary_img_name, t2.*
+		FROM diary_img i JOIN (SELECT * FROM diary d  
+		JOIN (SELECT * FROM member m
+		JOIN record r ON m.user_id = r.user_id WHERE m.user_id =#{userId}) t1 
+		ON d.record_id = t1.record_id) t2 ON i.diary_code = t2.diary_code
 	</select>
 	
 	<select id="showCourse" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT * FROM course c join member m ON c.user_id=#{userId}
+		SELECT * FROM course c join member_ m ON c.user_id=#{userId}
 	</select>
 	
 	<select id="memberIsMember" parameterType="java.util.Map"
 		resultType="int">
 		SELECT COUNT(*) 
-		FROM MEMBER 
+		FROM member_ 
 		WHERE user_id=#{userId} AND pwd=#{userPWD}
 	</select>
 	<select id="duplEmail" parameterType="java.lang.String"
 		resultType="int">
-		SELECT COUNT(*) FROM member WHERE user_id=#{userId}
+		SELECT COUNT(*) FROM member_ WHERE user_id=#{userId}
 	</select>
-	<!---->
+	
 	<insert id="memberInsert" parameterType="java.util.Map">
-		INSERT INTO member(user_id,pwd,name,rrn,address,userjoindate,usertel)
-		VALUES(#{userId},#{userPWD},#{userName},#{userRRN},#{userAddr},SYSDATE,#{userTel})
+		INSERT INTO member_(user_id,pwd,name,age,gender,userjoindate,usertel)
+		VALUES(#{userId},#{userPWD},#{userName},#{userAge},#{userGender},SYSDATE,#{userTel})
+	</insert>
+	<insert id="insertAddr" parameterType="java.util.Map">
+		INSERT INTO useraddr 
+		VALUES(#{userId},#{userAddr},#{memberLat},#{memberLng})
 	</insert>
 	<insert id="memberVerify" parameterType="java.lang.String">
 		INSERT INTO verify
 		VALUES(#{userId},'Y')
 	</insert>
 	<update id="memberUpdate" parameterType="java.util.Map">
-		UPDATE member 
+		UPDATE member_ 
 		<set>
 			<if test="surveyResult!=null">frequency=#{surveyResult},</if>
 			<if test="userPWD!=null">pwd=#{userPWD},</if>

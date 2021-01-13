@@ -2,10 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!-- 제이쿼리 코어용 라이브러리 임베드 -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <!-- 폰트 -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
@@ -42,129 +38,127 @@
 </style>
 
 
-<div id="colorlib-page">
-	<div id="colorlib-main">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="section-tittle text-center mb-80 col-lg-12" >
-					<h1 style="margin-top: 15px;">PACK COMMENT</h1>
+<div id="colorlib-main">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="section-tittle text-center mb-80 col-lg-12" >
+				<h1 style="margin-top: 15px;">PACK COMMENT</h1>
+			</div>
+				
+		</div>
+	</div>	
+	<hr>
+	
+	<!-- 코멘트 작성 및 인기글 목록 -->
+	<div class="row">
+		<button type="button" class="btn btn-success btn-lg offset-md-1 col-md-5" data-toggle="modal" data-target="#writeModal">
+		  +
+		</button>
+		
+		<!-- writeModal -->
+		<div class="modal fade" id="writeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title">글 작성</h4>
+		      </div>
+		      <div class="modal-body">
+		        <div class="col-sm-12" style="margin-top:10px ">
+						<form method="post" enctype="multipart/form-data" class="col-sm-12">
+							 <div id="fileUpload" class="dragAndDropDiv col-sm-12"><span class="dragAndDropDivSpan">Drag & Drop Files Here</span></div>
+							 <input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/>
+						</form>
+						<button class="dragAndDropBtn col-sm-2  col-sm-offset-10">추가</button>
+		        <br>
 				</div>
-					
-			</div>
-		</div>	
-		<hr>
+		      	<input type="hidden" value="${item.pictureName}" >
+		        <input type="text" placeholder="내용 작성" style="width: 450px; margin-left: 10px;">
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary">올리기</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		
-		<!-- 코멘트 작성 및 인기글 목록 -->
-		<div class="row">
-			<button type="button" class="btn btn-success btn-lg offset-md-1 col-md-5" data-toggle="modal" data-target="#writeModal">
-			  +
-			</button>
-			
-			<!-- writeModal -->
-			<div class="modal fade" id="writeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h4 class="modal-title">글 작성</h4>
-			      </div>
-			      <div class="modal-body">
-			        <div class="col-sm-12" style="margin-top:10px ">
-							<form method="post" enctype="multipart/form-data" class="col-sm-12">
-								 <div id="fileUpload" class="dragAndDropDiv col-sm-12"><span class="dragAndDropDivSpan">Drag & Drop Files Here</span></div>
-								 <input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/>
-							</form>
-							<button class="dragAndDropBtn col-sm-2  col-sm-offset-10">추가</button>
-			        <br>
-					</div>
-			      	<input type="hidden" value="${item.pictureName}" >
-			        <input type="text" placeholder="내용 작성" style="width: 450px; margin-left: 10px;">
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-primary">올리기</button>
-			        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-			
-		</div><!-- row -->	
-		<hr>
-		<!-- 코멘트 리스트 -->
-		<div class="row">
-			<c:if test="${empty commentList }" var="isEmpty">
-				<h3>게시물이 없어요.</h3>
-			</c:if>
-			<c:if test="${!isEmpty }">
-				<c:forEach var="item" items="${commentList}" varStatus="loop">
-					<button type="button" class="btn btn-default btn-lg offset-md-1 col-md-5" data-toggle="modal" data-target="#listModal">
-					  <div>
-					  	<table>
-					  		<tr>
-					  			<td hidden="hidden">${item.no}</td>
-					  			<td>${item.id}</td>
-					  			<td>${item.postDate}<br/>${item.content}<span class="badge">${item.commentCount}</span></td>
-					  		</tr>
-					  	</table>
-					  </div>
-					</button>
-				</c:forEach>
-			</c:if>
-			<!-- listModal -->
-			<div class="modal fade" id="listModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header"></div>
-			      <div class="modal-body">
-			        <div class="col-sm-12" style="margin-top:10px ">
-			        	<div class="col-lg-3 col-md-6 col-sm-6">
-							<div class="single-location mb-30 ">
-								<div class="location-img galleryImg" >
-									<img src="#" alt="팩갤러리 사진">
-								</div>
-								<input type="hidden" value="${item.pictureName}" >
+	</div><!-- row -->	
+	<hr>
+	<!-- 코멘트 리스트 -->
+	<div class="row">
+		<c:if test="${empty commentList }" var="isEmpty">
+			<h3>게시물이 없어요.</h3>
+		</c:if>
+		<c:if test="${!isEmpty }">
+			<c:forEach var="item" items="${commentList}" varStatus="loop">
+				<button type="button" class="btn btn-default btn-lg offset-md-1 col-md-5" data-toggle="modal" data-target="#listModal">
+				  <div>
+				  	<table>
+				  		<tr>
+				  			<td hidden="hidden">${item.no}</td>
+				  			<td>${item.id}</td>
+				  			<td>${item.postDate}<br/>${item.content}<span class="badge">${item.commentCount}</span></td>
+				  		</tr>
+				  	</table>
+				  </div>
+				</button>
+			</c:forEach>
+		</c:if>
+		<!-- listModal -->
+		<div class="modal fade" id="listModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header"></div>
+		      <div class="modal-body">
+		        <div class="col-sm-12" style="margin-top:10px ">
+		        	<div class="col-lg-3 col-md-6 col-sm-6">
+						<div class="single-location mb-30 ">
+							<div class="location-img galleryImg" >
+								<img src="#" alt="팩갤러리 사진">
 							</div>
-						</div>	
-					<br>
-					<hr>
-						<div>
-							<p>${record.no}</p>
-							<p>${record.content }</p>							
+							<input type="hidden" value="${item.pictureName}" >
 						</div>
+					</div>	
+				<br>
+				<hr>
+					<div>
+						<p>${record.no}</p>
+						<p>${record.content }</p>							
 					</div>
-			      </div>
-			      <div class="modal-footer">
-			      	<div class="row">
-			      		<div class="text-center">
-			      			<!-- 댓글 -->
-			      			<form class="form-inline" id="frm" method="post">
-			      				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
-			      				<input type="hidden" name="no" value="${record.no }"/>
-			      				<!-- 수정,삭제 -->
-			      				<input type="hidden" name="cno"/>
-			      				<input id="title" class="form-control" type="text" name="linecomment"/>
-			      				<input class="btm btn-success" id="submit" type="button" value="등록"/>			      			
-			      			</form>
-			      			<div class="row">
-			      				<!-- 댓글 목록 -->
-			      				<div id="comments"></div>
-			      			</div>
-			      		</div>
-			      	</div>
-					<c:if test="${sessionScope.id == record.id}">
-			        <button type="button" class="btn btn-primary">수정</button>
-			        <button type="button" class="btn btn-danger">삭제</button>
-			        </c:if>
-			        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-		</div><!-- row -->
-		
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		      	<div class="row">
+		      		<div class="text-center">
+		      			<!-- 댓글 -->
+		      			<form class="form-inline" id="frm" method="post">
+		      				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+		      				<input type="hidden" name="no" value="${record.no }"/>
+		      				<!-- 수정,삭제 -->
+		      				<input type="hidden" name="cno"/>
+		      				<input id="title" class="form-control" type="text" name="linecomment"/>
+		      				<input class="btm btn-success" id="submit" type="button" value="등록"/>			      			
+		      			</form>
+		      			<div class="row">
+		      				<!-- 댓글 목록 -->
+		      				<div id="comments"></div>
+		      			</div>
+		      		</div>
+		      	</div>
+				<c:if test="${sessionScope.id == record.id}">
+		        <button type="button" class="btn btn-primary">수정</button>
+		        <button type="button" class="btn btn-danger">삭제</button>
+		        </c:if>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div><!-- row -->
+	
 
-		
-		
-	</div>
+	
+	
 </div>
 
 <script>

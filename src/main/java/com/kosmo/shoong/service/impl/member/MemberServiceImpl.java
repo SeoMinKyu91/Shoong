@@ -44,7 +44,12 @@ public class MemberServiceImpl  implements MemberService{
 
 	@Override
 	public int insert(Map map) {
-		return memberDAO.insert(map);
+		int flag = memberDAO.insert(map);
+		if(flag==1) {
+			memberDAO.insertAddr(map);
+			return flag;
+		}
+		return -1;
 	}///////insert
 	//이메일 인증
 	@Autowired
@@ -83,8 +88,7 @@ public class MemberServiceImpl  implements MemberService{
 	public int insertVerify(String userId) {
 		return memberDAO.insertVerify(userId);
 	}
-
-
+	
 //	@Override
 //	public int delete(Map map) {
 //		return memberDAO.delete(map);
@@ -97,7 +101,6 @@ public class MemberServiceImpl  implements MemberService{
 	
 	@Override
 	public MemberDTO selectOne(Map map) {
-		System.out.println("implㅇ안---------------------");
 		return memberDAO.selectOne(map);
 	}
 
@@ -105,6 +108,14 @@ public class MemberServiceImpl  implements MemberService{
 		
 		
 		return memberDAO.memberHasPack(map);
+	}
+
+	@Override
+	public Map memberEditView(Map map) {
+		Map memberInfo = memberDAO.memberEditView(map);
+		
+		
+		return memberInfo;
 	}
 
 }/////////////////////////////////////////////

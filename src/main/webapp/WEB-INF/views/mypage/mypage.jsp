@@ -1,16 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- ¿©±â¿¡ ÀÚ±â°¡ css»õ·Î¿î°Å Àû¿ë½Ã·Á°í ÇÏ¸é link°É¾î¼­ Ãß°¡ÇÏ¸é µË´Ï´Ù -->
+<!-- ì—¬ê¸°ì— ìê¸°ê°€ cssìƒˆë¡œìš´ê±° ì ìš©ì‹œë ¤ê³  í•˜ë©´ linkê±¸ì–´ì„œ ì¶”ê°€í•˜ë©´ ë©ë‹ˆë‹¤ -->
 <link rel="stylesheet" href="<c:url value="/css/test.css"/>">
-<!-- ¿©±â¿¡ ÀÚ±â°¡ css»õ·Î¿î°Å Àû¿ë½Ã·Á°í ÇÏ¸é link°É¾î¼­ Ãß°¡ÇÏ¸é µË´Ï´Ù -->
-<!-- ÀÌ ¿¹Á¦¿¡¼­´Â ÇÊ¿äÇÑ js, css ¸¦ ¸µÅ©°É¾î »ç¿ë -->
+<!-- ì—¬ê¸°ì— ìê¸°ê°€ cssìƒˆë¡œìš´ê±° ì ìš©ì‹œë ¤ê³  í•˜ë©´ linkê±¸ì–´ì„œ ì¶”ê°€í•˜ë©´ ë©ë‹ˆë‹¤ -->
+<!-- ì´ ì˜ˆì œì—ì„œëŠ” í•„ìš”í•œ js, css ë¥¼ ë§í¬ê±¸ì–´ ì‚¬ìš© -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	
 <style>
 .swiper-container {
 	height: 250px;
@@ -19,112 +28,177 @@
 
 .swiper-slide {
 	text-align: center;
-	display: flex; /* ³»¿ëÀ» Áß¾ÓÁ¤·Ä ÇÏ±âÀ§ÇØ flex »ç¿ë */
-	align-items: center; /* À§¾Æ·¡ ±âÁØ Áß¾ÓÁ¤·Ä */
-	justify-content: center; /* ÁÂ¿ì ±âÁØ Áß¾ÓÁ¤·Ä */
+	display: flex; /* ë‚´ìš©ì„ ì¤‘ì•™ì •ë ¬ í•˜ê¸°ìœ„í•´ flex ì‚¬ìš© */
+	align-items: center; /* ìœ„ì•„ë˜ ê¸°ì¤€ ì¤‘ì•™ì •ë ¬ */
+	justify-content: center; /* ì¢Œìš° ê¸°ì¤€ ì¤‘ì•™ì •ë ¬ */
 }
 
 .swiper-slide img {
 	box-shadow: 0 0 5px #555;
-	max-width: 100%; /* ÀÌ¹ÌÁö ÃÖ´ë³Êºñ¸¦ Á¦ÇÑ, ½½¶óÀÌµå¿¡ ÀÌ¹ÌÁö°¡ ¿©·¯°³°¡ º¸¿©Áú¶§ ÇÊ¿ä */
-	/* ÀÌ ¿¹Á¦¿¡¼­ ÇÊ¿äÇØ¼­ ¼³Á¤Çß½À´Ï´Ù. »óÈ²¿¡µû¶ó ´Ù¸¦ ¼ö ÀÖ½À´Ï´Ù. */
+	max-width: 100%; /* ì´ë¯¸ì§€ ìµœëŒ€ë„ˆë¹„ë¥¼ ì œí•œ, ìŠ¬ë¼ì´ë“œì— ì´ë¯¸ì§€ê°€ ì—¬ëŸ¬ê°œê°€ ë³´ì—¬ì§ˆë•Œ í•„ìš” */
+	/* ì´ ì˜ˆì œì—ì„œ í•„ìš”í•´ì„œ ì„¤ì •í–ˆìŠµë‹ˆë‹¤. ìƒí™©ì—ë”°ë¼ ë‹¤ë¥¼ ìˆ˜ ìˆìŠµë‹ˆë‹¤. */
+	
 }
+
+/* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */                          
+        }
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
 
 
 </style>
 
 <div id="colorlib-main" style="padding-top: 30px; padding-left: 30px">
 	<div style="display: inline-block; width: 80%;">
-		<strong>${sessionScope.id}</strong><span>´Ô</span>
-		<button style="float: right"
-			onclick="location.href='<c:url value="/myInfoEdit.do"/>'">Á¤º¸¼öÁ¤</button>
+		<strong>${name}</strong><span>ë‹˜</span>
+		<a href='<c:url value="/Member/myInfoEdit.do"/>'>ì •ë³´ìˆ˜ì •</a>
 	</div>
-	<div
-		style="width: 40%; display: inline-block; margin-right: 8%">
-		<a style="float: right" href="<c:url value="/"/>">ÁÖÇà½ÃÀÛ</a>
+	<div style="width: 40%; display: inline-block; margin-right: 8%">
+		<a style="float: right" href="<c:url value="/"/>">ì£¼í–‰ì‹œì‘</a>
 		<table
 			class="table table-bordered table-hover table-condensed text-center">
-			<!-- Å×ÀÌºí ÄÃ·³ÆøÀº col-*-*°è¿­·Î ¼³Á¤ -->
+			<!-- í…Œì´ë¸” ì»¬ëŸ¼í­ì€ col-*-*ê³„ì—´ë¡œ ì„¤ì • -->
 			<tr style="height: 10px">
-				<span>³ªÀÇ ±â·Ï</span>
+				<span>ë‚˜ì˜ ê¸°ë¡</span>
 			</tr>
 			<c:if test="${empty courseList }" var="isEmpty">
 				<tr>
-					<td colspan="6">µî·ÏµÈ °Ô½Ã¹°ÀÌ ¾ø¾î¿ä</td>
+					<td colspan="6">ë“±ë¡ëœ ê²Œì‹œë¬¼ì´ ì—†ì–´ìš”</td>
 				</tr>
 			</c:if>
 			<c:if test="${!isEmpty}">
-			
+
 				<c:forEach var="item" items="${courseList}">
 					<tr>
-						<td class="text-left" colspan="12">
-						<a href="<c:url value="/"/>">
-							${item.COURSE_NAME}</a></td>
+						<td class="text-left" colspan="12"><a
+							href="<c:url value="/"/>"> ${item.COURSE_NAME}</a></td>
 					</tr>
 					<tr>
 						<td>${item.COURSE_DATE}</td>
-						<td>${item.COURSE_TIME}½Ã°£</td>
+						<td>${item.COURSE_TIME}ì‹œê°„</td>
 						<td>${item.COURSE_LENGTH}km</td>
 						<td>${item.COURSE_REGION}</td>
 					</tr>
 				</c:forEach>
 			</c:if>
 		</table>
-		<a href='<c:url value="/"/>' style="float: right">´õº¸±â</a>
+		<a href='<c:url value="/"/>' style="float: right">ë”ë³´ê¸°</a>
 	</div>
 	<div style="display: inline-block;">
-		<a>´ÙÀÌ¾î¸® ¹Ù·Î°¡±â</a>
+		<a>ë‹¤ì´ì–´ë¦¬ ë°”ë¡œê°€ê¸°</a>
 	</div>
 	<div style="margin-top: 10px">
-		<span>°¶·¯¸®</span>
+		<span>ê°¤ëŸ¬ë¦¬</span>
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
 				<c:if test="${empty imgList }" var="isEmpty">
-					<span style="text-align: center">µî·ÏµÈ ÀÌ¹ÌÁö°¡ ¾ø¾î¿ä</span>
+					<span style="text-align: center">ë“±ë¡ëœ ì´ë¯¸ì§€ê°€ ì—†ì–´ìš”</span>
 				</c:if>
 				<c:if test="${!isEmpty}">
-					<c:forEach var="item" items="${imgList}">
+					<c:forEach var="item" items="${imgList}" varStatus="status">
 						<div class="swiper-slide">
-							<img src="<c:url value='/images/gallery/${item.DIARY_IMG_NAME}'/>">
+								<img src="<c:url value='/images/gallery/${item.DIARY_IMG_NAME}'/>"
+								id="${status.count}" data-toggle="modal" data-target="#myModal" onclick="modalClick(id);" >
 						</div>
 					</c:forEach>
 				</c:if>
 			</div>
-
-			<!-- ³×ºñ°ÔÀÌ¼Ç -->
+			<!-- ë„¤ë¹„ê²Œì´ì…˜ -->
 			<div class="swiper-button-next"></div>
-			<!-- ´ÙÀ½ ¹öÆ° (¿À¸¥ÂÊ¿¡ ÀÖ´Â ¹öÆ°) -->
+			<!-- ë‹¤ìŒ ë²„íŠ¼ (ì˜¤ë¥¸ìª½ì— ìˆëŠ” ë²„íŠ¼) -->
 			<div class="swiper-button-prev"></div>
-			<!-- ÀÌÀü ¹öÆ° -->
+			<!-- ì´ì „ ë²„íŠ¼ -->
 
-			<!-- ÆäÀÌÂ¡ -->
+			<!-- í˜ì´ì§• -->
 			<div class="swiper-pagination"></div>
 		</div>
 		<a href='<c:url value="/myGallery.do"/>'
-			style="float: right; margin-right: 15%">´õº¸±â</a>
+			style="float: right; margin-right: 15%">ë”ë³´ê¸°</a>
 	</div>
+
+	<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog" data-backdrop="false"> <!-- ì‚¬ìš©ì ì§€ì • ë¶€ë¶„â‘  : idëª… -->
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">Ã—</button>
+          <h4 class="modal-title">ëª¨ë‹¬ ì°½ íƒ€ì´í‹€</h4> <!-- ì‚¬ìš©ì ì§€ì • ë¶€ë¶„â‘¡ : íƒ€ì´í‹€ -->
+          
+        </div>
+        <div class="modal-body">
+          <p>ì—¬ê¸°ì— í•„ìš”í•œ í…ìŠ¤íŠ¸ ë©”ì‹œì§€ ë„£ê¸°</p> <!-- ì‚¬ìš©ì ì§€ì • ë¶€ë¶„â‘¢ : í…ìŠ¤íŠ¸ ë©”ì‹œì§€ -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 
 <script>
 	new Swiper('.swiper-container', {
 
-		slidesPerView : 5, // µ¿½Ã¿¡ º¸¿©ÁÙ ½½¶óÀÌµå °¹¼ö
-		spaceBetween : 30, // ½½¶óÀÌµå°£ °£°İ
-		slidesPerGroup : 5, // ±×·ìÀ¸·Î ¹­À» ¼ö, slidesPerView ¿Í °°Àº °ªÀ» ÁöÁ¤ÇÏ´Â°Ô ÁÁÀ½
+		slidesPerView : 5, // ë™ì‹œì— ë³´ì—¬ì¤„ ìŠ¬ë¼ì´ë“œ ê°¯ìˆ˜
+		spaceBetween : 30, // ìŠ¬ë¼ì´ë“œê°„ ê°„ê²©
+		slidesPerGroup : 5, // ê·¸ë£¹ìœ¼ë¡œ ë¬¶ì„ ìˆ˜, slidesPerView ì™€ ê°™ì€ ê°’ì„ ì§€ì •í•˜ëŠ”ê²Œ ì¢‹ìŒ
 
-		// ±×·ì¼ö°¡ ¸ÂÁö ¾ÊÀ» °æ¿ì ºóÄ­À¸·Î ¸Ş¿ì±â
-		// 3°³°¡ ³ª¿Í¾ß µÇ´Âµ¥ 1°³¸¸ ÀÖ´Ù¸é 2°³´Â ºóÄ­À¸·Î Ã¤¿ö¼­ 3°³¸¦ ¸¸µë
+		// ê·¸ë£¹ìˆ˜ê°€ ë§ì§€ ì•Šì„ ê²½ìš° ë¹ˆì¹¸ìœ¼ë¡œ ë©”ìš°ê¸°
+		// 3ê°œê°€ ë‚˜ì™€ì•¼ ë˜ëŠ”ë° 1ê°œë§Œ ìˆë‹¤ë©´ 2ê°œëŠ” ë¹ˆì¹¸ìœ¼ë¡œ ì±„ì›Œì„œ 3ê°œë¥¼ ë§Œë“¬
 		loopFillGroupWithBlank : true,
 
-		loop : true, // ¹«ÇÑ ¹İº¹
+		loop : true, // ë¬´í•œ ë°˜ë³µ
 
-		pagination : { // ÆäÀÌÂ¡
+		pagination : { // í˜ì´ì§•
 			el : '.swiper-pagination',
-			clickable : true, // ÆäÀÌÂ¡À» Å¬¸¯ÇÏ¸é ÇØ´ç ¿µ¿ªÀ¸·Î ÀÌµ¿, ÇÊ¿ä½Ã ÁöÁ¤ÇØ Áà¾ß ±â´É ÀÛµ¿
+			clickable : true, // í˜ì´ì§•ì„ í´ë¦­í•˜ë©´ í•´ë‹¹ ì˜ì—­ìœ¼ë¡œ ì´ë™, í•„ìš”ì‹œ ì§€ì •í•´ ì¤˜ì•¼ ê¸°ëŠ¥ ì‘ë™
 		},
-		navigation : { // ³×ºñ°ÔÀÌ¼Ç
-			nextEl : '.swiper-button-next', // ´ÙÀ½ ¹öÆ° Å¬·¡½º¸í
-			prevEl : '.swiper-button-prev', // ÀÌ¹ø ¹öÆ° Å¬·¡½º¸í
+		navigation : { // ë„¤ë¹„ê²Œì´ì…˜
+			nextEl : '.swiper-button-next', // ë‹¤ìŒ ë²„íŠ¼ í´ë˜ìŠ¤ëª…
+			prevEl : '.swiper-button-prev', // ì´ë²ˆ ë²„íŠ¼ í´ë˜ìŠ¤ëª…
 		},
 	});
+	
+	function modalClick(id) {
+		
+		console.log(id+"í´ë¦­");
+	}
+
+	
+	
 </script>

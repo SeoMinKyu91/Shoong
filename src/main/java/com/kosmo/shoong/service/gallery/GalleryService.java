@@ -11,5 +11,9 @@ public interface GalleryService {
 	int delete(Map map);
 	int update(Map map);
 	
+	//마이페이지
+	List<Map> imgFirstList(Map map);
+	
+	//갤러리 페이지
 	List<Map> imgSelectList(Map map);
 }
