@@ -29,7 +29,7 @@ public class PackScheduleController {
 	private PackScheduleServiceImpl service;
 
 	@RequestMapping("calendar.do")
-	public String packCaledar(@RequestParam Map map, Model model,HttpServletRequest req) {
+	public String packCalendar(@RequestParam Map map, Model model,HttpServletRequest req) {
 		System.out.println("calendar.do 잘들어옴");
 		HttpSession session = req.getSession();
 
@@ -49,12 +49,14 @@ public class PackScheduleController {
 		List<Map> jsonList = new Vector<Map>();
 		for(PackScheduleEventsDTO item : jsonForm) {
 			Map jsonMap = new HashMap();
-			System.out.println("start:"+item.getPackScheduleStart());
-			System.out.println("end"+item.getPackScheduleEnd());
-			jsonMap.put("title", item.getPackScheduleTitle().toString());
-			jsonMap.put("start", item.getPackScheduleStart().toString());
-			jsonMap.put("end", item.getPackScheduleEnd().toString());
-			jsonMap.put("id", item.getPackId());
+//			System.out.println("start:"+item.getPackScheduleStart());
+//			System.out.println("end:"+item.getPackScheduleEnd());
+			if(item!=null) {
+				jsonMap.put("title", item.getPackScheduleTitle().toString());
+				jsonMap.put("start", item.getPackScheduleStart().toString());
+				jsonMap.put("end", item.getPackScheduleEnd().toString());
+				jsonMap.put("id", item.getPackId());
+			}
 			jsonList.add(jsonMap);
 		}
 
