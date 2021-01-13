@@ -161,7 +161,6 @@
 				</div>
 			
 				<div id="gallery">
-					
 					<c:if test="${empty packGalleryList}" var="isEmpty">
 						<h3>갤러리에 사진이 없어요.</h3>
 					</c:if>

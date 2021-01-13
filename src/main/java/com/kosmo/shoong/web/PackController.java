@@ -90,41 +90,41 @@ public class PackController {
    }
 
 
-   @RequestMapping("view.do")
-   public String packView(@RequestParam Map map, Model model,HttpServletRequest req) {
+	@RequestMapping("view.do")
+	public String packView(@RequestParam Map map, Model model, HttpServletRequest req) {
 
-      //로그인 아이디,팩 아이디 설정 나중에 세션에서 값불러오는걸로 대체
-      map.put("loginId", req.getSession().getAttribute("userId").toString());
-      map.put("packId",req.getSession().getAttribute("packId").toString());
+		// 로그인 아이디,팩 아이디 설정 나중에 세션에서 값불러오는걸로 대체
+		map.put("loginId", req.getSession().getAttribute("userId").toString());
+		map.put("packId", req.getSession().getAttribute("packId").toString());
 
-      //관리자 확인용
-      if(packNoticeService.isManager(map)) {
-         model.addAttribute("manager","manager");
-      }
+		// 관리자 확인용
+		if (packNoticeService.isManager(map)) {
+			model.addAttribute("manager", "manager");
+		}
 
-      int recordCount = packNoticeService.getTotalRecord(map);
+		int recordCount = packNoticeService.getTotalRecord(map);
 
-      if(recordCount>=4) {
-         map.put("start",1);
-         map.put("end",4);
-         model.addAttribute("totalRecordCount",4);
-      }
-      else {
-         map.put("start",1);
-         map.put("end",recordCount);
-         model.addAttribute("totalRecordCount",recordCount);
-      }
+		if (recordCount >= 4) {
+			map.put("start", 1);
+			map.put("end", 4);
+			model.addAttribute("totalRecordCount", 4);
+		} else {
+			map.put("start", 1);
+			map.put("end", recordCount);
+			model.addAttribute("totalRecordCount", recordCount);
+		}
 
-      List<PackNoticeDTO> packNoticeList = packNoticeService.selectList(map);
-      model.addAttribute("list",packNoticeList);
-      List<PackGalleryDTO> GalleryList=galleryService.selectList(map);
-
-       if(GalleryList.size() > 4) {
-            List<PackGalleryDTO> packGalleryList = GalleryList.subList(0, 4);
-            model.addAttribute("packGalleryList",packGalleryList);
-       }
-      return "pack/PackView";
-   }
+		List<PackNoticeDTO> packNoticeList = packNoticeService.selectList(map);
+		model.addAttribute("list", packNoticeList);
+		List<PackGalleryDTO> GalleryList = galleryService.selectList(map);
+		System.out.println("GalleryList.size():"+GalleryList.size());
+		if (GalleryList.size() > 0) {
+			List<PackGalleryDTO> packGalleryList = GalleryList.subList(0, GalleryList.size());
+			System.out.println(packGalleryList.get(0).getPictureName());
+			model.addAttribute("packGalleryList", packGalleryList);
+		}
+		return "pack/PackView";
+	}
 
 
    @RequestMapping(value="checkPackName.do",produces = "text/html; charset=UTF-8")
