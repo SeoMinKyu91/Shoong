@@ -101,7 +101,6 @@ public class MemberServiceImpl  implements MemberService{
 	
 	@Override
 	public MemberDTO selectOne(Map map) {
-		System.out.println("implㅇ안---------------------");
 		return memberDAO.selectOne(map);
 	}
 
@@ -109,6 +108,14 @@ public class MemberServiceImpl  implements MemberService{
 		
 		
 		return memberDAO.memberHasPack(map);
+	}
+
+	@Override
+	public Map memberEditView(Map map) {
+		Map memberInfo = memberDAO.memberEditView(map);
+		
+		
+		return memberInfo;
 	}
 
 }/////////////////////////////////////////////

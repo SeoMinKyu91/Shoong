@@ -3,29 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-<link rel="stylesheet" href="<c:url value="/css/packInfoEdit.css"/>">
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-<!-- 제이쿼리 UI용 CSS -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- 제이쿼리 코어용 라이브러리 임베드 -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- 제이쿼리 UI용 라이브러리 임베드 -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- 폰트 -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-<!-- 모달  -->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<!-- 모달 -->
-
-<script>
-	
-</script>
-
 <style>
 .introbox div{
 	margin-top: 10px; 
@@ -43,155 +20,191 @@
 }
 </style>
 
-<div id="colorlib-page">
-	<div id="colorlib-main">
-		
+<div id="colorlib-main">
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div
+				class="section-tittle text-center mb-80 col-lg-12">
+				<h1 style="margin-top: 30px;">
+					Shoong <small>팩 정보 수정</small>
+				</h1>
+			</div>
+
+		</div>
+	</div>
+	<hr>
+
+	<div class="container" style="margin-top: 50px;">
 		<div class="row">
-			<div class="col-lg-12">
-				<div class="section-tittle text-center mb-80 col-lg-12" >
-					<h1 style="margin-top: 30px;">Shoong <small>팩 정보 수정</small></h1>
-				</div>
-					
-			</div>
-		</div>
-		<hr>
-
-		<div class="container" style="margin-top:50px;">
-			<div class="row">
-				<div class="offset-md-2 col-md-7 col-lg-offset-2 col-lg-7">
-					<div class="row">
-						<div class="offset-md-1 col-md-2 col-xs-3">
-							<img style="width: 80px; height: 80px; border-radius: 40px;" src="<c:url value="/images/pack/${packInfo.PACK_THUMBNAIL }"/>" alt="팩 마크" id="packThumbnailProfile">
-						</div>	
-						<div class="col-md-8 col-xs-9">
-							<div class="row">
-								<div class="col-md-12">
-									<h3 style="margin-top:10px;">${packInfo.PACK_NAME }</h3>						
-								</div>
-								<div class="col-md-12">
-									<button style="color:#0095f6;border:none;background-color: white;" id="btnThumbnail">Chage Pack Profile Photo</button>
-								</div>
+			<div
+				class="offset-md-2 col-md-7 col-lg-offset-2 col-lg-7">
+				<div class="row">
+					<div class="offset-md-1 col-md-2 col-xs-3">
+						<img
+							style="width: 80px; height: 80px; border-radius: 40px;"
+							src="<c:url value="/images/pack/${packInfo.PACK_THUMBNAIL }"/>"
+							alt="팩 마크" id="packThumbnailProfile">
+					</div>
+					<div class="col-md-8 col-xs-9">
+						<div class="row">
+							<div class="col-md-12">
+								<h3 style="margin-top: 10px;">${packInfo.PACK_NAME }</h3>
+							</div>
+							<div class="col-md-12">
+								<button
+									style="color: #0095f6; border: none; background-color: white;"
+									id="btnThumbnail">Change Pack Profile Photo</button>
 							</div>
 						</div>
-					</div>
-					
-					<form class="form-horizontal" action="<c:url value='/pack/infoEditOk.do'/>" method="post" onsubmit="return formSubmit()" style="margin-top:30px;">
-						<div class="form-group form-text">
-							<label for="packName" class="col-xs-2 control-label" >팩 이름</label>
-							<div class="col-xs-9">
-								<input type="text" id="packName" name="packName" class="form-control" value="${packInfo.PACK_NAME }">
-							</div>
-							<a id="packnameCheck" class="col-xs-1 btn form-group">중복체크</a>
-						</div>
-						<div class="form-group form-text form-margin form-text">
-							<label for="packTag" class="col-xs-2 control-label">팩 태그</label>
-							<div class="col-xs-9">
-								<input type="text" id="packTag" name="packTag" class="form-control" value="${packInfo.PACK_TAG }">
-								<input type="hidden" id="packActTimeHidden" value="${packInfo.PACK_ACT_TIME }">
-							</div>
-							
-						</div>
-						
-						<div class="form-group form-margin" style="font-size:12px;">
-							<label class="col-xs-2 control-label" style="font-size:14px;">팩 활동시간</label> 
-							<label class="radio-inline"> 
-							<input type="radio" name='packActTime' value='주 1회' id="radio1"/>주 1회</label>
-							<label class="radio-inline"> 
-							<input type="radio" name='packActTime' value='주 2~3회' id="radio2"/>주 2~3회 </label>
-							<label class="radio-inline"> 
-							<input type="radio" name='packActTime' value='주 4회 이상' id="radio3"/>주 4회 이상</label>
-						</div>
-
-
-						<div class="form-group form-margin" >
-							<label class="col-xs-2 control-label" style="font-size:14px;">팩 평균 연령</label> 
-							<label class="radio-inline"> <input type="radio" name='packActAge' value='청소년' />청소년</label> 
-							<label class="radio-inline"> <input type="radio" name='packActAge' value='20대' />20대</label> 
-							<label class="radio-inline"> <input type="radio" name='packActAge' value='30대' />30대</label> 
-							<label class="radio-inline"> <input type="radio" name='packActAge' value='40대' />40대</label> 
-							<label class="radio-inline"> <input type="radio" name='packActAge' value='50대 이상' />50대 이상</label> 
-							<label class="radio-inline"> <input type="radio" name='packActAge' value='전 연령대' />전 연령대</label>
-						</div>
-
-						<div class="form-group form-margin">
-							<label class="col-xs-2 control-label" >팩 소개</label>
-							<div class="col-xs-9">
-								<textarea id="packIntro" name="packIntro" style="width:100%;height: 150px; padding: 10px;">${packInfo.PACK_INTRO }</textarea>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<input type="hidden" id="packThumbnail" value="Pack1.png" name="packThumbnail" class="form-group" /> 
-						</div>
-
-						<div class="form-group">
-							<div class="col-xs-offset-2 col-xs-9">
-								<button id="btnPackInfoSubmit" type="submit" class="btn btn-default">수정</button>
-							</div>
-						</div>
-
-
-					</form>
-					
-				</div>
-			</div>
-		</div>
-		
-
-	</div>
-	<!-- END COLORLIB-MAIN -->
-</div>
-<!-- END COLORLIB-PAGE -->
-
-
-
-<!-- 팩 썸네일 모달창 시작 -->
-<div class="modal fade" id="thumbnailModal" data-backdrop="false">
-	<div class="modal-dialog">
-		<div class="modal-content">
-
-			<div class="modal-body">
-				<!-- /////////////////////////   나중에 여기 팩뱃지로 바꿔야함      //////////////////////////////// -->
-				<div class="row packThumbnailModal">
-					<div class="col-md-2 col-xs-3">
-						<img src="<c:url value="/images/pack/Pack1.png"/>" alt="팩 마크" id="Pack1.png">
-					</div>
-					<div class="col-md-2 col-xs-3">
-						<img src="<c:url value="/images/pack/Pack2.png"/>" alt="팩 마크" id="Pack2.png">
-					</div>
-					<div class="col-md-2 col-xs-3">
-						<img src="<c:url value="/images/pack/Pack3.png"/>" alt="팩 마크" id="Pack3.png">
-					</div>
-					<div class="col-md-2 col-xs-3">
-						<img src="<c:url value="/images/pack/Pack4.png"/>" alt="팩 마크" id="Pack4.png">
-					</div>
-					<div class="col-md-2 col-xs-3">
-						<img src="<c:url value="/images/pack/Pack5.png"/>" alt="팩 마크" id="Pack5.png">
 					</div>
 				</div>
-			
-			
-				
-				
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn text-right" data-dismiss="modal" id="btnPackThumbnailOk">선택</button>
-				<button type="button" class="btn btn-info text-right" data-dismiss="modal">닫기</button>
-			</div>
 
+				<form class="form-horizontal"
+					action="<c:url value='/pack/infoEditOk.do'/>"
+					method="post" onsubmit="return formSubmit()"
+					style="margin-top: 30px;">
+					<div class="form-group form-text">
+						<label for="packName"
+							class="col-xs-2 control-label">팩
+							이름</label>
+						<div class="col-xs-9">
+							<input type="text" id="packName"
+								name="packName" class="form-control"
+								value="${packInfo.PACK_NAME }">
+						</div>
+						<a id="packnameCheck"
+							class="col-xs-1 btn form-group">중복체크</a>
+					</div>
+					<div
+						class="form-group form-text form-margin form-text">
+						<label for="packTag"
+							class="col-xs-2 control-label">팩 태그</label>
+						<div class="col-xs-9">
+							<input type="text" id="packTag"
+								name="packTag" class="form-control"
+								value="${packInfo.PACK_TAG }">
+							<input type="hidden" id="packActTimeHidden"
+								value="${packInfo.PACK_ACT_TIME }">
+						</div>
+
+					</div>
+
+					<div class="form-group form-margin"
+						style="font-size: 12px;">
+						<label class="col-xs-2 control-label"
+							style="font-size: 14px;">팩 활동시간</label> <label
+							class="radio-inline"> <input
+								type="radio" name='packActTime'
+								value='주 1회' id="radio1" />주 1회
+						</label> <label class="radio-inline"> <input
+								type="radio" name='packActTime'
+								value='주 2~3회' id="radio2" />주 2~3회
+						</label> <label class="radio-inline"> <input
+								type="radio" name='packActTime'
+								value='주 4회 이상' id="radio3" />주 4회 이상
+						</label>
+					</div>
+
+
+					<div class="form-group form-margin">
+						<label class="col-xs-2 control-label"
+							style="font-size: 14px;">팩 평균 연령</label> <label
+							class="radio-inline"> <input
+								type="radio" name='packActAge' value='청소년' />청소년
+						</label> <label class="radio-inline"> <input
+								type="radio" name='packActAge' value='20대' />20대
+						</label> <label class="radio-inline"> <input
+								type="radio" name='packActAge' value='30대' />30대
+						</label> <label class="radio-inline"> <input
+								type="radio" name='packActAge' value='40대' />40대
+						</label> <label class="radio-inline"> <input
+								type="radio" name='packActAge'
+								value='50대 이상' />50대 이상
+						</label> <label class="radio-inline"> <input
+								type="radio" name='packActAge'
+								value='전 연령대' />전 연령대
+						</label>
+					</div>
+
+					<div class="form-group form-margin">
+						<label class="col-xs-2 control-label">팩
+							소개</label>
+						<div class="col-xs-9">
+							<textarea id="packIntro" name="packIntro"
+								style="width: 100%; height: 150px; padding: 10px;">${packInfo.PACK_INTRO }</textarea>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<input type="hidden" id="packThumbnail"
+							value="Pack1.png" name="packThumbnail"
+							class="form-group" />
+					</div>
+
+					<div class="form-group">
+						<div class="col-xs-offset-2 col-xs-9">
+							<button id="btnPackInfoSubmit"
+								type="submit" class="btn btn-default">수정</button>
+						</div>
+					</div>
+
+
+				</form>
+
+			</div>
 		</div>
 	</div>
+	<!-- 팩 썸네일 모달창 시작 -->
+	<div class="modal fade" id="thumbnailModal"
+		data-backdrop="false">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-body">
+					<!-- /////////////////////////   나중에 여기 팩뱃지로 바꿔야함      //////////////////////////////// -->
+					<div class="row packThumbnailModal">
+						<div class="col-md-2 col-xs-3">
+							<img
+								src="<c:url value="/images/pack/Pack1.png"/>"
+								alt="팩 마크" id="Pack1.png">
+						</div>
+						<div class="col-md-2 col-xs-3">
+							<img
+								src="<c:url value="/images/pack/Pack2.png"/>"
+								alt="팩 마크" id="Pack2.png">
+						</div>
+						<div class="col-md-2 col-xs-3">
+							<img
+								src="<c:url value="/images/pack/Pack3.png"/>"
+								alt="팩 마크" id="Pack3.png">
+						</div>
+						<div class="col-md-2 col-xs-3">
+							<img
+								src="<c:url value="/images/pack/Pack4.png"/>"
+								alt="팩 마크" id="Pack4.png">
+						</div>
+						<div class="col-md-2 col-xs-3">
+							<img
+								src="<c:url value="/images/pack/Pack5.png"/>"
+								alt="팩 마크" id="Pack5.png">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn text-right"
+						data-dismiss="modal" id="btnPackThumbnailOk">선택</button>
+					<button type="button"
+						class="btn btn-info text-right"
+						data-dismiss="modal">닫기</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- 팩 썸네일 모달창 끝 -->
 </div>
-<!-- 팩 썸네일 모달창 끝 -->
-
-
-
-
-
-
-
-
-
+<!-- END COLORLIB-MAIN -->
 
 <script>
 

@@ -6,9 +6,6 @@
 
 <style>
 /*
-
-
-
 .mapboxgl-popup {
 	max-width: 200px;
 }
@@ -17,8 +14,6 @@
 	text-align: center;
 	font-family: 'Open Sans', sans-serif;
 }
-
-
 */
 
 #map {

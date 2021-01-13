@@ -194,7 +194,6 @@ h6 {
 		</div>
 	</div>
 </div>
-<!-- END COLORLIB-PAGE -->
 <script type="text/javascript">
 	$(
 		function(){
