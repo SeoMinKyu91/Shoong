@@ -17,50 +17,105 @@
 
 
 <style>
-#colorlib-main{
-margin-top: 50px;
-}#map{
-height: 300px;
-width : 100%;
-overflow: hidden;
-position: relative;
-margin-bottom: 50px;
-}.PackMainTop{
-font-family: 'Do Hyeon', sans-serif;
-font-size: 20px;
-}.packThumbnails{
-width: 100%
-}.packThumbnails img{
-width: 5%
-}.packCreatTable{
-width: 60%
-}.packCreatTable tr th:nth-child(1) {
-width: 20%
+#colorlib-main {
+	padding-top: 50px;
 }
 
+#map {
+	height: 300px;
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	margin-bottom: 50px;
+}
+
+h3{
+	padding-top:20px;
+	color:black;
+	font-weight: bold;
+}
+
+.packCreateBtn {
+	border: none;
+	color:#ff8827;
+}
+
+.packCreateBtn:hover {
+	background-color: #ff8827;
+	color:white;
+}
+
+.PackMainTop {
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 20px;
+}
+
+.packThumbnails {
+	width: 100%
+}
+
+.packThumbnails img {
+	width: 5%
+}
+
+.packCreatTable {
+	width: 60%
+}
+
+.packCreatTable tr th:nth-child(1) {
+	width: 20%
+}
+
+#formSubmitBtn{
+	background-color: #ff8827; 
+	border: none; 
+	color: white;
+	font-weight:bold;
+}
 </style>
 
 <div id="colorlib-main" class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+			<div class="" style="padding-top:20px">
+				<a href="<c:url value="/pack/main.do"/>">
+				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
+					style="width: 80px;"></a>
+				&emsp;<a class="packCreateBtn btn" 
+					href="<c:url value="/pack/main.do"/>" style="font-weight: bold">홈</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="packCreateBtn btn"
+						href="<c:url value="/pack/view.do"/>" style="font-weight: bold;padding-bottom:0px">나의팩</a>
+				</c:if>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-12">
+			<h3>&nbsp;&nbsp;팩 만들기</h3>
+			<hr style="background-color:black; height:2px"/>
+		</div>
+	</div>
 	<!-- 지도 -->
 	<div class="row">
-		<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-0">
+		<div class="col-xs-12 col-md-12">
 			<div id="map"></div>
 		</div>
 	</div>
 	<!-- 팩 가입 정보-->
-	<div class="row col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-0">
+	<div class="row col-xs-12 col-md-12">
 		<form class="form-horizontal" action="<c:url value='/pack/createOk.do'/>" method="post" onsubmit="return formSubmit()">
 		  <div class="form-group">
 		    <label for="inputEmail3" class="col-xs-2 control-label">팩 이름</label>
 		    <div class="col-xs-9">
-		      <input type="text" id= "packName" name= "packName" class="form-control" placeholder="팩  이름..">
+		      <input type="text" id= "packName" name= "packName" class="form-control" placeholder="팩  이름">
 		    </div>
-		    <a id="packnameCheck" class="col-xs-1 btn form-group">중복체크</a>
+		    <a id="packnameCheck" class="col-xs-1 btn form-group" style="color:#ff8827; text-decoration: underline;">중복체크</a>
 		  </div>
 		  <div class="form-group">
 		    <label class="col-xs-2 control-label">팩 태그</label>
 		    <div class="col-xs-9">
-		      <input  type="text" id ="packTag" name= "packTag" class="form-control" placeholder="팩  태그..">
+		      <input  type="text" id ="packTag" name= "packTag" class="form-control" placeholder="팩  태그">
 		    </div>
 		  </div>
 		  <div class="form-group">
@@ -129,8 +184,8 @@ width: 20%
 			<input type="hidden"  id="packLng"  name= "packLng" class="form-group"/>
 		  </div>
 		  <div class="form-group">
-		    <div class="col-xs-offset-2 col-xs-9">
-		      <button id="formSubmitBtn" type="submit"  class="btn btn-default">등록</button>
+		    <div class="col-xs-offset-6 col-xs-3 col-md-offset-6 col-md-3">
+		      <button id="formSubmitBtn" type="submit" class="btn">등록</button>
 		    </div>
 		  </div>
 		</form>

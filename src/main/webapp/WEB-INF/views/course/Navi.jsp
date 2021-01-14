@@ -22,13 +22,16 @@
 	height:400px;
 }
 
-ul li label{
-	font-size: .9em;
+
+ul li{
+	font-weight : bold;
+	font-size: 1em;
 }
 
 ul li span{
+	font-size: .8em;
+	font-weight : normal;
 	color:black;
-	font-size: .9em;
 }
 
 .my-box{
@@ -67,13 +70,8 @@ ul li span{
 	border: none;
 	background-color: #777777;
 	color: white;
-	font-family: 'Do Hyeon', sans-serif;
 	padding: 5px;
 	border-radius: 2px;
-}
-
-h1 {
-	font-family: 'Do Hyeon', sans-serif;
 }
 
 .modal-dialog {
@@ -126,7 +124,7 @@ h1 {
 	font-size: 100%;
 }
 
-#galleryImgModal img {
+#naviImgModal img {
 	width: 100%;
 }
 </style>
@@ -198,7 +196,7 @@ h1 {
 			</div>
 			
 		</div>
-		<div class="modal fade" id="galleryModal" data-backdrop="false"  >
+		<div class="modal fade" id="naviModal" data-backdrop="false">
 		     <div class="modal-dialog modal-lg" >
 		         <div class="modal-content">
 		             <div class="modal-header">
