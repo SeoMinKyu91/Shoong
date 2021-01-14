@@ -4,7 +4,6 @@
 
 <style>
 
-
 #map {
 	height: 300px;
 	width: 100%;
@@ -14,14 +13,12 @@
 
 .PackMainTop {
 	margin-top: 0px;
-	font-family: 'Jua', sans-serif;
 }
 
 .PackMainTop input {
 	width: 100px;
 	border-radius: 10px;
 	border-color: #333333;
-	font-family: 'Jua', sans-serif;
 }
 
 .PackMainTop input:focus {
@@ -41,7 +38,6 @@
 .packCreateBtn {
 	border: none;
 	color:#ff8827;
-	font-family: 'Jua', sans-serif;
 }
 
 .packCreateBtn:hover {
@@ -56,7 +52,6 @@
 
 #accordion table tr:nth-child(2) {
 	font-size: 7px;
-	font-family: 'Jua', sans-serif;
 }
 
 #accordion h3 {
@@ -64,7 +59,6 @@
 	height: 40px;
 	font-size: 20px;
 	color: white;
-	font-family: 'JuA', sans-serif;
 }
 
 .btn-img{
@@ -79,12 +73,12 @@
 			<div class="" style="padding-top:20px">
 				<a href="<c:url value="/pack/main.do"/>">
 				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
-					style="width: 80px; padding-bottom: 17px;"></a>
-				&emsp;<a class="packCreateBtn btn-lg" 
-					href="<c:url value="/pack/main.do"/>">홈</a>
+					style="width: 80px;"></a>
+				&emsp;<a class="packCreateBtn btn" 
+					href="<c:url value="/pack/main.do"/>" style="font-weight: bold">홈</a>
 				<c:if test="${!empty sessionScope.packId}">
-					<a class="packCreateBtn btn-lg"
-						href="<c:url value="/pack/view.do"/>">나의팩</a>
+					<a class="packCreateBtn btn"
+						href="<c:url value="/pack/view.do"/>" style="font-weight: bold">나의팩</a>
 				</c:if>
 			</div>
 		</div>
@@ -92,8 +86,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-md-12">
 			<div id="map"></div>
-			<p style="color: grey; font-size: .8em">지도를 클릭 시 클릭 된 지점을 기준으로 검색 됩니다(별 모양 마커를
-				움직이세요)</p>
+			<p style="color: grey; font-size: .8em">지도를 클릭 시 클릭 된 지점을 기준으로 검색 됩니다(별 모양 마커를 움직이세요)</p>
 		</div>
 	</div>
 	<div class="row">
@@ -104,17 +97,17 @@
 						<form class="form-inline" method="post"
 							action="<c:url value="/pack/main.do"/>">
 							<div class="packAddr">
-								[<span id="packRegionSearch"></span>] 근처 팩 &nbsp;
+								<span style="font-size: .8em; font-weight: bold;">[<span id="packRegionSearch" ></span>] 근처 팩</span> &nbsp;
 							</div>
 							<input type="text" class="form-group" name="searchWord"
-								style="width: 180px;" />
+								style="width: 180px; height:30px; padding-left:10px"/>
 							<button class="glyphiconBtn">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"><img class="btn-img" src='<c:url value="/images/search.png"/>'/></span>
 							</button>
 						</form>
 					</th>
 					<th>
-						<a class="packCreateBtn btn-lg" style="float: right"
+						<a class="packCreateBtn btn" style="float: right; font-weight: bold"
 							href="<c:url value="/pack/create.do"/>">팩 만들기</a>
 					</th>
 				</tr>
@@ -138,11 +131,11 @@
 										src="<c:url value="/images/pack/${item.packThumbnail}"/>"
 										alt="팩 마크"></th>
 									<th
-										style="font-size: 20px; font-family: 'Jua', sans-serif;">${item.packName}</th>
+										style="font-size: 20px;">${item.packName}</th>
 								</tr>
 								<tr>
 									<th colspan="2" style="color: #00a8f3; font-size: 12px;"><p
-											style="margin-left: 20px; margin-top: 10px;">${item.packTag}#${item.packActTime}#${item.packAge}</p></th>
+											style="margin-left: 20px; margin-top: 10px;">#${item.packTag} #${item.packActTime} #${item.packAge}</p></th>
 								</tr>
 								<tr>
 									<th colspan="2"><div
@@ -152,7 +145,7 @@
 									<th colspan="2" class="text-right">
 										<button class="btn joinPackBtn" id="${item.packID}"
 											data-toggle="modal" data-target="#packJoinModal"
-											style="margin-top: 10px; color: white; border: none; font-family: 'JuA', sans-serif; background-color: #ff8827">가입</button>
+											style="margin-top: 10px; font-weight:bold; color: white; border: none; background-color: #ff8827">가입</button>
 									</th>
 								</tr>
 							</table>
@@ -172,7 +165,7 @@
 					<div class="col-sm-12" id="galleryImgModal"
 						style="margin-top: 10px">
 						<span id="packJoinSpan"
-							style="font-size: 20px; font-family: 'Jua', sans-serif;">가입
+							style="font-size: 20px;">가입
 							신청 하시겠습니까?</span>
 					</div>
 				</div>
