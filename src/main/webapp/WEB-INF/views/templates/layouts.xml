@@ -44,6 +44,17 @@
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}/{4}.jsp" />
 	</definition>
 	
+	<definition name="empty" template="/WEB-INF/views/templates/EmptyLayout.jsp">
+      <put-attribute name="content" value=""/>
+   </definition>
+   
+   <definition name="empty/*" extends="empty">
+        <put-attribute name="content" value="/WEB-INF/views/{1}.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="empty/*/*" extends="empty">
+        <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
+    </definition>
 	
 	
 	
