@@ -36,7 +36,7 @@
 <!-- 여기는 정확히 무슨 기능인지 잘모르겠지만 활용도가 있을 수도 있을거 같아서 냅뒀습니다 -->
 <div class="colorlib-footer">
 	<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+	<!-- Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> -->
 	<ul>
 		<li><a href="https://ko-kr.facebook.com/"><i class="icon-facebook"></i></a></li>
 		<li><a href="https://twitter.com/?lang=ko"><i class="icon-twitter"></i></a></li>
