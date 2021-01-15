@@ -11,6 +11,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kosmo.shoong.service.pack.PackCommentDTO;
+import com.kosmo.shoong.service.pack.PackCommentReplyDTO;
 import com.kosmo.shoong.service.pack.PackCommentService;
 
 @Repository
@@ -18,32 +19,51 @@ public class PackCommentDAO implements PackCommentService {
 	
 	@Resource(name = "template")
 	private SqlSessionTemplate sqlMapper;
-	
+
 	@Override
-	public boolean isLogin(Map map) {
-		return (Integer)sqlMapper.selectOne("memoIsLogin", map) == 1 ? true : false;
+	public int packCommentWrite(Map map) {
+		return sqlMapper.insert("packCommentWrite",map);
+	}////////////
+
+	@Override
+	public int packCommentDelte(Map map) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
+
 	@Override
-	public List<PackCommentDTO> selectList(Map map){
-		return sqlMapper.selectList("memoSelectList",map);
+	public int packCommentUpdate(Map map) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
+
 	@Override
-	public PackCommentDTO selectOne(Map map) {
-		return sqlMapper.selectOne("memoSelectOne", map);
-	}
+	public int packCommentImgWrite(Map map) {
+		return sqlMapper.insert("packCommentImgWrite",map);
+	}//////////
+
 	@Override
-	public int insert(Map map) {
-		return sqlMapper.insert("commentInsert",map);
-	}
-	@Override
-	public int delete(Map map) {
+	public List<PackCommentDTO> packCommentMainSelectList(Map map) {
 		
-		sqlMapper.delete("commentDeleteByNo",map);
-		return sqlMapper.delete("commentDelete",map);
+		List<PackCommentDTO> list = sqlMapper.selectList("packCommentSelectList",map);
+		for(PackCommentDTO dto : list) {
+			String packCommentNo = dto.getPackCommentNo();
+			List<String> packCommentImg = sqlMapper.selectList("packCommentImageList",packCommentNo);
+			if(packCommentImg != null) {
+				dto.setPackCommentImages(packCommentImg);
+			}
+			List<PackCommentReplyDTO> packCommentReply = sqlMapper.selectList("packCommentReplyList",packCommentNo);
+			if(packCommentReply != null) {
+				dto.setPackCommentReply(packCommentReply);
+			}
+			
+			
+		}
+		
+		
+		
+		return list;
 	}
-	@Override
-	public int update(Map map) {
-		return sqlMapper.update("commentUpdate",map);
-	}
+	
+	
 }

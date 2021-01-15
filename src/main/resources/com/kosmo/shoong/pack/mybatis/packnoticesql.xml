@@ -20,7 +20,7 @@
 	<select id="PackNoticeSelectList" parameterType="java.util.Map" resultMap="packNoticeDTOResult">
 		
 		SELECT * FROM
-		(SELECT T.*,ROWNUM R FROM (SELECT p.*,m.name FROM member m JOIN pack_notice p ON m.user_id = p.user_id WHERE p.pack_id = #{packId}
+		(SELECT T.*,ROWNUM R FROM (SELECT p.*,m.name FROM member_ m JOIN pack_notice p ON m.user_id = p.user_id WHERE p.pack_id = #{packId}
 		ORDER BY pack_notice_no DESC) T)
 		WHERE R BETWEEN #{start} AND #{end}	 
 		

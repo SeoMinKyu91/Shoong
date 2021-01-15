@@ -12,7 +12,7 @@
 		<result property="packNoticeDate" column="PACK_NOTICE_DATE"/>
 		<result property="packNoticeContent" column="PACK_NOTICE_CONTENT"/>
 	</resultMap>
-	
+
 	<!-- 팩 가입/승인/거절 -->
 	<select id="PackJoinList" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT m.user_id,m.name,m.age,m.frequency,p.* 
@@ -61,6 +61,5 @@
 		update pack set pack_name = #{packName}, pack_tag = #{packTag}, 
 		pack_act_time = #{packActTime}, pack_act_age = #{packActAge}, pack_intro = #{packIntro},
 		pack_thumbnail = #{packThumbnail} where pack_id = #{packId}
-		
 	</update>
 </mapper>

@@ -17,27 +17,38 @@
 
 
 <style>
-#colorlib-main{
-margin-top: 50px;
-}#map{
-height: 300px;
-width : 100%;
-overflow: hidden;
-position: relative;
-margin-bottom: 50px;
-}.PackMainTop{
-font-family: 'Do Hyeon', sans-serif;
-font-size: 20px;
-}.packThumbnails{
-width: 100%
-}.packThumbnails img{
-width: 5%
-}.packCreatTable{
-width: 60%
-}.packCreatTable tr th:nth-child(1) {
-width: 20%
+#colorlib-main {
+	margin-top: 50px;
 }
 
+#map {
+	height: 300px;
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	margin-bottom: 50px;
+}
+
+.PackMainTop {
+	font-family: 'Do Hyeon', sans-serif;
+	font-size: 20px;
+}
+
+.packThumbnails {
+	width: 100%
+}
+
+.packThumbnails img {
+	width: 5%
+}
+
+.packCreatTable {
+	width: 60%
+}
+
+.packCreatTable tr th:nth-child(1) {
+	width: 20%
+}
 </style>
 
 <div id="colorlib-main" class="container">
