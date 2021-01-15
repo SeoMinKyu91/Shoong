@@ -23,7 +23,7 @@ public class FileUpDownUtils {
 		} else {
 			String ext = fileName.substring(fileName.lastIndexOf(".") + 1).trim();
 			String fileNameExcludeExt = fileName.substring(0, fileName.lastIndexOf("."));
-
+			
 			String newFileName;
 			while (true) {
 

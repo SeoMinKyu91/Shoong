@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kosmo.shoong.pack.mybatis.packcommentsql">
+
+	<resultMap type="packCommentDTO" id="packCommentDTOResult">
+		
+		<!-- 
+		property:자바빈의 속성명
+		column:테이블의 컬럼(조회결과의 컬럼들 의미)
+		 -->
+		<result property="packCommentNo" column="packCommentNo"/>
+		<result property="packCommentWriter" column="packCommentWriter"/>
+		<result property="packCommentContent" column="packCommentContent"/>
+		<result property="packCommentLikeCount" column="packCommentLikeCount"/>
+		<result property="packCommentReplyCount" column="packCommentReplyCount"/>
+		<!-- 
+		1:N관계 매핑용
+		column: 조인시 컬럼명
+		select: 자식테이블에서 조인시 컬럼명으로 조회시 쿼리문 아이디
+		javaType : OneMemoDTO의 자식레코드를 담을 컬렉션 타입
+		ofType : 자식의 DTO타입
+		 -->
+	</resultMap>
+
+
+
+
+<insert id="packCommentWrite">
+	<selectKey keyProperty="pack_join_no" order="BEFORE" resultType="int">
+		select pack_join_no from pack_join where user_id = #{userId}
+	</selectKey>
+	insert into pack_comment values(SEQ_P_COMMENT.nextval,#{pack_join_no},#{packCommentContent},sysdate)
+</insert>
+
+<insert id="packCommentImgWrite">
+	<selectKey keyProperty="pack_comment_no" order="BEFORE" resultType="int">
+		select pack_comment_no from 
+		(select rownum,pack_comment_no from pack_comment where pack_join_no = 
+		(select pack_join_no from pack_join where user_id = #{userId}) order by pack_comment_no desc) where rownum = '1'
+	</selectKey>
+	insert into pack_comment_img values(#{pack_comment_no},#{packCommentImgName})
+</insert>
+
+<select id="packCommentSelectList" parameterType="java.util.Map" resultMap="packCommentDTOResult">
+	SELECT (select name from member_ where user_id = p.user_id and p.pack_join_no = c.pack_join_no) packCommentWriter,
+	c.pack_comment_content packCommentContent,
+	c.pack_comment_no packCommentNo,
+	(select count(*) from pack_comment_like where pack_comment_no = c.pack_comment_no) packCommentLikeCount,
+	(select count(*) from pack_comment_reply where pack_comment_no = c.pack_comment_no) packCommentReplyCount
+	FROM pack_join p join pack_comment c on p.pack_join_no = c.pack_join_no where p.pack_id = #{packId} 
+	ORDER BY packCommentNo DESC
+</select>
+
+<select id="packCommentImageList" parameterType="java.lang.String" resultType="java.lang.String">
+	select pack_comment_img_name from pack_comment_img where pack_comment_no = #{packCommentNo}
+</select>
+<select id="packCommentReplyList" parameterType="java.lang.String" resultType="packCommentReplyDTO">
+	select rp.pack_comment_reply_content packCommentReplyContent, m.name packCommentReplyWriter 
+	from member_ m join pack_comment_reply rp on m.user_id = rp.user_id 
+	where pack_comment_no = #{packCommentNo}
+</select>
+
+
+</mapper>
