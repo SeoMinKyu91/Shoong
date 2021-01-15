@@ -135,7 +135,6 @@ width: 100%;
    </div>
    
   <div class="modal fade" id="galleryModal" data-backdrop="false"  >
-
        <div class="modal-dialog modal-lg" >
            <div class="modal-content">
                <div class="modal-header">
@@ -184,18 +183,19 @@ width: 100%;
 </div>
 <script>
 
-	// 이미지 다운로드 모달 정보 변경 
-	$(".galleryImg").click(function() {
-		var fileName = $(this).next().val()
-		var imgDownloadHref = '<c:url value="/pack/fileDownload.do?filename='
-				+ fileName + '"/>'
-		var imgDeleteHref = '<c:url value="/pack/fileDelete.do?filename='
-				+ fileName + '"/>'
-		$("#fileDownloadATag").attr("href", imgDownloadHref)
-		$("#fileDeleteATag").attr("href", imgDeleteHref)
-		$('#galleryImgModal').html($(this).html());
-		$('#galleryViewModal').modal();
-	});
+   
+
+
+// 이미지 다운로드 모달 정보 변경 
+      $(".galleryImg").click(function(){
+         var fileName = $(this).next().val()
+         var imgDownloadHref = '<c:url value="/pack/fileDownload.do?filename='+fileName+'"/>'
+         var imgDeleteHref = '<c:url value="/pack/fileDelete.do?filename='+fileName+'"/>'
+         $("#fileDownloadATag").attr("href", imgDownloadHref )
+         $("#fileDeleteATag").attr("href", imgDeleteHref)
+         $('#galleryImgModal').html($(this).html());
+         $('#galleryViewModal').modal();
+      })
 
 //이미지 드래그앤 드랍.
         var objDragAndDrop = $(".dragAndDropDiv");
@@ -220,7 +220,7 @@ width: 100%;
             var size =$("#imgArry").val().split(",").length+files.length;
             console.log(size)   
             if(size > 3){
-            	 alert('이미지는 3개까지 올릴 수 있습니다.');
+                alert('이미지는 3개까지 올릴 수 있습니다.');
                  return;
             }    
 
@@ -258,7 +258,7 @@ width: 100%;
       var imgarr =[];
       function sendFileToServer(formData)
         {
-        	
+           
       
             var extraData ={}; //Extra Data.
             var jqXHR=$.ajax({
@@ -270,8 +270,8 @@ width: 100%;
                 data: formData,
                 dataType:'json',
                 success: function(data){
-                	imgarr.push(data.fileName);
-                	imageDivShow()
+                   imgarr.push(data.fileName);
+                   imageDivShow()
                 }
             }); 
   
@@ -280,119 +280,45 @@ width: 100%;
         //5] Ajax 이용 해서 서버에 이미지 삭제하기 
         
         function deleteFileToServer(filename){
-=======
-	//이미지 드래그앤 드랍.
-	var objDragAndDrop = $(".dragAndDropDiv");
->>>>>>> branch 'master' of https://github.com/SeoMinKyu91/Shoong.git
 
-	$(document).on("dragenter", ".dragAndDropDiv", function(e) {
-		e.stopPropagation();
-		e.preventDefault();
-		$(this).css('border', '2px solid #0B85A1');
-	});
-	$(document).on("dragover", ".dragAndDropDiv", function(e) {
-		e.stopPropagation();
-		e.preventDefault();
-	});
-	$(document).on("drop", ".dragAndDropDiv", function(e) {
-		$(this).css('border', '2px dotted #0B85A1');
-		e.preventDefault();
-		var files = e.originalEvent.dataTransfer.files;
-		if (files.length > 3) {
-			alert('이미지는 3개까지 올릴 수 있습니다.');
-			return;
-		}
-		var size = $("#imgArry").val().split(",").length + files.length;
-		console.log(size)
-		if (size > 3) {
-			alert('이미지는 3개까지 올릴 수 있습니다.');
-			return;
-		}
-
-		handleFileUpload(files, objDragAndDrop);
-	});
-
-	//1]drag 영역 클릭시 파일 선택창
-
-	$(".dragAndDropBtn").on('click', function(e) {
-		$('input[type=file]').trigger('click');
-	});
-	$('input[type=file]').on('change', function(e) {
-		var files = e.originalEvent.target.files;
-		handleFileUpload(files, objDragAndDrop);
-	});
-	//1-1]만들어진 다이브 클릭시는 삭제 
-
-	//2]서버에 파일 전송 메소드
-	function handleFileUpload(files, obj) {
-		for (var i = 0; i < files.length; i++) {
-			var fd = new FormData();
-			fd.append('file', files[i]);
-			sendFileToServer(fd);
-		}
-	}
-
-	var rowCount = 0;
-
-	//4] Ajax 이용 해서 서버에 이미지 저장하는 핵심로직
-	var imgarr = [];
-	function sendFileToServer(formData) {
-		var extraData = {}; //Extra Data.
-		var jqXHR = $.ajax({
-			url : "<c:url value="/pack/fileUpload/post"/>",
-			type : "POST",
-			contentType : false,
-			processData : false,
-			cache : false,
-			data : formData,
-			dataType : 'json',
-			success : function(data) {
-				imgarr.push(data.fileName);
-				imageDivShow()
-			}
-		});
-
-	}//파일저장 
-
-	//5] Ajax 이용 해서 서버에 이미지 삭제하기 
-
-	function deleteFileToServer(filename) {
-		$.ajax({
-			url : "<c:url value="/pack/filedelete/post"/>",//요청할 서버의 URL주소
-			type : 'post',//데이타 전송방식(디폴트는 get방식) 
-			dataType : 'text',//서버로 부터 응답 받을 데이타의 형식 설정
-			data : "filename=" + filename,
-			success : function(data) {
-				console.log(data);
-				imgarr.splice(imgarr.indexOf(filename), 1);
-				imageDivShow();
-			},
-			error : function(error) {//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
-				console.log('에러 : ', error.responseText);
-			}
-
-		});
-	}
-
-	//6]파일 추가 삭제 후 다이브 다시띄우기.
-	function imageDivShow() {
-		var str = '';
-		for (var i = 0; i < imgarr.length; i++) {
-			str += "<div class='imgdiv' id='"+imgarr[i]+"'><img class='img'  src=/fileupload/"+imgarr[i]+"><div class='imgdeletemark'>삭제</div></div>";
-		}
-		$("#fileUpload").html(str);
-		//이미지에 호버 이벤트 걸기
-		$(".imgdiv").hover(function() {
-			$(this).children().eq(1).css("display", "block");
-			$(this).children().eq(0).css("opacity", 0.4);
-		}, function() {
-			$(this).children().eq(1).css("display", "none");
-			$(this).children().eq(0).css("opacity", 1.0);
-		});
-		$(".imgdiv").click(function() {
-			deleteFileToServer($(this).attr('id'))
-		});
-
-		$('#imgArry').val(imgarr);
-	}
+            $.ajax({
+               url:"<c:url value="/pack/filedelete/post"/>",//요청할 서버의 URL주소
+               type:'post',//데이타 전송방식(디폴트는 get방식) 
+               dataType:'text',//서버로 부터 응답 받을 데이타의 형식 설정
+               data: "filename="+filename,
+               success:function(data){
+                  console.log(data);
+                  imgarr.splice(imgarr.indexOf(filename),1); 
+                  imageDivShow();
+               },error:function(error){//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
+                  console.log('에러 : ',error.responseText);
+               }
+               
+            });
+        }
+        
+        
+        
+        //6]파일 추가 삭제 후 다이브 다시띄우기.
+        function imageDivShow(){
+           var str='';
+           for(var i=0; i < imgarr.length ;i++){
+                str += "<div class='imgdiv' id='"+imgarr[i]+"'><img class='img'  src=/fileupload/"+imgarr[i]+"><div class='imgdeletemark'>삭제</div></div>";
+               }
+                $("#fileUpload").html(str);
+                //이미지에 호버 이벤트 걸기
+                $(".imgdiv").hover(function(){
+                    $(this).children().eq(1).css("display","block");
+                    $(this).children().eq(0).css("opacity",0.4); 
+                  },function(){
+                    $(this).children().eq(1).css("display","none");
+                    $(this).children().eq(0).css("opacity",1.0);
+                  });
+                $(".imgdiv").click(function(){
+                   deleteFileToServer($(this).attr('id'))
+                             });
+                            
+                          $('#imgArry').val(imgarr);  
+                    }
+            
 </script>

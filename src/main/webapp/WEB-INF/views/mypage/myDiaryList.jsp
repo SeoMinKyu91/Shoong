@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
+<link rel="stylesheet" href="<c:url value="/css/test.css"/>">
+<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
+<!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style>
 .cardDiv{
 	margin-top: 20px;
@@ -44,6 +52,11 @@
 	padding: 5px;
 	border:1px solid #eeeeee;
 }
+.modal-dialog{
+    overflow-y: initial !important;
+   
+}.modal-body{
+	max-height: 800px;overflow-y: auto;}
 </style>
 
 
@@ -51,97 +64,90 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12">
-				<h3>나의 라이딩 다이어리<small><a href='<c:url value="/mypage/DiaryWrite.do"/>'>추가하기</a></small></h3>
+				<h3>나의 라이딩 다이어리<small data-toggle="modal" data-target="#myStoryInputModal">추가하기</small></h3>
 			</div>
 		</div>	
 		<div class="row">
-			<div class="col-md-3 col-xs-6 cardDiv">
+		 <c:if test="${empty diaryList }" var="isEmpty">
+            <h3>다이어리가 없어요.</h3>
+            <button type="submit" class="btn btn-default">지금 달리러 가기</button>		
+         </c:if>
+         <c:if test="${!isEmpty}">
+         	<c:forEach var="item" items="${diaryList }">        
+               <div class="col-md-3 col-xs-6 cardDiv">
 				<article class="card shadow">
 					<div class="card-body">
 						<div class="single-location mb-30">
 							<div class="location-img">
-								<img src='<c:url value="/images/bg_1.jpg"/>' alt="스토리 메인 사진">
-								<!--<img src=/fileupload/${item.storyMainImg} alt="스토리 메인 사진">  -->
+								<c:if test="${empty item.DIARY_THUMBNAIL }" var="isEmpty">
+								<img src='<c:url value="/images/bg_1.jpg"/>' alt="다이어리">
+								</c:if>
+								<c:if test="${!isEmpty}">
+								<img src=/fileupload/${item.DIARY_THUMBNAIL} alt="다이어리 ">
+								</c:if>
 							</div>
 							<div class="location-details">
 								<span class="location-btn">
-									<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>5
+									<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>${item.DIARY_IMG_COUNT}
 								</span>
 							</div>	
 						</div>
-			            <h4 class="card-title">한강 라이딩</h4>
+						 <a href='<c:url value="/mypage/diary/view.do?diaryCode=${item.DIARY_CODE }"/>'>${item.DIARY_TITLE}</a>
 			         </div>
 				</article>
-				<input class="storyNo" type="hidden" value="${item.storyNo}"/>
 			</div>
-				
-			<div class="col-md-3 col-xs-6 cardDiv">
-				<article class="card shadow">
-					<div class="card-body">
-						<div class="single-location mb-30">
-							<div class="location-img">
-								<img src='<c:url value="/images/bg_2.jpg"/>' alt="스토리 메인 사진">
-								<!--<img src=/fileupload/${item.storyMainImg} alt="스토리 메인 사진">  -->
-							</div>
-							<div class="location-details">
-								<span class="location-btn">
-									<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>5
-								</span>
-							</div>	
-						</div>
-			            <h4 class="card-title">북한강 라이딩</h4>
-			         </div>
-				</article>
-				<input class="storyNo" type="hidden" value="${item.storyNo}"/>
-			</div>
+                  
+                         
+            </c:forEach>
+         </c:if>
+		
 			
-			<div class="col-md-3 col-xs-6 cardDiv">
-				<article class="card shadow">
-					<div class="card-body">
-						<div class="single-location mb-30">
-							<div class="location-img">
-								<img src='<c:url value="/images/bg_3.jpg"/>' alt="스토리 메인 사진">
-								<!--<img src=/fileupload/${item.storyMainImg} alt="스토리 메인 사진">  -->
-							</div>
-							<div class="location-details">
-								<span class="location-btn">
-									<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>5
-								</span>
-							</div>	
-						</div>
-			            <h4 class="card-title">야간 라이딩</h4>
-			         </div>
-				</article>
-				<input class="storyNo" type="hidden" value="${item.storyNo}"/>
-			</div>
-			<div class="col-md-3 col-xs-6 cardDiv">
-				<article class="card shadow">
-					<div class="card-body">
-						<div class="single-location mb-30">
-							<div class="location-img">
-								<img src='<c:url value="/images/bg_4.jpg"/>' alt="스토리 메인 사진">
-								<!--<img src=/fileupload/${item.storyMainImg} alt="스토리 메인 사진">  -->
-							</div>
-							<div class="location-details">
-								<span class="location-btn">
-									<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>5
-								</span>
-							</div>	
-						</div>
-			            <h4 class="card-title">야간 라이딩</h4>
-			         </div>
-				</article>
-				<input class="storyNo" type="hidden" value="${item.storyNo}"/>
-			</div>
+				
+			
 		</div><!--row-->
 	</div><!--cotainer-->
 </div><!--colorlib-main-->
+<!-- 모달 -->
+<div class="modal fade" id="myStoryInputModal" data-backdrop="false">
+    <div class="modal-dialog" >
+        <div class="modal-content" style="width:1200px;" >
+            <div class="modal-header" >
+                <h4></h4>
+            </div>
+            <div class="modal-body" >
+        <c:if test="${empty recordList }" var="isEmpty">
+            <h3>코스가 없어요.</h3>
+            <button type="submit" class="btn btn-default">지금 달리러 가기</button>		
+         </c:if>
+         <c:if test="${!isEmpty}">
+         	<h3>나중엔 코스 띄우기 </h3>
+         	<table class="col-sm-12">
+             <c:forEach var="item" items="${recordList }">        
+                  <tr>
 
-
+                      <th>${item.COURSE_NAME }</th>
+                      <th>${item.RECORD_DATE }</th>
+                      <th>${item.RECORD_LENGTH }</th>
+                      <th><a href='<c:url value="/mypage/diary/write.do?recordId=${item.RECORD_ID }"/>'>추가하기</a></th>
+                  </tr>        
+            </c:forEach>
+		  </table>
+         </c:if>
+           		
+           
+            </div>
+			<div class="modal-footer"> 
+            		<a type="button" class="btn btn-default" data-dismiss="modal">닫기</a>
+				
+                
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script>
-	
+
 	//스토리 카드를 하나 클릭 했을 때
 	$(".cardDiv").click(function(){
 		

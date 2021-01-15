@@ -7,9 +7,9 @@
 <link rel="stylesheet" href="<c:url value="/css/test.css"/>">
 <!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
 <!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- Chart.js -->
 <script src="<c:url value="/admin/js/Chart.min.js"/>"></script>
 
@@ -99,94 +99,46 @@ padding: 10px;
 	     </div>
 	     <div class= "col-xs-12 col-sm-6">
 	     	<div class="myPageSection">       
-		        <h3>코스</h3>
+		        <h3>최근 라이딩<small>전체보기</small></h3>
 		       	<div style="width: 100%; height: 250px;  background-color: #eeeeee;"></div>
 	     	</div>
 	     </div>
    	</div>
-   	<!-- 다이어리 일부 띄우기-->
+   	<!-- 나의 다이어리  -->
   	<div class="row storyRow">
 			<div class="col-xs-12">
-				<h3>다이어리<small><a href='<c:url value="/mypage/Diary.do"/>'>전체보기</a></small></h3>
+				<h3>다이어리<small><a href='<c:url value="/mypage/diary/list.do"/>'>전체보기</a></small></h3>
 			</div>
-			<div class="col-md-3 col-xs-6 cardDiv">
+			<c:if test="${empty diaryList }" var="isEmpty">
+            <h3>다이어리가 없어요.</h3>
+            <button type="submit" class="btn btn-default">지금 달리러 가기</button>		
+         </c:if>
+         <c:if test="${!isEmpty}">
+         	<c:forEach var="item" items="${diaryList }">        
+               <div class="col-md-3 col-xs-6 cardDiv">
 				<article class="card shadow">
 					<div class="card-body">
 						<div class="single-location mb-30">
 							<div class="location-img">
-								<img src='<c:url value="/images/bg_1.jpg"/>' alt="스토리 메인 사진">
-								<!--<img src=/fileupload/${item.storyMainImg} alt="스토리 메인 사진">  -->
+								<c:if test="${empty item.DIARY_THUMBNAIL }" var="isEmpty">
+								<img src='<c:url value="/images/bg_1.jpg"/>' alt="다이어리">
+								</c:if>
+								<c:if test="${!isEmpty}">
+								<img src=/fileupload/${item.DIARY_THUMBNAIL} alt="다이어리 ">
+								</c:if>
 							</div>
 							<div class="location-details">
 								<span class="location-btn">
-									<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>5
+									<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>${item.DIARY_IMG_COUNT}
 								</span>
 							</div>	
 						</div>
-			            <h4 class="card-title">한강 라이딩</h4>
+						 <a href='<c:url value="/mypage/diary/view.do?diaryCode=${item.DIARY_CODE }"/>'>${item.DIARY_TITLE}</a>
 			         </div>
 				</article>
-				<input class="storyNo" type="hidden" value="${item.storyNo}"/>
-			</div>
-				
-			<div class="col-md-3 col-xs-6 cardDiv">
-				<article class="card shadow">
-					<div class="card-body">
-						<div class="single-location mb-30">
-							<div class="location-img">
-								<img src='<c:url value="/images/bg_2.jpg"/>' alt="스토리 메인 사진">
-								<!--<img src=/fileupload/${item.storyMainImg} alt="스토리 메인 사진">  -->
-							</div>
-							<div class="location-details">
-								<span class="location-btn">
-									<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>5
-								</span>
-							</div>	
-						</div>
-			            <h4 class="card-title">북한강 라이딩</h4>
-			         </div>
-				</article>
-				<input class="storyNo" type="hidden" value="${item.storyNo}"/>
-			</div>
-			
-			<div class="col-md-3 col-xs-6 cardDiv">
-				<article class="card shadow">
-					<div class="card-body">
-						<div class="single-location mb-30">
-							<div class="location-img">
-								<img src='<c:url value="/images/bg_3.jpg"/>' alt="스토리 메인 사진">
-								<!--<img src=/fileupload/${item.storyMainImg} alt="스토리 메인 사진">  -->
-							</div>
-							<div class="location-details">
-								<span class="location-btn">
-									<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>5
-								</span>
-							</div>	
-						</div>
-			            <h4 class="card-title">야간 라이딩</h4>
-			         </div>
-				</article>
-				<input class="storyNo" type="hidden" value="${item.storyNo}"/>
-			</div>
-			<div class="col-md-3 col-xs-6 cardDiv">
-				<article class="card shadow">
-					<div class="card-body">
-						<div class="single-location mb-30">
-							<div class="location-img">
-								<img src='<c:url value="/images/bg_4.jpg"/>' alt="스토리 메인 사진">
-								<!--<img src=/fileupload/${item.storyMainImg} alt="스토리 메인 사진">  -->
-							</div>
-							<div class="location-details">
-								<span class="location-btn">
-									<span class="glyphicon glyphicon-camera" aria-hidden="true"></span>5
-								</span>
-							</div>	
-						</div>
-			            <h4 class="card-title">야간 라이딩</h4>
-			         </div>
-				</article>
-				<input class="storyNo" type="hidden" value="${item.storyNo}"/>
-			</div>
+			</div>         
+            </c:forEach>
+         </c:if>
 
 	</div><!--row-->
 </div>
@@ -197,15 +149,31 @@ padding: 10px;
 
 <script>
 //색 투명도로 조절할 것
-if ($('#lineChart').length ){	
+if ($('#lineChart').length){	
 	 
-	  
+	//var arrLables =["1일", "5일", "10일", "15일", "20일", "25일", "30일"];
+	//var arrData =[2, 7, 15, 20, 30, 40,80];
 	
+	var arrLength =[];
+	var arrDate =[];
+	
+	<c:if test="${!empty chartList}">
+	 	<c:forEach var="item" items="${chartList}">        
+	 		arrLength.push(${item.chartLength});
+	 		arrDate.push("${item.chartDate}일");
+	    </c:forEach>
+ 	</c:if>
+	
+	
+
+	  
+	  
+	  
 	  var ctx = document.getElementById("lineChart");
 	  var lineChart = new Chart(ctx, {
 		type: 'line',
 		data: {
-		  labels: ["1일", "5일", "10일", "15일", "20일", "25일", "30일"],
+		  labels: arrDate,
 		  datasets: [{
 			label: "주행거리(Km)",
 			backgroundColor: "rgba(255, 100, 15, 0.31)",
@@ -215,7 +183,7 @@ if ($('#lineChart').length ){
 			pointHoverBackgroundColor: "#fff",
 			pointHoverBorderColor: "rgba(220,220,220,1)",
 			pointBorderWidth: 1,
-			data: [2, 7, 15, 20, 30, 40,80]
+			data: arrLength,
 		  }]
 		},
 	  });

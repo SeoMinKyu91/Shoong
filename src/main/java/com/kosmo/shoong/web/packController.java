@@ -42,6 +42,7 @@ public class packController {
 
 
    @RequestMapping("main.do")
+   
    public String packMain(@RequestParam Map map ,Model model,HttpServletRequest req) {
       /*유저 id 값 */
 
