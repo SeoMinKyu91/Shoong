@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
 <link rel="stylesheet" href="<c:url value="/css/test.css"/>">
 <!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
@@ -10,15 +8,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- Chart.js -->
-<script src="<c:url value="/admin/js/Chart.min.js"/>"></script>
 
 <style>
-.myPageSection{
-border:1px solid #bbbbbb;
-margin : 10px;
-padding: 10px;
-}
 .cardDiv{
 	margin-top: 20px;
 	background-color: white;
@@ -61,55 +52,23 @@ padding: 10px;
 	padding: 5px;
 	border:1px solid #eeeeee;
 }
+.modal-dialog{
+    overflow-y: initial !important;
+   
+}.modal-body{
+	max-height: 800px;overflow-y: auto;}
 </style>
-	
 
 
-<div id="colorlib-main" style="padding-top: 30px; padding-left: 30px">
-	<!--뱃지사진 + 마일리지  -->
-	<div class="row">
-		<div class= "col-xs-12">
-			<div style="display: inline-block; width: 80%;">
-				<img style="border-radius: 25px;width:50px;height: 50px;" src='<c:url value="/images/bg_1.jpg"/>' alt="스토리 메인 사진">
-								
-				<strong>김길동${name}</strong><span>님</span> 
-				<a href='<c:url value="/Member/myInfoEdit.do"/>'>정보수정</a>
-			</div>
-		</div>
-	</div>
-		<!-- progress바 _ 부트스트랩 -->
-	<div class="row">
-		<div class= "col-xs-12 col-sm-6">
-		<h4>마일리지</h4>
-			<div class="progress">
-			  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="width: 68%">
-			    <span class="sr-only">66km</span>
-			  </div>
-			</div>
-		</div>
-	</div>
-	
-	<!-- 나의 기록  -->
-	<div class="row">
-		<div class= "col-xs-12 col-sm-6">   
-			<div class="myPageSection" > 
-				<h3>나의 기록<small>1월 기록</small></h3>
-		       <canvas id="lineChart"></canvas>
-	     	</div>
-	     </div>
-	     <div class= "col-xs-12 col-sm-6">
-	     	<div class="myPageSection">       
-		        <h3>최근 라이딩<small>전체보기</small></h3>
-		       	<div style="width: 100%; height: 250px;  background-color: #eeeeee;"></div>
-	     	</div>
-	     </div>
-   	</div>
-   	<!-- 나의 다이어리  -->
-  	<div class="row storyRow">
+<div id="colorlib-main">
+	<div class="container">
+		<div class="row">
 			<div class="col-xs-12">
-				<h3>다이어리<small><a href='<c:url value="/mypage/diary/list.do"/>'>전체보기</a></small></h3>
+				<h3>나의 라이딩 다이어리<small data-toggle="modal" data-target="#myStoryInputModal">추가하기</small></h3>
 			</div>
-			<c:if test="${empty diaryList }" var="isEmpty">
+		</div>	
+		<div class="row">
+		 <c:if test="${empty diaryList }" var="isEmpty">
             <h3>다이어리가 없어요.</h3>
             <button type="submit" class="btn btn-default">지금 달리러 가기</button>		
          </c:if>
@@ -136,59 +95,68 @@ padding: 10px;
 						 <a href='<c:url value="/mypage/diary/view.do?diaryCode=${item.DIARY_CODE }"/>'>${item.DIARY_TITLE}</a>
 			         </div>
 				</article>
-			</div>         
+			</div>
+                  
+                         
             </c:forEach>
          </c:if>
+		
+			
+				
+			
+		</div><!--row-->
+	</div><!--cotainer-->
+</div><!--colorlib-main-->
+<!-- 모달 -->
+<div class="modal fade" id="myStoryInputModal" data-backdrop="false">
+    <div class="modal-dialog" >
+        <div class="modal-content" style="width:1200px;" >
+            <div class="modal-header" >
+                <h4></h4>
+            </div>
+            <div class="modal-body" >
+        <c:if test="${empty recordList }" var="isEmpty">
+            <h3>코스가 없어요.</h3>
+            <button type="submit" class="btn btn-default">지금 달리러 가기</button>		
+         </c:if>
+         <c:if test="${!isEmpty}">
+         	<h3>나중엔 코스 띄우기 </h3>
+         	<table class="col-sm-12">
+             <c:forEach var="item" items="${recordList }">        
+                  <tr>
 
-	</div><!--row-->
+                      <th>${item.COURSE_NAME }</th>
+                      <th>${item.RECORD_DATE }</th>
+                      <th>${item.RECORD_LENGTH }</th>
+                      <th><a href='<c:url value="/mypage/diary/write.do?recordId=${item.RECORD_ID }"/>'>추가하기</a></th>
+                  </tr>        
+            </c:forEach>
+		  </table>
+         </c:if>
+           		
+           
+            </div>
+			<div class="modal-footer"> 
+            		<a type="button" class="btn btn-default" data-dismiss="modal">닫기</a>
+				
+                
+            </div>
+        </div>
+    </div>
 </div>
-   		
-
-
 
 
 <script>
-//색 투명도로 조절할 것
-if ($('#lineChart').length){	
-	 
-	//var arrLables =["1일", "5일", "10일", "15일", "20일", "25일", "30일"];
-	//var arrData =[2, 7, 15, 20, 30, 40,80];
-	
-	var arrLength =[];
-	var arrDate =[];
-	
-	<c:if test="${!empty chartList}">
-	 	<c:forEach var="item" items="${chartList}">        
-	 		arrLength.push(${item.chartLength});
-	 		arrDate.push("${item.chartDate}일");
-	    </c:forEach>
- 	</c:if>
-	
-	
 
-	  
-	  
-	  
-	  var ctx = document.getElementById("lineChart");
-	  var lineChart = new Chart(ctx, {
-		type: 'line',
-		data: {
-		  labels: arrDate,
-		  datasets: [{
-			label: "주행거리(Km)",
-			backgroundColor: "rgba(255, 100, 15, 0.31)",
-			borderColor: "rgba(255, 100, 15, 0.7)",
-			pointBorderColor: "rgba(255, 100, 15, 0.7)",
-			pointBackgroundColor: "rgba(255, 100, 15, 0.7)",
-			pointHoverBackgroundColor: "#fff",
-			pointHoverBorderColor: "rgba(220,220,220,1)",
-			pointBorderWidth: 1,
-			data: arrLength,
-		  }]
-		},
-	  });
-	
-	}
+	//스토리 카드를 하나 클릭 했을 때
+	$(".cardDiv").click(function(){
 		
+		
+	})
+	
+	
+	
+	
 	
 </script>
+

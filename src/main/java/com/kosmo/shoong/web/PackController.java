@@ -37,6 +37,7 @@ public class PackController {
    @Resource(name = "memberService")
    private MemberServiceImpl memberService;
 
+
    @RequestMapping("main.do")
    public String packMain(@RequestParam Map map ,Model model,HttpServletRequest req) {
       /*유저 id 값 */
@@ -59,6 +60,12 @@ public class PackController {
 
       return "pack/PackMain";
    }
+
+
+
+
+
+
 
    //팩 생성 페이지로 이동 get
    @RequestMapping("create.do")
@@ -90,52 +97,60 @@ public class PackController {
    }
 
 
-	@RequestMapping("view.do")
-	public String packView(@RequestParam Map map, Model model, HttpServletRequest req) {
+   @RequestMapping("view.do")
+   public String packView(@RequestParam Map map, Model model,HttpServletRequest req) {
 
-		// 로그인 아이디,팩 아이디 설정 나중에 세션에서 값불러오는걸로 대체
-		map.put("loginId", req.getSession().getAttribute("userId").toString());
-		map.put("packId", req.getSession().getAttribute("packId").toString());
+      //로그인 아이디,팩 아이디 설정 나중에 세션에서 값불러오는걸로 대체
+      map.put("loginId", req.getSession().getAttribute("userId").toString());
+      map.put("packId",req.getSession().getAttribute("packId").toString());
 
-		// 관리자 확인용
-		if (packNoticeService.isManager(map)) {
-			model.addAttribute("manager", "manager");
-		}
+      //관리자 확인용
+      if(packNoticeService.isManager(map)) {
+         model.addAttribute("manager","manager");
+      }
 
-		int recordCount = packNoticeService.getTotalRecord(map);
+      int recordCount = packNoticeService.getTotalRecord(map);
 
-		if (recordCount >= 4) {
-			map.put("start", 1);
-			map.put("end", 4);
-			model.addAttribute("totalRecordCount", 4);
-		} else {
-			map.put("start", 1);
-			map.put("end", recordCount);
-			model.addAttribute("totalRecordCount", recordCount);
-		}
+      if(recordCount>=4) {
+         map.put("start",1);
+         map.put("end",4);
+         model.addAttribute("totalRecordCount",4);
+      }
+      else {
+         map.put("start",1);
+         map.put("end",recordCount);
+         model.addAttribute("totalRecordCount",recordCount);
+      }
 
-		List<PackNoticeDTO> packNoticeList = packNoticeService.selectList(map);
-		model.addAttribute("list", packNoticeList);
-		List<PackGalleryDTO> GalleryList = galleryService.selectList(map);
-		System.out.println("GalleryList.size():"+GalleryList.size());
-		if (GalleryList.size() > 0) {
-			List<PackGalleryDTO> packGalleryList = GalleryList.subList(0, GalleryList.size());
-			System.out.println(packGalleryList.get(0).getPictureName());
-			model.addAttribute("packGalleryList", packGalleryList);
-		}
-		return "pack/PackView";
-	}
+
+      List<PackNoticeDTO> packNoticeList = packNoticeService.selectList(map);
+
+      model.addAttribute("list",packNoticeList);
+
+
+      List<PackGalleryDTO> GalleryList=galleryService.selectList(map);
+
+       if(GalleryList.size() > 4) {
+            List<PackGalleryDTO> packGalleryList = GalleryList.subList(0, 4);
+            model.addAttribute("packGalleryList",packGalleryList);
+       }
+
+      return "pack/PackView";
+   }
 
 
    @RequestMapping(value="checkPackName.do",produces = "text/html; charset=UTF-8")
    @ResponseBody
    public String checkPackName(@RequestParam Map map) {
+
+
       int result = service.selectPackName(map);
       String check = "Y";
       System.out.println(result);
       if(result == 1) {
          check = "N";
       }
+
       return check;
    }//////////////
 
@@ -143,6 +158,7 @@ public class PackController {
    @RequestMapping(value="joinPack.do",produces = "text/html; charset=UTF-8")
    @ResponseBody
    public String joinPack(@RequestParam Map map,HttpServletRequest req) {
+
       System.out.println("팩가입 신청 들어왔습니다");
       //원래 user Id 세션에서  받아와야 한다.개발중이니 임시로.
       map.put("userId", req.getSession().getAttribute("userId").toString());
@@ -153,7 +169,21 @@ public class PackController {
       return check;
    }//////////////
 
- 
+   @RequestMapping(value="comment.do", method=RequestMethod.GET)
+   public String packComment(@RequestParam Map map, HttpServletRequest req, Model model,@ModelAttribute("id") String id) {
+	   //데이터 저장]
+	   /*
+	   String path = req.getContextPath();
+	   map.put("id", id);
+	   memoService.insert(map);
+	   PackCommentDTO record = memoService.slectOne(map);
+	   record.setContent(record.getContent().replace("\r\n","<br/>"));
+	   model.addAttribute("record",record);
+	   commentService.update(map);
+	   commentService.delete(map);
+	   */
+	   return "pack/PackComment";
+   }
 
 
 }
