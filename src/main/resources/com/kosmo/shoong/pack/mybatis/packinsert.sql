@@ -338,4 +338,4 @@ insert into pack_notice values(1212,'shoong1200@naver.com','1200','부팩장 공
 insert into pack_notice values(1213,'shoong1200@naver.com','1200','설날 공지',DEFAULT,'설날 코로나 조심하시고 즐겁게 보내세요')
 insert into pack_notice values(1214,'shoong1200@naver.com','1200','설날 이후 모임 공지',DEFAULT,'설날 이후 같이 라이딩을 자제 부탁드립니다')
 
-
+/* ============================================================================================================*/
