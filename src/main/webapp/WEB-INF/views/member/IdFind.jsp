@@ -10,7 +10,6 @@
 <!-- 설명이 이해가 잘 안되시면  따로 연락주세요...-->
 <div id="colorlib-main" style="padding-top: 100px">
 	<!-- 위에 딱 붙는게 싫어서 임시로 padding-top: 100px 주었음 수정하고싶으면 수정  -->
-
 	<div class="container">
 		<div class="col-xs-12 col-md-12">
 			<div class="page-header" style="text-align: center">
@@ -46,7 +45,6 @@
 		</div>
 	</form>
 </div>
-<!-- END COLORLIB-PAGE -->
 <!-- 카카오 회원가입 -->
 <script type="text/javascript">
 	 //로그인 (아이디/비밀번호) 입력 관련

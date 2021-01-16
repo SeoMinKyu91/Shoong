@@ -46,24 +46,25 @@
 
 <!-- 제이쿼리 UI용 CSS -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 <!-- mapbox core-->
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
 <!-- mapbox geocoder -->
 <link
-   rel="stylesheet"
-   href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
-   type="text/css" />
+	rel="stylesheet"
+	href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
+	type="text/css" />
 <!-- mapbox directions -->
 <link rel="stylesheet"
-   href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
-   type="text/css" />
+	href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
+	type="text/css" />
 <!-- mapbox draw -->
 <link 
-   rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css' type='text/css' />
-   
+	rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css' type='text/css' />
+
+<!-- mapbox core-->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
 <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
 <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
 
@@ -72,27 +73,27 @@
 </head>
 <body>
 
-<div id="colorlib-page">   
-   <!-- top 시작 -->
-   <tiles:insertAttribute name="top"/>
-   <!-- top끝 -->
-   
-   <!-- body 시작 -->
-   <tiles:insertAttribute name="body"/>   
-   <!-- body 끝 -->
-   
-   <!-- footer 시작 -->
-   <tiles:insertAttribute name="footer"/>
-   <!-- footer 끝 -->
-   
+<div id="colorlib-page">	
+	<!-- top 시작 -->
+	<tiles:insertAttribute name="top"/>
+	<!-- top끝 -->
+	
+	<!-- body 시작 -->
+	<tiles:insertAttribute name="body"/>	
+	<!-- body 끝 -->
+	
+	<!-- footer 시작 -->
+	<tiles:insertAttribute name="footer"/>
+	<!-- footer 끝 -->
+	
 </div><!-- END COLORLIB-PAGE -->
 <!-- loader -->
 <div id="ftco-loader" class="show fullscreen">
-   <svg class="circular" width="48px" height="48px">
-      <circle class="path-bg" cx="24" cy="24" r="22" fill="none"
-         stroke-width="4" stroke="#eeeeee" />
-      <circle class="path" cx="24" cy="24" r="22" fill="none"
-         stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
+	<svg class="circular" width="48px" height="48px">
+		<circle class="path-bg" cx="24" cy="24" r="22" fill="none"
+			stroke-width="4" stroke="#eeeeee" />
+		<circle class="path" cx="24" cy="24" r="22" fill="none"
+			stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 </div>
 
 <script src="<c:url value="/js/jquery-migrate-3.0.1.min.js"/>"></script>
@@ -101,7 +102,12 @@
 <script src="<c:url value="/js/jquery.easing.1.3.js"/>"></script>
 <script src="<c:url value="/js/jquery.waypoints.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.stellar.min.js"/>"></script>
+<!--  
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
+-->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
 <script src="<c:url value="/js/popper.min.js"/>"></script>
 <script src="<c:url value="/js/owl.carousel.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.magnific-popup.min.js"/>"></script>
@@ -123,7 +129,9 @@
    src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
 <script 
    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4aaa4b242f112a823dd2ef5541569589&libraries=services,clusterer"></script>
+
 <script src="<c:url value="/js/main.js"/>"></script>
+
 
 </body>
 </html>

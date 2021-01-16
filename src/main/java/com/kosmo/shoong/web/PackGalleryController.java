@@ -104,6 +104,8 @@ public class PackGalleryController {
             
           
         	MultipartFile upload= multipartRequest.getFile(itr.next());
+        	
+        	       	
             renameFilename = FileUpDownUtils.getNewFileName(filePath, upload.getOriginalFilename());
     		
     		 System.out.println("renameFilename"+renameFilename);

@@ -4,67 +4,62 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.kosmo.shoong.pack.mybatis.packmanagesql">
-
-
-
-<resultMap type="packNoticeDTO" id="packNoticeDTOResult">
+	<resultMap type="packNoticeDTO" id="packNoticeDTOResult">
 		<result property="packNoticeNo" column="PACK_NOTICE_NO"/>
 		<result property="userID" column="USER_ID"/>
 		<result property="packID" column="PACK_ID"/>
 		<result property="packNoticeTitle" column="PACK_NOTICE_TITLE"/>
 		<result property="packNoticeDate" column="PACK_NOTICE_DATE"/>
 		<result property="packNoticeContent" column="PACK_NOTICE_CONTENT"/>
-</resultMap>
+	</resultMap>
 
-<!-- 팩 가입/승인/거절 -->
-<select id="PackJoinList" parameterType="java.util.Map" resultType="java.util.Map">
-	SELECT m.user_id,m.name,m.age,m.frequency,p.* 
-	FROM member_ m JOIN pack_join p on m.user_id = p.user_id 
-	WHERE p.pack_id = #{packId} and p.pack_join_accept = 'no'
-</select>
-
-<insert id="PackJoin" parameterType="java.util.Map">
-	insert into pack_join values(SEQ_P_JOIN.nextval,#{userId},#{packId},sysdate,'no',sysdate)
-</insert>
-
-<insert id="packManager" parameterType="java.util.Map">
-	insert into pack_manager values(#{userId},#{packID},'submaster')
-</insert>
-
-<update id="PackJoinUpdate" parameterType="java.util.Map">
-	UPDATE pack_join SET pack_join_accept = 'yes', pack_join_date = sysdate WHERE pack_join_no = #{packJoinNo}
-</update>
-
-<delete id="PackJoinDelete" parameterType="java.util.Map">
-	DELETE FROM pack_join WHERE pack_join_no = #{packJoinNo}
-</delete>
-
-
-<!-- 팩 맴버 조회/제명/직책변경 -->
-<select id="PackMemberList" parameterType="java.util.Map" resultType="java.util.Map">
-	SELECT a.*, b.pack_lastaccess, b.pack_join_date,b.pack_join_no, c.authority 
-	FROM (member_ a JOIN pack_join b ON a.user_id = b.user_id) 
-	LEFT JOIN pack_manager c ON a.user_id = c.user_id WHERE b.pack_id = #{packId} AND b.pack_join_accept = 'yes'
-</select>
-
-<delete id="PackManagerDelete">
-	DELETE FROM pack_manager WHERE user_id = #{userId}
-</delete>
-
-<select id="PackManagerSelect" parameterType="java.util.Map" resultType="int">
-	SELECT count(*) from pack_manager where user_id = #{userId}
-</select>
-
-<select id="packIntroSelect" parameterType="java.util.Map" resultType="java.util.Map">
-	SELECT * FROM pack WHERE pack_id  = #{packId}
-</select>
-
-<!-- 팩 정보 수정 -->
-<update id="packInfoUpdate" parameterType="java.util.Map">
-	update pack set pack_name = #{packName}, pack_tag = #{packTag}, 
-	pack_act_time = #{packActTime}, pack_act_age = #{packActAge}, pack_intro = #{packIntro},
-	pack_thumbnail = #{packThumbnail} where pack_id = #{packId}
+	<!-- 팩 가입/승인/거절 -->
+	<select id="PackJoinList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT m.user_id,m.name,m.age,m.frequency,p.* 
+		FROM member_ m JOIN pack_join p on m.user_id = p.user_id 
+		WHERE p.pack_id = #{packId} and p.pack_join_accept = 'no'
+	</select>
 	
-</update>
-
+	<insert id="PackJoin" parameterType="java.util.Map">
+		insert into pack_join values(SEQ_P_JOIN.nextval,#{userId},#{packId},sysdate,'no',sysdate)
+	</insert>
+	
+	<insert id="packManager" parameterType="java.util.Map">
+		insert into pack_manager values(#{userId},#{packID},'submaster')
+	</insert>
+	
+	<update id="PackJoinUpdate" parameterType="java.util.Map">
+		UPDATE pack_join SET pack_join_accept = 'yes', pack_join_date = sysdate WHERE pack_join_no = #{packJoinNo}
+	</update>
+	
+	<delete id="PackJoinDelete" parameterType="java.util.Map">
+		DELETE FROM pack_join WHERE pack_join_no = #{packJoinNo}
+	</delete>
+	
+	
+	<!-- 팩 맴버 조회/제명/직책변경 -->
+	<select id="PackMemberList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT a.*, b.pack_lastaccess, b.pack_join_date,b.pack_join_no, c.authority 
+		FROM (member_ a JOIN pack_join b ON a.user_id = b.user_id) 
+		LEFT JOIN pack_manager c ON a.user_id = c.user_id WHERE b.pack_id = #{packId} AND b.pack_join_accept = 'yes'
+	</select>
+	
+	<delete id="PackManagerDelete">
+		DELETE FROM pack_manager WHERE user_id = #{userId}
+	</delete>
+	
+	<select id="PackManagerSelect" parameterType="java.util.Map" resultType="int">
+		SELECT count(*) from pack_manager where user_id = #{userId}
+	</select>
+	
+	<select id="packIntroSelect" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM pack WHERE pack_id  = #{packId}
+	</select>
+	
+	<!-- 팩 정보 수정 -->
+	<update id="packInfoUpdate" parameterType="java.util.Map">
+		update pack set pack_name = #{packName}, pack_tag = #{packTag}, 
+		pack_act_time = #{packActTime}, pack_act_age = #{packActAge}, pack_intro = #{packIntro},
+		pack_thumbnail = #{packThumbnail} where pack_id = #{packId}
+	</update>
 </mapper>

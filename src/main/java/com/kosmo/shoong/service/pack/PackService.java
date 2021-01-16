@@ -9,7 +9,7 @@ public interface PackService {
 	int insert(Map map);
 	int delete(Map map);
 	int update(Map map);
-	Map selectOneUserAddr(Map map);
+	
 	
 	//팩 생성시 pack_create 와 pack_join, pack_manager생성용. 
 	int insertCreate(Map map);

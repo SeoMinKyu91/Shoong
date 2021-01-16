@@ -17,32 +17,32 @@ public class PackCommentServiceImpl implements PackCommentService {
 	private PackCommentDAO dao;
 
 	@Override
-	public boolean isLogin(Map map) {
-		return dao.isLogin(map);
+	public int packCommentWrite(Map map) {
+		return dao.packCommentWrite(map);
+	}/////////
+
+	@Override
+	public int packCommentDelte(Map map) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
-	public List<PackCommentDTO> selectList(Map map){
-		return dao.selectList(map);
+	public int packCommentUpdate(Map map) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
-	public PackCommentDTO selectOne(Map map) {
-		return dao.selectOne(map);
+	public int packCommentImgWrite(Map map) {
+		// TODO Auto-generated method stub
+		return dao.packCommentImgWrite(map);
 	}
 
 	@Override
-	public int insert(Map map) {
-		return dao.insert(map);
+	public List<PackCommentDTO> packCommentMainSelectList(Map map) {
+		return dao.packCommentMainSelectList(map);
 	}
 
-	@Override
-	public int delete(Map map) {
-		return dao.delete(map);
-	}
 
-	@Override
-	public int update(Map map) {
-		return dao.update(map);
-	}
 }

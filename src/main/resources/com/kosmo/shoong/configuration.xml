@@ -19,10 +19,16 @@
 			type="com.kosmo.shoong.service.pack.PackScheduleDTO"/>
 		<typeAlias alias="packScheduleEventsDTO"
 			type="com.kosmo.shoong.service.pack.PackScheduleEventsDTO" />
+		<typeAlias alias="packCommentDTO"
+			type="com.kosmo.shoong.service.pack.PackCommentDTO" />
+		<typeAlias alias="packCommentReplyDTO"
+			type="com.kosmo.shoong.service.pack.PackCommentReplyDTO" />
 		<typeAlias alias="courseDTO"
 			type="com.kosmo.shoong.service.course.CourseDTO" />
 		<typeAlias alias="memberDTO"
 			type="com.kosmo.shoong.service.member.MemberDTO" />
+		<typeAlias alias="reportAdminDTO" 
+			type="com.kosmo.shoong.admin.service.ReportAdminDTO"/>
 	</typeAliases>
 
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
@@ -31,8 +37,20 @@
 		<mapper	resource="com/kosmo/shoong/pack/mybatis/packgallerysql.xml" />
 		<mapper	resource="com/kosmo/shoong/pack/mybatis/packnoticesql.xml" />
 		<mapper	resource="com/kosmo/shoong/pack/mybatis/packmanagesql.xml" />
+		<mapper	resource="com/kosmo/shoong/pack/mybatis/packschedulesql.xml" />
+		<mapper resource="com/kosmo/shoong/pack/mybatis/packcommentsql.xml"/>
 		<mapper	resource="com/kosmo/shoong/course/mybatis/coursesql.xml" />
 		<mapper	resource="com/kosmo/shoong/member/mybatis/membersql.xml"/>
+		<mapper	resource="com/kosmo/shoong/mypage/mybatis/mypage.xml" />
+		<mapper	resource="com/kosmo/shoong/mypage/mybatis/mypageDiary.xml"/>
+		<!-- 관리자 페이지 매퍼파일-->
+		<mapper	resource="com/kosmo/shoong/admin/mybatis/courseAdminsql.xml"/>
+		<mapper	resource="com/kosmo/shoong/admin/mybatis/homeAdminsql.xml"/>
+		<mapper	resource="com/kosmo/shoong/admin/mybatis/memberAdminsql.xml"/>
+		<mapper	resource="com/kosmo/shoong/admin/mybatis/packAdminsql.xml"/>
+		<mapper	resource="com/kosmo/shoong/admin/mybatis/rankingAdminsql.xml"/>
+		<mapper	resource="com/kosmo/shoong/admin/mybatis/reportAdminsql.xml"/>
+		<mapper	resource="com/kosmo/shoong/admin/mybatis/settingAdminsql.xml"/>
 		<!-- 관리자 페이지 매퍼파일-->
 		<mapper	resource="com/kosmo/shoong/admin/mybatis/courseAdminsql.xml"/>
 		<mapper	resource="com/kosmo/shoong/admin/mybatis/homeAdminsql.xml"/>

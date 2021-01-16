@@ -100,28 +100,28 @@ input {
 					placeholder="생년월일(6자리)">&nbsp; ㅡ &nbsp; <input
 					id="userRRN2" name="userRRN2" type="text" size="5" maxlength="1"
 					onchange="inputGender()" style="height: 50px"
-					onBlur="checknum(document.join.userRRN2.value)">&nbsp;xxxxxx
+					onBlur="checknum(document.join.userRRN2.value)">&nbsp;XXXXXX
 				<br />
 				<!-- 주민번호 7자리 입력시 생년월일, 나이, 성별 자동 입력 -->
 				<input name="userrrn1" type="text" size="4" maxlength="4"
 					style="border: none; color: gray"
-					onBlur="checknum(document.join.userrrn1.value)"><span
+					onBlur="checknum(document.join.userrrn1.value)" readonly="readonly"><span
 					style="font-size: .8em; color: gray">년&nbsp;&nbsp;</span> <input
 					name="userrrn2" type="text" size="2" maxlength="2"
 					style="border: none; color: gray"
-					onBlur="checknum(document.join.userrrn2.value)"><span
+					onBlur="checknum(document.join.userrrn2.value)" readonly="readonly"><span
 					style="font-size: .8em; color: gray">월&nbsp;&nbsp;</span> <input
 					name="userrrn3" type="text" size="2" maxlength="2"
 					style="border: none; color: gray"
-					onBlur="checknum(document.join.userrrn3.value)"><span
+					onBlur="checknum(document.join.userrrn3.value)" readonly="readonly"><span
 					style="font-size: .8em; color: gray">일&emsp;&emsp;</span> <input
 					name="userAge" id="userAge" type="text" size="2"
 					style="border: none; color: gray" maxlength="2"
-					onBlur="checknum(document.join.userAge.value)"><span
+					onBlur="checknum(document.join.userAge.value)" readonly="readonly"><span
 					style="font-size: .8em; color: gray">살&emsp;&emsp;</span> <input
 					name="userGender" type="text" size="3" maxlength="2"
 					style="border: none; color: gray"
-					onBlur="checknum(document.join.userGender.value)"><br />
+					onBlur="checknum(document.join.userGender.value)" readonly="readonly"><br />
 			</div>
 			<!-- 연락처 입력란 -->
 			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
@@ -161,7 +161,6 @@ input {
 		</form>
 	</div>
 </div>
-<!-- END COLORLIB-PAGE -->
 
 <!-- -----------------입력시 변환 스크립트---------------- -->
 <script>
