@@ -52,7 +52,7 @@
 	<select id="imgFirst" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT i.diary_img_name, t2.*
 		FROM diary_img i JOIN (SELECT * FROM diary d  
-		JOIN (SELECT * FROM member m
+		JOIN (SELECT * FROM member_ m
 		JOIN record r ON m.user_id = r.user_id WHERE m.user_id =#{userId}) t1 
 		ON d.record_id = t1.record_id) t2 ON i.diary_code = t2.diary_code
 	</select>
