@@ -16,29 +16,50 @@
 }
 */
 
-nav{
-	position: relative;
-}
-
-body {
-	margin: 0;
-	padding: 0;
-}
-
 #map {
-	position: relative;
 	top: 0;
 	bottom: 0;
-	width: 70%;
+	height:400px;
+}
+
+
+ul li{
+	font-weight : bold;
+	font-size: 1em;
+}
+
+ul li span{
+	font-size: .8em;
+	font-weight : normal;
+	color:black;
+}
+
+.my-box{
+	border: 5px lightgrey solid;
+	list-style: none; 
+	padding: 30px; 
+	height:355px;
+	background-color: white;
 }
 
 .mapboxgl-ctrl-geocoder {
-	width: 260px;
+	width: 30%;
 	padding-left: 19px;
+}
+
+.mapbox-directions-component {
+	width: 80%;
 }
 
 .single-location:hover .location-img img {
 	transform: scale(1.1)
+}
+
+#graph
+{
+	max-width: 100%;
+	height: 25vh;
+	min-height: 200px;
 }
 
 .plusImage {
@@ -49,13 +70,8 @@ body {
 	border: none;
 	background-color: #777777;
 	color: white;
-	font-family: 'Do Hyeon', sans-serif;
 	padding: 5px;
 	border-radius: 2px;
-}
-
-h1 {
-	font-family: 'Do Hyeon', sans-serif;
 }
 
 .modal-dialog {
@@ -108,18 +124,83 @@ h1 {
 	font-size: 100%;
 }
 
-#galleryImgModal img {
+#naviImgModal img {
 	width: 100%;
 }
 </style>
 <div id="colorlib-main" class="container" style="padding-top: 0;">
-	<div class="container">
-		<div id="map"></div>
+	<div class="row" style="padding-top: 50px; padding-left: 10px">
+		<div class="col-xs-10 offset-xs-1 col-md-7" id="map"></div>
+		<div class="col-xs-10 offset-xs-1 col-md-5" role="navigation">
+			<ul class="nav nav-tabs" style="list-style:none">
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#routeinfo">루트 정보</a></li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#routestop">루트 경유지</a></li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#placeinfo">관광 정보</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade show active" id="routeinfo">
+					<ul class="my-box">
+						<li>
+							<label for=" ">이름</label>
+							<span>&emsp;유경이네</span>
+						</li>
+						<li>
+							<label for=" ">공개</label>
+							<span id="Private">&emsp;공개된 루트</span>
+						</li>
+						<li>
+							<label for=" ">유형</label>
+							<span>&emsp;자전거ㆍ일반</span>
+						</li>
+						<li>
+							<label for=" ">등록</label>
+							<span>&emsp;김유경 2021년 1월 13일 수요일 오전 1:40</span>
+						</li>
+						<li>
+							<label for=" ">거리</label>
+							<span>&emsp;000km(↑↓누적고도 +000m, -000m)</span>
+						</li>
+						<li>
+							<label for=" ">특징</label>
+							<span>&emsp;</span>
+						</li>
+						<li>
+							<label for=" ">평가</label>
+							<span>&emsp;아직 등록된 평점이 없습니다</span>
+						</li>
+						<li>
+							<label for=" ">설명</label>
+							<span>&emsp;유경이네 방문</span>
+						</li>
+					</ul>
+				</div>
+				<div class="tab-pane fade" id="routestop">
+					<ul class="my-box">
+						<li>
+							<label for=" ">이름</label>
+							<span>&emsp;유경이네</span>
+						</li>
+					</ul>
+				</div>
+				<div class="tab-pane fade" id="placeinfo">
+					<ul class="my-box">
+						<li>
+							<label for=" ">이름</label>
+							<span>&emsp;유경이네</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
 		<div class="modal fade" id="naviModal" data-backdrop="false">
 		     <div class="modal-dialog modal-lg" >
 		         <div class="modal-content">
 		             <div class="modal-header">
-		                 <h4>경로 올리기</h4>
+		                 <h4>사진 올리기</h4>
 		             </div>
 		             <div class="modal-body">
 	                   	<div class="col-sm-12" style="margin-top:10px ">
@@ -144,6 +225,9 @@ h1 {
 		        </div>
 		    </div>
 	    </div>
+	</div>
+	<div class="row" style="padding-top: 50px; padding-left: 10px">
+		<div class="col-xs-10 offset-xs-1 col-md-7" id="graph"></div>
 	</div>
 </div>
 

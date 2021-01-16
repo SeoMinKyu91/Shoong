@@ -17,116 +17,62 @@
 
 
 <style>
-#colorlib-main {
-	padding-top: 50px;
+#colorlib-main{
+margin-top: 50px;
+}#map{
+height: 300px;
+width : 100%;
+overflow: hidden;
+position: relative;
+margin-bottom: 50px;
+}.PackMainTop{
+font-family: 'Do Hyeon', sans-serif;
+font-size: 20px;
+}.packThumbnails{
+width: 100%
+}.packThumbnails img{
+width: 5%
+}.packCreatTable{
+width: 60%
+}.packCreatTable tr th:nth-child(1) {
+width: 20%
 }
 
-#map {
-	height: 300px;
-	width: 100%;
-	overflow: hidden;
-	position: relative;
-	margin-bottom: 50px;
-}
-
-h3{
-	padding-top:20px;
-	color:black;
-	font-weight: bold;
-}
-
-.packCreateBtn {
-	border: none;
-	color:#ff8827;
-}
-
-.packCreateBtn:hover {
-	background-color: #ff8827;
-	color:white;
-}
-
-.PackMainTop {
-	font-family: 'Do Hyeon', sans-serif;
-	font-size: 20px;
-}
-
-.packThumbnails {
-	width: 100%
-}
-
-.packThumbnails img {
-	width: 5%
-}
-
-.packCreatTable {
-	width: 60%
-}
-
-.packCreatTable tr th:nth-child(1) {
-	width: 20%
-}
-
-#formSubmitBtn{
-	background-color: #ff8827; 
-	border: none; 
-	color: white;
-	font-weight:bold;
-}
 </style>
 
 <div id="colorlib-main" class="container">
-	<div class="row">
-		<div class="col-xs-12 col-md-12">
-			<div class="" style="padding-top:20px">
-				<a href="<c:url value="/pack/main.do"/>">
-				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
-					style="width: 80px;"></a>
-				&emsp;<a class="packCreateBtn btn" 
-					href="<c:url value="/pack/main.do"/>" style="font-weight: bold">홈</a>
-				<c:if test="${!empty sessionScope.packId}">
-					<a class="packCreateBtn btn"
-						href="<c:url value="/pack/view.do"/>" style="font-weight: bold">나의팩</a>
-				</c:if>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-12 col-md-12">
-			<h3>&nbsp;&nbsp;팩 만들기</h3>
-			<hr style="background-color:black; height:2px"/>
-		</div>
-	</div>
 	<!-- 지도 -->
 	<div class="row">
-		<div class="col-xs-10 col-xs-1 col-md-10 col-md-offset-1">
+		<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-0">
 			<div id="map"></div>
 		</div>
 	</div>
 	<!-- 팩 가입 정보-->
-	<div class="row col-xs-12 col-md-12">
+	<div class="row col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-0">
 		<form class="form-horizontal" action="<c:url value='/pack/createOk.do'/>" method="post" onsubmit="return formSubmit()">
 		  <div class="form-group">
-		    <label for="inputEmail3" class="col-xs-2 col-md-2 control-label">팩 이름</label>
-		    <div class="col-xs-8 col-md-8">
-		      <input type="text" id= "packName" name= "packName" class="form-control" placeholder="팩  이름">
+		    <label for="inputEmail3" class="col-xs-2 control-label">팩 이름</label>
+		    <div class="col-xs-9">
+		      <input type="text" id= "packName" name= "packName" class="form-control" placeholder="팩  이름..">
 		    </div>
-		    <a id="packnameCheck" class="col-xs-1 btn form-group" style="color:#ff8827; text-decoration: underline;">중복체크</a>
+		    <a id="packnameCheck" class="col-xs-1 btn form-group">중복체크</a>
 		  </div>
 		  <div class="form-group">
-		    <label class="col-xs-2 col-md-2 control-label">팩 태그</label>
-		    <div class="col-xs-8 col-md-8">
-		      <input  type="text" id ="packTag" name= "packTag" class="form-control" placeholder="팩  태그">
+		    <label class="col-xs-2 control-label">팩 태그</label>
+		    <div class="col-xs-9">
+		      <input  type="text" id ="packTag" name= "packTag" class="form-control" placeholder="팩  태그..">
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label class="col-xs-2 col-md-2 control-label">지역</label>
-		    <div class="col-xs-8 col-md-8">
+		    <label class="col-xs-2 control-label">지역</label>
+		    <div class="col-xs-9">
 		      <input type="text" id= "packActRegion" name= "packActRegion"  class="form-control">
 		    </div>
 		  </div>
+		  
 		  <div class="form-group">
-			    <label class="col-xs-2 col-md-2 control-label">팩 활동시간</label>
-			   	<label class="radio-inline">&emsp;
+			    <label class="col-xs-2 control-label">팩 활동시간</label>
+			   	<label class="radio-inline">
 				<input type="radio" name='packActTime' value='주 1회' />주 1회
 		 		</label>
 			   	<label class="radio-inline">
@@ -135,10 +81,12 @@ h3{
 				<label class="radio-inline">
 				 <input type="radio" name='packActTime' value='주 4회 이상' />주 4회 이상
 			 	</label>
+			
 		  </div>
+		  
 		  <div class="form-group">
-			    <label class="col-xs-2 col-md-2 control-label">팩 평균 연령</label>
-			   	<label class="radio-inline">&emsp;
+			    <label class="col-xs-2 control-label">팩 평균 연령</label>
+			   	<label class="radio-inline">
 				 <input type="radio" name='packActAge' value='청소년'/>청소년		 		
 				</label>
 			   	<label class="radio-inline">
@@ -154,24 +102,26 @@ h3{
 				 	 <input  type="radio" name='packActAge' value='50대 이상'/>50대 이상	
 				</label>
 				<label class="radio-inline">
-				 	<input type="radio" name='packActAge' value='전 연령대'/>전 연령대
+				 	<input  type="radio" name='packActAge' value='전 연령대'/>전 연령대
 				</label>
 		  </div>
+		  
 		  <div class="form-group">
-		  	  <label class="col-xs-2 col-md-2 control-label">팩 로고</label>
-			<div class="packThumbnails col-xs-9 col-md-9">
-				<img id="packLogo1.png" src="<c:url value='/images/pack/packLogo1.png'/>" alt="팩 1번마크" />
-				<img id="packLogo2.png" src="<c:url value='/images/pack/packLogo2.png'/>" alt="팩 2번마크" />
-				<img id="packLogo3.png" src="<c:url value='/images/pack/packLogo3.png'/>" alt="팩 3번마크" />
-				<img id="packLogo4.png" src="<c:url value='/images/pack/packLogo4.png'/>" alt="팩 4번마크" />
-				<img id="packLogo5.png" src="<c:url value='/images/pack/packLogo5.png'/>" alt="팩 5번마크" />
-				<img id="packLogo6.png" src="<c:url value='/images/pack/packLogo6.png'/>" alt="팩 6번마크" />
-				<img id="packLogo7.png" src="<c:url value='/images/pack/packLogo7.png'/>" alt="팩 7번마크" />
-			</div>
+		  
+		  	  <label class="col-xs-2 control-label">팩 로고</label>
+			   <div class="packThumbnails col-xs-9  col-xs-offset-2">
+					<img id="packLogo1.png" src="<c:url value='/images/pack/packLogo1.png'/>" alt="팩 1번마크" />
+					<img id="packLogo2.png" src="<c:url value='/images/pack/packLogo2.png'/>" alt="팩 2번마크" />
+					<img id="packLogo3.png" src="<c:url value='/images/pack/packLogo3.png'/>" alt="팩 3번마크" />
+					<img id="packLogo4.png" src="<c:url value='/images/pack/packLogo4.png'/>" alt="팩 4번마크" />
+					<img id="packLogo5.png" src="<c:url value='/images/pack/packLogo5.png'/>" alt="팩 5번마크" />
+					<img id="packLogo6.png" src="<c:url value='/images/pack/packLogo6.png'/>" alt="팩 6번마크" />
+					<img id="packLogo7.png" src="<c:url value='/images/pack/packLogo7.png'/>" alt="팩 7번마크" />
+				</div>
 		  </div>
 		  <div class="form-group">
-	 		<label class="col-xs-2 col-md-2 control-label">팩 소개</label>
-			<textarea id="packIntro" name="packIntro" class="form-control col-xs-9 col-md-8" rows="3"></textarea>
+		 		 <label class="col-xs-2 control-label">팩 소개</label>
+				  <textarea id= "packIntro" name= "packIntro" class="col-xs-9  col-xs-offset-2" rows="3"></textarea>
 		  </div>
 		  <div class="form-group">
 			<input type="hidden"  id="packThumbnail"  value="Pack1.png" name= "packThumbnail" class="form-group"/>
@@ -179,13 +129,15 @@ h3{
 			<input type="hidden"  id="packLng"  name= "packLng" class="form-group"/>
 		  </div>
 		  <div class="form-group">
-		    <div class="col-xs-offset-6 col-xs-3 col-md-offset-6 col-md-3">
-		      <button id="formSubmitBtn" type="submit" class="btn">등록</button>
+		    <div class="col-xs-offset-2 col-xs-9">
+		      <button id="formSubmitBtn" type="submit"  class="btn btn-default">등록</button>
 		    </div>
 		  </div>
 		</form>
-	</div>
+	</div><!-- row -->
+	
 </div>
+
 
 <script>
 	var duplicationCheck = false;

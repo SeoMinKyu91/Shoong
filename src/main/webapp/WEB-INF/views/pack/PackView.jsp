@@ -21,7 +21,6 @@
 			<div class="section-tittle text-center mb-80 col-lg-12" >
 				<h1 style="margin-top: 15px;">마이 팩 <small>가입한 팩 이름 띄우기</small></h1>
 			</div>
-				
 		</div>
 	</div>
 	<hr>
