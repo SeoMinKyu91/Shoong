@@ -145,55 +145,71 @@
 					    </div>
 					    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 					      <div class="panel-body">
+					      
+					      <div class="col-md-6 col-sm-6 col-xs-12">
+					      
 							<div class="table-responsive">
                       <table class="table table-striped jambo_table bulk_action">
                         <thead>
                           <tr class="headings">
-                            <th>
-                              <input type="checkbox" id="check-all" class="flat">
-                            </th>
+							<th class="column-title">No </th>
                             <th class="column-title">Admin ID </th>
+                            <th class="column-title">Password </th>
                             <th class="column-title">Name </th>
-                            <th class="column-title">Join Date </th>
-                            <th class="column-title">Classes </th>
-                            <th class="column-title no-link last"><span class="nobr">Action</span>
-                            </th>
-                            <th class="bulk-actions" colspan="7">
-                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                            </th>
+                            <th class="column-title">Job Code </th>
+
                           </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody>  
+                        <c:forEach var="admin" items="${adminList}" varStatus="status" begin="0" end="24">
                           <tr class="even pointer" data-toggle="modal" data-target="#reportModal">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">asd7890</td>
-                            <td class=" ">가길동 </td>
-                            <td class=" ">Dec 24 2020</td>
-                            <td class=" ">Master</td>
-                            <td class=" last">
-                            	<button type="button" class="btn btn-default btn-xs btn-danger">X</button>
-                            </td>
+                            <td class=" ">${status.count}</td>
+                            <td class=" ">${admin.ID}</td>
+                            <td class=" ">${admin.PWD} </td>
+                            <td class=" ">${admin.NAME}</td>
+                            <td class=" ">${admin.JOBCODE}</td>
                           </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">qwer4567</td>
-                            <td class=" ">나길동 </td>
-                            <td class=" ">Jan 02 2022</td>
-                            <td class=" ">Manager</td>
-                            <td class=" last">
-                            	<button type="button" class="btn btn-default btn-xs btn-danger">X</button>
-                            </td>
-                          </tr>
+                          </c:forEach>
                         </tbody>
                       </table>
-                      <button class="btn btn-primary" data-toggle="modal" data-target="#adminModal" id="myButton" style="margin-top: -18px;" >추가</button>
+                      
                     </div>
 					      </div>
+					      
+					      <div class="col-md-6 col-sm-6 col-xs-12">
+					      
+							<div class="table-responsive">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+							<th class="column-title">No </th>
+                            <th class="column-title">Admin ID </th>
+                            <th class="column-title">Password </th>
+                            <th class="column-title">Name </th>
+                            <th class="column-title">Job Code </th>
+
+                          </tr>
+                        </thead>
+
+                        <tbody>  
+                        <c:forEach var="admin" items="${adminList}" begin="25" end="50" varStatus="status">
+                          <tr class="even pointer" data-toggle="modal" data-target="#reportModal">
+                            <td class=" ">${status.count}</td>
+                            <td class=" ">${admin.ID}</td>
+                            <td class=" ">${admin.PWD} </td>
+                            <td class=" ">${admin.NAME}</td>
+                            <td class=" ">${admin.JOBCODE}</td>
+                          </tr>
+                          </c:forEach>
+                        </tbody>
+                      </table>
+                      <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#adminModal" id="myButton" style="margin-top: -18px;" >추가</button>
+                    </div>
+					      </div>
+					      
+					    </div>
+					    
 					    </div>
 					  </div>			
 		<!-- 관리자 추가 삭제 -->
