@@ -195,7 +195,9 @@ public class MemberController {
 		if(flag) {
 			session.setAttribute("userId", map.get("userId"));
 			if(mamberHasPack != null) {
+				System.out.println("memberHasPack:"+mamberHasPack.get("PACK_ID"));
 				session.setAttribute("packId", mamberHasPack.get("PACK_ID"));
+				
 			}
 			
 		}
