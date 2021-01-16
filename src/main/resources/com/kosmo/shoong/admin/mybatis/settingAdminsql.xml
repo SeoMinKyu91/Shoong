@@ -5,4 +5,8 @@
   
 <mapper namespace="com.kosmo.shoong.admin.mybatis.settingAdminsql">
 	
+	<select id="adminList" resultType="java.util.Map">
+		SELECT * FROM admin_
+	</select>
+	
 </mapper>

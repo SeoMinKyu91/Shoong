@@ -23,6 +23,7 @@
 					<li><a href="<c:url value="/Member/mypage.do"/>">MY PAGE</a></li>
 					<li><a href="<c:url value="/pack/main.do"/>">PACK</a></li>
 					<li><a href="<c:url value="/course/main.do"/>">Course</a></li>
+					<li><a href="<c:url value="/course/mainTest.do"/>">CourseMainTest</a></li>
 				</c:if>
 				<c:if test="${empty sessionScope.userId}" var="isNotLogin">
 					<li><a href="<c:url value="/Member/Join.do"/>">JOIN</a></li>
