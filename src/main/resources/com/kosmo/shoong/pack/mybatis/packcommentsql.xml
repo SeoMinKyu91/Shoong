@@ -32,7 +32,7 @@
 	<selectKey keyProperty="pack_join_no" order="BEFORE" resultType="int">
 		select pack_join_no from pack_join where user_id = #{userId}
 	</selectKey>
-	insert into pack_comment values(SEQ_P_COMMENT.nextval,#{pack_join_no},#{packCommentContent},sysdate)
+	insert into pack_comment values(SEQ_P_COMMENT.nextval,#{packCommentContent},sysdate,#{pack_join_no})
 </insert>
 
 <insert id="packCommentImgWrite">
