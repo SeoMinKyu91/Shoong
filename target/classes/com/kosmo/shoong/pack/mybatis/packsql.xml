@@ -67,6 +67,7 @@
 	SELECT count(*) from PACK where PACK_NAME = #{ckpackName}
 </select>
 
+
 <select id="UserAddrCheckSelect" parameterType="java.util.Map" resultType="java.util.Map" >
 	SELECT ADDRESS FROM member_ WHERE USER_ID = #{userId} 
 </select>

@@ -217,8 +217,6 @@
 			$('#thumbnailModal').modal();
 			thumbnailCssReset();
 		})
-		
-
 	});
 </script>
 <script>
@@ -290,9 +288,7 @@
 			error : function(error) {//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
 				console.log('에러 : ', error.responseText);
 			}
-
 		});
-
 	})
 	
 	var packThumbnail="";
@@ -315,6 +311,4 @@
 		$(".packThumbnailModal img").css('border','none');
 		
 	}
-		
-	
 </script>

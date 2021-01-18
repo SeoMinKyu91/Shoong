@@ -35,7 +35,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "templates/Main";
+		return "forward:/mypage/main.do";
 	}
 	
 }

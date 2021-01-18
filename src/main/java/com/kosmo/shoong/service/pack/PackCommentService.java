@@ -5,13 +5,13 @@ import java.util.Map;
 
 public interface PackCommentService {
 	
-	boolean isLogin(Map map);
-	List<PackCommentDTO> selectList(Map map);
-	//상세보기용
-	PackCommentDTO selectOne(Map map);
-	//입력,수정,삭제
-	int insert(Map map);
-	int delete(Map map);
-	int update(Map map);
+	
+	
+	int packCommentWrite(Map map);
+	int packCommentDelte(Map map);
+	int packCommentUpdate(Map map);
+	int packCommentImgWrite(Map map);
+	
+	List<PackCommentDTO> packCommentMainSelectList(Map map);
 	
 }

@@ -16,7 +16,7 @@ import com.kosmo.shoong.service.member.MemberDTO;
 import com.kosmo.shoong.service.member.MemberService;
 
 @Service("memberService")
-public class MemberServiceImpl  implements MemberService{
+public class MemberServiceImpl implements MemberService{
 
 	@Resource(name="memberDAO")
 	private MemberDAO memberDAO;
@@ -88,7 +88,7 @@ public class MemberServiceImpl  implements MemberService{
 	public int insertVerify(String userId) {
 		return memberDAO.insertVerify(userId);
 	}
-	
+
 //	@Override
 //	public int delete(Map map) {
 //		return memberDAO.delete(map);
@@ -98,23 +98,19 @@ public class MemberServiceImpl  implements MemberService{
 	public int update(Map map) {
 		return memberDAO.update(map);
 	}//////update
-	
+
 	@Override
 	public MemberDTO selectOne(Map map) {
 		return memberDAO.selectOne(map);
 	}
 
 	public Map memberHasPack(Map map) {
-		
-		
 		return memberDAO.memberHasPack(map);
 	}
 
 	@Override
 	public Map memberEditView(Map map) {
 		Map memberInfo = memberDAO.memberEditView(map);
-		
-		
 		return memberInfo;
 	}
 

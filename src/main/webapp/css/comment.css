@@ -1,0 +1,164 @@
+.feed {
+	margin-top: 20px;
+	border: 1px solid lightgrey;
+	background-color: white;
+	width: 100%;
+}
+.feed-top-row {
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+.feed-top-imgs {
+	padding-right: 0px;
+}
+.feed-top-img-src {
+	width: 50px;
+	height: 50px;
+	margin-left: 10px;
+	border-radius: 100%;
+}
+.feed-top-nick {
+	color: black;
+	font-weight: bold;
+	padding-left: 0px;
+	line-height: 50px;
+}
+.carousel-control.left {
+	background-image: linear-gradient(to right, rgba(0, 0, 0, .5) 0,
+		rgba(0, 0, 0, .0001) 0%);
+}
+.carousel-control.right {
+	background-image: linear-gradient(to right, rgba(0, 0, 0, .5) 0,
+		rgba(0, 0, 0, .0001) 0%);
+}
+.feed-img-row {
+	height: 450px;
+	margin-bottom:5px;
+}
+.carousel-inner .item img {
+	width: 100%;
+	height: 450px;
+}
+.carousel-inner{
+	border: 1px solid lightgrey;
+}
+
+.feed-content-row{
+	margin-left:0px;
+	margin-right:0px;
+	border-bottom: 1px solid lightgrey;
+}
+.feed-content{
+	padding: 10px;
+	border-top: 1px solid lightgrey;
+	margin-left:0px;
+	margin-right:0px;
+}
+
+.feed-content span{
+	font-size: 16px;
+}
+
+.feed-bottoms{
+	margin-top:5px;
+}
+
+.feed-bottoms .feed-bottom-row{
+	margin-top: 0px;	
+}
+
+.feed-bottom-icon .icon{
+	width: 25px;
+	height: 25px;
+}
+.feed-bottom-row .feed-likely-row span{
+	font-size: 12px;
+	font-weight: bold;
+	margin-left: 5px;
+	
+}
+.feed-reply-content{
+	height: 50px;
+	text-align: center;
+}
+.feed-reply-content-input{
+	border:none;
+	width: 100%;
+	height: 100%;
+}
+.feed-reply-content-input:focus{
+	outline: none;
+}
+.feed-reply-write span{
+	font-size: 15px;
+	font-weight: bold;
+	line-height: 50px;
+	opacity: 0.7;
+}
+
+#top-var{
+	text-align: center;
+}
+
+.top-menus{
+	background-color: lightgrey;
+	height: 50px; 
+}
+
+.top-menus button{
+	line-height: 50px;
+	border:none;
+	width: 100%;
+	height: 100%;
+}
+
+
+/*모달창*/
+.feed-story{
+	border: none;
+	font-size:18px;
+	opacity: 0.7;
+}
+.feed-story:focus{
+	outline: none;
+}
+.feed-img-modal{
+	height:50%;
+	text-align: center;
+	border: 2px dashed lightgrey;
+	margin-top: 20px;
+}
+.feed-img-modal-span{
+	font-size: 24px;
+	vertical-align: middle;
+	font-weight: bold;
+	line-height: 250px;
+}
+.imgdiv{
+	position: relative;
+	display: inline-block;s
+}
+.previewImg{
+	width:200px;
+	height: 180px;
+	margin: 15px;
+}
+.imgdeletemark{
+      display: none;   
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate( -50%, -50% );
+} 
+
+
+
+
+
+
+
+
+
+
+
