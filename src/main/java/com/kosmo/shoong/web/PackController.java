@@ -169,21 +169,6 @@ public class PackController {
       return check;
    }//////////////
 
-   @RequestMapping(value="comment.do", method=RequestMethod.GET)
-   public String packComment(@RequestParam Map map, HttpServletRequest req, Model model,@ModelAttribute("id") String id) {
-	   //데이터 저장]
-	   /*
-	   String path = req.getContextPath();
-	   map.put("id", id);
-	   memoService.insert(map);
-	   PackCommentDTO record = memoService.slectOne(map);
-	   record.setContent(record.getContent().replace("\r\n","<br/>"));
-	   model.addAttribute("record",record);
-	   commentService.update(map);
-	   commentService.delete(map);
-	   */
-	   return "pack/PackComment";
-   }
 
 
 }
