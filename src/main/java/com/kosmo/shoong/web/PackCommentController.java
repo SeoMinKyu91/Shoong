@@ -33,7 +33,7 @@ public class PackCommentController {
 	
 	@Resource(name="packCommentService")
 	private PackCommentServiceImpl service;
-	
+
 	@RequestMapping(value="comment.do")
 	public String packComment(@RequestParam Map map, HttpServletRequest req, Model model) {
 		System.out.println("comment.do");

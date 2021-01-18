@@ -76,7 +76,8 @@
 					style="width: 80px;"></a>
 				&emsp;<a class="packCreateBtn btn" 
 					href="<c:url value="/pack/main.do"/>" style="font-weight: bold">홈</a>
-				<c:if test="${!empty sessionScope.packId}">
+
+				<c:if test="${not empty sessionScope.packId}">
 					<a class="packCreateBtn btn"
 						href="<c:url value="/pack/view.do"/>" style="font-weight: bold">나의팩</a>
 				</c:if>
