@@ -1,132 +1,65 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<style>
-
-#map {
-	height: 300px;
-	width: 100%;
-	overflow: hidden;
-	position: relative;
-}
-
-.PackMainTop {
-	margin-top: 0px;
-}
-
-.PackMainTop input {
-	width: 100px;
-	border-radius: 10px;
-	border-color: #333333;
-}
-
-.PackMainTop input:focus {
-	outline: none;
-}
-
-.PackMainTop .packAddr {
-	font-size: 30px;
-}
-
-.PackMainTop .glyphiconBtn {
-	background-color: white;
-	border: none;
-	font-size: 20px;
-}
-
-.packCreateBtn {
-	border: none;
-	color:#ff8827;
-}
-
-.packCreateBtn:hover {
-	background-color: #ff8827;
-	color:white;
-}
-
-#accordion table tr:nth-child(1) {
-	font-size: 17px;
-	font-weight: 600;
-}
-
-#accordion table tr:nth-child(2) {
-	font-size: 7px;
-}
-
-#accordion h3 {
-	background-color: #ff8827;
-	height: 40px;
-	font-size: 20px;
-	color: white;
-}
-
-.btn-img{
-	 width:20px; 
-	 height: 20px;
-}
-</style>
-
-<div id="colorlib-main" class="container">
+<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<div id="colorlib-main" style="padding:20px">
 	<div class="row">
-		<div class="col-xs-12 col-md-12">
+		<div class="col-lg-12" style="padding-bottom:20px">
 			<div class="" style="padding-top:20px">
 				<a href="<c:url value="/pack/main.do"/>">
 				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
 					style="width: 80px;"></a>
 				&emsp;<a class="packCreateBtn btn" 
-					href="<c:url value="/pack/main.do"/>" style="font-weight: bold">홈</a>
-
-				<c:if test="${not empty sessionScope.packId}">
+					href="#" style="font-weight: bold;border: none;color:#ff8827;">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
 					<a class="packCreateBtn btn"
-						href="<c:url value="/pack/view.do"/>" style="font-weight: bold">나의팩</a>
+						href="<c:url value="/pack/view.do"/>" style="font-weight: bold;border: none;color:black;">MY PACK</a>
 				</c:if>
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-12 col-md-12">
-			<div id="map"></div>
+		<div class="col-lg-12">
+			<div id="map" style="height: 400px;width: 100%;overflow: hidden;position: relative;margine-top: 50px;"></div>
 			<p style="color: grey; font-size: .8em">지도를 클릭 시 클릭 된 지점을 기준으로 검색 됩니다(별 모양 마커를 움직이세요)</p>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-12 col-md-12 PackMainTop">
+		<div class="col-lg-12 PackMainTop">
 			<table class="col-xs-12 col-md-12">
 				<tr>
 					<th colspan="2" class="text-left">
 						<form class="form-inline" method="post"
 							action="<c:url value="/pack/main.do"/>">
-							<div class="packAddr">
-								<span style="font-size: .8em; font-weight: bold;">[<span id="packRegionSearch" ></span>] 근처 팩</span> &nbsp;
+							<div class="packAddr" style="font-size: 30px;">
+								<span style="font-size: .8em; font-weight: bold;padding-left:10px">[<span id="packRegionSearch"></span>] 근처 팩</span> &nbsp;
 							</div>
 							<input type="text" class="form-group" name="searchWord"
-								style="width: 180px; height:30px; padding-left:10px"/>
-							<button class="glyphiconBtn">
-								<span class="glyphicon glyphicon-search" aria-hidden="true"><img class="btn-img" src='<c:url value="/images/search.png"/>'/></span>
+								style="width: 200px; height:30px;border-radius: 10px;border-color: #333333;"/>
+							<button class="glyphiconBtn" style="background-color: white;border: none;font-size: 20px;">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 							</button>
 						</form>
 					</th>
 					<th>
-						<a class="packCreateBtn btn" style="float: right; font-weight: bold"
+						<a class="packCreateBtn btn" style="float: right; font-weight: bold;border: none;color:#ff8827;"
 							href="<c:url value="/pack/create.do"/>">팩 만들기</a>
 					</th>
 				</tr>
 			</table>
 		</div>
 	</div>
-	<div class="col-xs-12 col-md-12">
 		<div class="row">
 			<!-- accordion-->
-			<div id="accordion" class="col-xs-12 col-md-12">
+			<div id="accordion" class="col-lg-12" style="padding-bottom:20px">
 				<c:if test="${empty packList }" var="isEmpty">
-					<h3>해당하는 팩이 없어요.</h3>
+					<h3 style="background-color: #ff8827;height: 40px;font-size: 20px;color: white;line-height: 20px;">해당하는 팩이 없어요.</h3>
 				</c:if>
 				<c:if test="${!isEmpty}">
 					<c:forEach var="item" items="${packList }">
-						<h3>${item.packName}</h3>
+						<h3 style="background-color: #ff8827;height: 40px;font-size: 20px;color: white;line-height: 20px;">${item.packName}</h3>
 						<div>
-							<table class="col-xs-12 col-md-12">
+							<table class="col-lg-12">
 								<tr>
 									<th class="col-sm-1"><img style="width: 100%;"
 										src="<c:url value="/images/pack/${item.packThumbnail}"/>"
@@ -157,7 +90,6 @@
 			<!-- accordion-->
 		</div>
 		<!-- row -->
-	</div>
 	<!-- 모달 -->
 	<div class="modal fade" id="packJoinModal" data-backdrop="false">
 		<div class="modal-dialog modal-sm">
