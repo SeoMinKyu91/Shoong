@@ -2,14 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-<link rel="stylesheet" href="<c:url value="/css/test.css"/>">
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-<!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
 <style>
@@ -68,6 +64,8 @@
 .diaryInfo span{
 	width: 100%;
 	font-size: 25px;
+}#map{
+   height: 100%;
 }
 </style>
 
@@ -75,7 +73,9 @@
 				
             <div class="modal-body" style="height: 100%;">
             	   <div style="margin-top:10px">
-						<div style="width: 100% ;height: 200px;border:1px solid #666666"> 추후 코스 넣기</div>
+						<div style="width: 100% ;height: 200px;border:1px solid #666666"> 
+							 <div  id="map"></div> 
+						</div>
 					</div>
            			
 				 <div class="diaryInfo">
@@ -254,6 +254,70 @@
                           $('#imgArry').val(imgarr);  
                     }
             
+        //지도 
+        
+        function mapStart(){
+			mapboxgl.accessToken = 'pk.eyJ1Ijoid2t1bmdoOTMiLCJhIjoiY2tpd2hpNnZ0MHF3YzMwcnd5ZG1obzh2biJ9.EW26scaL6pDX7yQhFNnwMw';
+		
+			var monument = [ 126.87870025634767, 37.478732138068445 ];
+			
+			var imgarr = [];
+		
+			var map = new mapboxgl.Map({
+				container : 'map',
+				style : 'mapbox://styles/mapbox/streets-v11',
+				center : monument,
+				zoom : 11
+			})
+		
+			
+			//주소검색기 컨트롤러 얻어옴
+			var geocoder = new MapboxGeocoder({
+				accessToken : mapboxgl.accessToken,
+				mapboxgl : mapboxgl
+			});
+			
+		
+			
+			mapRecordUpload(map);
+			
+		}//mapStart()
+		
+		function mapRecordUpload(map){
+			map.on('load', function(){ // 이부분 있어야 바로 로드 가능
+			<c:if test="${!empty mapRecord}">
+		
+			var data = ${mapRecord}
+			var json = data.features[0];
+			console.log('data:%O',data.features[0]);
+			
+			map.addSource('route', {
+				"type":"geojson",
+				"data":json
+			});
+			map.addLayer({
+				'id': 'route',
+				'type': 'line',
+				'source': 'route',
+				'layout': {
+					'line-join': 'round',
+					'line-cap': 'round'
+				},
+				'paint': {
+					'line-color': '#ff0000',
+					'line-width': 8
+				}
+			});
+			map.setCenter(data.features[0].geometry.coordinates[0][0]);
+			map.setZoom(11);
+		</c:if>
+		});
+		}//mapRecordUpload()
+		
+		
+		$(function(){
+		mapStart();
+		})//로드시 스타트
 </script>
+
 				
-</script>

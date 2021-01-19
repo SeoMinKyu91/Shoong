@@ -7,7 +7,7 @@ public interface MyPageDiaryService {
 
 	
 	List<Map> recordSelectList(Map map);
-	
+	Map recordSelectOne(Map map);
 	List<Map> selectList(Map map);
 	Map selectOne(Map map);
 	int insert(Map map);
