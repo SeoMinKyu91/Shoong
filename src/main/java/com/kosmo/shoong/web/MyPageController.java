@@ -69,22 +69,24 @@ public class MyPageController {
 		 
 		  /*record 지도 관련*/
 		  Map recordMap =  recordService.selectOne(map);
-		  String filePath = req.getServletContext().getRealPath("/upload")+File.separator+recordMap.get("RECORD_FILE_NAME");
-			System.out.println("routePath:"+filePath);
-			BufferedReader br =
-					new BufferedReader(
-							new InputStreamReader(
-									new FileInputStream(new File(filePath))));
-			StringBuffer sb = new StringBuffer();
-
-			int data = -1;
-			char[] chars = new char[1024];
-
-			while((data=br.read(chars))!=-1) {
-				sb.append(chars,0,data);
-			}
-			if(br!=null) br.close();
-			model.addAttribute("mapRecord",sb.toString());
+		  if(recordMap != null) {
+			  	String filePath = req.getServletContext().getRealPath("/upload")+File.separator+recordMap.get("RECORD_FILE_NAME");
+				System.out.println("routePath:"+filePath);
+				BufferedReader br =
+						new BufferedReader(
+								new InputStreamReader(
+										new FileInputStream(new File(filePath))));
+				StringBuffer sb = new StringBuffer();
+				
+				int data = -1;
+				char[] chars = new char[1024];
+				
+				while((data=br.read(chars))!=-1) {
+					sb.append(chars,0,data);
+				}
+				if(br!=null) br.close();
+				model.addAttribute("mapRecord",sb.toString());
+		  }
 			
 	      return "mypage/mypage";
 	   }

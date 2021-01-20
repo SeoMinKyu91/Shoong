@@ -95,7 +95,7 @@
          </div>
 
          <div class="modal-footer">
-            <button type="button" class="btn btn-info" data-dismiss="modal" id="btnPackSchedule">등록</button>
+            <button type="button" class="btn btn-info" id="btnPackSchedule">등록</button>
             <button type="button" class="btn btn-info" data-dismiss="modal" id="btnPackScheduleClose">닫기</button>
          </div>
       </div>
@@ -318,7 +318,29 @@
    })
    
    $('#btnPackSchedule').click(function(){
-      $('#packSchedule').submit();
+		if($('#packScheduleTitle').val() == ''){
+			alert('제목을 입력해주세요');
+			$('#packScheduleTitle').focus();
+			return;
+		}
+		if($('#startDatePicker').val() == ''){
+			alert('시작 날짜를 입력해주세요');
+			$('#startDatePicker').focus();
+			return;
+		}
+		if($('#endDatePicker').val() == ''){
+			alert('끝 날짜를 입력해주세요');
+			$('#endDatePicker').focus();
+			return;
+		}
+		if($('#packScheduleContent').val() == ''){
+			alert('내용을 입력해주세요');
+			$('#packScheduleContent').focus();
+			return;
+		}
+			   
+	   
+	   	$('#packSchedule').submit();
    });
    
    $('#btnPackScheduleClose').click(function(){
