@@ -6,6 +6,7 @@
 	
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
+<script src="<c:url value="/js/togeojson.js"/>"></script>
 
 <style>
 /*
@@ -209,7 +210,7 @@ ul li span{
 	                   	<div class="col-sm-12" style="margin-top:10px ">
 		                  <form method="post" enctype="multipart/form-data" class="col-sm-12">
 		                      <div id="fileUpload" class="dragAndDropDiv col-sm-12">
-		                      	<span class="dragAndDropDivSpan">Drag & Drop Files Here</span>
+		                      	<span class="dragAndDropDivSpan">Drag & Drop Route Files Here</span>
 		                      </div>
 		                      <input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/>
 		                  </form>
@@ -218,9 +219,6 @@ ul li span{
 		            <div class="modal-footer"> 
 	               		<form method="post" action="<c:url value="/pack/pictureInput.do"/>">
 		               		<input class="form-control" name="imgArry" id="imgArry"  type="hidden">
-		               		<!-- 
-		               		<button type="submit" class="btn btn-default">Save</button>
-		               		 -->   
 		            	</form>
 	                	<button type="button" class="btn btn-default">Load</button>
 	                	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -235,14 +233,41 @@ ul li span{
 </div>
 
 <script>
-//맵박스 토큰
+//날자 계산
+Date.prototype.format = function(f) {
+    if (!this.valueOf()) return " ";
+ 
+    var weekName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+    var d = this;
+     
+    return f.replace(/(yyyy|yy|MM|dd|E|hh|mm|ss|a\/p)/gi, function($1) {
+        switch ($1) {
+            case "yyyy": return d.getFullYear();
+            case "yy": return (d.getFullYear() % 1000).zf(2);
+            case "MM": return (d.getMonth() + 1).zf(2);
+            case "dd": return d.getDate().zf(2);
+            case "E": return weekName[d.getDay()];
+            case "HH": return d.getHours().zf(2);
+            case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2);
+            case "mm": return d.getMinutes().zf(2);
+            case "ss": return d.getSeconds().zf(2);
+            case "a/p": return d.getHours() < 12 ? "오전" : "오후";
+            default: return $1;
+        }
+    });
+};
+ 
+String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s += this; } return s;};
+String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
+Number.prototype.zf = function(len){return this.toString().zf(len);};
+
 $(function(){
 	
 	$('#naviModalBtn').click(function() {
 		console.log('클릭모달버튼');
 		$('#naviModal').modal();
 	});
-	
+	//맵박스 토큰
 	mapboxgl.accessToken = 'pk.eyJ1Ijoid2t1bmdoOTMiLCJhIjoiY2tpd2hpNnZ0MHF3YzMwcnd5ZG1obzh2biJ9.EW26scaL6pDX7yQhFNnwMw';
 
 	var monument = [ 126.87870025634767, 37.478732138068445 ];
@@ -344,7 +369,7 @@ $(function(){
 				console.log('lenght:',length);
 				
 				//등록,거리
-				$('ul.my-box li:eq(3) span').html(new Date());
+				$('ul.my-box li:eq(3) span').html(new Date().format("yyyy년 MM월 dd일 a/p hh시 mm분 ss초"));
 				$('ul.my-box li:eq(4) span').html(length+"km");
 				
 				$('#naviModal').modal("toggle");
