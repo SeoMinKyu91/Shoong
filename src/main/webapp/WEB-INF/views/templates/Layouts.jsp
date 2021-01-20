@@ -34,7 +34,6 @@
 <link rel="stylesheet" href="<c:url value="/css/icomoon.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
 
-
 <!-- 달력 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.5.0/main.min.css,npm/fullcalendar@5.5.0/main.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.css">
