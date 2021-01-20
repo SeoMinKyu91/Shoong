@@ -234,6 +234,12 @@ ul li span{
 <script>
 //맵박스 토큰
 $(function(){
+	
+	$('#naviModalBtn').click(function() {
+		console.log('클릭모달버튼');
+		$('#naviModal').modal();
+	});
+	
 	mapboxgl.accessToken = 'pk.eyJ1Ijoid2t1bmdoOTMiLCJhIjoiY2tpd2hpNnZ0MHF3YzMwcnd5ZG1obzh2biJ9.EW26scaL6pDX7yQhFNnwMw';
 
 	var monument = [ 126.87870025634767, 37.478732138068445 ];

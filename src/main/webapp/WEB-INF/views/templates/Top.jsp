@@ -28,7 +28,7 @@
 			<c:if test="${!isNotId}">
 			</c:if>
 			<li><a href="<c:url value="/course/navi.do"/>">NAVI</a></li>
-			<li><a href="#" data-toggle="modal" data-target="#naviModal">ROUTE UPLOAD</a></li>
+			<li><a id="naviModalBtn" href="#">ROUTE UPLOAD</a></li>
 			<li><a href="<c:url value="/admin/home/main.do"/>">관리자페이지</a></li>
 		</ul>
 	</nav>
