@@ -262,6 +262,13 @@ String.prototype.zf = function(len){return "0".string(len - this.length) + this;
 Number.prototype.zf = function(len){return this.toString().zf(len);};
 
 $(function(){
+	$.ajax('<c:url value="/courseTest/gpxkml/address.kml"/>').done(function(xml){ 
+	    console.log(toGeoJSON.kml(xml)); 
+	});
+	
+	$.ajax('<c:url value="/courseTest/gpxkml/20201018_114312.gpx"/>').done(function(xml){ 
+	    console.log(toGeoJSON.gpx(xml)); 
+	});
 	
 	$('#naviModalBtn').click(function() {
 		console.log('클릭모달버튼');
