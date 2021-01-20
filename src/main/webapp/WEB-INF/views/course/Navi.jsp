@@ -4,7 +4,8 @@
 	contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-	
+<script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
+
 <style>
 /*
 .mapboxgl-popup {
@@ -135,14 +136,14 @@ ul li span{
 		<div class="col-xs-10 offset-xs-1 col-md-5" role="navigation">
 			<ul class="nav nav-tabs" style="list-style:none">
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#routeinfo">루트 정보</a></li>
+					<a class="nav-link active" data-toggle="tab" href="#routeinfo">루트 정보</a></li>
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#routestop">루트 경유지</a></li>
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#placeinfo">관광 정보</a></li>
 			</ul>
 			<div class="tab-content">
-				<div class="tab-pane fade show active" id="routeinfo">
+				<div class="tab-pane active" id="routeinfo">
 					<ul class="my-box">
 						<li>
 							<label for=" ">이름</label>
@@ -201,7 +202,7 @@ ul li span{
 		     <div class="modal-dialog modal-lg" >
 		         <div class="modal-content">
 		             <div class="modal-header">
-		                 <h4>사진 올리기</h4>
+		                 <h4>기록 올리기</h4>
 		             </div>
 		             <div class="modal-body">
 	                   	<div class="col-sm-12" style="margin-top:10px ">
@@ -337,10 +338,19 @@ $(function(){
 				});
 				map.setCenter(data.features[0].geometry.coordinates[0][0]);
 				map.setZoom(11);
+				
+				var length = turf.length(json, {units: 'kilometers'});
+				console.log('lenght:',length);
+				
+				//등록,거리
+				$('ul.my-box li:eq(3) span').html(new Date());
+				$('ul.my-box li:eq(4) span').html(length+"km");
+				
+				$('#naviModal').modal("toggle");
 			}
 		});
 		
-		$(".modal-footer button:eq(2)").click();
+// 		$(".modal-footer button:eq(2)").click();
 	});
 	
 	// 이미지 다운로드 모달 정보 변경 
