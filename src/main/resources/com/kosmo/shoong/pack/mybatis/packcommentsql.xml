@@ -63,5 +63,25 @@
 	where pack_comment_no = #{packCommentNo}
 </select>
 
+<select id="myCommentList" parameterType="java.util.Map" resultMap="packCommentDTOResult">
+	SELECT (select name from member_ where user_id = p.user_id and p.pack_join_no = c.pack_join_no) packCommentWriter,
+	c.pack_comment_content packCommentContent,
+	c.pack_comment_no packCommentNo,
+	(select count(*) from pack_comment_like where pack_comment_no = c.pack_comment_no) packCommentLikeCount,
+	(select count(*) from pack_comment_reply where pack_comment_no = c.pack_comment_no) packCommentReplyCount
+	FROM pack_join p join pack_comment c on p.pack_join_no = c.pack_join_no where p.pack_id = #{packId} and p.user_id = #{userId}
+	ORDER BY packCommentNo DESC
+</select>
+
+<select id="packCommentSelectOne" parameterType="java.util.Map" resultType="java.util.Map">
+	select pack_comment_no, pack_comment_content from pack_comment where pack_comment_no = #{packCommentNo}
+</select>
+
+<update id="packCommentUpdate" parameterType="java.util.Map">
+	update pack_comment set pack_comment_content = #{packCommentContent} where pack_comment_no = #{packCommentNo}
+</update>
+
+
+
 
 </mapper>

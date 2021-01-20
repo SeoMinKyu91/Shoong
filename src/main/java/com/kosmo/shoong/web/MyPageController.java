@@ -19,7 +19,7 @@ import com.kosmo.shoong.service.mypage.MyPageService;
 
 
 @Controller
-@RequestMapping("mypage")
+@RequestMapping("/mypage/")
 public class MyPageController {
 
 	@Resource(name="myPageService")

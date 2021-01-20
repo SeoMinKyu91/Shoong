@@ -29,8 +29,7 @@ public class PackCommentServiceImpl implements PackCommentService {
 
 	@Override
 	public int packCommentUpdate(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.packCommentUpdate(map);
 	}
 
 	@Override
@@ -42,6 +41,16 @@ public class PackCommentServiceImpl implements PackCommentService {
 	@Override
 	public List<PackCommentDTO> packCommentMainSelectList(Map map) {
 		return dao.packCommentMainSelectList(map);
+	}
+
+	public List<PackCommentDTO> myCommentList(Map map) {
+
+		return dao.myCommentList(map);
+	}
+
+	public Map packCommentSelectOne(Map map) {
+		
+		return dao.packCommentSelectOne(map);
 	}
 
 

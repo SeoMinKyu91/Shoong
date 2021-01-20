@@ -75,7 +75,8 @@
 				<h1></h1>
 				<div class="form-group "
 					style="text-align: center; padding-bottom: 50px">
-					<a href="https://kauth.kakao.com/oauth/authorize?response_type=code
+					<a
+						href="https://kauth.kakao.com/oauth/authorize?response_type=code
 						&client_id=616834812e97e8f82a462cd2cc2e5e4e
 						&redirect_uri=http://localhost:8080/shoong/kakao/login"
 						style="margin-top: 20px"><img
