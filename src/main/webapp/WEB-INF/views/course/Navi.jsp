@@ -5,6 +5,7 @@
 	pageEncoding="UTF-8"%>
 	
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+<script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
 
 <style>
 /*
