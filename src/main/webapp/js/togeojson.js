@@ -1,5 +1,6 @@
 /**
- * 
+ * 출처
+ * https://github.com/mapbox/togeojson/blob/master/togeojson.js
  */
 var toGeoJSON = (function() {
     'use strict';
