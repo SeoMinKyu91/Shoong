@@ -1,20 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!-- 폰트 -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <style>
-	#colorlib-main{
-		margin-top: 20px;
-		margin-bottom: 10px;
+	.packCreateBtn {
+		color:#ff8827;
+		background-color: white;
+		font-weight: bold;
+		border: none;
+	}
+	.packCreateBtn:hover {
+		color:white;
+		background-color: #ff8827;
+	}
+	.packManageBtn{
+		color:#ff8827;
+		background-color: white;
+		font-weight: bold;
+		border: #ff8827 solid 1px;
+	}
+	.packManageBtn:hover {
+		color:white;
+		background-color: #ff8827;
 	}
 	#packComment.col:eq(1){
 		diplay: none;
-	}
+	
 </style>
-
 <div id="colorlib-main" style="padding:20px">
 	<div class="row">
 		<div class="col-lg-12" style="padding-bottom:20px">
@@ -22,11 +34,14 @@
 				<a href="<c:url value="/pack/main.do"/>">
 				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
 					style="width: 80px;"></a>
-				&emsp;<a class="packCreateBtnHome btn" 
-					href="<c:url value="/pack/main.do"/>" style="font-weight: bold;border: none;color:black;">HOME</a>
+				&emsp;<a class="packCreateBtn btn" 
+					href="<c:url value="/pack/main.do"/>">HOME</a>
 				<c:if test="${!empty sessionScope.packId}">
-					<a class="packCreateBtnMyPack btn"
-						href="<c:url value="/pack/view.do"/>" style="font-weight: bold;border: none;color:#ff8827;">MY PACK</a>
+					<a class="packCreateBtn btn"
+						href="<c:url value="/pack/view.do"/>">MY PACK</a>
+				</c:if>
+				<c:if test="${!empty manager }">
+					<a class="packManageBtn btn" style="float: right; font-weight: bold;border: none;color:#ff8827;" href="<c:url value="/pack/manage.do"/>">팩 관리</a>
 				</c:if>
 			</div>
 		</div>
@@ -37,75 +52,60 @@
 			<hr style="background-color:black; height:1px"/>
 		</div>
 	</div>
-	<c:if test="${!empty manager }">
-		<div class="row">
-			<div class="col-lg-12">
-				<a class="btn btn-info" href="<c:url value="/pack/manage.do"/>">팩 관리</a>
-			</div>
-		</div>
-	</c:if>
-	<div class="col-lg-12">
-		<a class="btn btn-info" href="<c:url value="/pack/calendar.do"/>">팩 일정</a>
-	</div>
 	<div class="row">
-			<div class="offset-md-1 col-md-5">
-				<div class="row">
-					<div class="col-lg-9 col-sm-8">
-						<h3>공지사항</h3>
-					</div>
-					<div class="col-lg-3 col-sm-4" style="padding-top: 13px;">
-						<a href="<c:url value="/pack/notice/list.do"/>" class="btn-custom">Read More 
-							<span class="ion-ios-arrow-forward"></span>
-						</a>
-					</div>
+		<div class="col-lg-offset-1 col-lg-5">
+			<div class="row">
+				<div class="col-lg-9 col-sm-8">
+					<h3>공지사항</h3>
 				</div>
-			
-				
-				<table class="table table-bordered table-hover">
-					<tr>
-						<th class="text-center">번호</th>
-						<th class="text-center">제목</th>
-						<th class="text-center">작성자</th>
-						<th class="text-center">작성일</th>
+				<div class="col-lg-3 col-sm-4" style="padding-top: 13px;">
+					<a href="<c:url value="/pack/notice/list.do"/>" class="btn-custom">Read More 
+						<span class="ion-ios-arrow-forward"></span>
+					</a>
+				</div>
+			</div>
+			<table class="table table-bordered table-hover">
+				<tr>
+					<th class="text-center">번호</th>
+					<th class="text-center">제목</th>
+					<th class="text-center">작성자</th>
+					<th class="text-center">작성일</th>
+				</tr>
+				<c:if test="${empty list }" var="isEmpty">
+					<tr class="text-center">
+						<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
 					</tr>
-						
-					
-					<c:if test="${empty list }" var="isEmpty">
+				</c:if>
+				<c:if test="${!isEmpty}">
+					<c:forEach var="item" items="${list }" varStatus="loop">
 						<tr class="text-center">
-							<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
+							<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
+							<td class="text-left">${item.packNoticeTitle}</td>
+							<td>${item.userName}</td>
+							<td>${item.packNoticeDate}</td>
+							<td style="display: none;">${item.packNoticeContent }</td>
+							<td style="display: none;">${item.packNoticeNo }</td>
 						</tr>
-					</c:if>
-					<c:if test="${!isEmpty}">
-						<c:forEach var="item" items="${list }" varStatus="loop">
-							<tr class="text-center">
-								<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
-								<td class="text-left">${item.packNoticeTitle}</td>
-								<td>${item.userName}</td>
-								<td>${item.packNoticeDate}</td>
-								<td style="display: none;">${item.packNoticeContent }</td>
-								<td style="display: none;">${item.packNoticeNo }</td>
-							</tr>
-						</c:forEach>
-					</c:if>
-				
-				</table>
-			</div>
-			<div class="col-md-5">
-				<div class="row">
-					<div class="col-lg-9 col-sm-8">
-						<h3>Calender</h3>
-					</div>
-					<div class="col-lg-3 col-sm-4" style="padding-top: 13px;">
-						<a href="<c:url value="#"/>" class="btn-custom"> View Details
-							<span class="ion-ios-arrow-forward"></span>
-						</a>
-					</div>
+					</c:forEach>
+				</c:if>
+			
+			</table>
+		</div>
+		<div class="col-md-5">
+			<div class="row">
+				<div class="col-lg-9 col-sm-8">
+					<h3>Calender</h3>
 				</div>
-				
-				<div id="calender"></div>
+				<div class="col-lg-3 col-sm-4" style="padding-top: 13px;">
+					<a href="<c:url value="/pack/calendar.do"/>" class="btn-custom"> View Details
+						<span class="ion-ios-arrow-forward"></span>
+					</a>
+				</div>
 			</div>
-		</div><!-- row -->
-		
+			
+			<div id="calender"></div>
+		</div>
+	</div><!-- row -->
 		<div class="row">
 			<div class="offset-md-1 col-md-5 " style="margin-top: 10px;">
 				<div class="row">
@@ -118,7 +118,6 @@
 						</a>
 					</div>
 				</div>
-			
 				<table class="table table-bordered table-hover" id="packComment">
 					<tr>
 						<th class="text-center">가려야할 번호</th>
@@ -168,7 +167,6 @@
 						</a>
 					</div>
 				</div>
-			
 				<div id="gallery">
 					<c:if test="${empty packGalleryList}" var="isEmpty">
 						<h3>갤러리에 사진이 없어요.</h3>
@@ -181,9 +179,8 @@
 				</div>
 			</div>
 		</div><!-- row -->
-		
 		<div class="row">
-			<div class="offset-md-1 col-md-10 " style="margin-top: 10px;">
+			<div class="col-md-12 " style="margin-top: 10px;">
 				<div class="row">
 					<div class="col-lg-10 col-sm-9">
 						<h3>Pack Course List</h3>
@@ -194,8 +191,6 @@
 						</a>
 					</div>
 				</div>
-			
-				
 				<table class="table table-bordered table-hover">
 					<tr>
 						<th class="text-center">번호</th>
