@@ -103,7 +103,7 @@
 <script src="<c:url value="/js/jquery.waypoints.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.stellar.min.js"/>"></script>
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script src="<c:url value="/js/popper.min.js"/>"></script>
 <script src="<c:url value="/js/owl.carousel.min.js"/>"></script>
