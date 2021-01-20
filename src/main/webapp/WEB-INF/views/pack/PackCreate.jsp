@@ -9,26 +9,37 @@
 <!-- 제이쿼리 UI용 라이브러리 임베드 -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
+<style>
+	.packCreateBtn {
+		color:#ff8827;
+		background-color: white;
+		font-weight: bold;
+		border: none;
+	}
+	.packCreateBtn:hover {
+		color:white;
+		background-color: #ff8827;
+	}
+</style>
 <div id="colorlib-main" style="padding:20px">
 	<div class="row">
-		<div class="col-xs-12 col-md-12 col-lg-12">
+		<div class="col-lg-12" style="padding-bottom:20px">
 			<div class="" style="padding-top:20px;">
 				<a href="<c:url value="/pack/main.do"/>">
 				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
 					style="width: 80px;"></a>
 				&emsp;<a class="packCreateBtn btn" 
-					href="<c:url value="/pack/main.do"/>" style="font-weight: bold;border: none;color:black;">HOME</a>
+					href="<c:url value="/pack/main.do"/>">HOME</a>
 				<c:if test="${!empty sessionScope.packId}">
 					<a class="packCreateBtn btn" 
-						href="<c:url value="/pack/view.do"/>" style="font-weight: bold;border: none;color:black;">MY PACK</a>
+						href="<c:url value="/pack/view.do"/>">MY PACK</a>
 				</c:if>
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-12 col-md-12 col-lg-12">
-			<h3 style="padding-top:10px;padding-left:20px;color:black;font-weight: bold;">팩 만들기</h3>
+		<div class="col-lg-12">
+			<h3 style="padding-left:10px;color:black;font-weight: bold;">팩 만들기</h3>
 			<hr style="background-color:black; height:1px"/>
 		</div>
 	</div>

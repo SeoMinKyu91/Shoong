@@ -3,7 +3,6 @@
 <%@ page language="java" 
 	contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
 <script src="<c:url value="/js/togeojson.js"/>"></script>
@@ -23,26 +22,29 @@
 #map {
 	top: 0;
 	bottom: 0;
-	height:400px;
+	height:500px;
 }
 
+.nav-link {
+	color: #ff8827;
+}
 
 ul li{
 	font-weight : bold;
 	font-size: 1em;
+	padding-bottom:10px;
 }
 
-ul li span{
-	font-size: .8em;
-	font-weight : normal;
-	color:black;
+ul li label{
+	padding-right:10px;
 }
+
 
 .my-box{
 	border: 5px lightgrey solid;
 	list-style: none; 
-	padding: 30px; 
-	height:355px;
+	padding: 35px; 
+	height:455px;
 	background-color: white;
 }
 
@@ -131,6 +133,7 @@ ul li span{
 #naviImgModal img {
 	width: 100%;
 }
+
 </style>
 <div id="colorlib-main" style="padding:20px">
 	<div class="row" style="padding-top: 50px; padding-left: 10px">
@@ -138,7 +141,7 @@ ul li span{
 		<div class="col-xs-10 offset-xs-1 col-md-5" role="navigation">
 			<ul class="nav nav-tabs" style="list-style:none">
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#routeinfo">루트 정보</a></li>
+					<a class="nav-link" data-toggle="tab" href="#routeinfo">루트 정보</a></li>
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#routestop">루트 경유지</a></li>
 				<li class="nav-item">
@@ -148,37 +151,46 @@ ul li span{
 				<div class="tab-pane active" id="routeinfo">
 					<ul class="my-box">
 						<li>
-							<label for=" ">이름</label>
-							<span>&emsp;유경이네</span>
+							<label for=" ">작성자</label>&emsp;
+							<input type="text" id="userName" style="border:none" placeholder="작성자" readonly="readonly">
 						</li>
 						<li>
-							<label for=" ">공개</label>
-							<span id="Private">&emsp;공개된 루트</span>
+							<label for=" ">이름</label>&emsp;&emsp;
+							<input type="text" id="courseName" style="border:#aaaaaa solid 1px; height:25px" placeholder="경로이름">
 						</li>
 						<li>
-							<label for=" ">유형</label>
-							<span>&emsp;자전거ㆍ일반</span>
+							<label for=" ">공개여부</label>
+							<input type="radio" id="openNclose" name="openNclose"> 
+								<span style="font-weight: normal;">공개</span>&emsp;
+							<input type="radio" id="openNclose" name="openNclose">
+								<span style="font-weight: normal;">비공개</span>
 						</li>
 						<li>
-							<label for=" ">등록</label>
-							<span>&emsp;김유경 2021년 1월 13일 수요일 오전 1:40</span>
+							<label for=" ">유형</label>&emsp;&emsp;
+							<select
+								name="cycleType" id="cycleType"
+								style="border: #aaaaaa solid 1px; height:23px; font-weight: normal;color:#888888;">
+								<option value="" style="color:#888888;">==선택하세요==</option>
+								<option value="" style="color:#888888;">자전거유형1</option>
+								<option value="" style="color:#888888;">자전거유형2</option>
+								<option value="" style="color:#888888;">자전거유형3</option>
+								<option value="" style="color:#888888;">자전거유형4</option>
+							</select>
 						</li>
 						<li>
-							<label for=" ">거리</label>
-							<span>&emsp;000km(↑↓누적고도 +000m, -000m)</span>
+							<label for=" ">등록</label>&emsp;&emsp;
+							<span></span>
 						</li>
 						<li>
-							<label for=" ">특징</label>
-							<span>&emsp;</span>
+							<label for=" ">거리</label>&emsp;&emsp;
+							<span></span>
 						</li>
-						<li>
-							<label for=" ">평가</label>
-							<span>&emsp;아직 등록된 평점이 없습니다</span>
+						<li style="padding-bottom: 20px;">
+							<label for=" ">설명</label><br/>
+							<textarea rows="3" style="border:#aaaaaa solid 1px; width: 100%"></textarea>
 						</li>
-						<li>
-							<label for=" ">설명</label>
-							<span>&emsp;유경이네 방문</span>
-						</li>
+						<a class="btn" href="#" style="color:white;background-color: #ff8827; border:#ff8827 solid 1px;float: right;">등록</a>
+						<!--  <button type="submit" class="btn btn-block" style="float: right;">등록</button>-->
 					</ul>
 				</div>
 				<div class="tab-pane fade" id="routestop">

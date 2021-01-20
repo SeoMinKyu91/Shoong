@@ -2,6 +2,31 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<style>
+	.packCreateBtn {
+		color:#ff8827;
+		background-color: white;
+		font-weight: bold;
+		border: none;
+	}
+	.packCreateBtn:hover {
+		color:white;
+		background-color: #ff8827;
+	}
+	.PackMainTop input:focus {
+		outline: none;
+	}
+	#accordion table tr:nth-child(1) {
+		font-size: 17px;
+		font-weight: 600;
+	}
+	
+	#accordion table tr:nth-child(2) {
+		font-size: 7px;
+	}
+	
+</style>
+
 <div id="colorlib-main" style="padding:20px">
 	<div class="row">
 		<div class="col-lg-12" style="padding-bottom:20px">
@@ -10,10 +35,10 @@
 				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
 					style="width: 80px;"></a>
 				&emsp;<a class="packCreateBtn btn" 
-					href="#" style="font-weight: bold;border: none;color:#ff8827;">HOME</a>
+					href="<c:url value="/pack/main.do"/>">HOME</a>
 				<c:if test="${!empty sessionScope.packId}">
 					<a class="packCreateBtn btn"
-						href="<c:url value="/pack/view.do"/>" style="font-weight: bold;border: none;color:black;">MY PACK</a>
+						href="<c:url value="/pack/view.do"/>">MY PACK</a>
 				</c:if>
 			</div>
 		</div>
@@ -42,7 +67,7 @@
 						</form>
 					</th>
 					<th>
-						<a class="packCreateBtn btn" style="float: right; font-weight: bold;border: none;color:#ff8827;"
+						<a class="packCreateBtn btn" style="float: right;"
 							href="<c:url value="/pack/create.do"/>">팩 만들기</a>
 					</th>
 				</tr>
