@@ -161,6 +161,102 @@ input {
 		</form>
 	</div>
 </div>
+<!-- ---------------- 활동지역 맵 스크립트 ----------------- -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=616834812e97e8f82a462cd2cc2e5e4e&libraries=services"></script>
+<script>
+	var map;
+	var geocoder = new kakao.maps.services.Geocoder();
+	//0]사용자 위치 구하기
+	if (navigator.geolocation) {
+		var options = {
+			timeout : 3000,
+			maxinumAge : 5000
+		};
+		navigator.geolocation.getCurrentPosition(successCallback);
+		//이거 실패하는코드도 입력. 경복궁 37.57801416976735  /  126.97658868798284 
+		//실패하면 displayKaKaoMap(lat, lng); 여기에 저값담아보내기
+	}
+
+	//0-1]사용자 위치 구하기 성공시 좌표값 displayKaKaoMap로 넘김
+	function successCallback(position) {
+
+		var lat = position.coords.latitude;
+		var lng = position.coords.longitude;
+		$("#memberLat").val(lat);
+		$("#memberLng").val(lng);
+		displayKaKaoMap(lat, lng);
+	}
+
+	//1]사용자 뷰에 지도 생성 지도 정보 map에 저장
+	function displayKaKaoMap(lat, lng) {
+		var mapContainer = document.getElementById('map');
+		mapOption = {
+			center : new kakao.maps.LatLng(lat, lng), // 현재 위치 중심으로 지도의 중심좌표
+			level : 9
+		};
+
+		map = new kakao.maps.Map(mapContainer, mapOption);
+		//맵 컨트롤
+		var mapTypeControl = new kakao.maps.MapTypeControl();
+		// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의! TOPRIGHT는 오른쪽 위
+		map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+		// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+		var zoomControl = new kakao.maps.ZoomControl();
+		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+		//<이 위까지가 지도 기본 셋팅>/// 
+		searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+		displayCentermarker(map);
+		addeventmap(map)
+
+	}
+
+	//1-1]사용자 뷰 지도 중심에 마커 생성
+	var marker;
+	function displayCentermarker(map) {
+		//마커생성
+		marker = new kakao.maps.Marker({
+			position : map.getCenter()
+		});
+		//마커 셋팅
+		marker.setMap(map);
+	}
+
+	//2]지도에 이벤트를 등록합니다
+	function addeventmap(map) {
+		kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+			searchAddrFromCoords(mouseEvent.latLng, displayCenterInfo);
+
+			marker.setPosition(mouseEvent.latLng);
+			marker.setMap(map);
+			$("#memberLat").val(mouseEvent.latLng.getLat());
+			$("#memberLng").val(mouseEvent.latLng.getLng());
+
+		});
+	}
+	function searchAddrFromCoords(coords, callback) {
+
+		geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
+	}
+
+	function displayCenterInfo(result, status) {
+
+		if (status === kakao.maps.services.Status.OK) {
+			var Region = document.getElementById('userAddr');
+
+			for (var i = 0; i < result.length; i++) {
+				// 행정동의 region_type 값은 'H' 이므로
+				if (result[i].region_type === 'H') {
+					var regionArray = result[i].address_name.split(" ");
+					var resionCut = regionArray[0] + " " + regionArray[1]
+					Region.value = resionCut;
+					break;
+				}
+			}
+		}
+
+	}
+</script>
 
 <!-- -----------------입력시 변환 스크립트---------------- -->
 <script>
@@ -338,102 +434,5 @@ input {
 			document.getElementById('userTel3').focus();
 			return false;
 		}
-	}
-</script>
-
-<!-- ---------------- 활동지역 맵 스크립트 ----------------- -->
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=616834812e97e8f82a462cd2cc2e5e4e&libraries=services"></script>
-<script>
-	var map;
-	var geocoder = new kakao.maps.services.Geocoder();
-	//0]사용자 위치 구하기
-	if (navigator.geolocation) {
-		var options = {
-			timeout : 3000,
-			maxinumAge : 5000
-		};
-		navigator.geolocation.getCurrentPosition(successCallback);
-		//이거 실패하는코드도 입력. 경복궁 37.57801416976735  /  126.97658868798284 
-		//실패하면 displayKaKaoMap(lat, lng); 여기에 저값담아보내기
-	}
-
-	//0-1]사용자 위치 구하기 성공시 좌표값 displayKaKaoMap로 넘김
-	function successCallback(position) {
-
-		var lat = position.coords.latitude;
-		var lng = position.coords.longitude;
-		$("#memberLat").val(lat);
-		$("#memberLng").val(lng);
-		displayKaKaoMap(lat, lng);
-	}
-
-	//1]사용자 뷰에 지도 생성 지도 정보 map에 저장
-	function displayKaKaoMap(lat, lng) {
-		var mapContainer = document.getElementById('map');
-		mapOption = {
-			center : new kakao.maps.LatLng(lat, lng), // 현재 위치 중심으로 지도의 중심좌표
-			level : 9
-		};
-
-		map = new kakao.maps.Map(mapContainer, mapOption);
-		//맵 컨트롤
-		var mapTypeControl = new kakao.maps.MapTypeControl();
-		// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의! TOPRIGHT는 오른쪽 위
-		map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-		// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-		var zoomControl = new kakao.maps.ZoomControl();
-		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-		//<이 위까지가 지도 기본 셋팅>/// 
-		searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-		displayCentermarker(map);
-		addeventmap(map)
-
-	}
-
-	//1-1]사용자 뷰 지도 중심에 마커 생성
-	var marker;
-	function displayCentermarker(map) {
-		//마커생성
-		marker = new kakao.maps.Marker({
-			position : map.getCenter()
-		});
-		//마커 셋팅
-		marker.setMap(map);
-	}
-
-	//2]지도에 이벤트를 등록합니다
-	function addeventmap(map) {
-		kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-			searchAddrFromCoords(mouseEvent.latLng, displayCenterInfo);
-
-			marker.setPosition(mouseEvent.latLng);
-			marker.setMap(map);
-			$("#memberLat").val(mouseEvent.latLng.getLat());
-			$("#memberLng").val(mouseEvent.latLng.getLng());
-
-		});
-	}
-	function searchAddrFromCoords(coords, callback) {
-
-		geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);
-	}
-
-	function displayCenterInfo(result, status) {
-
-		if (status === kakao.maps.services.Status.OK) {
-			var Region = document.getElementById('userAddr');
-
-			for (var i = 0; i < result.length; i++) {
-				// 행정동의 region_type 값은 'H' 이므로
-				if (result[i].region_type === 'H') {
-					var regionArray = result[i].address_name.split(" ");
-					var resionCut = regionArray[0] + " " + regionArray[1]
-					Region.value = resionCut;
-					break;
-				}
-			}
-		}
-
 	}
 </script>
