@@ -66,14 +66,14 @@ padding: 10px;
    margin-right: 15px;
 }
 #inlineInfo{
-   background-color: #FBF8EF;
+   background-color: white;
    box-shadow: 0px 0px 5px #787878;
    border-radius: 10px;
    padding: 20px;
    margin: 10px;
 }
 .inlineInfo{
-   background-color: #FBF8EF;
+   background-color: white;
    box-shadow: 0px 0px 5px #787878;
    border-radius: 10px;
    padding: 20px;
@@ -95,7 +95,6 @@ padding: 10px;
 }#id{
    height: 100px;
 }
-
 </style>
 	
 
@@ -158,11 +157,11 @@ padding: 10px;
 		<div class=" storyRow">
          <div class="col-xs-12 ">
             <h3>다이어리<small><a href='<c:url value="/mypage/diary/list.do"/>'>전체보기</a></small></h3>
-         </div>
-         <c:if test="${empty diaryList}" var="isEmpty">
-            <h3>다이어리가 없어요.</h3>
+            <c:if test="${empty diaryList}" var="isEmpty">
+            <h4>다이어리가 없어요.</h4>
             <button type="submit" class="btn btn-default">지금 달리러 가기</button>      
          </c:if>
+         </div>
          <c:if test="${!isEmpty}">
             <c:forEach var="item" items="${diaryList}">        
                <div class="col-xs-6 cardDiv">
@@ -183,7 +182,7 @@ padding: 10px;
                         </span>
                      </div>   
                   </div>
-                   <a href='<c:url value="/mypage/diary/view.do?diaryCode=${item.DIARY_CODE }"/>'>${item.DIARY_TITLE}</a>
+                   <div style="text-align: center;"><a href='<c:url value="/mypage/diary/view.do?diaryCode=${item.DIARY_CODE }"/>'>${item.DIARY_TITLE}</a></div>
                   </div>
             </article>
          </div>         

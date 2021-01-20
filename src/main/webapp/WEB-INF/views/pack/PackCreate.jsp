@@ -74,7 +74,7 @@ h3{
 }
 </style>
 
-<div id="colorlib-main" class="container">
+<div id="colorlib-main" style="padding:10px">
 	<div class="row">
 		<div class="col-xs-12 col-md-12">
 			<div class="" style="padding-top:20px">
