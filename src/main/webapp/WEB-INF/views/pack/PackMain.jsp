@@ -67,7 +67,7 @@
 						</form>
 					</th>
 					<th>
-						<a class="packCreateBtn btn" style="float: right; font-weight: bold;border: none;color:#ff8827;"
+						<a class="packCreateBtn btn" style="float: right;"
 							href="<c:url value="/pack/create.do"/>">팩 만들기</a>
 					</th>
 				</tr>

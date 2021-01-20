@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <style>
 	.packCreateBtn {
 		color:#ff8827;
@@ -14,10 +14,11 @@
 		background-color: #ff8827;
 	}
 	.packManageBtn{
+		float:right;
 		color:#ff8827;
 		background-color: white;
 		font-weight: bold;
-		border: #ff8827 solid 1px;
+		border: none;
 	}
 	.packManageBtn:hover {
 		color:white;
@@ -25,7 +26,7 @@
 	}
 	#packComment.col:eq(1){
 		diplay: none;
-	
+	}
 </style>
 <div id="colorlib-main" style="padding:20px">
 	<div class="row">
@@ -40,26 +41,26 @@
 					<a class="packCreateBtn btn"
 						href="<c:url value="/pack/view.do"/>">MY PACK</a>
 				</c:if>
-				<c:if test="${!empty manager }">
-					<a class="packManageBtn btn" style="float: right; font-weight: bold;border: none;color:#ff8827;" href="<c:url value="/pack/manage.do"/>">팩 관리</a>
-				</c:if>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-md-12 col-lg-12">
-			<h3 style="padding-top:10px;padding-left:10px;color:black;font-weight: bold;">shoong</h3>
+			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em">따르릉 따르릉</p>
 			<hr style="background-color:black; height:1px"/>
+			<c:if test="${!empty manager}">
+				<a class="packManageBtn btn" href="<c:url value="/pack/manage.do"/>"><span class="glyphicon glyphicon-cog"></span>&nbsp;팩 관리</a>
+			</c:if>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-offset-1 col-lg-5">
 			<div class="row">
 				<div class="col-lg-9 col-sm-8">
-					<h3>공지사항</h3>
+					<p style="font-weight: bold;font-size:1.5em;">공지사항</p>
 				</div>
-				<div class="col-lg-3 col-sm-4" style="padding-top: 13px;">
-					<a href="<c:url value="/pack/notice/list.do"/>" class="btn-custom">Read More 
+				<div class="col-lg-3 col-sm-4" style="padding-top: 10px; float: right;">
+					<a href="<c:url value="/pack/notice/list.do"/>" class="btn-custom"> 더보기 
 						<span class="ion-ios-arrow-forward"></span>
 					</a>
 				</div>
@@ -88,21 +89,19 @@
 						</tr>
 					</c:forEach>
 				</c:if>
-			
 			</table>
 		</div>
-		<div class="col-md-5">
+		<div class="col-lg-offset-1 col-lg-5">
 			<div class="row">
 				<div class="col-lg-9 col-sm-8">
 					<h3>Calender</h3>
 				</div>
 				<div class="col-lg-3 col-sm-4" style="padding-top: 13px;">
-					<a href="<c:url value="/pack/calendar.do"/>" class="btn-custom"> View Details
+					<a href="<c:url value="/pack/calendar.do"/>" class="btn-custom"> 상세보기
 						<span class="ion-ios-arrow-forward"></span>
 					</a>
 				</div>
 			</div>
-			
 			<div id="calender"></div>
 		</div>
 	</div><!-- row -->
@@ -120,37 +119,37 @@
 				</div>
 				<table class="table table-bordered table-hover" id="packComment">
 					<tr>
-						<th class="text-center">가려야할 번호</th>
+						<th class="text-center">번호</th>
 						<th class="text-center">작성자</th>
 						<th class="text-center">제목</th>
 						<th class="text-center">작성일</th>
-						<th class="text-center">좋아요~</th>
+						<th class="text-center"><span class="glyphicon glyphicon-heart"></span></th>
 					</tr>
 					<tr class="text-center danger">
-						<td class="text-left ">가려야할 번호</td>
+						<td class="text-left ">4</td>
 						<td>작성자1</td>
-						<td class="text-left ">제목1</td>
+						<td class="text-left ">제목4</td>
 						<td>10.12</td>
 						<td>1</td>
 					</tr>
 					<tr class="text-center">
-						<td class="text-left ">가려야할 번호</td>
+						<td class="text-left">3</td>
 						<td>작성자2</td>
-						<td class="text-left">제목2</td>
+						<td class="text-left">제목3</td>
 						<td>11.20</td>
 						<td>2</td>
 					</tr>
 					<tr class="text-center">
-						<td class="text-left ">가려야할 번호</td>
+						<td class="text-left ">2</td>
 						<td>작성자3</td>
-						<td class="text-left">제목3</td>
+						<td class="text-left">제목2</td>
 						<td>12.30</td>
 						<td>3</td>
 					</tr>
 					<tr class="text-center">
-						<td class="text-left ">가려야할 번호</td>
+						<td class="text-left ">1</td>
 						<td>작성자4</td>
-						<td class="text-left">제목4</td>
+						<td class="text-left">제목1</td>
 						<td>4.05</td>
 						<td>4</td>
 					</tr>

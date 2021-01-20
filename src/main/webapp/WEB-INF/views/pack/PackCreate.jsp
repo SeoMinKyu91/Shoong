@@ -23,7 +23,7 @@
 </style>
 <div id="colorlib-main" style="padding:20px">
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-lg-12" style="padding-bottom:20px">
 			<div class="" style="padding-top:20px;">
 				<a href="<c:url value="/pack/main.do"/>">
 				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
@@ -39,7 +39,7 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
-			<h3 style="padding-top:10px;padding-left:20px;color:black;font-weight: bold;">팩 만들기</h3>
+			<h3 style="padding-left:10px;color:black;font-weight: bold;">팩 만들기</h3>
 			<hr style="background-color:black; height:1px"/>
 		</div>
 	</div>
