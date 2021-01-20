@@ -15,16 +15,28 @@
 	}
 </style>
 
-<div id="colorlib-main">
+<div id="colorlib-main" style="padding:20px">
 	<div class="row">
-		<div class="col-lg-12">
-			<div class="section-tittle text-center mb-80 col-lg-12" >
-				<h1 style="margin-top: 15px;">마이 팩 <small>가입한 팩 이름 띄우기</small></h1>
+		<div class="col-lg-12" style="padding-bottom:20px">
+			<div class="" style="padding-top:20px">
+				<a href="<c:url value="/pack/main.do"/>">
+				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
+					style="width: 80px;"></a>
+				&emsp;<a class="packCreateBtnHome btn" 
+					href="<c:url value="/pack/main.do"/>" style="font-weight: bold;border: none;color:black;">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="packCreateBtnMyPack btn"
+						href="<c:url value="/pack/view.do"/>" style="font-weight: bold;border: none;color:#ff8827;">MY PACK</a>
+				</c:if>
 			</div>
 		</div>
 	</div>
-	<hr>
-	
+	<div class="row">
+		<div class="col-xs-12 col-md-12 col-lg-12">
+			<h3 style="padding-top:10px;padding-left:10px;color:black;font-weight: bold;">shoong</h3>
+			<hr style="background-color:black; height:1px"/>
+		</div>
+	</div>
 	<c:if test="${!empty manager }">
 		<div class="row">
 			<div class="col-lg-12">
@@ -35,8 +47,6 @@
 	<div class="col-lg-12">
 		<a class="btn btn-info" href="<c:url value="/pack/calendar.do"/>">팩 일정</a>
 	</div>
-
-	
 	<div class="row">
 			<div class="offset-md-1 col-md-5">
 				<div class="row">

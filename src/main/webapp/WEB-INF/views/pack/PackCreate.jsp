@@ -10,100 +10,36 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-
-
-<style>
-#colorlib-main {
-	padding-top: 50px;
-}
-
-#map {
-	height: 300px;
-	width: 100%;
-	overflow: hidden;
-	position: relative;
-	margin-bottom: 50px;
-}
-
-h3{
-	padding-top:20px;
-	color:black;
-	font-weight: bold;
-}
-
-.packCreateBtn {
-	border: none;
-	color:#ff8827;
-}
-
-.packCreateBtn:hover {
-	background-color: #ff8827;
-	color:white;
-}
-
-.PackMainTop {
-	font-family: 'Do Hyeon', sans-serif;
-	font-size: 20px;
-}
-
-.packThumbnails {
-	width: 100%
-}
-
-.packThumbnails img {
-	width: 5%
-}
-
-.packCreatTable {
-	width: 60%
-}
-
-.packCreatTable tr th:nth-child(1) {
-	width: 20%
-}
-
-#formSubmitBtn{
-	background-color: #ff8827; 
-	border: none; 
-	color: white;
-	font-weight:bold;
-}
-</style>
-
-<div id="colorlib-main" class="container">
+<div id="colorlib-main" style="padding:20px">
 	<div class="row">
-		<div class="col-xs-12 col-md-12">
-			<div class="" style="padding-top:20px">
+		<div class="col-xs-12 col-md-12 col-lg-12">
+			<div class="" style="padding-top:20px;">
 				<a href="<c:url value="/pack/main.do"/>">
 				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
 					style="width: 80px;"></a>
 				&emsp;<a class="packCreateBtn btn" 
-					href="<c:url value="/pack/main.do"/>" style="font-weight: bold">홈</a>
+					href="<c:url value="/pack/main.do"/>" style="font-weight: bold;border: none;color:black;">HOME</a>
 				<c:if test="${!empty sessionScope.packId}">
-					<a class="packCreateBtn btn"
-						href="<c:url value="/pack/view.do"/>" style="font-weight: bold">나의팩</a>
+					<a class="packCreateBtn btn" 
+						href="<c:url value="/pack/view.do"/>" style="font-weight: bold;border: none;color:black;">MY PACK</a>
 				</c:if>
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-xs-12 col-md-12">
-			<h3>&nbsp;&nbsp;팩 만들기</h3>
-			<hr style="background-color:black; height:2px"/>
+		<div class="col-xs-12 col-md-12 col-lg-12">
+			<h3 style="padding-top:10px;padding-left:20px;color:black;font-weight: bold;">팩 만들기</h3>
+			<hr style="background-color:black; height:1px"/>
 		</div>
 	</div>
 	<!-- 지도 -->
 	<div class="row">
 		<div class="col-xs-10 col-xs-1 col-md-10 col-md-offset-1">
-			<div id="map"></div>
+			<div id="map" style="height: 400px;width: 100%;overflow: hidden;position: relative;margine-top: 50px;"></div>
 		</div>
 	</div>
 	<!-- 팩 가입 정보-->
-	<div class="row col-xs-12 col-md-12">
+	<div class="row col-xs-12 col-md-12" style="padding-top:30px;padding-left:70px;">
 		<form class="form-horizontal" action="<c:url value='/pack/createOk.do'/>" method="post" onsubmit="return formSubmit()">
 		  <div class="form-group">
 		    <label for="inputEmail3" class="col-xs-2 col-md-2 control-label">팩 이름</label>
@@ -159,14 +95,14 @@ h3{
 		  </div>
 		  <div class="form-group">
 		  	  <label class="col-xs-2 col-md-2 control-label">팩 로고</label>
-			<div class="packThumbnails col-xs-9 col-md-9">
-				<img id="packLogo1.png" src="<c:url value='/images/pack/packLogo1.png'/>" alt="팩 1번마크" />
-				<img id="packLogo2.png" src="<c:url value='/images/pack/packLogo2.png'/>" alt="팩 2번마크" />
-				<img id="packLogo3.png" src="<c:url value='/images/pack/packLogo3.png'/>" alt="팩 3번마크" />
-				<img id="packLogo4.png" src="<c:url value='/images/pack/packLogo4.png'/>" alt="팩 4번마크" />
-				<img id="packLogo5.png" src="<c:url value='/images/pack/packLogo5.png'/>" alt="팩 5번마크" />
-				<img id="packLogo6.png" src="<c:url value='/images/pack/packLogo6.png'/>" alt="팩 6번마크" />
-				<img id="packLogo7.png" src="<c:url value='/images/pack/packLogo7.png'/>" alt="팩 7번마크" />
+			<div class="packThumbnails col-xs-9 col-md-9" style="width: 100%">
+				<img id="packLogo1.png" src="<c:url value='/images/pack/packLogo1.png'/>" alt="팩 1번마크" style="width: 5%"/>
+				<img id="packLogo2.png" src="<c:url value='/images/pack/packLogo2.png'/>" alt="팩 2번마크" style="width: 5%"/>
+				<img id="packLogo3.png" src="<c:url value='/images/pack/packLogo3.png'/>" alt="팩 3번마크" style="width: 5%"/>
+				<img id="packLogo4.png" src="<c:url value='/images/pack/packLogo4.png'/>" alt="팩 4번마크" style="width: 5%"/>
+				<img id="packLogo5.png" src="<c:url value='/images/pack/packLogo5.png'/>" alt="팩 5번마크" style="width: 5%"/>
+				<img id="packLogo6.png" src="<c:url value='/images/pack/packLogo6.png'/>" alt="팩 6번마크" style="width: 5%"/>
+				<img id="packLogo7.png" src="<c:url value='/images/pack/packLogo7.png'/>" alt="팩 7번마크" style="width: 5%"/>
 			</div>
 		  </div>
 		  <div class="form-group">
@@ -180,7 +116,8 @@ h3{
 		  </div>
 		  <div class="form-group">
 		    <div class="col-xs-offset-6 col-xs-3 col-md-offset-6 col-md-3">
-		      <button id="formSubmitBtn" type="submit" class="btn">등록</button>
+		      <button id="formSubmitBtn" type="submit" class="btn" 
+		      	style="background-color: #ff8827;border: none;color: white;font-weight:bold;">등록</button>
 		    </div>
 		  </div>
 		</form>

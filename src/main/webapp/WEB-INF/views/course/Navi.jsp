@@ -128,7 +128,7 @@ ul li span{
 	width: 100%;
 }
 </style>
-<div id="colorlib-main" class="container" style="padding-top: 0;">
+<div id="colorlib-main" style="padding:20px">
 	<div class="row" style="padding-top: 50px; padding-left: 10px">
 		<div class="col-xs-10 offset-xs-1 col-md-7" id="map"></div>
 		<div class="col-xs-10 offset-xs-1 col-md-5" role="navigation">
