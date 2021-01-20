@@ -1,6 +1,6 @@
 # Shoong
 Kosmo 7기 슝 프로젝트팀 입니다.
-_edit by suggom_
+    _edit by suggom_
 
 > 사전 작업
 > 1. Tomcat 9 사양의 서버를 생성한다
@@ -29,3 +29,4 @@ _edit by suggom_
 > 7. db 계정 생성 후 /Shoong/src/main/resources/com/kosmo/shoong/erm에 KosmoProj.sql 실행 테이블 생성
 > 8. /Shoong/src/main/resources/com/kosmo/shoong/pack/mybatis/packinsert.sql 실행
 > 9. /Shoong/src/main/resources/com/kosmo/shoong/mypage/mybatis/mypageinsert.sql 실행
+ 
