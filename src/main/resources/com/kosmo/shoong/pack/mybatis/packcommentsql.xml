@@ -28,14 +28,14 @@
 
 
 
-<insert id="packCommentWrite">
+<insert id="packCommentWrite" parameterType="java.util.Map">
 	<selectKey keyProperty="pack_join_no" order="BEFORE" resultType="int">
 		select pack_join_no from pack_join where user_id = #{userId}
 	</selectKey>
-	insert into pack_comment values(SEQ_P_COMMENT.nextval,#{packCommentContent},sysdate,#{pack_join_no})
+	insert into pack_comment values(SEQ_P_COMMENT.nextval,#{pack_join_no},#{packCommentContent},sysdate)
 </insert>
 
-<insert id="packCommentImgWrite">
+<insert id="packCommentImgWrite" parameterType="java.util.Map">
 	<selectKey keyProperty="pack_comment_no" order="BEFORE" resultType="int">
 		select pack_comment_no from 
 		(select rownum,pack_comment_no from pack_comment where pack_join_no = 
