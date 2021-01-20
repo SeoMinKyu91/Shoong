@@ -1,6 +1,6 @@
 # Shoong
 Kosmo 7기 슝 프로젝트팀 입니다.
-#### edit by suggom
+_edit by suggom_
 
 > 사전 작업
 > 1. Tomcat 9 사양의 서버를 생성한다
