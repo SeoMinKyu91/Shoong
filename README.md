@@ -25,6 +25,7 @@ Kosmo 7기 슝 프로젝트팀 입니다.
 > <Context docBase="해당 서버의 realpath" 
 > path="독베이스의 별칭 경로" relodabl="true"/>
 > ```
+> * ex) <Context docBase="D:\JB\Workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp5\wtpwebapps\Shoong\upload" path="/fileupload" relodabl="true"/>
 > * 리얼패쓰/upload가 없으면 서버 실행 도중 에러생성됨
 > 7. db 계정 생성 후 /Shoong/src/main/resources/com/kosmo/shoong/erm에 KosmoProj.sql 실행 테이블 생성
 > 8. /Shoong/src/main/resources/com/kosmo/shoong/pack/mybatis/packinsert.sql 실행
