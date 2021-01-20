@@ -53,8 +53,13 @@ public class PackScheduleController {
 //			System.out.println("end:"+item.getPackScheduleEnd());
 			if(item!=null) {
 				jsonMap.put("title", item.getPackScheduleTitle().toString());
-				jsonMap.put("start", item.getPackScheduleStart().toString());
-				jsonMap.put("end", item.getPackScheduleEnd().toString());
+				if(item.getPackScheduleStart()!=null) {
+					jsonMap.put("start", item.getPackScheduleStart().toString());
+				}
+				if(item.getPackScheduleEnd() != null) {
+					jsonMap.put("end", item.getPackScheduleEnd().toString());
+				}
+				
 				jsonMap.put("id", item.getPackId());
 			}
 			jsonList.add(jsonMap);

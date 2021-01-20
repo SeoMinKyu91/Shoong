@@ -94,7 +94,7 @@
          </div>
 
          <div class="modal-footer">
-            <button type="button" class="btn btn-info" data-dismiss="modal" id="btnPackSchedule">등록</button>
+            <button type="button" class="btn btn-info" id="btnPackSchedule">등록</button>
             <button type="button" class="btn btn-info" data-dismiss="modal" id="btnPackScheduleClose">닫기</button>
          </div>
       </div>
@@ -316,7 +316,15 @@
       console.log('들어옴');
    })
    
-   $('#btnPackSchedule').click(function(){
+   $('#btnPackSchedule').click(function(e){
+	  e.preventDefault();
+      console.log($('#endDatePicker').val());
+      
+      if($('#endDatePicker').val()==''){
+    	  console.log('마지막 날짜 없음');
+    	  alert('마지막 날짜를 입력하세요');
+    	  return;
+      }
       $('#packSchedule').submit();
    });
    
