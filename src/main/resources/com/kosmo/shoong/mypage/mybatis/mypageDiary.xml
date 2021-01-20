@@ -11,6 +11,10 @@
    			 R.COURSE_ID = C.COURSE_ID where R.USER_ID = #{id}
 	</select>
 	
+	<select id="DiaryRecordSelectOne" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from RECORD_  where USER_ID = #{id} and RECORD_ID =#{recordId}
+	</select>
+	
 	<select id="DiarySelectList" parameterType="java.util.Map" resultType="java.util.Map">
 	SELECT S.*,
 	    (SELECT count(*) FROM DIARY_IMG C WHERE C.DIARY_CODE = S.DIARY_CODE)AS DIARY_IMG_COUNT
@@ -18,7 +22,7 @@
 	</select>
 	
 	<select id="DiarySelectOne" parameterType="java.util.Map" resultType="java.util.Map">
-			SELECT * from DIARY where DIARY_CODE=#{diaryCode}
+			SELECT * from DIARY d join RECORD_ r on d.RECORD_ID = r.RECORD_ID where DIARY_CODE=#{diaryCode}
 	</select>
 	
 	<select id="DiaryImgSelectList" parameterType="java.util.Map" resultType="java.util.Map">

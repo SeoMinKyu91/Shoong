@@ -32,7 +32,7 @@ myBatis 환경설정파일
 		<typeAlias alias="reportAdminDTO" 
 			type="com.kosmo.shoong.admin.service.ReportAdminDTO"/>
 	</typeAliases>
-
+	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
 	<mappers>
 		<!-- 유저 페이지 매퍼파일 -->
@@ -46,6 +46,7 @@ myBatis 환경설정파일
 		<mapper	resource="com/kosmo/shoong/member/mybatis/membersql.xml"/>
 		<mapper	resource="com/kosmo/shoong/mypage/mybatis/mypage.xml" />
 		<mapper	resource="com/kosmo/shoong/mypage/mybatis/mypageDiary.xml"/>
+		<mapper	resource="com/kosmo/shoong/mypage/mybatis/mypageRecord.xml"/>
 		<!-- 관리자 페이지 매퍼파일-->
 		<mapper	resource="com/kosmo/shoong/admin/mybatis/courseAdminsql.xml"/>
 		<mapper	resource="com/kosmo/shoong/admin/mybatis/homeAdminsql.xml"/>
@@ -55,5 +56,4 @@ myBatis 환경설정파일
 		<mapper	resource="com/kosmo/shoong/admin/mybatis/reportAdminsql.xml"/>
 		<mapper	resource="com/kosmo/shoong/admin/mybatis/settingAdminsql.xml"/>
 	</mappers>
-
 </configuration>

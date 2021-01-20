@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosmo.shoong.mypage.mybatis.mypageRecord">
+
+
+	
+<select id="mypageRecordSelectList" parameterType="java.util.Map" resultType="java.util.Map">
+
+select R.* , C.COURSE_NAME from RECORD_ R join COURSE C on 
+   			 R.COURSE_ID = C.COURSE_ID where R.USER_ID = #{id}
+	
+</select>
+	
+<select id="mypageRecordSelectOne" parameterType="java.util.Map" resultType="java.util.Map">
+SELECT * 
+FROM(
+    select * from RECORD_  where USER_ID = #{id}
+    ORDER BY ROWNUM DESC)
+WHERE ROWNUM = 1
+	
+</select>	
+</mapper>

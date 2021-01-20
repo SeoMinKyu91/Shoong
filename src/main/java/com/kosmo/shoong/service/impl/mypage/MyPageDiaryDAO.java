@@ -77,6 +77,12 @@ public class MyPageDiaryDAO implements MyPageDiaryService{
 		return sqlMapper.selectList("DiaryImgSelectList",map);
 	}
 
+	@Override
+	public Map recordSelectOne(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("DiaryRecordSelectOne",map);
+	}
+
 
 
 }
