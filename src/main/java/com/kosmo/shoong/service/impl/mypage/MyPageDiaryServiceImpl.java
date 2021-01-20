@@ -17,62 +17,68 @@ public class MyPageDiaryServiceImpl implements MyPageDiaryService{
 	
 	@Override
 	public List<Map> recordSelectList(Map map) {
-		// TODO Auto-generated method stub
+		////TODO Auto-generated method stub
 		return dao.recordSelectList(map);
 	}
 
 	@Override
 	public int insert(Map map) {
-		// TODO Auto-generated method stub
+		////TODO Auto-generated method stub
 		return dao.insert(map);
 	}
 
 	@Override
 	public int delete(Map map) {
-		// TODO Auto-generated method stub
+		//TODO Auto-generated method stub
 		return dao.delete(map);
 	}
 
 	@Override
 	public int update(Map map) {
-		// TODO Auto-generated method stub
+		////TODO Auto-generated method stub
 		return dao.update(map);
 	}
 
 	@Override
 	public List<Map> selectList(Map map) {
-		// TODO Auto-generated method stub
+		//TODO Auto-generated method stub
 		return dao.selectList(map);
 	}
 
 	@Override
 	public int imgInsert(Map map) {
-		// TODO Auto-generated method stub
+		////TODO Auto-generated method stub
 		return dao.imgInsert(map);
 	}
 
 	@Override
 	public Map imgSelect(Map map) {
-		// TODO Auto-generated method stub
+		////TODO Auto-generated method stub
 		return dao.imgSelect(map);
 	}
 
 	@Override
 	public int imgUpdate(Map map) {
-		// TODO Auto-generated method stub
+		////TODO Auto-generated method stub
 		return dao.imgUpdate(map);
 	}
 
 	@Override
 	public Map selectOne(Map map) {
-		// TODO Auto-generated method stub
+		////TODO Auto-generated method stub
 		return dao.selectOne(map);
 	}
 
 	@Override
 	public List<Map> imgSelectList(Map map) {
-		// TODO Auto-generated method stub
+		////TODO Auto-generated method stub
 		return dao.imgSelectList(map);
+	}
+
+	@Override
+	public Map recordSelectOne(Map map) {
+		// TODO Auto-generated method stub
+		return dao.recordSelectOne(map);
 	}
 
 }

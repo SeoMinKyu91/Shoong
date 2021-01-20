@@ -34,6 +34,8 @@
 <link rel="stylesheet" href="<c:url value="/css/icomoon.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
 
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+
 <!-- 달력 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.5.0/main.min.css,npm/fullcalendar@5.5.0/main.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.css">
@@ -101,9 +103,6 @@
 <script src="<c:url value="/js/jquery.easing.1.3.js"/>"></script>
 <script src="<c:url value="/js/jquery.waypoints.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.stellar.min.js"/>"></script>
-<!--  
-<script src="<c:url value="/js/bootstrap.min.js"/>"></script>
--->
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 

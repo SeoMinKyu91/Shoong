@@ -9,6 +9,7 @@ public interface MyPageService {
 
 	List<Map> selectList(Map map);
 	List<Map> diaryselectList(Map map);
+	
 	List<Map> chartRecordselectList(Map map);
 	int insert(Map map);
 	int delete(Map map);

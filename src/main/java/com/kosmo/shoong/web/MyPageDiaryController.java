@@ -1,6 +1,12 @@
 package com.kosmo.shoong.web;
 
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +26,7 @@ import com.kosmo.shoong.service.mypage.MyPageDiaryService;
 
 
 @Controller
-@RequestMapping("mypage/diary/")
+@RequestMapping("/mypage/diary/")
 public class MyPageDiaryController {
 
 	@Resource(name="myPageDiaryService")
@@ -29,9 +35,14 @@ public class MyPageDiaryController {
 	@RequestMapping("list.do")
 	   public String mypageDiary(@RequestParam Map map ,Model model,HttpServletRequest req) {
 	       /*유저 id 값 */
-		    map.put("id","kim");
+		  map.put("id","shoong1000@naver.com");
 		  //map.put("id", req.getSession().getAttribute("userId").toString());
-		    List recordlist = service.recordSelectList(map);
+		    List<Map> recordlist = service.recordSelectList(map);
+		    for(Map recordMap: recordlist) {
+		    	 String date = recordMap.get("RECORD_DATE").toString().substring(0,10);
+		    	 recordMap.put("RECORD_DATE",date);
+		    }
+		    //List recordlist = service.recordSelectList(map);
 		    List diarylist = service.selectList(map);
 		    model.addAttribute("diaryList",diarylist);
 		    model.addAttribute("recordList",recordlist);
@@ -42,8 +53,29 @@ public class MyPageDiaryController {
 	   }
 
 	@RequestMapping(value = "write.do" , method = RequestMethod.GET)
-	   public String mypageDiaryWritePage(@RequestParam Map map ,Model model) {
-		   model.addAttribute("recordId",map.get("recordId"));
+	   public String mypageDiaryWritePage(@RequestParam Map map ,Model model,HttpServletRequest req) throws IOException {
+		  map.put("id","shoong1000@naver.com");
+		  model.addAttribute("recordId",map.get("recordId"));
+		  //map.put("id", req.getSession().getAttribute("userId").toString());
+		
+		  /*record 지도 관련*/
+		  Map recordMap =  service.recordSelectOne(map);
+		  String filePath = req.getServletContext().getRealPath("/upload")+File.separator+recordMap.get("RECORD_FILE_NAME");
+			System.out.println("routePath:"+filePath);
+			BufferedReader br =
+					new BufferedReader(
+							new InputStreamReader(
+									new FileInputStream(new File(filePath))));
+			StringBuffer sb = new StringBuffer();
+
+			int data = -1;
+			char[] chars = new char[1024];
+
+			while((data=br.read(chars))!=-1) {
+				sb.append(chars,0,data);
+			}
+			if(br!=null) br.close();
+			model.addAttribute("mapRecord",sb.toString());
 	      return "mypage/myDiaryWrite";
 	   }
 	
@@ -51,7 +83,7 @@ public class MyPageDiaryController {
 	   public String mypageDiaryWrite(@RequestParam Map map,Model model,HttpServletRequest req) {
 		  
 		 //map.put("id", req.getSession().getAttribute("userId").toString());
-		   map.put("id","kim");
+		  map.put("id","shoong1000@naver.com");
 		  
 		  
 		   if( map.get("imgArry").toString().length() != 0) {
@@ -101,16 +133,36 @@ public class MyPageDiaryController {
 	   }
 	
 	@RequestMapping("view.do")
-	   public String mypageDiaryView(@RequestParam Map map ,Model model) {
-	       
-		    map.put("id","kim");
+	   public String mypageDiaryView(@RequestParam Map map ,Model model,HttpServletRequest req) throws IOException {
+		   //map.put("id", req.getSession().getAttribute("userId").toString());
+			map.put("id","shoong1000@naver.com");
 		    Map Diarymap  = service.selectOne(map);
+		   
+	    	String date = Diarymap .get("DIARY_DATE").toString().substring(0,10);
+	    	Diarymap .put("DIARY_DATE",date);
+
 		    List diaryImglist = service.imgSelectList(map);
 		    model.addAttribute("diaryMap",Diarymap);
 		    model.addAttribute("diaryImglist",diaryImglist);
-		   //실사용은 아래에
-		   //map.put("id", req.getSession().getAttribute("userId").toString());
-		 
+		  
+		    //
+		    String filePath = req.getServletContext().getRealPath("/upload")+File.separator+Diarymap.get("RECORD_FILE_NAME");
+			System.out.println("routePath:"+filePath);
+			BufferedReader br =
+					new BufferedReader(
+							new InputStreamReader(
+									new FileInputStream(new File(filePath))));
+			StringBuffer sb = new StringBuffer();
+
+			int data = -1;
+			char[] chars = new char[1024];
+
+			while((data=br.read(chars))!=-1) {
+				sb.append(chars,0,data);
+			}
+			if(br!=null) br.close();
+			model.addAttribute("mapRecord",sb.toString());
+		    
 	      return "mypage/myDiaryView";
 	   }
 	
