@@ -2,21 +2,21 @@ package com.kosmo.shoong.service.impl.pack;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.kosmo.shoong.service.pack.PackScheduleDTO;
 import com.kosmo.shoong.service.pack.PackScheduleEventsDTO;
 import com.kosmo.shoong.service.pack.PackScheduleService;
 
 @Service("scheduleServiceImpl")
 public class PackScheduleServiceImpl implements PackScheduleService{
-	
+
 	@Resource(name="scheduleDAO")
 	private PackScheduleDAO dao;
-	
+
 
 	@Override
 	public List<Map> scheduleSelectList(Map map) {
@@ -38,7 +38,7 @@ public class PackScheduleServiceImpl implements PackScheduleService{
 
 	@Override
 	public int scheduleInsert(Map map) {
-		
+
 		return dao.scheduleInsert(map);
 	}////////
 
@@ -73,6 +73,8 @@ public class PackScheduleServiceImpl implements PackScheduleService{
 	}
 
 	public List<PackScheduleEventsDTO> jsonForm(Map map) {
+		Set keys = map.keySet();
+		for(Object key:keys) System.out.println(key+":"+map.get(key));
 		// TODO Auto-generated method stub
 		return dao.jsonForm(map);
 	}

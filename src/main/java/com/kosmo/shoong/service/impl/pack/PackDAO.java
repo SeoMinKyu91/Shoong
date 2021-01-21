@@ -64,10 +64,4 @@ public class PackDAO implements PackService {
 		
 		return sqlMapper.selectOne("PackNameCheckSelect",map);
 	}
-
-	@Override
-	public Map selectOneUserAddr(Map map) {
-		// TODO Auto-generated method stub
-		return sqlMapper.selectOne("UserAddrCheckSelect",map);
-	}
 }

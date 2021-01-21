@@ -63,11 +63,5 @@ public class PackServiceImpl implements PackService{
 		// TODO Auto-generated method stub
 		return packDAO.selectPackName(map);
 	}
-
-	@Override
-	public Map selectOneUserAddr(Map map) {
-		// TODO Auto-generated method stub
-		return packDAO.selectOneUserAddr(map);
-	}
 	
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" 
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
@@ -34,9 +34,19 @@
 <link rel="stylesheet" href="<c:url value="/css/icomoon.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
 
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<!-- 달력 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.5.0/main.min.css,npm/fullcalendar@5.5.0/main.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- 모달 -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+<!-- 제이쿼리 UI용 CSS -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 <!-- mapbox core-->
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
@@ -50,11 +60,15 @@
 	href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
 	type="text/css" />
 <!-- mapbox draw -->
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css' type='text/css' />
+<link 
+	rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css' type='text/css' />
 
+<!-- mapbox core-->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
 <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
 <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -81,13 +95,16 @@
 			stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 </div>
 
-<script src="<c:url value="/js/jquery.min.js"/>"></script>
 <script src="<c:url value="/js/jquery-migrate-3.0.1.min.js"/>"></script>
-<script src="<c:url value="/js/popper.min.js"/>"></script>
-<script src="<c:url value="/js/bootstrap.min.js"/>"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<c:url value="/js/jquery.easing.1.3.js"/>"></script>
 <script src="<c:url value="/js/jquery.waypoints.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.stellar.min.js"/>"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="<c:url value="/js/popper.min.js"/>"></script>
 <script src="<c:url value="/js/owl.carousel.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.magnific-popup.min.js"/>"></script>
 <script src="<c:url value="/js/aos.js"/>"></script>
@@ -95,13 +112,22 @@
 <script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
 <script src="<c:url value="/js/jquery.timepicker.min.js"/>"></script>
 <script src="<c:url value="/js/scrollax.min.js"/>"></script>
+<!-- 달력 
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/locales-all.min.js"></script>
+-->
+<!-- 지도 -->
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
 <script
-	src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4aaa4b242f112a823dd2ef5541569589&libraries=services,clusterer"></script>
+   src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+<script 
+   src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
+<script 
+   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4aaa4b242f112a823dd2ef5541569589&libraries=services,clusterer"></script>
+
 <script src="<c:url value="/js/main.js"/>"></script>
+
 
 </body>
 </html>

@@ -32,11 +32,11 @@ public class MemberController {
 
 	@Resource(name="galleryService")
 	private GalleryService galleryService;
-
+	
 	@Resource(name="courseService")
 	private CourseService courseService;
-
-
+	
+	
 	/////회원 가입//////
 
 	//회원가입 입력폼
@@ -187,17 +187,19 @@ public class MemberController {
 	//로그인 처리]
 	@RequestMapping(value = "Login.do",method = RequestMethod.POST)
 	public String loginOk(HttpSession session, @RequestParam Map map,HttpServletRequest req) {
-
+		
 		session = req.getSession();
 		boolean flag = memberService.isMember(map);
-
+		
 		Map mamberHasPack = memberService.memberHasPack(map);
 		if(flag) {
 			session.setAttribute("userId", map.get("userId"));
 			if(mamberHasPack != null) {
+				System.out.println("memberHasPack:"+mamberHasPack.get("PACK_ID"));
 				session.setAttribute("packId", mamberHasPack.get("PACK_ID"));
+				
 			}
-
+			
 		}
 		else {
 			session.setAttribute("error", "아이디와 비밀번호가 일치하지 않습니다.");
@@ -227,7 +229,8 @@ public class MemberController {
 	}///////guestLogin
 
 	//ID/PW 찾기용]
-
+	
+	
 	////
 	@RequestMapping("/mypage.do")
 	public String mypage(HttpServletRequest req, Map map, Model model) {
@@ -249,7 +252,7 @@ public class MemberController {
 		//model.addAttribute("courseList", courselists);
 		return "mypage/mypage";
 	}
-
+		
 	@RequestMapping("/myInfoEdit.do")
 	public String myInfoEdit(HttpServletRequest req, Map map, Model model) {
 		map.put("userId", req.getSession().getAttribute("userId").toString());
@@ -258,5 +261,5 @@ public class MemberController {
 		System.out.println(memberInfo);
 		return "mypage/myInfoEdit";
 	}
-
+	
 }/////class

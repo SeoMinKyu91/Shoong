@@ -127,5 +127,12 @@ public class CourseController {
 		obj.put("fileName", renameFilename);
 		return obj.toJSONString();
 	}
+	
+	@RequestMapping("/mainTest.do")
+	public String courseMainTest(Map map) {
+		map.put("user_ID","kim");
+		
+		return "course/CourseMainTest";
+	}
 
 }

@@ -2,39 +2,34 @@ package com.kosmo.shoong.service.pack;
 
 import java.sql.Date;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class PackScheduleEventsDTO {
-	private String id;
-	private String title;
-	private Date start;
-	private Date end;
-	
-	public String getId() {
-		return id;
+	private String packId;
+	private String packScheduleTitle;
+	private Date packScheduleStart;
+	private Date packScheduleEnd;
+
+	public String getPackId() {
+		return packId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setPackId(String packId) {
+		this.packId = packId;
 	}
-	public String getTitle() {
-		return title;
+	public String getPackScheduleTitle() {
+		return packScheduleTitle;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setPackScheduleTitle(String packScheduleTitle) {
+		this.packScheduleTitle = packScheduleTitle;
 	}
-	public Date getStart() {
-		return start;
+	public Date getPackScheduleStart() {
+		return packScheduleStart;
 	}
-	public void setStart(Date start) {
-		this.start = start;
+	public void setPackScheduleStart(Date packScheduleStart) {
+		this.packScheduleStart = packScheduleStart;
 	}
-	public Date getEnd() {
-		return end;
+	public Date getPackScheduleEnd() {
+		return packScheduleEnd;
 	}
-	public void setEnd(Date end) {
-		this.end = end;
+	public void setPackScheduleEnd(Date packScheduleEnd) {
+		this.packScheduleEnd = packScheduleEnd;
 	}
 }

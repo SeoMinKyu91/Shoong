@@ -45,15 +45,15 @@
 		 -->
 		SELECT diary_img_name
 		FROM diary_img i JOIN (SELECT diary_code,t1.* FROM diary d JOIN 
-			(SELECT r.user_id,r.record_id FROM member_ m JOIN record r ON m.user_id=r.user_id WHERE m.user_id=#{userId}) t1 
-				ON d.record_id=t1.record_id ) t2 ON i.diary_code = t2.diary_code
+		(SELECT r.user_id,r.record_id FROM member_ m JOIN record r ON m.user_id=r.user_id WHERE m.user_id=#{userId}) t1 
+		ON d.record_id=t1.record_id ) t2 ON i.diary_code = t2.diary_code
 	</select>
 	
 	<select id="imgFirst" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT i.diary_img_name, t2.*
 		FROM diary_img i JOIN (SELECT * FROM diary d  
-		JOIN (SELECT * FROM member m
-		JOIN record r ON m.user_id = r.user_id WHERE m.user_id =#{userId}) t1 
+		JOIN (SELECT * FROM member_ m
+		JOIN record_ r ON m.user_id = r.user_id WHERE m.user_id =#{userId}) t1 
 		ON d.record_id = t1.record_id) t2 ON i.diary_code = t2.diary_code
 	</select>
 	
@@ -100,6 +100,10 @@
 	
 	<select id="memberHasPack" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT pack_id FROM pack_join WHERE user_id=#{userId} AND pack_join_accept='yes'
+	</select>
+
+	<select id="memberEditList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM member_ WHERE user_id=#{userId}
 	</select>
 	
 </mapper>

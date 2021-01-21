@@ -5,9 +5,7 @@
   
 <mapper namespace="com.kosmo.shoong.pack.mybatis.packschedulesql">
 
-
-
-<resultMap type="packScheduleDTO" id="packScheduleResult">
+	<resultMap type="packScheduleDTO" id="packScheduleResult">
 		<result property="packScheduleNo" column="PACK_SCHEDULE_NO"/>
 		<result property="userId" column="USER_ID"/>
 		<result property="packId" column="PACK_ID"/>
@@ -15,24 +13,27 @@
 		<result property="packScheduleEnd" column="PACK_SCHEDULE_END"/>
 		<result property="packScheduleTitle" column="PACK_SCHEDULE_TITLE"/>
 		<result property="packScheduleContent" column="PACK_SCHEDULE_CONTENT"/>
-</resultMap>
-
-<resultMap type="packScheduleEventsDTO" id="packScheduleEventsResult">
-		<result property="id" column="PACK_SCHEDULE_NO"/>
-		<result property="title" column="PACK_SCHEDULE_TITLE"/>
-		<result property="start" column="PACK_SCHEDULE_START"/>
-		<result property="end" column="PACK_SCHEDULE_END"/>
-</resultMap>
+	</resultMap>
+	
+	<resultMap type="packScheduleEventsDTO" id="packScheduleEventsResult">
+		<result property="packId" column="PACK_SCHEDULE_NO"/>
+		<result property="packScheduleTitle" column="PACK_SCHEDULE_TITLE"/>
+		<result property="packScheduleStart" column="PACK_SCHEDULE_START"/>
+		<result property="packScheduleEnd" column="PACK_SCHEDULE_END"/>
+	</resultMap>
 
 	<insert id="scheduleInsert" parameterType="java.util.Map">
 		insert into pack_schedule values(SEQ_P_SCHEDULE.NEXTVAL,#{userId},#{packId},#{packScheduleStart},#{packScheduleEnd},#{packScheduleTitle},#{packScheduleContent})
 	</insert>
 	
 	<select id="scheduleSelectList" parameterType="java.util.Map" resultType="java.util.Map">
-		select * from pack_schedule where pack_id = #{packId}
+		SELECT * FROM pack_schedule WHERE pack_id = #{packId}
 	</select>
+	
 	<select id="jsonForm" parameterType="java.util.Map" resultMap="packScheduleEventsResult">
-		select pack_schedule_no,pack_schedule_title, pack_schedule_start, pack_schedule_end from pack_schedule where pack_id = #{packId}
+		SELECT pack_schedule_no,pack_schedule_title,pack_schedule_start,pack_schedule_end 
+		FROM pack_schedule 
+		WHERE pack_id=#{packId}
 	</select>
 	
 	<select id="scheduleSelectOne" parameterType="java.util.Map" resultType="java.util.Map">
@@ -47,6 +48,5 @@
 	<delete id="scheduleDelete" parameterType="java.util.Map">
 		delete from pack_schedule where pack_schedule_no = #{packScheduleNo}
 	</delete>
-
 
 </mapper>

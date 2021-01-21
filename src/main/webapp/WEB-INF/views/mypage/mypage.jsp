@@ -3,202 +3,311 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-<link rel="stylesheet" href="<c:url value="/css/test.css"/>">
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-<!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
-	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Chart.js -->
+<script src="<c:url value="/admin/js/Chart.min.js"/>"></script>
 
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-	
 <style>
-.swiper-container {
-	height: 250px;
-	margin-right: 10%
+.myPageSection{
+border:1px solid #bbbbbb;
+margin : 10px;
+padding: 10px;
 }
-
-.swiper-slide {
-	text-align: center;
-	display: flex; /* 내용을 중앙정렬 하기위해 flex 사용 */
-	align-items: center; /* 위아래 기준 중앙정렬 */
-	justify-content: center; /* 좌우 기준 중앙정렬 */
+.cardDiv{
+   margin-top: 20px;
+   }
+.single-location{
+   position:relative;
+   }
+.single-location .location-img{
+   border-radius:10px;overflow:hidden;position:relative;z-index:0
 }
-
-.swiper-slide img {
-	box-shadow: 0 0 5px #555;
-	max-width: 100%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
-	/* 이 예제에서 필요해서 설정했습니다. 상황에따라 다를 수 있습니다. */
-	
+.single-location .location-img::before
+{
+   position:absolute;width:100%;height:50%;bottom:0;content:"";z-index:1
 }
-
-/* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-    
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 50%; /* Could be more or less, depending on screen size */                          
-        }
-        /* The Close Button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-
+.single-location .location-img img{
+   width:100%;  height: 170px;transform:scale(1);transition:all .5s ease-out 0s
+}
+.single-location .location-details{
+   width:100%;
+   position:absolute;left:70%;bottom:-9px;-webkit-transition:all .2s ease-out 0s;
+   -moz-transition:all .2s ease-out 0s;
+   -ms-transition:all .2s ease-out 0s;-o-transition:all .2s ease-out 0s;transition:all .2s ease-out 0s
+   }
+.single-location .location-details .location-btn{
+   padding:10px 20px;background:#fff;color:#333333;border-radius:30px;opacity:0;visibility:hidden;
+   font-family: 'Do Hyeon', sans-serif;
+   }
+.card-body:hover .location-img img{
+   transform:scale(1.1)
+   }
+.card-body:hover .location-details{
+   bottom:7%
+   }
+.card-body:hover .location-details .location-btn{
+   opacity:1;visibility:visible;
+   }
+.card-title{
+   font-size: 20px;
+}.card-body{
+   padding: 5px;
+   border:1px solid #eeeeee;
+}
+.lineMain{
+   margin: 30px;
+}
+.badgeImg{
+   border-radius: 50%;
+   width:100px;
+   height: 100px;
+   margin-right: 15px;
+}
+#inlineInfo{
+   background-color: #FBF8EF;
+   box-shadow: 0px 0px 5px #787878;
+   border-radius: 10px;
+   padding: 20px;
+   margin: 10px;
+}
+.inlineInfo{
+   background-color: #FBF8EF;
+   box-shadow: 0px 0px 5px #787878;
+   border-radius: 10px;
+   padding: 20px;
+   margin: 10px;
+}
+.progbar{
+   border: 1px solid #BDBDBD;
+   border-radius: 10px;
+   margin: 10px;
+   background-color: white;
+}
+.buttonbar{
+   font-size: 1em;
+   display: inline-block;
+   margin-left: 30px;
+}
+.namebar{
+   font-size: 2em;
+}#id{
+   height: 100px;
+}
 
 </style>
 
-<div id="colorlib-main" style="padding-top: 30px; padding-left: 30px">
-	<div style="display: inline-block; width: 80%;">
-		<strong>${name}</strong><span>님</span>
-		<a href='<c:url value="/Member/myInfoEdit.do"/>'>정보수정</a>
-	</div>
-	<div style="width: 40%; display: inline-block; margin-right: 8%">
-		<a style="float: right" href="<c:url value="/"/>">주행시작</a>
-		<table
-			class="table table-bordered table-hover table-condensed text-center">
-			<!-- 테이블 컬럼폭은 col-*-*계열로 설정 -->
-			<tr style="height: 10px">
-				<span>나의 기록</span>
-			</tr>
-			<c:if test="${empty courseList }" var="isEmpty">
-				<tr>
-					<td colspan="6">등록된 게시물이 없어요</td>
-				</tr>
-			</c:if>
-			<c:if test="${!isEmpty}">
-
-				<c:forEach var="item" items="${courseList}">
-					<tr>
-						<td class="text-left" colspan="12"><a
-							href="<c:url value="/"/>"> ${item.COURSE_NAME}</a></td>
-					</tr>
-					<tr>
-						<td>${item.COURSE_DATE}</td>
-						<td>${item.COURSE_TIME}시간</td>
-						<td>${item.COURSE_LENGTH}km</td>
-						<td>${item.COURSE_REGION}</td>
-					</tr>
-				</c:forEach>
-			</c:if>
-		</table>
-		<a href='<c:url value="/"/>' style="float: right">더보기</a>
-	</div>
-	<div style="display: inline-block;">
-		<a>다이어리 바로가기</a>
-	</div>
-	<div style="margin-top: 10px">
-		<span>갤러리</span>
-		<div class="swiper-container">
-			<div class="swiper-wrapper">
-				<c:if test="${empty imgList }" var="isEmpty">
-					<span style="text-align: center">등록된 이미지가 없어요</span>
-				</c:if>
-				<c:if test="${!isEmpty}">
-					<c:forEach var="item" items="${imgList}" varStatus="status">
-						<div class="swiper-slide">
-								<img src="<c:url value='/images/gallery/${item.DIARY_IMG_NAME}'/>"
-								id="${status.count}" data-toggle="modal" data-target="#myModal" onclick="modalClick(id);" >
-						</div>
-					</c:forEach>
-				</c:if>
-			</div>
-			<!-- 네비게이션 -->
-			<div class="swiper-button-next"></div>
-			<!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-			<div class="swiper-button-prev"></div>
-			<!-- 이전 버튼 -->
-
-			<!-- 페이징 -->
-			<div class="swiper-pagination"></div>
-		</div>
-		<a href='<c:url value="/myGallery.do"/>'
-			style="float: right; margin-right: 15%">더보기</a>
-	</div>
-
-	<!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog" data-backdrop="false"> <!-- 사용자 지정 부분① : id명 -->
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">×</button>
-          <h4 class="modal-title">모달 창 타이틀</h4> <!-- 사용자 지정 부분② : 타이틀 -->
-          
-        </div>
-        <div class="modal-body">
-          <p>여기에 필요한 텍스트 메시지 넣기</p> <!-- 사용자 지정 부분③ : 텍스트 메시지 -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
+<div id="colorlib-main">
+   <div  class="lineMain">
+	   <!--뱃지사진 + 마일리지  -->
+	   <div class="row col-sm-12" id="inlineInfo">
+	      <div class= "col-xs-12">
+	         <div style="display: inline-block; width: 80%;">
+	            <c:if test="${not empty sessionScope.userId}" var="isEmpty">				
+		            <img class="badgeImg" src='<c:url value="/images/badge/speedBadge.png"/>' alt="뱃지이미지">      
+		            <strong class="namebar">${sessionScope.userId}</strong>
+		            <a href='<c:url value="/Member/myInfoEdit.do"/>' class="btn btn-primary buttonbar">정보수정</a>
+		        </c:if>		
+				<c:if test="${!isEmpty}">	
+					<img class="badgeImg" src='<c:url value="/images/badge/speedBadge.png"/>' alt="뱃지이미지">      
+		            <strong class="namebar">장동건</strong>
+		            <a href='<c:url value="/Member/myInfoEdit.do"/>' class="btn btn-primary buttonbar">정보수정</a>
+	        	</c:if>
+	         </div>
+	         <!-- progress바 _ 부트스트랩 -->
+		      <div class="row col-sm-12 ">
+		         <div class= "col-xs-12 progbar">
+		         <h4>이달의 마일리지</h4>
+		            <div class="progress">
+		              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="width: 68%">
+		                 ${totalLength}km
+		              </div>
+		            </div>
+		         </div>
+		      </div>
+		   </div>
+	    </div>
+	<!-- -<div class="row">
+     <div class="col-xs-12 col-md-6">
+     <!-- 나의 기록  -->
+     <div class="row"> 
+   
+        <div class="col-xs-12 col-md-6">
+         	<div class="inlineInfo  col-xs-12">
+	    		<div class="myPageSection" style="background-color: white;"> 
+		      		<h3>나의 기록<small>상세</small></h3>
+		         	<canvas id="lineChart"></canvas>
+	      		</div>
+    		</div>
+    		<div class="inlineInfo  col-xs-12">
+	        	<div class="myPageSection" style="background-color: white;">       
+	          		<h3>최근 라이딩<small><a href='<c:url value="/mypage/record/list.do"/>'>전체보기</a></small></h3>
+			       	 <div  id="map"></div> 
+			     </div>
+   		 	</div>
+    	</div>
+     <div class="col-xs-12 col-md-6 ">
+     	<div class="col-xs-12 inlineInfo ">
+		<div class=" storyRow">
+         <div class="col-xs-12 ">
+            <h3>다이어리<small><a href='<c:url value="/mypage/diary/list.do"/>'>전체보기</a></small></h3>
+         </div>
+         <c:if test="${empty diaryList}" var="isEmpty">
+            <h3>다이어리가 없어요.</h3>
+            <button type="submit" class="btn btn-default">지금 달리러 가기</button>      
+         </c:if>
+         <c:if test="${!isEmpty}">
+            <c:forEach var="item" items="${diaryList}">        
+               <div class="col-xs-6 cardDiv">
+            <article class="card shadow">
+               <div class="card-body">
+                  <div class="single-location mb-30">
+                     <div class="location-img">
+                        <c:if test="${empty item.DIARY_THUMBNAIL }" var="isEmpty">
+                        <img src='<c:url value="/images/bg_1.jpg"/>' alt="다이어리">
+                        </c:if>
+                        <c:if test="${!isEmpty}">
+                        <img src=/fileupload/${item.DIARY_THUMBNAIL} alt="다이어리 ">
+                        </c:if>
+                     </div>
+                     <div class="location-details">
+                        <span class="location-btn">
+                           <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>${item.DIARY_IMG_COUNT}
+                        </span>
+                     </div>   
+                  </div>
+                   <a href='<c:url value="/mypage/diary/view.do?diaryCode=${item.DIARY_CODE }"/>'>${item.DIARY_TITLE}</a>
+                  </div>
+            </article>
+         </div>         
+            </c:forEach>
+         </c:if>
+   				</div>
+     		</div>
+   		</div>
+	</div> 
 </div>
+</div>   	
+
+
+
 
 <script>
-	new Swiper('.swiper-container', {
+//색 투명도로 조절할 것
+if ($('#lineChart').length){	
+	 
+	//var arrLables =["1일", "5일", "10일", "15일", "20일", "25일", "30일"];
+	//var arrData =[2, 7, 15, 20, 30, 40,80];
+	
+	var arrLength =[];
+	var arrDate =[];
+	
+	<c:if test="${!empty chartList}">
+	 	<c:forEach var="item" items="${chartList}">        
+	 		arrLength.push(${item.chartLength});
+	 		arrDate.push("${item.chartDate}일");
+	    </c:forEach>
+ 	</c:if>
 
-		slidesPerView : 5, // 동시에 보여줄 슬라이드 갯수
-		spaceBetween : 30, // 슬라이드간 간격
-		slidesPerGroup : 5, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
-
-		// 그룹수가 맞지 않을 경우 빈칸으로 메우기
-		// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
-		loopFillGroupWithBlank : true,
-
-		loop : true, // 무한 반복
-
-		pagination : { // 페이징
-			el : '.swiper-pagination',
-			clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
-		},
-		navigation : { // 네비게이션
-			nextEl : '.swiper-button-next', // 다음 버튼 클래스명
-			prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+	  var ctx = document.getElementById("lineChart");
+	  var lineChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+		  labels: arrDate,
+		  datasets: [{
+			label: "주행거리(Km)",
+			backgroundColor: "rgba(255, 100, 15, 0.31)",
+			borderColor: "rgba(255, 100, 15, 0.7)",
+			pointBorderColor: "rgba(255, 100, 15, 0.7)",
+			pointBackgroundColor: "rgba(255, 100, 15, 0.7)",
+			pointHoverBackgroundColor: "#fff",
+			pointHoverBorderColor: "rgba(220,220,220,1)",
+			pointBorderWidth: 1,
+			data: arrLength,
+		  }]
 		},
 	});
-	
-	function modalClick(id) {
+}//if()
 		
-		console.log(id+"클릭");
-	}
 
+function mapStart(){
+	mapboxgl.accessToken = 'pk.eyJ1Ijoid2t1bmdoOTMiLCJhIjoiY2tpd2hpNnZ0MHF3YzMwcnd5ZG1obzh2biJ9.EW26scaL6pDX7yQhFNnwMw';
+
+	var monument = [ 126.87870025634767, 37.478732138068445 ];
 	
+	var imgarr = [];
+
+	var map = new mapboxgl.Map({
+		container : 'map',
+		style : 'mapbox://styles/mapbox/streets-v11',
+		center : monument,
+		zoom : 11
+	})
+
+	map.addControl(new MapboxDirections({
+		accessToken : mapboxgl.accessToken
+	}), 'bottom-left');
 	
+	//주소검색기 컨트롤러 얻어옴
+	var geocoder = new MapboxGeocoder({
+		accessToken : mapboxgl.accessToken,
+		mapboxgl : mapboxgl
+	});
+	
+
+	//맵박스 현재위치 컨트롤러
+	map.addControl(new mapboxgl.GeolocateControl({
+		positionOptions : {
+			enableHighAccuracy : true
+		},
+		trackUserLocation : true
+	}));
+	
+	//지오코더가 결과를 반환할 때 마커를 생성한다
+	geocoder.on('result', function(data) {
+		// Capture the result coordinates
+		var point = data.result.center; 
+		// Add the marker to the map at the result coordinates
+		marker.setLngLat(point).addTo(map); 
+	});
+	
+	mapRecordUpload(map);
+	
+}//mapStart()
+
+function mapRecordUpload(map){
+	map.on('load', function(){ // 이부분 있어야 바로 로드 가능
+	<c:if test="${!empty mapRecord}">
+	var data = ${mapRecord}
+	var json = data.features[0];
+	console.log('data:%O',data.features[0]);
+	
+	map.addSource('route', {
+		"type":"geojson",
+		"data":json
+	});
+	map.addLayer({
+		'id': 'route',
+		'type': 'line',
+		'source': 'route',
+		'layout': {
+			'line-join': 'round',
+			'line-cap': 'round'
+		},
+		'paint': {
+			'line-color': '#ff0000',
+			'line-width': 8
+		}
+	});
+	map.setCenter(data.features[0].geometry.coordinates[0][0]);
+	map.setZoom(11);
+</c:if>
+});
+}//mapRecordUpload()
+
+
+$(function(){
+mapStart();
+})//로드시 스타트
 </script>

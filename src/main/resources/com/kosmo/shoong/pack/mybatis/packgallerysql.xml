@@ -14,8 +14,12 @@
 <select id="PackGallerySelectList" parameterType="java.util.Map" resultMap="packGalleryDTOResult">
 	SELECT * from PACK_GALLERY
 </select>
+
 <insert id="PackGalleryInsert" parameterType="java.util.Map">
-	insert into PACK_GALLERY values(SEQ_P_GALLERY.nextval,#{joinId},#{pictureName})
+	<selectKey keyProperty="pack_join_no" order="BEFORE" resultType="int">
+      select pack_join_no from pack_join where user_id = #{userId}
+   	</selectKey>
+	insert into PACK_GALLERY values(SEQ_P_GALLERY.nextval,#{pictureName},#{pack_join_no})
 </insert>
 <delete id="PackGalleryDelete" parameterType="java.util.Map">
 	delete from PACK_GALLERY WHERE PICTURE_NAME = #{filename}
