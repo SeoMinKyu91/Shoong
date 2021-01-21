@@ -44,7 +44,7 @@ ul li label{
 	border: 5px lightgrey solid;
 	list-style: none; 
 	padding: 35px; 
-	height:455px;
+	height:448px;
 	background-color: white;
 }
 
