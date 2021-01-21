@@ -30,7 +30,7 @@
 <div id="colorlib-main" style="padding:20px">
 	<div class="row">
 		<div class="col-lg-12" style="padding-bottom:20px">
-			<div class="" style="padding-top:20px">
+			<div class="">
 				<a href="<c:url value="/pack/main.do"/>">
 				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
 					style="width: 80px;"></a>
@@ -57,12 +57,12 @@
 						<form class="form-inline" method="post"
 							action="<c:url value="/pack/main.do"/>">
 							<div class="packAddr" style="font-size: 30px;">
-								<span style="font-size: .8em; font-weight: bold;padding-left:10px">[<span id="packRegionSearch"></span>] 근처 팩</span> &nbsp;
+								<span style="font-size: .8em; font-weight: bold;padding-left:10px;color:white;">[<span id="packRegionSearch"></span>] 근처 팩</span> &nbsp;
 							</div>
 							<input type="text" class="form-group" name="searchWord"
 								style="width: 200px; height:30px;border-radius: 10px;border-color: #333333;"/>
-							<button class="glyphiconBtn" style="background-color: white;border: none;font-size: 20px;">
-								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							<button class="searchBtn btn btn-sm" style="border: white solid 1px;background-color:#bdc3c7;padding-left:10px;">
+								<img class="btn-img" src='<c:url value="/images/search.png"/>' style="width:20px; height: 20px;"/>
 							</button>
 						</form>
 					</th>
@@ -204,8 +204,6 @@
 	            //if문
 	            
 	        }
-
-	 		
 	 		//0-2]사용자 위치 구하기 실패시
 	 		function error(position){
 	 			displayKaKaoMap(37.57801416976735,  126.97658868798284 );

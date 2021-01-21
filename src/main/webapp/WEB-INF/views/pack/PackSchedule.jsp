@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
-
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js"></script>
@@ -20,7 +19,6 @@
 <style>
 
   body {
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
   }
 
@@ -36,30 +34,19 @@
 
 </style>
 
-<div id="colorlib-page">
    <div id="colorlib-main">
-      
       <div class="row">
          <div class="col-lg-12">
             <div class="section-tittle text-center mb-80 col-lg-12" >
-               <h1 style="margin-top: 30px;">Shoong <small>팩 일정</small></h1>
+               <h1 style="margin-top: 30px;">일정</h1>
             </div>
                
          </div>
       </div>
       <hr>
-      <div id="calendar"></div>
-      
-      
-      
-      
-
-      
-
+      <div id="calendar" style=""></div>
    </div>
    <!-- END COLORLIB-MAIN -->
-</div>
-<!-- END COLORLIB-PAGE -->
 
 <!-- 팩 일정 등록 모달창 시작 -->
 <div class="modal fade" id="packScheduleInsertModal" data-backdrop="false">
