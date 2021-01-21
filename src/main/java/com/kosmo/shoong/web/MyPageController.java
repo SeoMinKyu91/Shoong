@@ -33,58 +33,58 @@ public class MyPageController {
 	private MyPageRecordService recordService;
 
 	@RequestMapping("main.do")
-	   public String mypageMain(@RequestParam Map map ,Model model,HttpServletRequest req) throws IOException {
-		/*유저 id 값 */
-	    //map.put("id","shoong1000@naver.com");
-	   map.put("id", req.getSession().getAttribute("userId").toString());
+	public String mypageMain(@RequestParam Map map, Model model, HttpServletRequest req) throws IOException {
+		/* 유저 id 값 */
+		// map.put("id","shoong1000@naver.com");
+		map.put("id", req.getSession().getAttribute("userId").toString());
 
-	    /*코스 관련*/
-		 List<Map> recordList = Service.chartRecordselectList(map);
-		 List<Map> chartList = new Vector<Map>();
+		/* 코스 관련 */
+		List<Map> recordList = Service.chartRecordselectList(map);
+		List<Map> chartList = new Vector<Map>();
 
-		 float totalLength = 0 ;
-		 for(Map recordMap : recordList) {
-			 Map chartMap = new HashMap();
-			 float length =  Float.valueOf((recordMap.get("RECORD_LENGTH").toString()));
-			 totalLength += length;
-			 chartMap.put("chartLength", String.format("%.1f", length));
+		float totalLength = 0;
+		for (Map recordMap : recordList) {
+			Map chartMap = new HashMap();
+			float length = Float.valueOf((recordMap.get("RECORD_LENGTH").toString()));
+			totalLength += length;
+			chartMap.put("chartLength", String.format("%.1f", length));
 
-			 String dateStr =  recordMap.get("RECORD_DATE").toString();
-			 String date[] = dateStr.substring(0,dateStr.lastIndexOf(" ")).split("-");
-			 System.out.println(date[2]);
-			 chartMap.put("chartDate", date[2]);
-			 chartList.add(chartMap);
-		 };
+			String dateStr = recordMap.get("RECORD_DATE").toString();
+			String date[] = dateStr.substring(0, dateStr.lastIndexOf(" ")).split("-");
+			System.out.println(date[2]);
+			chartMap.put("chartDate", date[2]);
+			chartList.add(chartMap);
+		}
 
-		 model.addAttribute("totalLength",String.format("%.1f", totalLength));
-		 model.addAttribute("chartList",chartList);
+		model.addAttribute("totalLength", String.format("%.1f", totalLength));
+		model.addAttribute("chartList", chartList);
 
+		/* 다이어리 관련 */
+		List diaryList = Service.diaryselectList(map);
+		model.addAttribute("diaryList", diaryList);
 
-		 /*다이어리 관련 */
-		  List diaryList = Service.diaryselectList(map);
-		  model.addAttribute("diaryList",diaryList);
-
-		  /*record 지도 관련*/
-		  Map recordMap =  recordService.selectOne(map);
-		  String filePath = req.getServletContext().getRealPath("/upload")+File.separator+recordMap.get("RECORD_FILE_NAME");
-			System.out.println("routePath:"+filePath);
-			BufferedReader br =
-					new BufferedReader(
-							new InputStreamReader(
-									new FileInputStream(new File(filePath))));
+		/* record 지도 관련 */
+		Map recordMap = recordService.selectOne(map);
+		if (recordMap != null) {
+			String filePath = req.getServletContext().getRealPath("/upload") + File.separator
+					+ recordMap.get("RECORD_FILE_NAME");
+			System.out.println("routePath:" + filePath);
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(filePath))));
 			StringBuffer sb = new StringBuffer();
 
 			int data = -1;
 			char[] chars = new char[1024];
 
-			while((data=br.read(chars))!=-1) {
-				sb.append(chars,0,data);
+			while ((data = br.read(chars)) != -1) {
+				sb.append(chars, 0, data);
 			}
-			if(br!=null) br.close();
-			model.addAttribute("mapRecord",sb.toString());
+			if (br != null)
+				br.close();
+			model.addAttribute("mapRecord", sb.toString());
+		}
 
-	      return "mypage/mypage";
-	   }
+		return "mypage/mypage";
+	}
 
 
 
