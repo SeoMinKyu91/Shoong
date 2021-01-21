@@ -56,4 +56,5 @@ insert into DIARY_IMG values(416,309,'diaryImg_sample1_4.jpg','소제목1','소�
 insert into DIARY_IMG values(417,310,'diaryImg_sample2_1.jpg','소제목1','소제목1 내용');
 insert into DIARY_IMG values(418,310,'diaryImg_sample2_2.jpg','소제목2','소제목2 내용');
 insert into DIARY_IMG values(419,310,'diaryImg_sample2_3.jpg','소제목3','소제목3 내용');
-insert into DIARY_IMG values(420,310,'diaryImg_sample3_1.jpg','소제목4','소제목4 내용');--레코드 임시 데이터 
+insert into DIARY_IMG values(420,310,'diaryImg_sample3_1.jpg','소제목4','소제목4 내용');
+--레코드 임시 데이터 
