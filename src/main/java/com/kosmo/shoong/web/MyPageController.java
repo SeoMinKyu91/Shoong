@@ -36,7 +36,12 @@ public class MyPageController {
 	public String mypageMain(@RequestParam Map map, Model model, HttpServletRequest req) throws IOException {
 		/* 유저 id 값 */
 		// map.put("id","shoong1000@naver.com");
-		map.put("id", req.getSession().getAttribute("userId").toString());
+		if(req.getSession().getAttribute("userId")!=null) {
+			System.out.println("mypageMain:"+req.getSession().getAttribute("userId").toString());
+			map.put("id", req.getSession().getAttribute("userId").toString());
+		} else {
+			map.put("id","shoong1900@naver.com");
+		}
 
 		/* 코스 관련 */
 		List<Map> recordList = Service.chartRecordselectList(map);
