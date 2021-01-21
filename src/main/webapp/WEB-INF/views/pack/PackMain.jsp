@@ -57,12 +57,12 @@
 						<form class="form-inline" method="post"
 							action="<c:url value="/pack/main.do"/>">
 							<div class="packAddr" style="font-size: 30px;">
-								<span style="font-size: .8em; font-weight: bold;padding-left:10px;color:white;">[<span id="packRegionSearch"></span>] 근처 팩</span> &nbsp;
+								<span style="font-size: .8em; font-weight: bold;padding-left:10px;">[<span id="packRegionSearch"></span>] 근처 팩</span> &nbsp;
 							</div>
 							<input type="text" class="form-group" name="searchWord"
 								style="width: 200px; height:30px;border-radius: 10px;border-color: #333333;"/>
-							<button class="searchBtn btn btn-sm" style="border: white solid 1px;background-color:#bdc3c7;padding-left:10px;">
-								<img class="btn-img" src='<c:url value="/images/search.png"/>' style="width:20px; height: 20px;"/>
+							<button class="searchBtn" style="border: none;background-color:white;font-size: 30px;">
+								<img class="btn-img" src='<c:url value="/images/search.png"/>' style="width:25px; height: 25px;"/>
 							</button>
 						</form>
 					</th>
