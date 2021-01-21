@@ -3,7 +3,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- Chart.js -->
@@ -96,10 +96,6 @@ padding: 10px;
    height: 100px;
 }
 </style>
-	
-
-
-
 
 <div id="colorlib-main">
    <div  class="lineMain">
@@ -150,8 +146,6 @@ padding: 10px;
 			     </div>
    		 	</div>
     	</div>
-  
-     
      <div class="col-xs-12 col-md-6 ">
      	<div class="col-xs-12 inlineInfo ">
 		<div class=" storyRow">
@@ -284,7 +278,6 @@ function mapStart(){
 function mapRecordUpload(map){
 	map.on('load', function(){ // 이부분 있어야 바로 로드 가능
 	<c:if test="${!empty mapRecord}">
-
 	var data = ${mapRecord}
 	var json = data.features[0];
 	console.log('data:%O',data.features[0]);

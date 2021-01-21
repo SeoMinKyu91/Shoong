@@ -69,7 +69,6 @@
 <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 </head>
 <body>
 
@@ -102,11 +101,8 @@
 <script src="<c:url value="/js/jquery.easing.1.3.js"/>"></script>
 <script src="<c:url value="/js/jquery.waypoints.min.js"/>"></script>
 <script src="<c:url value="/js/jquery.stellar.min.js"/>"></script>
-<!--  
-<script src="<c:url value="/js/bootstrap.min.js"/>"></script>
--->
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script src="<c:url value="/js/popper.min.js"/>"></script>
 <script src="<c:url value="/js/owl.carousel.min.js"/>"></script>

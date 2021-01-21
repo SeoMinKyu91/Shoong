@@ -1,67 +1,3 @@
-/*
-create sequence SEQ_DIARY
-nocache
-nocycle;
-create sequence SEQ_DIARY_IMG
-nocache
-nocycle;
-*/
-drop table COURSE;
-drop table RECORD_;
-drop table DIARY;
-drop table DIARY_IMG;
-
-
-CREATE TABLE COURSE
-(
-	COURSE_ID nvarchar2(10) NOT NULL,
-	COURSE_CATE_ID nvarchar2(10) ,
-	USER_ID varchar2(30) ,
-	COURSE_NAME nvarchar2(50),
-	COURSE_INTRO nvarchar2(50),
-	COURSE_THUMBNAIL varchar2(500),
-	COURSE_TIME nvarchar2(10),
-	COURSE_LENGTH nvarchar2(50),
-	COURSE_DATE date,
-	-- 식별자#
-	COURSE_TAG nvarchar2(50),
-	COURSE_REGION nvarchar2(50),
-	PRIMARY KEY (COURSE_ID)
-);
-
-CREATE TABLE RECORD_
-(
-	RECORD_ID number NOT NULL,
-	USER_ID varchar2(30) NOT NULL,
-	COURSE_ID nvarchar2(10) NOT NULL,
-	RECORD_FILE_NAME varchar2(100),
-	RECORD_LENGTH float,
-	RECORD_DATE date,
-	PRIMARY KEY (RECORD_ID)
-);
-
-CREATE TABLE DIARY
-(
-	DIARY_CODE number NOT NULL,
-	RECORD_ID number NOT NULL,
-	USER_ID varchar2(30),
-	DIARY_TITLE nvarchar2(50),
-	DIARY_MAIN_CONTENT nvarchar2(500),
-	DIARY_DATE date DEFAULT SYSDATE,
-	DIARY_THUMBNAIL varchar2(100),
-	PRIMARY KEY (DIARY_CODE)
-);
-
-CREATE TABLE DIARY_IMG
-(
-	DIARY_IMG_CODE number NOT NULL,
-	DIARY_CODE number NOT NULL,
-	DIARY_IMG_NAME varchar2(50),
-	DIARY_IMG_TITLE nvarchar2(50),
-	DIARY_IMG_CONTENT nvarchar2(500),
-	PRIMARY KEY (DIARY_IMG_CODE)
-);
-
 --코스 임시 데이터
 --insert into COURSE(COURSE_ID,COURSE_NAME)
 insert into COURSE(COURSE_ID,COURSE_NAME) values (101,'한강 라이딩');
@@ -74,8 +10,6 @@ insert into COURSE(COURSE_ID,COURSE_NAME) values (107,'제주도 한바퀴 라�
 insert into COURSE(COURSE_ID,COURSE_NAME) values (108,'북한강 라이딩');
 insert into COURSE(COURSE_ID,COURSE_NAME) values (109,'해운대 라이딩');
 insert into COURSE(COURSE_ID,COURSE_NAME) values (110,'벛꽃풍경 라이딩');
-
-
 
 --레코드 임시 데이터 
 --insert into RECORD_ values(RECORD_ID,USER_ID,COURSE_ID,RECORD_TIME,RECORD_LENGTH,RECORD_DATE);
@@ -122,8 +56,4 @@ insert into DIARY_IMG values(416,309,'diaryImg_sample1_4.jpg','소제목1','소�
 insert into DIARY_IMG values(417,310,'diaryImg_sample2_1.jpg','소제목1','소제목1 내용');
 insert into DIARY_IMG values(418,310,'diaryImg_sample2_2.jpg','소제목2','소제목2 내용');
 insert into DIARY_IMG values(419,310,'diaryImg_sample2_3.jpg','소제목3','소제목3 내용');
-insert into DIARY_IMG values(420,310,'diaryImg_sample3_1.jpg','소제목4','소제목4 내용');
-
-
-commit
-
+insert into DIARY_IMG values(420,310,'diaryImg_sample3_1.jpg','소제목4','소제목4 내용');--레코드 임시 데이터 

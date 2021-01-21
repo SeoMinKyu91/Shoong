@@ -2,9 +2,11 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<!-- myBatis 환경설정파일 
+<!-- 
+myBatis 환경설정파일 
 1]데이타베이스 연결정보 설정 
-2]매퍼파일의 위치정보 설정 -->
+2]매퍼파일의 위치정보 설정 
+-->
 
 <configuration>
 	<!-- 자바빈 별칭 -->
@@ -33,6 +35,7 @@
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
 	<mappers>
+		<!-- 유저 페이지 매퍼파일 -->
 		<mapper	resource="com/kosmo/shoong/pack/mybatis/packsql.xml" />
 		<mapper	resource="com/kosmo/shoong/pack/mybatis/packgallerysql.xml" />
 		<mapper	resource="com/kosmo/shoong/pack/mybatis/packnoticesql.xml" />
@@ -52,6 +55,5 @@
 		<mapper	resource="com/kosmo/shoong/admin/mybatis/rankingAdminsql.xml"/>
 		<mapper	resource="com/kosmo/shoong/admin/mybatis/reportAdminsql.xml"/>
 		<mapper	resource="com/kosmo/shoong/admin/mybatis/settingAdminsql.xml"/>
-  </mappers>
-
+	</mappers>
 </configuration>

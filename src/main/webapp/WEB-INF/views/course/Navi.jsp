@@ -3,6 +3,9 @@
 <%@ page language="java" 
 	contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+<script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
+<script src="<c:url value="/js/togeojson.js"/>"></script>
 
 <style>
 /*
@@ -19,26 +22,29 @@
 #map {
 	top: 0;
 	bottom: 0;
-	height:400px;
+	height:500px;
 }
 
+.nav-link {
+	color: #ff8827;
+}
 
 ul li{
 	font-weight : bold;
 	font-size: 1em;
+	padding-bottom:10px;
 }
 
-ul li span{
-	font-size: .8em;
-	font-weight : normal;
-	color:black;
+ul li label{
+	padding-right:10px;
 }
+
 
 .my-box{
 	border: 5px lightgrey solid;
 	list-style: none; 
-	padding: 30px; 
-	height:355px;
+	padding: 35px; 
+	height:455px;
 	background-color: white;
 }
 
@@ -127,8 +133,9 @@ ul li span{
 #naviImgModal img {
 	width: 100%;
 }
+
 </style>
-<div id="colorlib-main" class="container" style="padding-top: 0;">
+<div id="colorlib-main" style="padding:20px">
 	<div class="row" style="padding-top: 50px; padding-left: 10px">
 		<div class="col-xs-10 offset-xs-1 col-md-7" id="map"></div>
 		<div class="col-xs-10 offset-xs-1 col-md-5" role="navigation">
@@ -141,40 +148,49 @@ ul li span{
 					<a class="nav-link" data-toggle="tab" href="#placeinfo">관광 정보</a></li>
 			</ul>
 			<div class="tab-content">
-				<div class="tab-pane fade show active" id="routeinfo">
+				<div class="tab-pane active" id="routeinfo">
 					<ul class="my-box">
 						<li>
-							<label for=" ">이름</label>
-							<span>&emsp;유경이네</span>
+							<label for=" ">작성자</label>&emsp;
+							<input type="text" id="userName" style="border:none" placeholder="작성자" readonly="readonly">
 						</li>
 						<li>
-							<label for=" ">공개</label>
-							<span id="Private">&emsp;공개된 루트</span>
+							<label for=" ">이름</label>&emsp;&emsp;
+							<input type="text" id="courseName" style="border:#aaaaaa solid 1px; height:25px" placeholder="경로이름">
 						</li>
 						<li>
-							<label for=" ">유형</label>
-							<span>&emsp;자전거ㆍ일반</span>
+							<label for=" ">공개여부</label>
+							<input type="radio" id="openNclose" name="openNclose"> 
+								<span style="font-weight: normal;">공개</span>&emsp;
+							<input type="radio" id="openNclose" name="openNclose">
+								<span style="font-weight: normal;">비공개</span>
 						</li>
 						<li>
-							<label for=" ">등록</label>
-							<span>&emsp;김유경 2021년 1월 13일 수요일 오전 1:40</span>
+							<label for=" ">유형</label>&emsp;&emsp;
+							<select
+								name="cycleType" id="cycleType"
+								style="border: #aaaaaa solid 1px; height:23px; font-weight: normal;color:#888888;">
+								<option value="" style="color:#888888;">==선택하세요==</option>
+								<option value="" style="color:#888888;">자전거유형1</option>
+								<option value="" style="color:#888888;">자전거유형2</option>
+								<option value="" style="color:#888888;">자전거유형3</option>
+								<option value="" style="color:#888888;">자전거유형4</option>
+							</select>
 						</li>
 						<li>
-							<label for=" ">거리</label>
-							<span>&emsp;000km(↑↓누적고도 +000m, -000m)</span>
+							<label for=" ">등록</label>&emsp;&emsp;
+							<span></span>
 						</li>
 						<li>
-							<label for=" ">특징</label>
-							<span>&emsp;</span>
+							<label for=" ">거리</label>&emsp;&emsp;
+							<span></span>
 						</li>
-						<li>
-							<label for=" ">평가</label>
-							<span>&emsp;아직 등록된 평점이 없습니다</span>
+						<li style="padding-bottom: 20px;">
+							<label for=" ">설명</label><br/>
+							<textarea rows="3" style="border:#aaaaaa solid 1px; width: 100%"></textarea>
 						</li>
-						<li>
-							<label for=" ">설명</label>
-							<span>&emsp;유경이네 방문</span>
-						</li>
+						<a class="btn" href="#" style="color:white;background-color: #ff8827; border:#ff8827 solid 1px;float: right;">등록</a>
+						<!--  <button type="submit" class="btn btn-block" style="float: right;">등록</button>-->
 					</ul>
 				</div>
 				<div class="tab-pane fade" id="routestop">
@@ -200,13 +216,13 @@ ul li span{
 		     <div class="modal-dialog modal-lg" >
 		         <div class="modal-content">
 		             <div class="modal-header">
-		                 <h4>사진 올리기</h4>
+		                 <h4>기록 올리기</h4>
 		             </div>
 		             <div class="modal-body">
 	                   	<div class="col-sm-12" style="margin-top:10px ">
 		                  <form method="post" enctype="multipart/form-data" class="col-sm-12">
 		                      <div id="fileUpload" class="dragAndDropDiv col-sm-12">
-		                      	<span class="dragAndDropDivSpan">Drag & Drop Files Here</span>
+		                      	<span class="dragAndDropDivSpan">Drag & Drop Route Files Here</span>
 		                      </div>
 		                      <input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/>
 		                  </form>
@@ -215,9 +231,6 @@ ul li span{
 		            <div class="modal-footer"> 
 	               		<form method="post" action="<c:url value="/pack/pictureInput.do"/>">
 		               		<input class="form-control" name="imgArry" id="imgArry"  type="hidden">
-		               		<!-- 
-		               		<button type="submit" class="btn btn-default">Save</button>
-		               		 -->   
 		            	</form>
 	                	<button type="button" class="btn btn-default">Load</button>
 	                	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -232,8 +245,48 @@ ul li span{
 </div>
 
 <script>
-//맵박스 토큰
+//날자 계산
+Date.prototype.format = function(f) {
+    if (!this.valueOf()) return " ";
+ 
+    var weekName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+    var d = this;
+     
+    return f.replace(/(yyyy|yy|MM|dd|E|hh|mm|ss|a\/p)/gi, function($1) {
+        switch ($1) {
+            case "yyyy": return d.getFullYear();
+            case "yy": return (d.getFullYear() % 1000).zf(2);
+            case "MM": return (d.getMonth() + 1).zf(2);
+            case "dd": return d.getDate().zf(2);
+            case "E": return weekName[d.getDay()];
+            case "HH": return d.getHours().zf(2);
+            case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2);
+            case "mm": return d.getMinutes().zf(2);
+            case "ss": return d.getSeconds().zf(2);
+            case "a/p": return d.getHours() < 12 ? "오전" : "오후";
+            default: return $1;
+        }
+    });
+};
+ 
+String.prototype.string = function(len){var s = '', i = 0; while (i++ < len) { s += this; } return s;};
+String.prototype.zf = function(len){return "0".string(len - this.length) + this;};
+Number.prototype.zf = function(len){return this.toString().zf(len);};
+
 $(function(){
+	$.ajax('<c:url value="/courseTest/gpxkml/address.kml"/>').done(function(xml){ 
+	    console.log(toGeoJSON.kml(xml)); 
+	});
+	
+	$.ajax('<c:url value="/courseTest/gpxkml/20201018_114312.gpx"/>').done(function(xml){ 
+	    console.log(toGeoJSON.gpx(xml)); 
+	});
+	
+	$('#naviModalBtn').click(function() {
+		console.log('클릭모달버튼');
+		$('#naviModal').modal();
+	});
+	//맵박스 토큰
 	mapboxgl.accessToken = 'pk.eyJ1Ijoid2t1bmdoOTMiLCJhIjoiY2tpd2hpNnZ0MHF3YzMwcnd5ZG1obzh2biJ9.EW26scaL6pDX7yQhFNnwMw';
 
 	var monument = [ 126.87870025634767, 37.478732138068445 ];
@@ -330,10 +383,19 @@ $(function(){
 				});
 				map.setCenter(data.features[0].geometry.coordinates[0][0]);
 				map.setZoom(11);
+				
+				var length = turf.length(json, {units: 'kilometers'});
+				console.log('lenght:',length);
+				
+				//등록,거리
+				$('ul.my-box li:eq(3) span').html(new Date().format("yyyy년 MM월 dd일 a/p hh시 mm분 ss초"));
+				$('ul.my-box li:eq(4) span').html(length+"km");
+				
+				$('#naviModal').modal("toggle");
 			}
 		});
 		
-		$(".modal-footer button:eq(2)").click();
+// 		$(".modal-footer button:eq(2)").click();
 	});
 	
 	// 이미지 다운로드 모달 정보 변경 
