@@ -16,7 +16,7 @@ import com.kosmo.shoong.service.member.MemberDTO;
 import com.kosmo.shoong.service.member.MemberService;
 
 @Service("memberService")
-public class MemberServiceImpl  implements MemberService{
+public class MemberServiceImpl implements MemberService{
 
 	@Resource(name="memberDAO")
 	private MemberDAO memberDAO;
@@ -44,7 +44,12 @@ public class MemberServiceImpl  implements MemberService{
 
 	@Override
 	public int insert(Map map) {
-		return memberDAO.insert(map);
+		int flag = memberDAO.insert(map);
+		if(flag==1) {
+			memberDAO.insertAddr(map);
+			return flag;
+		}
+		return -1;
 	}///////insert
 	//이메일 인증
 	@Autowired
@@ -84,7 +89,6 @@ public class MemberServiceImpl  implements MemberService{
 		return memberDAO.insertVerify(userId);
 	}
 
-
 //	@Override
 //	public int delete(Map map) {
 //		return memberDAO.delete(map);
@@ -94,17 +98,20 @@ public class MemberServiceImpl  implements MemberService{
 	public int update(Map map) {
 		return memberDAO.update(map);
 	}//////update
-	
+
 	@Override
 	public MemberDTO selectOne(Map map) {
-		System.out.println("implㅇ안---------------------");
 		return memberDAO.selectOne(map);
 	}
 
 	public Map memberHasPack(Map map) {
-		
-		
 		return memberDAO.memberHasPack(map);
+	}
+
+	@Override
+	public Map memberEditView(Map map) {
+		Map memberInfo = memberDAO.memberEditView(map);
+		return memberInfo;
 	}
 
 }/////////////////////////////////////////////

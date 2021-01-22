@@ -73,7 +73,6 @@
 	  -View객체로 JSP가 아닌 View타입의 객체를 매핑하는 리졸버
 	  -이 뷰리졸버를 기본 뷰리졸버보다 우선 순위가 높게 설정	  
 	 -->
- 	
  	<beans:bean p:order="1" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
  	<!-- 
 		 3]실제 다운로드를 처리하는 View타입의 클래스를 빈 으로 등록
@@ -108,5 +107,6 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
-
+	
+	
 </beans:beans>

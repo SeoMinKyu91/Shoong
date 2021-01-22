@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kosmo.shoong.admin.mybatis.memberAdminsql">
+	
+	<select id="memberList" resultType="java.util.Map">
+		SELECT * FROM member_ m, useraddr u WHERE m.user_id = u.user_id
+	</select>
+	
+	<select id="memberSearch" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM member_ m, useraddr u WHERE m.user_id = u.user_id
+		<if test="searchType!=null">
+			<if test="searchType=='id'.toString()">AND m.user_id LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType=='name'.toString()">AND m.name LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType=='age'.toString()">AND m.age LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType=='gender'.toString()">AND m.gender LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType=='addr'.toString()">AND u.address LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType=='tel'.toString()">AND m.tel LIKE '%' || #{keyword} || '%'</if>
+		</if>
+	</select>
+	
+</mapper>

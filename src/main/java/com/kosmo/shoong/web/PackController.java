@@ -38,12 +38,10 @@ public class PackController {
    private MemberServiceImpl memberService;
 
 
-
-
-
    @RequestMapping("main.do")
    public String packMain(@RequestParam Map map ,Model model,HttpServletRequest req) {
       /*유저 id 값 */
+
       /* 유저정보에 ADDRESS로는 정확도 부족 lat,lng 받아서 기반 검색. 주석 풀지 마세요.
      map.put("userId", req.getSession().getAttribute("userId").toString());
      Map userAddress =  service.selectOneUserAddr(map);
@@ -52,9 +50,9 @@ public class PackController {
         map.put("searchRegion", userAddress.get("ADDRESS"));
         model.addAttribute("searchRegion",userAddress.get("ADDRESS"));
      }*/
+
       List<PackDTO> packList=service.selectList(map);
       model.addAttribute("packList",packList);
-
       if(map.get("searchRegion") != null) {
          model.addAttribute("searchLat",map.get("lat"));
          model.addAttribute("searchLng",map.get("lng"));
@@ -171,21 +169,6 @@ public class PackController {
       return check;
    }//////////////
 
-   @RequestMapping(value="comment.do", method=RequestMethod.GET)
-   public String packComment(@RequestParam Map map, HttpServletRequest req, Model model,@ModelAttribute("id") String id) {
-	   //데이터 저장]
-	   /*
-	   String path = req.getContextPath();
-	   map.put("id", id);
-	   memoService.insert(map);
-	   PackCommentDTO record = memoService.slectOne(map);
-	   record.setContent(record.getContent().replace("\r\n","<br/>"));
-	   model.addAttribute("record",record);
-	   commentService.update(map);
-	   commentService.delete(map);
-	   */
-	   return "pack/PackComment";
-   }
 
 
 }

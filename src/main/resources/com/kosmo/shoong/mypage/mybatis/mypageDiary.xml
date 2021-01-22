@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosmo.shoong.mypage.mybatis.mypageDiary">
+
+	
+	<select id="DiaryRecordSelectList" parameterType="java.util.Map" resultType="java.util.Map">
+		select R.* , C.COURSE_NAME from RECORD_ R join COURSE C on 
+   			 R.COURSE_ID = C.COURSE_ID where R.USER_ID = #{id}
+	</select>
+	
+	<select id="DiaryRecordSelectOne" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from RECORD_  where USER_ID = #{id} and RECORD_ID =#{recordId}
+	</select>
+	
+	<select id="DiarySelectList" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT S.*,
+	    (SELECT count(*) FROM DIARY_IMG C WHERE C.DIARY_CODE = S.DIARY_CODE)AS DIARY_IMG_COUNT
+	 FROM DIARY S order by DIARY_CODE desc
+	</select>
+	
+	<select id="DiarySelectOne" parameterType="java.util.Map" resultType="java.util.Map">
+			SELECT * from DIARY d join RECORD_ r on d.RECORD_ID = r.RECORD_ID where DIARY_CODE=#{diaryCode}
+	</select>
+	
+	<select id="DiaryImgSelectList" parameterType="java.util.Map" resultType="java.util.Map">
+		    SELECT * from DIARY_IMG where DIARY_CODE=#{diaryCode}
+	</select>
+	
+	
+	
+	
+	<insert id="DiaryInsert" parameterType="java.util.Map">
+		<selectKey keyProperty="diaryCode" order="BEFORE" resultType="int">
+			select SEQ_DIARY.nextval from dual
+		</selectKey>
+		
+		<choose>
+			<when test="thumbnail != null">
+				insert into diary values(#{diaryCode},#{recordId},#{id},#{title},#{content},DEFAULT,#{thumbnail})
+			</when>
+			<otherwise>
+				insert into diary(DIARY_CODE,RECORD_ID,USER_ID,DIARY_TITLE,DIARY_MAIN_CONTENT,DIARY_DATE) values(#{diaryCode},#{recordId},#{id},#{title},#{content},DEFAULT)
+			</otherwise>
+		</choose>
+	</insert>
+	
+	<insert id="DiaryImgInsert" parameterType="java.util.Map">
+	    insert into DIARY_IMG(DIARY_IMG_CODE,DIARY_CODE,DIARY_IMG_NAME) values(SEQ_DIARY_IMG.NEXTVAL,#{diaryCode},#{imgName}) 
+	</insert>
+	<!-- 아래쿼리 깔끔하게 수정하기 -->
+	<select id="DiaryImgSelectOne" parameterType="java.util.Map" resultType="java.util.Map">
+		
+		select * from
+		(select rownum as num, a.* from (select (SELECT count(*) FROM DIARY_IMG I WHERE I.DIARY_CODE = #{diaryCode} )AS DIARY_IMG_COUNT , d.* from DIARY_IMG d where DIARY_CODE = #{diaryCode} order by DIARY_IMG_CODE
+        )a )c where c.num=#{row} 
+
+	</select>
+	
+	<update id="DiaryImgUpdate" parameterType="java.util.Map">
+	    UPDATE DIARY_IMG SET DIARY_IMG_TITLE = #{title}, DIARY_IMG_CONTENT= #{content}  where DIARY_IMG_CODE =${imgCode}
+	</update>
+</mapper>

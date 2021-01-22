@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kosmo.shoong.admin.mybatis.reportAdminsql">
+	
+	<resultMap type="reportAdminDTO" id="reportAdminDTOResult">
+		<result property="reportID" column="REPORT_ID"/>
+		<result property="userID" column="USER_ID"/>
+		<result property="reportTargetID" column="REPORT_TARGET_ID"/>
+		<result property="reportCategory" column="REPORT_CATEGORY"/>
+		<result property="reportDate" column="REPORT_DATE"/>
+		<result property="reportReason" column="REPORT_REASON"/>
+	</resultMap>
+	
+	<select id="ReportAdminSelectList" parameterType="java.util.Map" resultMap="reportAdminDTOResult">
+		SELECT * FROM REPORT
+	</select>
+	
+	<select id="ReportAdminSelectOne" parameterType="java.util.Map" resultMap="reportAdminDTOResult">
+		SELECT * FROM REPORT WHERE REPORT_ID = #{reportID}
+	</select>
+</mapper>

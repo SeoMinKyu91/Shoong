@@ -63,11 +63,6 @@
 
 			</div>
 			<!-- 로그인 끝 -->
-
-
-
-
 		</div>
 	</div>
-	
-</div><!-- END COLORLIB-PAGE -->
+</div><!-- END COLORLIB-MAIN -->

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kosmo.shoong.common.utility.CommonUtilities;
 import com.kosmo.shoong.service.course.CourseService;
 import com.kosmo.shoong.service.gallery.GalleryService;
 import com.kosmo.shoong.service.impl.member.MemberServiceImpl;
@@ -33,11 +32,11 @@ public class MemberController {
 
 	@Resource(name="galleryService")
 	private GalleryService galleryService;
-
+	
 	@Resource(name="courseService")
 	private CourseService courseService;
-
-
+	
+	
 	/////회원 가입//////
 
 	//회원가입 입력폼
@@ -51,7 +50,7 @@ public class MemberController {
 	public String joinOk(@RequestParam Map map,Model model) throws MessagingException {
 		//맵에서 유저아이디와 유저아이디 뒷자리(@gmail.com) 따로따로 받아서
 		map.put("userId", map.get("userId").toString()+"@"+map.get("emailStrinput").toString());
-		map.put("userRRN", map.get("userRRN1").toString()+map.get("userRRN2").toString());
+		//map.put("userRRN", map.get("userRRN1").toString()+map.get("userRRN2").toString());
 		map.put("userTel", map.get("userTel1").toString()+map.get("userTel2").toString()+map.get("userTel3").toString());
 		Set keys = map.keySet();
 		for(Object key:keys) System.out.println(key+":"+map.get(key));
@@ -70,7 +69,7 @@ public class MemberController {
 		String userPWDOk = map.get("userPWDOk").toString();
 		JSONObject json = new JSONObject();
 		if(userPWD.equals(userPWDOk)) {
-			json.put("passwordCheck", "비밀번호가 일치합니다.");
+			json.put("passwordCheck", "");
 		}
 		else {
 			json.put("passwordCheck", "비밀번호가 일치하지 않습니다.");
@@ -78,23 +77,23 @@ public class MemberController {
 		return json.toJSONString();
 	}/////pwdOk
 
-	//이메일 형식 판단
-	@RequestMapping(value="EmailCheck.do",produces="text/html; charset=UTF-8")
-	@ResponseBody
-	public String emailOk(@RequestParam Map map) {
-		String userId = map.get("userId").toString();
-		JSONObject json = new JSONObject();
-		if(userId.trim().equals("")) {
-			json.put("emailCheck", "정확한 이메일 형식이 아닙니다.");
-			return json.toJSONString();
-		}
-		if(!CommonUtilities.isCorrectNaming(userId)) {
-			json.put("emailCheck", "정확한 이메일 형식이 아닙니다.");
-			return json.toJSONString();
-		}
-		json.put("emailCheck", "ok");
-		return json.toJSONString();
-	}////////emailOk
+//	//이메일 형식 판단
+//	@RequestMapping(value="EmailCheck.do",produces="text/html; charset=UTF-8")
+//	@ResponseBody
+//	public String emailOk(@RequestParam Map map) {
+//		String userId = map.get("userId").toString();
+//		JSONObject json = new JSONObject();
+//		if(userId.trim().equals("")) {
+//			json.put("emailCheck", "정확한 이메일 형식이 아닙니다.");
+//			return json.toJSONString();
+//		}
+//		if(!CommonUtilities.isCorrectNaming(userId)) {
+//			json.put("emailCheck", "정확한 이메일 형식이 아닙니다.");
+//			return json.toJSONString();
+//		}
+//		json.put("emailCheck", "ok");
+//		return json.toJSONString();
+//	}////////emailOk
 
 	//이메일(아이디)중복체크
 	@RequestMapping(value = "EmailDuplCheck.do", produces = "text/html; charset=UTF-8")
@@ -188,17 +187,19 @@ public class MemberController {
 	//로그인 처리]
 	@RequestMapping(value = "Login.do",method = RequestMethod.POST)
 	public String loginOk(HttpSession session, @RequestParam Map map,HttpServletRequest req) {
-
+		
 		session = req.getSession();
 		boolean flag = memberService.isMember(map);
-
+		
 		Map mamberHasPack = memberService.memberHasPack(map);
 		if(flag) {
 			session.setAttribute("userId", map.get("userId"));
 			if(mamberHasPack != null) {
+				System.out.println("memberHasPack:"+mamberHasPack.get("PACK_ID"));
 				session.setAttribute("packId", mamberHasPack.get("PACK_ID"));
+				
 			}
-
+			
 		}
 		else {
 			session.setAttribute("error", "아이디와 비밀번호가 일치하지 않습니다.");
@@ -214,7 +215,7 @@ public class MemberController {
 		session = req.getSession();
 		//로그아웃 처리-세션영역 데이타 삭제
 		session.invalidate();
-		//뷰정보 번환]
+		//뷰정보 반환]
 		return "/templates/Main";
 	}/////////////logout
 
@@ -228,25 +229,37 @@ public class MemberController {
 	}///////guestLogin
 
 	//ID/PW 찾기용]
-
+	
+	
 	////
 	@RequestMapping("/mypage.do")
 	public String mypage(HttpServletRequest req, Map map, Model model) {
 		map.put("userId", req.getSession().getAttribute("userId").toString());
+
 		System.out.println("mypage()"+req.getSession().getAttribute("userId").toString());
+
 		MemberDTO dto = memberService.selectOne(map);
-		List<Map> lists = galleryService.imgSelectList(map);
+		model.addAttribute("name",dto.getUserName());
+
+		List<Map> lists = galleryService.imgFirstList(map);
+		System.out.println(lists);
 		model.addAttribute("imgList", lists);
+		for(Map list : lists) System.out.println(list);
+
 		List<Map> courselists = courseService.showCourse(map);
 		//for(Map courseList:courselists)
 			//courseList.put("COURSE_DATE", courseList.get("COURSE_DATE").toString().substring(0,10));
 		//model.addAttribute("courseList", courselists);
 		return "mypage/mypage";
 	}
-
+		
 	@RequestMapping("/myInfoEdit.do")
-	public String myInfoEdit() {
+	public String myInfoEdit(HttpServletRequest req, Map map, Model model) {
+		map.put("userId", req.getSession().getAttribute("userId").toString());
+		Map memberInfo = memberService.memberEditView(map);
+		model.addAttribute("memberInfo", memberInfo);
+		System.out.println(memberInfo);
 		return "mypage/myInfoEdit";
 	}
-
+	
 }/////class

@@ -47,9 +47,9 @@ h6 {
 		<div class="container">
 			<div class="col-xs-12 col-md-12">
 				<div class="page-header" style="text-align: center">
-					<img alt="shoongLogo"
-						src="<c:url value="/images/shooongLogo.png"/>"
-						style="width: 100px; padding-top: 50px">
+					<a href="<c:url value="/"/>"><img alt="shoongLogo"
+					src="<c:url value="/images/shooongLogo.png"/>"
+					style="width: 100px; padding-bottom: 50px"></a>
 				</div>
 			</div>
 		</div>
@@ -194,13 +194,12 @@ h6 {
 		</div>
 	</div>
 </div>
-<!-- END COLORLIB-PAGE -->
 <script type="text/javascript">
 	$(
 		function(){
 			$('#ridingBegin').hide();
 			$('#ridingPro').hide();
-		})
+	});
 	
 	$('#ridingQue').change(function(){
 		$(":input:radio[name=riding]:checked").each(function(){
@@ -219,4 +218,9 @@ h6 {
 			console.log('2click');
 		});
 	});
+</script>
+
+<!-- 추가 작업 예정 : 전체 유효성 체크 -->
+<script>
+
 </script>

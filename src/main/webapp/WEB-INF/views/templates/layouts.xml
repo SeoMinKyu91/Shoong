@@ -4,6 +4,25 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
+	<!--관리자 페이지 타일즈-->
+	<definition name="adminlayouts" template="/WEB-INF/views/templates/AdminLayouts.jsp">
+		<put-attribute name="css" value="/WEB-INF/views/templates/AdminCss.jsp" />
+		<put-attribute name="top" value="/WEB-INF/views/templates/AdminTop.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/templates/AdminFooter.jsp" />
+	</definition>
+	<definition name="*.admin" extends="adminlayouts">
+		<put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	<definition name="*/*.admin" extends="adminlayouts">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	<definition name="*/*/*.admin" extends="adminlayouts">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+	</definition>
+	<definition name="*/*/*/*.admin" extends="adminlayouts">
+		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}/{4}.jsp" />
+	</definition>
 
 	<!-- template에 최상위 페이지명 -->
 	<definition name="layouts" template="/WEB-INF/views/templates/Layouts.jsp">
@@ -44,5 +63,4 @@
 		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}/{4}.jsp" />
 	</definition>
 	
-
 </tiles-definitions>
