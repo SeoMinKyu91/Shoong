@@ -46,7 +46,7 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-md-12 col-lg-12">
-			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em">따르릉 따르릉</p>
+			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em;text-align: center">따르릉 따르릉</p>
 			<hr style="background-color:black; height:1px"/>
 			<c:if test="${!empty manager}">
 				<a class="packManageBtn btn" href="<c:url value="/pack/manage.do"/>"><span class="glyphicon glyphicon-cog"></span>&nbsp;팩 관리</a>
