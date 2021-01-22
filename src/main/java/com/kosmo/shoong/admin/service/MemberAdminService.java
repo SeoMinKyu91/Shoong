@@ -7,4 +7,5 @@ public interface MemberAdminService {
 
 	List<Map> memberList();
 	List<Map> memberSearch(Map map);
+	int deleteMember(Map map);
 }
