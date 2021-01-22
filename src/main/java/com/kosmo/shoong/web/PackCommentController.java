@@ -83,6 +83,30 @@ public class PackCommentController {
 		return "pack/PackComment";
 	}///////////
 	
+	@RequestMapping("myComment.do")
+	public String myComment(@RequestParam Map map,Model model, HttpServletRequest req) {
+		System.out.println("Mycomment.do");
+		
+		String userId = "";
+		String packId = "";
+		
+		HttpSession session = req.getSession();
+		if(session.getAttribute("userId") != null && session.getAttribute("packId") != null) {
+			userId = (String) session.getAttribute("userId");
+			packId = (String) session.getAttribute("packId");
+		}
+		map.put("userId", userId);
+		map.put("packId", packId);
+		
+		
+		
+		List<PackCommentDTO> myCommentList = service.myCommentList(map);
+		model.addAttribute("commentList",myCommentList);
+		
+		return "pack/PackMyComment";
+	}/////////
+	
+	
 	@RequestMapping(value= "comment/write.do", produces = "text/html; charset=UTF-8")
 	public String commentWrite(@RequestParam Map map,Model model,HttpServletRequest req) {
 		HttpSession session = req.getSession();
@@ -165,4 +189,43 @@ public class PackCommentController {
     	System.out.println((String)map.get("filename"));
 		return "삭제된 파일이름은 : "+(String)map.get("filename");
 	}
+    
+    @RequestMapping(value="comment/selectOne.do", produces = "text/html; charset=UTF-8")
+    @ResponseBody
+    public String packCommentSelectOne(@RequestParam Map map) {
+    	System.out.println("commentUpdate.do");
+    	System.out.println(map.get("packCommentNo"));
+    	
+    	Map commentMap = service.packCommentSelectOne(map);
+    	
+    	
+    	System.out.println(commentMap.get("PACK_COMMENT_CONTENT"));
+    	JSONObject json = new JSONObject(commentMap);
+    	
+    	
+    	
+    	return json.toJSONString();
+    }
+    
+    @RequestMapping("comment/update.do")
+    public String packCommentUpdate(@RequestParam Map map, Model model) {
+    	System.out.println("packCommentUpdate.do");
+    	System.out.println(map.get("packCommentNo"));
+    	System.out.println(map.get("packCommentContent"));
+    	
+    	service.packCommentUpdate(map);
+    	
+    	return "forward:/pack/myComment.do";
+    }
+    
+    
+    
 }
+
+
+
+
+
+
+
+

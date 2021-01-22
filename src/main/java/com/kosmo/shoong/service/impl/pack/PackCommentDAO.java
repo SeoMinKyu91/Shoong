@@ -1,6 +1,7 @@
 package com.kosmo.shoong.service.impl.pack;
 
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,8 +34,7 @@ public class PackCommentDAO implements PackCommentService {
 
 	@Override
 	public int packCommentUpdate(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlMapper.update("packCommentUpdate",map);
 	}
 
 	@Override
@@ -63,6 +63,34 @@ public class PackCommentDAO implements PackCommentService {
 		
 		
 		return list;
+	}
+
+	public List<PackCommentDTO> myCommentList(Map map) {
+		List<PackCommentDTO> list = sqlMapper.selectList("myCommentList",map);
+		for(PackCommentDTO dto : list) {
+			String packCommentNo = dto.getPackCommentNo();
+			List<String> packCommentImg = sqlMapper.selectList("packCommentImageList",packCommentNo);
+			if(packCommentImg != null) {
+				dto.setPackCommentImages(packCommentImg);
+			}
+			List<PackCommentReplyDTO> packCommentReply = sqlMapper.selectList("packCommentReplyList",packCommentNo);
+			if(packCommentReply != null) {
+				dto.setPackCommentReply(packCommentReply);
+			}
+			
+		}
+		
+		return list;
+	}
+
+	public Map packCommentSelectOne(Map map) {
+		Map commentOne = sqlMapper.selectOne("packCommentSelectOne",map);
+		List<String> commentImgs = sqlMapper.selectList("packCommentImageList",map);
+		if(commentImgs !=null) {
+			commentOne.put("packCommentImgs", commentImgs);
+		}
+		return commentOne;
+		
 	}
 	
 	

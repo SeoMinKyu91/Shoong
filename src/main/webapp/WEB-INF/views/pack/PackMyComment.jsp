@@ -12,7 +12,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- 모달 -->
-<link rel="stylesheet" href="<c:url value="/css/comment.css?f"/>">
+<link rel="stylesheet" href="<c:url value="/css/comment.css?as"/>">
 
 <style>
 	.feed-bottom-icon img{
@@ -28,7 +28,7 @@
 			<div
 				class="section-tittle text-center mb-80 col-lg-12">
 				<h1 style="margin-top: 15px;">PACK
-					COMMENT</h1>
+					MY COMMENT</h1>
 			</div>
 
 		</div>
@@ -55,8 +55,7 @@
 			<div class="offset-md-2 col-md-8 col-sm-12">
 				<c:if test="${not empty commentList }"
 					var="notempty">
-					<c:forEach items="${commentList }"
-						var="item" varStatus="loop">
+					<c:forEach items="${commentList }" var="item" varStatus="loop">
 
 						<div class="row feed-rows">
 							<div class="feed">
@@ -76,6 +75,17 @@
 													<div class="col-7 feed-top-nick">
 														<span class="feed-top-nick-span">${item.packCommentWriter }</span>
 													</div>
+													<div class="offset-md-1 col-2 dropdown-menu-right dropdown feed-top-icon">
+													  <button class="btn btn-default feed-top-icon-button" type="button" id="${item.packCommentNo }" data-toggle="dropdown" style="margin-left:20px;">
+													  	<img src="<c:url value="/images/icons/readmore.png"/>" alt="기본사진">  
+													  
+													  </button>
+													  <ul class="dropdown-menu" role="menu" aria-labelledby="${item.packCommentNo }">
+													    <li role="presentation" class="feed-update"><a role="menuitem" tabindex="-1" >수정</a></li>
+													    <li role="presentation " class="feed-delete"><a role="menuitem" tabindex="-1" >삭제</a></li>
+													  </ul>
+													</div>
+													
 												</div>
 												<!-- feed-top-row -->
 											</div>
@@ -267,13 +277,51 @@
 				</form>
 				<button type="submit" class="btn btn-default"
 					id="btnCommentWrite">Save</button>
-				<button type="button" class="btn btn-default"
+				<button type="button" class="btn btn-default closeButton"
 					data-dismiss="modal" id="feed-write-cancle">Close</button>
 			</div>
 		</div>
 	</div>
 </div>
 <!-- 피드 글 쓰기 모달 끝 -->
+
+<!-- 피드 글 수정 모달 시작 -->
+<div class="modal fade" id="feed-update-modal"
+	data-backdrop="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header"
+				style="text-align: center;">
+				<h4 style="text-align: center;">게시물 수정</h4>
+			</div>
+			<div class="modal-body">
+				<form action="" class="" id="feed-update-form"
+					method="post" enctype="multipart/form-data">
+					<div class="feed-story"
+						contenteditable="true">글자를 입력해주세요</div>
+					<div class="feed-img-modal">
+						<span class="feed-img-modal-span">Drag
+							& Drop Files Here</span>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<form method="post"
+					action="<c:url value="/pack/comment/update.do"/>"
+					id="sendToServerFormUpdate">
+					<input type="hidden" name="imgArray" id="imgArrayUpdate" class="form-control">
+					<input type="hidden" name='packCommentContent' class="form=control" id="feed-story-update-modal">
+					<input type="hidden" name="packCommentNo" id="packCommentUpdateNo">
+				</form>
+				<button type="submit" class="btn btn-default"
+					id="btnCommentUpdate">Save</button>
+				<button type="button" class="btn btn-default closeButton"
+					data-dismiss="modal" id="feed-write-cancle">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 피드 글 수정 모달 끝 -->
 
 <script>
 	$(function() {
@@ -406,6 +454,117 @@
 			$('#sendToServerForm').submit();
 		});
 		
+		//수정 버튼 클릭시
+		$('.feed-update').click(function(){
+			console.log('업데이트 클릭');
+			
+			var packCommentNo = $(this).parent().attr('aria-labelledby');
+			console.log(packCommentNo);
+			
+			$.ajax({
+				 url:"<c:url value="/pack/comment/selectOne.do"/>",
+				 type : 'post',
+				 dataType : 'json',
+				 data: "packCommentNo=" + packCommentNo,
+				 success : function(data){
+					console.log("팩 콘텐트:"+data.PACK_COMMENT_CONTENT);
+					console.log("팩 번호:"+data.PACK_COMMENT_NO);
+					updateModal(data);
+					$('#feed-update-modal').modal('show');
+				 },
+				 error:function(error){
+					 console.log('에러: ',error.reponseText);
+				 }
+			 });
+			
+			
+		});
 		
-	});
+		//수정 모달 초기화
+		function updateModal(data){
+			
+			//css설정
+			$('.feed-story').css('opacity',1);
+			
+			$('.feed-story').html(data.PACK_COMMENT_CONTENT);
+			$('#packCommentUpdateNo').val(data.PACK_COMMENT_NO);
+			
+			console.log("내가확인하고 싶은 no 값:" + $('#packCommentUpdateNo').val());
+			
+			if(data.packCommentImgs != null){
+				$.each(data.packCommentImgs,function(index,el){
+					console.log(index+":"+el);
+					imgarr.push(el);
+				})
+				console.log("imgarr배열:"+ imgarr.length);
+			}
+			imageDivShowUpdate();
+			
+			
+			
+		}
+		
+		function imageDivShowUpdate() {
+			var str = '';
+			for (var i = 0; i < imgarr.length; i++) {
+				str += "<div class='imgdiv' id='"+imgarr[i]+"'><img class='previewImg'  src=/fileupload/"+imgarr[i]+"><div class='imgdeletemark'>삭제</div></div>";
+			}
+			$(".feed-img-modal").html(str);
+			//이미지에 호버 이벤트 걸기
+			$(".imgdiv").hover(function() {
+				$(this).children().eq(1).css("display", "block");
+				$(this).children().eq(0).css("opacity", 0.4);
+			}, function() {
+				$(this).children().eq(1).css("display", "none");
+				$(this).children().eq(0).css("opacity", 1.0);
+			});
+			$(".imgdiv").click(function() {
+				deleteFileToServer($(this).attr('id'))
+			});
+			$('#imgArrayUpdate').val(imgarr);
+		}
+		
+		function deleteFileToServerUpdate(filename) {
+			$.ajax({
+				url : "<c:url value="/pack/comment/filedelete/post"/>",//요청할 서버의 URL주소
+				type : 'post',//데이타 전송방식(디폴트는 get방식) 
+				dataType : 'text',//서버로 부터 응답 받을 데이타의 형식 설정
+				data : "filename=" + filename,
+				success : function(data) {
+					console.log(data);
+					imgarr.splice(imgarr.indexOf(filename), 1);
+					console.log(imgarr);
+					imageDivShowUpdate();
+				},
+				error : function(error) {//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
+					console.log('에러 : ', error.responseText);
+				}
+
+			});
+		}
+		
+		//close버튼 클릭시 초기화
+		$('.closeButton').click(function(){
+			console.log('닫기 버튼 클릭');
+			imgarr.splice(0,imgarr.length);
+			$('.feed-story').html("글자를 입력해주세요");
+			$('.feed-story').css('opacity',0.7);
+			$('.feed-img-modal').html("<span class='feed-img-modal-span'>Drag & Drop Files Here</span>");
+			
+		});
+		
+		//서버로 update 전송
+		$('#btnCommentUpdate').click(function(){
+			console.log("수정하고 난뒤 packContent값:"+$('.feed-story').text());
+			$('#feed-story-update-modal').val($('.feed-story').text());
+			
+			console.log('내가 확인하고싶은 content:'+$('#feed-story-update-modal').val());
+			console.log($('#feed-story-modal').val());
+			console.log($('#imgArray').val());
+			
+			$('#sendToServerFormUpdate').submit();
+		});
+		
+		
+	})
 </script>
