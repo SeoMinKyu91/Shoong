@@ -16,4 +16,6 @@ public interface MemberService {
 	int update(Map map);
 	MemberDTO selectOne(Map map);
 	
+	Map memberEditView(Map map);
+	
 }//////interface

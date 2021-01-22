@@ -51,7 +51,7 @@ input {
 				<div class=" col-xs-10 offset-xs-1 col-md-6 offset-md-3">
 					<!-- 이메일 입력란 -->
 					<input type="hidden" id="userId" name="userId"
-						style="font-size: .8em; height: 50px; value="${userInfo.email}"> <br />
+						style="font-size: .8em; height: 50px;" value="${userInfo.email}"> <br />
 				</div>
 			</div>
 			<!-- 비밀번호 입력란 -->
@@ -146,7 +146,6 @@ input {
 		</form>
 	</div>
 </div>
-<!-- END COLORLIB-PAGE -->
 
 <!-- -----------------입력시 변환 스크립트---------------- -->
 <script>

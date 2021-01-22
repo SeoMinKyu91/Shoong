@@ -2,13 +2,13 @@ package com.kosmo.shoong.service.impl.pack;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kosmo.shoong.service.pack.PackScheduleDTO;
 import com.kosmo.shoong.service.pack.PackScheduleEventsDTO;
 import com.kosmo.shoong.service.pack.PackScheduleService;
 
@@ -17,7 +17,7 @@ public class PackScheduleDAO implements PackScheduleService{
 
 	@Resource(name="template")
 	private SqlSessionTemplate sqlMapper;
-	
+
 	@Override
 	public List<Map> scheduleSelectList(Map map) {
 		// TODO Auto-generated method stub
@@ -38,7 +38,7 @@ public class PackScheduleDAO implements PackScheduleService{
 
 	@Override
 	public int scheduleInsert(Map map) {
-		
+
 		return sqlMapper.insert("scheduleInsert",map);
 	}////////
 
@@ -73,7 +73,8 @@ public class PackScheduleDAO implements PackScheduleService{
 	}
 
 	public List<PackScheduleEventsDTO> jsonForm(Map map) {
-		// TODO Auto-generated method stub
+		Set keys = map.keySet();
+		for(Object key:keys) System.out.println(key+":"+map.get(key));
 		return sqlMapper.selectList("jsonForm",map);
 	}
 

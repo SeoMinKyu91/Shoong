@@ -1,5 +1,8 @@
 package com.kosmo.shoong.admin.impl.setting;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,4 +15,11 @@ public class SettingAdminDAO implements SettingAdminService{
 
 	@Resource(name="template")
 	private SqlSessionTemplate sqlMapper;
+
+	@Override
+	public List<Map> adminList() {
+		return sqlMapper.selectList("adminList");
+	}
+	
+	
 }

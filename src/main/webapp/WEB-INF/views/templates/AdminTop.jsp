@@ -34,11 +34,11 @@
           <li><a href="<c:url value="/admin/home/main.do"/>"><i class="fa fa-home"></i> Home </a></li>
           <li><a href="#"><i class="fa fa-bicycle"></i> Course <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="<c:url value="/admin/course/main.do"/>">Course1</a></li>
-              <li><a href="<c:url value="/admin/course/main.do"/>">Course2</a></li>
-              <li><a href="<c:url value="/admin/course/main.do"/>">Course3</a></li>
-              <li><a href="<c:url value="/admin/course/main.do"/>">Course4</a></li>
-              <li><a href="<c:url value="/admin/course/main.do"/>">Course5</a></li>
+              <li><a href="<c:url value="/admin/course/main.do"/>">MAIN</a></li>
+              <li><a href="<c:url value="/admin/course/main.do"/>">감성코스</a></li>
+              <li><a href="<c:url value="/admin/course/main.do"/>">맛집코스</a></li>
+              <li><a href="<c:url value="/admin/course/main.do"/>">숨겨진 코스</a></li>
+              <li><a href="<c:url value="/admin/course/main.do"/>">도전코스</a></li>
             </ul>
           </li>
           <li><a href="<c:url value="/admin/ranking/main.do"/>"><i class="fa fa-bar-chart-o"></i> Ranking </a></li>
