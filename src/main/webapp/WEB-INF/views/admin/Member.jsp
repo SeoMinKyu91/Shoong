@@ -212,9 +212,6 @@ var deleteId = "";
 	});
 
 });
-	
-	
-
 
 
 </script>
