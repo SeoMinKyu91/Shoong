@@ -149,6 +149,70 @@ ul li label{
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="routeinfo">
+					<form class="form-horizontal" method="post" name="join" onsubmit="return checked()"
+					style="background-color: white; box-shadow: 0px 0px 5px #000; border-radius: 100px;"
+					action="<c:url value='/Member/Join.do'/>">
+						<div class="form-group">
+							<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
+								style="padding-top: 40px; padding-bottom: 40px; text-align: center">
+								<h3 style="font-weight: bold">회원 가입</h3>
+							</div>
+							<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+								<!-- 작성자 입력란 -->
+								<label for="userId"> 작성자 </label>
+								<br /> 
+								<input type="text" id="userId" name="userId"
+								style="font-size: .8em; height: 50px; width: 34.5%"
+								readonly="readonly"> 
+							</div>
+						</div>
+						<!--  입력란 -->
+						<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+							<label for="userPWD">비밀번호<span style="font-size: .8em">&nbsp;(4~12자의 영문 대소문자와 숫자로만 입력)</span></label> <input type="password" 
+								class="form-control input-sm" id="userPWD" name="userPWD" minlength="4" maxlength="12"
+								style="font-size: .8em" placeholder="비밀번호를 입력하세요"> 
+						</div>
+						<!--  입력란 -->
+						<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+							<select name="emailStr" id="emailStr"
+									style="font-size: .8em; height: 50px; width: 30%; border: #ced4da 1.5px solid; color: #7e757d">
+									<option value="">==선택하세요==</option>
+									<option value="naver.com">naver.com</option>
+									<option value="gmail.com">gmail.com</option>
+									<option value="daum.net">daum.net</option>
+									<option value="nate.com">nate.com</option>
+									<option value="1">직접입력</option>
+							</select> <br />
+						</div>
+						<!-- 이름 입력란 -->
+						<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+							<label for="userName">이름</label> <input type="text"
+								class="form-control input-sm" id="userName" name="userName"
+								style="font-size: .8em" placeholder="이름을 입력하세요">
+						</div>
+						<!-- 연락처 입력란 -->
+						<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+							<label for="userTel">연락처</label><br /> <select name="userTel1"
+								id="userTel1"
+								style="font-size: .8em; height: 50px; width: 28%; padding-left: 10px; border: #ced4da 1.5px solid;">
+								<option value="010">010</option>
+								<option value="011">011</option>
+								<option value="016">016</option>
+								<option value="017">017</option>
+								<option value="018">018</option>
+								<option value="019">019</option>
+							</select> &nbsp; ㅡ &nbsp; <input name="userTel2" id="userTel2" type="text"
+								maxlength="4" style="height: 50px; width: 28%"
+								OnKeyUp="checkTel();">&nbsp; ㅡ &nbsp; <input
+								name="userTel3" id="userTel3" type="text" maxlength="4"
+								style="height: 50px; width: 28%" OnKeyUp="checkTel();"> <br />
+						</div>
+						<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2"
+							style="padding-bottom: 50px">
+							<button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>
+						</div>
+					</form>
+					<!-- 
 					<ul class="my-box">
 						<li>
 							<label for=" ">작성자</label>&emsp;
@@ -192,6 +256,7 @@ ul li label{
 						<a class="btn" href="#" style="color:white;background-color: #ff8827; border:#ff8827 solid 1px;float: right;">등록</a>
 						<!--  <button type="submit" class="btn btn-block" style="float: right;">등록</button>-->
 					</ul>
+					 -->
 				</div>
 				<div class="tab-pane fade" id="routestop">
 					<ul class="my-box">
@@ -388,8 +453,8 @@ $(function(){
 				console.log('lenght:',length);
 				
 				//등록,거리
-				$('ul.my-box li:eq(3) span').html(new Date().format("yyyy년 MM월 dd일 a/p hh시 mm분 ss초"));
-				$('ul.my-box li:eq(4) span').html(length+"km");
+				$('.form-horizontal li:eq(4) span').html(new Date().format("yyyy년 MM월 dd일 a/p hh시 mm분 ss초"));
+				$('.form-horizontal li:eq(3) span').html(length+"km");
 				
 				$('#naviModal').modal("toggle");
 			}
