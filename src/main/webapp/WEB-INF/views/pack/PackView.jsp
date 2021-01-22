@@ -25,7 +25,7 @@
 		background-color: #ff8827;
 	}
 	#tableTitle{
-		background-color: #aaaaaa;
+		background-color: #fad1af;
 	}
 	#packComment.col:eq(1){
 		diplay: none;
@@ -60,10 +60,10 @@
 	<div class="row">
 		<div class="col-lg-offset-1 col-lg-5">
 			<div class="row">
-				<div class="col-lg-9 col-sm-8">
+				<div class="col-lg-10 col-sm-8">
 					<p style="font-weight: bold;font-size:1.5em;">공지사항</p>
 				</div>
-				<div class="col-lg-3 col-sm-4" style="padding-top: 10px; float: right;">
+				<div class="col-lg-2 col-sm-4" style="padding-top: 10px; float: right;">
 					<a href="<c:url value="/pack/notice/list.do"/>" class="btn-custom"> 더보기 
 						<span class="ion-ios-arrow-forward"></span>
 					</a>
@@ -97,11 +97,11 @@
 		</div>
 		<div class="col-lg-5">
 			<div class="row">
-				<div class="col-lg-9 col-sm-8">
+				<div class="col-lg-10 col-sm-8">
 					<p style="font-weight: bold;font-size:1.5em;">팩 일정</p>
 				</div>
-				<div class="col-lg-3 col-sm-4" style="padding-top: 10px; float: right;">
-					<a href="<c:url value="/pack/calender.do"/>" class="btn-custom">상세보기 
+				<div class="col-lg-2 col-sm-4" style="padding-top: 10px; float: right;">
+					<a href="<c:url value="/pack/calender.do"/>" class="btn-custom">더보기 
 						<span class="ion-ios-arrow-forward"></span>
 					</a>
 				</div>
@@ -112,17 +112,17 @@
 		<div class="row">
 			<div class="col-lg-offset-1 col-lg-5 " style="margin-top: 10px;">
 				<div class="row">
-					<div class="col-lg-9 col-sm-8">
+					<div class="col-lg-10 col-sm-8">
 						<p style="font-weight: bold;font-size:1.5em;">코멘트</p>
 					</div>
-					<div class="col-lg-3 col-sm-4" style="padding-top: 10px; float: right;">
-						<a href="<c:url value="/pack/comment.do"/>" class="btn-custom"> 더보기 
+					<div class="col-lg-2 col-sm-4" style="padding-top: 10px; float: right;">
+						<a href="<c:url value="/pack/comment.do"/>" class="btn-custom">더보기 
 							<span class="ion-ios-arrow-forward"></span>
 						</a>
 					</div>
 				</div>
 				<table class="table table-bordered table-hover" id="packComment">
-					<tr>
+					<tr id="tableTitle">
 						<th class="text-center">번호</th>
 						<th class="text-center">작성자</th>
 						<th class="text-center">제목</th>
@@ -134,7 +134,7 @@
 							<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
 						</tr>
 					</c:if>
-					<tr class="text-center danger">
+					<tr class="text-center">
 						<td>4</td>
 						<td class="text-left ">제목4</td>
 						<td>장동건</td>
@@ -166,18 +166,18 @@
 			</div>
 			<div class="col-md-5" style="margin-top: 10px;">
 				<div class="row">
-					<div class="col-lg-9 col-sm-8">
-						<h3>Gallery</h3>
+					<div class="col-lg-10 col-sm-8">
+						<p style="font-weight: bold;font-size:1.5em;">갤러리</p>
 					</div>
-					<div class="col-lg-3 col-sm-4" style="padding-top: 13px;">
-						<a href="<c:url value="/pack/gallery.do"/>" class="btn-custom"> View Details
-							<span class="ion-ios-arrow-forward"></span>
-						</a>
-					</div>
+					<div class="col-lg-2 col-sm-4" style="padding-top: 10px; float: right;">
+					<a href="<c:url value="/pack/gallery.do"/>" class="btn-custom">더보기 
+						<span class="ion-ios-arrow-forward"></span>
+					</a>
+				</div>
 				</div>
 				<div id="gallery">
 					<c:if test="${empty packGalleryList}" var="isEmpty">
-						<h3>갤러리에 사진이 없어요.</h3>
+						<h3 style="text-align: center; line-height: 150px;color:grey">갤러리에 사진이 없어요.</h3>
 					</c:if>
 					<c:if test="${!isEmpty}">
 						<c:forEach var="item" items="${packGalleryList }">
@@ -190,23 +190,23 @@
 		<div class="row">
 			<div class="col-lg-offset-1 col-lg-10" style="margin-top: 10px;">
 				<div class="row">
-					<div class="col-lg-10 col-sm-9">
-						<h3>Pack Course List</h3>
+					<div class="col-lg-11 col-sm-9">
+						<p style="font-weight: bold;font-size:1.5em;">코스 목록</p>
 					</div>
-					<div class="col-lg-2 col-sm-3" style="padding-top: 13px;">
-						<a href="<c:url value="#"/>" class="btn-custom"> View Details
-							<span class="ion-ios-arrow-forward"></span>
-						</a>
+					<div class="col-lg-1 col-sm-3" style="padding-top: 13px;">
+						<a href="#" class="btn-custom">더보기 
+						<span class="ion-ios-arrow-forward"></span>
+					</a>
 					</div>
 				</div>
 				<table class="table table-bordered table-hover">
-					<tr>
+					<tr id="tableTitle">
 						<th class="text-center">번호</th>
 						<th class="text-center">제목</th>
 						<th class="text-center">작성자</th>
 						<th class="text-center">작성일</th>
 					</tr>
-					<tr class="text-center danger">
+					<tr class="text-center">
 						<td>1</td>
 						<td class="text-left ">제목1</td>
 						<td>작성자1</td>
