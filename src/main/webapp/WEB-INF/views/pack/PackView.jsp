@@ -25,7 +25,8 @@
 		background-color: #ff8827;
 	}
 	#tableTitle{
-		background-color: #fad1af;
+		background-color: #ff8827;
+		color:white;
 	}
 	#packComment.col:eq(1){
 		diplay: none;
@@ -101,7 +102,7 @@
 					<p style="font-weight: bold;font-size:1.5em;">팩 일정</p>
 				</div>
 				<div class="col-lg-2 col-sm-4" style="padding-top: 10px; float: right;">
-					<a href="<c:url value="/pack/calender.do"/>" class="btn-custom">더보기 
+					<a href="<c:url value="/pack/calendar.do"/>" class="btn-custom">더보기 
 						<span class="ion-ios-arrow-forward"></span>
 					</a>
 				</div>

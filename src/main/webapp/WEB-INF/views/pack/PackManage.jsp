@@ -4,7 +4,10 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <style>
-	a:link { color: #ff8827; }
+	a:link { 
+		color: #ff8827; 
+		font-weight:bold;
+	}
 	a:visted { color: black; }
 	
 	.surak a:link { color:blue; }
@@ -161,7 +164,7 @@
 
 							<c:if test="${!noPackJoinList }">
 								<div class="row custom-border"
-									style="font-size: 14px; background-color:#fad1af;">
+									style="font-size: 14px; background-color:#ff8827;color:white;">
 									<div class="col-lg-2 col-xs-2" style="font-weight:bold;">이름</div>
 									<div class="col-lg-2 col-xs-2" style="font-weight:bold;">나이</div>
 									<div class="col-lg-3 col-xs-5" style="font-weight:bold;">가입

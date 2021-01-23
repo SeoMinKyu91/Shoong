@@ -19,9 +19,18 @@
 <style>
 
   body {
-    font-size: 14px;
+    font-size: 12px;
   }
-
+  .packCreateBtn {
+		color:#ff8827;
+		background-color: white;
+		font-weight: bold;
+		border: none;
+	}
+	.packCreateBtn:hover {
+		color:white;
+		background-color: #ff8827;
+	}
   #calendar {
     max-width: 1100px;
     margin: 0 auto;
@@ -31,21 +40,76 @@
      text-align: center;
      background-color: black;
   }
-
+  .modal {
+	  text-align:center;
+      position: fixed;
+      left:25%
+    }
+    @media screen and (min-width: 768px) {
+      .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+      }
+    }
+    .modal-dialog {
+      display: inline-block;
+      vertical-align: middle;
+    }
+	#packSchedule{
+		background-color: white;
+		border : #ff8827 1px solid;
+		border-radius: 10px;
+	}
+	#packScheduleUpdate{
+		background-color: white;
+		border : #ff8827 1px solid;
+		border-radius: 10px;
+	}
+	label{
+		float: left;
+	}
+	.SceduleBtn{
+		color:white;
+		background-color: #ff8827;
+		font-weight: bold;
+		border: none;
+	}
 </style>
 
-   <div id="colorlib-main">
-      <div class="row">
-         <div class="col-lg-12">
-            <div class="section-tittle text-center mb-80 col-lg-12" >
-               <h1 style="margin-top: 30px;">일정</h1>
-            </div>
-               
-         </div>
-      </div>
-      <hr>
-      <div id="calendar" style=""></div>
-   </div>
+  <div id="colorlib-main" style="padding:20px">
+	<div class="row">
+		<div class="col-lg-12" style="padding-bottom:20px">
+			<div class="">
+				<a href="<c:url value="/pack/main.do"/>">
+				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
+					style="width: 80px;"></a>
+				&emsp;<a class="packCreateBtn btn" 
+					href="<c:url value="/pack/main.do"/>">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="packCreateBtn btn"
+						href="<c:url value="/pack/view.do"/>">MY PACK</a>
+				</c:if>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-12 col-lg-12">
+			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em;text-align: center">전국일주</p>
+			<hr style="background-color: black;height:1px"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="text-center col-lg-12" >
+				<p style="font-size:2em;padding-bottom:10px;padding:20px;">&lt;&nbsp;일정&nbsp;&gt;</p>
+			</div>
+				
+		</div>
+	</div>
+    <div id="calendar"></div>
+  </div>
    <!-- END COLORLIB-MAIN -->
 
 <!-- 팩 일정 등록 모달창 시작 -->
@@ -53,7 +117,7 @@
    <div class="modal-dialog modal-lg">
       <div class="modal-content">
          <div class="modal-header">
-            <h4 class="modal-title"style="margin: 5px;">팩일정 등록</h4>
+            <h4 class="modal-title"style="margin: 5px;">일정 등록</h4>
          </div>
 
          <div class="modal-body">
@@ -82,8 +146,8 @@
          </div>
 
          <div class="modal-footer">
-            <button type="button" class="btn btn-info" id="btnPackSchedule">등록</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal" id="btnPackScheduleClose">닫기</button>
+            <button type="button" class="SceduleBtn btn" id="btnPackSchedule">등록</button>
+            <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnPackScheduleClose">닫기</button>
          </div>
       </div>
    </div>
@@ -95,41 +159,41 @@
    <div class="modal-dialog modal-lg">
       <div class="modal-content">
          <div class="modal-header">
-            <h4 class="modal-title"style="margin: 5px;">팩일정 상세보기</h4>
+            <h4 class="modal-title"style="margin: 5px;font-weight:bold;">일정 상세보기</h4>
          </div>
 
          <div class="modal-body">
             <div class="row">
-               <div class="col-md-2">제목</div>
-               <div class="col-md-10" id="packScheduleViewTitle" value=""></div>
+               <div class="col-md-2" style="text-align: left;font-weight:bold;">제목</div>
+               <div class="col-md-10" id="packScheduleViewTitle" value="" style="text-align: left;"></div>
             </div>
             <div class="row">
-               <div class="col-md-2">글쓴이</div>
-               <div class="col-md-10" id="packScheduleViewWriter" value=""></div>
+               <div class="col-md-2" style="text-align: left;font-weight:bold;">글쓴이</div>
+               <div class="col-md-10" id="packScheduleViewWriter" value="" style="text-align: left;"></div>
             </div>
             <div class="row">
-               <div class="col-md-2">시작 날짜</div>
-               <div class="col-md-10" id="packScheduleViewStart" value=""></div>
+               <div class="col-md-2" style="text-align: left;font-weight:bold;">시작 날짜</div>
+               <div class="col-md-10" id="packScheduleViewStart" value="" style="text-align: left;"></div>
             </div>
             <div class="row">
-               <div class="col-md-2">끝 날짜</div>
-               <div class="col-md-10" id="packScheduleViewEnd" value=""></div>
+               <div class="col-md-2" style="text-align: left;font-weight:bold;">끝 날짜</div>
+               <div class="col-md-10" id="packScheduleViewEnd" value="" style="text-align: left;"></div>
             </div>
             <div class="row">
-               <div class="col-md-2">글 내용</div>
-               <div class="col-md-10" id="packScheduleViewContent" value=""></div>
+               <div class="col-md-2" style="text-align: left;font-weight:bold;">글 내용</div>
+               <div class="col-md-10" id="packScheduleViewContent" value="" style="text-align: left;"></div>
             </div>
             <div class="row">
-               <div style="display:none;" id="packScheduleViewNo" value=""></div>
+               <div style="display:none;" id="packScheduleViewNo" value="" style="text-align: left;"></div>
             </div>
             
          </div>
 
          <div class="modal-footer">
-            <button type="button" class="btn btn-info" data-dismiss="modal" id="btnPackScheduleUpdate">수정</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal" id="btnPackScheduleDelete">삭제</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal" id="btnPackScheduleJoin">참가</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal" id="btnPackScheduleClose">닫기</button>
+            <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnPackScheduleUpdate">수정</button>
+            <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnPackScheduleDelete">삭제</button>
+            <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnPackScheduleJoin">참가</button>
+            <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnPackScheduleClose">닫기</button>
          </div>
       </div>
    </div>
@@ -143,7 +207,7 @@
    <div class="modal-dialog modal-lg">
       <div class="modal-content">
          <div class="modal-header">
-            <h4 class="modal-title"style="margin: 5px;">팩일정 수정</h4>
+            <h4 class="modal-title" style="margin: 5px;font-weight:bold;">일정 수정</h4>
          </div>
 
          <div class="modal-body">
@@ -175,8 +239,8 @@
          </div>
 
          <div class="modal-footer">
-            <button type="button" class="btn btn-info" data-dismiss="modal" id="btnPackScheduleUpdateOk">수정</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal" id="btnPackScheduleUpdateClose">닫기</button>
+            <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnPackScheduleUpdateOk">수정</button>
+            <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnPackScheduleUpdateClose">닫기</button>
          </div>
       </div>
    </div>
@@ -188,11 +252,11 @@
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header">
-            <h4 class="modal-title">팩일정 삭제</h4>
+            <h4 class="modal-title" style="font-weight:bold;">일정 삭제</h4>
          </div>
 
          <div class="modal-body">
-            <h3 class="text-center">정말로 삭제하시겠습니까?</h3>   
+            <h4 class="text-center">정말로 삭제하시겠습니까?</h4>   
             <form action="<c:url value="/pack/schedule/delete.do"/>" class="bg-light p-5 contact-form" id="packScheduleDeleteForm" style="display: none;">
                <div class="form-group">
                   <input type="hidden" class="form-control" name="packScheduleNo" id="packScheduleDeleteNo" value="">
@@ -201,8 +265,8 @@
          </div>
          
          <div class="modal-footer">
-            <button type="button" class="btn btn-info" data-dismiss="modal" id="btnScheduleDeleteOk">삭제</button>
-            <button type="button" class="btn btn-info" data-dismiss="modal" id="btnScheduleDeleteClose">닫기</button>
+            <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnScheduleDeleteOk">삭제</button>
+            <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnScheduleDeleteClose">닫기</button>
             
          </div>
       </div>
@@ -296,7 +360,7 @@
     
    $('#startDatePicker, #endDatePicker').datepicker({
       format: "yyyy-mm-dd",
-      startDate: '0d',   //달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+      startDate: '0',   //달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
        language : "ko",
        todayHighlight: true//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
       })//여기까지가 기본 사용 방법
@@ -343,7 +407,7 @@
       
       $('#startDatePickerUpdate, #endDatePickerUpdate').datepicker({
          format: "yyyy-mm-dd",
-         startDate: '0d',   //달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
+         startDate: '0',   //달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
           language : "ko"
       });
       
