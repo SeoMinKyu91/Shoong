@@ -98,7 +98,7 @@
 								</tr>
 								<tr>
 									<th colspan="2"><div
-											style="margin-left: 20px; padding: 7px; width: 85%; height: 80px; border: 1px solid #999999">${item.packIntro}</div></th>
+											style="margin-left: 20px; padding: 7px; width: 92%; height: 80px; border: 1px solid #999999">${item.packIntro}</div></th>
 								</tr>
 								<tr>
 									<th colspan="2" class="text-right">
