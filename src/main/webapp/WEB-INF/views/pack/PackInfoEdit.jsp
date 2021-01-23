@@ -6,6 +6,16 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
+.packCreateBtn {
+	color:#ff8827;
+	background-color: white;
+	font-weight: bold;
+	border: none;
+}
+.packCreateBtn:hover {
+	color:white;
+	background-color: #ff8827;
+}
 .introbox div{
 	margin-top: 10px; 
 }
@@ -20,27 +30,41 @@
 	width: 60px;
 	height: 60px
 }
+#btnPackInfoSubmit{
+	color:white;
+	background-color: #ff8827;
+	border : none;
+	font-weight: bold;
+	float : right;
+}
 </style>
 
-<div id="colorlib-main">
-
+<div id="colorlib-main" style="padding:20px;">
 	<div class="row">
-		<div class="col-lg-12">
-			<div
-				class="section-tittle text-center mb-80 col-lg-12">
-				<h1 style="margin-top: 30px;">
-					Shoong <small>팩 정보 수정</small>
-				</h1>
+		<div class="col-lg-12" style="padding-bottom:20px">
+			<div class="">
+				<a href="<c:url value="/pack/main.do"/>">
+				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
+					style="width: 80px;"></a>
+				&emsp;<a class="packCreateBtn btn" 
+					href="<c:url value="/pack/main.do"/>">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="packCreateBtn btn"
+						href="<c:url value="/pack/view.do"/>">MY PACK</a>
+				</c:if>
 			</div>
-
 		</div>
 	</div>
-	<hr>
-
+	<div class="row">
+		<div class="col-xs-12 col-md-12 col-lg-12">
+			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em;text-align: center">${packInfo.PACK_NAME}</p>
+			<hr style="background-color: black;height:1px"/>
+		</div>
+	</div>
 	<div class="container" style="margin-top: 50px;">
 		<div class="row">
 			<div
-				class="offset-md-2 col-md-7 col-lg-offset-2 col-lg-7">
+				class="offset-md-2 col-md-8 col-lg-offset-2 col-lg-8">
 				<div class="row">
 					<div class="offset-md-1 col-md-2 col-xs-3">
 						<img
@@ -56,7 +80,7 @@
 							<div class="col-md-12">
 								<button
 									style="color: #0095f6; border: none; background-color: white;"
-									id="btnThumbnail">Change Pack Profile Photo</button>
+									id="btnThumbnail">프로필 사진 바꾸기</button>
 							</div>
 						</div>
 					</div>
@@ -76,7 +100,7 @@
 								value="${packInfo.PACK_NAME }">
 						</div>
 						<a id="packnameCheck"
-							class="col-xs-1 btn form-group">중복체크</a>
+							class="col-xs-1 btn form-group" style="color:#ff8827; text-decoration: underline;">중복체크</a>
 					</div>
 					<div
 						class="form-group form-text form-margin form-text">
@@ -93,48 +117,67 @@
 					</div>
 
 					<div class="form-group form-margin"
-						style="font-size: 12px;">
-						<label class="col-xs-2 control-label"
-							style="font-size: 14px;">팩 활동시간</label> <label
-							class="radio-inline"> <input
-								type="radio" name='packActTime'
-								value='주 1회' id="radio1" />주 1회
-						</label> <label class="radio-inline"> <input
-								type="radio" name='packActTime'
-								value='주 2~3회' id="radio2" />주 2~3회
-						</label> <label class="radio-inline"> <input
-								type="radio" name='packActTime'
-								value='주 4회 이상' id="radio3" />주 4회 이상
-						</label>
+						style="font-size: 14px;">
+						<label class="col-xs-2 control-label">팩 활동시간</label> 
+						<div class="col-xs-9">
+							<label class="radio-inline"> 
+								<input
+									type="radio" name='packActTime'
+									value='주 1회' id="radio1"/>주 1회
+							</label> 
+							<label class="radio-inline"> 
+								<input
+									type="radio" name='packActTime'
+									value='주 2~3회' id="radio2" />주 2~3회
+							</label>
+							<label class="radio-inline"> 
+								<input
+									type="radio" name='packActTime'
+									value='주 4회 이상' id="radio3" />주 4회 이상
+							</label>
+						</div>
 					</div>
 
 
 					<div class="form-group form-margin">
 						<label class="col-xs-2 control-label"
-							style="font-size: 14px;">팩 평균 연령</label> <label
-							class="radio-inline"> <input
-								type="radio" name='packActAge' value='청소년' />청소년
-						</label> <label class="radio-inline"> <input
-								type="radio" name='packActAge' value='20대' />20대
-						</label> <label class="radio-inline"> <input
-								type="radio" name='packActAge' value='30대' />30대
-						</label> <label class="radio-inline"> <input
-								type="radio" name='packActAge' value='40대' />40대
-						</label> <label class="radio-inline"> <input
-								type="radio" name='packActAge'
-								value='50대 이상' />50대 이상
-						</label> <label class="radio-inline"> <input
-								type="radio" name='packActAge'
-								value='전 연령대' />전 연령대
-						</label>
+							style="font-size: 14px;">팩 평균 연령</label> 
+						<div class="col-xs-10">
+							<label class="radio-inline"> 
+								<input
+									type="radio" name='packActAge' value='청소년' />청소년
+							</label>
+							<label class="radio-inline"> 
+								<input
+									type="radio" name='packActAge' value='20대' />20대
+							</label>
+							<label class="radio-inline"> 
+								<input
+									type="radio" name='packActAge' value='30대' />30대
+							</label>
+							<label class="radio-inline"> 
+								<input
+									type="radio" name='packActAge' value='40대' />40대
+							</label>
+							<label class="radio-inline">
+								<input
+									type="radio" name='packActAge'
+									value='50대 이상' />50대 이상
+							</label>
+							<label class="radio-inline">
+								<input
+									type="radio" name='packActAge'
+									value='전 연령대' />전 연령대
+							</label>
+						</div>
 					</div>
 
 					<div class="form-group form-margin">
 						<label class="col-xs-2 control-label">팩
 							소개</label>
-						<div class="col-xs-9">
+						<div class="col-xs-10">
 							<textarea id="packIntro" name="packIntro"
-								style="width: 100%; height: 150px; padding: 10px;">${packInfo.PACK_INTRO }</textarea>
+								style="width: 100%; height: 150px; padding: 10px; border:#aaaaaa solid 1px">${packInfo.PACK_INTRO }</textarea>
 						</div>
 					</div>
 
@@ -145,7 +188,7 @@
 					</div>
 
 					<div class="form-group">
-						<div class="col-xs-offset-2 col-xs-9">
+						<div class="col-xs-12">
 							<button id="btnPackInfoSubmit"
 								type="submit" class="btn btn-default">수정</button>
 						</div>
@@ -162,34 +205,43 @@
 		data-backdrop="false">
 		<div class="modal-dialog">
 			<div class="modal-content">
-
 				<div class="modal-body">
 					<!-- /////////////////////////   나중에 여기 팩뱃지로 바꿔야함      //////////////////////////////// -->
 					<div class="row packThumbnailModal">
 						<div class="col-md-2 col-xs-3">
 							<img
-								src="<c:url value="/images/pack/Pack1.png"/>"
-								alt="팩 마크" id="Pack1.png">
+								src="<c:url value="/images/pack/packLogo1.png"/>"
+								alt="팩 마크" id="packLogo1.png">
 						</div>
 						<div class="col-md-2 col-xs-3">
 							<img
-								src="<c:url value="/images/pack/Pack2.png"/>"
-								alt="팩 마크" id="Pack2.png">
+								src="<c:url value="/images/pack/packLogo2.png"/>"
+								alt="팩 마크" id="packLogo2.png">
 						</div>
 						<div class="col-md-2 col-xs-3">
 							<img
-								src="<c:url value="/images/pack/Pack3.png"/>"
-								alt="팩 마크" id="Pack3.png">
+								src="<c:url value="/images/pack/packLogo3.png"/>"
+								alt="팩 마크" id="packLogo3.png">
 						</div>
 						<div class="col-md-2 col-xs-3">
 							<img
-								src="<c:url value="/images/pack/Pack4.png"/>"
-								alt="팩 마크" id="Pack4.png">
+								src="<c:url value="/images/pack/packLogo4.png"/>"
+								alt="팩 마크" id="packLogo4.png">
 						</div>
 						<div class="col-md-2 col-xs-3">
 							<img
-								src="<c:url value="/images/pack/Pack5.png"/>"
-								alt="팩 마크" id="Pack5.png">
+								src="<c:url value="/images/pack/packLogo5.png"/>"
+								alt="팩 마크" id="packLogo5.png">
+						</div>
+						<div class="col-md-2 col-xs-3">
+							<img
+								src="<c:url value="/images/pack/packLogo6.png"/>"
+								alt="팩 마크" id="packLogo6.png">
+						</div>
+						<div class="col-md-2 col-xs-3">
+							<img
+								src="<c:url value="/images/pack/packLogo7.png"/>"
+								alt="팩 마크" id="packLogo7.png">
 						</div>
 					</div>
 				</div>
