@@ -17,7 +17,7 @@
 				<li><a href="<c:url value="/Member/Logout.do"/>">LOGOUT</a></li>
 				<li><a href="<c:url value="/mypage/main.do"/>">MY PAGE</a></li>
 				<li><a href="<c:url value="/pack/main.do"/>">PACK</a></li>
-				<li><a href="<c:url value="/course/main.do"/>">COURSE</a></li>
+				<li><a href="<c:url value="/course/mainTest.do"/>">COURSE</a></li>
 			</c:if>
 			<c:if test="${empty sessionScope.userId}" var="isNotLogin">
 				<li><a href="<c:url value="/Member/Join.do"/>">JOIN</a></li>
@@ -25,7 +25,7 @@
 			<c:if test="${!isNotLogin}"></c:if>
 			<c:if test="${sessionScope.userId == 'guest'}" var="isNotId">
 				<li><span style="font-size: .8em">${sessionScope.userId}님 어서오세요</span></li>
-				<li><a href="<c:url value="/course/main.do"/>">COURSE</a></li>
+				<li><a href="<c:url value="/course/mainTest.do"/>">COURSE</a></li>
 			</c:if>
 			<c:if test="${!isNotId}">
 			</c:if>
