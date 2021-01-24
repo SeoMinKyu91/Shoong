@@ -63,7 +63,6 @@ public class MemberDAO implements MemberService{
 
 	@Override
 	public MemberDTO selectOne(Map map) {
-
 		return sqlMapper.selectOne("selectOne",map);
 	}
 
@@ -75,6 +74,13 @@ public class MemberDAO implements MemberService{
 
 	public Map memberHasPack(Map map) {
 		return sqlMapper.selectOne("memberHasPack",map);
+	}
+
+	@Override
+	public MemberDTO isLogin(MemberDTO member) {
+		MemberDTO memberResult = sqlMapper.selectOne("memberIsLogin",member);
+		System.out.println("isLoginResult:"+memberResult.toString());
+		return memberResult;
 	}
 
 
