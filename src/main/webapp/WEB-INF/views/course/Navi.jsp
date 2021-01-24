@@ -426,8 +426,10 @@ $(function(){
 			},
 			success:function(data){
 				console.log('요청 성공');
-				console.log('data:%O',data.features[0]);
-				json = data.features[0];
+				//console.log('data:%O',data.features[0]);
+				console.log('data:%O',data);
+				//json = data.features[0];
+				json = data;
 				
 				map.addSource('route', {
 					"type":"geojson",
@@ -446,7 +448,7 @@ $(function(){
 							'line-width': 8
 						}
 				});
-				map.setCenter(data.features[0].geometry.coordinates[0][0]);
+				map.setCenter(json.geometry.coordinates[0][0]);
 				map.setZoom(11);
 				
 				var length = turf.length(json, {units: 'kilometers'});
