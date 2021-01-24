@@ -1,5 +1,14 @@
 package com.kosmo.shoong.web;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -40,6 +49,13 @@ public class AndroidController {
 	public MemberDTO isMemberJsonByPost(MemberDTO member) {
 		System.out.println("post:"+member.toString());
 		return memberservice.isLogin(member);
+	}
+	
+	@CrossOrigin
+	@PostMapping(value="/course/upload/json")
+	public String courseUpload(@RequestParam String route) {
+		System.out.println("route:"+route);
+		return "";
 	}
 	
 	//안드 경로 전송

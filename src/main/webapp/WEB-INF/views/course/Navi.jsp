@@ -254,7 +254,7 @@ ul li label{
 							<textarea rows="3" style="border:#aaaaaa solid 1px; width: 100%"></textarea>
 						</li>
 						<a class="btn" href="#" style="color:white;background-color: #ff8827; border:#ff8827 solid 1px;float: right;">등록</a>
-						<!--  <button type="submit" class="btn btn-block" style="float: right;">등록</button>-->
+						<!--  <button type="submit" class="btn btn-block" style="float: right;">등록</button>
 					</ul>
 					 -->
 				</div>
