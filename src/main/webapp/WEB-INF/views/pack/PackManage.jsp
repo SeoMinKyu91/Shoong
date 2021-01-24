@@ -4,7 +4,10 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <style>
-	a:link { color: black; }
+	a:link { 
+		color: #ff8827; 
+		font-weight:bold;
+	}
 	a:visted { color: black; }
 	
 	.surak a:link { color:blue; }
@@ -17,6 +20,16 @@
 		text-align: center;
 		
 	}
+	.packCreateBtn {
+		color:#ff8827;
+		background-color: white;
+		font-weight: bold;
+		border: none;
+	}
+	.packCreateBtn:hover {
+		color:white;
+		background-color: #ff8827;
+	}
 	.custom-border div{
 		margin: 10px 0px 10px 0px;
 		
@@ -25,14 +38,14 @@
 		background-color: white;
 	}
 	.custom-border:hover{
-		background-color: gray;
+		background-color: #f7e7da;
 		
 	}
 	.custom-border:nth-child(1):hover{
 		background-color: white;
 	}
 	.introbox div{
-		margin-top: 10px; 
+		padding-top: 10px; 
 	}
 	.introEdit:hover {
 		cursor: pointer;
@@ -40,20 +53,29 @@
 	
 </style>
 
-<div id="colorlib-main">
+<div id="colorlib-main" style="padding:20px">
 	<div class="row">
-		<div class="col-lg-12">
-			<div
-				class="section-tittle text-center mb-80 col-lg-12">
-				<h1 style="margin-top: 30px;">
-					Shoong <small>팩 관리</small>
-				</h1>
+		<div class="col-lg-12" style="padding-bottom:20px">
+			<div class="">
+				<a href="<c:url value="/pack/main.do"/>">
+				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
+					style="width: 80px;"></a>
+				&emsp;<a class="packCreateBtn btn" 
+					href="<c:url value="/pack/main.do"/>">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="packCreateBtn btn"
+						href="<c:url value="/pack/view.do"/>">MY PACK</a>
+				</c:if>
 			</div>
-
 		</div>
 	</div>
-	<hr>
-	<div class="container" style="margin-top: 50px;">
+	<div class="row">
+		<div class="col-xs-12 col-md-12 col-lg-12">
+			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em;text-align: center">${packInfo.PACK_NAME}</p>
+			<hr style="background-color: black;height:1px"/>
+		</div>
+	</div>
+	<div class="container" style="padding-top: 30px;">
 		<div class="row">
 			<div
 				class="offset-md-2 col-md-8 col-lg-offset-2 col-lg-8">
@@ -64,34 +86,33 @@
 							src="<c:url value="/images/pack/${packInfo.PACK_THUMBNAIL }"/>"
 							alt="팩 마크">
 					</div>
-					<div class="col-md-7 introbox"
+					<div class="col-lg-7 introbox"
 						style="margin-left: 30px;">
 						<div class="row">
-							<div class="col-md-11 col-xs-11">
-								<h2 style="font-style: bold;">${packInfo.PACK_NAME}</h2>
+							<div class="col-lg-11 col-xs-11">
+								<h2 style="font-weight: bold;">${packInfo.PACK_NAME}</h2>
 							</div>
-							<div class="col-md-1 col-xs-1">
+							<div class="col-lg-1 col-xs-1">
 								<a href='<c:url value="/pack/infoEdit.do?packId=${sessionScope.packId }"/>'
 									class="introEdit">
 									<span class="glyphicon glyphicon-edit"
-										aria-hidden="true"></span>
+										aria-hidden="true" style="color:black;"></span>
 								</a>
 							</div>
 						</div>
 						<div class="row">
-							<p class="col-md-4">#${packInfo.PACK_ACT_REGION
+							<p class="col-lg-4">#${packInfo.PACK_ACT_REGION
 								}</p>
-							<p class="col-md-3">#${packInfo.PACK_ACT_TIME
+							<p class="col-lg-3">#${packInfo.PACK_ACT_TIME
 								}</p>
-							<p class="col-md-3">#${packInfo.PACK_ACT_AGE
+							<p class="col-lg-3">#${packInfo.PACK_ACT_AGE
 								}</p>
 						</div>
 						<div class="row" style="margin-top: 0px;">
-							<p class="col-md-3">${packInfo.PACK_TAG }</p>
+							<p class="col-lg-10">${packInfo.PACK_TAG }</p>
 						</div>
 						<div class="row">
-							<p
-								style="font-size: 15px; line-height: 2.0;">${packInfo.PACK_INTRO}</p>
+							<p class="col-lg-10" style="font-size: 15px; line-height: 2.0;">${packInfo.PACK_INTRO}</p>
 						</div>
 					</div>
 				</div>
@@ -99,9 +120,7 @@
 		</div>
 	</div>
 
-
-
-	<div class="container" style="margin-top: 50px;">
+	<div class="container" style="padding-top: 40px;">
 		<div class="row">
 			<div
 				class="offset-md-2 col-md-8 col-lg-offset-2 col-lg-8">
@@ -113,16 +132,15 @@
 			<div
 				class="offset-md-2 col-md-8 col-lg-offset-2 col-lg-8">
 				<div role="tabpanel">
-
 					<!-- Nav tabs -->
 					<ul
 						class="nav nav-pills justify-content-center"
 						role="tablist">
-						<li role="presentation" class="active">
+						<li role="presentation" class="active" id="JoinMem">
 							<a href="#home" aria-controls="home"
 								role="tab" data-toggle="tab">팩 가입신청 목록</a>
 						</li>
-						<li role="presentation"><a
+						<li role="presentation" id="JoinMem"><a
 								href="#profile" aria-controls="profile"
 								role="tab" data-toggle="tab">팩 가입자 목록</a>
 						</li>
@@ -144,16 +162,14 @@
 								</div>
 							</c:if>
 
-
-
 							<c:if test="${!noPackJoinList }">
 								<div class="row custom-border"
-									style="font-size: 14px; color: gray;">
-									<div class="col-lg-2 col-xs-2">이름</div>
-									<div class="col-lg-2 col-xs-2">나이</div>
-									<div class="col-lg-3 col-xs-5">가입
+									style="font-size: 14px; background-color:#ff8827;color:white;">
+									<div class="col-lg-2 col-xs-2" style="font-weight:bold;">이름</div>
+									<div class="col-lg-2 col-xs-2" style="font-weight:bold;">나이</div>
+									<div class="col-lg-3 col-xs-5" style="font-weight:bold;">가입
 										신청일</div>
-									<div class="col-lg-3 col-xs-2">활동량</div>
+									<div class="col-lg-3 col-xs-2" style="font-weight:bold;">활동량</div>
 								</div>
 								<c:forEach var="list"
 									items="${packJoinList}">
@@ -184,18 +200,15 @@
 
 						</div>
 
-
-
-
 						<div role="tabpanel" class="tab-pane"
 							id="profile">
 							<div class="row custom-border"
-								style="font-size: 14px; color: gray;">
-								<div class="col-lg-3 col-xs-2">이름</div>
-								<div class="col-lg-2 col-xs-2">나이</div>
-								<div class="col-lg-3 col-xs-5">최근
+								style="font-size: 14px; background-color:#fad1af;">
+								<div class="col-lg-3 col-xs-2" style="font-weight:bold;">이름</div>
+								<div class="col-lg-2 col-xs-2" style="font-weight:bold;">나이</div>
+								<div class="col-lg-3 col-xs-5" style="font-weight:bold;">최근
 									접속일</div>
-								<div class="col-lg-3 col-xs-2">직책</div>
+								<div class="col-lg-3 col-xs-2" style="font-weight:bold;">직책</div>
 							</div>
 
 
@@ -215,7 +228,6 @@
 												aria-hidden="true" style="color: red;"></span>
 										</a>
 									</div>
-
 								</div>
 							</c:forEach>
 						</div>
@@ -232,7 +244,6 @@
 <div class="modal fade" id="packIntroEdit" data-backdrop="false">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-
 			<div class="modal-body">
 				<form action="#" class="bg-light p-5 contact-form" method="post"
 					enctype="multipart/form-data">
@@ -242,21 +253,17 @@
 							id="packName">
 					</div>
 
-					<label for="packName">팩 나이</label>
+					<label for="packName">팩 연령대</label>
 					<div class="form-group">
 						<input type="text" class="form-control" name="packName"
 							id="packName">
 					</div>
-
-					
-					
 
 					<label for="packIntro">팩 소개글</label>
 					<div class="form-group">
 						<textarea cols="30" rows="7" class="form-control" id="packIntro"
 							name="packIntro"></textarea>
 					</div>
-
 				</form>
 				<button type="button" class="btn btn-primary" data-dismiss="modal">수정</button>
 				<button type="button" class="btn btn-info" data-dismiss="modal">닫기</button>
@@ -266,7 +273,6 @@
 	</div>
 </div>
 <!-- 팩 정보수정 모달창 끝 -->
-
 <script>
 	$(function() {
 		/*

@@ -132,7 +132,7 @@ public class CourseController {
 	public String courseMainTest(Map map) {
 		map.put("user_ID","kim");
 		
-		return "course/CourseMainTest";
+		return "/course/CourseMainTest";
 	}
 
 }

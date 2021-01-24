@@ -21,10 +21,15 @@
 		background-color: #ff8827;
 	}
 </style>
+<<<<<<< HEAD
+
+<div id="colorlib-main" style="padding:10px">
+=======
 <div id="colorlib-main" style="padding:20px">
+>>>>>>> refs/remotes/origin/test_master
 	<div class="row">
 		<div class="col-lg-12" style="padding-bottom:20px">
-			<div class="" style="padding-top:20px;">
+			<div class="">
 				<a href="<c:url value="/pack/main.do"/>">
 				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
 					style="width: 80px;"></a>
