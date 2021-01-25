@@ -208,7 +208,6 @@
 	          searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 	          displayCentermarker(map);
 	          addeventmap(map);
-	          
 	      }
 	      
 	       /////
