@@ -12,10 +12,12 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- 모달 -->
-<link rel="stylesheet" href="<c:url value="/css/comment.css?f"/>">
+<link rel="stylesheet" href="<c:url value="/css/comment.css?as"/>">
 <script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
-
 <style>
+	.feed-bottom-icon img{
+		margin: 6px 0px 6px 15px;
+	}
 	.feed-bottom-icon img{
 	margin: 6px 0px 6px 15px;
 	}
@@ -50,12 +52,39 @@
 	.icons-div a:hover{
 		cursor: pointer;
 	}
-	
+	.feed-img{
+		height: 250px;
+		padding: 4px;
+	}
+	.feed-img img{
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+	}
+	.feed-img-hover{
+		width:99%;
+		height:100%;
+		background-color:black;
+		z-index:3;
+		display: none;
+		text-align: center;
+		position: absolute;
+		opacity: 0.5;
+		top: 0%;
+		left: 0%;
+		line-height: 250px;
+	}
+	.feed-img-hover span{
+		color:white;
+		font-size: 16px;
+		font-weight: bold;
+		margin-right: 2px;
+		
+	}
 </style>
 
 
 <div id="colorlib-main">
-	
 	<div class="row" style="margin-left: 20px; margin-bottom: 2px;">
 			
 		<div class="col-lg-12" style="padding-bottom:10px">
@@ -79,179 +108,39 @@
 	</div>
 	<hr style="background-color:black; height:1px; margin: 0px;"/>
 
-	<!-- 피드 메인 시작 DIV -->
-	<div class="container">
-		<div class="row" id="body-div">
-			<div class="offset-md-2 col-md-8 col-sm-12">
-				<c:if test="${not empty commentList }"
-					var="notempty">
-					<c:forEach items="${commentList }"
-						var="item" varStatus="loop">
-
-						<div class="row feed-rows">
-							<div class="feed">
-								<div class="row feed-inner">
-									<div class="col-md-12">
-										<div class="row feed-row">
-											<!-- 피드 top 시작 -->
-											<div class="col-12 feed-top">
-												<div class="row feed-top-row">
-													<div class="col-2 feed-top-imgs"
-														style="text-align: center;">
-														<!-- 나중에 이미지 사진 교체 해야함 현재는 정확히 어떻게 해야할지 모르겠어서 임시사진 적용 -->
-														<img class="feed-top-img-src"
-															alt="이미지사진"
-															src="<c:url value="/images/image_10.jpg"/>" />
-													</div>
-													<div class="col-7 feed-top-nick">
-														<span class="feed-top-nick-span">${item.packCommentWriter }</span>
-													</div>
+	<div class="container" style="margin-top:25px;">
+		<div class="row">
+			<div class="col-lg-offset-2 col-lg-8">
+				<div class="row">
+					<div class="col-lg-12">
+						<c:if test="${empty commentList }" var="isEmpty">
+							<h4>등록된 게시글이 없습니다</h4>	
+						</c:if>
+						<c:if test="${not isEmpty}">
+							<c:forEach items="${commentList}" var="item" varStatus="loop">
+								<c:if test="${not empty item }">
+									<c:forEach items="${item.packCommentImages }" var="image" varStatus="loop" begin="0" end="0">
+										<div class="col-md-4 feed-img">
+											<img alt="기본사진" src="/fileupload/${image }"/>
+											<a href="<c:url value="/pack/comment/view.do?packCommentNo=${item.packCommentNo }"/>">
+												<div class="feed-img-hover">
+													<img src="<c:url value='/images/fa-icons/comment-white.png'/>" style="width:25px;height:25px;">
+													<span>${item.packCommentReplyCount }</span>
+													<img src="<c:url value='/images/fa-icons/heart-white.png'/>"style="width:25px;height:25px;">
+													<span>${item.packCommentLikeCount }</span>
 												</div>
-												<!-- feed-top-row -->
-											</div>
-											<!-- feed-row -->
-											<!-- 피드 top 끝 -->
+											</a>
 										</div>
-										<!-- 피드 이미지 시작 -->
-										<c:if
-											test="${not empty item.packCommentImages}"
-											var="imagesExist">
-											<div class="row feed-img-row">
-												
-												<div class="col-12 feed-img carousel slide" id="${item.packCommentNo }" data-ride="carousel" data-interval="false">
-													<!-- indicators -->
-													<c:if test="${item.packCommentImages.size() > 1 }">
-														<ol class="carousel-indicators">
-															<c:forEach items="${item.packCommentImages }"
-																var="i" varStatus="index">
-																<li <c:if test="${index.index==0 }"> class="active"</c:if>
-																	data-target="#${item.packCommentNo}"
-																	data-slide-to="${index.index}">
-																</li>
-															</c:forEach>
-														</ol>
-													</c:if>
-
-													<!-- Wrapper for slides -->
-													<div class="carousel-inner"
-														role="listbox">
-														<c:forEach
-															items="${item.packCommentImages }"
-															var="image" varStatus="index">
-															<div
-																<c:if test="${index.index==0 }" var="isFirst"> class="item active"</c:if>
-																<c:if test="${!isFirst }">class="item"</c:if>>
-																<img class="feed-img-src"
-																	src="/fileupload/${image }"
-																	alt="기본사진" />
-															</div>
-														</c:forEach>
-													</div>
-
-													<!-- Controls -->
-													<c:if test="${item.packCommentImages.size() > 1 }">
-														<a class="left carousel-control"
-															href="#${item.packCommentNo }"
-															role="button" data-slide="prev"
-															style="background-color: none;">
-															<span
-																class="glyphicon glyphicon-chevron-left"
-																aria-hidden="true"></span> <span
-																class="sr-only">Previous</span>
-														</a>
-														<a class="right carousel-control"
-															href="#${item.packCommentNo }"
-															role="button" data-slide="next">
-															<span
-																class="glyphicon glyphicon-chevron-right"
-																aria-hidden="true"></span> <span
-																class="sr-only">Next</span>
-														</a>
-													</c:if>
-												</div>
-											</div>
-											<!-- feed-img-row -->
-										</c:if>
-										<c:if test="!imagesExist">
-
-										</c:if>
-										<!-- 피드 이미지 끝 -->
-
-										<div class="row feed-content-row">
-											<div class="col-12 feed-content">
-												<span>${item.packCommentContent }</span>
-											</div>
-										</div>
-
-										<!-- 피드 bottoms 시작 -->
-										<div class="feed-bottoms">
-											<div class="row feed-bottom-row">
-												<div class="col-10 feed-bottom-icon">
-													<img class="icon likely-icon"
-														src="<c:url value='/images/fa-icons/heart.png'/>"
-														title="Likely" style="">
-													<img class="icon reply-icon"
-														src="<c:url value='/images/fa-icons/comment.png'/>" />
-												</div>
-											</div>
-
-											<div class="row feed-bottom-row">
-												<c:if test="${item.packCommentLikeCount != null}">
-													<div class="col-12 feed-likely-row">
-														<span style="margin-left: 15px;">좋아요</span>
-														<span class="likely-count">${item.packCommentLikeCount}</span>
-														<span>개</span>
-													</div>
-												</c:if>
-											</div>
-
-											<div class="row feed-bottom-row"
-												style="margin-top: 10px;">
-												<div class="col-12 feed-reply-show">
-													<span style="margin-left: 15px;">댓글
-													</span> <span style="margin-left: 15px;">${item.packCommentReplyCount }개</span>
-													<span><a href="#">모두보기</a></span>
-												</div>
-											</div>
-
-											<div class="row feed-bottom-row">
-												<c:if
-													test="${not empty item.packCommentReply }">
-													<c:forEach
-														items="${item.packCommentReply }"
-														var="reply">
-														<div class="col-12 feed-replys">
-															<span
-																style="margin-left: 15px; font-weight: bold; font-size: 12px;">${reply.packCommentReplyWriter }</span>
-															<span style="margin-left: 15px;">${reply.packCommentReplyContent }</span>
-														</div>
-													</c:forEach>
-												</c:if>
-											</div>
-
-											<div class="row feed-bottom-row"
-												style="border-top: 1px solid lightgrey; margin-left: 0px; margin-right: 0px; margin-top: 15px;">
-												<div class="col-10 feed-reply-content">
-													<input type="text" class="feed-reply-content-input" placeholder="댓글달기"/>
-												</div>
-												<div class="col-2 feed-reply-write" style="text-align: right;">
-													<span>게시</span>
-												</div>
-											</div>
-										</div>
-										<!-- 피드 bottoms 끝 -->
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- feed rows -->
-					</c:forEach>
-				</c:if>
-				<c:if test="${!notempty }">
-					<div>등록된 피드가 없습니다</div>
-				</c:if>
+									</c:forEach>
+								</c:if>
+							</c:forEach>
+						</c:if>	
+					</div>
+				</div>
+				
 			</div>
 		</div>
+		
 	</div>
 </div>
 <!-- color-lib-main -->
@@ -288,13 +177,51 @@
 				</form>
 				<button type="submit" class="btn btn-default"
 					id="btnCommentWrite">Save</button>
-				<button type="button" class="btn btn-default"
+				<button type="button" class="btn btn-default closeButton"
 					data-dismiss="modal" id="feed-write-cancle">Close</button>
 			</div>
 		</div>
 	</div>
 </div>
 <!-- 피드 글 쓰기 모달 끝 -->
+
+<!-- 피드 글 수정 모달 시작 -->
+<div class="modal fade" id="feed-update-modal"
+	data-backdrop="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header"
+				style="text-align: center;">
+				<h4 style="text-align: center;">게시물 수정</h4>
+			</div>
+			<div class="modal-body">
+				<form action="" class="" id="feed-update-form"
+					method="post" enctype="multipart/form-data">
+					<div class="feed-story"
+						contenteditable="true">글자를 입력해주세요</div>
+					<div class="feed-img-modal">
+						<span class="feed-img-modal-span">Drag
+							& Drop Files Here</span>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<form method="post"
+					action="<c:url value="/pack/comment/update.do"/>"
+					id="sendToServerFormUpdate">
+					<input type="hidden" name="imgArray" id="imgArrayUpdate" class="form-control">
+					<input type="hidden" name='packCommentContent' class="form=control" id="feed-story-update-modal">
+					<input type="hidden" name="packCommentNo" id="packCommentUpdateNo">
+				</form>
+				<button type="submit" class="btn btn-default"
+					id="btnCommentUpdate">Save</button>
+				<button type="button" class="btn btn-default closeButton"
+					data-dismiss="modal" id="feed-write-cancle">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 피드 글 수정 모달 끝 -->
 
 <script>
 	$(function() {
@@ -427,26 +354,124 @@
 			$('#sendToServerForm').submit();
 		});
 		
-		$('.feed-reply-write').children().click(function(){
-			console.log('게시버튼 클릭');
-			var replyContent = $('.feed-reply-content-input').val();
-			var packCommentNo = $(this).parent().parent().parent().parent().find('div.feed-img-row').find('div.feed-img').attr('id');
+		//수정 버튼 클릭시
+		$('.feed-update').click(function(){
+			console.log('업데이트 클릭');
+			
+			var packCommentNo = $(this).parent().attr('aria-labelledby');
 			console.log(packCommentNo);
-			console.log(replyContent);
+			
 			$.ajax({
-				url : "<c:url value="/pack/comment/reply/write"/>",//요청할 서버의 URL주소
+				 url:"<c:url value="/pack/comment/selectOne.do"/>",
+				 type : 'post',
+				 dataType : 'json',
+				 data: "packCommentNo=" + packCommentNo,
+				 success : function(data){
+					console.log("팩 콘텐트:"+data.PACK_COMMENT_CONTENT);
+					console.log("팩 번호:"+data.PACK_COMMENT_NO);
+					updateModal(data);
+					$('#feed-update-modal').modal('show');
+				 },
+				 error:function(error){
+					 console.log('에러: ',error.reponseText);
+				 }
+			 });
+			
+			
+		});
+		
+		//수정 모달 초기화
+		function updateModal(data){
+			
+			//css설정
+			$('.feed-story').css('opacity',1);
+			
+			$('.feed-story').html(data.PACK_COMMENT_CONTENT);
+			$('#packCommentUpdateNo').val(data.PACK_COMMENT_NO);
+			
+			console.log("내가확인하고 싶은 no 값:" + $('#packCommentUpdateNo').val());
+			
+			if(data.packCommentImgs != null){
+				$.each(data.packCommentImgs,function(index,el){
+					console.log(index+":"+el);
+					imgarr.push(el);
+				})
+				console.log("imgarr배열:"+ imgarr.length);
+			}
+			imageDivShowUpdate();
+			
+			
+			
+		}
+		
+		function imageDivShowUpdate() {
+			var str = '';
+			for (var i = 0; i < imgarr.length; i++) {
+				str += "<div class='imgdiv' id='"+imgarr[i]+"'><img class='previewImg'  src=/fileupload/"+imgarr[i]+"><div class='imgdeletemark'>삭제</div></div>";
+			}
+			$(".feed-img-modal").html(str);
+			//이미지에 호버 이벤트 걸기
+			$(".imgdiv").hover(function() {
+				$(this).children().eq(1).css("display", "block");
+				$(this).children().eq(0).css("opacity", 0.4);
+			}, function() {
+				$(this).children().eq(1).css("display", "none");
+				$(this).children().eq(0).css("opacity", 1.0);
+			});
+			$(".imgdiv").click(function() {
+				deleteFileToServer($(this).attr('id'))
+			});
+			$('#imgArrayUpdate').val(imgarr);
+		}
+		
+		function deleteFileToServerUpdate(filename) {
+			$.ajax({
+				url : "<c:url value="/pack/comment/filedelete/post"/>",//요청할 서버의 URL주소
 				type : 'post',//데이타 전송방식(디폴트는 get방식) 
 				dataType : 'text',//서버로 부터 응답 받을 데이타의 형식 설정
-				data : {'replyContent':replyContent,'packCommentNo':packCommentNo},
+				data : "filename=" + filename,
 				success : function(data) {
 					console.log(data);
+					imgarr.splice(imgarr.indexOf(filename), 1);
+					console.log(imgarr);
+					imageDivShowUpdate();
 				},
 				error : function(error) {//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
 					console.log('에러 : ', error.responseText);
 				}
+
 			});
+		}
+		
+		//close버튼 클릭시 초기화
+		$('.closeButton').click(function(){
+			console.log('닫기 버튼 클릭');
+			imgarr.splice(0,imgarr.length);
+			$('.feed-story').html("글자를 입력해주세요");
+			$('.feed-story').css('opacity',0.7);
+			$('.feed-img-modal').html("<span class='feed-img-modal-span'>Drag & Drop Files Here</span>");
+			
+		});
+		
+		//서버로 update 전송
+		$('#btnCommentUpdate').click(function(){
+			console.log("수정하고 난뒤 packContent값:"+$('.feed-story').text());
+			$('#feed-story-update-modal').val($('.feed-story').text());
+			
+			console.log('내가 확인하고싶은 content:'+$('#feed-story-update-modal').val());
+			console.log($('#feed-story-modal').val());
+			console.log($('#imgArray').val());
+			
+			$('#sendToServerFormUpdate').submit();
 		});
 		
 		
-	});
+		$(".feed-img").hover(function() {
+			$(this).find('.feed-img-hover').css("display", "block");
+		}, function() {
+			$(this).find('.feed-img-hover').css("display", "none");
+		});
+
+		
+	})
 </script>
