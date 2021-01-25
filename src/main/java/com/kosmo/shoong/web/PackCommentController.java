@@ -274,6 +274,16 @@ public class PackCommentController {
     	return "forward:/pack/myComment.do";
     }
     
+    @RequestMapping("comment/reply/write")
+    public String packCommentReplyWrite(@RequestParam Map map, Model model) {
+    	System.out.println("댓글등록 controller들어옴");
+    	System.out.println("글번호:"+map.get("packCommentNo"));
+    	System.out.println("댓글 내용:"+map.get("replyContent"));
+    	
+    	
+    	return "시부레";
+    }
+    
     
 }
 

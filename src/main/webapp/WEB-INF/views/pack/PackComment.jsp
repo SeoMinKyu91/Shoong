@@ -117,12 +117,8 @@
 											test="${not empty item.packCommentImages}"
 											var="imagesExist">
 											<div class="row feed-img-row">
-
-												<div
-													class="col-12 feed-img carousel slide"
-													id="${item.packCommentNo }"
-													data-ride="carousel"
-													data-interval="false">
+												
+												<div class="col-12 feed-img carousel slide" id="${item.packCommentNo }" data-ride="carousel" data-interval="false">
 													<!-- indicators -->
 													<c:if test="${item.packCommentImages.size() > 1 }">
 														<ol class="carousel-indicators">
@@ -200,8 +196,7 @@
 											</div>
 
 											<div class="row feed-bottom-row">
-												<c:if
-													test="${item.packCommentLikeCount != null}">
+												<c:if test="${item.packCommentLikeCount != null}">
 													<div class="col-12 feed-likely-row">
 														<span style="margin-left: 15px;">좋아요</span>
 														<span class="likely-count">${item.packCommentLikeCount}</span>
@@ -236,14 +231,10 @@
 
 											<div class="row feed-bottom-row"
 												style="border-top: 1px solid lightgrey; margin-left: 0px; margin-right: 0px; margin-top: 15px;">
-												<div
-													class="col-10 feed-reply-content">
-													<input type="text"
-														class="feed-reply-content-input"
-														placeholder="댓글달기" />
+												<div class="col-10 feed-reply-content">
+													<input type="text" class="feed-reply-content-input" placeholder="댓글달기"/>
 												</div>
-												<div class="col-2 feed-reply-write"
-													style="text-align: right;">
+												<div class="col-2 feed-reply-write" style="text-align: right;">
 													<span>게시</span>
 												</div>
 											</div>
@@ -434,6 +425,26 @@
 			console.log($('#imgArray').val());
 			
 			$('#sendToServerForm').submit();
+		});
+		
+		$('.feed-reply-write').children().click(function(){
+			console.log('게시버튼 클릭');
+			var replyContent = $('.feed-reply-content-input').val();
+			var packCommentNo = $(this).parent().parent().parent().parent().find('div.feed-img-row').find('div.feed-img').attr('id');
+			console.log(packCommentNo);
+			console.log(replyContent);
+			$.ajax({
+				url : "<c:url value="/pack/comment/reply/write"/>",//요청할 서버의 URL주소
+				type : 'post',//데이타 전송방식(디폴트는 get방식) 
+				dataType : 'text',//서버로 부터 응답 받을 데이타의 형식 설정
+				data : {'replyContent':replyContent,'packCommentNo':packCommentNo},
+				success : function(data) {
+					console.log(data);
+				},
+				error : function(error) {//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
+					console.log('에러 : ', error.responseText);
+				}
+			});
 		});
 		
 		
