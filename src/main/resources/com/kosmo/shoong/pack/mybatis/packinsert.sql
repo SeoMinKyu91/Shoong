@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 /* =================================================팩장에 해당하는 유저 생성 ===========================================================*/
 INSERT INTO member_ VALUES('shoong1000@naver.com','1234','장동건','남성',25,'01000001000',sysdate,sysdate,132);
 INSERT INTO member_ VALUES('shoong1100@naver.com','1234','한지민','여성',30,'010000001100',sysdate,sysdate,132);
@@ -34,7 +32,6 @@ INSERT INTO useraddr VALUES('shoong1700@naver.com', '경기도 성남시',37.430
 INSERT INTO useraddr VALUES('shoong1800@naver.com', '경기도 성남시',37.399067052411404,127.16010054234708);
 INSERT INTO useraddr VALUES('shoong1900@naver.com', '경기도 용인시',37.289404999999995,127.1252265);
 
->>>>>>> branch 'test_BWG' of https://github.com/SeoMinKyu91/Shoong.git
 /* =================================================1000번팩 가입 완료한 유저 생성 ===========================================================*/
 INSERT INTO member_ VALUES('shoong1001@naver.com','1234','양현모','남성',21,'01000001001',sysdate,sysdate,132);
 INSERT INTO member_ VALUES('shoong1002@naver.com','1234','영비','남성',24,'01000001002',sysdate,sysdate,132);

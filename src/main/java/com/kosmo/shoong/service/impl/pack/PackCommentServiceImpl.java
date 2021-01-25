@@ -23,8 +23,7 @@ public class PackCommentServiceImpl implements PackCommentService {
 
 	@Override
 	public int packCommentDelte(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.packCommentDelte(map);
 	}
 
 	@Override
@@ -51,6 +50,20 @@ public class PackCommentServiceImpl implements PackCommentService {
 	public Map packCommentSelectOne(Map map) {
 		
 		return dao.packCommentSelectOne(map);
+	}
+
+	public PackCommentDTO packCommentView(Map map) {
+		return dao.packCommentView(map);
+	}
+
+	public int packCommentImgDelete(Map map) {
+
+		return dao.packCommentImgDelete(map);
+	}
+
+	public int packCommentImgUpdate(Map map) {
+		
+		return dao.packCommentImgUpdate(map);
 	}
 
 

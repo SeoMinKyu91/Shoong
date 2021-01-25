@@ -13,7 +13,6 @@
 
 <!-- 모달 -->
 <link rel="stylesheet" href="<c:url value="/css/comment.css?f"/>">
-<script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
 
 <style>
 	.feed-bottom-icon img{
@@ -43,42 +42,52 @@
 	#packComment.col:eq(1){
 		diplay: none;
 	}
-	.icons-div img{
-		width: 30px;
-		height: 30px;
-	}
-	.icons-div a:hover{
-		cursor: pointer;
-	}
 	
 </style>
 
 
 <div id="colorlib-main" style="padding: 20px;">
-	
 	<div class="row">
-			
 		<div class="col-lg-12" style="padding-bottom:20px">
-			<div class="row">
-				<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10" style="padding-top:20px">
-					<a href="<c:url value="/pack/main.do"/>">
-					<img alt="pack" src="<c:url value="/images/pack/pack.png"/>" style="width: 80px;"></a>&emsp;<a class="packCreateBtn btn" href="<c:url value="/pack/main.do"/>">HOME</a>
-					<c:if test="${!empty sessionScope.packId}">
-						<a class="packCreateBtn btn" href="<c:url value="/pack/view.do"/>">MY PACK</a>
-					</c:if>
-				</div>
-				<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 icons-div" style="padding-top: 14px;">
-					<a id="btn-feed-write"><i class="fas fa-edit fa-2x" style="color: black; margin-left: 5px;"></i></a>
-					<a href="<c:url value="/pack/myComment.do"/>"><i class="far fa-user fa-2x" style="color: black; margin-left: 5px;"></i></a>
-				</div>
+			<div class="" style="padding-top:20px">
+				<a href="<c:url value="/pack/main.do"/>">
+				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
+					style="width: 80px;"></a>
+				&emsp;<a class="packCreateBtn btn" 
+					href="<c:url value="/pack/main.do"/>">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="packCreateBtn btn"
+						href="<c:url value="/pack/view.do"/>">MY PACK</a>
+				</c:if>
 			</div>
-			
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-12 col-lg-12">
+			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em">따르릉 따르릉</p>
 			<hr style="background-color:black; height:1px"/>
+			<c:if test="${!empty manager}">
+				<a class="packManageBtn btn" href="<c:url value="/pack/manage.do"/>"><span class="glyphicon glyphicon-cog"></span>&nbsp;팩 관리</a>
+			</c:if>
 		</div>
 	</div>
 
 	<!-- 피드 메인 시작 DIV -->
 	<div class="container">
+		<div class="row" id="top-var">
+			<div class="offset-md-2 col-md-8 col-sm-12">
+				<div class="row top-menus">
+					<div class="col-6 feedwrite">
+						<button type="button" id="btn-feed-write">게시글
+							추가하기</button>
+					</div>
+					<div class="col-6 feedshow">
+						<a href="<c:url value="/pack/myComment.do"/>"><button class="btnfeedshow">내가 글쓴 목록</button></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="row" id="body-div">
 			<div class="offset-md-2 col-md-8 col-sm-12">
 				<c:if test="${not empty commentList }"
@@ -116,8 +125,7 @@
 											var="imagesExist">
 											<div class="row feed-img-row">
 
-												<div
-													class="col-12 feed-img carousel slide"
+												<div class="col-12 feed-img carousel slide"
 													id="${item.packCommentNo }"
 													data-ride="carousel"
 													data-interval="false">

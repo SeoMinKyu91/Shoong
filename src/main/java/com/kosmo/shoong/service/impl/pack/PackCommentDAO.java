@@ -28,8 +28,8 @@ public class PackCommentDAO implements PackCommentService {
 
 	@Override
 	public int packCommentDelte(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
+		sqlMapper.delete("packCommentImgDelete",map);
+		return sqlMapper.delete("packCommentDelete",map);
 	}
 
 	@Override
@@ -91,6 +91,28 @@ public class PackCommentDAO implements PackCommentService {
 		}
 		return commentOne;
 		
+	}
+
+	public PackCommentDTO packCommentView(Map map) {
+		PackCommentDTO dto = sqlMapper.selectOne("packCommentView",map);
+		List<String> packCommentImg = sqlMapper.selectList("packCommentImageList",map);
+		if(packCommentImg != null) {
+			dto.setPackCommentImages(packCommentImg);
+		}
+		List<PackCommentReplyDTO> packCommentReply = sqlMapper.selectList("packCommentReplyList",map);
+		if(packCommentReply != null) {
+			dto.setPackCommentReply(packCommentReply);
+		}
+		return dto;
+	}
+
+	public int packCommentImgDelete(Map map) {
+		return sqlMapper.delete("packCommentImgDelete",map);
+	}
+
+	public int packCommentImgUpdate(Map map) {
+
+		return sqlMapper.insert("packCommentImgUpdate",map);
 	}
 	
 	

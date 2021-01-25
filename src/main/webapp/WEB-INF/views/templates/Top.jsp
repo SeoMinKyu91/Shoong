@@ -3,9 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
 <!-- 선택페이지 class="colorlib-active" 추가해주는 스크립트 만들기 -->
+<style>
+	.box{ -ms-overflow-style: none; } 
+	.box::-webkit-scrollbar{ display:none; }
+</style>
 
 <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
-<aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
+<aside id="colorlib-aside" role="complementary" class="js-fullheight text-center box">
 	<a href="<c:url value="/"/>" id="colorlib-logo"><img alt="shoongLogo" src="<c:url value="/images/shooongLogo.png"/>" style="width:100px"></a>
 	<nav id="colorlib-main-menu" role="navigation">
 		<ul>
