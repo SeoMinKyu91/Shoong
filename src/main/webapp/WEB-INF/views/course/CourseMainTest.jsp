@@ -32,10 +32,10 @@
     <!-- style CSS -->
     <link rel="stylesheet" href="<c:url value="/courseTest/css/style.css"/>">
 </head>
-
+<style>
+</style>
 <body>
 <div id="colorlib-main">
- 
     <!-- breadcrumb start-->
     <section class="breadcrumb breadcrumb_bg">
         <div class="container">
@@ -43,8 +43,8 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item text-center">
-                            <h2>Course with SHOONG</h2>
-                            <p>Recommended course for U</p>
+                            <h2>SHOOONG.</h2>
+                            <p>${sessionScope.userId}님을 위한 코스 추천</p>
                         </div>
                     </div>
                 </div>
@@ -52,8 +52,6 @@
         </div>
     </section>
     <!-- breadcrumb start-->
-    
-    
     <div class="main_menu_iner">
             <div class="container">
                 <div class="row align-items-center ">

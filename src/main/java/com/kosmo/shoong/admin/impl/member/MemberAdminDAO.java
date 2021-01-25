@@ -26,6 +26,12 @@ public class MemberAdminDAO implements MemberAdminService{
 		// TODO Auto-generated method stub
 		return sqlMapper.selectList("memberSearch",map);
 	}
-	
+
+	@Override
+	public int deleteMember(Map map) {
+		// TODO Auto-generated method stub
+		System.out.println("dao안");
+		return sqlMapper.delete("memberDelete",map);
+	}
 	
 }

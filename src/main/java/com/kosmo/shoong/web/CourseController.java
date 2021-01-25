@@ -67,35 +67,6 @@ public class CourseController {
 		}
 		if(br!=null) br.close();
 		return sb.toString();
-		/*
-		File file = new File(routePath);
-		BufferedReader br =
-				new BufferedReader(
-						new InputStreamReader(new FileInputStream(file)));
-		String data;
-		String result="";
-		while((data=br.readLine())!=null) {
-			result += data;
-		}
-		br.close();
-		System.out.println(result);
-		JsonParser parser = new JsonParser();
-		JsonObject obj = parser.parse(result).getAsJsonObject();
-
-		return obj.toString();
-		*/
-		/*
-		Gson gson = new Gson();
-		Reader reader = Files.newBufferedReader(Paths.get(routePath));
-		Map<?, ?> map = gson.fromJson(reader, Map.class);
-		// print map entries
-	    for (Map.Entry<?, ?> entry : map.entrySet()) {
-	        System.out.println(entry.getKey() + "=" + entry.getValue());
-	    }
-	    // close reader
-	    reader.close();
-		 */
-
 	}
 
 	@PostMapping(value = "/fileUpload", produces = "text/html; charset=UTF-8")
@@ -132,7 +103,7 @@ public class CourseController {
 	public String courseMainTest(Map map) {
 		map.put("user_ID","kim");
 		
-		return "course/CourseMainTest";
+		return "/course/CourseMainTest";
 	}
 
 }

@@ -78,9 +78,7 @@ public class MemberDAO implements MemberService{
 
 	@Override
 	public MemberDTO isLogin(MemberDTO member) {
-		MemberDTO memberResult = sqlMapper.selectOne("memberIsLogin",member);
-		System.out.println("isLoginResult:"+memberResult.toString());
-		return memberResult;
+		return sqlMapper.selectOne("memberIsLogin",member);
 	}
 
 

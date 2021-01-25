@@ -5,137 +5,173 @@
 	uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 <style>
-#colorlib-main {
-	margin-top: 20px;
-	margin-bottom: 10px;
-}
-
-.popular-location .single-location {
-	position: relative;
-	margin-top: 30px;
-}
-
-.popular-location .single-location .location-img {
-	border-radius: 10px;
-	overflow: hidden;
-	position: relative;
-	z-index: 0
-}
-
-.popular-location .single-location .location-img::before {
-	position: absolute;
-	width: 100%;
-	height: 50%;
-	bottom: 0;
-	content: "";
-	z-index: 1
-}
-
-.popular-location .single-location .location-img img {
-	width: 100%;
-	transform: scale(1);
-	transition: all .5s ease-out 0s;
-	height: 150px;
-}
-
-.single-location:hover .location-img img {
-	transform: scale(1.1)
-}
-
-.plusImage {
-	float: right;
-}
-
-.plusImage button {
-	border: none;
-	background-color: #777777;
-	color: white;
-	font-family: 'Do Hyeon', sans-serif;
-	padding: 5px;
-	border-radius: 2px;
-}
-
-h1 {
-	font-family: 'Do Hyeon', sans-serif;
-}
-
-.modal-dialog {
-	width: 80%;
-	max-width: 800px;
-	height: 100%;
-}
-
-.imgdiv {
-	margin: 10px;
-	display: inline-block;
-	position: relative
-}
-
-.img {
-	width: 200px;
-	height: 176px;
-}
-
-.imgdeletemark {
-	display: none;
-	text-align: center;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-.dragAndDropDiv {
-	width: 100%;
-	margin-top: 15px;
-	height: 200px;
-	border: 2px dashed #777777;
-	color: #777777;
-	text-align: center;
-}
-
-.dragAndDropDivSpan {
-	line-height: 200px;
-	vertical-align: middle;
-	font-size: 150%;
-}
-
-.dragAndDropBtn {
-	margin-top: 10px;
-	border: 1px solid #777777;
-	background-color: #ffffff;
-	color: #777777;
-	text-align: center;
-	font-size: 100%;
-}
-
-#galleryImgModal img {
-	width: 100%;
-}
+	.modal {
+	  text-align:center;
+      position: fixed;
+      left:25%
+    }
+    @media screen and (min-width: 768px) {
+      .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+      }
+    }
+    .modal-dialog {
+      display: inline-block;
+      vertical-align: middle;
+    }
+	.packCreateBtn {
+		color:#ff8827;
+		background-color: white;
+		font-weight: bold;
+		border: none;
+	}
+	.packCreateBtn:hover {
+		color:white;
+		background-color: #ff8827;
+	}
+	.popular-location .single-location {
+		position: relative;
+		margin-top: 30px;
+	}
+	
+	.popular-location .single-location .location-img {
+		border-radius: 10px;
+		overflow: hidden;
+		position: relative;
+		z-index: 0
+	}
+	
+	.popular-location .single-location .location-img::before {
+		position: absolute;
+		width: 100%;
+		height: 50%;
+		bottom: 0;
+		content: "";
+		z-index: 1
+	}
+	
+	.popular-location .single-location .location-img img {
+		width: 100%;
+		transform: scale(1);
+		transition: all .5s ease-out 0s;
+		height: 150px;
+	}
+	
+	.single-location:hover .location-img img {
+		transform: scale(1.1)
+	}
+	
+	.plusImage {
+		float: right;
+	}
+	
+	.plusImgBtn {
+		color:white;
+		background-color: #ff8827;
+		font-weight: bold;
+		border: none;
+	}
+	
+	.modal-dialog {
+		width: 80%;
+		max-width: 800px;
+		height: 100%;
+	}
+	
+	.imgdiv {
+		margin: 10px;
+		display: inline-block;
+		position: relative
+	}
+	
+	.img {
+		width: 200px;
+		height: 176px;
+	}
+	
+	.imgdeletemark {
+		display: none;
+		text-align: center;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	.dragAndDropDiv {
+		width: 100%;
+		margin-top: 15px;
+		height: 200px;
+		border: 2px dashed #ff8827;
+		color: #777777;
+		text-align: center;
+	}
+	.dragAndDropDivSpan {
+		line-height: 200px;
+		vertical-align: middle;
+		font-size: 150%;
+	}
+	.dragAndDropBtn {
+		margin-top: 10px;
+		border: 1px solid #777777;
+		background-color: #ffffff;
+		color: #777777;
+		text-align: center;
+		font-size: 100%;
+	}
+	#galleryImgModal img {
+		width: 100%;
+	}
+	.addImageBtn{
+		color:white;
+		background-color: #ff8827;
+		font-weight: bold;
+		border: none;
+	}
 </style>
 
 
-<div id="colorlib-main"
-	class="popular-location section-padding30">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<!-- Section Tittle -->
-				<div class="section-tittle text-center mb-80">
-					<h1>PACK GALLERY</h1>
-				</div>
+<div id="colorlib-main" class="popular-location" style="padding:20px;">
+	<div class="row">
+		<div class="col-lg-12" style="padding-bottom:20px">
+			<div class="">
+				<a href="<c:url value="/pack/main.do"/>">
+				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
+					style="width: 80px;"></a>
+				&emsp;<a class="packCreateBtn btn" 
+					href="<c:url value="/pack/main.do"/>">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="packCreateBtn btn"
+						href="<c:url value="/pack/view.do"/>">MY PACK</a>
+				</c:if>
 			</div>
 		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-12 col-lg-12">
+			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em;text-align: center">전국일주</p>
+			<hr style="background-color: black;height:1px"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="text-center col-lg-12" >
+				<p style="font-size:1.8em;padding-bottom:10px;padding:20px;">&lt;&nbsp;갤러리&nbsp;&gt;</p>
+			</div>
+				
+		</div>
+	</div>
+	<div class="container">
 		<div class="row plusImage">
-			<button type="button" data-toggle="modal"
-				data-target="#galleryModal">&nbsp사진
-				추가&nbsp</button>
+			<button class="plusImgBtn btn" type="button" data-toggle="modal"
+				data-target="#galleryModal">&nbsp;사진추가&nbsp;</button>
 		</div>
 		<div class="row">
-
 			<c:if test="${empty packGalleryList }"
 				var="isEmpty">
-				<h3>갤러리에 사진이 없어요.</h3>
+				<h4>갤러리에 사진이 없어요.</h4>
 			</c:if>
 			<c:if test="${!isEmpty}">
 				<c:forEach var="item"
@@ -160,7 +196,7 @@ h1 {
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4>사진 올리기</h4>
+					<h4 style="font-weight: bold;">사진 올리기</h4>
 				</div>
 				<div class="modal-body">
 					<div class="col-sm-12"
@@ -170,8 +206,7 @@ h1 {
 							class="col-sm-12">
 							<div id="fileUpload"
 								class="dragAndDropDiv col-sm-12">
-								<span class="dragAndDropDivSpan">Drag
-									& Drop Files Here</span>
+								<span class="dragAndDropDivSpan">여기에 이미지를 드래그하세요</span>
 							</div>
 							<input type="file" name="fileUpload"
 								id="fileUpload" style="display: none;"
@@ -187,10 +222,10 @@ h1 {
 						<input class="form-control" name="imgArry"
 							id="imgArry" type="hidden">
 						<button type="submit"
-							class="btn btn-default">Save</button>
+							class="addImageBtn btn">저장</button>
 					</form>
-					<button type="button" class="btn btn-default"
-						data-dismiss="modal">Close</button>
+					<button type="button" class="addImageBtn btn"
+						data-dismiss="modal">닫기</button>
 				</div>
 			</div>
 		</div>

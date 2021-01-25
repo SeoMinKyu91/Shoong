@@ -8542,22 +8542,4 @@ textarea.form-control {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
     
-    
-.packCreateBtnHome:hover {
-	color:white;
-	background-color: #ff8827;
-}
-
-.PackMainTop input:focus {
-	outline: none;
-}
-
-#accordion table tr:nth-child(1) {
-	font-size: 17px;
-	font-weight: 600;
-}
-
-#accordion table tr:nth-child(2) {
-	font-size: 7px;
-}
 

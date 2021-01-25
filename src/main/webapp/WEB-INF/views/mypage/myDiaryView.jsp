@@ -91,7 +91,7 @@ hr {
 
 <div id="colorlib-main">
          <!-- Projects-->
-        <section class="projects-section bg-light" id="projects">
+        <section class="projects-section" id="projects">
             <div class="container">
                 <!-- Featured Project Row-->
                 <div class="row align-items-center no-gutters mb-4 mb-lg-5">
@@ -116,7 +116,7 @@ hr {
                 <!-- Project One Row-->
                    <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
                        <div class="col-lg-6"><img class="img-fluid" src="/fileupload/${item.DIARY_IMG_NAME}" alt="" /></div>
-                       <div class="col-lg-6">
+                       <div class="bg-light col-lg-6">
                            <div class="bg-black text-center h-100 project">
                                <div class="d-flex h-100">
                                    <div class="project-text w-100 my-auto text-center text-lg-left">
@@ -133,7 +133,7 @@ hr {
                    <!-- Project Two Row-->
                    <div class="row justify-content-center no-gutters">
                        <div class="col-lg-6"><img class="img-fluid" src="/fileupload/${item.DIARY_IMG_NAME}" alt="" /></div>
-                       <div class="col-lg-6 order-lg-first">
+                       <div class="col-lg-6 order-lg-first bg-light">
                            <div class="bg-black text-center h-100 project">
                                <div class="d-flex h-100">
                                    <div class="project-text w-100 my-auto text-center text-lg-right">

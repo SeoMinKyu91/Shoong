@@ -2,18 +2,43 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<style>
+	.packCreateBtn {
+		color:#ff8827;
+		background-color: white;
+		font-weight: bold;
+		border: none;
+	}
+	.packCreateBtn:hover {
+		color:white;
+		background-color: #ff8827;
+	}
+	.PackMainTop input:focus {
+		outline: none;
+	}
+	#accordion table tr:nth-child(1) {
+		font-size: 17px;
+		font-weight: 600;
+	}
+	
+	#accordion table tr:nth-child(2) {
+		font-size: 7px;
+	}
+	
+</style>
+
 <div id="colorlib-main" style="padding:20px">
 	<div class="row">
 		<div class="col-lg-12" style="padding-bottom:20px">
-			<div class="" style="padding-top:20px">
+			<div class="">
 				<a href="<c:url value="/pack/main.do"/>">
 				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
 					style="width: 80px;"></a>
 				&emsp;<a class="packCreateBtn btn" 
-					href="#" style="font-weight: bold;border: none;color:#ff8827;">HOME</a>
+					href="<c:url value="/pack/main.do"/>">HOME</a>
 				<c:if test="${!empty sessionScope.packId}">
 					<a class="packCreateBtn btn"
-						href="<c:url value="/pack/view.do"/>" style="font-weight: bold;border: none;color:black;">MY PACK</a>
+						href="<c:url value="/pack/view.do"/>">MY PACK</a>
 				</c:if>
 			</div>
 		</div>
@@ -32,17 +57,17 @@
 						<form class="form-inline" method="post"
 							action="<c:url value="/pack/main.do"/>">
 							<div class="packAddr" style="font-size: 30px;">
-								<span style="font-size: .8em; font-weight: bold;padding-left:10px">[<span id="packRegionSearch"></span>] 근처 팩</span> &nbsp;
+								<span style="font-size: .8em; font-weight: bold;padding-left:10px;">[<span id="packRegionSearch"></span>] 근처 팩</span> &nbsp;
 							</div>
 							<input type="text" class="form-group" name="searchWord"
 								style="width: 200px; height:30px;border-radius: 10px;border-color: #333333;"/>
-							<button class="glyphiconBtn" style="background-color: white;border: none;font-size: 20px;">
-								<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+							<button class="searchBtn" style="border: none;background-color:white;font-size: 30px;">
+								<img class="btn-img" src='<c:url value="/images/search.png"/>' style="width:25px; height: 25px;"/>
 							</button>
 						</form>
 					</th>
 					<th>
-						<a class="packCreateBtn btn" style="float: right; font-weight: bold;border: none;color:#ff8827;"
+						<a class="packCreateBtn btn" style="float: right;"
 							href="<c:url value="/pack/create.do"/>">팩 만들기</a>
 					</th>
 				</tr>
@@ -73,7 +98,7 @@
 								</tr>
 								<tr>
 									<th colspan="2"><div
-											style="margin-left: 20px; padding: 7px; width: 85%; height: 80px; border: 1px solid #999999">${item.packIntro}</div></th>
+											style="margin-left: 20px; padding: 7px; width: 92%; height: 80px; border: 1px solid #999999">${item.packIntro}</div></th>
 								</tr>
 								<tr>
 									<th colspan="2" class="text-right">
@@ -179,8 +204,6 @@
 	            //if문
 	            
 	        }
-
-	 		
 	 		//0-2]사용자 위치 구하기 실패시
 	 		function error(position){
 	 			displayKaKaoMap(37.57801416976735,  126.97658868798284 );

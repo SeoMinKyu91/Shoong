@@ -3,7 +3,6 @@
 <%@ page language="java" 
 	contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 <script src='https://unpkg.com/@turf/turf/turf.min.js'></script>
 <script src="<c:url value="/js/togeojson.js"/>"></script>
@@ -23,26 +22,29 @@
 #map {
 	top: 0;
 	bottom: 0;
-	height:400px;
+	height:500px;
 }
 
+.nav-link {
+	color: #ff8827;
+}
 
 ul li{
 	font-weight : bold;
 	font-size: 1em;
+	padding-bottom:10px;
 }
 
-ul li span{
-	font-size: .8em;
-	font-weight : normal;
-	color:black;
+ul li label{
+	padding-right:10px;
 }
+
 
 .my-box{
 	border: 5px lightgrey solid;
 	list-style: none; 
-	padding: 30px; 
-	height:355px;
+	padding: 35px; 
+	height:448px;
 	background-color: white;
 }
 
@@ -131,6 +133,7 @@ ul li span{
 #naviImgModal img {
 	width: 100%;
 }
+
 </style>
 <div id="colorlib-main" style="padding:20px">
 	<div class="row" style="padding-top: 50px; padding-left: 10px">
@@ -138,7 +141,7 @@ ul li span{
 		<div class="col-xs-10 offset-xs-1 col-md-5" role="navigation">
 			<ul class="nav nav-tabs" style="list-style:none">
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#routeinfo">루트 정보</a></li>
+					<a class="nav-link" data-toggle="tab" href="#routeinfo">루트 정보</a></li>
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#routestop">루트 경유지</a></li>
 				<li class="nav-item">
@@ -146,40 +149,114 @@ ul li span{
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane active" id="routeinfo">
+					<form class="form-horizontal" method="post" name="join" onsubmit="return checked()"
+					style="background-color: white; box-shadow: 0px 0px 5px #000; border-radius: 100px;"
+					action="<c:url value='/Member/Join.do'/>">
+						<div class="form-group">
+							<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
+								style="padding-top: 40px; padding-bottom: 40px; text-align: center">
+								<h3 style="font-weight: bold">회원 가입</h3>
+							</div>
+							<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+								<!-- 작성자 입력란 -->
+								<label for="userId"> 작성자 </label>
+								<br /> 
+								<input type="text" id="userId" name="userId"
+								style="font-size: .8em; height: 50px; width: 34.5%"
+								readonly="readonly"> 
+							</div>
+						</div>
+						<!--  입력란 -->
+						<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+							<label for="userPWD">비밀번호<span style="font-size: .8em">&nbsp;(4~12자의 영문 대소문자와 숫자로만 입력)</span></label> <input type="password" 
+								class="form-control input-sm" id="userPWD" name="userPWD" minlength="4" maxlength="12"
+								style="font-size: .8em" placeholder="비밀번호를 입력하세요"> 
+						</div>
+						<!--  입력란 -->
+						<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+							<select name="emailStr" id="emailStr"
+									style="font-size: .8em; height: 50px; width: 30%; border: #ced4da 1.5px solid; color: #7e757d">
+									<option value="">==선택하세요==</option>
+									<option value="naver.com">naver.com</option>
+									<option value="gmail.com">gmail.com</option>
+									<option value="daum.net">daum.net</option>
+									<option value="nate.com">nate.com</option>
+									<option value="1">직접입력</option>
+							</select> <br />
+						</div>
+						<!-- 이름 입력란 -->
+						<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+							<label for="userName">이름</label> <input type="text"
+								class="form-control input-sm" id="userName" name="userName"
+								style="font-size: .8em" placeholder="이름을 입력하세요">
+						</div>
+						<!-- 연락처 입력란 -->
+						<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+							<label for="userTel">연락처</label><br /> <select name="userTel1"
+								id="userTel1"
+								style="font-size: .8em; height: 50px; width: 28%; padding-left: 10px; border: #ced4da 1.5px solid;">
+								<option value="010">010</option>
+								<option value="011">011</option>
+								<option value="016">016</option>
+								<option value="017">017</option>
+								<option value="018">018</option>
+								<option value="019">019</option>
+							</select> &nbsp; ㅡ &nbsp; <input name="userTel2" id="userTel2" type="text"
+								maxlength="4" style="height: 50px; width: 28%"
+								OnKeyUp="checkTel();">&nbsp; ㅡ &nbsp; <input
+								name="userTel3" id="userTel3" type="text" maxlength="4"
+								style="height: 50px; width: 28%" OnKeyUp="checkTel();"> <br />
+						</div>
+						<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2"
+							style="padding-bottom: 50px">
+							<button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>
+						</div>
+					</form>
+					<!-- 
 					<ul class="my-box">
 						<li>
-							<label for=" ">이름</label>
-							<span>&emsp;유경이네</span>
+							<label for=" ">작성자</label>&emsp;
+							<input type="text" id="userName" style="border:none" placeholder="작성자" readonly="readonly">
 						</li>
 						<li>
-							<label for=" ">공개</label>
-							<span id="Private">&emsp;공개된 루트</span>
+							<label for=" ">이름</label>&emsp;&emsp;
+							<input type="text" id="courseName" style="border:#aaaaaa solid 1px; height:25px" placeholder="경로이름">
 						</li>
 						<li>
-							<label for=" ">유형</label>
-							<span>&emsp;자전거ㆍ일반</span>
+							<label for=" ">공개여부</label>
+							<input type="radio" id="openNclose" name="openNclose"> 
+								<span style="font-weight: normal;">공개</span>&emsp;
+							<input type="radio" id="openNclose" name="openNclose">
+								<span style="font-weight: normal;">비공개</span>
 						</li>
 						<li>
-							<label for=" ">등록</label>
-							<span>&emsp;김유경 2021년 1월 13일 수요일 오전 1:40</span>
+							<label for=" ">유형</label>&emsp;&emsp;
+							<select
+								name="cycleType" id="cycleType"
+								style="border: #aaaaaa solid 1px; height:23px; font-weight: normal;color:#888888;">
+								<option value="" style="color:#888888;">==선택하세요==</option>
+								<option value="" style="color:#888888;">자전거유형1</option>
+								<option value="" style="color:#888888;">자전거유형2</option>
+								<option value="" style="color:#888888;">자전거유형3</option>
+								<option value="" style="color:#888888;">자전거유형4</option>
+							</select>
 						</li>
 						<li>
-							<label for=" ">거리</label>
-							<span>&emsp;000km(↑↓누적고도 +000m, -000m)</span>
+							<label for=" ">등록</label>&emsp;&emsp;
+							<span></span>
 						</li>
 						<li>
-							<label for=" ">특징</label>
-							<span>&emsp;</span>
+							<label for=" ">거리</label>&emsp;&emsp;
+							<span></span>
 						</li>
-						<li>
-							<label for=" ">평가</label>
-							<span>&emsp;아직 등록된 평점이 없습니다</span>
+						<li style="padding-bottom: 20px;">
+							<label for=" ">설명</label><br/>
+							<textarea rows="3" style="border:#aaaaaa solid 1px; width: 100%"></textarea>
 						</li>
-						<li>
-							<label for=" ">설명</label>
-							<span>&emsp;유경이네 방문</span>
-						</li>
+						<a class="btn" href="#" style="color:white;background-color: #ff8827; border:#ff8827 solid 1px;float: right;">등록</a>
+						<!--  <button type="submit" class="btn btn-block" style="float: right;">등록</button>
 					</ul>
+					 -->
 				</div>
 				<div class="tab-pane fade" id="routestop">
 					<ul class="my-box">
@@ -378,8 +455,8 @@ $(function(){
 				console.log('lenght:',length);
 				
 				//등록,거리
-				$('ul.my-box li:eq(3) span').html(new Date().format("yyyy년 MM월 dd일 a/p hh시 mm분 ss초"));
-				$('ul.my-box li:eq(4) span').html(length+"km");
+				$('.form-horizontal li:eq(4) span').html(new Date().format("yyyy년 MM월 dd일 a/p hh시 mm분 ss초"));
+				$('.form-horizontal li:eq(3) span').html(length+"km");
 				
 				$('#naviModal').modal("toggle");
 			}
