@@ -118,7 +118,7 @@
 				<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 icons-div" style="padding-top: 17px;">
 					<a id="btn-feed-write"><i class="fas fa-edit fa-2x" style="color: black; margin-left: 5px;"></i></a>
 					<a href="<c:url value="/pack/myComment.do"/>"><i class="far fa-user fa-2x" style="color: black; margin-left: 5px;"></i></a>
-					<i class="far fa-list-alt"></i>
+					<a href="<c:url value="/pack/comment.do"/>"><i class="far fa-list-alt"></i></a>
 				</div>
 			</div>
 			

@@ -54,11 +54,11 @@
 </style>
 
 
-<div id="colorlib-main" style="padding: 20px;">
+<div id="colorlib-main">
 	
-	<div class="row">
+	<div class="row" style="margin-left: 20px; margin-bottom: 2px;">
 			
-		<div class="col-lg-12" style="padding-bottom:20px">
+		<div class="col-lg-12" style="padding-bottom:10px">
 			<div class="row">
 				<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10" style="padding-top:20px">
 					<a href="<c:url value="/pack/main.do"/>">
@@ -67,15 +67,17 @@
 						<a class="packCreateBtn btn" href="<c:url value="/pack/view.do"/>">MY PACK</a>
 					</c:if>
 				</div>
-				<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 icons-div" style="padding-top: 14px;">
+				<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 icons-div" style="padding-top: 17px;">
 					<a id="btn-feed-write"><i class="fas fa-edit fa-2x" style="color: black; margin-left: 5px;"></i></a>
 					<a href="<c:url value="/pack/myComment.do"/>"><i class="far fa-user fa-2x" style="color: black; margin-left: 5px;"></i></a>
+					<a href="<c:url value="/pack/comment.do"/>"><i class="far fa-list-alt"></i></a>
 				</div>
 			</div>
 			
-			<hr style="background-color:black; height:1px"/>
+			
 		</div>
 	</div>
+	<hr style="background-color:black; height:1px; margin: 0px;"/>
 
 	<!-- 피드 메인 시작 DIV -->
 	<div class="container">
