@@ -44,7 +44,7 @@ ul li label{
 	border: 5px lightgrey solid;
 	list-style: none; 
 	padding: 35px; 
-	height:455px;
+	height:448px;
 	background-color: white;
 }
 
@@ -254,7 +254,7 @@ ul li label{
 							<textarea rows="3" style="border:#aaaaaa solid 1px; width: 100%"></textarea>
 						</li>
 						<a class="btn" href="#" style="color:white;background-color: #ff8827; border:#ff8827 solid 1px;float: right;">등록</a>
-						<!--  <button type="submit" class="btn btn-block" style="float: right;">등록</button>-->
+						<!--  <button type="submit" class="btn btn-block" style="float: right;">등록</button>
 					</ul>
 					 -->
 				</div>
@@ -426,8 +426,10 @@ $(function(){
 			},
 			success:function(data){
 				console.log('요청 성공');
-				console.log('data:%O',data.features[0]);
-				json = data.features[0];
+				//console.log('data:%O',data.features[0]);
+				console.log('data:%O',data);
+				//json = data.features[0];
+				json = data;
 				
 				map.addSource('route', {
 					"type":"geojson",
@@ -446,7 +448,7 @@ $(function(){
 							'line-width': 8
 						}
 				});
-				map.setCenter(data.features[0].geometry.coordinates[0][0]);
+				map.setCenter(json.geometry.coordinates[0][0]);
 				map.setZoom(11);
 				
 				var length = turf.length(json, {units: 'kilometers'});

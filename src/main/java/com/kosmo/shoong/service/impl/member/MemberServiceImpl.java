@@ -114,4 +114,9 @@ public class MemberServiceImpl implements MemberService{
 		return memberInfo;
 	}
 
+	@Override
+	public MemberDTO isLogin(MemberDTO member) {
+		return memberDAO.isLogin(member);
+	}
+
 }/////////////////////////////////////////////

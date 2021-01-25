@@ -4,17 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kosmo.shoong.member.mybatis.membersql">
-
+	<!--  -->
 	<resultMap type="memberDTO" id="MemberDTO">
 		<result property="userId" column="USER_ID"/>
 		<result property="userPWD" column="PWD"/>
 		<result property="userName" column="NAME"/>
-		<result property="userRRN" column="RRN"/>
-		<result property="userAddr" column="ADDRESS"/>
+		<result property="userGender" column="GENDER"/>
+		<result property="userAge" column="AGE"/>
+		<result property="userTel" column="USERTEL"/>
 		<result property="lastAccess" column="LASTCONNECT"/>
 		<result property="userJoinDate" column="USERJOINDATE"/>
-		<result property="userFrequeny" column="FREQUENCY"/>
-	</resultMap>
+		<result property="userFrequeny" column="FREQUENCY"/>		
+	</resultMap> 
 	
 	<resultMap type="com.kosmo.shoong.service.gallery.GalleryDTO" id="galleryDTO">
 		<result property="diaryImgCode" column="DIARY_IMG_CODE"/>
@@ -26,7 +27,10 @@
 		<result property="userId" column="USER_ID"/>
 	</resultMap>
 	
-
+	<select id="memberIsLogin" resultMap="MemberDTO">
+		SELECT * FROM member_
+		WHERE user_id=#{userId} AND pwd=#{userPWD}
+	</select>
 	
 	<select id="selectOne" parameterType="java.util.Map" resultMap="MemberDTO">
 		SELECT * FROM member_ WHERE user_id=#{userId}
