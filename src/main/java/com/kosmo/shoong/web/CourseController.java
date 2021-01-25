@@ -72,6 +72,7 @@ public class CourseController {
 	@PostMapping(value = "/fileUpload", produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String uploadCourse(MultipartHttpServletRequest mhsr) {
+		System.out.println("uploadCourse");
 		String filePath = mhsr.getServletContext().getRealPath("/upload");
 		System.out.println("courseupload:"+filePath);
 		Iterator<String> itr = mhsr.getFileNames();
@@ -79,6 +80,8 @@ public class CourseController {
 		String fileFullPath = null;
 		String renameFilename = null;
 		while (itr.hasNext()) { // 받은 파일들을 모두 돌린다.
+			//mhsr.getParameterMap().get("routeFile");
+			
 			MultipartFile upload = mhsr.getFile(itr.next());
 			renameFilename = FileUpDownUtils.getNewFileName(filePath, upload.getOriginalFilename());
 
@@ -86,6 +89,7 @@ public class CourseController {
 
 			fileFullPath = filePath + File.separator + renameFilename; // 파일 전체 경로
 			File file = new File(fileFullPath);
+			System.out.println("파일이름:"+file.getName());
 			try {
 				// 파일 저장
 				upload.transferTo(file);
