@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kosmo.shoong.record.mybatis.recordsql">
+	<!-- 
+	<resultMap type="recordDTO" id="packDTOResult">
+			property:자바빈의 속성명
+			column:테이블의 컬럼(조회결과의 컬럼들 의미)
+			<result property="packID" column="PACK_ID"/>
+			<result property="packName" column="PACK_NAME"/>
+			<result property="packTag" column="PACK_TAG"/>
+			<result property="packActRegion" column="PACK_ACT_REGION"/>
+			<result property="packActTime" column="PACK_ACT_TIME"/>
+			<result property="packAge" column="PACK_ACT_AGE"/>
+			<result property="packIntro" column="PACK_INTRO"/>
+			<result property="packThumbnail" column="PACK_THUMBNAIL"/>
+			<result property="packLat" column="PACK_LAT"/>
+			<result property="packLng" column="PACK_LNG"/>
+	</resultMap>
+	
+	-->
+	<insert id="insertRecord" parameterType="recordDTO">
+		INSERT INTO record_(RECORD_ID,USER_ID,RECORD_DATE) 
+		VALUES (#{recordId},#{userId},#{recordDate})
+	</insert>
+
+</mapper>
