@@ -2,6 +2,8 @@ package com.kosmo.shoong.service.course;
 
 import java.util.Date;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,6 +12,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class CourseDTO {
+	//@SerializedName("")
 	private String courseID;
 	private String courseName;
 	private String courseIntro;

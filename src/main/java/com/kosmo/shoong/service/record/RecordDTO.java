@@ -19,7 +19,7 @@ public class RecordDTO {
 	private String userId;
 	private String courseId;
 	@SerializedName("filename")
-	private String filename;
+	private String fileName;
 	private String recordLength;
 	@SerializedName("startTime")
 	private Date recordDate;

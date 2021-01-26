@@ -59,7 +59,7 @@ public class RecordController {
 		JsonParser parser = new JsonParser();
 		JsonElement resultJson = parser.parse(sb.toString());
 		System.out.println("파싱:"+resultJson.toString());
-		//System.out.println("fromJson:"+gson.fromJson(resultJson.getAsJsonObject().get("properties"), RecordDTO.class));
+		System.out.println("fromJson:"+gson.fromJson(resultJson.getAsJsonObject().get("properties"), RecordDTO.class));
 		boolean flag = 
 				rService.insertRecord(
 							gson.fromJson(
