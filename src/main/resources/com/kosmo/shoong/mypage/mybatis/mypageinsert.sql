@@ -1,15 +1,3 @@
---코스 임시 데이터
---insert into COURSE(COURSE_ID,COURSE_NAME)
-insert into COURSE(COURSE_ID,COURSE_NAME) values (101,'한강 라이딩');
-insert into COURSE(COURSE_ID,COURSE_NAME) values (102,'소양강 라이딩');
-insert into COURSE(COURSE_ID,COURSE_NAME) values (103,'막국수가 있는 라이딩');
-insert into COURSE(COURSE_ID,COURSE_NAME) values (104,'단풍길 라이딩');
-insert into COURSE(COURSE_ID,COURSE_NAME) values (105,'팔당댐 라이딩');
-insert into COURSE(COURSE_ID,COURSE_NAME) values (106,'동해바다 라이딩');
-insert into COURSE(COURSE_ID,COURSE_NAME) values (107,'제주도 한바퀴 라이딩');
-insert into COURSE(COURSE_ID,COURSE_NAME) values (108,'북한강 라이딩');
-insert into COURSE(COURSE_ID,COURSE_NAME) values (109,'해운대 라이딩');
-insert into COURSE(COURSE_ID,COURSE_NAME) values (110,'벛꽃풍경 라이딩');
 
 --레코드 임시 데이터 
 --insert into RECORD_ values(RECORD_ID,USER_ID,COURSE_ID,RECORD_TIME,RECORD_LENGTH,RECORD_DATE);
