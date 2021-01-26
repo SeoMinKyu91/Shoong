@@ -13,7 +13,6 @@
 
 <!-- 모달 -->
 <link rel="stylesheet" href="<c:url value="/css/comment.css?f"/>">
-<script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
 
 <style>
 	.feed-bottom-icon img{
@@ -43,44 +42,52 @@
 	#packComment.col:eq(1){
 		diplay: none;
 	}
-	.icons-div img{
-		width: 30px;
-		height: 30px;
-	}
-	.icons-div a:hover{
-		cursor: pointer;
-	}
 	
 </style>
 
 
-<div id="colorlib-main">
-	
-	<div class="row" style="margin-left: 20px; margin-bottom: 2px;">
-			
-		<div class="col-lg-12" style="padding-bottom:10px">
-			<div class="row">
-				<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10" style="padding-top:20px">
-					<a href="<c:url value="/pack/main.do"/>">
-					<img alt="pack" src="<c:url value="/images/pack/pack.png"/>" style="width: 80px;"></a>&emsp;<a class="packCreateBtn btn" href="<c:url value="/pack/main.do"/>">HOME</a>
-					<c:if test="${!empty sessionScope.packId}">
-						<a class="packCreateBtn btn" href="<c:url value="/pack/view.do"/>">MY PACK</a>
-					</c:if>
-				</div>
-				<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 icons-div" style="padding-top: 17px;">
-					<a id="btn-feed-write"><i class="fas fa-edit fa-2x" style="color: black; margin-left: 5px;"></i></a>
-					<a href="<c:url value="/pack/myComment.do"/>"><i class="far fa-user fa-2x" style="color: black; margin-left: 5px;"></i></a>
-					<a href="<c:url value="/pack/comment.do"/>"><i class="far fa-list-alt"></i></a>
-				</div>
+<div id="colorlib-main" style="padding: 20px;">
+	<div class="row">
+		<div class="col-lg-12" style="padding-bottom:20px">
+			<div class="" style="padding-top:20px">
+				<a href="<c:url value="/pack/main.do"/>">
+				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
+					style="width: 80px;"></a>
+				&emsp;<a class="packCreateBtn btn" 
+					href="<c:url value="/pack/main.do"/>">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="packCreateBtn btn"
+						href="<c:url value="/pack/view.do"/>">MY PACK</a>
+				</c:if>
 			</div>
-			
-			
 		</div>
 	</div>
-	<hr style="background-color:black; height:1px; margin: 0px;"/>
+	<div class="row">
+		<div class="col-xs-12 col-md-12 col-lg-12">
+			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em">따르릉 따르릉</p>
+			<hr style="background-color:black; height:1px"/>
+			<c:if test="${!empty manager}">
+				<a class="packManageBtn btn" href="<c:url value="/pack/manage.do"/>"><span class="glyphicon glyphicon-cog"></span>&nbsp;팩 관리</a>
+			</c:if>
+		</div>
+	</div>
 
 	<!-- 피드 메인 시작 DIV -->
 	<div class="container">
+		<div class="row" id="top-var">
+			<div class="offset-md-2 col-md-8 col-sm-12">
+				<div class="row top-menus">
+					<div class="col-6 feedwrite">
+						<button type="button" id="btn-feed-write">게시글
+							추가하기</button>
+					</div>
+					<div class="col-6 feedshow">
+						<a href="<c:url value="/pack/myComment.do"/>"><button class="btnfeedshow">내가 글쓴 목록</button></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="row" id="body-div">
 			<div class="offset-md-2 col-md-8 col-sm-12">
 				<c:if test="${not empty commentList }"
@@ -117,8 +124,11 @@
 											test="${not empty item.packCommentImages}"
 											var="imagesExist">
 											<div class="row feed-img-row">
-												
-												<div class="col-12 feed-img carousel slide" id="${item.packCommentNo }" data-ride="carousel" data-interval="false">
+
+												<div class="col-12 feed-img carousel slide"
+													id="${item.packCommentNo }"
+													data-ride="carousel"
+													data-interval="false">
 													<!-- indicators -->
 													<c:if test="${item.packCommentImages.size() > 1 }">
 														<ol class="carousel-indicators">
@@ -196,7 +206,8 @@
 											</div>
 
 											<div class="row feed-bottom-row">
-												<c:if test="${item.packCommentLikeCount != null}">
+												<c:if
+													test="${item.packCommentLikeCount != null}">
 													<div class="col-12 feed-likely-row">
 														<span style="margin-left: 15px;">좋아요</span>
 														<span class="likely-count">${item.packCommentLikeCount}</span>
@@ -231,10 +242,14 @@
 
 											<div class="row feed-bottom-row"
 												style="border-top: 1px solid lightgrey; margin-left: 0px; margin-right: 0px; margin-top: 15px;">
-												<div class="col-10 feed-reply-content">
-													<input type="text" class="feed-reply-content-input" placeholder="댓글달기"/>
+												<div
+													class="col-10 feed-reply-content">
+													<input type="text"
+														class="feed-reply-content-input"
+														placeholder="댓글달기" />
 												</div>
-												<div class="col-2 feed-reply-write" style="text-align: right;">
+												<div class="col-2 feed-reply-write"
+													style="text-align: right;">
 													<span>게시</span>
 												</div>
 											</div>
@@ -425,26 +440,6 @@
 			console.log($('#imgArray').val());
 			
 			$('#sendToServerForm').submit();
-		});
-		
-		$('.feed-reply-write').children().click(function(){
-			console.log('게시버튼 클릭');
-			var replyContent = $('.feed-reply-content-input').val();
-			var packCommentNo = $(this).parent().parent().parent().parent().find('div.feed-img-row').find('div.feed-img').attr('id');
-			console.log(packCommentNo);
-			console.log(replyContent);
-			$.ajax({
-				url : "<c:url value="/pack/comment/reply/write"/>",//요청할 서버의 URL주소
-				type : 'post',//데이타 전송방식(디폴트는 get방식) 
-				dataType : 'text',//서버로 부터 응답 받을 데이타의 형식 설정
-				data : {'replyContent':replyContent,'packCommentNo':packCommentNo},
-				success : function(data) {
-					console.log(data);
-				},
-				error : function(error) {//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
-					console.log('에러 : ', error.responseText);
-				}
-			});
 		});
 		
 		

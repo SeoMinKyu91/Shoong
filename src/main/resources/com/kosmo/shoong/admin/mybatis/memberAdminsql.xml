@@ -21,4 +21,8 @@
 		</if>
 	</select>
 	
+	<delete id="memberDelete" parameterType="java.util.Map">
+		DELETE FROM member_ WHERE USER_ID = #{id}
+	</delete>
+	
 </mapper>

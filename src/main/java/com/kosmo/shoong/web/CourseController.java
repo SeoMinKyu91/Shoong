@@ -67,40 +67,12 @@ public class CourseController {
 		}
 		if(br!=null) br.close();
 		return sb.toString();
-		/*
-		File file = new File(routePath);
-		BufferedReader br =
-				new BufferedReader(
-						new InputStreamReader(new FileInputStream(file)));
-		String data;
-		String result="";
-		while((data=br.readLine())!=null) {
-			result += data;
-		}
-		br.close();
-		System.out.println(result);
-		JsonParser parser = new JsonParser();
-		JsonObject obj = parser.parse(result).getAsJsonObject();
-
-		return obj.toString();
-		*/
-		/*
-		Gson gson = new Gson();
-		Reader reader = Files.newBufferedReader(Paths.get(routePath));
-		Map<?, ?> map = gson.fromJson(reader, Map.class);
-		// print map entries
-	    for (Map.Entry<?, ?> entry : map.entrySet()) {
-	        System.out.println(entry.getKey() + "=" + entry.getValue());
-	    }
-	    // close reader
-	    reader.close();
-		 */
-
 	}
 
 	@PostMapping(value = "/fileUpload", produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String uploadCourse(MultipartHttpServletRequest mhsr) {
+		System.out.println("uploadCourse");
 		String filePath = mhsr.getServletContext().getRealPath("/upload");
 		System.out.println("courseupload:"+filePath);
 		Iterator<String> itr = mhsr.getFileNames();
@@ -108,6 +80,8 @@ public class CourseController {
 		String fileFullPath = null;
 		String renameFilename = null;
 		while (itr.hasNext()) { // 받은 파일들을 모두 돌린다.
+			//mhsr.getParameterMap().get("routeFile");
+			
 			MultipartFile upload = mhsr.getFile(itr.next());
 			renameFilename = FileUpDownUtils.getNewFileName(filePath, upload.getOriginalFilename());
 
@@ -115,6 +89,7 @@ public class CourseController {
 
 			fileFullPath = filePath + File.separator + renameFilename; // 파일 전체 경로
 			File file = new File(fileFullPath);
+			System.out.println("파일이름:"+file.getName());
 			try {
 				// 파일 저장
 				upload.transferTo(file);
@@ -132,7 +107,7 @@ public class CourseController {
 	public String courseMainTest(Map map) {
 		map.put("user_ID","kim");
 		
-		return "course/CourseMainTest";
+		return "/course/CourseMainTest";
 	}
 
 }

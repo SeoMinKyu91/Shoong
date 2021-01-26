@@ -66,14 +66,14 @@ padding: 10px;
    margin-right: 15px;
 }
 #inlineInfo{
-   background-color: #FBF8EF;
+   background-color: white;
    box-shadow: 0px 0px 5px #787878;
    border-radius: 10px;
    padding: 20px;
    margin: 10px;
 }
 .inlineInfo{
-   background-color: #FBF8EF;
+   background-color: white;
    box-shadow: 0px 0px 5px #787878;
    border-radius: 10px;
    padding: 20px;
@@ -84,6 +84,8 @@ padding: 10px;
    border-radius: 10px;
    margin: 10px;
    background-color: white;
+   width: 100%;
+   padding: 10px;
 }
 .buttonbar{
    font-size: 1em;
@@ -95,14 +97,12 @@ padding: 10px;
 }#id{
    height: 100px;
 }
-
 </style>
 
 <div id="colorlib-main">
-   <div  class="lineMain">
+   <div class="lineMain">
 	   <!--뱃지사진 + 마일리지  -->
-	   <div class="row col-sm-12" id="inlineInfo">
-	      <div class= "col-xs-12">
+	   <div class="row col-xs-12" id="inlineInfo">
 	         <div style="display: inline-block; width: 80%;">
 	            <c:if test="${not empty sessionScope.userId}" var="isEmpty">				
 		            <img class="badgeImg" src='<c:url value="/images/badge/speedBadge.png"/>' alt="뱃지이미지">      
@@ -117,7 +117,7 @@ padding: 10px;
 	         </div>
 	         <!-- progress바 _ 부트스트랩 -->
 		      <div class="row col-sm-12 ">
-		         <div class= "col-xs-12 progbar">
+		         <div class= "col-sm-12 progbar">
 		         <h4>이달의 마일리지</h4>
 		            <div class="progress">
 		              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="width: 68%">
@@ -126,13 +126,12 @@ padding: 10px;
 		            </div>
 		         </div>
 		      </div>
-		   </div>
 	    </div>
 	<!-- -<div class="row">
      <div class="col-xs-12 col-md-6">
      <!-- 나의 기록  -->
      <div class="row"> 
-   
+ 
         <div class="col-xs-12 col-md-6">
          	<div class="inlineInfo  col-xs-12">
 	    		<div class="myPageSection" style="background-color: white;"> 
@@ -149,17 +148,17 @@ padding: 10px;
     	</div>
      <div class="col-xs-12 col-md-6 ">
      	<div class="col-xs-12 inlineInfo ">
-		<div class=" storyRow">
-         <div class="col-xs-12 ">
+		<div class="row storyRow">
+         <div class="col-md-12 ">
             <h3>다이어리<small><a href='<c:url value="/mypage/diary/list.do"/>'>전체보기</a></small></h3>
-         </div>
-         <c:if test="${empty diaryList}" var="isEmpty">
-            <h3>다이어리가 없어요.</h3>
+            <c:if test="${empty diaryList}" var="isEmpty">
+            <h4>다이어리가 없어요.</h4>
             <button type="submit" class="btn btn-default">지금 달리러 가기</button>      
          </c:if>
+         </div>
          <c:if test="${!isEmpty}">
             <c:forEach var="item" items="${diaryList}">        
-               <div class="col-xs-6 cardDiv">
+               <div class="col-md-6 cardDiv">
             <article class="card shadow">
                <div class="card-body">
                   <div class="single-location mb-30">
@@ -177,7 +176,7 @@ padding: 10px;
                         </span>
                      </div>   
                   </div>
-                   <a href='<c:url value="/mypage/diary/view.do?diaryCode=${item.DIARY_CODE }"/>'>${item.DIARY_TITLE}</a>
+                   <div style="text-align: center;"><a href='<c:url value="/mypage/diary/view.do?diaryCode=${item.DIARY_CODE }"/>'>${item.DIARY_TITLE}</a></div>
                   </div>
             </article>
          </div>         
