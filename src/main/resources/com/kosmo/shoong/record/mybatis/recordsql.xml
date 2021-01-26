@@ -22,8 +22,8 @@
 	
 	-->
 	<insert id="insertRecord" parameterType="recordDTO">
-		INSERT INTO record_(RECORD_ID,USER_ID,RECORD_DATE) 
-		VALUES (#{recordId},#{userId},#{recordDate})
+		INSERT INTO record_(RECORD_ID,USER_ID,RECORD_DATE,RECORD_FILE_NAME,RECORD_LENGTH) 
+		VALUES (SEQ_RECORD.NEXTVAL,#{userId},#{recordDate},#{fileName},#{recordLength})
 	</insert>
 
 </mapper>
