@@ -41,6 +41,7 @@ public class FileUpDownUtils {
 							if (i != arrFiles.length - 1)
 								newFileName += arrFiles[i] + "_";
 							else
+								//newFileName += String.valueOf(index + 1);
 								newFileName += String.valueOf(index + 1);
 						}
 
