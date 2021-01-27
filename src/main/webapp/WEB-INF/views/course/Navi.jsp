@@ -81,9 +81,8 @@ ul li label{
 }
 
 .modal-dialog {
-	width: 80%;
-	max-width: 800px;
-	height: 100%;
+      display: inline-block;
+      vertical-align: middle;
 }
 
 .imgdiv {
@@ -134,6 +133,91 @@ ul li label{
 	width: 100%;
 }
 
+.cus {
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
+}
+.cus th {
+	border-top: 1px solid white;
+	border-bottom: 1px solid white;
+	background-color : #ff8827;
+	color:white;
+	font-size:1em;
+}
+.cus td {
+	cursor: pointer;
+}
+
+.packCreateBtn {
+	color:#ff8827;
+	background-color: white;
+	font-weight: bold;
+	border: none;
+}
+.packCreateBtn:hover {
+	color:white;
+	background-color: #ff8827;
+}
+.submitBtn {
+	color:white;
+	background-color: #ff8827;
+	font-weight: bold;
+	border: none;
+}
+.closeBtn{
+	color:white;
+	background-color: #ff8827;
+	font-weight: bold;
+	border: none;
+}
+.insertBtn{
+	color:white;
+	background-color: #ff8827;
+	font-weight: bold;
+	border: none;
+}
+#packNoticeForm{
+	background-color: white;
+	border : #ff8827 1px solid;
+	border-radius: 10px;
+}
+
+#packNoticeEditForm{
+	background-color: white;
+	border : #ff8827 1px solid;
+	border-radius: 10px;
+}
+.deleteBtn{
+	color:white;
+	background-color: #ff8827;
+	font-weight: bold;
+	border: none;
+}
+.editBtn{
+	color:white;
+	background-color: #ff8827;
+	font-weight: bold;
+	border: none;
+}
+.viewBtn{
+	color:white;
+	background-color: #ff8827;
+	font-weight: bold;
+	border: none;
+}
+.modal {
+  text-align:center;
+     position: fixed;
+     left:25%
+   }
+@media screen and (min-width: 768px) {
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
 </style>
 <div id="colorlib-main" style="padding:20px">
 	<div class="row" style="padding-top: 50px; padding-left: 10px">
@@ -141,15 +225,16 @@ ul li label{
 		<div class="col-xs-10 offset-xs-1 col-md-5" role="navigation">
 			<ul class="nav nav-tabs" style="list-style:none">
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#routeinfo">루트 정보</a></li>
+					<a class="nav-link" data-toggle="tab" href="#routeInfo">루트 정보</a></li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#routestop">루트 경유지</a></li>
+					<a class="nav-link" data-toggle="tab" href="#courseList">코스 목록</a></li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#placeinfo">관광 정보</a></li>
+					<a class="nav-link" data-toggle="tab" href="#recordList">내 기록</a></li>
 			</ul>
 			<div class="tab-content">
-				<div class="tab-pane active" id="routeinfo">
-					<form action="">
+				<!-- 루트 등록 시작 -->
+				<div class="tab-pane active" id="routeInfo">
+					<form action="<c:url value=''/>">
 						<ul class="my-box">
 							<li>
 								<label for=" ">작성자</label>&emsp;
@@ -190,29 +275,98 @@ ul li label{
 								<label for=" ">설명</label><br/>
 								<textarea rows="3" style="border:#aaaaaa solid 1px; width: 100%"></textarea>
 							</li>
-							<!-- 
-							<a class="btn" href="#" style="color:white;background-color: #ff8827; border:#ff8827 solid 1px;float: right;">등록</a>
-							 -->
+							<li>
+								<button type="submit" class="btn btn-block" 
+								style="color:white; background-color: #ff8827; border:#ff8827 solid 1px;float: right;">등록</button>
+							</li>
 						</ul>
-						<button type="submit" class="btn btn-block" style="float: right;">등록</button>
 					</form>
 				</div>
-				<div class="tab-pane fade" id="routestop">
-					<ul class="my-box">
-						<li>
-							<label for=" ">이름</label>
-							<span>&emsp;유경이네</span>
-						</li>
-					</ul>
+				<!-- 루트 등록 끝 -->
+				<!-- 코스 리스트 시작 -->
+				<!-- 기존에 있는 코스가 보임 -->
+				<div class="tab-pane fade" id="courseList">
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-hover cus">
+								<tr>
+									<th class="text-center col-lg-2 col-xs-1">번호</th>
+									<th class="text-center col-lg-6 col-xs-6">제목</th>
+									<th class="text-center col-lg-2 col-xs-2">작성자</th>
+									<th class="text-center col-lg-2 col-xs-3">작성일</th>
+								</tr>
+								<c:if test="${empty list }" var="isEmpty">
+									<tr class="text-center">
+										<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
+									</tr>
+								</c:if>
+								<c:if test="${!isEmpty}">
+									<c:forEach var="item" items="${list }" varStatus="loop">
+										<tr class="text-center">
+											<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
+											<td class="text-left">${item.packNoticeTitle}</td>
+											<td>${item.userName}</td>
+											<td>${item.packNoticeDate}</td>
+											<td style="display: none;">${item.packNoticeContent }</td>
+											<td style="display: none;">${item.packNoticeNo }</td>
+										</tr>
+									</c:forEach>
+								</c:if>	
+							</table>
+						</div>
+					</div>
+					<c:if test="${!empty manager }">
+						<div class="row">
+							<div class="col-lg-12 text-right">
+								<button class="submitBtn btn" data-toggle="modal" id="btnNoticeWrite">등록</button>
+			
+							</div>
+						</div>
+					</c:if>
 				</div>
-				<div class="tab-pane fade" id="placeinfo">
-					<ul class="my-box">
-						<li>
-							<label for=" ">이름</label>
-							<span>&emsp;유경이네</span>
-						</li>
-					</ul>
+				<!-- 코스 리스트 끝 -->
+				<!-- 레코드 리스트 시작 -->
+				<!-- 레코드 중에서 코스로 등록하지 않은 레코드가 보임 -->
+				<div class="tab-pane fade" id="recordList">
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-hover cus">
+								<tr>
+									<th class="text-center col-lg-2 col-xs-1">번호</th>
+									<th class="text-center col-lg-6 col-xs-6">제목</th>
+									<th class="text-center col-lg-2 col-xs-2">작성자</th>
+									<th class="text-center col-lg-2 col-xs-3">작성일</th>
+								</tr>
+								<c:if test="${empty list }" var="isEmpty">
+									<tr class="text-center">
+										<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
+									</tr>
+								</c:if>
+								<c:if test="${!isEmpty}">
+									<c:forEach var="item" items="${list }" varStatus="loop">
+										<tr class="text-center">
+											<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
+											<td class="text-left">${item.packNoticeTitle}</td>
+											<td>${item.userName}</td>
+											<td>${item.packNoticeDate}</td>
+											<td style="display: none;">${item.packNoticeContent }</td>
+											<td style="display: none;">${item.packNoticeNo }</td>
+										</tr>
+									</c:forEach>
+								</c:if>	
+							</table>
+						</div>
+					</div>
+					<c:if test="${!empty manager }">
+						<div class="row">
+							<div class="col-lg-12 text-right">
+								<button class="submitBtn btn" data-toggle="modal" id="btnNoticeWrite">등록</button>
+			
+							</div>
+						</div>
+					</c:if>
 				</div>
+				<!-- 레코드 리스트 끝 -->
 			</div>
 			
 		</div>
@@ -243,10 +397,151 @@ ul li label{
 		    </div>
 	    </div>
 	</div>
+	<!-- 높이 그래프 시작 -->
 	<div class="row" style="padding-top: 50px; padding-left: 10px">
 		<div class="col-xs-10 offset-xs-1 col-md-7" id="graph"></div>
 	</div>
-</div>
+	<!-- 높이 그래프 끝 -->
+	<!-- 팩 공지사항 등록 모달창 시작 -->
+	<div class="modal fade" id="noticeWrite" data-backdrop="false">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title"style="margin: 5px;">공지사항 등록</h4>
+				</div>
+	
+				<div class="modal-body">
+					<form action="" class="bg-light p-5 contact-form" id="packNoticeForm">
+						<label for="packNoticeTitle" style="float: left;">글 제목</label>
+						<div class="form-group">
+							<input type="text" class="form-control" name="packNoticeTitle"
+								id="packNoticeTitle">
+						</div>
+	
+						<label for="packNoticeContent" style="float: left;">공지사항 내용</label>
+						<div class="form-group">
+							<textarea cols="30" rows="7" class="form-control"  name="packNoticeContent" id="packNoticeContent"></textarea>
+						</div>
+					</form>
+				</div>
+	
+				<div class="modal-footer">
+					<button type="button" class="insertBtn btn" data-dismiss="modal" id="btnWriteOk">등록</button>
+					<button type="button" class="insertBtn btn" data-dismiss="modal" id="btnNoticeWriteClose">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 팩 공지사항 등록 모달창 끝 -->
+	
+	<!-- 팩 공지사항 수정 모달창 시작 -->
+	<div class="modal fade" id="noticeEdit" data-backdrop="false">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title"style="margin: 5px;">공지사항 수정</h4>
+				</div>
+	
+				<div class="modal-body">
+					<form action="" class="bg-light p-5 contact-form" id="packNoticeEditForm">
+						<label for="packNoticeTitle" style="float: left;">글 제목</label>
+						<div class="form-group">
+							<input type="text" class="form-control" name="packNoticeTitle"
+								id="packNoticeEditTitle" value="">
+						</div>
+	
+						<label for="packNoticeContent" style="float: left;">공지사항 내용</label>
+						<div class="form-group">
+							<textarea cols="30" rows="7" class="form-control" id="packNoticeEditContent" name="packNoticeContent" value=""></textarea>
+						</div>
+						
+						<div class="form-group">
+							<input type="hidden" class="form-control" name="packNoticeNo" id="packNoticeEditNo" value="">
+						</div>
+						<div class="form-group">
+							<input type="hidden" class="form-control" name="nowPage"  value="${nowPage}">
+						</div>
+	
+					</form>
+				</div>
+	
+				<div class="modal-footer">
+					<button type="button" class="editBtn btn" data-dismiss="modal" id="btnNoticeEditOk">수정</button>
+					<button type="button" class="editBtn btn" data-dismiss="modal" id="btnNoticeEditClose">닫기</button>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 팩 공지사항 수정 모달창 끝 -->
+	
+	<!-- 팩 공지사항 삭제 모달창 시작 -->
+	<div class="modal fade" id="noticeDelete" data-backdrop = "false">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">공지사항 삭제</h4>
+				</div>
+				<div class="modal-body">
+					<h4 class="text-center">정말로 삭제하시겠습니까?</h4>	
+					<form action="" class="bg-light p-5 contact-form" id="packNoticeDeleteForm" style="display: none;">
+						<div class="form-group">
+							<input type="hidden" class="form-control" name="packNoticeNo" id="packNoticeDeleteNo" value="">
+						</div>
+					</form>
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="deleteBtn btn" data-dismiss="modal" id="btnNoticeDeleteOk">삭제</button>
+					<button type="button" class="deleteBtn btn" data-dismiss="modal" id="btnNoticeDeleteClose">닫기</button>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 팩 공지사항 삭제 모달창 끝 -->
+	
+	<!-- 팩 공지사항 상세보기 모달창 시작 -->
+	<div class="modal fade" id="noticeView" data-backdrop="false">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div id="mdNo">
+						
+					</div>
+					<div id="mdUserID">
+					
+					</div>
+					<div id="mdTitle">
+					
+					</div>
+					<div id="mdPostdate">
+					
+					</div>
+				</div>
+	
+				<div class="modal-body" style="height: 400px;">
+					<div class="row" style="margin: 10px;">
+						<div id="mdContent">
+							
+						</div>
+					</div>
+				</div>
+	
+				<div class="modal-footer">
+					<c:if test="${!empty manager }">
+						<button class="viewBtn btn" data-toggle="modal" id="btnNoticeEdit">수정</button>
+						<button class="viewBtn btn" data-toggle="modal" id="btnNoticeDelete">삭제</button>
+						
+					</c:if>
+				
+					<button type="button" class="closeBtn btn" data-dismiss="modal" id="btnNoticeViewClose">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 팩 공지사항 상세보기 모달창 끝 -->
+	</div>
 
 <script>
 //날자 계산
