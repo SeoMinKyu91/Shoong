@@ -22,7 +22,7 @@
 	
 	-->
 	<insert id="insertRecord" parameterType="recordDTO">
-		INSERT INTO record_(RECORD_ID,USER_ID,RECORD_DATE,RECORD_FILE_NAME,RECORD_LENGTH) 
+		INSERT INTO record_(record_id,user_id,record_date,record_file_name,record_length) 
 		VALUES (SEQ_RECORD.NEXTVAL,#{userId},#{recordDate},#{fileName},#{recordLength})
 	</insert>
 
