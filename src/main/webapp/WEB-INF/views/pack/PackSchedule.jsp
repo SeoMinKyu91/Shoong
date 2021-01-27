@@ -368,7 +368,6 @@
       console.log('들어옴');
    })
    
-<<<<<<< HEAD
    $('#btnPackSchedule').click(function(){
 		if($('#packScheduleTitle').val() == ''){
 			alert('제목을 입력해주세요');
@@ -393,18 +392,6 @@
 			   
 	   
 	   	$('#packSchedule').submit();
-=======
-   $('#btnPackSchedule').click(function(e){
-	  e.preventDefault();
-      console.log($('#endDatePicker').val());
-      
-      if($('#endDatePicker').val()==''){
-    	  console.log('마지막 날짜 없음');
-    	  alert('마지막 날짜를 입력하세요');
-    	  return;
-      }
-      $('#packSchedule').submit();
->>>>>>> branch 'test_BWG' of https://github.com/SeoMinKyu91/Shoong.git
    });
    
    $('#btnPackScheduleClose').click(function(){
