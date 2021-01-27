@@ -51,8 +51,8 @@ public class MyPageDiaryController {
 
 	@RequestMapping(value = "write.do" , method = RequestMethod.GET)
 	   public String mypageDiaryWritePage(@RequestParam Map map ,Model model,HttpServletRequest req) throws IOException {
-		  map.put("id","shoong1000@naver.com");
-		  //model.addAttribute("recordId",map.get("recordId"));
+		  //map.put("id","shoong1000@naver.com");
+		  model.addAttribute("recordId",map.get("recordId"));
 		  map.put("id", req.getSession().getAttribute("userId").toString());
 
 		  /*record 지도 관련*/
@@ -79,8 +79,8 @@ public class MyPageDiaryController {
 	@RequestMapping(value = "write.do", method = RequestMethod.POST)
 	   public String mypageDiaryWrite(@RequestParam Map map,Model model,HttpServletRequest req) {
 
-		 //map.put("id", req.getSession().getAttribute("userId").toString());
-		  map.put("id","shoong1000@naver.com");
+		 map.put("id", req.getSession().getAttribute("userId").toString());
+		 // map.put("id","shoong1000@naver.com");
 
 
 		   if( map.get("imgArry").toString().length() != 0) {
@@ -131,8 +131,8 @@ public class MyPageDiaryController {
 
 	@RequestMapping("view.do")
 	   public String mypageDiaryView(@RequestParam Map map ,Model model,HttpServletRequest req) throws IOException {
-		   //map.put("id", req.getSession().getAttribute("userId").toString());
-			map.put("id","shoong1000@naver.com");
+		   map.put("id", req.getSession().getAttribute("userId").toString());
+			//map.put("id","shoong1000@naver.com");
 		    Map Diarymap  = service.selectOne(map);
 
 	    	String date = Diarymap .get("DIARY_DATE").toString().substring(0,10);

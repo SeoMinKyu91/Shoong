@@ -11,7 +11,7 @@
 	select * from 
 	(SELECT S.*,
 	    (SELECT count(*) FROM DIARY_IMG C WHERE C.DIARY_CODE = S.DIARY_CODE)AS DIARY_IMG_COUNT
-	 FROM DIARY S order by DIARY_CODE desc)d
+	 FROM DIARY S where  USER_ID = #{id}  order by DIARY_CODE desc)d
 	 where rownum <![CDATA[<]]> =6
 </select>
 	
