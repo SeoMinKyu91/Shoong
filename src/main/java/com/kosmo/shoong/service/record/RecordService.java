@@ -1,6 +1,9 @@
 package com.kosmo.shoong.service.record;
 
+import java.util.List;
+
 public interface RecordService {
-	public boolean insertRecord(RecordDTO record);
+	boolean insertRecord(RecordDTO record);
+	List<RecordDTO> selectListById(String userId);
 
 }

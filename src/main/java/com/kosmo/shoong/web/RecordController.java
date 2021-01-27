@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -21,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.kosmo.shoong.common.FileUpDownUtils;
 import com.kosmo.shoong.service.impl.record.RecordServiceImpl;
 import com.kosmo.shoong.service.record.RecordDTO;
 
@@ -34,11 +36,13 @@ public class RecordController {
 	@CrossOrigin
 	@ResponseBody
 	@PostMapping(value="/upload/json",produces="text/plain;charset=UTF-8")
-	public String courseUpload(
+	public String recordUpload(
 			@RequestPart MultipartFile files,HttpServletRequest req) throws IOException {
 		//파일 받아옴
 		String path = req.getSession().getServletContext().getRealPath("/upload");
-		File file = new File(path+File.separator+files.getOriginalFilename());
+		
+		String renameFileName = FileUpDownUtils.getNewFileName(path, files.getOriginalFilename());
+		File file = new File(path+File.separator+renameFileName);
 		System.out.println("file size:"+file.length());
 		System.out.println("file name:"+file.getName());
 		files.transferTo(file);
@@ -55,7 +59,7 @@ public class RecordController {
 		}
 		//제이슨 파싱
 		//new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
-		Gson gson = new GsonBuilder().setDateFormat("yyyy_MM_dd_hh_mm").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy_MM_dd_HH_mm").create();
 		JsonParser parser = new JsonParser();
 		JsonElement resultJson = parser.parse(sb.toString());
 		System.out.println("파싱:"+resultJson.toString());
@@ -65,5 +69,12 @@ public class RecordController {
 							gson.fromJson(
 								resultJson.getAsJsonObject().get("properties"), RecordDTO.class));
 		return flag?"업로드 성공":"업로드 실패";
+	}
+	
+	//레코드 리스트
+	@GetMapping(value="")
+	public String recordList() {
+		
+		return "";
 	}
 }

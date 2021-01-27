@@ -1,5 +1,7 @@
 package com.kosmo.shoong.service.impl.record;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -17,6 +19,11 @@ public class RecordDAO implements RecordService {
 	@Override
 	public boolean insertRecord(RecordDTO record) {
 		return (Integer)sqlMapper.insert("insertRecord", record)==1?true:false;
+	}
+
+	@Override
+	public List<RecordDTO> selectListById(String userId) {
+		return sqlMapper.selectList("selectListById", userId);
 	}
 
 }

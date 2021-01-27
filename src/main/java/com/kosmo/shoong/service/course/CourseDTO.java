@@ -12,16 +12,15 @@ import lombok.ToString;
 @Getter
 @ToString
 public class CourseDTO {
-	//@SerializedName("")
+
 	private String courseID;
 	private String courseName;
 	private String courseIntro;
-	private String courseThumbnail;
 	private String courseTime;
 	private String courseLength;
-	private String courseRegion;
-	private String courseTag;
 	private Date courseRegiDate;
+	private String courseTag;
+	private String courseRegion;
 	
 	private String userId;
 	private String courseCateID;

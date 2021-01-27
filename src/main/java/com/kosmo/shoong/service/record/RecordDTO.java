@@ -1,5 +1,14 @@
 package com.kosmo.shoong.service.record;
 
+/*
+ RECORD_ID                                 NOT NULL NUMBER
+ USER_ID                                   NOT NULL VARCHAR2(30)
+ COURSE_ID                                          NVARCHAR2(10)
+ RECORD_FILE_NAME                                   VARCHAR2(100)
+ RECORD_LENGTH                                      FLOAT(126)
+ RECORD_DATE                                        DATE
+ DURATION                                           NVARCHAR2(10) 
+ */
 
 import java.util.Date;
 

@@ -1,5 +1,7 @@
 package com.kosmo.shoong.service.impl.record;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -16,6 +18,11 @@ public class RecordServiceImpl implements RecordService {
 	@Override
 	public boolean insertRecord(RecordDTO record) {
 		return dao.insertRecord(record);
+	}
+
+	@Override
+	public List<RecordDTO> selectListById(String userId) {
+		return dao.selectListById(userId);
 	}
 
 }

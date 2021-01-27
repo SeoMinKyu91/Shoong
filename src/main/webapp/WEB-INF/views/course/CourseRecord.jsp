@@ -1,5 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 	prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" 
+	prefix="fmt"%>
 <%@ page language="java" 
 	contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -225,15 +227,57 @@ ul li label{
 		<div class="col-xs-10 offset-xs-1 col-md-5" role="navigation">
 			<ul class="nav nav-tabs" style="list-style:none">
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#routeInfo">루트 정보</a></li>
-				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#courseList">코스 목록</a></li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#routeInfo">루트 정보</a></li>
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#recordList">내 기록</a></li>
 			</ul>
 			<div class="tab-content">
+				<!-- 코스 리스트 시작 -->
+				<!-- 기존에 있는 코스가 보임 -->
+				<div class="tab-pane active" id="courseList">
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-hover cus">
+								<tr>
+									<th class="text-center col-lg-2 col-xs-1">번호</th>
+									<th class="text-center col-lg-6 col-xs-6">제목</th>
+									<th class="text-center col-lg-2 col-xs-2">작성자</th>
+									<th class="text-center col-lg-2 col-xs-3">작성일</th>
+								</tr>
+								<c:if test="${empty list }" var="isEmpty">
+									<tr class="text-center">
+										<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
+									</tr>
+								</c:if>
+								<c:if test="${!isEmpty}">
+									<c:forEach var="item" items="${list }" varStatus="loop">
+										<tr class="text-center">
+											<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
+											<td class="text-left">${item.packNoticeTitle}</td>
+											<td>${item.userName}</td>
+											<td>${item.packNoticeDate}</td>
+											<td style="display: none;">${item.packNoticeContent }</td>
+											<td style="display: none;">${item.packNoticeNo }</td>
+										</tr>
+									</c:forEach>
+								</c:if>	
+							</table>
+						</div>
+					</div>
+					<c:if test="${!empty manager }">
+						<div class="row">
+							<div class="col-lg-12 text-right">
+								<button class="submitBtn btn" data-toggle="modal" id="btnNoticeWrite">등록</button>
+			
+							</div>
+						</div>
+					</c:if>
+				</div>
+				<!-- 코스 리스트 끝 -->
 				<!-- 루트 등록 시작 -->
-				<div class="tab-pane active" id="routeInfo">
+				<div class="tab-pane fade" id="routeInfo">
 					<form action="<c:url value=''/>">
 						<ul class="my-box">
 							<li>
@@ -283,48 +327,6 @@ ul li label{
 					</form>
 				</div>
 				<!-- 루트 등록 끝 -->
-				<!-- 코스 리스트 시작 -->
-				<!-- 기존에 있는 코스가 보임 -->
-				<div class="tab-pane fade" id="courseList">
-					<div class="row">
-						<div class="col-md-12">
-							<table class="table table-hover cus">
-								<tr>
-									<th class="text-center col-lg-2 col-xs-1">번호</th>
-									<th class="text-center col-lg-6 col-xs-6">제목</th>
-									<th class="text-center col-lg-2 col-xs-2">작성자</th>
-									<th class="text-center col-lg-2 col-xs-3">작성일</th>
-								</tr>
-								<c:if test="${empty list }" var="isEmpty">
-									<tr class="text-center">
-										<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
-									</tr>
-								</c:if>
-								<c:if test="${!isEmpty}">
-									<c:forEach var="item" items="${list }" varStatus="loop">
-										<tr class="text-center">
-											<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
-											<td class="text-left">${item.packNoticeTitle}</td>
-											<td>${item.userName}</td>
-											<td>${item.packNoticeDate}</td>
-											<td style="display: none;">${item.packNoticeContent }</td>
-											<td style="display: none;">${item.packNoticeNo }</td>
-										</tr>
-									</c:forEach>
-								</c:if>	
-							</table>
-						</div>
-					</div>
-					<c:if test="${!empty manager }">
-						<div class="row">
-							<div class="col-lg-12 text-right">
-								<button class="submitBtn btn" data-toggle="modal" id="btnNoticeWrite">등록</button>
-			
-							</div>
-						</div>
-					</c:if>
-				</div>
-				<!-- 코스 리스트 끝 -->
 				<!-- 레코드 리스트 시작 -->
 				<!-- 레코드 중에서 코스로 등록하지 않은 레코드가 보임 -->
 				<div class="tab-pane fade" id="recordList">
@@ -337,20 +339,22 @@ ul li label{
 									<th class="text-center col-lg-2 col-xs-2">작성자</th>
 									<th class="text-center col-lg-2 col-xs-3">작성일</th>
 								</tr>
-								<c:if test="${empty list }" var="isEmpty">
+								<c:if test="${empty recordList }" var="isEmpty">
 									<tr class="text-center">
 										<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
 									</tr>
 								</c:if>
 								<c:if test="${!isEmpty}">
-									<c:forEach var="item" items="${list }" varStatus="loop">
+									<c:forEach var="item" items="${recordList }" varStatus="loop">
 										<tr class="text-center">
-											<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
-											<td class="text-left">${item.packNoticeTitle}</td>
-											<td>${item.userName}</td>
-											<td>${item.packNoticeDate}</td>
-											<td style="display: none;">${item.packNoticeContent }</td>
-											<td style="display: none;">${item.packNoticeNo }</td>
+											<td class="text-left">${item.fileName}</td>
+											<td>${item.userId}</td>
+											<td>${item.recordLength}</td>
+											<td>
+											<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm" value="${item.recordDate}"/>
+											<c:out value="${dResult }"/>
+											</td>
+											<td style="display: none;">${item.duration }</td>
 										</tr>
 									</c:forEach>
 								</c:if>	
@@ -529,12 +533,8 @@ ul li label{
 				</div>
 	
 				<div class="modal-footer">
-					<c:if test="${!empty manager }">
-						<button class="viewBtn btn" data-toggle="modal" id="btnNoticeEdit">수정</button>
-						<button class="viewBtn btn" data-toggle="modal" id="btnNoticeDelete">삭제</button>
-						
-					</c:if>
-				
+					<button class="viewBtn btn" data-toggle="modal" id="btnNoticeEdit">수정</button>
+					<button class="viewBtn btn" data-toggle="modal" id="btnNoticeDelete">삭제</button>
 					<button type="button" class="closeBtn btn" data-dismiss="modal" id="btnNoticeViewClose">닫기</button>
 				</div>
 			</div>
@@ -827,5 +827,173 @@ $(function(){
 
 		$('#imgArry').val(imgarr);
 	}
+	
+	$('#btnNoticeWrite').on('click', function(e) {
+		console.log('버튼 클릭');
+		$('#noticeWrite').modal('show');
+	})
+	
+
+	$('#btnNoticeWriteClose').on('click', function() {
+		$('#noticeWrite').modal('hide');
+	})
+	
+	
+	$('#btnWriteOk').click(function() {
+		console.log("등록하기 버튼 클릭");
+		if ($('#packNoticeTitle').val() == "") {
+			$('#packNoticeTitle').focus();
+			return;
+		} else if ($('#packNoticeContent').val() == "") {
+			$('#packNoticeContent').focus();
+			return;
+		}
+		//form태그의 action속성 및 method속성 설정
+		$('#packNoticeForm').prop({
+			action : '<c:url value="/pack/notice/write.do"/>',
+			method : 'post'
+		});
+		//폼객체의 submit()함수로 서버로 전송
+		$('#packNoticeForm').submit();
+	});
+	
+	
+	var no = "";
+	var title = "";
+	var user = "";
+	var postdate = "";
+	var content = "";
+	var packNoticeNo = ""
+	
+	//테이블 클릭시 모달창 띄우기
+	//공지사항 상세보기  속성값 설정 해주기
+	$(".cus tr").click(function(){
+		var userId = "<c:out value='${sessionScope.userId}'/>";
+		console.log('테이블 a태그 클릭',userId);
+		no = $(this).children().eq(0).text();
+		title = $(this).children().eq(1).text();
+		user = $(this).children().eq(2).text();
+		postdate = $(this).children().eq(3).text();
+		content = $(this).children().eq(4).text();
+		packNoticeNo = $(this).children().eq(5).text();
+		
+		if(userId === title){
+			console.log(userId,'와',title);
+			//$('.viewBtn').attr("hidden","false");
+			$('.viewBtn').show();
+		} else {
+			console.log(userId,'와',title,'달라');
+			$('.viewBtn').hide();
+		}
+		
+		$("#mdNo").append("글 번호: " + no);
+		$("#mdUserID").append("작성자 : " + user);
+		$("#mdTitle").append("제목 : " + title);
+		$("#mdPostdate").append("작성일 : " + postdate);
+		$("#mdContent").append(""+content);
+		
+		$('#noticeView').modal('show');
+	});
+	
+	
+	
+	//공지사항 상세보기 모달 내용 삭제
+	$("#btnNoticeViewClose").click(function(){
+		modalContentDelete();
+	})
+	
+	//공지사항 수정 모달
+	$('#btnNoticeEdit').click(function(){
+		console.log("수정 모달창 들어옴");
+		console.log("팩수정 모달창 packNoticeNo:"+packNoticeNo)
+		$("#packNoticeEditNo").attr("value",packNoticeNo);
+		$("#packNoticeEditContent").append(content);
+		$("#packNoticeEditTitle").attr("value",title);
+		
+		$('#noticeView').modal('hide');
+		modalContentDelete();
+		$('#noticeEdit').modal('show');
+	})
+	
+	//공지사항 수정 닫기 모달
+	$('#btnNoticeEditClose').click(function(){
+		$("#packNoticeEditContent").text("");
+	})
+	
+	
+	//공지사항 수정 완료
+	$('#btnNoticeEditOk').click(function() {
+		console.log("수정하기 버튼 클릭");
+		if ($('#packNoticeEditTitle').val() == "") {
+			$('#packNoticeEditTitle').focus();
+			return;
+		} else if ($('#packNoticeEditContent').val() == "") {
+			$('#packNoticeEditContent').focus();
+			return;
+		}
+		//form태그의 action속성 및 method속성 설정
+		$('#packNoticeEditForm').prop({
+			action : '<c:url value="/pack/notice/Edit.do"/>',
+			method : 'post'
+		});
+		//폼객체의 submit()함수로 서버로 전송
+		$('#packNoticeEditForm').submit();
+	});
+	
+	
+	//공지사항 삭제하기
+	$('#btnNoticeDelete').on('click', function(e) {
+		console.log('버튼 클릭');
+		console.log(packNoticeNo);
+		
+		$('#packNoticeDeleteNo').attr("value",packNoticeNo);
+		
+		$('#noticeView').modal('hide');
+		$('#noticeDelete').modal('show');
+
+	})
+
+	$('#btnNoticeDeleteClose').on('click', function() {
+		$('#noticeDelete').modal('hide');
+		modalContentDelete();
+	})
+	
+	
+	$('#btnNoticeDeleteOk').click(function() {
+		console.log("삭제하기 버튼 클릭");
+		console.log($('#packNoticeDeleteNo').val())
+		
+		
+		//form태그의 action속성 및 method속성 설정
+		$('#packNoticeDeleteForm').prop({
+			action : '<c:url value="/pack/notice/delete.do"/>',
+			method : 'post'
+		});
+		//폼객체의 submit()함수로 서버로 전송
+		$('#packNoticeDeleteForm').submit();
+	});
+	
+	//공지사항 상세보기 모달내용 삭제 함수
+	function modalContentDelete(){
+		console.log("모달 닫기 클릭");
+		attrDelete();
+		
+		
+		$("#mdNo").text("");
+		$("#mdUserID").text("");
+		$("#mdTitle").text("");
+		$("#mdPostdate").text("");
+		$("#mdContent").text("");
+	}
+	
+	function attrDelete(){
+		no = "";
+		title = "";
+		user = "";
+		postdate = "";
+		content ="";
+		packNoticeNo ="";
+	}
+	
 });
 </script>

@@ -5,45 +5,72 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kosmo.shoong.common.FileUpDownUtils;
 import com.kosmo.shoong.service.course.CourseDTO;
 import com.kosmo.shoong.service.course.CourseService;
+import com.kosmo.shoong.service.impl.course.CourseServiceImpl;
+import com.kosmo.shoong.service.impl.record.RecordServiceImpl;
+import com.kosmo.shoong.service.record.RecordDTO;
 
 
 @Controller
 @RequestMapping("/course")
+@SessionAttributes({"userId","packId"})
 public class CourseController {
 
 	@Resource(name="courseService")
-	private CourseService service;
+	private CourseServiceImpl cService;
+	
+	@Resource(name="recordService")
+	public RecordServiceImpl rService;
 
 	@RequestMapping("/main.do")
 	public String courseMain(Model model,Map map) {
-		map.put("user_ID","kim");
-		CourseDTO record = service.selectOne(map);
+		//map.put("user_ID","kim");
+		CourseDTO record = cService.selectOne(map);
 		model.addAttribute("courseList",record);
 		return "course/CourseList";
 	}
-
+	
+	/*
+	 * record_,course 다보여줌
+	 */
 	@RequestMapping("/navi.do")
-	public String courseNavi() {
-		return "course/Navi";
+	public String courseNavi(
+			@ModelAttribute(value="userId")  String userId,Model model) {
+		System.out.println("courseNavi:"+userId);
+		List<RecordDTO> rList = rService.selectListById(userId);
+		
+		for(RecordDTO r:rList) {
+			System.out.println(r.getRecordDate());
+		}
+		model.addAttribute("recordList",rList);
+		//cService.selectList();
+		
+		return "course/CourseRecord";
 	}
 
 	@PostMapping(value = "/routeLoad",produces = "text/html; charset=UTF-8")
@@ -68,7 +95,8 @@ public class CourseController {
 		if(br!=null) br.close();
 		return sb.toString();
 	}
-
+	
+	//웹 json file 업로드
 	@PostMapping(value = "/fileUpload", produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String uploadCourse(MultipartHttpServletRequest mhsr) {
@@ -101,6 +129,13 @@ public class CourseController {
 		JSONObject obj = new JSONObject();
 		obj.put("fileName", renameFilename);
 		return obj.toJSONString();
+	}
+	
+	//코스 등록용
+	@PostMapping(value="")
+	public String insertCourse(Map map) {
+		
+		return "";
 	}
 	
 	@RequestMapping("/mainTest.do")
