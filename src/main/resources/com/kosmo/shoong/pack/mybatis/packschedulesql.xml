@@ -23,7 +23,8 @@
 	</resultMap>
 
 	<insert id="scheduleInsert" parameterType="java.util.Map">
-		insert into pack_schedule values(SEQ_P_SCHEDULE.NEXTVAL,#{userId},#{packId},#{packScheduleStart},#{packScheduleEnd},#{packScheduleTitle},#{packScheduleContent})
+		insert into pack_schedule 
+		values(SEQ_P_SCHEDULE.NEXTVAL,#{userId},#{packId},#{packScheduleStart},#{packScheduleEnd},#{packScheduleTitle},#{packScheduleContent})
 	</insert>
 	
 	<select id="scheduleSelectList" parameterType="java.util.Map" resultType="java.util.Map">

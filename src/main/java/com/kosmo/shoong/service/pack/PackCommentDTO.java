@@ -14,8 +14,15 @@ public class PackCommentDTO {
 	private String packCommentLikeCount;
 	private String packCommentReplyCount;
 	private List<PackCommentReplyDTO> packCommentReply;
+	private String packCommentLike;
 	
 	
+	public String getPackCommentLike() {
+		return packCommentLike;
+	}
+	public void setPackCommentLike(String packCommentLike) {
+		this.packCommentLike = packCommentLike;
+	}
 	//게터 & 세터
 	public String getPackCommentNo() {
 		return packCommentNo;
