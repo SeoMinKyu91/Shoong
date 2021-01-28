@@ -252,7 +252,7 @@ ul li label{
 									</tr>
 								</c:if>
 								<c:if test="${!isEmpty}">
-									<c:forEach var="item" items="${list }" varStatus="loop">
+									<c:forEach var="item" items="${list}" varStatus="loop">
 										<tr class="text-center">
 											<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
 											<td class="text-left">${item.packNoticeTitle}</td>
@@ -406,25 +406,38 @@ ul li label{
 		<div class="col-xs-10 offset-xs-1 col-md-7" id="graph"></div>
 	</div>
 	<!-- 높이 그래프 끝 -->
-	<!-- 팩 공지사항 등록 모달창 시작 -->
+	<!-- 코스 등록 모달창 시작 -->
 	<div class="modal fade" id="noticeWrite" data-backdrop="false">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title"style="margin: 5px;">공지사항 등록</h4>
 				</div>
-	
 				<div class="modal-body">
 					<form action="" class="bg-light p-5 contact-form" id="packNoticeForm">
-						<label for="packNoticeTitle" style="float: left;">글 제목</label>
 						<div class="form-group">
-							<input type="text" class="form-control" name="packNoticeTitle"
-								id="packNoticeTitle">
+							<input type="text" class="form-control" name="courseId"
+								id="courseId" hidden="true" value="">
 						</div>
-	
-						<label for="packNoticeContent" style="float: left;">공지사항 내용</label>
+						<label for="courseName" style="float: left;">코스 명</label>
 						<div class="form-group">
-							<textarea cols="30" rows="7" class="form-control"  name="packNoticeContent" id="packNoticeContent"></textarea>
+							<input type="text" class="form-control" name="courseName"
+								id="courseName">
+						</div>
+						<label for="courseTime" style="float: left;">소요 예상 시간</label>
+						<div class="form-group">
+							<input type="text" class="form-control" name="courseTime"
+								id="courseTime">
+						</div>
+						<label for="courseTime" style="float: left;">코스 길이</label>
+						<div class="form-group">
+							<input type="text" class="form-control" name="courseTime"
+								id="courseTime">
+						</div>
+						<label for="courseIntro" style="float: left;">코스 소개 내용</label>
+						<div class="form-group">
+							<textarea cols="30" rows="7" class="form-control"  name="courseIntro" id="courseIntro">
+							</textarea>
 						</div>
 					</form>
 				</div>
@@ -436,7 +449,7 @@ ul li label{
 			</div>
 		</div>
 	</div>
-	<!-- 팩 공지사항 등록 모달창 끝 -->
+	<!-- 코스 등록 모달창 끝 -->
 	
 	<!-- 팩 공지사항 수정 모달창 시작 -->
 	<div class="modal fade" id="noticeEdit" data-backdrop="false">
@@ -448,6 +461,10 @@ ul li label{
 	
 				<div class="modal-body">
 					<form action="" class="bg-light p-5 contact-form" id="packNoticeEditForm">
+						<div class="form-group">
+							<input type="text" class="form-control" name="packNoticeTitle"
+								id="packNoticeEditTitle" value="" hidden="true">
+						</div>
 						<label for="packNoticeTitle" style="float: left;">글 제목</label>
 						<div class="form-group">
 							<input type="text" class="form-control" name="packNoticeTitle"
@@ -465,7 +482,6 @@ ul li label{
 						<div class="form-group">
 							<input type="hidden" class="form-control" name="nowPage"  value="${nowPage}">
 						</div>
-	
 					</form>
 				</div>
 	
@@ -505,7 +521,7 @@ ul li label{
 	</div>
 	<!-- 팩 공지사항 삭제 모달창 끝 -->
 	
-	<!-- 팩 공지사항 상세보기 모달창 시작 -->
+	<!-- 기록 상세보기 모달창 시작 -->
 	<div class="modal fade" id="noticeView" data-backdrop="false">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -540,7 +556,7 @@ ul li label{
 			</div>
 		</div>
 	</div>
-	<!-- 팩 공지사항 상세보기 모달창 끝 -->
+	<!-- 기록 공지사항 상세보기 모달창 끝 -->
 	</div>
 
 <script>
