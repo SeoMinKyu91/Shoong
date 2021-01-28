@@ -5,8 +5,6 @@ import java.util.Map;
 
 public interface CourseService {
 
-	List<Map> selectList(Map map);
-	
 	CourseDTO selectOne(Map map);
 	
 	int insert(Map map);
@@ -14,4 +12,5 @@ public interface CourseService {
 	int update(Map map);
 	
 	List<Map> showCourse(Map map);
+	List<CourseDTO> selectList();
 }

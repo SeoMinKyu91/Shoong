@@ -8,6 +8,7 @@ public interface MemberService {
 	boolean isMember(Map map);//회원 여부 판단
 	boolean isDuplicateEmail(Map map);//이메일 중복 여부 판단
 //	MemberDTO selectOne(Map map);//회원정보 상세보기
+	MemberDTO isLogin(MemberDTO member);
 	
 //	List<Map> selectList(Map map);
 	

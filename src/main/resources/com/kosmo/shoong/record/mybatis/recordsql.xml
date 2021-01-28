@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kosmo.shoong.record.mybatis.recordsql">
+
+	<resultMap type="recordDTO" id="recordDTOResult">
+		<result property="recordId" column="RECORD_ID"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="courseId" column="COURSE_ID"/>
+		<result property="fileName" column="RECORD_FILE_NAME"/>
+		<result property="recordLength" column="RECORD_LENGTH"/>
+		<result property="recordDate" column="RECORD_DATE"/>
+		<result property="duration" column="DURATION"/>
+	</resultMap>
+	
+	<insert id="insertRecord" parameterType="recordDTO">
+		INSERT INTO record_(record_id,user_id,record_date,record_file_name,record_length,duration) 
+		VALUES (SEQ_RECORD.NEXTVAL,#{userId},#{recordDate},#{fileName},#{recordLength},#{duration})
+	</insert>
+	
+	<select id="selectListById" parameterType="String" resultMap="recordDTOResult">
+		SELECT RECORD_ID,USER_ID,COURSE_ID,RECORD_FILE_NAME,RECORD_LENGTH,RECORD_DATE,DURATION
+		FROM record_
+		WHERE user_id=#{value}
+	</select>
+	
+	
+
+</mapper>

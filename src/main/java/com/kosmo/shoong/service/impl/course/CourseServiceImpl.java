@@ -17,12 +17,6 @@ public class CourseServiceImpl implements CourseService{
 	private CourseDAO courseDao;
 
 	@Override
-	public List<Map> selectList(Map map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public int insert(Map map) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -43,6 +37,11 @@ public class CourseServiceImpl implements CourseService{
 	@Override
 	public List<Map> showCourse(Map map) {
 		return courseDao.showCourse(map);
+	}
+	
+	@Override
+	public List<CourseDTO> selectList() {
+		return courseDao.selectList();
 	}
 
 	@Override

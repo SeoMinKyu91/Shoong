@@ -161,7 +161,6 @@ input {
 		</form>
 	</div>
 </div>
-
 <!-- ---------------- 활동지역 맵 스크립트 ----------------- -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=616834812e97e8f82a462cd2cc2e5e4e&libraries=services"></script>
@@ -437,4 +436,3 @@ input {
 		}
 	}
 </script>
-
