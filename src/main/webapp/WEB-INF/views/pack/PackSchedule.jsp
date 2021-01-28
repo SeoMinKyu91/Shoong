@@ -100,6 +100,8 @@
 			<hr style="background-color: black;height:1px"/>
 		</div>
 	</div>
+	
+	<!--  
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="text-center col-lg-12" >
@@ -108,8 +110,14 @@
 				
 		</div>
 	</div>
-    <div id="calendar"></div>
+	-->
+	<div class="col-lg-8">
+		<div id="calendar"></div>
+	</div>
+    
   </div>
+  
+  
    <!-- END COLORLIB-MAIN -->
 
 <!-- 팩 일정 등록 모달창 시작 -->

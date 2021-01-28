@@ -117,11 +117,12 @@ public class PackScheduleController {
 		System.out.println("컨트롤러 나갈때"+selectOne.get("PACK_SCHEDULE_NO"));
 
 		JSONObject json = new JSONObject();
-
+		System.out.println(selectOne.get("PACK_SCHEDULE_END").toString());
+		
 		json.put("title", selectOne.get("PACK_SCHEDULE_TITLE"));
 		json.put("content", selectOne.get("PACK_SCHEDULE_CONTENT"));
-		json.put("start", selectOne.get("PACK_SCHEDULE_START").toString());
-		json.put("end", selectOne.get("PACK_SCHEDULE_END").toString());
+		json.put("start", selectOne.get("PACK_SCHEDULE_START").toString().substring(0,10));
+		json.put("end", selectOne.get("PACK_SCHEDULE_END").toString().substring(0,10));
 		json.put("packScheduleNo", selectOne.get("PACK_SCHEDULE_NO"));
 		json.put("userId", selectOne.get("USER_ID"));
 		json.put("packId", selectOne.get("PACK_ID"));
