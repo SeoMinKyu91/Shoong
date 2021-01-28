@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.JsonObject;
 import com.kosmo.shoong.common.FileUpDownUtils;
 import com.kosmo.shoong.service.impl.pack.PackCommentServiceImpl;
 import com.kosmo.shoong.service.pack.PackCommentDTO;
@@ -75,6 +77,7 @@ public class PackCommentController {
 				System.out.println("!!!!!!!!!사진 이름!!!!!!!");
 				System.out.println(image);
 			}
+			System.out.println(dto.getPackCommentLike());
 			
 		}
 		
@@ -274,16 +277,76 @@ public class PackCommentController {
     	return "forward:/pack/myComment.do";
     }
     
-    @RequestMapping("comment/reply/write")
-    public String packCommentReplyWrite(@RequestParam Map map, Model model) {
+    @RequestMapping(value="comment/reply/write",produces = "text/html; charset=UTF-8")
+    @ResponseBody
+    public String packCommentReplyWrite(@RequestParam Map map, Model model,HttpSession session) {
     	System.out.println("댓글등록 controller들어옴");
     	System.out.println("글번호:"+map.get("packCommentNo"));
     	System.out.println("댓글 내용:"+map.get("replyContent"));
+    	map.put("userId", session.getAttribute("userId"));
+    	service.packCommentReplyInsert(map);
+    	Map replySelectOne  = service.packCommentReplySelectOne(map);
+    	System.out.println("===================================================================");
+    	System.out.println(replySelectOne.get("NAME"));
+    	replySelectOne.put("PACK_COMMENT_REPLY_DATE", replySelectOne.get("PACK_COMMENT_REPLY_DATE").toString());
+    	JSONObject json = new JSONObject(replySelectOne);
     	
-    	
-    	return "시부레";
+    	return json.toJSONString();
     }
     
+    @RequestMapping(value="comment/reply/delete",produces = "text/html; charset=UTF-8")
+    @ResponseBody
+    public String packCommentReplyDelete(@RequestParam Map map) {
+    	
+    	System.out.println("=========================================");
+    	System.out.println("글번호:"+map.get("packCommentNo"));
+    	System.out.println("댓글번호:"+map.get("packCommentReplyNo"));
+    	service.packCommentReplyDelete(map);
+    	String packCommentNo = (String) map.get("packCommentNo");
+    	String packCommentReplyCount = service.packCommentReplyCount(map);
+    	
+    	JSONObject json = new JSONObject();
+    	json.put("packCommentReplyCount", packCommentReplyCount);
+    	json.put("packCommentNo",packCommentNo );
+    	System.out.println("**********************************************");
+    	System.out.println(packCommentNo);
+    	System.out.println(packCommentReplyCount);
+    	return json.toJSONString();
+    }
+    
+    @RequestMapping(value="comment/like.do")
+    @ResponseBody
+    public String packCommentLike(@RequestParam Map map,HttpSession session) {
+    	String userId = (String) session.getAttribute("userId");
+    	System.out.println("세션에 저장되어있는 유저 아이디:"+userId);
+    	System.out.println("packCommentNo:"+map.get("packCommentNo"));
+    	map.put("userId", userId);
+    	String isLike = service.packCommentLike(map);
+    	String likeCount = service.packCommentLikeCount(map);
+    	System.out.println("");
+    	JSONObject json = new JSONObject();
+    	System.out.println("좋아요 총 갯수:"+likeCount);
+    	json.put("result",isLike);
+    	json.put("likeCount", likeCount);
+    	
+    	
+    	return json.toJSONString();
+    }
+    
+    @RequestMapping(value="comment/replyMore.do",produces = "text/html; charset=UTF-8")
+    @ResponseBody
+    public String packCommentReplyMore(@RequestParam Map map) {
+    	System.out.println("팩 댓글 더보기 ");
+    	System.out.println(map.get("packCommentNo"));
+    	
+    	JSONObject json = new JSONObject();
+    	List<Map> replyMap = service.replyMore(map);
+    	JSONArray jsonArray = new JSONArray();
+    	jsonArray.add(replyMap);
+    	System.out.println(jsonArray.toString());
+    	
+    	return jsonArray.toJSONString();
+    }
     
 }
 

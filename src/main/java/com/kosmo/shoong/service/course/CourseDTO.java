@@ -6,19 +6,31 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/*
+ COURSE_ID                                 NOT NULL NVARCHAR2(50)
+ COURSE_CATE_ID                            NOT NULL NVARCHAR2(10)
+ USER_ID                                   NOT NULL VARCHAR2(30)
+ COURSE_NAME                                        NVARCHAR2(50)
+ COURSE_INTRO                                       NVARCHAR2(500)
+ COURSE_TIME                                        NVARCHAR2(10)
+ COURSE_LENGTH                                      NVARCHAR2(50)
+ COURSE_DATE                                        DATE
+ COURSE_TAG                                         NVARCHAR2(50)
+ COURSE_REGION                                      NVARCHAR2(50) 
+ */
 @Setter
 @Getter
 @ToString
 public class CourseDTO {
+
 	private String courseID;
 	private String courseName;
 	private String courseIntro;
-	private String courseThumbnail;
 	private String courseTime;
 	private String courseLength;
-	private String courseRegion;
-	private String courseTag;
 	private Date courseRegiDate;
+	private String courseTag;
+	private String courseRegion;
 	
 	private String userId;
 	private String courseCateID;

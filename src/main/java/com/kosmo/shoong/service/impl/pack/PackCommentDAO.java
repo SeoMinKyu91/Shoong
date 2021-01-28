@@ -48,6 +48,7 @@ public class PackCommentDAO implements PackCommentService {
 		List<PackCommentDTO> list = sqlMapper.selectList("packCommentSelectList",map);
 		for(PackCommentDTO dto : list) {
 			String packCommentNo = dto.getPackCommentNo();
+			map.put("packCommentNo", packCommentNo);
 			List<String> packCommentImg = sqlMapper.selectList("packCommentImageList",packCommentNo);
 			if(packCommentImg != null) {
 				dto.setPackCommentImages(packCommentImg);
@@ -56,7 +57,7 @@ public class PackCommentDAO implements PackCommentService {
 			if(packCommentReply != null) {
 				dto.setPackCommentReply(packCommentReply);
 			}
-			
+			dto.setPackCommentLike(sqlMapper.selectOne("packCommentLike",map));
 			
 		}
 		
@@ -113,6 +114,47 @@ public class PackCommentDAO implements PackCommentService {
 	public int packCommentImgUpdate(Map map) {
 
 		return sqlMapper.insert("packCommentImgUpdate",map);
+	}
+
+	public int packCommentReplyInsert(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.insert("packCommentReplyInsert",map);
+	}
+
+	public Map packCommentReplySelectOne(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("packCommentReplySelectOne",map);
+	}
+
+	public int packCommentReplyDelete(Map map) {
+
+		return sqlMapper.delete("packCommentReplyDelete",map);
+	}
+
+	public String packCommentLike(Map map) {
+		
+		String isLike = sqlMapper.selectOne("packCommentLike",map);
+		if(isLike.equals("1")) {
+			sqlMapper.delete("packCommentLikeDelete",map);
+			return "disLike";
+		}
+		else {
+			sqlMapper.insert("packCommentLikeInsert",map);
+			return "like";
+		}
+	}
+
+	public String packCommentLikeCount(Map map) {
+		return sqlMapper.selectOne("packCommentLikeCount",map);
+	}
+
+	public String packCommentReplyCount(Map map) {
+		return sqlMapper.selectOne("packCommentReplyCount",map);
+	}
+
+	public List<Map> replyMore(Map map) {
+		
+		return sqlMapper.selectList("packCommentReplyMore",map);
 	}
 	
 	

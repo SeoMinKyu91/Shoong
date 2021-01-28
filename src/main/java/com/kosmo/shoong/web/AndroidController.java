@@ -22,8 +22,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.kosmo.shoong.service.course.CourseService;
 import com.kosmo.shoong.service.impl.member.MemberServiceImpl;
 import com.kosmo.shoong.service.member.MemberDTO;
+import com.kosmo.shoong.service.record.RecordDTO;
 
 
 //안드로이드 컨트롤러
@@ -33,6 +35,9 @@ public class AndroidController {
 	
 	@Resource(name = "memberService")
 	private MemberServiceImpl memberservice;
+	
+	@Resource(name="courseService")
+	private CourseService service;
 	
 	/**/
 	//안드 로그인
@@ -74,34 +79,7 @@ public class AndroidController {
 		return "톰캣 서버로 들어왔었다";
 	}
 	*/
-	@CrossOrigin
-	@PostMapping(value="/course/upload/json",produces="text/plain;charset=UTF-8")
-	public String courseUpload(
-			@RequestPart MultipartFile files,HttpServletRequest req) throws IOException {
-		//파일 받아옴
-		String path = req.getSession().getServletContext().getRealPath("/upload");
-		File file = new File(path+File.separator+files.getOriginalFilename());
-		System.out.println("file size:"+file.length());
-		System.out.println("file name:"+file.getName());
-		files.transferTo(file);
-		//파일 읽기
-		BufferedReader br = new BufferedReader(
-				new InputStreamReader(new FileInputStream(file)));
-		StringBuffer sb = new StringBuffer();
-
-		int data = -1;
-		char[] chars = new char[1024];
-
-		while((data=br.read(chars))!=-1) {
-			sb.append(chars,0,data);
-		}
-		//제이슨 파싱
-		Gson gson = new Gson();
-		JsonParser parser = new JsonParser();
-		JsonElement resultJson = parser.parse(sb.toString());
-		System.out.println("파싱:"+resultJson.toString());
-		return "업로드 성공";
-	}
+	
 	//안드 경로 전송
 	//안드 경로 저장
 }
