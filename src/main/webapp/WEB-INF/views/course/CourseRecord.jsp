@@ -406,12 +406,13 @@ ul li label{
 		<div class="col-xs-10 offset-xs-1 col-md-7" id="graph"></div>
 	</div>
 	<!-- 높이 그래프 끝 -->
+	<!-- 관광정보 뿌리기 -->
 	<!-- 코스 등록 모달창 시작 -->
 	<div class="modal fade" id="noticeWrite" data-backdrop="false">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title"style="margin: 5px;">공지사항 등록</h4>
+					<h4 class="modal-title"style="margin: 5px;">코스 등록</h4>
 				</div>
 				<div class="modal-body">
 					<form action="" class="bg-light p-5 contact-form" id="packNoticeForm">
@@ -429,10 +430,10 @@ ul li label{
 							<input type="text" class="form-control" name="courseTime"
 								id="courseTime">
 						</div>
-						<label for="courseTime" style="float: left;">코스 길이</label>
+						<label for="courseLength" style="float: left;">코스 길이</label>
 						<div class="form-group">
-							<input type="text" class="form-control" name="courseTime"
-								id="courseTime">
+							<input type="text" class="form-control" name="courseLength"
+								id="courseLength">
 						</div>
 						<label for="courseIntro" style="float: left;">코스 소개 내용</label>
 						<div class="form-group">
