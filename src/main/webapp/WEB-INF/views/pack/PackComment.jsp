@@ -13,7 +13,7 @@
 
 <!-- 모달 -->
 <link rel="stylesheet" href="<c:url value="/css/comment.css?f"/>">
-<script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
+
 
 <style>
 	.feed-bottom-icon img{
@@ -82,11 +82,16 @@
 	.replyMore:hover{
 		border-bottom: 1px solid black;
 	}
-
+	
+	
+	
+	
+	
 	
 </style>
 
 <div id="colorlib-main">
+	
 	
 	<div class="row" style="margin-left: 20px; margin-bottom: 2px;">
 			
@@ -667,6 +672,8 @@
 			});
 			
 		});
+		
+		
 		
 	});
 </script>
