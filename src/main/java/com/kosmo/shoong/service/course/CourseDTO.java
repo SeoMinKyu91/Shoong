@@ -33,5 +33,5 @@ public class CourseDTO {
 	private String courseRegion;
 	
 	private String userId;
-	private String courseCateID;
+	private String courseCateId;
 }

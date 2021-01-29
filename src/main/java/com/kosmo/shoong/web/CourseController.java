@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -60,7 +61,7 @@ public class CourseController {
 	 */
 	@RequestMapping("/navi.do")
 	public String courseNavi(
-			@ModelAttribute(value="userId")  String userId,Model model) {
+			@ModelAttribute(value="userId") String userId,Model model) {
 		System.out.println("courseNavi:"+userId);
 		List<RecordDTO> rList = rService.selectListById(userId);
 		
@@ -132,10 +133,18 @@ public class CourseController {
 	}
 	
 	//코스 등록용
-	@PostMapping(value="")
-	public String insertCourse(Map map) {
-		
-		return "";
+	@RequestMapping(value="/insert.do")
+	public String insertCourse(
+			@RequestParam Map map,@ModelAttribute(value="userId") String userId) {
+		map.put("userId", userId);
+		Set<String> keys = map.keySet();
+		for(String key:keys) System.out.println(key+":"+map.get(key).toString());
+		String courseLength = map.get("courseLength").toString();
+		//courseLength = courseLength.substring(0, courseLength.length()-2);
+		//System.out.println(Double.valueOf(courseLength.substring(0, courseLength.length()-2)));
+		boolean flag = cService.insert(map);
+		System.out.println(flag?"코스 입력 성공":"코스 입력 실패");
+		return "forward:/mypage/main.do";
 	}
 	
 	@RequestMapping("/mainTest.do")
