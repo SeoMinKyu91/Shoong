@@ -25,6 +25,13 @@ public class MemberAdminServiceImpl implements MemberAdminService {
 		// TODO Auto-generated method stub
 		return dao.memberSearch(map);
 	}
+
+	@Override
+	public int deleteMember(Map map) {
+		// TODO Auto-generated method stub
+		System.out.println("임플안");
+		return dao.deleteMember(map);
+	}
 	
 	
 }

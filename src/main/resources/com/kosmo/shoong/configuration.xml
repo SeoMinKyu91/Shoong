@@ -27,6 +27,8 @@ myBatis 환경설정파일
 			type="com.kosmo.shoong.service.pack.PackCommentReplyDTO" />
 		<typeAlias alias="courseDTO"
 			type="com.kosmo.shoong.service.course.CourseDTO" />
+		<typeAlias alias="recordDTO" 
+			type="com.kosmo.shoong.service.record.RecordDTO"/>
 		<typeAlias alias="memberDTO"
 			type="com.kosmo.shoong.service.member.MemberDTO" />
 		<typeAlias alias="reportAdminDTO" 
@@ -43,10 +45,12 @@ myBatis 환경설정파일
 		<mapper	resource="com/kosmo/shoong/pack/mybatis/packschedulesql.xml" />
 		<mapper resource="com/kosmo/shoong/pack/mybatis/packcommentsql.xml"/>
 		<mapper	resource="com/kosmo/shoong/course/mybatis/coursesql.xml" />
+		<mapper	resource="com/kosmo/shoong/record/mybatis/recordsql.xml"/>
 		<mapper	resource="com/kosmo/shoong/member/mybatis/membersql.xml"/>
 		<mapper	resource="com/kosmo/shoong/mypage/mybatis/mypage.xml" />
 		<mapper	resource="com/kosmo/shoong/mypage/mybatis/mypageDiary.xml"/>
 		<mapper	resource="com/kosmo/shoong/mypage/mybatis/mypageRecord.xml"/>
+		
 		<!-- 관리자 페이지 매퍼파일-->
 		<mapper	resource="com/kosmo/shoong/admin/mybatis/courseAdminsql.xml"/>
 		<mapper	resource="com/kosmo/shoong/admin/mybatis/homeAdminsql.xml"/>

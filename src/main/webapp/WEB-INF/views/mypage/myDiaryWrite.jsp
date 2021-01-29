@@ -14,8 +14,8 @@
 	 display: inline-block;    
      position: relative
 }.img{
-   	width: 90px;
-    height:90px;
+   	width: 180px;
+    height:180px;
 }.imgdeletemark{
     display: none;   
 	text-align: center;
@@ -56,7 +56,6 @@
 	margin-bottom: 20px;
 }.diaryInfo .diaryTitle{
 	width: 100%;
-	
 }.diaryInfo .diaryContent{
 	height: 200px;
 	width: 100%;
@@ -146,14 +145,14 @@
             $(this).css('border', '2px dotted #0B85A1');
             e.preventDefault();
             var files = e.originalEvent.dataTransfer.files;
-            if (files.length > 3) {
-                alert('이미지는 3개까지 올릴 수 있습니다.');
+            if (files.length >= 5) {
+                alert('이미지는 5개까지 올릴 수 있습니다.');
                 return;
             }
             var size =$("#imgArry").val().split(",").length+files.length;
             console.log(size)   
-            if(size > 3){
-                alert('이미지는 3개까지 올릴 수 있습니다.');
+            if(size >= 5){
+                alert('이미지는 5개까지 올릴 수 있습니다.');
                  return;
             }    
 

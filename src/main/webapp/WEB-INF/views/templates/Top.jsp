@@ -3,9 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
 <!-- 선택페이지 class="colorlib-active" 추가해주는 스크립트 만들기 -->
+<style>
+	.box{ -ms-overflow-style: none; } 
+	.box::-webkit-scrollbar{ display:none; }
+</style>
 
 <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
-<aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
+<aside id="colorlib-aside" role="complementary" class="js-fullheight text-center box">
 	<a href="<c:url value="/"/>" id="colorlib-logo"><img alt="shoongLogo" src="<c:url value="/images/shooongLogo.png"/>" style="width:100px"></a>
 	<nav id="colorlib-main-menu" role="navigation">
 		<ul>
@@ -17,7 +21,7 @@
 				<li><a href="<c:url value="/Member/Logout.do"/>">LOGOUT</a></li>
 				<li><a href="<c:url value="/mypage/main.do"/>">MY PAGE</a></li>
 				<li><a href="<c:url value="/pack/main.do"/>">PACK</a></li>
-				<li><a href="<c:url value="/course/main.do"/>">COURSE</a></li>
+				<li><a href="<c:url value="/course/mainTest.do"/>">COURSE</a></li>
 			</c:if>
 			<c:if test="${empty sessionScope.userId}" var="isNotLogin">
 				<li><a href="<c:url value="/Member/Join.do"/>">JOIN</a></li>
@@ -25,11 +29,11 @@
 			<c:if test="${!isNotLogin}"></c:if>
 			<c:if test="${sessionScope.userId == 'guest'}" var="isNotId">
 				<li><span style="font-size: .8em">${sessionScope.userId}님 어서오세요</span></li>
-				<li><a href="<c:url value="/course/main.do"/>">COURSE</a></li>
+				<li><a href="<c:url value="/course/mainTest.do"/>">COURSE</a></li>
 			</c:if>
 			<c:if test="${!isNotId}">
 			</c:if>
-			<li><a href="<c:url value="/course/navi.do"/>">NAVI</a></li>
+			<li><a href="<c:url value="/course/navi.do"/>">Course&Record</a></li>
 			<li><a id="naviModalBtn" href="#">ROUTE UPLOAD</a></li>
 			<li><a href="<c:url value="/admin/home/main.do"/>">관리자페이지</a></li>
 		</ul>

@@ -5,15 +5,94 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 <style>
 	.cus {
-		border-top: 2px solid black;
-		border-bottom: 2px solid black;
+		border-top: 1px solid white;
+		border-bottom: 1px solid white;
 	}
 	.cus th {
-		border-bottom: 2px solid black;
+		border-top: 1px solid white;
+		border-bottom: 1px solid white;
+		background-color : #ff8827;
+		color:white;
+		font-size:1em;
+	}
+	.cus td {
+		cursor: pointer;
 	}
 	
+	.packCreateBtn {
+		color:#ff8827;
+		background-color: white;
+		font-weight: bold;
+		border: none;
+	}
+	.packCreateBtn:hover {
+		color:white;
+		background-color: #ff8827;
+	}
+	.submitBtn {
+		color:white;
+		background-color: #ff8827;
+		font-weight: bold;
+		border: none;
+	}
+	.closeBtn{
+		color:white;
+		background-color: #ff8827;
+		font-weight: bold;
+		border: none;
+	}
+	.insertBtn{
+		color:white;
+		background-color: #ff8827;
+		font-weight: bold;
+		border: none;
+	}
+	#packNoticeForm{
+		background-color: white;
+		border : #ff8827 1px solid;
+		border-radius: 10px;
+	}
 	
-
+	#packNoticeEditForm{
+		background-color: white;
+		border : #ff8827 1px solid;
+		border-radius: 10px;
+	}
+	.deleteBtn{
+		color:white;
+		background-color: #ff8827;
+		font-weight: bold;
+		border: none;
+	}
+	.editBtn{
+		color:white;
+		background-color: #ff8827;
+		font-weight: bold;
+		border: none;
+	}
+	.viewBtn{
+		color:white;
+		background-color: #ff8827;
+		font-weight: bold;
+		border: none;
+	}
+	.modal {
+	  text-align:center;
+      position: fixed;
+      left:25%
+    }
+    @media screen and (min-width: 768px) {
+      .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+      }
+    }
+    .modal-dialog {
+      display: inline-block;
+      vertical-align: middle;
+    }
 </style>
 
 
@@ -27,13 +106,13 @@
 
 			<div class="modal-body">
 				<form action="" class="bg-light p-5 contact-form" id="packNoticeForm">
-					<label for="packNoticeTitle">글 제목</label>
+					<label for="packNoticeTitle" style="float: left;">글 제목</label>
 					<div class="form-group">
 						<input type="text" class="form-control" name="packNoticeTitle"
 							id="packNoticeTitle">
 					</div>
 
-					<label for="packNoticeContent">공지사항 내용</label>
+					<label for="packNoticeContent" style="float: left;">공지사항 내용</label>
 					<div class="form-group">
 						<textarea cols="30" rows="7" class="form-control"  name="packNoticeContent" id="packNoticeContent"></textarea>
 					</div>
@@ -41,8 +120,8 @@
 			</div>
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-info" data-dismiss="modal" id="btnWriteOk">등록</button>
-				<button type="button" class="btn btn-info" data-dismiss="modal" id="btnNoticeWriteClose">닫기</button>
+				<button type="button" class="insertBtn btn" data-dismiss="modal" id="btnWriteOk">등록</button>
+				<button type="button" class="insertBtn btn" data-dismiss="modal" id="btnNoticeWriteClose">닫기</button>
 			</div>
 		</div>
 	</div>
@@ -59,13 +138,13 @@
 
 			<div class="modal-body">
 				<form action="" class="bg-light p-5 contact-form" id="packNoticeEditForm">
-					<label for="packNoticeTitle">글 제목</label>
+					<label for="packNoticeTitle" style="float: left;">글 제목</label>
 					<div class="form-group">
 						<input type="text" class="form-control" name="packNoticeTitle"
 							id="packNoticeEditTitle" value="">
 					</div>
 
-					<label for="packNoticeContent">공지사항 내용</label>
+					<label for="packNoticeContent" style="float: left;">공지사항 내용</label>
 					<div class="form-group">
 						<textarea cols="30" rows="7" class="form-control" id="packNoticeEditContent" name="packNoticeContent" value=""></textarea>
 					</div>
@@ -81,8 +160,8 @@
 			</div>
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-info" data-dismiss="modal" id="btnNoticeEditOk">수정</button>
-				<button type="button" class="btn btn-info" data-dismiss="modal" id="btnNoticeEditClose">닫기</button>
+				<button type="button" class="editBtn btn" data-dismiss="modal" id="btnNoticeEditOk">수정</button>
+				<button type="button" class="editBtn btn" data-dismiss="modal" id="btnNoticeEditClose">닫기</button>
 				
 			</div>
 		</div>
@@ -97,9 +176,8 @@
 			<div class="modal-header">
 				<h4 class="modal-title">공지사항 삭제</h4>
 			</div>
-
 			<div class="modal-body">
-				<h3 class="text-center">정말로 삭제하시겠습니까?</h3>	
+				<h4 class="text-center">정말로 삭제하시겠습니까?</h4>	
 				<form action="" class="bg-light p-5 contact-form" id="packNoticeDeleteForm" style="display: none;">
 					<div class="form-group">
 						<input type="hidden" class="form-control" name="packNoticeNo" id="packNoticeDeleteNo" value="">
@@ -108,8 +186,8 @@
 			</div>
 			
 			<div class="modal-footer">
-				<button type="button" class="btn btn-info" data-dismiss="modal" id="btnNoticeDeleteOk">삭제</button>
-				<button type="button" class="btn btn-info" data-dismiss="modal" id="btnNoticeDeleteClose">닫기</button>
+				<button type="button" class="deleteBtn btn" data-dismiss="modal" id="btnNoticeDeleteOk">삭제</button>
+				<button type="button" class="deleteBtn btn" data-dismiss="modal" id="btnNoticeDeleteClose">닫기</button>
 				
 			</div>
 		</div>
@@ -146,29 +224,48 @@
 
 			<div class="modal-footer">
 				<c:if test="${!empty manager }">
-					<button class="btn btn-warning" data-toggle="modal" id="btnNoticeEdit">수정</button>
-					<button class="btn btn-warning" data-toggle="modal" id="btnNoticeDelete">삭제</button>
+					<button class="viewBtn btn" data-toggle="modal" id="btnNoticeEdit">수정</button>
+					<button class="viewBtn btn" data-toggle="modal" id="btnNoticeDelete">삭제</button>
 					
 				</c:if>
 			
-				<button type="button" class="btn btn-info" data-dismiss="modal" id="btnNoticeViewClose">닫기</button>
+				<button type="button" class="closeBtn btn" data-dismiss="modal" id="btnNoticeViewClose">닫기</button>
 			</div>
 		</div>
 	</div>
 </div>
 <!-- 팩 공지사항 상세보기 모달창 끝 -->
 
-<div id="colorlib-main">
+<div id="colorlib-main" style="padding:20px">
+	<div class="row">
+		<div class="col-lg-12" style="padding-bottom:20px">
+			<div class="">
+				<a href="<c:url value="/pack/main.do"/>">
+				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
+					style="width: 80px;"></a>
+				&emsp;<a class="packCreateBtn btn" 
+					href="<c:url value="/pack/main.do"/>">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="packCreateBtn btn"
+						href="<c:url value="/pack/view.do"/>">MY PACK</a>
+				</c:if>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-12 col-lg-12">
+			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em;text-align: center">전국일주</p>
+			<hr style="background-color: black;height:1px"/>
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="section-tittle text-center mb-80 col-lg-12" >
-				<h1 style="margin-top: 30px;"> Shoong <small>공지사항</small></h1>
+			<div class="section-tittle text-center col-lg-12" >
+				<p style="font-size:1.6em;padding-bottom:10px;padding:20px;">&lt;&nbsp;공지사항&nbsp;&gt;</p>
 			</div>
 				
 		</div>
 	</div>
-	<hr>
-	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -202,7 +299,7 @@
 		<c:if test="${!empty manager }">
 			<div class="row">
 				<div class="col-lg-12 text-right">
-					<button class="btn btn-warning" data-toggle="modal" id="btnNoticeWrite">등록</button>
+					<button class="submitBtn btn" data-toggle="modal" id="btnNoticeWrite">등록</button>
 
 				</div>
 			</div>

@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.gson.JsonObject;
 import com.kosmo.shoong.common.FileUpDownUtils;
 import com.kosmo.shoong.service.impl.pack.PackCommentServiceImpl;
 import com.kosmo.shoong.service.pack.PackCommentDTO;
@@ -75,6 +77,7 @@ public class PackCommentController {
 				System.out.println("!!!!!!!!!사진 이름!!!!!!!");
 				System.out.println(image);
 			}
+			System.out.println(dto.getPackCommentLike());
 			
 		}
 		
@@ -82,6 +85,60 @@ public class PackCommentController {
 		
 		return "pack/PackComment";
 	}///////////
+	
+	@RequestMapping("myComment.do")
+	public String myComment(@RequestParam Map map,Model model, HttpServletRequest req) {
+		System.out.println("Mycomment.do");
+		
+		String userId = "";
+		String packId = "";
+		
+		HttpSession session = req.getSession();
+		if(session.getAttribute("userId") != null && session.getAttribute("packId") != null) {
+			userId = (String) session.getAttribute("userId");
+			packId = (String) session.getAttribute("packId");
+		}
+		map.put("userId", userId);
+		map.put("packId", packId);
+		
+		
+		
+		List<PackCommentDTO> myCommentList = service.myCommentList(map);
+		model.addAttribute("commentList",myCommentList);
+		
+		return "pack/PackMyComment";
+	}/////////
+	
+	@RequestMapping("comment/view.do")
+	public String packCommentView(@RequestParam Map map, Model model,HttpSession session) {		
+		System.out.println("commentView페이지 commentNo:"+map.get("packCommentNo"));
+		
+		map.put("packId", session.getAttribute("packId"));
+		map.put("userId", session.getAttribute("userId"));
+		
+		
+		
+		PackCommentDTO dto = service.packCommentView(map);
+		System.out.println("view페이지 글내용"+dto.getPackCommentContent());
+		System.out.println("view페이지 글쓴놈"+dto.getPackCommentWriter());
+		System.out.println("view페이지 좋아요 수:"+dto.getPackCommentLikeCount());
+		System.out.println("view페이지 댓글 수:"+dto.getPackCommentReplyCount());
+		
+		if(dto.getPackCommentReply() !=null) {
+			List<PackCommentReplyDTO> rpdto = dto.getPackCommentReply();
+			for(PackCommentReplyDTO r1 : rpdto) {
+				System.out.println("댓글내용:"+r1.getPackCommentReplyContent());
+				System.out.println("댓글단놈:"+r1.getPackCommentReplyWriter());
+			}
+		}
+		
+		model.addAttribute("packCommentView",dto);
+		
+		
+		return "pack/PackCommentView";
+	}
+	
+	
 	
 	@RequestMapping(value= "comment/write.do", produces = "text/html; charset=UTF-8")
 	public String commentWrite(@RequestParam Map map,Model model,HttpServletRequest req) {
@@ -115,10 +172,9 @@ public class PackCommentController {
 	
 	@RequestMapping(value = "comment/fileUpload/post",produces = "text/html; charset=UTF-8") //ajax에서 호출하는 부분
     @ResponseBody
-    public String upload(MultipartHttpServletRequest multipartRequest)  throws IllegalStateException, IOException { //Multipart로 받는다.
-      
-        
-       //1]서버의 물리적 경로 얻기		
+    public String upload(MultipartHttpServletRequest multipartRequest ,@RequestParam Map map)  throws IllegalStateException, IOException { //Multipart로 받는다.
+        System.out.println("verify:"+map.get("verify"));
+       //1]서버의 물리적 경로 얻기
 	   String filePath=multipartRequest.getServletContext().getRealPath("/upload");
        Iterator<String> itr =  multipartRequest.getFileNames();
         
@@ -151,6 +207,7 @@ public class PackCommentController {
 		
       
 		obj.put("fileName", renameFilename);
+		obj.put("verify", map.get("verify"));
 				
         
         return obj.toJSONString();
@@ -165,4 +222,138 @@ public class PackCommentController {
     	System.out.println((String)map.get("filename"));
 		return "삭제된 파일이름은 : "+(String)map.get("filename");
 	}
+    
+    @RequestMapping(value="comment/selectOne.do", produces = "text/html; charset=UTF-8")
+    @ResponseBody
+    public String packCommentSelectOne(@RequestParam Map map) {
+    	System.out.println("selectOne.do");
+    	System.out.println(map.get("packCommentNo"));
+    	
+    	Map commentMap = service.packCommentSelectOne(map);
+    	
+    	
+    	System.out.println(commentMap.get("PACK_COMMENT_CONTENT"));
+    	JSONObject json = new JSONObject(commentMap);
+    	
+    	
+    	
+    	return json.toJSONString();
+    }
+    
+    @RequestMapping("comment/update.do")
+    public String packCommentUpdate(@RequestParam Map map, Model model,HttpSession session) {
+    	System.out.println("packCommentUpdate.do");
+    	System.out.println(map.get("packCommentUpdate"));
+    	System.out.println(map.get("packCommentNo"));
+    	System.out.println(map.get("packCommentContent"));
+    	
+    	service.packCommentUpdate(map);
+    	service.packCommentImgDelete(map);
+    	//이미지 등록
+		String[] imgArray = map.get("imgArray").toString().split(",");
+		for(String imgName : imgArray) {
+			System.out.println("이미지 이름:"+imgName);
+			Map imgMap = new HashMap();
+			imgMap.put("packCommentImgName", imgName);
+			imgMap.put("packCommentNo",map.get("packCommentNo"));
+			service.packCommentImgUpdate(imgMap);
+			
+		}
+    	
+    	
+    	
+    	model.addAttribute("packCommentNo",map.get("packCommentNo"));
+    	
+    	return "forward:/pack/comment/view.do";
+    }
+    
+    @RequestMapping("comment/delete.do")
+    public String packCommentDelete(@RequestParam Map map, Model model) {
+    	System.out.println("피드 삭제 들어옴");
+    	System.out.println(map.get("packCommentNo"));
+    	service.packCommentDelte(map);
+    	
+    	
+    	return "forward:/pack/myComment.do";
+    }
+    
+    @RequestMapping(value="comment/reply/write",produces = "text/html; charset=UTF-8")
+    @ResponseBody
+    public String packCommentReplyWrite(@RequestParam Map map, Model model,HttpSession session) {
+    	System.out.println("댓글등록 controller들어옴");
+    	System.out.println("글번호:"+map.get("packCommentNo"));
+    	System.out.println("댓글 내용:"+map.get("replyContent"));
+    	map.put("userId", session.getAttribute("userId"));
+    	service.packCommentReplyInsert(map);
+    	Map replySelectOne  = service.packCommentReplySelectOne(map);
+    	System.out.println("===================================================================");
+    	System.out.println(replySelectOne.get("NAME"));
+    	replySelectOne.put("PACK_COMMENT_REPLY_DATE", replySelectOne.get("PACK_COMMENT_REPLY_DATE").toString());
+    	JSONObject json = new JSONObject(replySelectOne);
+    	
+    	return json.toJSONString();
+    }
+    
+    @RequestMapping(value="comment/reply/delete",produces = "text/html; charset=UTF-8")
+    @ResponseBody
+    public String packCommentReplyDelete(@RequestParam Map map) {
+    	
+    	System.out.println("=========================================");
+    	System.out.println("글번호:"+map.get("packCommentNo"));
+    	System.out.println("댓글번호:"+map.get("packCommentReplyNo"));
+    	service.packCommentReplyDelete(map);
+    	String packCommentNo = (String) map.get("packCommentNo");
+    	String packCommentReplyCount = service.packCommentReplyCount(map);
+    	
+    	JSONObject json = new JSONObject();
+    	json.put("packCommentReplyCount", packCommentReplyCount);
+    	json.put("packCommentNo",packCommentNo );
+    	System.out.println("**********************************************");
+    	System.out.println(packCommentNo);
+    	System.out.println(packCommentReplyCount);
+    	return json.toJSONString();
+    }
+    
+    @RequestMapping(value="comment/like.do")
+    @ResponseBody
+    public String packCommentLike(@RequestParam Map map,HttpSession session) {
+    	String userId = (String) session.getAttribute("userId");
+    	System.out.println("세션에 저장되어있는 유저 아이디:"+userId);
+    	System.out.println("packCommentNo:"+map.get("packCommentNo"));
+    	map.put("userId", userId);
+    	String isLike = service.packCommentLike(map);
+    	String likeCount = service.packCommentLikeCount(map);
+    	System.out.println("");
+    	JSONObject json = new JSONObject();
+    	System.out.println("좋아요 총 갯수:"+likeCount);
+    	json.put("result",isLike);
+    	json.put("likeCount", likeCount);
+    	
+    	
+    	return json.toJSONString();
+    }
+    
+    @RequestMapping(value="comment/replyMore.do",produces = "text/html; charset=UTF-8")
+    @ResponseBody
+    public String packCommentReplyMore(@RequestParam Map map) {
+    	System.out.println("팩 댓글 더보기 ");
+    	System.out.println(map.get("packCommentNo"));
+    	
+    	JSONObject json = new JSONObject();
+    	List<Map> replyMap = service.replyMore(map);
+    	JSONArray jsonArray = new JSONArray();
+    	jsonArray.add(replyMap);
+    	System.out.println(jsonArray.toString());
+    	
+    	return jsonArray.toJSONString();
+    }
+    
 }
+
+
+
+
+
+
+
+
