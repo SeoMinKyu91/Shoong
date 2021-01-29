@@ -222,6 +222,7 @@ ul li label{
 }
 </style>
 <div id="colorlib-main" style="padding:20px">
+	<!-- 본문 탭 시작 -->
 	<div class="row" style="padding-top: 50px; padding-left: 10px">
 		<div class="col-xs-10 offset-xs-1 col-md-7" id="map"></div>
 		<div class="col-xs-10 offset-xs-1 col-md-5" role="navigation">
@@ -374,6 +375,7 @@ ul li label{
 			</div>
 			
 		</div>
+		<!-- 본문 탭 끝 -->
 		<div class="modal fade" id="naviModal" data-backdrop="false">
 		     <div class="modal-dialog modal-lg" >
 		         <div class="modal-content">
@@ -514,7 +516,7 @@ ul li label{
 			</div>
 		</div>
 	</div>
-	<!-- 기록 공지사항 상세보기 모달창 끝 -->
+	<!-- 기록 상세보기 모달창 끝 -->
 	</div>
 
 <script>
