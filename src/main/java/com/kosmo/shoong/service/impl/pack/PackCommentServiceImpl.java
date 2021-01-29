@@ -66,5 +66,39 @@ public class PackCommentServiceImpl implements PackCommentService {
 		return dao.packCommentImgUpdate(map);
 	}
 
+	public int packCommentReplyInsert(Map map) {
+
+		return dao.packCommentReplyInsert(map);
+	}
+
+	public Map packCommentReplySelectOne(Map map) {
+
+		return dao.packCommentReplySelectOne(map);
+	}
+
+	public int packCommentReplyDelete(Map map) {
+
+		
+		return dao.packCommentReplyDelete(map);
+	}
+
+	public String packCommentLike(Map map) {
+
+		return dao.packCommentLike(map);
+	}
+
+	public String packCommentLikeCount(Map map) {
+		return dao.packCommentLikeCount(map);
+	}
+
+	public String packCommentReplyCount(Map map) {
+		return dao.packCommentReplyCount(map);
+	}
+
+	public List<Map> replyMore(Map map) {
+
+		return dao.replyMore(map);
+	}
+
 
 }

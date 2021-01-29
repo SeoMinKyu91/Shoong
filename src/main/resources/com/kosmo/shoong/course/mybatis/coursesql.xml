@@ -5,26 +5,21 @@
   
 <mapper namespace="com.kosmo.shoong.course.mybatis.coursesql">
 	
-<resultMap type="courseDTO" id="courseDTOResult">
-		<!-- 
-		property:자바빈의 속성명
-		column:테이블의 컬럼(조회결과의 컬럼들 의미)
-		 -->
+	<resultMap type="courseDTO" id="courseDTOResult">
 		<result property="courseID" column="COURSE_ID"/>
 		<result property="courseCateID" column="COURSE_CATE_ID"/>
 		<result property="userId" column="USER_ID"/>
 		<result property="courseName" column="COURSE_NAME"/>
 		<result property="courseIntro" column="COURSE_INTRO"/>
-		<result property="courseThumbnail" column="COURSE_THUMBNAIL"/>
 		<result property="courseTime" column="COURSE_TIME"/>
 		<result property="courseLength" column="COURSE_LENGTH"/>
-		<result property="courseDate" column="COURSE_DATE"/>
+		<result property="courseRegiDate" column="COURSE_DATE"/>
 		<result property="courseTag" column="COURSE_TAG"/>
 		<result property="courseRegion" column="COURSE_REGION"/>
-</resultMap>
-
-<select id="courseSelectOne" parameterType="java.util.Map" resultMap="courseDTOResult">
-	select * from course where user_id=#{userId}
-</select>
+	</resultMap>
+	
+	<select id="courseSelectOne" parameterType="java.util.Map" resultMap="courseDTOResult">
+		select * from course where user_id=#{userId}
+	</select>
 	
 </mapper>
