@@ -249,25 +249,27 @@ ul li label{
 						<div class="col-md-12">
 							<table class="table table-hover cus">
 								<tr>
-									<th class="text-center col-lg-2 col-xs-1">번호</th>
-									<th class="text-center col-lg-6 col-xs-6">제목</th>
-									<th class="text-center col-lg-2 col-xs-2">작성자</th>
-									<th class="text-center col-lg-2 col-xs-3">작성일</th>
+									<th class="text-center col-lg-2 col-xs-1">코스명</th>
+									<th class="text-center col-lg-6 col-xs-6">길이</th>
+									<th class="text-center col-lg-2 col-xs-2">시간</th>
+									<th class="text-center col-lg-2 col-xs-3">등록일</th>
 								</tr>
-								<c:if test="${empty list }" var="isEmpty">
+								<c:if test="${empty courseList}" var="isEmpty">
 									<tr class="text-center">
 										<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
 									</tr>
 								</c:if>
 								<c:if test="${!isEmpty}">
-									<c:forEach var="item" items="${list}" varStatus="loop">
+									<c:forEach var="item" items="${courseList}" varStatus="loop">
 										<tr class="text-center">
-											<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
-											<td class="text-left">${item.packNoticeTitle}</td>
-											<td>${item.userName}</td>
-											<td>${item.packNoticeDate}</td>
-											<td style="display: none;">${item.packNoticeContent }</td>
-											<td style="display: none;">${item.packNoticeNo }</td>
+											<td>${item.courseName}</td>
+											<td class="text-left">${item.courseLength}</td>
+											<td>${item.courseTime}</td>
+											<td>${item.courseRegiDate}</td>
+											<td style="display: none;">${item.courseId }</td>
+											<!-- 
+											<td style="display: none;">${item.courseRegion }</td>
+											 -->
 										</tr>
 									</c:forEach>
 								</c:if>	
@@ -322,7 +324,6 @@ ul li label{
 						<div class="row">
 							<div class="col-lg-12 text-right">
 								<button class="submitBtn btn" data-toggle="modal" id="btnNoticeWrite">등록</button>
-			
 							</div>
 						</div>
 					</c:if>
@@ -850,7 +851,7 @@ $(function(){
 	//내 기록 상세보기  속성값 설정 해주기
 	$("#recordList .cus tr").click(function(){
 		$('.viewBtn').show();
-		var userId = "<c:out value='${sessionScope.userId}'/>";
+		var userId = "${sessionScope.userId}";
 		console.log('테이블 a태그 클릭',userId);
 		fileName = $(this).children().eq(0).text();
 		recordLength = $(this).children().eq(1).text();

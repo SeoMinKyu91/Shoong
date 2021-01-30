@@ -23,7 +23,7 @@ import lombok.ToString;
 @ToString
 public class CourseDTO {
 
-	private String courseID;
+	private String courseId;
 	private String courseName;
 	private String courseIntro;
 	private String courseTime;

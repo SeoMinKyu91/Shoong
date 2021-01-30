@@ -48,6 +48,6 @@ public class CourseDAO implements CourseService {
 	
 	@Override
 	public List<CourseDTO> selectList() {
-		return sqlMapper.selectList("courseList");
+		return sqlMapper.selectList("courseSelect");
 	}
 }

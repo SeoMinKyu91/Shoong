@@ -69,7 +69,8 @@ public class CourseController {
 			System.out.println(r.getRecordDate());
 		}
 		model.addAttribute("recordList",rList);
-		//cService.selectList();
+		
+		model.addAttribute("courseList", cService.selectList());
 		
 		return "course/CourseRecord";
 	}
