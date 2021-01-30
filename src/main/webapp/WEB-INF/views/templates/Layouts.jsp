@@ -177,7 +177,7 @@
 		//메시지 btn 클릭시
 		$('.messageImg').click(function(){
 			console.log('메시지 버튼 클릭');
-			var userId = ${sessionScope.userId};
+			var userId = '${sessionScope.userId}';
 			
 			/*
 				1. 팩구성원 정보(프로필사진,이름,총원,hidden타입으로 user_id)
@@ -244,7 +244,7 @@
 			console.log('메시지 나가기 클릭 버튼 클릭');
 			$('.msgTab').css('display','none');
 		})
-	})
+	});
 		
 	</script>
 	
