@@ -20,9 +20,8 @@ public class CourseDAO implements CourseService {
 	private SqlSessionTemplate sqlMapper;
 
 	@Override
-	public int insert(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean insert(Map map) {
+		return sqlMapper.insert("insertCourse", map)==1?true:false;
 	}
 
 	@Override

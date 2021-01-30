@@ -85,6 +85,12 @@ ul li label{
 .modal-dialog {
       display: inline-block;
       vertical-align: middle;
+      overflow-y: initial !important;
+}
+
+.modal-body{
+    height: 100%;
+    overflow-y: auto;
 }
 
 .imgdiv {
@@ -221,6 +227,7 @@ ul li label{
   }
 }
 </style>
+<!-- 본문 시작 -->
 <div id="colorlib-main" style="padding:20px">
 	<!-- 본문 탭 시작 -->
 	<div class="row" style="padding-top: 50px; padding-left: 10px">
@@ -230,9 +237,9 @@ ul li label{
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#courseList">코스 목록</a></li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#routeInfo">루트 정보</a></li>
-				<li class="nav-item">
 					<a class="nav-link" data-toggle="tab" href="#recordList">내 기록</a></li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#spotRestaurant">관광/맛집</a></li>
 			</ul>
 			<div class="tab-content">
 				<!-- 코스 리스트 시작 -->
@@ -277,57 +284,6 @@ ul li label{
 					</c:if>
 				</div>
 				<!-- 코스 리스트 끝 -->
-				<!-- 루트 등록 시작 -->
-				<div class="tab-pane fade" id="routeInfo">
-					<form action="<c:url value=''/>">
-						<ul class="my-box">
-							<li>
-								<label for=" ">작성자</label>&emsp;
-								<input type="text" id="userName" style="border:none" placeholder="작성자" readonly="readonly">
-							</li>
-							<li>
-								<label for=" ">이름</label>&emsp;&emsp;
-								<input type="text" id="courseName" style="border:#aaaaaa solid 1px; height:25px" placeholder="경로이름">
-							</li>
-							<li>
-								<label for=" ">공개여부</label>
-								<input type="radio" id="openNclose" name="openNclose"> 
-									<span style="font-weight: normal;">공개</span>&emsp;
-								<input type="radio" id="openNclose" name="openNclose">
-									<span style="font-weight: normal;">비공개</span>
-							</li>
-							<li>
-								<label for=" ">유형</label>&emsp;&emsp;
-								<select
-									name="cycleType" id="cycleType"
-									style="border: #aaaaaa solid 1px; height:23px; font-weight: normal;color:#888888;">
-									<option value="" style="color:#888888;">==선택하세요==</option>
-									<option value="" style="color:#888888;">자전거유형1</option>
-									<option value="" style="color:#888888;">자전거유형2</option>
-									<option value="" style="color:#888888;">자전거유형3</option>
-									<option value="" style="color:#888888;">자전거유형4</option>
-								</select>
-							</li>
-							<li>
-								<label for=" ">등록</label>&emsp;&emsp;
-								<span></span>
-							</li>
-							<li>
-								<label for=" ">거리</label>&emsp;&emsp;
-								<span></span>
-							</li>
-							<li style="padding-bottom: 20px;">
-								<label for=" ">설명</label><br/>
-								<textarea rows="3" style="border:#aaaaaa solid 1px; width: 100%"></textarea>
-							</li>
-							<li>
-								<button type="submit" class="btn btn-block" 
-								style="color:white; background-color: #ff8827; border:#ff8827 solid 1px;float: right;">등록</button>
-							</li>
-						</ul>
-					</form>
-				</div>
-				<!-- 루트 등록 끝 -->
 				<!-- 레코드 리스트 시작 -->
 				<!-- 레코드 중에서 코스로 등록하지 않은 레코드가 보임 -->
 				<div class="tab-pane fade" id="recordList">
@@ -349,7 +305,7 @@ ul li label{
 									<c:forEach var="item" items="${recordList}" varStatus="loop">
 										<tr class="text-center">
 											<td class="text-left">${item.fileName}</td>
-											<td>${item.recordLength}km</td>
+											<td >${item.recordLength}km</td>
 											<td>${item.duration}분</td>
 											<td>
 												<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm" value="${item.recordDate}"/>
@@ -371,7 +327,12 @@ ul li label{
 						</div>
 					</c:if>
 				</div>
-				<!-- 레코드 리스트 끝 -->
+				<!-- 관광정보 뿌리기 시작-->
+				<div class="tab-pane fade" id="spotRestaurant">
+					<div class="row">
+					</div>
+				</div>
+				<!-- 관광정보 뿌리기 끝-->
 			</div>
 			
 		</div>
@@ -408,8 +369,6 @@ ul li label{
 		<div class="col-xs-10 offset-xs-1 col-md-7" id="graph"></div>
 	</div>
 	<!-- 높이 그래프 끝 -->
-	<!-- 관광정보 뿌리기 시작-->
-	<!-- 관광정보 뿌리기 끝-->
 	<!-- 코스 등록 모달창 시작 -->
 	<div class="modal fade" id="noticeEdit" data-backdrop="false">
 		<div class="modal-dialog modal-lg">
@@ -419,6 +378,10 @@ ul li label{
 				</div>
 				<div class="modal-body">
 					<form action="" class="bg-light p-5 contact-form" id="packNoticeForm">
+						<label for="map3" style="float: left;">코스</label><br/>
+						<div class="form-group">
+							<div id="map3" style="height: 300px; width: 550px;"></div>
+						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="courseId"
 								id="courseId" hidden="true" value="">
@@ -430,12 +393,12 @@ ul li label{
 						</div>
 						<label for="courseCate" style="float: left;">코스 카테고리</label>
 						<div class="form-group">
-							<select class="form-control" name="cycleType" id="cycleType" >
-								<option value="" style="color:#888888;">==선택하세요==</option>
-								<option value="" style="color:#888888;">자전거유형1</option>
-								<option value="" style="color:#888888;">자전거유형2</option>
-								<option value="" style="color:#888888;">자전거유형3</option>
-								<option value="" style="color:#888888;">자전거유형4</option>
+							<select class="form-control" name="courseCateId" id="courseCateId" >
+								<option value="0" style="color:#888888;">==선택하세요==</option>
+								<option value="2" style="color:#888888;">감성코스</option>
+								<option value="3" style="color:#888888;">맛집코스</option>
+								<option value="4" style="color:#888888;">숨겨진코스</option>
+								<option value="5" style="color:#888888;">도전코스</option>
 							</select>
 						</div>
 						<label for="courseTime" style="float: left;">소요 예상 시간</label>
@@ -450,8 +413,7 @@ ul li label{
 						</div>
 						<label for="courseIntro" style="float: left;">코스 소개 내용</label>
 						<div class="form-group">
-							<textarea cols="30" rows="7" class="form-control"  name="courseIntro" id="courseIntro">
-							</textarea>
+							<textarea rows="7" class="form-control"  name="courseIntro" id="courseIntro"></textarea>
 						</div>
 					</form>
 				</div>
@@ -463,7 +425,7 @@ ul li label{
 			</div>
 		</div>
 	</div>
-	<!-- 코스 등록 수정 모달창 끝 -->
+	<!-- 코스 등록 모달창 끝 -->
 	
 	<!-- 기록 삭제 모달창 시작 -->
 	<div class="modal fade" id="noticeDelete" data-backdrop = "false">
@@ -517,8 +479,8 @@ ul li label{
 		</div>
 	</div>
 	<!-- 기록 상세보기 모달창 끝 -->
-	</div>
-
+</div>
+<!-- 본문 끝 -->
 <script>
 //날자 계산
 Date.prototype.format = function(f) {
@@ -549,6 +511,9 @@ String.prototype.zf = function(len){return "0".string(len - this.length) + this;
 Number.prototype.zf = function(len){return this.toString().zf(len);};
 
 $(function(){
+	
+	$('head').append('<style type="text/css">.modal .modal-body {max-height: ' + ($('body').height() * .8) + 'px;overflow-y: auto;}.modal-open .modal{overflow-y: hidden !important;}</style>');
+	
 	$.ajax('<c:url value="/courseTest/gpxkml/address.kml"/>').done(function(xml){ 
 	    console.log(toGeoJSON.kml(xml)); 
 	});
@@ -582,8 +547,18 @@ $(function(){
 		zoom : 12
 	});
 	
+	var map3 = new mapboxgl.Map({
+		container : 'map3',
+		style : 'mapbox://styles/mapbox/streets-v11',
+		center : monument,
+		zoom : 12
+	});
+	
 	map2.getCanvas().style.width = '550px';
 	map2.getCanvas().style.marginTop = '20px';
+	
+	map3.getCanvas().style.width = '550px';
+	map3.getCanvas().style.marginTop = '5px';
 	
 	/*
 	//행정구역 별 구분선 추가
@@ -815,34 +790,55 @@ $(function(){
 	}
 	
 	$('#btnNoticeWrite').on('click', function(e) {
-		console.log('버튼 클릭');
+		console.log('btnNoticeWrite 버튼 클릭');
 		$('#noticeWrite').modal('show');
+		$('body').css("overflow", "hidden");
 	})
-	
 
-	$('#btnNoticeWriteClose').on('click', function() {
-		$('#noticeWrite').modal('hide');
-	})
-	
-	
-	$('#btnWriteOk').click(function() {
-		console.log("등록하기 버튼 클릭");
-		if ($('#packNoticeTitle').val() == "") {
-			$('#packNoticeTitle').focus();
-			return;
-		} else if ($('#packNoticeContent').val() == "") {
-			$('#packNoticeContent').focus();
-			return;
+	//내 기록을 코스로 등록 모달 닫기
+	$('#btnNoticeWriteClose').click(function(){
+		$("#packNoticeEditContent").text("");
+		if(map3.getSource('route')) {
+			map3.removeLayer('route');
+			map3.removeSource('route');
 		}
-		//form태그의 action속성 및 method속성 설정
-		$('#packNoticeForm').prop({
-			action : '<c:url value="/pack/notice/write.do"/>',
-			method : 'post'
-		});
-		//폼객체의 submit()함수로 서버로 전송
-		$('#packNoticeForm').submit();
+		
+		$('#noticeWrite').modal('hide');
+		$('body').css("overflow", "scroll");
 	});
 	
+	//내 기록을 코스로 등록 모달 완료
+	$('#btnWriteOk').click(function() {
+		console.log("등록하기 버튼 클릭");
+		if ($('#courseName').val() == "") {
+			$('#courseName').focus();
+			console.log("1");
+			return;
+		} else if ($('#courseCate').val() == "0") {
+			$('#courseCate').focus();
+			console.log("2");
+			return;
+		} else if ($('#courseIntro').val() == "") {
+			$('#courseIntro').focus();
+			console.log("3");
+			return;
+		} 
+		console.log("4");
+		//form태그의 action속성 및 method속성 설정
+		$('#packNoticeForm').prop({
+			action : "<c:url value='/course/insert.do'/>",
+			method : 'POST'
+		});
+		console.log("5");
+		//폼객체의 submit()함수로 서버로 전송
+		$('#packNoticeForm').submit();
+		console.log("6");
+		if(map3.getSource('route')) {
+			map3.removeLayer('route');
+			map3.removeSource('route');
+		}
+		modalContentDelete();
+	});
 	
 	var fileName = "";
 	var recordDate = "";
@@ -851,7 +847,7 @@ $(function(){
 	var recordNo = "";
 	
 	//테이블 클릭시 모달창 띄우기
-	//공지사항 상세보기  속성값 설정 해주기
+	//내 기록 상세보기  속성값 설정 해주기
 	$("#recordList .cus tr").click(function(){
 		$('.viewBtn').show();
 		var userId = "<c:out value='${sessionScope.userId}'/>";
@@ -879,15 +875,61 @@ $(function(){
 		$("#mdPostdate").append("일자 : " + recordDate);
 		$("#mdContent").append(""+recordNo);
 		
+		//루트 가져오기
+		$.ajax({
+			url:"<c:url value='/course/routeLoad'/>",
+			type:"post",
+			dataType:"json",
+			data:{
+				"fileName":fileName
+			},
+			success:function(data){
+				console.log('요청 성공');
+				//console.log('data:%O',data.features[0]);
+				console.log('data:%O',data);
+				//json = data.features[0];
+				json = data;
+				
+				map2.addSource('route', {
+					"type":"geojson",
+					"data":json
+				});
+				map2.addLayer({
+						'id': 'route',
+						'type': 'line',
+						'source': 'route',
+						'layout': {
+							'line-join': 'round',
+							'line-cap': 'round'
+						},
+						'paint': {
+							'line-color': '#ff0000',
+							'line-width': 8
+						}
+				});
+				map2.setCenter(json.geometry.coordinates[0][0]);
+				map2.setZoom(11);
+				
+				var length = turf.length(json, {units: 'kilometers'});
+				console.log('lenght:',length);
+			}
+		});
+		
 		$('#noticeView').modal('show');
+		$('body').css("overflow", "hidden");
 	});
 	
-	//공지사항 상세보기 모달 내용 삭제
+	//내 기록 상세보기 모달 내용 삭제
 	$("#btnNoticeViewClose").click(function(){
 		modalContentDelete();
+		$('body').css("overflow", "scroll");
+		if(map2.getSource('route')) {
+			map2.removeLayer('route');
+			map2.removeSource('route');
+		}
 	});
 	
-	//공지사항 수정 모달
+	//내 기록을 코스로 등록 모달
 	$('#btnNoticeEdit').click(function(){
 		console.log("수정 모달창 들어옴");
 		console.log("팩수정 모달창 packNoticeNo:"+recordNo)
@@ -896,36 +938,51 @@ $(function(){
 		$("#courseLength").attr("value",recordLength);
 		//$("#packNoticeEditTitle").attr("value",title);
 		
+		//지도 띄우기
+		//루트 가져오기
+		$.ajax({
+			url:"<c:url value='/course/routeLoad'/>",
+			type:"post",
+			dataType:"json",
+			data:{
+				"fileName":fileName
+			},
+			success:function(data){
+				console.log('요청 성공');
+				//console.log('data:%O',data.features[0]);
+				console.log('data:%O',data);
+				//json = data.features[0];
+				json = data;
+				
+				map3.addSource('route', {
+					"type":"geojson",
+					"data":json
+				});
+				map3.addLayer({
+						'id': 'route',
+						'type': 'line',
+						'source': 'route',
+						'layout': {
+							'line-join': 'round',
+							'line-cap': 'round'
+						},
+						'paint': {
+							'line-color': '#ff0000',
+							'line-width': 8
+						}
+				});
+				map3.setCenter(json.geometry.coordinates[0][0]);
+				map3.setZoom(11);
+				
+				var length = turf.length(json, {units: 'kilometers'});
+				console.log('lenght:',length);
+			}
+		});
+		
 		$('#noticeView').modal('hide');
 		modalContentDelete();
 		$('#noticeEdit').modal('show');
 	});
-	
-	//공지사항 수정 닫기 모달
-	$('#btnNoticeEditClose').click(function(){
-		$("#packNoticeEditContent").text("");
-	});
-	
-	
-	//공지사항 수정 완료
-	$('#btnNoticeEditOk').click(function() {
-		console.log("수정하기 버튼 클릭");
-		if ($('#packNoticeEditTitle').val() == "") {
-			$('#packNoticeEditTitle').focus();
-			return;
-		} else if ($('#packNoticeEditContent').val() == "") {
-			$('#packNoticeEditContent').focus();
-			return;
-		}
-		//form태그의 action속성 및 method속성 설정
-		$('#packNoticeEditForm').prop({
-			action : '<c:url value="/pack/notice/Edit.do"/>',
-			method : 'post'
-		});
-		//폼객체의 submit()함수로 서버로 전송
-		$('#packNoticeEditForm').submit();
-	});
-	
 	
 	//공지사항 삭제하기
 	$('#btnNoticeDelete').on('click', function(e) {
