@@ -814,8 +814,8 @@ $(function(){
 			$('#courseName').focus();
 			console.log("1");
 			return;
-		} else if ($('#courseCate').val() == "0") {
-			$('#courseCate').focus();
+		} else if ($('#courseCateId').val() == "0") {
+			$('#courseCateId').focus();
 			console.log("2");
 			return;
 		} else if ($('#courseIntro').val() == "") {

@@ -21,7 +21,7 @@ public class CourseDAO implements CourseService {
 
 	@Override
 	public boolean insert(Map map) {
-		return sqlMapper.insert("insertCourse", map)==1?true:false;
+		return sqlMapper.insert("courseInsert", map)==1?true:false;
 	}
 
 	@Override
