@@ -17,9 +17,8 @@ public class CourseServiceImpl implements CourseService{
 	private CourseDAO courseDao;
 
 	@Override
-	public int insert(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean insert(Map map) {
+		return courseDao.insert(map);
 	}
 
 	@Override

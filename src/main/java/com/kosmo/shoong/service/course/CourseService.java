@@ -7,7 +7,7 @@ public interface CourseService {
 
 	CourseDTO selectOne(Map map);
 	
-	int insert(Map map);
+	boolean insert(Map map);
 	int delete(Map map);
 	int update(Map map);
 	

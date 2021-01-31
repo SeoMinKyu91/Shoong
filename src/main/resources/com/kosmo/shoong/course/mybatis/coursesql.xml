@@ -6,8 +6,8 @@
 <mapper namespace="com.kosmo.shoong.course.mybatis.coursesql">
 	
 	<resultMap type="courseDTO" id="courseDTOResult">
-		<result property="courseID" column="COURSE_ID"/>
-		<result property="courseCateID" column="COURSE_CATE_ID"/>
+		<result property="courseId" column="COURSE_ID"/>
+		<result property="courseCateId" column="COURSE_CATE_ID"/>
 		<result property="userId" column="USER_ID"/>
 		<result property="courseName" column="COURSE_NAME"/>
 		<result property="courseIntro" column="COURSE_INTRO"/>
@@ -19,7 +19,16 @@
 	</resultMap>
 	
 	<select id="courseSelectOne" parameterType="java.util.Map" resultMap="courseDTOResult">
-		select * from course where user_id=#{userId}
+		SELECT * FROM course WHERE user_id=#{userId}
 	</select>
+	
+	<select id="courseSelect" resultMap="courseDTOResult">
+		SELECT * FROM course
+	</select>
+	
+	<insert id="courseInsert" parameterType="java.util.Map">
+		INSERT INTO course(COURSE_ID,COURSE_CATE_ID,USER_ID,COURSE_NAME,COURSE_INTRO,COURSE_TIME,COURSE_LENGTH,COURSE_DATE) 
+		VALUES (#{courseId},#{courseCateId},#{userId},#{courseName},#{courseIntro},#{courseTime},#{courseLength},SYSDATE)
+	</insert>
 	
 </mapper>

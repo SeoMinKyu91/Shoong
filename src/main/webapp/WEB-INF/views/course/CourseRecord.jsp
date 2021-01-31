@@ -249,25 +249,27 @@ ul li label{
 						<div class="col-md-12">
 							<table class="table table-hover cus">
 								<tr>
-									<th class="text-center col-lg-2 col-xs-1">번호</th>
-									<th class="text-center col-lg-6 col-xs-6">제목</th>
-									<th class="text-center col-lg-2 col-xs-2">작성자</th>
-									<th class="text-center col-lg-2 col-xs-3">작성일</th>
+									<th class="text-center col-lg-2 col-xs-1">코스명</th>
+									<th class="text-center col-lg-6 col-xs-6">길이</th>
+									<th class="text-center col-lg-2 col-xs-2">시간</th>
+									<th class="text-center col-lg-2 col-xs-3">등록일</th>
 								</tr>
-								<c:if test="${empty list }" var="isEmpty">
+								<c:if test="${empty courseList}" var="isEmpty">
 									<tr class="text-center">
 										<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
 									</tr>
 								</c:if>
 								<c:if test="${!isEmpty}">
-									<c:forEach var="item" items="${list}" varStatus="loop">
+									<c:forEach var="item" items="${courseList}" varStatus="loop">
 										<tr class="text-center">
-											<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
-											<td class="text-left">${item.packNoticeTitle}</td>
-											<td>${item.userName}</td>
-											<td>${item.packNoticeDate}</td>
-											<td style="display: none;">${item.packNoticeContent }</td>
-											<td style="display: none;">${item.packNoticeNo }</td>
+											<td>${item.courseName}</td>
+											<td class="text-left">${item.courseLength}</td>
+											<td>${item.courseTime}</td>
+											<td>${item.courseRegiDate}</td>
+											<td style="display: none;">${item.courseId }</td>
+											<!-- 
+											<td style="display: none;">${item.courseRegion }</td>
+											 -->
 										</tr>
 									</c:forEach>
 								</c:if>	
@@ -305,7 +307,7 @@ ul li label{
 									<c:forEach var="item" items="${recordList}" varStatus="loop">
 										<tr class="text-center">
 											<td class="text-left">${item.fileName}</td>
-											<td>${item.recordLength}km</td>
+											<td >${item.recordLength}km</td>
 											<td>${item.duration}분</td>
 											<td>
 												<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm" value="${item.recordDate}"/>
@@ -322,7 +324,6 @@ ul li label{
 						<div class="row">
 							<div class="col-lg-12 text-right">
 								<button class="submitBtn btn" data-toggle="modal" id="btnNoticeWrite">등록</button>
-			
 							</div>
 						</div>
 					</c:if>
@@ -378,7 +379,7 @@ ul li label{
 				</div>
 				<div class="modal-body">
 					<form action="" class="bg-light p-5 contact-form" id="packNoticeForm">
-						<label for="courseIntro" style="float: left;">코스</label><br/>
+						<label for="map3" style="float: left;">코스</label><br/>
 						<div class="form-group">
 							<div id="map3" style="height: 300px; width: 550px;"></div>
 						</div>
@@ -393,12 +394,12 @@ ul li label{
 						</div>
 						<label for="courseCate" style="float: left;">코스 카테고리</label>
 						<div class="form-group">
-							<select class="form-control" name="cycleType" id="cycleType" >
-								<option value="" style="color:#888888;">==선택하세요==</option>
-								<option value="" style="color:#888888;">자전거유형1</option>
-								<option value="" style="color:#888888;">자전거유형2</option>
-								<option value="" style="color:#888888;">자전거유형3</option>
-								<option value="" style="color:#888888;">자전거유형4</option>
+							<select class="form-control" name="courseCateId" id="courseCateId" >
+								<option value="0" style="color:#888888;">==선택하세요==</option>
+								<option value="2" style="color:#888888;">감성코스</option>
+								<option value="3" style="color:#888888;">맛집코스</option>
+								<option value="4" style="color:#888888;">숨겨진코스</option>
+								<option value="5" style="color:#888888;">도전코스</option>
 							</select>
 						</div>
 						<label for="courseTime" style="float: left;">소요 예상 시간</label>
@@ -413,8 +414,7 @@ ul li label{
 						</div>
 						<label for="courseIntro" style="float: left;">코스 소개 내용</label>
 						<div class="form-group">
-							<textarea cols="30" rows="7" class="form-control"  name="courseIntro" id="courseIntro">
-							</textarea>
+							<textarea rows="7" class="form-control"  name="courseIntro" id="courseIntro"></textarea>
 						</div>
 					</form>
 				</div>
@@ -791,36 +791,55 @@ $(function(){
 	}
 	
 	$('#btnNoticeWrite').on('click', function(e) {
-		console.log('버튼 클릭');
+		console.log('btnNoticeWrite 버튼 클릭');
 		$('#noticeWrite').modal('show');
 		$('body').css("overflow", "hidden");
 	})
-	
 
-	$('#btnNoticeWriteClose').on('click', function() {
+	//내 기록을 코스로 등록 모달 닫기
+	$('#btnNoticeWriteClose').click(function(){
+		$("#packNoticeEditContent").text("");
+		if(map3.getSource('route')) {
+			map3.removeLayer('route');
+			map3.removeSource('route');
+		}
+		
 		$('#noticeWrite').modal('hide');
 		$('body').css("overflow", "scroll");
-	})
-	
-	
-	$('#btnWriteOk').click(function() {
-		console.log("등록하기 버튼 클릭");
-		if ($('#packNoticeTitle').val() == "") {
-			$('#packNoticeTitle').focus();
-			return;
-		} else if ($('#packNoticeContent').val() == "") {
-			$('#packNoticeContent').focus();
-			return;
-		}
-		//form태그의 action속성 및 method속성 설정
-		$('#packNoticeForm').prop({
-			action : '<c:url value="/pack/notice/write.do"/>',
-			method : 'post'
-		});
-		//폼객체의 submit()함수로 서버로 전송
-		$('#packNoticeForm').submit();
 	});
 	
+	//내 기록을 코스로 등록 모달 완료
+	$('#btnWriteOk').click(function() {
+		console.log("등록하기 버튼 클릭");
+		if ($('#courseName').val() == "") {
+			$('#courseName').focus();
+			console.log("1");
+			return;
+		} else if ($('#courseCateId').val() == "0") {
+			$('#courseCateId').focus();
+			console.log("2");
+			return;
+		} else if ($('#courseIntro').val() == "") {
+			$('#courseIntro').focus();
+			console.log("3");
+			return;
+		} 
+		console.log("4");
+		//form태그의 action속성 및 method속성 설정
+		$('#packNoticeForm').prop({
+			action : "<c:url value='/course/insert.do'/>",
+			method : 'POST'
+		});
+		console.log("5");
+		//폼객체의 submit()함수로 서버로 전송
+		$('#packNoticeForm').submit();
+		console.log("6");
+		if(map3.getSource('route')) {
+			map3.removeLayer('route');
+			map3.removeSource('route');
+		}
+		modalContentDelete();
+	});
 	
 	var fileName = "";
 	var recordDate = "";
@@ -829,10 +848,10 @@ $(function(){
 	var recordNo = "";
 	
 	//테이블 클릭시 모달창 띄우기
-	//공지사항 상세보기  속성값 설정 해주기
+	//내 기록 상세보기  속성값 설정 해주기
 	$("#recordList .cus tr").click(function(){
 		$('.viewBtn').show();
-		var userId = "<c:out value='${sessionScope.userId}'/>";
+		var userId = "${sessionScope.userId}";
 		console.log('테이블 a태그 클릭',userId);
 		fileName = $(this).children().eq(0).text();
 		recordLength = $(this).children().eq(1).text();
@@ -857,17 +876,61 @@ $(function(){
 		$("#mdPostdate").append("일자 : " + recordDate);
 		$("#mdContent").append(""+recordNo);
 		
+		//루트 가져오기
+		$.ajax({
+			url:"<c:url value='/course/routeLoad'/>",
+			type:"post",
+			dataType:"json",
+			data:{
+				"fileName":fileName
+			},
+			success:function(data){
+				console.log('요청 성공');
+				//console.log('data:%O',data.features[0]);
+				console.log('data:%O',data);
+				//json = data.features[0];
+				json = data;
+				
+				map2.addSource('route', {
+					"type":"geojson",
+					"data":json
+				});
+				map2.addLayer({
+						'id': 'route',
+						'type': 'line',
+						'source': 'route',
+						'layout': {
+							'line-join': 'round',
+							'line-cap': 'round'
+						},
+						'paint': {
+							'line-color': '#ff0000',
+							'line-width': 8
+						}
+				});
+				map2.setCenter(json.geometry.coordinates[0][0]);
+				map2.setZoom(11);
+				
+				var length = turf.length(json, {units: 'kilometers'});
+				console.log('lenght:',length);
+			}
+		});
+		
 		$('#noticeView').modal('show');
 		$('body').css("overflow", "hidden");
 	});
 	
-	//공지사항 상세보기 모달 내용 삭제
+	//내 기록 상세보기 모달 내용 삭제
 	$("#btnNoticeViewClose").click(function(){
 		modalContentDelete();
 		$('body').css("overflow", "scroll");
+		if(map2.getSource('route')) {
+			map2.removeLayer('route');
+			map2.removeSource('route');
+		}
 	});
 	
-	//공지사항 수정 모달
+	//내 기록을 코스로 등록 모달
 	$('#btnNoticeEdit').click(function(){
 		console.log("수정 모달창 들어옴");
 		console.log("팩수정 모달창 packNoticeNo:"+recordNo)
@@ -876,36 +939,51 @@ $(function(){
 		$("#courseLength").attr("value",recordLength);
 		//$("#packNoticeEditTitle").attr("value",title);
 		
+		//지도 띄우기
+		//루트 가져오기
+		$.ajax({
+			url:"<c:url value='/course/routeLoad'/>",
+			type:"post",
+			dataType:"json",
+			data:{
+				"fileName":fileName
+			},
+			success:function(data){
+				console.log('요청 성공');
+				//console.log('data:%O',data.features[0]);
+				console.log('data:%O',data);
+				//json = data.features[0];
+				json = data;
+				
+				map3.addSource('route', {
+					"type":"geojson",
+					"data":json
+				});
+				map3.addLayer({
+						'id': 'route',
+						'type': 'line',
+						'source': 'route',
+						'layout': {
+							'line-join': 'round',
+							'line-cap': 'round'
+						},
+						'paint': {
+							'line-color': '#ff0000',
+							'line-width': 8
+						}
+				});
+				map3.setCenter(json.geometry.coordinates[0][0]);
+				map3.setZoom(11);
+				
+				var length = turf.length(json, {units: 'kilometers'});
+				console.log('lenght:',length);
+			}
+		});
+		
 		$('#noticeView').modal('hide');
 		modalContentDelete();
 		$('#noticeEdit').modal('show');
 	});
-	
-	//공지사항 수정 닫기 모달
-	$('#btnNoticeEditClose').click(function(){
-		$("#packNoticeEditContent").text("");
-	});
-	
-	
-	//공지사항 수정 완료
-	$('#btnNoticeEditOk').click(function() {
-		console.log("수정하기 버튼 클릭");
-		if ($('#packNoticeEditTitle').val() == "") {
-			$('#packNoticeEditTitle').focus();
-			return;
-		} else if ($('#packNoticeEditContent').val() == "") {
-			$('#packNoticeEditContent').focus();
-			return;
-		}
-		//form태그의 action속성 및 method속성 설정
-		$('#packNoticeEditForm').prop({
-			action : '<c:url value="/pack/notice/Edit.do"/>',
-			method : 'post'
-		});
-		//폼객체의 submit()함수로 서버로 전송
-		$('#packNoticeEditForm').submit();
-	});
-	
 	
 	//공지사항 삭제하기
 	$('#btnNoticeDelete').on('click', function(e) {

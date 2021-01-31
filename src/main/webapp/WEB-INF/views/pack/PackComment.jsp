@@ -12,8 +12,13 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- 모달 -->
+<<<<<<< HEAD
 <link rel="stylesheet" href="<c:url value="/css/comment.css?fasd"/>">
 <script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
+=======
+<link rel="stylesheet" href="<c:url value="/css/comment.css?f"/>">
+
+>>>>>>> refs/remotes/origin/test_LES
 
 <style>
 	.feed-bottom-icon img{
@@ -82,11 +87,16 @@
 	.replyMore:hover{
 		border-bottom: 1px solid black;
 	}
-
+	
+	
+	
+	
+	
 	
 </style>
 
 <div id="colorlib-main">
+	
 	
 	<div class="row" style="margin-left: 20px; margin-bottom: 2px;">
 			
@@ -667,6 +677,8 @@
 			});
 			
 		});
+		
+		
 		
 	});
 </script>

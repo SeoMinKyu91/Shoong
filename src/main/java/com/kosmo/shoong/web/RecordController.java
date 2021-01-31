@@ -71,10 +71,4 @@ public class RecordController {
 		return flag?"업로드 성공":"업로드 실패";
 	}
 	
-	//레코드 리스트
-	@GetMapping(value="")
-	public String recordList() {
-		
-		return "";
-	}
 }

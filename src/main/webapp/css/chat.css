@@ -1,0 +1,338 @@
+
+/*스크롤바 커스터마이징*/
+::-webkit-scrollbar {
+	width: 12px;
+	height: 12px;
+}
+
+::-webkit-scrollbar-button:start:decrement {
+	display: block;
+	width: 10px;
+	height: 0px;
+	background: url() rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-button:end:increment {
+	display: block;
+	width: 10px;
+	height: 22px;
+	background: url() rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-track {
+	background: rgba(0, 0, 0, 0);
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, .3);
+	border-radius: 5px;
+}
+
+
+.message div{
+	color:black;	
+}
+
+.message {
+	width: 50px;
+	height: 50px;
+	z-index: 300;
+	border-radius: 100%;
+	position: fixed;
+	top: 90%;
+	left: 95%;
+	background-color: lightgrey;
+}
+
+.messageImg {
+	position: absolute;
+	left: 2px;
+	top: 3px;
+	width: 90%;
+	height: 90%;
+	cursor: pointer;
+}
+
+.msgTab {
+	width: 500px;
+	height: 600px;
+	position: absolute;
+	border-radius: 30px;
+	top: -600px;
+	left: -500px;
+	background-color: white;
+	border: 1px solid black;
+	display: flex;
+}
+
+.msgTop {
+	width: 80px;
+	height: 100%;
+	border-right: 1px solid black;
+	background-color: lightgrey;
+	border-top-left-radius: 30px;
+	border-bottom-left-radius: 30px;
+	padding-top: 30px;
+}
+
+.msgTop div {
+	width: 100%;
+	height: 50px;
+	text-align: center;
+}
+
+.msgTop div:hover {
+	cursor: pointer;
+}
+
+.msgTopUser img {
+	width: 60%;
+	height: 60%;
+}
+
+.msgTopChat img {
+	width: 60%;
+	height: 60%;
+}
+
+.msgTopChat {
+	margin-top: 20px;
+}
+
+.msgBody {
+	width: 420px;
+	height: 100%;
+	border-top-right-radius: 30px;
+	border-bottom-right-radius: 30px;
+}
+
+.messageExit {
+	height: 30px;
+	text-align: right;
+	padding: 10px;
+}
+
+.messageExit img {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.msgBodyMyProfile {
+	height: 80px;
+	margin-top: 10px;
+	border-bottom: 1px solid lightgrey;
+	display: flex;
+	line-height: 80px;
+}
+
+.msgBodyMyProfile img {
+	border-radius: 100%;
+	width: 60px;
+	height: 60px;
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+.msgBodyMyProflieName {
+	margin-left: 10px;
+	font-size: 18px;
+	font-weight: bold
+}
+
+.msgBodyPackUserList {
+	height: 478px;
+	border-bottom-right-radius: 30px;
+	overflow: auto;
+}
+
+.msgBodyPackUser {
+	height: 70px;
+	line-height: 70px;
+	display: flex;
+}
+
+.msgBodyPackUser:hover {
+	background-color: ivory;
+	cursor: pointer;
+}
+
+.msgBodyPackUser img {
+	border-radius: 100%;
+	width: 50px;
+	height: 50px;
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+.msgBodyPacUserName {
+	font-size: 16px;
+	font-weight: bold;
+	margin-left: 15px;
+}
+
+.msgBodyChatForm {
+	/*작업후 diplay:none으로 바꾸기*/
+	display: block;
+	margin-top: 30px;
+	height: 538px;
+	border-bottom-right-radius: 30px;
+	overflow: auto;
+}
+
+.chatList {
+	display: flex;
+	height: 80px;
+	padding-top: 10px;
+	cursor: pointer;
+}
+
+.chatList:hover {
+	background-color: ivory;
+}
+
+.chatList img {
+	margin-left: 20px;
+	border-radius: 100%;
+	height: 60px;
+}
+
+.chatListInfo {
+	margin-left: 20px;
+	padding-top: 7px;
+}
+
+.chatListPackUserNames {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+/*작업후 지우기*/
+.msgBodyPackUserListForm {
+	display: none;
+}
+
+.chatRoom {
+	width: 500px;
+	height: 600px;
+	position: absolute;
+	border-radius: 30px;
+	top: -600px;
+	left: -500px;
+	background-color: white;
+	border: 1px solid black;
+	display: block;
+	z-index: 301;
+}
+
+.chatRoomTop {
+	height: 80px;
+	border-bottom: 1px solid black;
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
+	line-height: 80px;
+	display: flex;
+}
+
+.chatRoomTopImgs {
+	width: 80px;
+	height: 80px;
+	margin-left: 20px;
+}
+
+.chatRoomTopImgs img {
+	border-radius: 100%;
+	width: 60px;
+	height: 60px;
+}
+
+.chatRoomTopName {
+	height: 80px;
+	font-weight: bold;
+}
+
+.chatRoomExit img {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	position: absolute;
+	top: 2%;
+	left: 93%;
+}
+
+.chatRoomBody {
+	height: 440px;
+	background-color: lightgrey;
+	border-bottom: 1px solid black;
+	padding: 15px;
+	overflow: auto;
+}
+
+.chatRoomFooter {
+	height: 80px;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+	display: flex;
+}
+
+.chatRoomMessageWrite {
+	width: 430px;
+	height: 79px;
+	outline: none;
+	border: none;
+	border-bottom-left-radius: 30px;
+	padding-left: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	overflow: auto;
+	cursor: pointer;
+}
+
+.chatRoomMessageWriteBtnDiv {
+	width: 70px;
+	height: 79px;
+	border-bottom-right-radius: 30px;
+	text-align: center;
+	padding-top: 15px;
+}
+
+.chatRoomMessageWriteBtn {
+	height: 40px;
+	width: 60px;
+	background-color: yellow;
+	outline: none;
+	border: 1px solid black;
+}
+
+.crbOthersMessage {
+	display: flex;
+}
+
+.crbOthersNameAndContent {
+	margin-left: 15px;
+}
+
+.crbOthersProfileImg img {
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+}
+
+.crbOthersMessageContent {
+	background-color: white;
+	padding: 10px;
+	border-radius: 0.4em;
+	position: relative;
+}
+
+.crbMyMessage {
+	text-align: right;
+	margin-bottom: 10px;
+}
+
+.crbMyMessageContent {
+	display: inline-block;
+	background-color: yellow;
+	padding: 10px;
+	border-radius: 0.4em;
+}
