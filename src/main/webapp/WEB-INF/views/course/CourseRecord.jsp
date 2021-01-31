@@ -268,7 +268,7 @@ ul li label{
 											<td>${item.courseLength}</td>
 											<td>${item.courseTime}</td>
 											<td>${item.courseRegiDate}</td>
-											<td style="display: none;">${item.courseId }</td>
+											<td style="display: none;">${item.courseId}</td>
 											<!-- 
 											<td style="display: none;">${item.courseRegion }</td>
 											 -->
@@ -501,9 +501,9 @@ ul li label{
 				</div>
 	
 				<div class="modal-footer">
-					<button class="viewBtn btn" data-toggle="modal" id="btnNoticeEdit">코스 찜</button>
-					<button class="viewBtn btn" data-toggle="modal" id="">코스 추천</button>
-					<button type="button" class="closeBtn btn" data-dismiss="modal" id="btnNoticeViewClose">닫기</button>
+					<button class="viewBtn btn" data-toggle="modal" id="btnCourseViewCart">코스 찜</button>
+					<button class="viewBtn btn" data-toggle="modal" id="btnCourseViewStar">코스 추천</button>
+					<button type="button" class="closeBtn btn" data-dismiss="modal" id="btnCourseViewClose">닫기</button>
 				</div>
 			</div>
 		</div>
@@ -584,11 +584,21 @@ $(function(){
 		zoom : 12
 	});
 	
+	var map4 = new mapboxgl.Map({
+		container : 'map4',
+		style : 'mapbox://styles/mapbox/streets-v11',
+		center : monument,
+		zoom : 12
+	});
+	
 	map2.getCanvas().style.width = '550px';
 	map2.getCanvas().style.marginTop = '20px';
 	
 	map3.getCanvas().style.width = '550px';
 	map3.getCanvas().style.marginTop = '5px';
+	
+	map4.getCanvas().style.width = '550px';
+	map4.getCanvas().style.marginTop = '5px';
 	
 	/*
 	//행정구역 별 구분선 추가
@@ -868,6 +878,85 @@ $(function(){
 			map3.removeSource('route');
 		}
 		modalContentDelete();
+	});
+	
+	var courseCateName = "";
+	var courseName = "";
+	var courseLength = "";
+	var courseTime = ""
+	var courseRegiDate = "";
+	var courseId = "";
+	
+	//코스 목록 클릭시 모달 창
+	$("#courseList .cus tr").click(function(){
+		$('.viewBtn').show();
+		var userId = "${sessionScope.userId}";
+		console.log('테이블 a태그 클릭',userId);
+		courseCateName = $(this).children().eq(0).text();
+		courseName = $(this).children().eq(1).text();
+		courseLength = $(this).children().eq(2).text();
+		courseTime = $(this).children().eq(3).text();
+		courseRegiDate = $(this).children().eq(4).text();
+		courseId = $(this).children().eq(4).text();
+		
+		$("#mdNo").append("파일 : " + fileName);
+		$("#mdUserID").append("길이 : " + recordLength);
+		$("#mdTitle").append("시간 : " + recordDuration);
+		$("#mdPostdate").append("일자 : " + recordDate);
+		$("#mdContent").append(""+recordNo);
+		
+		//루트 가져오기
+		$.ajax({
+			url:"<c:url value='/course/routeLoad'/>",
+			type:"post",
+			dataType:"json",
+			data:{
+				"fileName":fileName
+			},
+			success:function(data){
+				console.log('요청 성공');
+				//console.log('data:%O',data.features[0]);
+				console.log('data:%O',data);
+				//json = data.features[0];
+				json = data;
+				
+				map4.addSource('route', {
+					"type":"geojson",
+					"data":json
+				});
+				map4.addLayer({
+						'id': 'route',
+						'type': 'line',
+						'source': 'route',
+						'layout': {
+							'line-join': 'round',
+							'line-cap': 'round'
+						},
+						'paint': {
+							'line-color': '#ff0000',
+							'line-width': 8
+						}
+				});
+				map4.setCenter(json.geometry.coordinates[0][0]);
+				map4.setZoom(11);
+				
+				var length = turf.length(json, {units: 'kilometers'});
+				console.log('lenght:',length);
+			}
+		});
+		
+		$('#noticeView').modal('show');
+		$('body').css("overflow", "hidden");
+	});
+	
+	//내 기록 상세보기 모달 내용 삭제
+	$("#btnNoticeViewClose").click(function(){
+		modalContentDelete();
+		$('body').css("overflow", "scroll");
+		if(map2.getSource('route')) {
+			map2.removeLayer('route');
+			map2.removeSource('route');
+		}
 	});
 	
 	var fileName = "";
