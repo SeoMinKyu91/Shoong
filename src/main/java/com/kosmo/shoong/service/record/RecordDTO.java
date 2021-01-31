@@ -18,10 +18,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-<<<<<<< HEAD
-=======
-@ToString
->>>>>>> refs/remotes/origin/test_LES
 public class RecordDTO {
 	
 	private String recordId;
