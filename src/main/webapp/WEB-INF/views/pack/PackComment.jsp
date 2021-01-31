@@ -12,7 +12,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- 모달 -->
-<link rel="stylesheet" href="<c:url value="/css/comment.css?f"/>">
+<link rel="stylesheet" href="<c:url value="/css/comment.css?fasd"/>">
 <script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
 
 <style>

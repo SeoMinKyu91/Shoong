@@ -5,6 +5,7 @@
 
 <!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
 <link rel="stylesheet" href="<c:url value="/css/test.css"/>">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
@@ -13,7 +14,6 @@
 	};
 </script>
 <!-- ※colorlib-main으로 일단 감싸고 안에다가 작업해야 왼쪽 탑에 안먹히고 작업할 수 있어요 -->
-<div id="colorlib-main" style="padding-top: 50px">
 	<!-- 위에 딱 붙는게 싫어서 임시로 padding-top: 100px 주었음 수정하고싶으면 수정  -->
 	<div class="container">
 		<div class="col-xs-12 col-md-12">
@@ -27,7 +27,6 @@
 	<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
 		style="padding-bottom: 50px">
 		<form class="form-horizontal" method="post" name="join"
-			style="background-color: white; box-shadow: 0px 0px 5px #000; border-radius: 100px;"
 			action="<c:url value='/Member/Login.do'/>">
 			<div class="form-group">
 				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
@@ -46,9 +45,11 @@
 				</div>
 				<h1></h1>
 				<h1></h1>
-				<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
-					<button type="submit" id="loginCheck" style="font-size: 1em"
-						class="btn btn-primary btn-lg btn-block">로그인</button>
+				<div class="form-group">
+					<div class="col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+						<button type="submit" id="loginCheck" style="font-size: 1em"
+							class="btn btn-primary btn-lg btn-block">로그인</button>
+					</div>
 				</div>
 				<div class="form-group text-center">
 					<a href=<c:url value='/Member/GuestLogin.do'/>

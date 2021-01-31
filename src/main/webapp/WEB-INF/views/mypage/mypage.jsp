@@ -3,7 +3,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- Chart.js -->
@@ -99,7 +99,7 @@ padding: 10px;
 }
 </style>
 
-<div id="colorlib-main">
+<div id="colorlib-main" style="padding:30px">
    <div class="lineMain">
 	   <!--뱃지사진 + 마일리지  -->
 	   <div class="row col-xs-12" id="inlineInfo">
@@ -131,7 +131,6 @@ padding: 10px;
      <div class="col-xs-12 col-md-6">
      <!-- 나의 기록  -->
      <div class="row"> 
- 
         <div class="col-xs-12 col-md-6">
          	<div class="inlineInfo  col-xs-12">
 	    		<div class="myPageSection" style="background-color: white;"> 
