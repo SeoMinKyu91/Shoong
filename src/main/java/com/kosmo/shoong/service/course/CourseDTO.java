@@ -34,4 +34,5 @@ public class CourseDTO {
 	
 	private String userId;
 	private String courseCateId;
+	private String courseCateName;
 }

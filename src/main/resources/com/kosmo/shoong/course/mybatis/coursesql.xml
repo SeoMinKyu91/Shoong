@@ -16,6 +16,7 @@
 		<result property="courseRegiDate" column="COURSE_DATE"/>
 		<result property="courseTag" column="COURSE_TAG"/>
 		<result property="courseRegion" column="COURSE_REGION"/>
+		<result property="courseCateName" column="COURSE_CATE_NAME"/>
 	</resultMap>
 	
 	<select id="courseSelectOne" parameterType="java.util.Map" resultMap="courseDTOResult">
@@ -23,7 +24,8 @@
 	</select>
 	
 	<select id="courseSelect" resultMap="courseDTOResult">
-		SELECT * FROM course
+		SELECT c.*,cc.course_cate_name FROM course c
+		JOIN course_cate cc ON c.course_cate_id=cc.course_cate_id
 	</select>
 	
 	<insert id="courseInsert" parameterType="java.util.Map">

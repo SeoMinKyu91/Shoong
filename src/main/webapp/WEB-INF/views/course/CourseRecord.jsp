@@ -249,9 +249,10 @@ ul li label{
 						<div class="col-md-12">
 							<table class="table table-hover cus">
 								<tr>
+									<th class="text-center col-lg-2 col-xs-1">카테고리</th>
 									<th class="text-center col-lg-2 col-xs-1">코스명</th>
-									<th class="text-center col-lg-6 col-xs-6">길이</th>
-									<th class="text-center col-lg-2 col-xs-2">시간</th>
+									<th class="text-center col-lg-1 col-xs-1">길이</th>
+									<th class="text-center col-lg-1 col-xs-1">시간</th>
 									<th class="text-center col-lg-2 col-xs-3">등록일</th>
 								</tr>
 								<c:if test="${empty courseList}" var="isEmpty">
@@ -262,8 +263,9 @@ ul li label{
 								<c:if test="${!isEmpty}">
 									<c:forEach var="item" items="${courseList}" varStatus="loop">
 										<tr class="text-center">
-											<td>${item.courseName}</td>
-											<td class="text-left">${item.courseLength}</td>
+											<td class="text-left">${item.courseCateName}</td>
+											<td class="text-left">${item.courseName}</td>
+											<td>${item.courseLength}</td>
 											<td>${item.courseTime}</td>
 											<td>${item.courseRegiDate}</td>
 											<td style="display: none;">${item.courseId }</td>
@@ -480,6 +482,33 @@ ul li label{
 		</div>
 	</div>
 	<!-- 기록 상세보기 모달창 끝 -->
+	
+	<!-- 코스 상세보기 모달창 시작 -->
+	<div class="modal fade" id="courseView" data-backdrop="false">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div id="mdNo"></div>
+					<div id="mdPostdate"></div>
+				</div>
+	
+				<div class="modal-body" style="height: 400px;">
+					<div class="row" style="margin: 10px;">
+						<div id="mdUserID"></div>&nbsp;&nbsp;
+						<div id="mdTitle"></div><br /><br />
+						<div id="map4" style="height: 300px; padding-top: 20px; width: 550px; padding-top:20px;"></div>
+					</div>
+				</div>
+	
+				<div class="modal-footer">
+					<button class="viewBtn btn" data-toggle="modal" id="btnNoticeEdit">코스 찜</button>
+					<button class="viewBtn btn" data-toggle="modal" id="">코스 추천</button>
+					<button type="button" class="closeBtn btn" data-dismiss="modal" id="btnNoticeViewClose">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 코스 상세보기 모달창 끝 -->
 </div>
 <!-- 본문 끝 -->
 <script>
@@ -983,6 +1012,16 @@ $(function(){
 		$('#noticeView').modal('hide');
 		modalContentDelete();
 		$('#noticeEdit').modal('show');
+	});
+	
+	//내 기록을 코스로 등록 모달 내용 삭제
+	$("#btnNoticeWriteClose").click(function(){
+		modalContentDelete();
+		$('body').css("overflow", "scroll");
+		if(map2.getSource('route')) {
+			map2.removeLayer('route');
+			map2.removeSource('route');
+		}
 	});
 	
 	//공지사항 삭제하기
