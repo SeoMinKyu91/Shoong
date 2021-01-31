@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
+
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
 	window.onload = function(){
@@ -11,15 +12,7 @@
 </script>
 
 	<!-- 위에 딱 붙는게 싫어서 임시로 padding-top: 100px 주었음 수정하고싶으면 수정  -->
-	<div class="container">
-		<div class="col-xs-12 col-md-12">
-			<div class="page-header" style="text-align: center">
-				<a href="<c:url value="/"/>"><img alt="shoongLogo"
-					src="<c:url value="/images/shooongLogo.png"/>"
-					style="width: 100px; padding-bottom: 50px"></a>
-			</div>
-		</div>
-	</div>
+
 	<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
 		style="padding-bottom: 50px">
 		<form class="form-horizontal" method="post" name="join"
@@ -80,10 +73,12 @@
 			</div>
 		</form>
 	</div>
+</div>
 
 <!-- 카카오 회원가입 -->
 <script type="text/javascript">
 	//게스트 로그인
+$(function() {
 	$('#guestId').click(function(){
 		 $.ajax({
 			 url : "<c:url value='/Member/GuestLogin.do'/>",
@@ -131,4 +126,5 @@
 	  		location.reload();
 	  	}
  });
+});
 </script>

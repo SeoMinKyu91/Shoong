@@ -2,19 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <!-- Preloader Start -->
-<div id="preloader-active">
-	<div class="preloader d-flex align-items-center justify-content-center">
-		<div class="preloader-inner position-relative">
-			<div class="preloader-circle"></div>
-			<div class="preloader-img pere-text">
-				<img src="<c:url value="change/img/logo/loder.jpg"/>" alt="">
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Preloader Start -->
-<header>
 	<!-- Header Start -->
 	<div class="header-area header-transparent">
 		<div class="main-header">
@@ -25,7 +14,7 @@
 						<div class="col-xl-2 col-lg-2 col-md-1">
 							<div class="logo">
 								<a href="index.html"><img
-									src="<c:url value='change/img/shooongLogo.png'/>" style="width:50px">&emsp;SHOOONG</a>
+									src="<c:url value='/change/img/shooongLogo.png'/>" style="width:50px">&emsp;SHOOONG</a>
 							</div>
 						</div>
 						<div class="col-xl-10 col-lg-10 col-md-8">
@@ -72,4 +61,3 @@
 		</div>
 	</div>
 	<!-- Header End -->
-</header>

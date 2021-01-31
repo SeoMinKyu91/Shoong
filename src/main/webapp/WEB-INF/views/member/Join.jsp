@@ -25,17 +25,8 @@ input {
 	margin-bottom: 50px;
 }
 </style>
-<div id="colorlib-main" style="padding-top: 50px">
-	<!-- 위에 딱 붙는게 싫어서 임시로 padding-top: 100px 주었음 수정하고싶으면 수정  -->
-	<div class="container">
-		<div class="col-xs-12 col-md-12">
-			<div class="page-header" style="text-align: center">
-				<a href="<c:url value="/"/>"><img alt="shoongLogo"
-					src="<c:url value="/images/shooongLogo.png"/>"
-					style="width: 100px; padding-bottom: 50px"></a>
-			</div>
-		</div>
-	</div>
+<div class="row">
+	
 	<!-- 실제 내용 시작 -->
 	<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
 		style="padding-bottom: 50px">
@@ -160,7 +151,8 @@ input {
 			</div>
 		</form>
 	</div>
-</div>
+	
+	</div>
 <!-- ---------------- 활동지역 맵 스크립트 ----------------- -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=616834812e97e8f82a462cd2cc2e5e4e&libraries=services"></script>
