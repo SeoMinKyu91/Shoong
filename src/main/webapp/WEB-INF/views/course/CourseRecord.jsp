@@ -1018,9 +1018,9 @@ $(function(){
 	$("#btnNoticeWriteClose").click(function(){
 		modalContentDelete();
 		$('body').css("overflow", "scroll");
-		if(map2.getSource('route')) {
-			map2.removeLayer('route');
-			map2.removeSource('route');
+		if(map3.getSource('route')) {
+			map3.removeLayer('route');
+			map3.removeSource('route');
 		}
 	});
 	
