@@ -1,0 +1,107 @@
+.services-area{
+        // Single Offers
+            @media #{$md}{
+                padding-top: 100px;
+                padding-bottom:80px;
+            }
+
+            @media #{$sm}{
+                padding-top: 70px;
+                padding-bottom: 20px;
+            }
+
+            @media #{$xs}{
+                padding-top: 70px;
+                padding-bottom: 20px;
+            }
+        .single-services{
+            .services-icon{
+                margin-bottom: 50px;
+                width: 67px;
+                height: 67px;
+                background: #fff;
+                line-height: 67px;
+                text-align: center;
+                border-radius: 50px;
+                display: inline-block;
+                position: relative;
+
+                // Animated start
+                &::before{
+                    content: "";
+                    position: absolute;
+                    top: -12px;
+                    left: -12px;
+                    width: 90px;
+                    height: 90px;
+                    background: transparent;
+                    border-radius: 50%;
+                    transition: .5s;
+                    border: 2px dashed #31ff7a;
+                    box-sizing:border-box;
+                    animation: animate 10s linear infinite;
+                }
+                @keyframes animate{
+                    0%{
+                        transform: scale(1) rotate(0deg);
+                    }
+                    100%{
+                        transform: scale(1) rotate(360deg);
+                    }
+                }
+                // Animated End
+                span{
+                    color: $theme-color;
+                    font-size: 38px;
+                    padding-top: 3px;
+                    display: block;
+                }
+            }
+            .services-cap{
+                h5{
+                 & > a{
+                    color: #fff;
+                    font-size: 20px;
+                    font-weight: 700;
+                    margin-bottom: 21px;
+                    display: block;
+                    @include transition(.4s);
+                    @media #{$sm}{
+                        font-size: 29px;
+                    }
+                  }
+                }
+                p{
+                    margin-bottom: 0px;
+                    color: #bcbdca;
+                    font-size: 16px;
+                    @media #{$sm}{
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
+    }
+
+    // Bottom Shape
+    .single-services{
+        position: relative;
+        .shape1{
+            position: absolute;
+            right: -61%;
+            top: 40px;
+            @media #{$lg}{
+                right: -75%;
+                top: 40px;
+            }
+        }
+        .shape2{
+            position: absolute;
+            right: -61%;
+            top: 40px;
+            @media #{$lg}{
+                right: -80%;
+                top: 40px;
+            }
+        }
+    }

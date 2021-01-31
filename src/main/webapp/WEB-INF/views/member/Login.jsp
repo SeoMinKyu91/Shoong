@@ -1,10 +1,7 @@
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-<link rel="stylesheet" href="<c:url value="/css/test.css"/>">
 <!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
@@ -12,8 +9,7 @@
 		Kakao.init('616834812e97e8f82a462cd2cc2e5e4e');
 	};
 </script>
-<!-- ※colorlib-main으로 일단 감싸고 안에다가 작업해야 왼쪽 탑에 안먹히고 작업할 수 있어요 -->
-<div id="colorlib-main" style="padding-top: 50px">
+
 	<!-- 위에 딱 붙는게 싫어서 임시로 padding-top: 100px 주었음 수정하고싶으면 수정  -->
 	<div class="container">
 		<div class="col-xs-12 col-md-12">
@@ -84,7 +80,7 @@
 			</div>
 		</form>
 	</div>
-</div>
+
 <!-- 카카오 회원가입 -->
 <script type="text/javascript">
 	//게스트 로그인
