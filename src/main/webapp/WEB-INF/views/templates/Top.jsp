@@ -11,6 +11,10 @@
 	.test li{
 		display: flex;
 	}
+	.navbar-brand {
+		float : left;
+		height : 50px;
+	}
 
 </style>
 <!--
@@ -35,7 +39,12 @@
 	<div class="container-fluid">
 		<!--화면 크기가 작을때 보여지는 네비게이션바(모바일용)  -->
 		<div class="navbar-header">
-			<a class="navbar-brand" href='<c:url value="/"/>'>SHOOONG</a>
+			<button type="button" class="navbar-toggle collapsed" style="background-color: white"
+				data-toggle="collapse" data-target="#collapse-menu">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href='<c:url value="/"/>'><img src="<c:url value= 'images/shooongLogo.png'/>"  style="width: 40px; height: 40px;"/></a>
 		</div>
 		<!-- 화면 크기가 클때 상단에 보여지는 메뉴(데스크탑용) -->
 		<div class="collapse navbar-collapse navbar-right" id="collapse-menu">
