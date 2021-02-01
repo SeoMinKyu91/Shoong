@@ -14,11 +14,6 @@
 	};
 </script>
 <style>
-/* 모든 파일에 적용(slider-area) */
-.slider-area {
-	display: none;
-}
-
 #loginCheck {
 	background-color : #f32a48;
 	color: white;
@@ -52,12 +47,33 @@
 #idpwdCheck:hover {
 	color: white;
 }
+.animated-text{
+	display:none;
+}
+.slider-area{
+	display:none;
+}
+#bg {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  opacity: 0.5;
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+.form-horizontal{
+	padding-top: 30px;
+	background-color: #f2f2f7;
+	background-color: rgba( 255, 255, 255, 0.5 );
+	border-radius: 30px;
+}
 </style>
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
 	<!-- 위에 딱 붙는게 싫어서 임시로 padding-top: 100px 주었음 수정하고싶으면 수정  -->
 	<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
 		style="padding-bottom: 30px">
 		<form class="form-horizontal" method="post" name="join"
-			style="padding-top: 30px; background-color: #f2f2f7; box-shadow: 0px 0px 5px #000; border-radius: 50px"
 			action="<c:url value='/Member/Login.do'/>">
 			<div class="form-group">
 				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
@@ -115,6 +131,7 @@
 			</div>
 		</form>
 	</div>
+</img>
 <!-- 카카오 회원가입 -->
 <script type="text/javascript">
 	//게스트 로그인
