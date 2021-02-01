@@ -26,32 +26,54 @@
 	href="<c:url value="/change/css/themify-icons.css"/>">
 <link rel="stylesheet" href="<c:url value="/change/css/slick.css"/>">
 <link rel="stylesheet"
-	href="<c:url value="change/css/nice-select.css"/>">
-<link rel="stylesheet" href="<c:url value="change/css/style.css"/>">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+	href="<c:url value="/change/css/nice-select.css"/>">
+<link rel="stylesheet" href="<c:url value="/change/css/style.css"/>">
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
+	rel="stylesheet">
 </head>
 
 <body>
+	<!-- top 시작 -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<!-- top 시작 -->
-	<header>
-		<!-- Preloader Start -->
-		<div id="preloader-active">
-			<div
-				class="preloader d-flex align-items-center justify-content-center">
-				<div class="preloader-inner position-relative">
-					<div class="preloader-circle"></div>
-				</div>
+	<!-- Preloader Start -->
+	<div id="preloader-active">
+		<div
+			class="preloader d-flex align-items-center justify-content-center">
+			<div class="preloader-inner position-relative">
+				<div class="preloader-circle"></div>
 			</div>
 		</div>
+	</div>
+	<header>
 		<tiles:insertAttribute name="top" />
 	</header>
 	<!-- top끝 -->
 
 	<!-- body 시작 -->
 	<main>
+		<div class="slider-area hero-overly">
+			<div
+				class="single-slider hero-overly  slider-height d-flex align-items-center">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-xl-8 col-lg-9">
+							<!-- Hero Caption -->
+							<div class="hero__caption">
+								<h1 style="font-size: 8em">SHOOONG.</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		 <div class="popular-location section-padding30">
+            <div class="container">
 		<tiles:insertAttribute name="body" />
+			</div>
+		</div>
 	</main>
 	<!-- body 끝 -->
 

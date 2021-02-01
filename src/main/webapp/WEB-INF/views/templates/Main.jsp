@@ -37,7 +37,7 @@
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="single-location mb-30">
 					<div class="location-img">
-						<img src="<c:url value='change/img/gallery/location1.png'/>" alt="">
+						<img src="<c:url value='/change/img/gallery/location1.png'/>" alt="">
 					</div>
 					<div class="location-details">
 						<p>New York</p>
@@ -50,7 +50,7 @@
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="single-location mb-30">
 					<div class="location-img">
-						<img src="<c:url value='change/img/gallery/location2.png'/>" alt="">
+						<img src="<c:url value='/change/img/gallery/location2.png'/>" alt="">
 					</div>
 					<div class="location-details">
 						<p>Paris</p>
@@ -63,7 +63,7 @@
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="single-location mb-30">
 					<div class="location-img">
-						<img src="<c:url value='change/img/gallery/location3.png'/>" alt="">
+						<img src="<c:url value='/change/img/gallery/location3.png'/>" alt="">
 					</div>
 					<div class="location-details">
 						<p>Rome</p>
@@ -76,7 +76,7 @@
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="single-location mb-30">
 					<div class="location-img">
-						<img src="<c:url value='change/img/gallery/location4.png'/>" alt="">
+						<img src="<c:url value='/change/img/gallery/location4.png'/>" alt="">
 					</div>
 					<div class="location-details">
 						<p>Italy</p>
@@ -89,7 +89,7 @@
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="single-location mb-30">
 					<div class="location-img">
-						<img src="<c:url value='change/img/gallery/location5.png'/>" alt="">
+						<img src="<c:url value='/change/img/gallery/location5.png'/>" alt="">
 					</div>
 					<div class="location-details">
 						<p>Nepal</p>
@@ -102,7 +102,7 @@
 			<div class="col-lg-4 col-md-6 col-sm-6">
 				<div class="single-location mb-30">
 					<div class="location-img">
-						<img src="<c:url value='change/img/gallery/location6.png'/>" alt="">
+						<img src="<c:url value='/change/img/gallery/location6.png'/>" alt="">
 					</div>
 					<div class="location-details">
 						<p>indonesia</p>
