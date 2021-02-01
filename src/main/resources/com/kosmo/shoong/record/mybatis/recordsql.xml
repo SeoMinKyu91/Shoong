@@ -26,6 +26,12 @@
 		WHERE user_id=#{value}
 	</select>
 	
+	<select id="selectMileageById" parameterType="String" resultType="java.util.Map">
+		SELECT record_length
+		FROM record_
+		WHERE user_id=#{value}
+	</select>
+	
 	
 
 </mapper>

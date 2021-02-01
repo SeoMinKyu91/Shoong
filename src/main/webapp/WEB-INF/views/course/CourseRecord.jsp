@@ -267,7 +267,10 @@ ul li label{
 											<td class="text-left">${item.courseName}</td>
 											<td>${item.courseLength}</td>
 											<td>${item.courseTime}</td>
-											<td>${item.courseRegiDate}</td>
+											<td>
+											<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm" value="${item.courseRegiDate}"/>
+											<c:out value="${dResult}"/>
+											</td>
 											<td style="display: none;">${item.courseId}</td>
 											<!-- 
 											<td style="display: none;">${item.courseRegion }</td>
@@ -381,6 +384,10 @@ ul li label{
 				</div>
 				<div class="modal-body">
 					<form action="" class="bg-light p-5 contact-form" id="packNoticeForm">
+						<div class="form-group">
+							<input type="text" class="form-control" name="courseFileName"
+								id="courseFileName" hidden="true" value="" >
+						</div>
 						<label for="map3" style="float: left;">코스</label><br/>
 						<div class="form-group">
 							<div id="map3" style="height: 300px; width: 550px;"></div>
@@ -488,14 +495,14 @@ ul li label{
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<div id="mdNo"></div>
-					<div id="mdPostdate"></div>
+					<div id="mdCourseNo"></div>
+					<div id="mdCoursePostdate"></div>
 				</div>
 	
 				<div class="modal-body" style="height: 400px;">
 					<div class="row" style="margin: 10px;">
-						<div id="mdUserID"></div>&nbsp;&nbsp;
-						<div id="mdTitle"></div><br /><br />
+						<div id="mdCourseUserID"></div>&nbsp;&nbsp;
+						<div id="mdCourseTitle"></div><br /><br />
 						<div id="map4" style="height: 300px; padding-top: 20px; width: 550px; padding-top:20px;"></div>
 					</div>
 				</div>
@@ -885,67 +892,74 @@ $(function(){
 	var courseLength = "";
 	var courseTime = ""
 	var courseRegiDate = "";
+	
 	var courseId = "";
 	
 	//코스 목록 클릭시 모달 창
 	$("#courseList .cus tr").click(function(){
 		$('.viewBtn').show();
-		var userId = "${sessionScope.userId}";
-		console.log('테이블 a태그 클릭',userId);
-		courseCateName = $(this).children().eq(0).text();
-		courseName = $(this).children().eq(1).text();
-		courseLength = $(this).children().eq(2).text();
-		courseTime = $(this).children().eq(3).text();
-		courseRegiDate = $(this).children().eq(4).text();
-		courseId = $(this).children().eq(4).text();
 		
-		$("#mdNo").append("파일 : " + fileName);
-		$("#mdUserID").append("길이 : " + recordLength);
-		$("#mdTitle").append("시간 : " + recordDuration);
-		$("#mdPostdate").append("일자 : " + recordDate);
-		$("#mdContent").append(""+recordNo);
+		courseId = $(this).children().eq(5).text();
 		
-		//루트 가져오기
 		$.ajax({
-			url:"<c:url value='/course/routeLoad'/>",
-			type:"post",
+			url:"<c:url value='/course/viewcourse'/>",
+			type:"get",
 			dataType:"json",
-			data:{
-				"fileName":fileName
-			},
-			success:function(data){
-				console.log('요청 성공');
-				//console.log('data:%O',data.features[0]);
-				console.log('data:%O',data);
-				//json = data.features[0];
-				json = data;
+			data:"courseId="+courseId,
+			success:function(json){
+				//var json = JSON.parse(data);
+				console.log("%o",json);
+				//console.log("코스이름",json.courseName);
 				
-				map4.addSource('route', {
-					"type":"geojson",
-					"data":json
-				});
-				map4.addLayer({
-						'id': 'route',
-						'type': 'line',
-						'source': 'route',
-						'layout': {
-							'line-join': 'round',
-							'line-cap': 'round'
-						},
-						'paint': {
-							'line-color': '#ff0000',
-							'line-width': 8
-						}
-				});
-				map4.setCenter(json.geometry.coordinates[0][0]);
-				map4.setZoom(11);
+				courseName = json.courseName;
+				courseLength = json.courseLength;
+				courseTime = json.courseTime;
+				courseRegiDate = json.courseRegiDate;
+				courseIntro = json.courseIntro;
 				
-				var length = turf.length(json, {units: 'kilometers'});
-				console.log('lenght:',length);
+				$("#mdCourseNo").append("코스 이름 : " + courseName);
+				$("#mdCourseUserID").append("코스 길이 : " + courseLength);
+				$("#mdCourseTitle").append("코스 시간 : " + courseTime);
+				$("#mdCoursePostdate").append("등록 일자 : " + courseRegiDate);
+				$("#mdCourseContent").append(""+ courseIntro);
+				
+				$.ajax({
+					url:"<c:url value='/course/routeLoad'/>",
+					type:"post",
+					dataType:"json",
+					data:{
+						"fileName":json.courseFileName
+					},
+					success:function(data){
+						map4.addSource('route', {
+							"type":"geojson",
+							"data":data
+						});
+						map4.addLayer({
+								'id': 'route',
+								'type': 'line',
+								'source': 'route',
+								'layout': {
+									'line-join': 'round',
+									'line-cap': 'round'
+								},
+								'paint': {
+									'line-color': '#ff0000',
+									'line-width': 8
+								}
+						});
+						map4.setCenter(data.geometry.coordinates[0][0]);
+						map4.setZoom(11);
+						
+						var length = turf.length(data, {units: 'kilometers'});
+						console.log('lenght:',length);
+					}
+				});
 			}
 		});
 		
-		$('#noticeView').modal('show');
+		//루트 가져오기
+		$('#courseView').modal('show');
 		$('body').css("overflow", "hidden");
 	});
 	
@@ -953,9 +967,9 @@ $(function(){
 	$("#btnNoticeViewClose").click(function(){
 		modalContentDelete();
 		$('body').css("overflow", "scroll");
-		if(map2.getSource('route')) {
-			map2.removeLayer('route');
-			map2.removeSource('route');
+		if(map4.getSource('route')) {
+			map4.removeLayer('route');
+			map4.removeSource('route');
 		}
 	});
 	
@@ -1052,6 +1066,7 @@ $(function(){
 	$('#btnNoticeEdit').click(function(){
 		console.log("수정 모달창 들어옴");
 		console.log("팩수정 모달창 packNoticeNo:"+recordNo)
+		$("#courseFileName").attr("value",fileName);
 		$("#courseId").attr("value",fileName);
 		$("#courseTime").attr("value",recordDuration);
 		$("#courseLength").attr("value",recordLength);
@@ -1149,7 +1164,6 @@ $(function(){
 	function modalContentDelete(){
 		console.log("모달 닫기 클릭");
 		attrDelete();
-		
 		
 		$("#mdNo").text("");
 		$("#mdUserID").text("");

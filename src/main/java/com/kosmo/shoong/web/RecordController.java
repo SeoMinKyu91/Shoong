@@ -68,6 +68,9 @@ public class RecordController {
 				rService.insertRecord(
 							gson.fromJson(
 								resultJson.getAsJsonObject().get("properties"), RecordDTO.class));
+		if(flag) {
+			
+		}
 		return flag?"업로드 성공":"업로드 실패";
 	}
 	
