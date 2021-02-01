@@ -28,6 +28,7 @@
 <link rel="stylesheet"
 	href="<c:url value="/change/css/nice-select.css"/>">
 <link rel="stylesheet" href="<c:url value="/change/css/style.css"/>">
+<link rel="stylesheet" href="<c:url value="/change/slidingText.css"/>">
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -53,25 +54,30 @@
 
 	<!-- body 시작 -->
 	<main>
-		<div class="slider-area hero-overly">
+		<div class="slider-area hero-overly"">
 			<div
-				class="single-slider hero-overly  slider-height d-flex align-items-center">
+				class="single-slider hero-overly  slider-height d-flex align-items-center" style="margin-top: 80px;">
 				<div class="container">
 					<div class="row justify-content-center">
 						<div class="col-xl-8 col-lg-9">
 							<!-- Hero Caption -->
 							<div class="hero__caption">
-								<h1 style="font-size: 8em">SHOOONG.</h1>
+								<!-- h1 style="font-size: 8em">SHOOONG.</h1> -->
+								<div class="animated-text">
+									<div class="line">SHOOONG.</div>
+									<div class="line">SHOOONG.</div>
+									<div class="line">SHOOONG.</div>
+									<div class="line">SHOOONG.</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</div>
-		 <div class="popular-location section-padding30">
-            <div class="container">
-		<tiles:insertAttribute name="body" />
+		<div class="popular-location section-padding30">
+			<div class="container">
+				<tiles:insertAttribute name="body" />
 			</div>
 		</div>
 	</main>
@@ -87,7 +93,6 @@
 	<div id="back-top">
 		<a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 	</div>
-
 	<!-- JS here -->
 	<!-- All JS Custom Plugins Link Here here -->
 	<script src="<c:url value="/change/js/vendor/modernizr-3.5.0.min.js"/>"></script>
