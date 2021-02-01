@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+ BADGE_ID                                  NOT NULL NUMBER
+ BADGE_NAME                                         NVARCHAR2(30)
+ BADGE_REQUIREMENT                                  VARCHAR2(30)
+ BEDGE_CATEGORY                                     VARCHAR2(30)
+ BADGE_THUMBNAIL                                    NVARCHAR2(30)
+ -->
+<mapper namespace="com.kosmo.shoong.badge.mybatis.badgesql">
+
+	<resultMap type="badgeDTO" id="badgeDTOResult">
+		<result property="badgeId" column="BADGE_ID"/>
+		<result property="badgeName" column="BADGE_NAME"/>
+		<result property="badgeRequirement" column="BADGE_REQUIREMENT"/>
+		<result property="badgeCategory" column="BEDGE_CATEGORY"/>
+		<result property="badgeThumbnail" column="BADGE_THUMBNAIL"/>
+	</resultMap>
+
+	<insert id="insertMileageBadge" parameterType="java.util">
+		<selectKey resultType="Int" keyProperty="badgeIdList">
+			SELECT BADGE_ID
+			FROM BADGE
+			WHERE BADGE_CATEGORY='마일리지'
+			AND TO_NUMBER(BADGE_REQUIREMENT) <![CDATA[>]]>= #{value}
+		</selectKey>
+		
+		INSERT INTO USER_BADGE_GET
+		<foreach collection="badgeIdList" item="badgeId">
+			VALUES (#{badgeId},#{userId},SYSDATE)
+		</foreach>
+	</insert>
+
+</mapper>
