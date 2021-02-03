@@ -39,23 +39,27 @@
 	width: 100%;
 	font-size: 25px;
 }
-</style>
+.animated-text{
+	display:none;
+}
+.slider-area{
+	display:none;
+}
 
-	<div id="colorlib-main">
-				<h3>(${row}/${imgMap.DIARY_IMG_COUNT})</h3>
-            <div style="height: 100%;">
-            	   <div style="margin-top:10px">
-            	    <img style="height: 400px; width: 600px;" src="/fileupload/${imgMap.DIARY_IMG_NAME}" alt="팩갤러리 사진">
-					</div>
+</style>
+	<h3>(${row}/${imgMap.DIARY_IMG_COUNT})</h3>
+        <div style="height: 100%;">
+           	<div style="margin-top:10px">
+            <img style="height: 400px; width: 600px;" src="/fileupload/${imgMap.DIARY_IMG_NAME}" alt="팩갤러리 사진">
+			</div>
            			
-				 <div class="diaryInfo">
-				     <span>소제목입력</span><br> 
-					 <div class="diaryTitle"  id="titleDiv" contenteditable="true"></div>
-					 <span>내용입력 </span> <br> 
-					 <div class="diaryContent"  id="contentDiv" contenteditable="true"></div>
-				</div>
-				
-            </div>
+			<div class="diaryInfo">
+				<span>소제목입력</span><br> 
+				<div class="diaryTitle"  id="titleDiv" contenteditable="true"></div>
+				<span>내용입력 </span> <br> 
+				<div class="diaryContent"  id="contentDiv" contenteditable="true"></div>
+			</div>	
+        </div>
 			<div > 
             	<form method="post" action="<c:url value="/mypage/diary/story/writeOk.do"/>">
             		<input class="form-control" name="title" id="title"  type="hidden">
@@ -68,9 +72,6 @@
 				</form>
                 
             </div>
-            </div>
-             
-
 <script>
 		$("#myStorySave").click(function(){
 			

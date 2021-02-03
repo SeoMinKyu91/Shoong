@@ -14,16 +14,21 @@
 	width: 100%;
 	height: 400px;
 }
+.animated-text{
+	display:none;
+}
+.slider-area{
+	display:none;
+}
+h1 {
+	text-align: center;
+}
+
 </style>
+    <h1>나의 라이딩</h1>
+    <hr/><br/>
 
-
-<div id="colorlib-main">
 	<div class="container">
-		<div class="row">
-			<div class="col-xs-12">
-				<h1>나의 라이딩</h1>
-			</div>
-		</div>	
 		<div class="row">
 			<c:if test="${empty recordList }" var="isEmpty">
 	                  <h3>기록이 없어요</h3>
@@ -43,11 +48,7 @@
 	    	  </c:if>
 		</div><!--row-->
 	</div><!--cotainer-->
-</div><!--colorlib-main-->
-
 <script>
-
-
 // 너무 느리다.. 방법이 없나 생각해보기.. 레코드 뽑는 개수 지정?
 function mapStart(recordId,mapRecord){
 	mapboxgl.accessToken = 'pk.eyJ1Ijoid2t1bmdoOTMiLCJhIjoiY2tpd2hpNnZ0MHF3YzMwcnd5ZG1obzh2biJ9.EW26scaL6pDX7yQhFNnwMw';

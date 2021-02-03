@@ -86,25 +86,33 @@ hr {
   .d-lg-block {
     display: block !important;
   }
+.animated-text{
+	display:none;
+}
+.slider-area{
+	display:none;
+}
+.text{
+	text-align: center;
+	background-color: white;
+	border: 30%;
+}
+
 </style>
 
-
-<div id="colorlib-main">
+	<div class="text">
+        <h1>${diaryMap.DIARY_TITLE}</h1>
+        <p>날짜 : ${diaryMap.DIARY_DATE}</p>
+        <p>${diaryMap.DIARY_MAIN_CONTENT}</p>
+        <p class="text-black-50 mb-0"></p>
+    </div>
          <!-- Projects-->
         <section class="projects-section" id="projects">
             <div class="container">
                 <!-- Featured Project Row-->
-                <div class="row align-items-center no-gutters mb-4 mb-lg-5">
+                <div>
                    <!-- 지도 넣을 곳 -->
-                    <div class="col-xl-8 col-lg-7"><div id="map"></div></div>
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="featured-text text-center text-lg-left">
-                            <h4>${diaryMap.DIARY_TITLE}</h4>
-                            <p>날짜 : ${diaryMap.DIARY_DATE}</p>
-                            <p>${diaryMap.DIARY_MAIN_CONTENT}</p>
-                            <p class="text-black-50 mb-0"></p>
-                        </div>
-                    </div>
+                    <div><div id="map"></div></div>
                 </div>
                 
                 <c:if test="${empty diaryImglist}" var="isEmpty">
@@ -121,8 +129,8 @@ hr {
                                <div class="d-flex h-100">
                                    <div class="project-text w-100 my-auto text-center text-lg-left">
                                        <h4>#${item.DIARY_IMG_TITLE}</h4>
-                                       <p>${item.DIARY_IMG_CONTENT}</p>
                                        <hr class="d-none d-lg-block mb-0 ml-0" />
+                                       <p>${item.DIARY_IMG_CONTENT}</p>
                                    </div>
                                </div>
                            </div>
@@ -136,10 +144,10 @@ hr {
                        <div class="col-lg-6 order-lg-first bg-light">
                            <div class="bg-black text-center h-100 project">
                                <div class="d-flex h-100">
-                                   <div class="project-text w-100 my-auto text-center text-lg-right">
+                                   <div class="project-text w-100 my-auto text-center text-lg-left">
                                        <h4>#${item.DIARY_IMG_TITLE}</h4>
-                                       <p>${item.DIARY_IMG_CONTENT}</p>
                                        <hr class="d-none d-lg-block mb-0 mr-0" />
+                                       <p>${item.DIARY_IMG_CONTENT}</p>
                                    </div>
                                </div>
                            </div>
@@ -150,8 +158,7 @@ hr {
                 </c:if>
             </div>
         </section>
-        
-</div>       
+
 
 <script>
 function mapStart(){
