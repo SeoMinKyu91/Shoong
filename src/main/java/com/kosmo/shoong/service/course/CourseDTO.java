@@ -23,15 +23,16 @@ import lombok.ToString;
 @ToString
 public class CourseDTO {
 
-	private String courseID;
+	private String courseId;
 	private String courseName;
 	private String courseIntro;
 	private String courseTime;
 	private String courseLength;
 	private Date courseRegiDate;
-	private String courseTag;
 	private String courseRegion;
+	private String courseFileName;
 	
 	private String userId;
 	private String courseCateId;
+	private String courseCateName;
 }

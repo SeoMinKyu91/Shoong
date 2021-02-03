@@ -1,6 +1,7 @@
 package com.kosmo.shoong.service.impl.record;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -24,6 +25,11 @@ public class RecordDAO implements RecordService {
 	@Override
 	public List<RecordDTO> selectListById(String userId) {
 		return sqlMapper.selectList("selectListById", userId);
+	}
+
+	@Override
+	public List<String> selectMileageById(String userId) {
+		return sqlMapper.selectList("selectMileageById", userId);
 	}
 
 }

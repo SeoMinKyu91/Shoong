@@ -3,18 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-<link rel="stylesheet" href="<c:url value="/css/test.css"/>">
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
+	rel="stylesheet">
 <!-- ※colorlib-main으로 일단 감싸고 안에다가 작업해야 왼쪽 탑에 안먹히고 작업할 수 있어요 -->
 <!-- 설명이 이해가 잘 안되시면  따로 연락주세요...-->
 <style>
+.slider-area {
+	display: none;
+}
+
 input {
 	border: #ced4da 1.5px solid;
 	font-size: .8em;
 	padding-left: 10px
+}
+
+.input {
+	border: #ced4da 1.5px solid;
+	font-size: .8em;
+	padding-left: 10px;
 }
 
 #map {
@@ -22,76 +30,100 @@ input {
 	width: 100%;
 	overflow: hidden;
 	position: relative;
-	margin-bottom: 50px;
+	margin-bottom: 20px;
+}
+
+#joinBtn {
+	background-color: #f32a48;
+	color: white;
+	border: none;
+}
+#joinBtn:hover {
+	background-color: #f2f2f7;
+}
+#userAddr {
+	border: #ced4da 1.5px solid;
+	font-size: .8em;
+	padding-left: 10px;
 }
 </style>
-<div id="colorlib-main" style="padding-top: 50px">
-	<!-- 위에 딱 붙는게 싫어서 임시로 padding-top: 100px 주었음 수정하고싶으면 수정  -->
-	<div class="container">
-		<div class="col-xs-12 col-md-12">
-			<div class="page-header" style="text-align: center">
-				<a href="<c:url value="/"/>"><img alt="shoongLogo"
-					src="<c:url value="/images/shooongLogo.png"/>"
-					style="width: 100px; padding-bottom: 50px"></a>
+<!-- 실제 내용 시작 -->
+<div class="col-xs-10 offset-xs-1 col-md-10 offset-md-1"
+	style="padding-bottom: 50px">
+	<form class="form-horizontal" method="post" name="join"
+		onsubmit="return checked()"
+		style="padding-top: 30px; background-color: #f2f2f7; box-shadow: 0px 0px 5px #000; border-radius: 50px"
+		action="<c:url value='/Member/Join.do'/>">
+		<div class="form-group">
+			<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
+				style="padding-bottom: 30px; text-align: center">
+				<h3 style="font-weight: bold">회원 가입</h3>
 			</div>
+			<br />
 		</div>
-	</div>
-	<!-- 실제 내용 시작 -->
-	<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
-		style="padding-bottom: 50px">
-		<form class="form-horizontal" method="post" name="join" onsubmit="return checked()"
-			style="background-color: white; box-shadow: 0px 0px 5px #000; border-radius: 100px;"
-			action="<c:url value='/Member/Join.do'/>">
-			<div class="form-group">
-				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
-					style="padding-top: 40px; padding-bottom: 40px; text-align: center">
-					<h3 style="font-weight: bold">회원 가입</h3>
-				</div>
-				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
-					<!-- 이메일 입력란 -->
-					<label for="userId">이메일 </label>
-					<Button type="button" id="emailDuplCheck" class="btn btn-sm"
-						style="float: right; background-color: white;">
-						<span id="duplCheck" role="button"
-							style="color: #a39bbd; text-decoration: underline;">중복체크</span>
-					</Button>
-					<br /> <input type="text" id="userId" name="userId"
-						style="font-size: .8em; height: 50px; width: 34.5%"
-						placeholder="이메일을 입력하세요"> @ <input type="text"
-						id="emailStrinput" name="emailStrinput" placeholder="직접 입력"
-						style="font-size: .8em; height: 50px; width: 30%"> <select
+		<div class="form-group">
+			<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2"
+				style="padding-bottom: 5px;">
+				<!-- 이메일 입력란 -->
+				<label for="userId">이메일 </label>
+				<Button type="button" id="emailDuplCheck" class="btn btn-sm"
+					style="float: right; background-color: #f2f2f7;">
+					<span id="duplCheck" role="button"
+						style="color: #f32a48; text-decoration: underline;">중복체크</span>
+				</Button>
+				<br />
+				<div style="display: flex; flex-direction: row;">
+					<input type="text" id="userId" name="userId"
+						style="font-size: .8em; height: 50px; width: 30%"
+						placeholder="이메일을 입력하세요"><span style="line-height: 50px">&nbsp;@&nbsp;</span><input
+						type="text" id="emailStrinput" name="emailStrinput"
+						placeholder="직접 입력"
+						style="font-size: .8em; height: 50px; width: 30%"> &emsp;<select
 						name="emailStr" id="emailStr"
-						style="font-size: .8em; height: 50px; width: 30%; border: #ced4da 1.5px solid; color: #7e757d">
+						style="width: 30%; border: #ced4da 1.5px solid; color: #7e757d;">
 						<option value="">==선택하세요==</option>
 						<option value="naver.com">naver.com</option>
 						<option value="gmail.com">gmail.com</option>
 						<option value="daum.net">daum.net</option>
 						<option value="nate.com">nate.com</option>
 						<option value="1">직접입력</option>
-					</select> <br />
+					</select>
 				</div>
 			</div>
-			<!-- 비밀번호 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
-				<label for="userPWD">비밀번호<span style="font-size: .8em">&nbsp;(4~12자의 영문 대소문자와 숫자로만 입력)</span></label> <input type="password" 
-					class="form-control input-sm" id="userPWD" name="userPWD" minlength="4" maxlength="12"
-					style="font-size: .8em" placeholder="비밀번호를 입력하세요"> 
+		</div>
+		<!-- 비밀번호 입력란 -->
+		<div class="form-group">
+			<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+				<label for="userPWD">비밀번호<span style="font-size: .8em">&nbsp;(4~12자의
+						영문 대소문자와 숫자로만 입력)</span></label> <br /> <input type="password" id="userPWD"
+					name="userPWD" minlength="4" maxlength="12"
+					style="font-size: .8em; height: 50px; width: 100%"
+					placeholder="비밀번호를 입력하세요">
 			</div>
-			<!-- 비밀번호 확인 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
-				<label for="userPWDOk">비밀번호 확인</label> <input type="password"
-					class="form-control input-sm" id="userPWDOk" name="userPWDOk" minlength="4" maxlength="12"
-					style="font-size: .8em" placeholder="위와 같은 비밀번호를 입력하세요"> <span
-					id="passwordCheck" style="font-size: .8em; color: gray"></span>
+		</div>
+		<!-- 비밀번호 확인 입력란 -->
+		<div class="form-group">
+			<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+				<label for="userPWDOk">비밀번호 확인</label> <br /> <input
+					type="password" class="input" id="userPWDOk" name="userPWDOk"
+					minlength="4" maxlength="12"
+					style="font-size: .8em; height: 50px; width: 100%"
+					placeholder="위와 같은 비밀번호를 입력하세요"> <span id="passwordCheck"
+					style="font-size: .8em; color: gray"></span>
 			</div>
-			<!-- 이름 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
-				<label for="userName">이름</label> <input type="text"
-					class="form-control input-sm" id="userName" name="userName"
-					style="font-size: .8em" placeholder="이름을 입력하세요">
+		</div>
+		<!-- 이름 입력란 -->
+		<div class="form-group">
+			<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+				<label for="userName">이름</label> <br /> <input type="text"
+					class="input" id="userName" name="userName"
+					style="font-size: .8em; height: 50px; width: 100%"
+					placeholder="이름을 입력하세요">
 			</div>
-			<!-- 생년월일 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+		</div>
+		<!-- 생년월일 입력란 -->
+		<div class="form-group">
+			<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userRRN">생년월일</label> <br /> <input name="userRRN1"
 					id="userRRN1" type="text" size="25" maxlength="6"
 					OnKeyUp="check();" onChange="inputbirthNage(); inputGender()"
@@ -104,30 +136,34 @@ input {
 				<br />
 				<!-- 주민번호 7자리 입력시 생년월일, 나이, 성별 자동 입력 -->
 				<input name="userrrn1" type="text" size="4" maxlength="4"
-					style="border: none; color: gray"
+					style="border: none; color: gray; background-color: #f2f2f7;"
 					onBlur="checknum(document.join.userrrn1.value)" readonly="readonly"><span
-					style="font-size: .8em; color: gray">년&nbsp;&nbsp;</span> <input
-					name="userrrn2" type="text" size="2" maxlength="2"
-					style="border: none; color: gray"
+					style="font-size: .8em; color: gray; background-color: #f2f2f7;">년&nbsp;&nbsp;</span>
+				<input name="userrrn2" type="text" size="2" maxlength="2"
+					style="border: none; color: gray; background-color: #f2f2f7;"
 					onBlur="checknum(document.join.userrrn2.value)" readonly="readonly"><span
-					style="font-size: .8em; color: gray">월&nbsp;&nbsp;</span> <input
-					name="userrrn3" type="text" size="2" maxlength="2"
-					style="border: none; color: gray"
+					style="font-size: .8em; color: gray; background-color: #f2f2f7;">월&nbsp;&nbsp;</span>
+				<input name="userrrn3" type="text" size="2" maxlength="2"
+					style="border: none; color: gray; background-color: #f2f2f7;"
 					onBlur="checknum(document.join.userrrn3.value)" readonly="readonly"><span
-					style="font-size: .8em; color: gray">일&emsp;&emsp;</span> <input
-					name="userAge" id="userAge" type="text" size="2"
-					style="border: none; color: gray" maxlength="2"
-					onBlur="checknum(document.join.userAge.value)" readonly="readonly"><span
-					style="font-size: .8em; color: gray">살&emsp;&emsp;</span> <input
-					name="userGender" type="text" size="3" maxlength="2"
-					style="border: none; color: gray"
-					onBlur="checknum(document.join.userGender.value)" readonly="readonly"><br />
+					style="font-size: .8em; color: gray; background-color: #f2f2f7;">일&emsp;&emsp;</span>
+				<input name="userAge" id="userAge" type="text" size="2"
+					style="border: none; color: gray; background-color: #f2f2f7;"
+					maxlength="2" onBlur="checknum(document.join.userAge.value)"
+					readonly="readonly"><span
+					style="font-size: .8em; color: gray; background-color: #f2f2f7;">살&emsp;&emsp;</span>
+				<input name="userGender" type="text" size="3" maxlength="2"
+					style="border: none; color: gray; background-color: #f2f2f7;"
+					onBlur="checknum(document.join.userGender.value)"
+					readonly="readonly"><br />
 			</div>
-			<!-- 연락처 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+		</div>
+		<!-- 연락처 입력란 -->
+		<div class="form-group">
+			<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userTel">연락처</label><br /> <select name="userTel1"
 					id="userTel1"
-					style="font-size: .8em; height: 50px; width: 28%; padding-left: 10px; border: #ced4da 1.5px solid;">
+					style="font-size: .8em; height: 50px; width: 100%; padding-left: 10px; border: #ced4da 1.5px solid;">
 					<option value="010">010</option>
 					<option value="011">011</option>
 					<option value="016">016</option>
@@ -140,27 +176,35 @@ input {
 					name="userTel3" id="userTel3" type="text" maxlength="4"
 					style="height: 50px; width: 28%" OnKeyUp="checkTel();"> <br />
 			</div>
-			<!-- 활동지역 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+		</div>
+		<!-- 활동지역 입력란 -->
+		<div class="form-group">
+			<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userAddr">활동지역</label>
 				<div>
-					<input type="text" class="form-control" id="userAddr"
-						name="userAddr" style="font-size: .8em">
+					<input type="text" class="input" id="userAddr" name="userAddr" 
+						style="font-size:1.1em; height: 50px; width: 100%; padding-left: 10px; border: #ced4da 1.5px solid;">
 				</div>
 			</div>
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+		</div>
+		<div class="form-group">
+			<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<div id="map"></div>
 				<input type="hidden" id="memberLat" name="memberLat"
 					class="form-group" /> <input type="hidden" id="memberLng"
-					name="memberLng" class="form-group" />
+					name="memberLng" class="form-group"/>
 			</div>
-			<div class="form-group col-xs-10 offset-xs-1 col-md-8 offset-md-2"
-				style="padding-bottom: 50px">
-				<button type="submit" class="btn btn-primary btn-lg btn-block">가입하기</button>
+		</div>
+		<div class="form-group">
+			<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2"
+				style="padding-bottom: 60px; margin-bottom: 40px">
+				<button type="submit" id="joinBtn"
+					class="btn btn-primary btn-lg btn-block">가입하기</button>
 			</div>
-		</form>
-	</div>
+		</div>
+	</form>
 </div>
+
 <!-- ---------------- 활동지역 맵 스크립트 ----------------- -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=616834812e97e8f82a462cd2cc2e5e4e&libraries=services"></script>
@@ -298,10 +342,12 @@ input {
 		var birthYear = jumin1.substring(0);
 		if (birthYear > 2) {
 			age = yy - (1900 + parseInt(jumin1.substring(0, 2)));
-			document.join.userrrn1.value = 1900 + parseInt(jumin1.substring(0,2));
+			document.join.userrrn1.value = 1900 + parseInt(jumin1.substring(0,
+					2));
 		} else {
 			age = yy - (2000 + parseInt(jumin1.substring(0, 2)));
-			document.join.userrrn1.value = 2000 + parseInt(jumin1.substring(0,2));
+			document.join.userrrn1.value = 2000 + parseInt(jumin1.substring(0,
+					2));
 		}
 		if (jumin1.substring(2, 4) < 13) {
 			document.join.userrrn2.value = parseInt(jumin1.substring(2, 4));
@@ -367,43 +413,43 @@ input {
 		});
 	});
 	////////전체 유효성 체크////////
-	function checked(){
+	function checked() {
 		//이메일 공백검사	
 		var id = document.getElementById('userId').value;
 		var domain = document.getElementById('emailStr').value;
-		if(id == "" || domain == ""){
+		if (id == "" || domain == "") {
 			alert("이메일을 입력해주세요.");
 			document.getElementById('userId').focus();
 			//추가 작업 예정 : 이메일 중복체크 누르지 않았을때 유효성 검사
-			
+
 			return false;
 		}
 		//비밀번호, 비밀번호 확인 공백 및 유효성 검사//
 		var pwd = document.getElementById('userPWD').value;
 		var pwdOk = document.getElementById('userPWDOk').value;
 		var pwdPattern = /^[a-zA-Z0-9]{4,12}$/
-		if(!pwdPattern.test(pwd) && pwd != ""){
+		if (!pwdPattern.test(pwd) && pwd != "") {
 			alert("비밀번호 형식에 맞지 않습니다. 다시 입력해주세요.");
 			document.getElementById('userPWD').focus();
 			return false;
-		} else if(pwd == ""){
+		} else if (pwd == "") {
 			alert("비밀번호를 입력해주세요.");
 			document.getElementById('userPWD').focus();
 			return false;
 		}
-		if(pwdOk == ""){
+		if (pwdOk == "") {
 			alert("비밀번호 확인을 입력해주세요.");
 			document.getElementById('userPWDOk').focus();
 			return false;
 		}
-		if(pwd != pwdOk){
+		if (pwd != pwdOk) {
 			alert("비밀번호가 일치하지 않습니다.");
 			document.getElementById('userPWD').focus();
 			return false;
 		}
 		//이름 공백검사//
 		var name = document.getElementById('userName').value;
-		if(name == ""){
+		if (name == "") {
 			alert("이름을 입력해주세요.");
 			document.getElementById('userName').focus();
 			return false;
@@ -411,12 +457,12 @@ input {
 		//주민번호 공백검사
 		var rrn1 = document.getElementById('userRRN1').value;
 		var rrn2 = document.getElementById('userRRN2').value;
-		if(rrn1 == ""){
+		if (rrn1 == "") {
 			alert("주민번호 앞 6자리를 입력해주세요.");
 			document.getElementById('userRRN1').focus();
 			return false;
 		}
-		if(rrn2 == ""){
+		if (rrn2 == "") {
 			alert("주민번호 뒤 1자리를 입력해주세요.");
 			document.getElementById('userRRN2').focus();
 			return false;
@@ -424,12 +470,12 @@ input {
 		//연락처 공백검사(중간, 뒷번호 입력 여부)
 		var tel2 = document.getElementById('userTel2').value;
 		var tel3 = document.getElementById('userTel3').value;
-		if(tel2 == ""){
+		if (tel2 == "") {
 			alert("휴대폰번호 중간 4자리를 입력해주세요.");
 			document.getElementById('userTel2').focus();
 			return false;
 		}
-		if(tel3 == ""){
+		if (tel3 == "") {
 			alert("휴대폰번호 뒷 4자리를 입력해주세요.");
 			document.getElementById('userTel3').focus();
 			return false;

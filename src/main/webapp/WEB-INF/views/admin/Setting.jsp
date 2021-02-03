@@ -1,7 +1,150 @@
+<%@page import="java.net.HttpURLConnection"%>
+<%@page import="java.net.URL"%>
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.io.BufferedReader"%>
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="com.google.android.gcm.server.Result"%>
+<%@page import="java.util.List"%>
+<%@page import="com.google.android.gcm.server.MulticastResult"%>
+<%@page import="com.google.android.gcm.server.Message"%>
+<%@page import="com.google.android.gcm.server.Sender"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="org.json.simple.JSONArray"%>
+<%@page import="org.json.simple.parser.JSONParser"%>
+<%@page import="java.io.InputStreamReader"%>
+
+
+<%@page import="java.util.ArrayList"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%!
+	//token값저장용
+	ArrayList<String> tokens = new ArrayList<String>();  	
+	 
+	//Firebase Console->프로젝트 선택->설정->프로젝트 설정
+	//->클라우드 메시징->서버키 복사
+	final String apiKey = "AAAAJ2Qak8w:APA91bGejFe733-bo1ojzuZprIKJQ8hMCzjc1vD24TM_ulcfnhwmSBMEH9RfAMvtNtmb3BSR5QeGFwSpTovd4fw5v0c6Rne_FauVikJlgLmYsaq5O3-6mhWpHBc7VbSW17VXI3KmyZAt";
+	String gcmURL ="https://fcm.googleapis.com/fcm/send";	
+	JSONArray resultArray = new JSONArray();
+	
+	private void requestToFCMServer(String title,String message,String token){
+		try{
+			
+			
+			URL url = new URL(gcmURL);
+		    HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+		    httpConn.setDoOutput(true);
+		    httpConn.setRequestMethod("POST");
+		    httpConn.setRequestProperty("Content-Type", "application/json");
+		    httpConn.setRequestProperty("Authorization", "key=" + apiKey);
+		    
+			String msg =String.format("{\"data\":{\"dataTitle\":\"%s\",\"dataBody\":\"%s\"},\"to\":\"%s\"}",title,message,token);
+		    OutputStream os = httpConn.getOutputStream();
+		    
+		    //UTF-8로 인코딩:한글처리
+		    os.write(msg.getBytes("UTF-8"));
+		    os.flush();
+		    os.close();
+		    
+		    
+			//요청 보내기
+		    int responseCode = httpConn.getResponseCode();      
+		    //서버에서 보낸 응답 결과 받기
+		    BufferedReader reader = new BufferedReader(new InputStreamReader(httpConn.getInputStream()));
+		    String responseString; 	
+		    while ((responseString = reader.readLine()) != null) { 
+		    	System.out.println(responseString);
+		    	JSONParser parser = new JSONParser();
+		    	JSONObject object=(JSONObject)parser.parse(responseString);		    	
+		    	resultArray.add(object);   
+		    }
+		    reader.close();  
+		    
+		}
+		catch(Exception e){System.out.println(e.getMessage());}
+		
+	}////////////////////
+%>
+<%
+	request.setCharacterEncoding("UTF-8");
+	
+    Connection conn = null; 
+    PreparedStatement psmt = null; 
+    ResultSet rs = null;
+    
+    String message = request.getParameter("dataBody");
+    String title = request.getParameter("dataTitle");;
+    int successTokens=0;
+    try {
+    	Class.forName("oracle.jdbc.OracleDriver");
+       
+        conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","shoong","shoong");
+        psmt= conn.prepareStatement("SELECT TOKEN FROM FCM_TOKENS");
+        rs = psmt.executeQuery();       
+       //알림 메시지를 전송할 토큰값을 컬렉션에 저장하기
+        while(rs.next()){
+            tokens.add(rs.getString(1));
+            System.out.println("토큰값?"+rs.getString(1));
+        }
+        conn.close();        
+       
+        //FCM서버로 메시지 보내기
+        for(String token:tokens){
+        	requestToFCMServer(title, message, token);
+        }
+        //몇대의 스마트폰에 알림 메시지가 성공적으로 보내졌는지 체크
+        System.out.println("result : "+resultArray.toJSONString());        
+        
+        for(int i=0;i < resultArray.size();i++){
+        	JSONObject object=(JSONObject)resultArray.get(i);
+        	long success=(Long)object.get("success");
+        	if(success == 1) successTokens++;
+        }
+        
+    }catch (Exception e) {
+        e.printStackTrace();
+    }  
+%>
+<%
+	//RegisterToken.jsp
+	String sql = null;
+	String token = null;
+    String requestMethod = null;
+    
+    request.setCharacterEncoding("utf-8");
+    
+    try{
+    	Class.forName("oracle.jdbc.OracleDriver");
+        String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+        conn = DriverManager.getConnection(url,"shoong","shoong");
+        
+        System.out.println("연결성공");
+    }catch(Exception e){
+    	System.out.println("연결실패");
+        e.printStackTrace();
+    }
+    token = request.getParameter("token");
+    System.out.println("token:"+token);
+    if( token ==null || token.equals("") ){
+        System.out.println("토큰값이 전달 되지 않았습니다.");
+    }else{
+        // 토큰값 전달시 쿼리문 입력할곳임
+        sql = "INSERT INTO FCM_TOKENS(ID,TOKEN) VALUES(TOKENS_SEQ.NEXTVAL,?)";
+        psmt = conn.prepareStatement(sql);        
+        psmt.setString(1,token);        
+        psmt.executeUpdate();
+        System.out.println("토큰값이 입력되었습니다.");
+    }
+  
+    psmt.close();
+    conn.close();
+    
+%>
 <style>
 	#myButton{
 		right: 600px;
@@ -298,6 +441,36 @@
               </div>
             </div>
 <!-- 벳지  -->
+	<div class="clearfix"></div>
+<!-- push알람 -->
+ <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                    <h2>Push</h2>
+                  <div class="x_title">
+                  	<form method="post">
+						<table style="border-spacing:1px;background-color:gray;width:400px">
+							<tr style="border-spacing:1px;background-color:white">
+								<td style="width:20%">제목</td>
+								<td><input type="text" name="noti_title" style="width:90%"/></td>
+							</tr>
+							<tr style="border-spacing:1px;background-color:white">
+								<td colspan="2">메시지</td>
+								
+							</tr>
+							<tr style="border-spacing:1px;background-color:white">
+								
+								<td colspan="2"><textarea name="noti_message" style="width:90%;height:200px" ></textarea></td>
+							</tr>
+							<tr style="border-spacing:1px;background-color:white">
+								<td colspan="2" style="text-align:center"><input type="submit" value="확인"/></td>			
+							</tr>  
+							
+						</table>
+					</form>
+                  </div>
+                 </div>
+</div>
+<!-- push알람 -->
 	<div class="clearfix"></div>
 <!-- 금지어 -->
               <div class="col-md-6 col-sm-6 col-xs-12">

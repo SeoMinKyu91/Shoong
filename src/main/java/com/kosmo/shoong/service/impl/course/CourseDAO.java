@@ -21,7 +21,7 @@ public class CourseDAO implements CourseService {
 
 	@Override
 	public boolean insert(Map map) {
-		return sqlMapper.insert("insertCourse", map)==1?true:false;
+		return sqlMapper.insert("courseInsert", map)==1?true:false;
 	}
 
 	@Override
@@ -35,10 +35,7 @@ public class CourseDAO implements CourseService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	@Override
-	public CourseDTO selectOne(Map map) {		
-		return sqlMapper.selectOne("courseSelectOne", map);
-	}
+	
 	@Override
 	public List<Map> showCourse(Map map) {
 		Set keys = map.keySet();
@@ -48,6 +45,11 @@ public class CourseDAO implements CourseService {
 	
 	@Override
 	public List<CourseDTO> selectList() {
-		return sqlMapper.selectList("courseList");
+		return sqlMapper.selectList("courseSelect");
+	}
+
+	@Override
+	public CourseDTO selectOneByCId(String courseId) {
+		return sqlMapper.selectOne("courseSelectByCId", courseId);
 	}
 }
