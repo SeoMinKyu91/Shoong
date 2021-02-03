@@ -5,5 +5,6 @@ import java.util.List;
 public interface RecordService {
 	boolean insertRecord(RecordDTO record);
 	List<RecordDTO> selectListById(String userId);
+	List<String> selectMileageById(String userId);
 
 }

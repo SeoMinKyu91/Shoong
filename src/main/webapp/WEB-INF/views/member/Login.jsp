@@ -34,6 +34,7 @@
 	color: #f32a48;
 	background-color: #f2f2f7;
 	text-decoration: underline;
+	background: none;
 }
 #join:hover {
 	color: white;
@@ -43,6 +44,7 @@
 	color: #f32a48;
 	background-color: #f2f2f7;
 	text-decoration: underline;
+	background: none;
 }
 #idpwdCheck:hover {
 	color: white;
@@ -108,9 +110,9 @@
 				<div class="col-xs-10 offset-xs-1 col-md-6 offset-md-3 text-center"
 					style="padding-bottom: 5px;">
 					<a href="<c:url value="/Member/Join.do"/>" class="btn" id="join"
-						name="join">회원이 아닌가요?</a> <a
+						name="join">회원이 아닌가요?</a> <span style="color: #f32a48;">/</span> <a
 						href="<c:url value="/Member/IDCheck.do"/>" class="btn"
-						id="idpwdCheck" name="idpwdCheck">ID찾기</a> <a
+						id="idpwdCheck" name="idpwdCheck">ID찾기</a><a
 						href="<c:url value="/Member/PWDCheck1.do"/>" class="btn"
 						id="idpwdCheck" name="idpwdCheck">PW찾기</a>
 					<hr class="line" style="width: 100%;" />

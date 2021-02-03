@@ -44,9 +44,9 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
-	public CourseDTO selectOne(Map map) {
-		// TODO Auto-generated method stub
-		return null;
+	public CourseDTO selectOneByCId(String courseId) {
+		return courseDao.selectOneByCId(courseId);
 	}
+
 
 }

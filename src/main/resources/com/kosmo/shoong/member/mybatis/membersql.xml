@@ -61,10 +61,6 @@
 		ON d.record_id = t1.record_id) t2 ON i.diary_code = t2.diary_code
 	</select>
 	
-	<select id="showCourse" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT * FROM course c join member_ m ON c.user_id=#{userId}
-	</select>
-	
 	<select id="memberIsMember" parameterType="java.util.Map"
 		resultType="int">
 		SELECT COUNT(*) 

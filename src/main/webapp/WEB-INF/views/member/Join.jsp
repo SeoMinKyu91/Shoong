@@ -75,7 +75,7 @@ input {
 				<div style="display: flex; flex-direction: row;">
 					<input type="text" id="userId" name="userId"
 						style="font-size: .8em; height: 50px; width: 30%"
-						placeholder="이메일을 입력하세요"><span style="line-height: 50px">&emsp;@&emsp;</span><input
+						placeholder="이메일을 입력하세요"><span style="line-height: 50px">&nbsp;@&nbsp;</span><input
 						type="text" id="emailStrinput" name="emailStrinput"
 						placeholder="직접 입력"
 						style="font-size: .8em; height: 50px; width: 30%"> &emsp;<select
