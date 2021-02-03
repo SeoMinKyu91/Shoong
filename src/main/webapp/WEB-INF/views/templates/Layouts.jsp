@@ -138,7 +138,8 @@
 	<script src="<c:url value="/js/jquery-migrate-3.0.1.min.js"/>"></script> 
 	-->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- 
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 	<script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
 	<script src="<c:url value="/js/jquery.timepicker.min.js"/>"></script>
 	<!-- 지도 -->
