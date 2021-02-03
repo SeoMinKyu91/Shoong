@@ -39,8 +39,8 @@
 	z-index: 300;
 	border-radius: 100%;
 	position: fixed;
-	top: 90%;
-	left: 95%;
+	top: 85%;
+	left: 96%;
 	background-color: lightgrey;
 }
 
@@ -97,6 +97,11 @@
 
 .msgTopChat {
 	margin-top: 20px;
+}
+
+.msgTopChatBot img{
+	width: 60%;
+	height: 60%;
 }
 
 .msgBody {
@@ -279,7 +284,9 @@
 
 .chatRoomMessageWrite {
 	width: 430px;
-	height: 79px;
+	max-width:428px;
+	height: 98%;
+	font-size:16px;
 	outline: none;
 	border: none;
 	border-bottom-left-radius: 30px;
@@ -337,4 +344,32 @@
 	background-color: yellow;
 	padding: 10px;
 	border-radius: 0.4em;
+}
+/*챗봇 관련 css*/
+/*챗봇 왼쪽 탑 아이콘 이미지*/
+.msgTopChatBot{
+	margin-top: 20px;
+}
+
+.chatBot {
+	width: 500px;
+	height: 600px;
+	position: absolute;
+	border-radius: 30px;
+	top: -600px;
+	left: -500px;
+	background-color: white;
+	border: 1px solid black;
+	display: none;
+	z-index: 301;
+}
+
+/*챗봇 닫기 클릭*/
+.chatBotExit img {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	position: absolute;
+	top: 2%;
+	left: 93%;
 }
