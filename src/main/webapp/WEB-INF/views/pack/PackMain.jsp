@@ -22,14 +22,13 @@
 		border-radius: 30px;
 	}
 	.packCreateBtn {
-		color:#ff8827;
-		background-color: white;
+		color:#f32a48;
+		background: none;
 		font-weight: bold;
-		border: none;
+		border: #f32a48 1px solid;
 	}
 	.packCreateBtn:hover {
 		color:white;
-		background-color: #ff8827;
 	}
 	.PackMainTop input:focus {
 		outline: none;
@@ -49,11 +48,8 @@
 	<div class="row">
 		<div class="col-lg-12" style="padding-bottom:20px">
 			<div class="">
-				<a href="<c:url value="/pack/main.do"/>">
-				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
-					style="width: 80px;"></a>
-				&emsp;<a class="packCreateBtn btn" 
-					href="<c:url value="/pack/main.do"/>">HOME</a>
+				<a class="packCreateBtn btn" 
+					href="<c:url value="/pack/main.do"/>" style="margine-right: 20px">HOME</a>
 				<c:if test="${!empty sessionScope.packId}">
 					<a class="packCreateBtn btn"
 						href="<c:url value="/pack/view.do"/>">MY PACK</a>
