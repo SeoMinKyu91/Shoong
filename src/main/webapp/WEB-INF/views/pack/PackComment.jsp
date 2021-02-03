@@ -125,11 +125,8 @@
 	<div class="container">
 		<div class="row" id="body-div">
 			<div class="offset-md-2 col-md-8 col-sm-12">
-				<c:if test="${not empty commentList }"
-					var="notempty">
-					<c:forEach items="${commentList }"
-						var="item" varStatus="loop">
-
+				<c:if test="${not empty commentList }" var="notempty">
+					<c:forEach items="${commentList }" var="item" varStatus="loop">
 						<div class="row feed-rows">
 							<div class="feed">
 								<div class="row feed-inner">
@@ -294,7 +291,9 @@
 					</c:forEach>
 				</c:if>
 				<c:if test="${!notempty }">
-					<div>등록된 피드가 없습니다</div>
+					<div class="offset-sm-2 col-sm-9" style="margin-top:30px;">
+						<h1>등록된 게시글이 없습니다</h1>
+					</div>
 				</c:if>
 			</div>
 		</div>
@@ -315,7 +314,7 @@
 				<form action="" class="" id="feed-write-form"
 					method="post" enctype="multipart/form-data">
 					<div class="feed-story"
-						contenteditable="true">글자를 입력해주세요</div>
+						contenteditable="true">회원님의 공유할 이야기를 적어주세요</div>
 					<div class="feed-img-modal">
 						<span class="feed-img-modal-span">Drag
 							& Drop Files Here</span>

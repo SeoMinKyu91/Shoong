@@ -206,8 +206,7 @@
 								style="font-size: 14px; background-color:#fad1af;">
 								<div class="col-lg-3 col-xs-2" style="font-weight:bold;">이름</div>
 								<div class="col-lg-2 col-xs-2" style="font-weight:bold;">나이</div>
-								<div class="col-lg-3 col-xs-5" style="font-weight:bold;">최근
-									접속일</div>
+								<div class="col-lg-3 col-xs-5" style="font-weight:bold;">최근 접속일</div>
 								<div class="col-lg-3 col-xs-2" style="font-weight:bold;">직책</div>
 							</div>
 
@@ -220,14 +219,13 @@
 									<div class="col-lg-2 col-xs-2">30</div>
 									<div class="col-lg-3 col-xs-5">${memberList.LASTCONNECT }</div>
 									<div class="col-lg-3 col-xs-2">${memberList.AUTHORITY }</div>
-									<div class="col-lg-1 col-xs-1 gujul">
-										<a
-											href="<c:url value="/pack/member/delete.do?packJoinNo=${memberList.PACK_JOIN_NO}"/>&userID=${memberList.USER_ID}">
-											<span
-												class="glyphicon glyphicon-remove removeMember"
-												aria-hidden="true" style="color: red;"></span>
-										</a>
-									</div>
+									<c:if test="${memberList.AUTHORITY eq '회원'}">
+										<div class="col-lg-1 col-xs-1 gujul">
+											<a href="<c:url value="/pack/member/delete.do?packJoinNo=${memberList.PACK_JOIN_NO}"/>&userID=${memberList.USER_ID}">
+												<span class="glyphicon glyphicon-remove removeMember" aria-hidden="true" style="color: red;"></span>
+											</a>
+										</div>
+									</c:if>
 								</div>
 							</c:forEach>
 						</div>

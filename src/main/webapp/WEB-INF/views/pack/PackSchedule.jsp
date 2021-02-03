@@ -130,25 +130,27 @@
 
          <div class="modal-body">
             <form action="<c:url value="/pack/schedule/insert.do"/>" class="bg-light p-5 contact-form" id="packSchedule" method="post">
-               <label for="packScheduleTitle">일정 제목</label>
-               <div class="form-group">
-                  <input type="text" class="form-control" name="packScheduleTitle" id="packScheduleTitle">
-               </div>
+               	<label for="packScheduleTitle">일정 제목</label>
+               	<div class="form-group">
+					<input type="text" class="form-control" name="packScheduleTitle" id="packScheduleTitle">
+               	</div>
 
-               <label for="startDatePicker">시작 날짜</label>
-               <div class="form-group">
-                  <input type="text" name="packScheduleStart" id="startDatePicker" class="form-control" value="">
-               </div>
+               	<label for="startDatePicker">시작 날짜</label>
+               	<div class="form-group">
+					<input type="text" name="packScheduleStart" id="startDatePicker" class="form-control" value="">
+               	</div>
                
-               <label for="endDatePicker">끝 날짜</label>
-               <div class="form-group">
-                  <input type="text" name="packScheduleEnd" id="endDatePicker" class="form-control" value="">
-               </div>
+               	<label for="endDatePicker">끝 날짜</label>
+               	<div class="form-group">
+                  	<input type="text" name="packScheduleEnd" id="endDatePicker" class="form-control" value="">
+               	</div>
                
-               <label for="packScheduleContent">일정 내용</label>
-               <div class="form-group">
-                  <textarea cols="30" rows="7" class="form-control"  name="packScheduleContent" id="packScheduleContent"></textarea>
-               </div>
+              	<label for="packScheduleContent">일정 내용</label>
+               	<div class="form-group">
+                  	<textarea cols="30" rows="7" class="form-control"  name="packScheduleContent" id="packScheduleContent"></textarea>
+               	</div>
+               
+               
                
             </form>
          </div>
