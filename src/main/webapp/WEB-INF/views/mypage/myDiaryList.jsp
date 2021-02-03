@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-<link rel="stylesheet" href="<c:url value="/css/test.css"/>">
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
 <!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -76,16 +74,25 @@
 th{
    font-size: 2em;
 }
-
+.animated-text{
+	display:none;
+}
+.slider-area{
+	display:none;
+}
+.popular-location{
+	padding-top: 70px;
+	
+}
 </style>
 
 
-<div id="colorlib-main">
     <section class="gallery-block cards-gallery">
        <div class="container">
            <div class="heading">
              <h2>My Riding Diary<small data-toggle="modal" data-target="#myStoryInputModal">추가하기</small></h2>
            </div>
+           <br/>
            <div class="row">
               <c:if test="${empty diaryList }" var="isEmpty">
                   <h3>다이어리가 없어요.</h3>
@@ -144,4 +151,3 @@ th{
                 </div>
            </div>
       </div>
-</div><!--row-->
