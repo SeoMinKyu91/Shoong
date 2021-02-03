@@ -3,6 +3,24 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <style>
+	.slider-area{
+		display:none;
+	}
+	#bg {
+	  position: fixed; 
+	  top: 0; 
+	  left: 0; 
+	  opacity: 0.5;
+	  /* Preserve aspet ratio */
+	  min-width: 100%;
+	  min-height: 100%;
+	}
+	.form-horizontal{
+		padding-top: 30px;
+		background-color: #f2f2f7;
+		background-color: rgba( 255, 255, 255, 0.5 );
+		border-radius: 30px;
+	}
 	.packCreateBtn {
 		color:#ff8827;
 		background-color: white;
@@ -27,7 +45,7 @@
 	
 </style>
 
-<div id="colorlib-main" style="padding:20px">
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
 	<div class="row">
 		<div class="col-lg-12" style="padding-bottom:20px">
 			<div class="">
@@ -135,7 +153,7 @@
 		</div>
 	</div>
 	<!-- 모달 -->
-</div>
+</img>
 
 
 <script>
