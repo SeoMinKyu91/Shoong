@@ -14,21 +14,32 @@
 		<result property="courseTime" column="COURSE_TIME"/>
 		<result property="courseLength" column="COURSE_LENGTH"/>
 		<result property="courseRegiDate" column="COURSE_DATE"/>
-		<result property="courseTag" column="COURSE_TAG"/>
+		<result property="courseFileName" column="COURSE_FILE_NAME"/>
 		<result property="courseRegion" column="COURSE_REGION"/>
+		<result property="courseCateName" column="COURSE_CATE_NAME"/>
 	</resultMap>
 	
 	<select id="courseSelectOne" parameterType="java.util.Map" resultMap="courseDTOResult">
 		SELECT * FROM course WHERE user_id=#{userId}
 	</select>
 	
+	<select id="courseSelectByCId" parameterType="String" resultMap="courseDTOResult">
+		SELECT * FROM course WHERE course_id=#{value}
+	</select>
+	
 	<select id="courseSelect" resultMap="courseDTOResult">
-		SELECT * FROM course
+		SELECT c.*,cc.course_cate_name FROM course c
+		JOIN course_cate cc ON c.course_cate_id=cc.course_cate_id
 	</select>
 	
 	<insert id="courseInsert" parameterType="java.util.Map">
-		INSERT INTO course(COURSE_ID,COURSE_CATE_ID,USER_ID,COURSE_NAME,COURSE_INTRO,COURSE_TIME,COURSE_LENGTH,COURSE_DATE) 
-		VALUES (#{courseId},#{courseCateId},#{userId},#{courseName},#{courseIntro},#{courseTime},#{courseLength},SYSDATE)
+		INSERT INTO course(COURSE_ID,COURSE_CATE_ID,USER_ID,COURSE_NAME,COURSE_INTRO,COURSE_TIME,COURSE_LENGTH,COURSE_DATE,COURSE_FILE_NAME) 
+		VALUES (#{courseId},#{courseCateId},#{userId},#{courseName},#{courseIntro},#{courseTime},#{courseLength},SYSDATE,#{courseFileName})
 	</insert>
+	
+	<!-- mypage -->
+	<select id="showCourse" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT * FROM course c join member_ m ON c.user_id=#{userId}
+	</select>
 	
 </mapper>

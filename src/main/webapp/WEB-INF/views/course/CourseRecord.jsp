@@ -249,9 +249,10 @@ ul li label{
 						<div class="col-md-12">
 							<table class="table table-hover cus">
 								<tr>
+									<th class="text-center col-lg-2 col-xs-1">카테고리</th>
 									<th class="text-center col-lg-2 col-xs-1">코스명</th>
-									<th class="text-center col-lg-6 col-xs-6">길이</th>
-									<th class="text-center col-lg-2 col-xs-2">시간</th>
+									<th class="text-center col-lg-1 col-xs-1">길이</th>
+									<th class="text-center col-lg-1 col-xs-1">시간</th>
 									<th class="text-center col-lg-2 col-xs-3">등록일</th>
 								</tr>
 								<c:if test="${empty courseList}" var="isEmpty">
@@ -262,11 +263,15 @@ ul li label{
 								<c:if test="${!isEmpty}">
 									<c:forEach var="item" items="${courseList}" varStatus="loop">
 										<tr class="text-center">
-											<td>${item.courseName}</td>
-											<td class="text-left">${item.courseLength}</td>
+											<td class="text-left">${item.courseCateName}</td>
+											<td class="text-left">${item.courseName}</td>
+											<td>${item.courseLength}</td>
 											<td>${item.courseTime}</td>
-											<td>${item.courseRegiDate}</td>
-											<td style="display: none;">${item.courseId }</td>
+											<td>
+											<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm" value="${item.courseRegiDate}"/>
+											<c:out value="${dResult}"/>
+											</td>
+											<td style="display: none;">${item.courseId}</td>
 											<!-- 
 											<td style="display: none;">${item.courseRegion }</td>
 											 -->
@@ -379,6 +384,10 @@ ul li label{
 				</div>
 				<div class="modal-body">
 					<form action="" class="bg-light p-5 contact-form" id="packNoticeForm">
+						<div class="form-group">
+							<input type="text" class="form-control" name="courseFileName"
+								id="courseFileName" hidden="true" value="" >
+						</div>
 						<label for="map3" style="float: left;">코스</label><br/>
 						<div class="form-group">
 							<div id="map3" style="height: 300px; width: 550px;"></div>
@@ -480,6 +489,33 @@ ul li label{
 		</div>
 	</div>
 	<!-- 기록 상세보기 모달창 끝 -->
+	
+	<!-- 코스 상세보기 모달창 시작 -->
+	<div class="modal fade" id="courseView" data-backdrop="false">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div id="mdCourseNo"></div>
+					<div id="mdCoursePostdate"></div>
+				</div>
+	
+				<div class="modal-body" style="height: 400px;">
+					<div class="row" style="margin: 10px;">
+						<div id="mdCourseUserID"></div>&nbsp;&nbsp;
+						<div id="mdCourseTitle"></div><br /><br />
+						<div id="map4" style="height: 300px; padding-top: 20px; width: 550px; padding-top:20px;"></div>
+					</div>
+				</div>
+	
+				<div class="modal-footer">
+					<button class="viewBtn btn" data-toggle="modal" id="btnCourseViewCart">코스 찜</button>
+					<button class="viewBtn btn" data-toggle="modal" id="btnCourseViewStar">코스 추천</button>
+					<button type="button" class="closeBtn btn" data-dismiss="modal" id="btnCourseViewClose">닫기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 코스 상세보기 모달창 끝 -->
 </div>
 <!-- 본문 끝 -->
 <script>
@@ -555,11 +591,21 @@ $(function(){
 		zoom : 12
 	});
 	
+	var map4 = new mapboxgl.Map({
+		container : 'map4',
+		style : 'mapbox://styles/mapbox/streets-v11',
+		center : monument,
+		zoom : 12
+	});
+	
 	map2.getCanvas().style.width = '550px';
 	map2.getCanvas().style.marginTop = '20px';
 	
 	map3.getCanvas().style.width = '550px';
 	map3.getCanvas().style.marginTop = '5px';
+	
+	map4.getCanvas().style.width = '550px';
+	map4.getCanvas().style.marginTop = '5px';
 	
 	/*
 	//행정구역 별 구분선 추가
@@ -841,6 +887,92 @@ $(function(){
 		modalContentDelete();
 	});
 	
+	var courseCateName = "";
+	var courseName = "";
+	var courseLength = "";
+	var courseTime = ""
+	var courseRegiDate = "";
+	
+	var courseId = "";
+	
+	//코스 목록 클릭시 모달 창
+	$("#courseList .cus tr").click(function(){
+		$('.viewBtn').show();
+		
+		courseId = $(this).children().eq(5).text();
+		
+		$.ajax({
+			url:"<c:url value='/course/viewcourse'/>",
+			type:"get",
+			dataType:"json",
+			data:"courseId="+courseId,
+			success:function(json){
+				//var json = JSON.parse(data);
+				console.log("%o",json);
+				//console.log("코스이름",json.courseName);
+				
+				courseName = json.courseName;
+				courseLength = json.courseLength;
+				courseTime = json.courseTime;
+				courseRegiDate = json.courseRegiDate;
+				courseIntro = json.courseIntro;
+				
+				$("#mdCourseNo").append("코스 이름 : " + courseName);
+				$("#mdCourseUserID").append("코스 길이 : " + courseLength);
+				$("#mdCourseTitle").append("코스 시간 : " + courseTime);
+				$("#mdCoursePostdate").append("등록 일자 : " + courseRegiDate);
+				$("#mdCourseContent").append(""+ courseIntro);
+				
+				$.ajax({
+					url:"<c:url value='/course/routeLoad'/>",
+					type:"post",
+					dataType:"json",
+					data:{
+						"fileName":json.courseFileName
+					},
+					success:function(data){
+						map4.addSource('route', {
+							"type":"geojson",
+							"data":data
+						});
+						map4.addLayer({
+								'id': 'route',
+								'type': 'line',
+								'source': 'route',
+								'layout': {
+									'line-join': 'round',
+									'line-cap': 'round'
+								},
+								'paint': {
+									'line-color': '#ff0000',
+									'line-width': 8
+								}
+						});
+						map4.setCenter(data.geometry.coordinates[0][0]);
+						map4.setZoom(11);
+						
+						var length = turf.length(data, {units: 'kilometers'});
+						console.log('lenght:',length);
+					}
+				});
+			}
+		});
+		
+		//루트 가져오기
+		$('#courseView').modal('show');
+		$('body').css("overflow", "hidden");
+	});
+	
+	//내 기록 상세보기 모달 내용 삭제
+	$("#btnNoticeViewClose").click(function(){
+		modalContentDelete();
+		$('body').css("overflow", "scroll");
+		if(map4.getSource('route')) {
+			map4.removeLayer('route');
+			map4.removeSource('route');
+		}
+	});
+	
 	var fileName = "";
 	var recordDate = "";
 	var recordLength = "";
@@ -934,6 +1066,7 @@ $(function(){
 	$('#btnNoticeEdit').click(function(){
 		console.log("수정 모달창 들어옴");
 		console.log("팩수정 모달창 packNoticeNo:"+recordNo)
+		$("#courseFileName").attr("value",fileName);
 		$("#courseId").attr("value",fileName);
 		$("#courseTime").attr("value",recordDuration);
 		$("#courseLength").attr("value",recordLength);
@@ -985,6 +1118,16 @@ $(function(){
 		$('#noticeEdit').modal('show');
 	});
 	
+	//내 기록을 코스로 등록 모달 내용 삭제
+	$("#btnNoticeWriteClose").click(function(){
+		modalContentDelete();
+		$('body').css("overflow", "scroll");
+		if(map3.getSource('route')) {
+			map3.removeLayer('route');
+			map3.removeSource('route');
+		}
+	});
+	
 	//공지사항 삭제하기
 	$('#btnNoticeDelete').on('click', function(e) {
 		console.log('버튼 클릭');
@@ -1021,7 +1164,6 @@ $(function(){
 	function modalContentDelete(){
 		console.log("모달 닫기 클릭");
 		attrDelete();
-		
 		
 		$("#mdNo").text("");
 		$("#mdUserID").text("");

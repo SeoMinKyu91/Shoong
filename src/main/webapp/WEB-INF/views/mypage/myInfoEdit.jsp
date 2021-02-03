@@ -84,7 +84,7 @@ input {
 						영문 대소문자와 숫자로만 입력)</span></label> <br /> <input type="password" id="userPWD"
 					name="userPWD" minlength="4" maxlength="12"
 					style="font-size: .8em; height: 50px; width: 100%"
-					placeholder="${memberInfo.PWD }">
+					value="${memberInfo.PWD }">
 			</div>
 		</div>
 		<!-- 비밀번호 확인 입력란 -->
@@ -104,7 +104,7 @@ input {
 				<label for="userName">이름</label> <br /> <input type="text"
 					class="input" id="userName" name="userName"
 					style="font-size: .8em; height: 50px; width: 100%"
-					placeholder="${memberInfo.NAME }">
+					value="${memberInfo.NAME }">
 			</div>
 		</div>
 		<!-- 생년월일 입력란 -->
@@ -160,11 +160,11 @@ input {
 				<c:set var="tel" value="${memberInfo.USERTEL}"/>
             <input name="userTel2" id="userTel2" type="text"
                maxlength="4" style="height: 50px; width: 26.5%"
-               OnKeyUp="checkTel();" placeholder="${fn:substring(tel,3,7) }">
+               OnKeyUp="checkTel();" value="${fn:substring(tel,3,7) }">
                &nbsp; ㅡ &nbsp;
             <input
                name="userTel3" id="userTel3" type="text" maxlength="4"
-               style="height: 50px; width: 26.5%" OnKeyUp="checkTel();" placeholder="${fn:substring(tel,7,11) }"> <br />
+               style="height: 50px; width: 26.5%" OnKeyUp="checkTel();" value="${fn:substring(tel,7,11) }"> <br />
          </div>
 			</div>
 		<!-- 활동지역 입력란 -->
