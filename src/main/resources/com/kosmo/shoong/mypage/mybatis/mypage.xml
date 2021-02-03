@@ -20,5 +20,5 @@
 SELECT*FROM RECORD_ WHERE RECORD_DATE  <![CDATA[>]]>= TRUNC(SYSDATE,'MM') AND
 							 LAST_DAY(SYSDATE)  <![CDATA[>]]>= RECORD_DATE AND
 							 USER_ID =#{id}
-</select>	
+</select>
 </mapper>

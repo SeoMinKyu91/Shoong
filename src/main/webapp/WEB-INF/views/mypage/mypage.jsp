@@ -121,6 +121,7 @@ padding: 10px;
 #loginCheck:hover {
 	background-color: #f2f2f7;
 }
+
 </style>
 <img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt=""/>
    <div class="lineMain">
