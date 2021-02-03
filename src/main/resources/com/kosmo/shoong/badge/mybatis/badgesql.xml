@@ -20,7 +20,7 @@
 	</resultMap>
 
 	<insert id="insertMileageBadge" parameterType="java.util">
-		<selectKey resultType="Int" keyProperty="badgeIdList">
+		<selectKey resultType="Int" order="BEFORE" keyProperty="badgeIdList">
 			SELECT BADGE_ID
 			FROM BADGE
 			WHERE BADGE_CATEGORY='마일리지'
