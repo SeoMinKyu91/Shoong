@@ -19,7 +19,7 @@
 		<result property="badgeThumbnail" column="BADGE_THUMBNAIL"/>
 	</resultMap>
 
-	<insert id="insertMileageBadge" parameterType="java.util">
+	<insert id="insertMileageBadge" parameterType="java.util.Map">
 		<selectKey resultType="Int" order="BEFORE" keyProperty="badgeIdList">
 			SELECT BADGE_ID
 			FROM BADGE
