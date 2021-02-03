@@ -62,7 +62,7 @@
 	left: -500px;
 	background-color: white;
 	border: 1px solid black;
-	display: flex;
+	display: none;
 }
 
 .msgTop {
@@ -134,7 +134,7 @@
 	margin-left: 20px;
 }
 
-.msgBodyMyProflieName {
+.msgBodyMyProfileName {
 	margin-left: 10px;
 	font-size: 18px;
 	font-weight: bold
@@ -165,15 +165,14 @@
 	margin-left: 20px;
 }
 
-.msgBodyPacUserName {
+.msgBodyPackUserName {
 	font-size: 16px;
 	font-weight: bold;
 	margin-left: 15px;
 }
 
 .msgBodyChatForm {
-	/*작업후 diplay:none으로 바꾸기*/
-	display: block;
+	display: none;
 	margin-top: 30px;
 	height: 538px;
 	border-bottom-right-radius: 30px;
@@ -205,12 +204,15 @@
 .chatListPackUserNames {
 	font-weight: bold;
 	margin-bottom: 5px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
-/*작업후 지우기*/
-.msgBodyPackUserListForm {
-	display: none;
+.chatListChatContent{
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
+
 
 .chatRoom {
 	width: 500px;
@@ -221,7 +223,7 @@
 	left: -500px;
 	background-color: white;
 	border: 1px solid black;
-	display: block;
+	display: none;
 	z-index: 301;
 }
 
