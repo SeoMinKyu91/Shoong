@@ -66,7 +66,7 @@
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
 
 <!-- 채팅  -->
-<link rel="stylesheet" href="<c:url value="/css/chat.css?asdff"/>">
+<link rel="stylesheet" href="<c:url value="/css/chat.css?asddfff"/>">
 
 <script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
 
@@ -128,6 +128,10 @@
 							</div>
 							<div class="msgTopChat">
 								<img class="msgTopChatImg" src="<c:url value="/images/fa-icons/comment-regular.svg"/>">
+							</div>
+							<!-- 챗봇 왼쪽에 아이콘 모양 나오는 곳 -->
+							<div class="msgTopChatBot">
+								<img class="msgTopChatBotImg" src="<c:url value="/images/fa-icons/folder-open-regular.svg"/>" >
 							</div>
 						</div>
 						<div class="msgBody">
@@ -210,11 +214,20 @@
 							<!--  
 							<div class="chatRoomMessageWrite" contenteditable="true"></div>
 							-->
-							<input type="text" class="chatRoomMessageWrite" style="height: 98%;font-size:16px; max-width: 428px; overflow: auto;">
+							<input type="text" class="chatRoomMessageWrite">
 							<div class="chatRoomMessageWriteBtnDiv">
 								<button class="chatRoomMessageWriteBtn">전송</button>
 							</div>
 						</div>
+					</div><!-- 채팅방 끝 -->
+					
+					<!-- 챗봇 메시지 창 -->
+					<!-- 토탈 heigth:600px이여서 별님이 원하는 크기만큼 설정하시면 될거같아요 -->
+					<div class="chatBot" style="background-color: red;">
+						<div class="chatBotExit">
+							<img class="chatBotExitBtn" src="<c:url value="/images/fa-icons/window-close-regular.svg"/>">
+						</div>
+						
 					</div>
 				</div>
 			</c:if>
@@ -682,8 +695,19 @@
 					console.log("에러:"+error.responseText);
 				}
 				
-			})
+			});
 		}
+		
+		//챗봇 관련 스크립트
+		$('.msgTopChatBotImg').click(function(){
+			console.log('챗봇 이미지 클릭');
+			$('.chatBot').css('display','block');
+		});
+		
+		$('.chatBotExitBtn').click(function(){
+			console.log('챗봇 닫기 클릭');
+			$('.chatBot').css('display','none');
+		})
 		
 	})
 		
