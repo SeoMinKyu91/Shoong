@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kosmo.shoong.service.mypage.MyPageRecordService;
@@ -91,7 +92,13 @@ public class MyPageController {
 		return "mypage/mypage";
 	}
 
-
+	//회원 정보 변경
+	@RequestMapping(value = "infoEdit.do", method = RequestMethod.POST)
+	public String infoEdit(HttpServletRequest req, Map map, Model model) {
+		map.put("userId", req.getSession().getAttribute("userId").toString());
+		int res = Service.update(map);
+		return "mypage/mypage";
+	}
 
 
 }

@@ -258,7 +258,6 @@ public class MemberController {
 		map.put("userId", req.getSession().getAttribute("userId").toString());
 		Map memberInfo = memberService.memberEditView(map);
 		model.addAttribute("memberInfo", memberInfo);
-		System.out.println(memberInfo);
 		return "mypage/myInfoEdit";
 	}
 

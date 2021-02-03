@@ -58,6 +58,7 @@ public class MemberDAO implements MemberService{
 
 	@Override
 	public int update(Map map) {
+		System.out.println("dad안");
 		return sqlMapper.update("memberUpdate", map);
 	}///////update
 
