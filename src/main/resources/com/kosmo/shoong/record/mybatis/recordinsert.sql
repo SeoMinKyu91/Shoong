@@ -4,7 +4,7 @@
  COURSE_ID                                          NVARCHAR2(50)
  RECORD_LENGTH                                      FLOAT(126)
  RECORD_DATE                                        DATE
- RECORD_DURATION                                    DATE
+ RECORD_DURATION                                    NVARCHAR2(10)
  */
 /*레코드 임시 데이터*/ 
 insert into RECORD_(record_id,user_id,course_id,record_file_name,record_length,record_date) values (201,'shoong1000@naver.com',101,'recordsample1.json',52.4,'2020-11-14');
