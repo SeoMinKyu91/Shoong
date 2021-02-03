@@ -3,13 +3,19 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- Chart.js -->
 <script src="<c:url value="/admin/js/Chart.min.js"/>"></script>
 
 <style>
+.animated-text{
+	display:none;
+}
+.slider-area{
+	display:none;
+}
 .myPageSection{
 border:1px solid #bbbbbb;
 margin : 10px;
@@ -39,7 +45,6 @@ padding: 10px;
    }
 .single-location .location-details .location-btn{
    padding:10px 20px;background:#fff;color:#333333;border-radius:30px;opacity:0;visibility:hidden;
-   font-family: 'Do Hyeon', sans-serif;
    }
 .card-body:hover .location-img img{
    transform:scale(1.1)
@@ -68,6 +73,7 @@ padding: 10px;
 #inlineInfo{
    background-color: white;
    box-shadow: 0px 0px 5px #787878;
+   background-color: rgba( 255, 255, 255, 0.5 );
    border-radius: 10px;
    padding: 20px;
    margin: 10px;
@@ -75,6 +81,7 @@ padding: 10px;
 .inlineInfo{
    background-color: white;
    box-shadow: 0px 0px 5px #787878;
+   background-color: rgba( 255, 255, 255, 0.5 );
    border-radius: 10px;
    padding: 20px;
    margin: 10px;
@@ -93,13 +100,30 @@ padding: 10px;
    margin-left: 30px;
 }
 .namebar{
-   font-size: 2em;
+   font-size: 15px;
 }#id{
    height: 100px;
 }
-</style>
+#bg {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  opacity: 0.5;
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+#loginCheck {
+	background-color : #f32a48;
+	color: white;
+	border : none;
+}
+#loginCheck:hover {
+	background-color: #f2f2f7;
+}
 
-<div id="colorlib-main">
+</style>
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt=""/>
    <div class="lineMain">
 	   <!--뱃지사진 + 마일리지  -->
 	   <div class="row col-xs-12" id="inlineInfo">
@@ -107,12 +131,12 @@ padding: 10px;
 	            <c:if test="${not empty sessionScope.userId}" var="isEmpty">				
 		            <img class="badgeImg" src='<c:url value="/images/badge/speedBadge.png"/>' alt="뱃지이미지">      
 		            <strong class="namebar">${sessionScope.userId}</strong>
-		            <a href='<c:url value="/Member/myInfoEdit.do"/>' class="btn btn-primary buttonbar">정보수정</a>
+		            <a href='<c:url value="/Member/myInfoEdit.do"/>' class="btn btn-primary" id="loginCheck">정보수정</a>
 		        </c:if>		
 				<c:if test="${!isEmpty}">	
 					<img class="badgeImg" src='<c:url value="/images/badge/speedBadge.png"/>' alt="뱃지이미지">      
 		            <strong class="namebar">장동건</strong>
-		            <a href='<c:url value="/Member/myInfoEdit.do"/>' class="btn btn-primary buttonbar">정보수정</a>
+		            <a href='<c:url value="/Member/myInfoEdit.do"/>' class="btn btn-primary" id="loginCheck">정보수정</a>
 	        	</c:if>
 	         </div>
 	         <!-- progress바 _ 부트스트랩 -->
@@ -131,7 +155,6 @@ padding: 10px;
      <div class="col-xs-12 col-md-6">
      <!-- 나의 기록  -->
      <div class="row"> 
- 
         <div class="col-xs-12 col-md-6">
          	<div class="inlineInfo  col-xs-12">
 	    		<div class="myPageSection" style="background-color: white;"> 
@@ -172,7 +195,7 @@ padding: 10px;
                      </div>
                      <div class="location-details">
                         <span class="location-btn">
-                           <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>${item.DIARY_IMG_COUNT}
+                           <span class="glyphicon glyphicon-camera" aria-hidden="true">&nbsp</span>${item.DIARY_IMG_COUNT}
                         </span>
                      </div>   
                   </div>
@@ -187,7 +210,7 @@ padding: 10px;
    		</div>
 	</div> 
 </div>
-</div>   	
+
 
 
 

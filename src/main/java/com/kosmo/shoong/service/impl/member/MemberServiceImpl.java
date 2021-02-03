@@ -96,6 +96,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public int update(Map map) {
+		System.out.println("임플안");
 		return memberDAO.update(map);
 	}//////update
 

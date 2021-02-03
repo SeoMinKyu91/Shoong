@@ -16,8 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kosmo.shoong.service.impl.member.MemberServiceImpl;
 import com.kosmo.shoong.service.mypage.MyPageRecordService;
 import com.kosmo.shoong.service.mypage.MyPageService;
 
@@ -31,6 +33,9 @@ public class MyPageController {
 
 	@Resource(name="myPageRecordService")
 	private MyPageRecordService recordService;
+	
+	@Resource(name = "memberService")
+	private MemberServiceImpl memberService;
 
 	@RequestMapping("main.do")
 	public String mypageMain(@RequestParam Map map, Model model, HttpServletRequest req) throws IOException {
@@ -91,7 +96,32 @@ public class MyPageController {
 		return "mypage/mypage";
 	}
 
-
+	//회원 정보 변경
+	@RequestMapping(value = "infoEdit.do", method = RequestMethod.POST)
+	public String infoEdit(HttpServletRequest req, @RequestParam Map map, Model model) {
+		map.put("userId", req.getSession().getAttribute("userId").toString());
+		//Map info = new HashMap();
+		//info.put("userId", req.getSession().getAttribute("userId").toString());
+		System.out.println(map);
+		//for(Object key:map.keySet()) {
+		//	if(map.get(key)!=null) {
+		//		info.put(key, map.get(key));
+		//	}
+		//}
+		//System.out.println(info);
+		System.out.println(map);
+		int res = Service.update(map);
+		System.out.println(res);
+		if (res==0) {
+			System.out.println("실패");
+		}
+		else {
+			System.out.println("성공");
+		}
+		Map memberInfo = memberService.memberEditView(map);
+		model.addAttribute("memberInfo", memberInfo);
+		return "mypage/myInfoEdit";
+	}
 
 
 }

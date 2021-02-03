@@ -32,7 +32,6 @@
 		diplay: none;
 	}
 </style>
-<div id="colorlib-main" style="padding:20px">
 	<div class="row">
 		<div class="col-lg-12" style="padding-bottom:20px">
 			<div class="">
@@ -234,5 +233,3 @@
 				</table>
 			</div>
 		</div>
-	</div>
-</div>

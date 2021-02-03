@@ -135,7 +135,7 @@ public class MyPageDiaryController {
 			//map.put("id","shoong1000@naver.com");
 		    Map Diarymap  = service.selectOne(map);
 
-	    	String date = Diarymap .get("DIARY_DATE").toString().substring(0,10);
+	    	String date = Diarymap.get("DIARY_DATE").toString().substring(0,10);
 	    	Diarymap .put("DIARY_DATE",date);
 
 		    List diaryImglist = service.imgSelectList(map);

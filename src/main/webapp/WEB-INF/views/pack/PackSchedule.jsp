@@ -100,6 +100,8 @@
 			<hr style="background-color: black;height:1px"/>
 		</div>
 	</div>
+	
+	<!--  
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="text-center col-lg-12" >
@@ -108,8 +110,14 @@
 				
 		</div>
 	</div>
-    <div id="calendar"></div>
+	-->
+	<div class="col-lg-8">
+		<div id="calendar"></div>
+	</div>
+    
   </div>
+  
+  
    <!-- END COLORLIB-MAIN -->
 
 <!-- 팩 일정 등록 모달창 시작 -->
@@ -122,25 +130,27 @@
 
          <div class="modal-body">
             <form action="<c:url value="/pack/schedule/insert.do"/>" class="bg-light p-5 contact-form" id="packSchedule" method="post">
-               <label for="packScheduleTitle">일정 제목</label>
-               <div class="form-group">
-                  <input type="text" class="form-control" name="packScheduleTitle" id="packScheduleTitle">
-               </div>
+               	<label for="packScheduleTitle">일정 제목</label>
+               	<div class="form-group">
+					<input type="text" class="form-control" name="packScheduleTitle" id="packScheduleTitle">
+               	</div>
 
-               <label for="startDatePicker">시작 날짜</label>
-               <div class="form-group">
-                  <input type="text" name="packScheduleStart" id="startDatePicker" class="form-control" value="">
-               </div>
+               	<label for="startDatePicker">시작 날짜</label>
+               	<div class="form-group">
+					<input type="text" name="packScheduleStart" id="startDatePicker" class="form-control" value="">
+               	</div>
                
-               <label for="endDatePicker">끝 날짜</label>
-               <div class="form-group">
-                  <input type="text" name="packScheduleEnd" id="endDatePicker" class="form-control" value="">
-               </div>
+               	<label for="endDatePicker">끝 날짜</label>
+               	<div class="form-group">
+                  	<input type="text" name="packScheduleEnd" id="endDatePicker" class="form-control" value="">
+               	</div>
                
-               <label for="packScheduleContent">일정 내용</label>
-               <div class="form-group">
-                  <textarea cols="30" rows="7" class="form-control"  name="packScheduleContent" id="packScheduleContent"></textarea>
-               </div>
+              	<label for="packScheduleContent">일정 내용</label>
+               	<div class="form-group">
+                  	<textarea cols="30" rows="7" class="form-control"  name="packScheduleContent" id="packScheduleContent"></textarea>
+               	</div>
+               
+               
                
             </form>
          </div>
@@ -368,7 +378,6 @@
       console.log('들어옴');
    })
    
-<<<<<<< HEAD
    $('#btnPackSchedule').click(function(){
 		if($('#packScheduleTitle').val() == ''){
 			alert('제목을 입력해주세요');
@@ -393,18 +402,6 @@
 			   
 	   
 	   	$('#packSchedule').submit();
-=======
-   $('#btnPackSchedule').click(function(e){
-	  e.preventDefault();
-      console.log($('#endDatePicker').val());
-      
-      if($('#endDatePicker').val()==''){
-    	  console.log('마지막 날짜 없음');
-    	  alert('마지막 날짜를 입력하세요');
-    	  return;
-      }
-      $('#packSchedule').submit();
->>>>>>> branch 'test_BWG' of https://github.com/SeoMinKyu91/Shoong.git
    });
    
    $('#btnPackScheduleClose').click(function(){

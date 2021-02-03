@@ -100,6 +100,7 @@
 	}
 	
 	
+	
 </style>
 
 
@@ -215,7 +216,7 @@
 						<div class="col-lg-12 feed-icons" style="height: 80px;border-top:1px solid lightgrey;border-bottom:1px solid lightgrey;">
 							<div class="row" style="margin: 0px; padding: 0px;">
 								<div class="col-lg-1 feed-icon-like">
-									<img class="icon" src="<c:url value="/images/fa-icons/heart-regular.svg"/>" alt="좋아요이미지" title="좋아요" style="width: 25px; height: 25px;">
+										<img class="icon" src="<c:url value="/images/fa-icons/heart-regular.svg"/>" alt="좋아요이미지" title="좋아요" style="width: 25px; height: 25px;">
 								</div>
 								<div class="col-lg-1 feed-icon-reply">
 									<img class="icon" src="<c:url value="/images/fa-icons/comment-regular.svg"/>" alt="" title="댓글"/>
