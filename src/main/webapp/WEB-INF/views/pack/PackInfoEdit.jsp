@@ -183,7 +183,7 @@
 
 					<div class="form-group">
 						<input type="hidden" id="packThumbnail"
-							value="Pack1.png" name="packThumbnail"
+							value="${packInfo.PACK_THUMBNAIL }" name="packThumbnail"
 							class="form-group" />
 					</div>
 

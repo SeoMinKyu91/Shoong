@@ -169,15 +169,7 @@ public class PackController {
       return check;
    }//////////////
    
-   //채팅창 관련 작업
-   @RequestMapping(value="chat/listAll.do",produces = "text/html; charset=UTF-8")
-   @ResponseBody
-   public String chatListAll(@RequestParam Map map) {
-	   
-	   
-	   
-	   return "";
-   }
+   
 
 
 

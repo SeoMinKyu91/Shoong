@@ -35,6 +35,9 @@ myBatis 환경설정파일
 			type="com.kosmo.shoong.service.badge.BadgeDTO" />
 		<typeAlias alias="reportAdminDTO" 
 			type="com.kosmo.shoong.admin.service.ReportAdminDTO"/>
+		<typeAlias alias="chatMessageDTO" 
+			type="com.kosmo.shoong.service.chat.ChatMessageDTO"/>			
+			
 	</typeAliases>
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
@@ -46,6 +49,7 @@ myBatis 환경설정파일
 		<mapper	resource="com/kosmo/shoong/pack/mybatis/packmanagesql.xml" />
 		<mapper	resource="com/kosmo/shoong/pack/mybatis/packschedulesql.xml" />
 		<mapper resource="com/kosmo/shoong/pack/mybatis/packcommentsql.xml"/>
+		<mapper	resource="com/kosmo/shoong/pack/mybatis/chatmessage.xml"/>
 		<mapper	resource="com/kosmo/shoong/course/mybatis/coursesql.xml" />
 		<mapper	resource="com/kosmo/shoong/record/mybatis/recordsql.xml"/>
 		<mapper	resource="com/kosmo/shoong/member/mybatis/membersql.xml"/>
