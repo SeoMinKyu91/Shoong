@@ -107,13 +107,11 @@ public class PackManageCotroller {
 	
 	@RequestMapping("member/delete.do")
 	public String packMemberDelete(@RequestParam Map map, Model model) {
+		System.out.println(map.get("packJoinNo"));
 		
 		
-		
-		if(service.packSelectManager(map)) {
-			System.out.println("매니저임");
-			service.packManagerDelete(map);
-		}//////////
+		//service.packManagerDelete(map);
+			
 		
 		service.packJoinDelete(map);
 		

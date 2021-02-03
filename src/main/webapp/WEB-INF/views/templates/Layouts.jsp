@@ -74,6 +74,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
 <body>
 
@@ -191,7 +192,7 @@
 	</c:if>
 	
 	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
 	<script>
 	
 	$(function(){
@@ -567,15 +568,14 @@
 			console.log('e.keycode:$s,e.which:%s',e.keyCode,e.which);
 			var keyValue = e.keyCode? e.keyCode : e.which;
 			var chatContent = $('.chatRoomMessageWrite').val();
-			if(chatContent != ''){
-				if(keyValue ==13){
+			if(keyValue==13){
+				if(chatContent !=''){
 					ajaxChatMessageInsert();
 					sendMessage();
-				}
+				}	
 			}
-			else{
-				alert('글자를 입력해주세요');
-			}
+			
+			
 			
 			
 		})
@@ -609,10 +609,8 @@
 				$('.chatRoomMessageWrite').focus();	
 			}
 			else{
-				alert('글자를 입력해주세요');
 				$('.chatRoomMessageWrite').val("");		
 				$('.chatRoomMessageWrite').focus();
-				return
 			}
 			
 			
