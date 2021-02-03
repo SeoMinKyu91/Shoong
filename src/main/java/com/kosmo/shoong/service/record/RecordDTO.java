@@ -18,7 +18,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@ToString
 public class RecordDTO {
 	
 	private String recordId;
