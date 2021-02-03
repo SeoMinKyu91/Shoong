@@ -146,7 +146,6 @@
 			<version>2.0.5</version>
 		</dependency>
 		<!--마이바티스 사용을 위한 디펜던시 추가 끝 -->
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>

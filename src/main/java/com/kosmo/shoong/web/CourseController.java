@@ -5,45 +5,73 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kosmo.shoong.common.FileUpDownUtils;
 import com.kosmo.shoong.service.course.CourseDTO;
 import com.kosmo.shoong.service.course.CourseService;
+import com.kosmo.shoong.service.impl.course.CourseServiceImpl;
+import com.kosmo.shoong.service.impl.record.RecordServiceImpl;
+import com.kosmo.shoong.service.record.RecordDTO;
 
 
 @Controller
 @RequestMapping("/course")
+@SessionAttributes({"userId","packId"})
 public class CourseController {
 
 	@Resource(name="courseService")
-	private CourseService service;
+	private CourseServiceImpl cService;
+	
+	@Resource(name="recordService")
+	public RecordServiceImpl rService;
 
 	@RequestMapping("/main.do")
 	public String courseMain(Model model,Map map) {
-		map.put("user_ID","kim");
-		CourseDTO record = service.selectOne(map);
+		//map.put("user_ID","kim");
+		CourseDTO record = cService.selectOne(map);
 		model.addAttribute("courseList",record);
 		return "course/CourseList";
 	}
-
+	
+	/*
+	 * record_,course 다보여줌
+	 */
 	@RequestMapping("/navi.do")
-	public String courseNavi() {
-		return "course/Navi";
+	public String courseNavi(
+			@ModelAttribute(value="userId") String userId,Model model) {
+		System.out.println("courseNavi:"+userId);
+		List<RecordDTO> rList = rService.selectListById(userId);
+		
+		for(RecordDTO r:rList) {
+			System.out.println(r.getRecordDate());
+		}
+		model.addAttribute("recordList",rList);
+		//cService.selectList();
+		
+		return "course/CourseRecord";
 	}
 
 	@PostMapping(value = "/routeLoad",produces = "text/html; charset=UTF-8")
@@ -68,10 +96,12 @@ public class CourseController {
 		if(br!=null) br.close();
 		return sb.toString();
 	}
-
+	
+	//웹 json file 업로드
 	@PostMapping(value = "/fileUpload", produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String uploadCourse(MultipartHttpServletRequest mhsr) {
+		System.out.println("uploadCourse");
 		String filePath = mhsr.getServletContext().getRealPath("/upload");
 		System.out.println("courseupload:"+filePath);
 		Iterator<String> itr = mhsr.getFileNames();
@@ -79,6 +109,8 @@ public class CourseController {
 		String fileFullPath = null;
 		String renameFilename = null;
 		while (itr.hasNext()) { // 받은 파일들을 모두 돌린다.
+			//mhsr.getParameterMap().get("routeFile");
+			
 			MultipartFile upload = mhsr.getFile(itr.next());
 			renameFilename = FileUpDownUtils.getNewFileName(filePath, upload.getOriginalFilename());
 
@@ -86,6 +118,7 @@ public class CourseController {
 
 			fileFullPath = filePath + File.separator + renameFilename; // 파일 전체 경로
 			File file = new File(fileFullPath);
+			System.out.println("파일이름:"+file.getName());
 			try {
 				// 파일 저장
 				upload.transferTo(file);
@@ -97,6 +130,21 @@ public class CourseController {
 		JSONObject obj = new JSONObject();
 		obj.put("fileName", renameFilename);
 		return obj.toJSONString();
+	}
+	
+	//코스 등록용
+	@RequestMapping(value="/insert.do")
+	public String insertCourse(
+			@RequestParam Map map,@ModelAttribute(value="userId") String userId) {
+		map.put("userId", userId);
+		Set<String> keys = map.keySet();
+		for(String key:keys) System.out.println(key+":"+map.get(key).toString());
+		String courseLength = map.get("courseLength").toString();
+		//courseLength = courseLength.substring(0, courseLength.length()-2);
+		//System.out.println(Double.valueOf(courseLength.substring(0, courseLength.length()-2)));
+		boolean flag = cService.insert(map);
+		System.out.println(flag?"코스 입력 성공":"코스 입력 실패");
+		return "forward:/mypage/main.do";
 	}
 	
 	@RequestMapping("/mainTest.do")
