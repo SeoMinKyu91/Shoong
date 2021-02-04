@@ -3,19 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
 <link rel="stylesheet" href="cards-gallery.css">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
 
 <!-- ※colorlib-main으로 일단 감싸고 안에다가 작업해야 왼쪽 탑에 안먹히고 작업할 수 있어요 -->
 <!-- 설명이 이해가 잘 안되시면  따로 연락주세요...-->
@@ -104,8 +95,7 @@ input {
 						style="margin-left: 80px; width: 110px;">
 				</div>
 				<div class="col-xs-10 offset-xs-1 col-md-4 offset-md-4">
-					<button
-						data-toggle="modal" data-target="#thumbnailModal"
+					<button type ="button"
 						style="color: #f32a48; border: none; float: center; background-color: rgba(255, 255, 255, 0.1); margin-left: 80px;"
 						id="btnThumbnail">프로필 사진 바꾸기</button>
 				</div>
@@ -282,7 +272,7 @@ input {
 				<div class="modal-footer">
 					<button type="button" class="btn text-right"
 						id="btnmyPageThumbnailOk">선택</button>
-					<button type="button" class="btn btn-info text-right">닫기</button>
+					<button type="button" class="btn btn-info text-right btnmyPageThumbnailNo">닫기</button>
 				</div>
 			</div>
 		</div>
@@ -295,16 +285,22 @@ input {
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=616834812e97e8f82a462cd2cc2e5e4e&libraries=services"></script>
 <script>
 	$(function() {
-		jQuery.noConflict();
 		//------------------------모달 스크립트 -------------------------->
 		var myPageThumbnail = "";
 
-		$('#btnThumbnail').click(function() {
-			$('#thumbnailModal').modal();
+		$('#btnThumbnail').click(function(e) {
+			e.stopPropagation();
+			$('#thumbnailModal').modal('show');
+			/*
 			$('#thumbnailModal').modal({
 				backdrop : 'static'
 			});
+			*/
 			thumbnailCssReset();
+		})
+		
+		$('.btnmyPageThumbnailNo').click(function(){
+			$('#thumbnailModal').modal('hide');
 		})
 
 		$('.myPageThumbnailModal img').click(function() {
@@ -314,11 +310,11 @@ input {
 
 		})
 
-		$('#btnmyPageThumbnailOk')
-				.click(
+		$('#btnmyPageThumbnailOk').click(
 						function() {
 							console.log('확인버튼 눌러짐');
 							console.log(myPageThumbnail);
+							$('#thumbnailModal').modal('hide');
 							$('#myPageThumbnail')
 									.prop("value", myPageThumbnail);
 							$('#myPageThumbnailProfile')
