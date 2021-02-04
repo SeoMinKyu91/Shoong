@@ -51,7 +51,6 @@
 	color: #eb566c !important;
 	display: inline-block;
 	padding: 18px 44px;
-	font-family: "Sulphur Point", sans-serif;
 	font-size: 14px;
 	font-weight: 400;
 	border: 0;
@@ -130,13 +129,11 @@
 }
 
 body {
-	font-family: "Sulphur Point", sans-serif;
 	font-weight: normal;
 	font-style: normal
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: "Sulphur Point", sans-serif;
 	color: #1c1930;
 	margin-top: 0px;
 	font-style: normal;
@@ -145,7 +142,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-	font-family: "Sulphur Point", sans-serif;
 	color: #10285d;
 	font-size: 16px;
 	line-height: 30px;
@@ -380,7 +376,6 @@ hr {
 	border-radius: 30px;
 	-moz-user-select: none;
 	text-transform: uppercase;
-	font-family: "Sulphur Point", sans-serif;
 	color: #fff;
 	cursor: pointer;
 	display: inline-block;
@@ -2369,7 +2364,6 @@ transition
 	margin-bottom: 22px;
 	color: #ff3d1c;
 	display: inline-block;
-	font-family: "Sacramento", cursive
 }
 
 .section-tittle h2 {
@@ -2727,7 +2721,6 @@ transition
 	line-height: 1.2;
 	font-weight: 400;
 	margin-bottom: 30px;
-	font-family: "Sacramento", cursive;
 	display: block
 }
 
@@ -2930,7 +2923,6 @@ transition
 	padding: 15px;
 	border-radius: 0px;
 	text-transform: capitalize;
-	font-family: "Sulphur Point", sans-serif;
 	line-height: 31px;
 	font-size: 15px
 }
@@ -3227,7 +3219,6 @@ transition
 	margin-bottom: 22px;
 	color: #ff3d1c;
 	display: inline-block;
-	font-family: "Sacramento", cursive
 }
 
 @media ( max-width : 575px) {
@@ -3906,7 +3897,6 @@ rotate(
 	padding: 15px;
 	border-radius: 0px;
 	text-transform: capitalize;
-	font-family: "Sulphur Point", sans-serif;
 	letter-spacing: 0.1em;
 	line-height: 1.2;
 	line-height: 29px;
@@ -4451,7 +4441,6 @@ form.search-box2 .search-form a {
 	padding: 15px;
 	border-radius: 0px;
 	text-transform: capitalize;
-	font-family: "Sulphur Point", sans-serif;
 	line-height: 31px;
 	font-size: 15px
 }
@@ -4588,7 +4577,6 @@ form.search-box2 .search-form a {
 	margin-bottom: 29px;
 	font-weight: 500;
 	text-transform: capitalize;
-	font-family: "Sulphur Point", sans-serif
 }
 
 .footer-area .footer-tittle h4 span {
@@ -6148,7 +6136,6 @@ form.search-box2 .search-form a {
 	color: #fff;
 	font-weight: 900;
 	margin-bottom: 0;
-	font-family: "Sulphur Point", sans-serif;
 	text-transform: capitalize
 }
 
@@ -6207,7 +6194,6 @@ form.search-box2 .search-form a {
 	cursor: pointer;
 	display: block;
 	float: left;
-	font-family: "Sulphur Point", sans-serif;
 	font-weight: normal;
 	width: 100% !important;
 	line-height: 50px;
@@ -6243,7 +6229,6 @@ form.search-box2 .search-form a {
 	top: 3px;
 	transition: all 0.15s ease-in-out;
 	width: 5px;
-	font-family: fontawesome;
 	color: #919191;
 	font-size: 15px
 }
