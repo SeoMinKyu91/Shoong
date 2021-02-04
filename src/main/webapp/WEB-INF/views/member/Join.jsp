@@ -6,8 +6,6 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
 	rel="stylesheet">
-<!-- ※colorlib-main으로 일단 감싸고 안에다가 작업해야 왼쪽 탑에 안먹히고 작업할 수 있어요 -->
-<!-- 설명이 이해가 잘 안되시면  따로 연락주세요...-->
 <style>
 .slider-area {
 	display: none;
@@ -26,7 +24,7 @@
 .form-horizontal {
 	padding-top: 30px;
 	background-color: #f2f2f7;
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: rgba(255, 255, 255, 0.9);
 	border-radius: 30px;
 }
 
