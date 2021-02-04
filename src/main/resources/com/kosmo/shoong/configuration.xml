@@ -31,8 +31,13 @@ myBatis 환경설정파일
 			type="com.kosmo.shoong.service.record.RecordDTO"/>
 		<typeAlias alias="memberDTO"
 			type="com.kosmo.shoong.service.member.MemberDTO" />
+			
+		<!-- Admin -->
 		<typeAlias alias="reportAdminDTO" 
 			type="com.kosmo.shoong.admin.service.ReportAdminDTO"/>
+		<typeAlias alias="packAdminDTO"
+			type="com.kosmo.shoong.admin.service.PackAdminDTO" />
+			
 	</typeAliases>
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
