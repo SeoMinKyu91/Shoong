@@ -43,7 +43,6 @@
   .modal {
 	  text-align:center;
       position: fixed;
-      left:25%
     }
     @media screen and (min-width: 768px) {
       .modal:before {
@@ -76,9 +75,32 @@
 		font-weight: bold;
 		border: none;
 	}
+	
+	.animated-text{
+		display:none;
+	}
+	.slider-area{
+		display:none;
+	}
+	
+	#bg {
+	  position: fixed; 
+	  top: 0; 
+	  left: 0; 
+	  opacity: 0.5;
+	  /* Preserve aspet ratio */
+	  min-width: 100%;
+	  min-height: 100%;
+	}
+	
+	/*달력 요일 뿌려주는 부분*/
+	.fc-col-header-cell{
+		background-color: red;
+	}
+	
+	
 </style>
-
-  <div id="colorlib-main" style="padding:20px">
+<div class="container">
 	<div class="row">
 		<div class="col-lg-12" style="padding-bottom:20px">
 			<div class="">
@@ -94,28 +116,22 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-xs-12 col-md-12 col-lg-12">
-			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em;text-align: center">전국일주</p>
-			<hr style="background-color: black;height:1px"/>
+</div>
+
+<!--  
+<div class="row">
+	<div class="col-lg-12">
+		<div class="text-center col-lg-12" >
+			<p style="font-size:2em;padding-bottom:10px;padding:20px;">&lt;&nbsp;일정&nbsp;&gt;</p>
 		</div>
+			
 	</div>
-	
-	<!--  
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="text-center col-lg-12" >
-				<p style="font-size:2em;padding-bottom:10px;padding:20px;">&lt;&nbsp;일정&nbsp;&gt;</p>
-			</div>
-				
-		</div>
-	</div>
-	-->
-	<div class="col-lg-8">
-		<div id="calendar"></div>
-	</div>
+</div>
+-->
+<div class="col-lg-8">
+	<div id="calendar"></div>
+</div>
     
-  </div>
   
   
    <!-- END COLORLIB-MAIN -->

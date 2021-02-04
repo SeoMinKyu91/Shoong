@@ -80,7 +80,9 @@ public class PackScheduleController {
 		HttpSession session = req.getSession();
 		map.put("userId",session.getAttribute("userId"));
 		map.put("packId",session.getAttribute("packId"));
-
+		System.out.println("팩 스케줄 등록 들어옴");
+		System.out.println(map.get("userId"));
+		System.out.println(map.get("packId"));
 		System.out.println(map.get("packScheduleTitle"));
 		System.out.println(map.get("packScheduleStart"));
 		System.out.println(map.get("packScheduleEnd"));

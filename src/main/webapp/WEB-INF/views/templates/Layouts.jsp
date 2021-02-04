@@ -117,7 +117,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="popular-location" style="margin-top:100px;">
+		<div class="popular-location" style="padding-top:100px; padding-bottom:100px;">
 			<div class="container">
 				<tiles:insertAttribute name="body" />
 				<c:if test="${not empty sessionScope.packId }">
