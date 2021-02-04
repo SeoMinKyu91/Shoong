@@ -19,23 +19,33 @@
 		<result property="badgeThumbnail" column="BADGE_THUMBNAIL"/>
 	</resultMap>
 	
-	<select id="">
-	
+	<select id="whereIsMyBadge" parameterType="java.util.Map" resultMap="badgeDTOResult">
+		SELECT *
+		FROM BADGE
+		WHERE BADGE_CATEGORY='마일리지'
+		AND TO_NUMBER(BADGE_REQUIREMENT) <![CDATA[<=]]>  TO_NUMBER(#{mileage})
+		<!-- 
+		AND BADGE_ID <![CDATA[>=]]> (SELECT MAX(BADGE_ID) FROM USER_BADGE_GET WHERE USER_ID=#{userId})
+		 -->
 	</select>
 
 	<insert id="insertMileageBadge" parameterType="java.util.Map">
 		<!-- 
-		<selectKey resultType="Int" order="BEFORE" keyProperty="badgeIdList">
+		<selectKey resultType="integer" order="BEFORE" keyProperty="badgeIdList">
 			SELECT BADGE_ID
 			FROM BADGE
 			WHERE BADGE_CATEGORY='마일리지'
-			AND TO_NUMBER(BADGE_REQUIREMENT) <![CDATA[>]]>= #{value}
+			AND TO_NUMBER(BADGE_REQUIREMENT) <![CDATA[>]]>= TO_NUMBER(#{mileage})
 		</selectKey>
 		 -->
-		INSERT INTO USER_BADGE_GET
-		<foreach collection="badgeList" item="badge">
-			VALUES (#{badgeId},#{userId},SYSDATE)
+		<foreach collection="badgeList" item="badge" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
+		INTO user_badge_get(badge_get_id,badge_id,user_id,get_date) 
+		VALUES (seq_b_u_get.NEXTVAL,#{badge.badgeId},#{userId},SYSDATE)
 		</foreach>
+		 <!-- 
+		INSERT INTO USER_BADGE_GET 
+		VALUES (#{badgeId},#{userId},SYSDATE)
+		 -->
 	</insert>
 
 </mapper>
