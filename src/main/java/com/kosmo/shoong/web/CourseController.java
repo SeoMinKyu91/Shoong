@@ -83,6 +83,7 @@ public class CourseController {
 	public String routeLoad(
 			@RequestParam String fileName,HttpServletRequest req)
 											throws IOException {
+	
 		String filePath = req.getServletContext().getRealPath("/upload")+File.separator+fileName;
 		System.out.println("routePath:"+filePath);
 		BufferedReader br =
@@ -99,6 +100,7 @@ public class CourseController {
 		}
 		if(br!=null) br.close();
 		return sb.toString();
+		
 	}
 	
 	//웹 json file 업로드

@@ -33,9 +33,15 @@
     <link rel="stylesheet" href="<c:url value="/courseTest/css/style.css"/>">
 </head>
 <style>
+.animated-text {
+	display: none;
+}
+
+.slider-area {
+	display: none;
+}
 </style>
 <body>
-<div id="colorlib-main">
     <!-- breadcrumb start-->
     <section class="breadcrumb breadcrumb_bg">
         <div class="container">
@@ -327,7 +333,6 @@
     </section>
     <!-- about us css end-->
 
-</div>
 
     <!-- jquery plugins here-->
     <script src="<c:url value="/courseTest/js/jquery-1.12.1.min.js"/>"></script>
