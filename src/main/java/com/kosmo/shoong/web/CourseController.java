@@ -17,6 +17,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.tribes.util.Arrays;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,8 +73,11 @@ public class CourseController {
 			System.out.println(r.getRecordDate());
 		}
 		model.addAttribute("recordList",rList);
-		
-		model.addAttribute("courseList", cService.selectList());
+		List<CourseDTO> cList = cService.selectList();
+		for(CourseDTO c:cList) {
+			System.out.println(c.getCourseName());
+		}
+		model.addAttribute("courseList",cList);
 		
 		return "course/CourseRecord";
 	}
