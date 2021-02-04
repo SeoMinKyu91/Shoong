@@ -21,12 +21,7 @@
 		background-color: #ff8827;
 	}
 </style>
-<<<<<<< HEAD
-
-<div id="colorlib-main" style="padding:10px">
-=======
 <div id="colorlib-main" style="padding:20px">
->>>>>>> refs/remotes/origin/test_master
 	<div class="row">
 		<div class="col-lg-12" style="padding-bottom:20px">
 			<div class="">

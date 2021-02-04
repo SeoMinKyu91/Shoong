@@ -2,27 +2,25 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+<!--  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+-->
 
 <!-- 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+<link rel="stylesheet" href="cards-gallery.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
 -->
-<!-- 모달  -->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- 모달 -->
-<<<<<<< HEAD
+
 <link rel="stylesheet" href="<c:url value="/css/comment.css?fasd"/>">
 <script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
-=======
-<link rel="stylesheet" href="<c:url value="/css/comment.css?f"/>">
-
->>>>>>> refs/remotes/origin/test_LES
 
 <style>
 	.feed-bottom-icon img{
-	margin: 6px 0px 6px 15px;
+		margin: 6px 0px 6px 15px;
 	}
 	.packCreateBtn {
 		color:#ff8827;
@@ -88,218 +86,229 @@
 		border-bottom: 1px solid black;
 	}
 	
+	.animated-text{
+		display:none;
+	}
+	.slider-area{
+		display:none;
+	}
 	
-	
-	
+	#bg {
+	  position: fixed; 
+	  top: 0; 
+	  left: 0; 
+	  opacity: 0.5;
+	  /* Preserve aspet ratio */
+	  min-width: 100%;
+	  min-height: 100%;
+	}
 	
 	
 </style>
 
-<div id="colorlib-main">
 	
-	
-	<div class="row" style="margin-left: 20px; margin-bottom: 2px;">
-			
-		<div class="col-lg-12" style="padding-bottom:10px">
-			<div class="row">
-				<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10" style="padding-top:20px">
-					<a href="<c:url value="/pack/main.do"/>">
-					<img alt="pack" src="<c:url value="/images/pack/pack.png"/>" style="width: 80px;"></a>&emsp;<a class="packCreateBtn btn" href="<c:url value="/pack/main.do"/>">HOME</a>
-					<c:if test="${!empty sessionScope.packId}">
-						<a class="packCreateBtn btn" href="<c:url value="/pack/view.do"/>">MY PACK</a>
-					</c:if>
-				</div>
-				<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 icons-div" style="padding-top: 17px;">
-					<a id="btn-feed-write"><i class="fas fa-edit fa-2x" style="color: black; margin-left: 5px;"></i></a>
-					<a href="<c:url value="/pack/myComment.do"/>"><i class="far fa-user fa-2x" style="color: black; margin-left: 5px;"></i></a>
-					<a href="<c:url value="/pack/comment.do"/>"><i class="far fa-list-alt"></i></a>
-				</div>
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
+<div class="row">
+		
+	<!-- 팩 위에 꺼 -->
+	<div class="col-lg-12">
+		<div class="row">
+			<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
+				<a href="<c:url value="/pack/main.do"/>">
+				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>" style="width: 80px;"></a>&emsp;<a class="packCreateBtn btn" href="<c:url value="/pack/main.do"/>">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="packCreateBtn btn" href="<c:url value="/pack/view.do"/>">MY PACK</a>
+				</c:if>
 			</div>
-			
-			
+			<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 icons-div" style="padding-top: 17px;">
+				<a id="btn-feed-write"><i class="fas fa-edit fa-2x" style="color: black; margin-left: 5px;"></i></a>
+				<a href="<c:url value="/pack/myComment.do"/>"><i class="far fa-user fa-2x" style="color: black; margin-left: 5px;"></i></a>
+				<a href="<c:url value="/pack/comment.do"/>"><i class="far fa-list-alt"></i></a>
+			</div>
 		</div>
+		
+		
 	</div>
-	<hr style="background-color:black; height:1px; margin: 0px;"/>
+</div>
+<hr style="background-color:black; height:1px; margin: 0px;"/>
 
-	<!-- 피드 메인 시작 DIV -->
-	<div class="container">
-		<div class="row" id="body-div">
-			<div class="offset-md-2 col-md-8 col-sm-12">
-				<c:if test="${not empty commentList }" var="notempty">
-					<c:forEach items="${commentList }" var="item" varStatus="loop">
-						<div class="row feed-rows">
-							<div class="feed">
-								<div class="row feed-inner">
-									<div class="col-md-12">
-										<div class="row feed-row">
-											<!-- 피드 top 시작 -->
-											<div class="col-12 feed-top">
-												<div class="row feed-top-row">
-													<div class="col-2 feed-top-imgs"
-														style="text-align: center;">
-														<!-- 나중에 이미지 사진 교체 해야함 현재는 정확히 어떻게 해야할지 모르겠어서 임시사진 적용 -->
-														<img class="feed-top-img-src"
-															alt="이미지사진"
-															src="<c:url value="/images/image_10.jpg"/>" />
-													</div>
-													<div class="col-7 feed-top-nick">
-														<span class="feed-top-nick-span">${item.packCommentWriter }</span>
-													</div>
+<!-- 피드 메인 시작 DIV -->
+<div class="container">
+	<div class="row" id="body-div">
+		<div class="offset-md-2 col-md-8 col-sm-12">
+			<c:if test="${not empty commentList }" var="notempty">
+				<c:forEach items="${commentList }" var="item" varStatus="loop">
+					<div class="row feed-rows">
+						<div class="feed">
+							<div class="row feed-inner">
+								<div class="col-md-12">
+									<div class="row feed-row">
+										<!-- 피드 top 시작 -->
+										<div class="col-12 feed-top">
+											<div class="row feed-top-row">
+												<div class="col-2 feed-top-imgs"
+													style="text-align: center;">
+													<!-- 나중에 이미지 사진 교체 해야함 현재는 정확히 어떻게 해야할지 모르겠어서 임시사진 적용 -->
+													<img class="feed-top-img-src"
+														alt="이미지사진"
+														src="<c:url value="/images/image_10.jpg"/>" />
 												</div>
-												<!-- feed-top-row -->
+												<div class="col-7 feed-top-nick">
+													<span class="feed-top-nick-span">${item.packCommentWriter }</span>
+												</div>
 											</div>
-											<!-- feed-row -->
-											<!-- 피드 top 끝 -->
+											<!-- feed-top-row -->
 										</div>
-										<!-- 피드 이미지 시작 -->
-										<c:if test="${not empty item.packCommentImages}" var="imagesExist">
-											<div class="row feed-img-row">
-												
-												<div class="col-12 feed-img carousel slide" id="${item.packCommentNo }" data-ride="carousel" data-interval="false">
-													<!-- indicators -->
-													<c:if test="${item.packCommentImages.size() > 1 }">
-														<ol class="carousel-indicators">
-															<c:forEach items="${item.packCommentImages }"
-																var="i" varStatus="index">
-																<li <c:if test="${index.index==0 }"> class="active"</c:if>
-																	data-target="#${item.packCommentNo}"
-																	data-slide-to="${index.index}">
-																</li>
-															</c:forEach>
-														</ol>
-													</c:if>
-
-													<!-- Wrapper for slides -->
-													<div class="carousel-inner"
-														role="listbox">
-														<c:forEach
-															items="${item.packCommentImages }"
-															var="image" varStatus="index">
-															<div
-																<c:if test="${index.index==0 }" var="isFirst"> class="item active"</c:if>
-																<c:if test="${!isFirst }">class="item"</c:if>>
-																<img class="feed-img-src"
-																	src="/fileupload/${image }"
-																	alt="기본사진" />
-															</div>
-														</c:forEach>
-													</div>
-
-													<!-- Controls -->
-													<c:if test="${item.packCommentImages.size() > 1 }">
-														<a class="left carousel-control"
-															href="#${item.packCommentNo }"
-															role="button" data-slide="prev"
-															style="background-color: none;">
-															<span
-																class="glyphicon glyphicon-chevron-left"
-																aria-hidden="true"></span> <span
-																class="sr-only">Previous</span>
-														</a>
-														<a class="right carousel-control"
-															href="#${item.packCommentNo }"
-															role="button" data-slide="next">
-															<span
-																class="glyphicon glyphicon-chevron-right"
-																aria-hidden="true"></span> <span
-																class="sr-only">Next</span>
-														</a>
-													</c:if>
-												</div>
-											</div>
-											<!-- feed-img-row -->
-										</c:if>
-										<c:if test="!imagesExist">
-
-										</c:if>
-										<!-- 피드 이미지 끝 -->
-
-										<div class="row feed-content-row">
-											<div class="col-12 feed-content">
-												<span>${item.packCommentContent }</span>
-											</div>
-										</div>
-
-										<!-- 피드 bottoms 시작 -->
-										<div class="feed-bottoms">
-											<div class="row feed-bottom-row">
-												<div class="col-10 feed-bottom-icon">
-													<c:if test="${item.packCommentLike eq '0'}">
-														<img class="icon likely-icon" src="<c:url value='/images/fa-icons/heart.png'/>" title="Likely"/>
-													</c:if>
-													<c:if test="${item.packCommentLike eq '1'}">
-														<img class="icon likely-icon" src="<c:url value='/images/fa-icons/heart-solid.svg'/>" title="Likely"/>	
-													</c:if>
-													<img class="icon reply-icon" src="<c:url value='/images/fa-icons/comment.png'/>" title="reply"/>
-												</div>
-											</div>
-
-											<div class="row feed-bottom-row">
-												<c:if test="${item.packCommentLikeCount != null}">
-													<div class="col-12 feed-likely-row">
-														<span style="margin-left: 15px;">좋아요</span>
-														<span class="likely-count">${item.packCommentLikeCount}</span>
-														<span>개</span>
-													</div>
-												</c:if>
-											</div>
-
-											<div class="row feed-bottom-row"
-												style="margin-top: 10px;">
-												<div class="col-12 feed-reply-show">
-													<span style="margin-left: 15px;">댓글</span> <span style="margin-left: 15px;" id="span${item.packCommentNo }">${item.packCommentReplyCount }개</span>
-													<input type="hidden" value="${item.packCommentReplyCount }" id="rpc${item.packCommentNo }"/>
-													<span class="replyMore">모두보기</span>
-												</div>
-											</div>
-
-											<div class="row feed-bottom-row qwerasdf">
-												<c:if
-													test="${not empty item.packCommentReply }">
-													<c:forEach items="${item.packCommentReply }" var="reply" varStatus="loop" begin="0" end="3">
-														<div class="col-lg-11 feed-replys" id="replyNo${reply.packCommentReplyNo }">
-															<span style="margin-left: 15px; font-weight: bold; font-size: 12px;">${reply.packCommentReplyWriter }</span>
-															<span style="margin-left: 15px;">${reply.packCommentReplyContent }</span>
-															
-														</div>
-														<c:if test="${sessionScope.userId eq reply.userId }">
-															<div class="col-lg-1 feed-replys-readmore" id="readmore${reply.packCommentReplyNo }">
-																<i class="fas fa-ellipsis-h reply-readmore" style="font-size: 15px; cursor: pointer; opacity: 0.4;"></i>
-																<input class="replyNo" type="hidden" value="${reply.packCommentReplyNo}">
-															</div>
-														</c:if>
-													</c:forEach>
-												</c:if>
-											</div>
-
-											<div class="row feed-bottom-row"
-												style="border-top: 1px solid lightgrey; margin-left: 0px; margin-right: 0px; margin-top: 15px;">
-												<div class="col-10 feed-reply-content">
-													<input type="text" class="feed-reply-content-input" placeholder="댓글달기"/>
-												</div>
-												<div class="col-2 feed-reply-write" style="text-align: right;">
-													<span style="cursor: pointer;">게시</span>
-												</div>
-											</div>
-										</div>
-										<!-- 피드 bottoms 끝 -->
+										<!-- feed-row -->
+										<!-- 피드 top 끝 -->
 									</div>
+									<!-- 피드 이미지 시작 -->
+									<c:if test="${not empty item.packCommentImages}" var="imagesExist">
+										<div class="row feed-img-row">
+											
+											<div class="col-12 feed-img carousel slide" id="${item.packCommentNo }" data-ride="carousel" data-interval="false">
+												<!-- indicators -->
+												<c:if test="${item.packCommentImages.size() > 1 }">
+													<ol class="carousel-indicators">
+														<c:forEach items="${item.packCommentImages }"
+															var="i" varStatus="index">
+															<li <c:if test="${index.index==0 }"> class="active"</c:if>
+																data-target="#${item.packCommentNo}"
+																data-slide-to="${index.index}">
+															</li>
+														</c:forEach>
+													</ol>
+												</c:if>
+
+												<!-- Wrapper for slides -->
+												<div class="carousel-inner"
+													role="listbox">
+													<c:forEach
+														items="${item.packCommentImages }"
+														var="image" varStatus="index">
+														<div
+															<c:if test="${index.index==0 }" var="isFirst"> class="item active"</c:if>
+															<c:if test="${!isFirst }">class="item"</c:if>>
+															<img class="feed-img-src"
+																src="/fileupload/${image }"
+																alt="기본사진" />
+														</div>
+													</c:forEach>
+												</div>
+
+												<!-- Controls -->
+												<c:if test="${item.packCommentImages.size() > 1 }">
+													<a class="left carousel-control"
+														href="#${item.packCommentNo }"
+														role="button" data-slide="prev"
+														style="background-color: none;">
+														<span
+															class="glyphicon glyphicon-chevron-left"
+															aria-hidden="true"></span> <span
+															class="sr-only">Previous</span>
+													</a>
+													<a class="right carousel-control"
+														href="#${item.packCommentNo }"
+														role="button" data-slide="next">
+														<span
+															class="glyphicon glyphicon-chevron-right"
+															aria-hidden="true"></span> <span
+															class="sr-only">Next</span>
+													</a>
+												</c:if>
+											</div>
+										</div>
+										<!-- feed-img-row -->
+									</c:if>
+									<c:if test="!imagesExist">
+
+									</c:if>
+									<!-- 피드 이미지 끝 -->
+
+									<div class="row feed-content-row">
+										<div class="col-12 feed-content">
+											<span>${item.packCommentContent }</span>
+										</div>
+									</div>
+
+									<!-- 피드 bottoms 시작 -->
+									<div class="feed-bottoms">
+										<div class="row feed-bottom-row">
+											<div class="col-10 feed-bottom-icon">
+												<c:if test="${item.packCommentLike eq '0'}">
+													<img class="icon likely-icon" src="<c:url value='/images/fa-icons/heart.png'/>" title="Likely"/>
+												</c:if>
+												<c:if test="${item.packCommentLike eq '1'}">
+													<img class="icon likely-icon" src="<c:url value='/images/fa-icons/heart-solid.svg'/>" title="Likely"/>	
+												</c:if>
+												<img class="icon reply-icon" src="<c:url value='/images/fa-icons/comment.png'/>" title="reply"/>
+											</div>
+										</div>
+
+										<div class="row feed-bottom-row">
+											<c:if test="${item.packCommentLikeCount != null}">
+												<div class="col-12 feed-likely-row">
+													<span style="margin-left: 15px;">좋아요</span>
+													<span class="likely-count">${item.packCommentLikeCount}</span>
+													<span>개</span>
+												</div>
+											</c:if>
+										</div>
+
+										<div class="row feed-bottom-row"
+											style="margin-top: 10px;">
+											<div class="col-12 feed-reply-show">
+												<span style="margin-left: 15px;">댓글</span> <span style="margin-left: 15px;" id="span${item.packCommentNo }">${item.packCommentReplyCount }개</span>
+												<input type="hidden" value="${item.packCommentReplyCount }" id="rpc${item.packCommentNo }"/>
+												<span class="replyMore">모두보기</span>
+											</div>
+										</div>
+
+										<div class="row feed-bottom-row qwerasdf">
+											<c:if
+												test="${not empty item.packCommentReply }">
+												<c:forEach items="${item.packCommentReply }" var="reply" varStatus="loop" begin="0" end="3">
+													<div class="col-lg-11 feed-replys" id="replyNo${reply.packCommentReplyNo }">
+														<span style="margin-left: 15px; font-weight: bold; font-size: 12px;">${reply.packCommentReplyWriter }</span>
+														<span style="margin-left: 15px;">${reply.packCommentReplyContent }</span>
+														
+													</div>
+													<c:if test="${sessionScope.userId eq reply.userId }">
+														<div class="col-lg-1 feed-replys-readmore" id="readmore${reply.packCommentReplyNo }">
+															<i class="fas fa-ellipsis-h reply-readmore" style="font-size: 15px; cursor: pointer; opacity: 0.4;"></i>
+															<input class="replyNo" type="hidden" value="${reply.packCommentReplyNo}">
+														</div>
+													</c:if>
+												</c:forEach>
+											</c:if>
+										</div>
+
+										<div class="row feed-bottom-row"
+											style="border-top: 1px solid lightgrey; margin-left: 0px; margin-right: 0px; margin-top: 15px;">
+											<div class="col-10 feed-reply-content">
+												<input type="text" class="feed-reply-content-input" placeholder="댓글달기"/>
+											</div>
+											<div class="col-2 feed-reply-write" style="text-align: right;">
+												<span style="cursor: pointer;">게시</span>
+											</div>
+										</div>
+									</div>
+									<!-- 피드 bottoms 끝 -->
 								</div>
 							</div>
 						</div>
-						<!-- feed rows -->
-					</c:forEach>
-				</c:if>
-				<c:if test="${!notempty }">
-					<div class="offset-sm-2 col-sm-9" style="margin-top:30px;">
-						<h1>등록된 게시글이 없습니다</h1>
 					</div>
-				</c:if>
-			</div>
+					<!-- feed rows -->
+				</c:forEach>
+			</c:if>
+			<c:if test="${!notempty }">
+				<div class="offset-sm-2 col-sm-9" style="margin-top:30px;">
+					<h1>등록된 게시글이 없습니다</h1>
+				</div>
+			</c:if>
 		</div>
 	</div>
 </div>
-<!-- color-lib-main -->
 
 <!-- 피드 글 쓰기 모달 시작 -->
 <div class="modal fade" id="feed-write-modal"
