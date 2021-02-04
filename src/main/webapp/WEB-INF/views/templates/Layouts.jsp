@@ -33,6 +33,7 @@
 <link rel="stylesheet" href="<c:url value="/css/open-iconic-bootstrap.min.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/bootstrap-datepicker.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.timepicker.css"/>">
+
 <!-- 달력 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.5.0/main.min.css,npm/fullcalendar@5.5.0/main.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.css">
@@ -71,8 +72,9 @@
 <script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
 
 <!----------------------------------------------------------------------------->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
 
@@ -115,7 +117,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="popular-location section-padding30">
+		<div class="popular-location" style="margin-top:100px;">
 			<div class="container">
 				<tiles:insertAttribute name="body" />
 				<c:if test="${not empty sessionScope.packId }">
@@ -730,7 +732,7 @@
 	<script src="<c:url value="/js/jquery-migrate-3.0.1.min.js"/>"></script> 
 	-->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
 	<script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
 	<script src="<c:url value="/js/jquery.timepicker.min.js"/>"></script>
 	<!-- 지도 -->
@@ -749,7 +751,10 @@
 	<!-- Jquery, Popper, Bootstrap 
 	<script src="<c:url value="/change/js/vendor/jquery-1.12.4.min.js"/>"></script> -->
 	<script src="<c:url value="/change/js/popper.min.js"/>"></script>
+	
+	<!-- 웅기 지운부분  
 	<script src="<c:url value="/change/js/bootstrap.min.js"/>"></script>
+	-->
 	<!-- Jquery Mobile Menu -->
 	<script src="<c:url value="/change/js/jquery.slicknav.min.js"/>"></script>
 
