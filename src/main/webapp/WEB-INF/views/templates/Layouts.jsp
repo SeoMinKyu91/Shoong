@@ -94,7 +94,7 @@
 
 	<!-- body 시작 -->
 	<main>
-		<div class="slider-area hero-overly"">
+		<div class="slider-area hero-overly">
 			<div
 				class="single-slider hero-overly  slider-height d-flex align-items-center" style="margin-top: 80px;">
 				<div class="container">
