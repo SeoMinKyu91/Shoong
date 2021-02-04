@@ -42,7 +42,8 @@ public class MyPageController {
 		/* 유저 id 값 */
 		// map.put("id","shoong1000@naver.com");
 		if(req.getSession().getAttribute("userId")!=null) {
-			System.out.println("mypageMain:"+req.getSession().getAttribute("userId").toString());
+			System.out.println("mypageMainUserId:"+req.getSession().getAttribute("userId").toString());
+			System.out.println("mypageMainPackId:"+req.getSession().getAttribute("packId").toString());
 			map.put("id", req.getSession().getAttribute("userId").toString());
 		} else {
 			map.put("id","shoong1900@naver.com");

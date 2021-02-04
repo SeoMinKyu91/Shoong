@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <!-- class="right_col 이 DiV안에서 작업하지 않으면 깨져요. -->
 <div class="right_col" role="main">
 	<!-- title -->
@@ -59,48 +60,16 @@
                         	</tr>
                       	</thead>
                       	<tbody>
-                        	<tr data-toggle="modal" data-target="#packViewModal">
-                          		<th scope="row">1</th>
-		                          <td>가나다</td>
-		                          <td>용인</td>
-		                          <td>가길동</td>
-                        	</tr>
-                        	<tr>
-	                          <th scope="row">2</th>
-		                          <td>나다라</td>
-		                          <td>가산동</td>
-		                          <td>나길동</td>
-                        	</tr>
-                       		<tr>
-                          		<th scope="row">3</th>
-		                          <td>Larry</td>
-		                          <td>the Bird</td>
-		                          <td>@twitter</td>
-                        	</tr>
-                        	<tr>
-                          		<th scope="row">4</th>
-		                          <td>Larry</td>
-		                          <td>the Bird</td>
-		                          <td>@twitter</td>
-                        	</tr>
-                        	<tr>
-                          		<th scope="row">5</th>
-		                          <td>Larry</td>
-		                          <td>the Bird</td>
-		                          <td>@twitter</td>
-                        	</tr>
-                        	<tr>
-                          		<th scope="row">6</th>
-		                          <td>Larry</td>
-		                          <td>the Bird</td>
-		                          <td>@twitter</td>
-                        	</tr>
-                        	<tr>
-                          		<th scope="row">7</th>
-		                          <td>Larry</td>
-		                          <td>the Bird</td>
-		                          <td>@twitter</td>
-                        	</tr>
+		                	<c:if test="${not empty packList}">
+								<c:forEach var="item" items="${packList }" varStatus="loop">
+		                        	<tr data-toggle="modal" data-target="#packViewModal">
+			                          		<th scope="row">1</th>
+					                          <td>${item.packName}</td>
+					                          <td>${item.packActRegion }</td>
+					                          <td>가길동</td>
+		                        	</tr>
+			                	</c:forEach>
+			            	</c:if>
                       	</tbody>
                     </table>
             	</div>
@@ -188,142 +157,26 @@
                         </thead>
 
                         <tbody>
+                        
                           <tr class="even pointer" data-toggle="modal" data-target="#packViewModal">
                             <td class="a-center ">
                               <input type="checkbox" class="flat" name="table_records">
                             </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">가나다 </td>
-                            <td class=" ">Dec 24 2020</td>
-                            <td class=" ">용인</td>
-                            <td class=" ">20</td>
-                            <td class="a-right a-right ">1</td>
-                            <td class=" last">
-                            	<button type="button" class="btn btn-default btn-xs btn-warning">!</button>
-                            	<button type="button" class="btn btn-default btn-xs btn-danger">X</button>
-                            </a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000039</td>
-                            <td class=" ">May 23, 2014 11:30:12 PM</td>
-                            <td class=" ">121000208 <i class="success fa fa-long-arrow-up"></i>
-                            </td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$741.20</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000038</td>
-                            <td class=" ">May 24, 2014 10:55:33 PM</td>
-                            <td class=" ">121000203 <i class="success fa fa-long-arrow-up"></i>
-                            </td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$432.26</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000037</td>
-                            <td class=" ">May 24, 2014 10:52:44 PM</td>
-                            <td class=" ">121000204</td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$333.21</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">May 24, 2014 11:47:56 PM </td>
-                            <td class=" ">121000210</td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$7.45</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000039</td>
-                            <td class=" ">May 26, 2014 11:30:12 PM</td>
-                            <td class=" ">121000208 <i class="error fa fa-long-arrow-down"></i>
-                            </td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$741.20</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000038</td>
-                            <td class=" ">May 26, 2014 10:55:33 PM</td>
-                            <td class=" ">121000203</td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$432.26</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000037</td>
-                            <td class=" ">May 26, 2014 10:52:44 PM</td>
-                            <td class=" ">121000204</td>
-                            <td class=" ">Mike Smith</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$333.21</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">May 27, 2014 11:47:56 PM </td>
-                            <td class=" ">121000210</td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$7.45</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                          <tr class="odd pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000039</td>
-                            <td class=" ">May 28, 2014 11:30:12 PM</td>
-                            <td class=" ">121000208</td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$741.20</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
+		                    <c:if test="${not empty packList}">
+								<c:forEach var="item" items="${packList }" varStatus="loop">
+		                            <td class=" ">${item.packID}</td>
+		                            <td class=" ">${item.packName} </td>
+		                            <td class=" ">Dec 24 2020</td>
+		                            <td class=" ">${item.packActRegion }</td>
+		                            <td class=" ">20</td>
+		                            <td class="a-right a-right ">1</td>
+		                            <td class=" last">
+		                            	<button type="button" class="btn btn-default btn-xs btn-warning">!</button>
+		                            	<button type="button" class="btn btn-default btn-xs btn-danger">X</button>
+		                            </a>
+		                            </td>
+                           		</c:forEach>
+                            </c:if>
                           </tr>
                         </tbody>
                       </table>
@@ -430,107 +283,6 @@
 			                            <td class=" ">가길동</td>
 			                            <td class=" ">Chief</td>
 			                            <td class="a-right a-right ">3 Hours</td>
-			                          </tr>
-			                          <tr class="odd pointer">
-			                            <td class="a-center ">
-			                              <input type="checkbox" class="flat" name="table_records">
-			                            </td>
-			                            <td class=" ">☆</td>
-			                            <td class=" ">Jan 01, 2021</td>
-			                            <td class=" ">abc1234</td>
-			                            <td class=" ">나길동</td>
-			                            <td class=" ">Manager</td>
-			                            <td class="a-right a-right ">17 Hours</td>
-			                          </tr>
-			                          <tr class="even pointer">
-			                            <td class="a-center ">
-			                              <input type="checkbox" class="flat" name="table_records">
-			                            </td>
-			                            <td class=" ">●</td>
-			                            <td class=" ">Jan 08, 2021</td>
-			                            <td class=" ">qwer1234</td>
-			                            <td class=" ">다길동</td>
-			                            <td class=" ">Member</td>
-			                            <td class="a-right a-right ">8 Hours</td>
-			                          </tr>
-			                          <tr class="odd pointer">
-			                            <td class="a-center ">
-			                              <input type="checkbox" class="flat" name="table_records">
-			                            </td>
-			                            <td class=" ">121000037</td>
-			                            <td class=" ">May 24, 2014 10:52:44 PM</td>
-			                            <td class=" ">121000204</td>
-			                            <td class=" ">Mike Smith</td>
-			                            <td class=" ">Paid</td>
-			                            <td class="a-right a-right ">$333.21</td>
-			                          </tr>
-			                          <tr class="even pointer">
-			                            <td class="a-center ">
-			                              <input type="checkbox" class="flat" name="table_records">
-			                            </td>
-			                            <td class=" ">121000040</td>
-			                            <td class=" ">May 24, 2014 11:47:56 PM </td>
-			                            <td class=" ">121000210</td>
-			                            <td class=" ">John Blank L</td>
-			                            <td class=" ">Paid</td>
-			                            <td class="a-right a-right ">$7.45</td>
-			                          </tr>
-			                          <tr class="odd pointer">
-			                            <td class="a-center ">
-			                              <input type="checkbox" class="flat" name="table_records">
-			                            </td>
-			                            <td class=" ">121000039</td>
-			                            <td class=" ">May 26, 2014 11:30:12 PM</td>
-			                            <td class=" ">121000208 <i class="error fa fa-long-arrow-down"></i>
-			                            </td>
-			                            <td class=" ">John Blank L</td>
-			                            <td class=" ">Paid</td>
-			                            <td class="a-right a-right ">$741.20</td>
-			                          </tr>
-			                          <tr class="even pointer">
-			                            <td class="a-center ">
-			                              <input type="checkbox" class="flat" name="table_records">
-			                            </td>
-			                            <td class=" ">121000038</td>
-			                            <td class=" ">May 26, 2014 10:55:33 PM</td>
-			                            <td class=" ">121000203</td>
-			                            <td class=" ">Mike Smith</td>
-			                            <td class=" ">Paid</td>
-			                            <td class="a-right a-right ">$432.26</td>
-			                          </tr>
-			                          <tr class="odd pointer">
-			                            <td class="a-center ">
-			                              <input type="checkbox" class="flat" name="table_records">
-			                            </td>
-			                            <td class=" ">121000037</td>
-			                            <td class=" ">May 26, 2014 10:52:44 PM</td>
-			                            <td class=" ">121000204</td>
-			                            <td class=" ">Mike Smith</td>
-			                            <td class=" ">Paid</td>
-			                            <td class="a-right a-right ">$333.21</td>
-			                          </tr>
-			
-			                          <tr class="even pointer">
-			                            <td class="a-center ">
-			                              <input type="checkbox" class="flat" name="table_records">
-			                            </td>
-			                            <td class=" ">121000040</td>
-			                            <td class=" ">May 27, 2014 11:47:56 PM </td>
-			                            <td class=" ">121000210</td>
-			                            <td class=" ">John Blank L</td>
-			                            <td class=" ">Paid</td>
-			                            <td class="a-right a-right ">$7.45</td>
-			                          </tr>
-			                          <tr class="odd pointer">
-			                            <td class="a-center ">
-			                              <input type="checkbox" class="flat" name="table_records">
-			                            </td>
-			                            <td class=" ">121000039</td>
-			                            <td class=" ">May 28, 2014 11:30:12 PM</td>
-			                            <td class=" ">121000208</td>
-			                            <td class=" ">John Blank L</td>
-			                            <td class=" ">Paid</td>
-			                            <td class="a-right a-right ">$741.20</td>
 			                          </tr>
 			                        </tbody>
 			                      </table>
