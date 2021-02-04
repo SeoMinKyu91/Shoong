@@ -3,15 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-
-<!-- 
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet">
-
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- -->
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
 <link rel="stylesheet" href="cards-gallery.css">
@@ -77,159 +76,166 @@ input {
 	background-color: rgba(255, 255, 255, 0.9);
 	border-radius: 30px;
 }
-.myPageThumbnailModal img{
+
+.myPageThumbnailModal img {
 	border-radius: 40px;
 	width: 60px;
 	height: 60px
 }
 </style>
 <!-- 실제 내용 시작 -->
-<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
-<div class="col-xs-10 offset-xs-1 col-md-10 offset-md-1"
-	style="padding-bottom: 50px">
-	<form class="form-horizontal" method="post" name="join"
-		onsubmit="return checked()"
-		style="padding-top: 30px; box-shadow: 0px 0px 5px #000; border-radius: 30px"
-		action="<c:url value='/mypage/infoEdit.do'/>">
-		<div class="form-group">
-			<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
-				style="padding-bottom: 30px; text-align: center">
-				<h3 style="font-weight: bold">${memberInfo.USER_ID }님회원정보수정</h3>
-			</div>
-			<div class="col-xs-10 offset-xs-1 col-md-4 offset-md-4">
-				<img class="badgeImg"
-					src='<c:url value="/images/badge/speedBadge.png"/>' alt="뱃지이미지"
-					id="myPageThumbnailProfile"
-					style="margin-left: 80px; width: 110px;">
-			</div>
-			<div class="col-xs-10 offset-xs-1 col-md-4 offset-md-4">
-				<button
-					style="color: #f32a48; border: none; float: center; background-color: rgba(255, 255, 255, 0.1); margin-left: 80px;"
-					id="btnThumbnail">프로필 사진 바꾸기</button>
-			</div>
-		</div>
-		<br />
-		<!-- 비밀번호 입력란 -->
-		<div class="form-group">
-			<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
-				<label for="userPWD">비밀번호<span style="font-size: .8em">&nbsp;(4~12자의
-						영문 대소문자와 숫자로만 입력)</span></label> <br /> <input type="password" id="userPWD"
-					name="userPWD" minlength="4" maxlength="12"
-					style="font-size: .8em; height: 50px; width: 100%"
-					value="${memberInfo.PWD }">
-			</div>
-		</div>
-		<!-- 비밀번호 확인 입력란 -->
-		<div class="form-group">
-			<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
-				<label for="userPWDOk">비밀번호 확인</label> <br /> <input
-					type="password" class="input" id="userPWDOk" name="userPWDOk"
-					minlength="4" maxlength="12"
-					style="font-size: .8em; height: 50px; width: 100%"
-					placeholder="위와 같은 비밀번호를 입력하세요"> <span id="passwordCheck"
-					style="font-size: .8em; color: gray"></span>
-			</div>
-		</div>
-		<!-- 이름 입력란 -->
-		<div class="form-group">
-			<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
-				<label for="userName">이름</label> <br /> <input type="text"
-					class="input" id="userName" name="userName"
-					style="font-size: .8em; height: 50px; width: 100%"
-					value="${memberInfo.NAME }">
-			</div>
-		</div>
-		<!-- 생년월일 입력란 -->
-		<div class="form-group">
-			<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
-				<label for="userRRN">생년월일</label> <br /> <input name="userRRN1"
-					id="userRRN1" type="text" size="25" maxlength="6"
-					OnKeyUp="check();" onChange="inputbirthNage(); inputGender()"
-					style="height: 50px"
-					onBlur="checknum(document.join.userRRN1.value)"
-					placeholder="생년월일(6자리)">&nbsp; ㅡ &nbsp; <input
-					id="userRRN2" name="userRRN2" type="text" size="5" maxlength="1"
-					onchange="inputGender()" style="height: 50px"
-					onBlur="checknum(document.join.userRRN2.value)">&nbsp;XXXXXX
-				<br />
-				<!-- 주민번호 7자리 입력시 생년월일, 나이, 성별 자동 입력 -->
-				<input name="userrrn1" type="text" size="4" maxlength="4"
-					style="border: none; color: gray; background-color: rgba(255, 255, 255, 0.1);"
-					onBlur="checknum(document.join.userrrn1.value)" readonly="readonly"><span
-					style="font-size: .8em; color: gray; background-color: rgba(255, 255, 255, 0.1);">년&nbsp;&nbsp;</span>
-				<input name="userrrn2" type="text" size="2" maxlength="2"
-					style="border: none; color: gray; background-color: rgba(255, 255, 255, 0.1);"
-					onBlur="checknum(document.join.userrrn2.value)" readonly="readonly"><span
-					style="font-size: .8em; color: gray; background-color: rgba(255, 255, 255, 0.1);">월&nbsp;&nbsp;</span>
-				<input name="userrrn3" type="text" size="2" maxlength="2"
-					style="border: none; color: gray; background-color: rgba(255, 255, 255, 0.1);"
-					onBlur="checknum(document.join.userrrn3.value)" readonly="readonly"><span
-					style="font-size: .8em; color: gray; background-color: rgba(255, 255, 255, 0.1);">일&emsp;&emsp;</span>
-				<input name="userAge" id="userAge" type="text" size="2"
-					style="border: none; color: gray; background-color: rgba(255, 255, 255, 0.1);"
-					maxlength="2" onBlur="checknum(document.join.userAge.value)"
-					readonly="readonly"><span
-					style="font-size: .8em; color: gray; background-color: rgba(255, 255, 255, 0.1);">살&emsp;&emsp;</span>
-				<input name="userGender" type="text" size="3" maxlength="2"
-					style="border: none; color: gray; background-color: rgba(255, 255, 255, 0.1);"
-					onBlur="checknum(document.join.userGender.value)"
-					readonly="readonly"><br />
-			</div>
-		</div>
-		<!-- 연락처 입력란 -->
-		<div class="form-group">
-			<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
-				<label for="userTel">연락처</label><br /> <select name="userTel1"
-					id="userTel1"
-					style="font-size: .8em; height: 50px; width: 100%; padding-left: 10px; border: #ced4da 1.5px solid;">
-					<option value="010">010</option>
-					<option value="011">011</option>
-					<option value="016">016</option>
-					<option value="017">017</option>
-					<option value="018">018</option>
-					<option value="019">019</option>
-				</select> &nbsp; ㅡ &nbsp;
-				<c:set var="tel" value="${memberInfo.USERTEL}" />
-				<input name="userTel2" id="userTel2" type="text" maxlength="4"
-					style="height: 50px; width: 26.5%" OnKeyUp="checkTel();"
-					value="${fn:substring(tel,3,7) }"> &nbsp; ㅡ &nbsp; <input
-					name="userTel3" id="userTel3" type="text" maxlength="4"
-					style="height: 50px; width: 26.5%" OnKeyUp="checkTel();"
-					value="${fn:substring(tel,7,11) }"> <br />
-			</div>
-		</div>
-		<!-- 활동지역 입력란 -->
-		<div class="form-group">
-			<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
-				<label for="userAddr">활동지역</label>
-				<div>
-					<input type="text" class="input" id="userAddr" name="userAddr"
-						style="font-size: 1.1em; height: 50px; width: 100%; padding-left: 10px; border: #ced4da 1.5px solid;"
-						placeholder="${memberInfo.ADDRESS }">
+<div class="row">
+	<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
+	<div class="col-xs-10 offset-xs-1 col-md-10 offset-md-1"
+		style="padding-bottom: 50px">
+		<form class="form-horizontal" method="post" name="join"
+			onsubmit="return checked()"
+			style="padding-top: 30px; box-shadow: 0px 0px 5px #000; border-radius: 30px"
+			action="<c:url value='/mypage/infoEdit.do'/>">
+			<div class="form-group">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
+					style="padding-bottom: 30px; text-align: center">
+					<h3 style="font-weight: bold">${memberInfo.USER_ID }님회원정보수정</h3>
+				</div>
+				<div class="col-xs-10 offset-xs-1 col-md-4 offset-md-4">
+					<img class="badgeImg"
+						src='<c:url value="/images/badge/speedBadge.png"/>' alt="뱃지이미지"
+						id="myPageThumbnailProfile"
+						style="margin-left: 80px; width: 110px;">
+				</div>
+				<div class="col-xs-10 offset-xs-1 col-md-4 offset-md-4">
+					<button
+						data-toggle="modal" data-target="#thumbnailModal"
+						style="color: #f32a48; border: none; float: center; background-color: rgba(255, 255, 255, 0.1); margin-left: 80px;"
+						id="btnThumbnail">프로필 사진 바꾸기</button>
 				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
-				<div id="map"></div>
-				<input type="hidden" id="memberLat" name="memberLat"
-					class="form-group" /> <input type="hidden" id="memberLng"
-					name="memberLng" class="form-group" />
+			<br />
+			<!-- 비밀번호 입력란 -->
+			<div class="form-group">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+					<label for="userPWD">비밀번호<span style="font-size: .8em">&nbsp;(4~12자의
+							영문 대소문자와 숫자로만 입력)</span></label> <br /> <input type="password" id="userPWD"
+						name="userPWD" minlength="4" maxlength="12"
+						style="font-size: .8em; height: 50px; width: 100%"
+						value="${memberInfo.PWD }">
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2"
-				style="padding-bottom: 60px; margin-bottom: 40px">
-				<button type="submit" id="joinBtn"
-					class="btn btn-primary btn-lg btn-block">수정하기</button>
+			<!-- 비밀번호 확인 입력란 -->
+			<div class="form-group">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+					<label for="userPWDOk">비밀번호 확인</label> <br /> <input
+						type="password" class="input" id="userPWDOk" name="userPWDOk"
+						minlength="4" maxlength="12"
+						style="font-size: .8em; height: 50px; width: 100%"
+						placeholder="위와 같은 비밀번호를 입력하세요"> <span id="passwordCheck"
+						style="font-size: .8em; color: gray"></span>
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<input type="hidden" id="myPageThumbnail"
-				value="${packInfo.PACK_THUMBNAIL }" name="myPageThumbnail"
-				class="form-group" />
-		</div>
-	</form>
+			<!-- 이름 입력란 -->
+			<div class="form-group">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+					<label for="userName">이름</label> <br /> <input type="text"
+						class="input" id="userName" name="userName"
+						style="font-size: .8em; height: 50px; width: 100%"
+						value="${memberInfo.NAME }">
+				</div>
+			</div>
+			<!-- 생년월일 입력란 -->
+			<div class="form-group">
+				<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+					<label for="userRRN">생년월일</label> <br /> <input name="userRRN1"
+						id="userRRN1" type="text" size="25" maxlength="6"
+						OnKeyUp="check();" onChange="inputbirthNage(); inputGender()"
+						style="height: 50px"
+						onBlur="checknum(document.join.userRRN1.value)"
+						placeholder="생년월일(6자리)">&nbsp; ㅡ &nbsp; <input
+						id="userRRN2" name="userRRN2" type="text" size="5" maxlength="1"
+						onchange="inputGender()" style="height: 50px"
+						onBlur="checknum(document.join.userRRN2.value)">&nbsp;XXXXXX
+					<br />
+					<!-- 주민번호 7자리 입력시 생년월일, 나이, 성별 자동 입력 -->
+					<input name="userrrn1" type="text" size="4" maxlength="4"
+						style="border: none; color: gray; background-color: rgba(255, 255, 255, 0.1);"
+						onBlur="checknum(document.join.userrrn1.value)"
+						readonly="readonly"><span
+						style="font-size: .8em; color: gray; background-color: rgba(255, 255, 255, 0.1);">년&nbsp;&nbsp;</span>
+					<input name="userrrn2" type="text" size="2" maxlength="2"
+						style="border: none; color: gray; background-color: rgba(255, 255, 255, 0.1);"
+						onBlur="checknum(document.join.userrrn2.value)"
+						readonly="readonly"><span
+						style="font-size: .8em; color: gray; background-color: rgba(255, 255, 255, 0.1);">월&nbsp;&nbsp;</span>
+					<input name="userrrn3" type="text" size="2" maxlength="2"
+						style="border: none; color: gray; background-color: rgba(255, 255, 255, 0.1);"
+						onBlur="checknum(document.join.userrrn3.value)"
+						readonly="readonly"><span
+						style="font-size: .8em; color: gray; background-color: rgba(255, 255, 255, 0.1);">일&emsp;&emsp;</span>
+					<input name="userAge" id="userAge" type="text" size="2"
+						style="border: none; color: gray; background-color: rgba(255, 255, 255, 0.1);"
+						maxlength="2" onBlur="checknum(document.join.userAge.value)"
+						readonly="readonly"><span
+						style="font-size: .8em; color: gray; background-color: rgba(255, 255, 255, 0.1);">살&emsp;&emsp;</span>
+					<input name="userGender" type="text" size="3" maxlength="2"
+						style="border: none; color: gray; background-color: rgba(255, 255, 255, 0.1);"
+						onBlur="checknum(document.join.userGender.value)"
+						readonly="readonly"><br />
+				</div>
+			</div>
+			<!-- 연락처 입력란 -->
+			<div class="form-group">
+				<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+					<label for="userTel">연락처</label><br /> <select name="userTel1"
+						id="userTel1"
+						style="font-size: .8em; height: 50px; width: 100%; padding-left: 10px; border: #ced4da 1.5px solid;">
+						<option value="010">010</option>
+						<option value="011">011</option>
+						<option value="016">016</option>
+						<option value="017">017</option>
+						<option value="018">018</option>
+						<option value="019">019</option>
+					</select> &nbsp; ㅡ &nbsp;
+					<c:set var="tel" value="${memberInfo.USERTEL}" />
+					<input name="userTel2" id="userTel2" type="text" maxlength="4"
+						style="height: 50px; width: 26.5%" OnKeyUp="checkTel();"
+						value="${fn:substring(tel,3,7) }"> &nbsp; ㅡ &nbsp; <input
+						name="userTel3" id="userTel3" type="text" maxlength="4"
+						style="height: 50px; width: 26.5%" OnKeyUp="checkTel();"
+						value="${fn:substring(tel,7,11) }"> <br />
+				</div>
+			</div>
+			<!-- 활동지역 입력란 -->
+			<div class="form-group">
+				<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+					<label for="userAddr">활동지역</label>
+					<div>
+						<input type="text" class="input" id="userAddr" name="userAddr"
+							style="font-size: 1.1em; height: 50px; width: 100%; padding-left: 10px; border: #ced4da 1.5px solid;"
+							placeholder="${memberInfo.ADDRESS }">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+					<div id="map"></div>
+					<input type="hidden" id="memberLat" name="memberLat"
+						class="form-group" /> <input type="hidden" id="memberLng"
+						name="memberLng" class="form-group" />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2"
+					style="padding-bottom: 60px; margin-bottom: 40px">
+					<button type="submit" id="joinBtn"
+						class="btn btn-primary btn-lg btn-block">수정하기</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<input type="hidden" id="myPageThumbnail"
+					value="${packInfo.PACK_THUMBNAIL }" name="myPageThumbnail"
+					class="form-group" />
+			</div>
+		</form>
+	</div>
 </div>
 <!-- 프로필 사진 모달창 시작 -->
 <div class="modal fade" id="thumbnailModal" data-backdrop="false">
