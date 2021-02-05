@@ -243,18 +243,33 @@ ul li label {
 	padding-bottom: 10px;
 }
 
-
 .mainbody {
 	width: 90vw;
 	height: 50vh;
 }
-#map{
+
+#map {
 	height: 150%;
 }
-@media (min-width: 992px)
-.container {
-    width: 970px;
+
+@media ( min-width : 992px) .container {
+	width
+	
+	
+	:
+	
+	 
+	
+	970px
+	
+	
+	;
 }
+.team-img > img{
+	width: 100%;
+	height: 100%;
+}
+
 </style>
 <!-- 본문 시작 -->
 <!-- 본문 탭 시작 -->
@@ -470,7 +485,54 @@ ul li label {
 				</c:if>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="messages">
-				<div class="row"></div>
+				<div class="row">
+					<div class="container">
+						<div class="row">
+							<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+								<div class="single-team mb-30">
+									<div class="team-img">
+										<img src="<c:url value="/change/img/gallery/home_blog1.png"/>" alt="">
+									</div>
+									<div class="team-caption">
+										<h3>
+											<a href="blog.html">The Best SPA Salons For Your
+												Relaxation</a>
+										</h3>
+										<p>October 6, 2020by Steve</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+								<div class="single-team mb-30">
+									<div class="team-img">
+										<img src="<c:url value="/change/img/gallery/home_blog2.png"/>" alt="">
+									</div>
+									<div class="team-caption">
+										<h3>
+											<a href="blog.html">The Best SPA Salons For Your
+												Relaxation</a>
+										</h3>
+										<p>October 6, 2020by Steve</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+								<div class="single-team mb-30">
+									<div class="team-img">
+										<img src="<c:url value="/change/img/gallery/home_blog3.png"/>" alt="">
+									</div>
+									<div class="team-caption">
+										<h3>
+											<a href="blog.html">The Best SPA Salons For Your
+												Relaxation</a>
+										</h3>
+										<p>October 6, 2020by Steve</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
