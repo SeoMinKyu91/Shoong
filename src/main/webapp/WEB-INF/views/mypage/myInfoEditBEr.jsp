@@ -4,9 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
-	rel="stylesheet">
 <style>
 .slider-area {
 	display: none;

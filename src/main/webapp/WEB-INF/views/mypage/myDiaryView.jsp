@@ -6,9 +6,7 @@
 <link rel="stylesheet" href="<c:url value="/css/test.css"/>">
 <!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
 <!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;

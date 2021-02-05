@@ -3,14 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
-<link rel="stylesheet" href="cards-gallery.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-
 <style>
 .packCreateBtn {
 	color:#ff8827;
@@ -45,6 +37,7 @@
 }
 </style>
 
+<div id="colorlib-main" style="padding:20px;">
 	<div class="row">
 		<div class="col-lg-12" style="padding-bottom:20px">
 			<div class="">
@@ -198,7 +191,10 @@
 								type="submit" class="btn btn-default">수정</button>
 						</div>
 					</div>
+
+
 				</form>
+
 			</div>
 		</div>
 	</div>
@@ -259,9 +255,11 @@
 		</div>
 	</div>
 	<!-- 팩 썸네일 모달창 끝 -->
+</div>
+<!-- END COLORLIB-MAIN -->
 
 <script>
-jQuery.noConflict();
+
 	$(function() {
 		
 		$(':radio[name="packActTime"]:input[value="${packInfo.PACK_ACT_TIME}"]').prop("checked",true);
