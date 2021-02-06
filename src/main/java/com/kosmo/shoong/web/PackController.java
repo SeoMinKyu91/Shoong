@@ -40,23 +40,26 @@ public class PackController {
 
    @RequestMapping("main.do")
    public String packMain(@RequestParam Map map ,Model model,HttpServletRequest req) {
-      /*유저 id 값 */
+	   System.out.println("내꺼검샘이애");
 
-      /* 유저정보에 ADDRESS로는 정확도 부족 lat,lng 받아서 기반 검색. 주석 풀지 마세요.
-     map.put("userId", req.getSession().getAttribute("userId").toString());
-     Map userAddress =  service.selectOneUserAddr(map);
-     if(userAddress.get("ADDRESS") != null) {
-
-        map.put("searchRegion", userAddress.get("ADDRESS"));
-        model.addAttribute("searchRegion",userAddress.get("ADDRESS"));
-     }*/
-
-      List<PackDTO> packList=service.selectList(map);
-      model.addAttribute("packList",packList);
-      if(map.get("searchRegion") != null) {
+      if(map.get("lat") != null) {
+    	 System.out.println("검샘");
          model.addAttribute("searchLat",map.get("lat"));
          model.addAttribute("searchLng",map.get("lng"));
+         model.addAttribute("searchRegion",map.get("searchRegion"));
+         
+      }else {
+    	 System.out.println("내꺼검샘");
+	     String id = req.getSession().getAttribute("userId").toString();
+	     Map userAddress =  service.selectOneUserAddr(id);
+	     map.put("myRegion", userAddress.get("ADDRESS"));
+	     model.addAttribute("searchRegion",userAddress.get("ADDRESS").toString());
+	     model.addAttribute("searchLat", userAddress.get("USER_LAT"));
+	     model.addAttribute("searchLng",userAddress.get("USER_LNG"));  
       }
+      
+      List<PackDTO> packList=service.selectList(map);
+      model.addAttribute("packList",packList);
 
       return "pack/PackMain";
    }

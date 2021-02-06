@@ -51,6 +51,7 @@
 </style>
  <h2>[${location}]근처 자전거 가게</h2>
  <br>
+ <div style="margin-bottom: 150px">
  <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
@@ -59,6 +60,8 @@
         <div id="pagination"></div>
     </div>
 </div>
+</div>
+
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4aaa4b242f112a823dd2ef5541569589&libraries=services"></script>
 
@@ -88,7 +91,6 @@ searchPlaces();
 function searchPlaces() {
 
     var keyword = '${word}';
-
     if (!keyword.replace(/^\s+|\s+$/g, '')) {
         alert('키워드를 입력해주세요!');
         return false;
@@ -115,10 +117,8 @@ function placesSearchCB(data, status, pagination) {
         return;
 
     } else if (status === kakao.maps.services.Status.ERROR) {
-
         alert('검색 결과 중 오류가 발생했습니다.');
         return;
-
     }
 }
 
@@ -295,24 +295,14 @@ function displayInfowindow(marker, title,phone,address,lat,lng) {
    console.log(rink.replace(/\s/gi, ""))
 	
 	var content = '<div style="z-index:1;  height: 100px;"><table>';
-    	content +='<tr><th style="background-color:#555555">'+title+'</th></tr>';
-    	content +='<tr><th>'+phone+'</th></tr>';
-    	content +='<tr><th>'+address+'</th></tr>';
-    	content +='<tr><th>';
-    	content +='<a style="color:red" href='+rink.replace(/\s/gi, "")+'>카카오길찾기</a>';
+    	content +='<tr><th colspan="2" style="background-color:#ffde6d">'+title+'</th></tr>';
+    	content +='<tr><th style="width:40px">번호</th><th>'+phone+'</th></tr>';
+    	content +='<tr><th>주소</th><th>'+address+'</th></tr>';
+    	content +='<tr><th colspan="2">';
+    	content +='<a style="color:#f31448" href='+rink.replace(/\s/gi, "")+'>카카오길찾기</a>';
     	content +='</th></tr>';
     	content +='</table></div>';
     	
-    
-    /*
-    places.place_name 
-    places.road_address_name 
-
-     places.address_name
-
-    places.address_name
-    places.phone 
-*/
     infowindow.setContent(content);
     infowindow.open(map, marker);
 }
