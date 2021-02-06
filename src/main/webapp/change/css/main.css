@@ -51,7 +51,6 @@
 	color: #c6a16e !important;
 	display: inline-block;
 	padding: 18px 44px;
-	font-family: "Josefin Sans", sans-serif;
 	font-size: 14px;
 	font-weight: 400;
 	border: 0;
@@ -130,13 +129,11 @@
 }
 
 body {
-	font-family: "Great Vibes", cursive;
 	font-weight: normal;
 	font-style: normal
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: "Josefin Sans", sans-serif;
 	color: #0b1c39;
 	margin-top: 0px;
 	font-style: normal;
@@ -145,7 +142,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-	font-family: "Great Vibes", cursive;
 	color: #506172;
 	font-size: 16px;
 	line-height: 30px;
@@ -2666,7 +2662,6 @@ transition
 	margin-right: 33px;
 	padding-right: 33px;
 	border-right: 1px solid #fff;
-	font-family: 'Roboto', sans-serif;
 	font-size: 14px
 }
 
@@ -2927,7 +2922,6 @@ translate(
 	font-weight: 900;
 	margin-bottom: 14px;
 	color: #ffffff;
-	font-family: 'Barlow', sans-serif;
 	line-height: 1.2;
 	text-transform: uppercase
 }
@@ -3467,7 +3461,6 @@ translate(
 	color: #fff;
 	font-size: 25px;
 	font-weight: 500;
-	font-family: "Josefin Sans", sans-serif;
 	display: block
 }
 
@@ -3912,7 +3905,6 @@ translate(
 .blog-area .single-blog .blog-caption .blog-cap-top ul li {
 	color: #c7c7c7;
 	font-size: 14px;
-	font-family: 'Lato', sans-serif
 }
 
 .blog-area .single-blog .blog-caption .blog-cap-top ul li a {
@@ -3923,7 +3915,6 @@ translate(
 .blog-area .single-blog .blog-caption .blog-cap-mid p a {
 	color: #444444;
 	font-size: 18px;
-	font-family: 'Lato', sans-serif;
 	line-height: 28px;
 	margin-bottom: 30px
 }
@@ -5491,7 +5482,6 @@ translate(
 	color: #fff;
 	font-weight: 900;
 	margin-bottom: 0;
-	font-family: "Josefin Sans", sans-serif;
 	text-transform: capitalize
 }
 
@@ -5550,7 +5540,6 @@ translate(
 	cursor: pointer;
 	display: block;
 	float: left;
-	font-family: "Great Vibes", cursive;
 	font-weight: normal;
 	width: 100% !important;
 	line-height: 50px;
@@ -5586,7 +5575,6 @@ translate(
 	top: 3px;
 	transition: all 0.15s ease-in-out;
 	width: 5px;
-	font-family: fontawesome;
 	color: #919191;
 	font-size: 15px
 }

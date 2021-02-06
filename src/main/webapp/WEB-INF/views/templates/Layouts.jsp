@@ -31,8 +31,10 @@
 <link rel="stylesheet" href="<c:url value="/css/icomoon.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/open-iconic-bootstrap.min.css"/>">
+<!--  
 <link rel="stylesheet" href="<c:url value="/css/bootstrap-datepicker.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.timepicker.css"/>">
+-->
 
 <!-- 달력 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.5.0/main.min.css,npm/fullcalendar@5.5.0/main.min.css">
@@ -76,8 +78,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script 
-   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4aaa4b242f112a823dd2ef5541569589&libraries=services,clusterer"></script>
+
+<!-- bootstrap datetimepicker -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4aaa4b242f112a823dd2ef5541569589&libraries=services,clusterer"></script>
 </head>
 
 <body>
@@ -99,7 +105,7 @@
 
 	<!-- body 시작 -->
 	<main>
-		<div class="slider-area hero-overly"">
+		<div class="slider-area hero-overly">
 			<div
 				class="single-slider hero-overly  slider-height d-flex align-items-center" style="margin-top: 80px;">
 				<div class="container">
@@ -120,7 +126,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="popular-location" style="margin-top:100px;">
+		<div class="popular-location" style="padding-top:200px; padding-bottom:100px;">
 			<div class="container">
 				<tiles:insertAttribute name="body" />
 				<c:if test="${not empty sessionScope.packId }">
@@ -712,6 +718,7 @@
 			$('.chatBot').css('display','none');
 		})
 		
+		
 	})
 		
 	</script>
@@ -734,8 +741,10 @@
 	-->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
+	<!--  
 	<script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
 	<script src="<c:url value="/js/jquery.timepicker.min.js"/>"></script>
+	-->
 	<!-- 지도 -->
 	<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
 	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
@@ -743,8 +752,7 @@
 	   src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
 	<script 
 	   src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
-	<script 
-	   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4aaa4b242f112a823dd2ef5541569589&libraries=services,clusterer"></script>
+	
 	
 	<!-- JS here -->
 	<!-- All JS Custom Plugins Link Here here -->

@@ -29,7 +29,7 @@ import com.kosmo.shoong.service.mypage.MyPageService;
 public class MyPageController {
 
 	@Resource(name="myPageService")
-	private MyPageService Service;
+	private MyPageService service;
 
 	@Resource(name="myPageRecordService")
 	private MyPageRecordService recordService;
@@ -50,7 +50,7 @@ public class MyPageController {
 		}
 
 		/* 코스 관련 */
-		List<Map> recordList = Service.chartRecordselectList(map);
+		List<Map> recordList = service.chartRecordselectList(map);
 		List<Map> chartList = new Vector<Map>();
 
 		float totalLength = 0;
@@ -71,7 +71,7 @@ public class MyPageController {
 		model.addAttribute("chartList", chartList);
 
 		/* 다이어리 관련 */
-		List diaryList = Service.diaryselectList(map);
+		List diaryList = service.diaryselectList(map);
 		model.addAttribute("diaryList", diaryList);
 
 		/* record 지도 관련 */
@@ -111,7 +111,7 @@ public class MyPageController {
 		//}
 		//System.out.println(info);
 		System.out.println(map);
-		int res = Service.update(map);
+		int res = memberService.update(map);
 		System.out.println(res);
 		if (res==0) {
 			System.out.println("실패");

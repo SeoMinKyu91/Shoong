@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
-<link rel="stylesheet" href="cards-gallery.css">
 <link rel="stylesheet" href="<c:url value="/css/comment.css?as"/>">
 <script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
 <style>
@@ -230,7 +228,6 @@
 
 <script>
 	$(function() {
-		jQuery.noConflict();
 		var objDragAndDrop = $('.feed-img-modal');
 		
 		$('#btn-feed-write').click(function(){

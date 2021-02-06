@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonArray;
 import com.kosmo.shoong.service.impl.pack.PackScheduleServiceImpl;
 import com.kosmo.shoong.service.pack.PackScheduleEventsDTO;
 
@@ -49,15 +50,17 @@ public class PackScheduleController {
 		List<Map> jsonList = new Vector<Map>();
 		for(PackScheduleEventsDTO item : jsonForm) {
 			Map jsonMap = new HashMap();
-//			System.out.println("start:"+item.getPackScheduleStart());
-//			System.out.println("end:"+item.getPackScheduleEnd());
+			
+			
+			
+			
 			if(item!=null) {
 				jsonMap.put("title", item.getPackScheduleTitle().toString());
 				if(item.getPackScheduleStart()!=null) {
-					jsonMap.put("start", item.getPackScheduleStart().toString());
+					jsonMap.put("start", item.getPackScheduleStart().substring(0,10));
 				}
 				if(item.getPackScheduleEnd() != null) {
-					jsonMap.put("end", item.getPackScheduleEnd().toString());
+					jsonMap.put("end", item.getPackScheduleEnd().substring(0,10));
 				}
 				
 				jsonMap.put("id", item.getPackId());
@@ -80,7 +83,9 @@ public class PackScheduleController {
 		HttpSession session = req.getSession();
 		map.put("userId",session.getAttribute("userId"));
 		map.put("packId",session.getAttribute("packId"));
-
+		System.out.println("팩 스케줄 등록 들어옴");
+		System.out.println(map.get("userId"));
+		System.out.println(map.get("packId"));
 		System.out.println(map.get("packScheduleTitle"));
 		System.out.println(map.get("packScheduleStart"));
 		System.out.println(map.get("packScheduleEnd"));
@@ -110,10 +115,17 @@ public class PackScheduleController {
 	public String scheduleSelectOne(@RequestParam Map map,HttpServletRequest req) {
 		System.out.println("컨트롤러 들어올때"+map.get("packScheduleNo"));
 		String userId =  req.getSession().getAttribute("userId").toString();
+		
 		Map selectOne = new HashMap();
 		selectOne = service.scheduleSelectOne(map);
-
-
+		Map selectJoinList = new HashMap();
+		selectJoinList.put("packScheduleNo", selectOne.get("PACK_SCHEDULE_NO"));
+		List<Map> scheduleJoiner = service.scheduleJoinList(selectJoinList);
+		System.out.println("조인한사람들");
+		for(Map test11 : scheduleJoiner) {
+			System.out.println(test11.get("NAME"));
+		}
+		
 		System.out.println("컨트롤러 나갈때"+selectOne.get("PACK_SCHEDULE_NO"));
 
 		JSONObject json = new JSONObject();
@@ -132,6 +144,7 @@ public class PackScheduleController {
 		else {
 			json.put("isWriter", "no;");
 		}
+		json.put("scheduleJoiner",scheduleJoiner);
 
 
 		return json.toJSONString();
@@ -156,8 +169,35 @@ public class PackScheduleController {
 
 		return "forward:/pack/calendar.do";
 	}
+	
+	@RequestMapping(value="schedule/join.do",produces = "text/html; charset=UTF-8")
+	@ResponseBody
+	public String packScheduleJoin(@RequestParam Map map) {
+		
+		
+		
+		return (int)service.scheduleJoin(map) == 1?"참가 성공":"참가 실패";
+	}
 
-
+//	@RequestMapping(value="scheduleAjax/list.do",produces="text/html; charset=UTF-8")
+//	@ResponseBody
+//	public String ajaxScheduleSelectList(@RequestParam Map map) {
+//		
+//		List<Map> list = service.ajaxScheduleList(map);
+//		JSONArray jsonArray = new JSONArray();
+//		for(Map schedule:list) {
+//			Map bfSchedule = new HashMap();
+//			
+//			bfSchedule.put("start", schedule.get("PACK_SCHEDULE_START").toString().substring(0,10));
+//			bfSchedule.put("end", schedule.get("PACK_SCHEDULE_END").toString().substring(0,10));
+//			bfSchedule.put("title", schedule.get("PACK_SCHEDULE_TITLE"));
+//			bfSchedule.put("id", schedule.get("PACK_SCHEDULE_NO"));
+//			jsonArray.add(bfSchedule);
+//		}
+//		
+//		return jsonArray.toJSONString();
+//	}
+	
 
 
 

@@ -126,22 +126,24 @@ padding: 10px;
 	   <!--뱃지사진 + 마일리지  -->
 	   <div class="row col-xs-12" id="inlineInfo">
 	         <div style="display: inline-block; width: 80%;">
-	            <c:if test="${not empty sessionScope.userId}" var="isEmpty">				
+	            <c:if test="${not empty sessionScope.userId}" var="isEmpty">		
+	            												<!-- 이미지 넣기 -->		
 		            <img class="badgeImg" src='<c:url value="/images/badge/speedBadge.png"/>' alt="뱃지이미지">      
 		            <strong class="namebar">${sessionScope.userId}</strong>
 		            <a href='<c:url value="/Member/myInfoEdit.do"/>' class="btn btn-primary" id="loginCheck">정보수정</a>
 		        </c:if>		
+		        <!--  
 				<c:if test="${!isEmpty}">	
 					<img class="badgeImg" src='<c:url value="/images/badge/speedBadge.png"/>' alt="뱃지이미지">      
 		            <strong class="namebar">장동건</strong>
 		            <a href='<c:url value="/Member/myInfoEdit.do"/>' class="btn btn-primary" id="loginCheck">정보수정</a>
-	        	</c:if>
+	        	</c:if>-->
 	         </div>
 	         <!-- progress바 _ 부트스트랩 -->
 		      <div class="row col-sm-12 ">
 		         <div class= "col-sm-12 progbar">
 		         <h4>이달의 마일리지</h4>
-		            <div class="progress">
+		            <div class="progress">																										<!-- 마일리지 넣기 -->
 		              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="width: 68%">
 		                 ${totalLength}km
 		              </div>

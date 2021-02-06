@@ -5,9 +5,8 @@ import java.sql.Date;
 public class PackScheduleEventsDTO {
 	private String packId;
 	private String packScheduleTitle;
-	private Date packScheduleStart;
-	private Date packScheduleEnd;
-
+	private String packScheduleStart;
+	private String packScheduleEnd;
 	public String getPackId() {
 		return packId;
 	}
@@ -20,16 +19,18 @@ public class PackScheduleEventsDTO {
 	public void setPackScheduleTitle(String packScheduleTitle) {
 		this.packScheduleTitle = packScheduleTitle;
 	}
-	public Date getPackScheduleStart() {
+	public String getPackScheduleStart() {
 		return packScheduleStart;
 	}
-	public void setPackScheduleStart(Date packScheduleStart) {
+	public void setPackScheduleStart(String packScheduleStart) {
 		this.packScheduleStart = packScheduleStart;
 	}
-	public Date getPackScheduleEnd() {
+	public String getPackScheduleEnd() {
 		return packScheduleEnd;
 	}
-	public void setPackScheduleEnd(Date packScheduleEnd) {
+	public void setPackScheduleEnd(String packScheduleEnd) {
 		this.packScheduleEnd = packScheduleEnd;
 	}
+
+	
 }

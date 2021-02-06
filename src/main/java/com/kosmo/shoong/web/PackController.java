@@ -134,7 +134,7 @@ public class PackController {
             List<PackGalleryDTO> packGalleryList = GalleryList.subList(0, 4);
             model.addAttribute("packGalleryList",packGalleryList);
        }
-
+       service.packNameSelectOne(map);
       return "pack/PackView";
    }
 
