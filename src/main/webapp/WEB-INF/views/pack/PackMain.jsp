@@ -1,156 +1,180 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
 <link rel="stylesheet" href="cards-gallery.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
 
 <style>
 .slider-area {
-   display: none;
+	display: none;
 }
+
 .packCreateBtn {
-   color: #f32a48;
-   background: none;
-   font-weight: bold;
-   font-size: 1.2em;
-   border: #f32a48 1px solid;
-   font-size: 1.2em
+	color: #f32a48;
+	background: none;
+	font-weight: bold;
+	font-size: 1.2em;
+	border: #f32a48 1px solid;
 }
 
 .packCreateBtn:hover {
-   color: white;
+	color: white;
 }
 
 .packMainBtn {
-   color: #f32a48;
-   background: none;
-   font-weight: bold;
-   font-size: 1.2em;
-   border: #f32a48 1px solid;
-   font-size: 1.2em
+	color: #f32a48;
+	background: none;
+	font-weight: bold;
+	border: #f32a48 1px solid;
 }
 
 .packMainBtn:hover {
-   color: white;
+	color: white;
 }
 
 .MyPackBtn {
-   color: #f32a48;
-   background: none;
-   font-weight: bold;
-   font-size: 1.2em;
-   border: #f32a48 1px solid;
-   font-size: 1.2em
+	color: #f32a48;
+	background: none;
+	font-weight: bold;
+	border: #f32a48 1px solid;
 }
 
-.MyPackBtnBtn:hover {
-   color: white;
+.MyPackBtn:hover {
+	color: white;
+}
+
+.joinPackBtn {
+	background-color: #f32a48;
+	color: white;
+	border: none;
+}
+
+.joinPackBtn:hover {
+	color : white;
 }
 
 #tbPack:hover {
 	background-color: #fff0f2;
 }
 
-</style>
+body {
+	background-color: #F9F9F9;
+}
 
-<div class="row">
-   <div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
-      <div class="">
-         <a class="packMainBtn btn" href="<c:url value="/pack/main.do"/>"
-            style="margine-right: 20px">HOME</a>
-         <c:if test="${!empty sessionScope.packId}">
-            <a class="MyPackBtn btn" href="<c:url value="/pack/view.do"/>">MY
-               PACK</a>
-         </c:if>
-      </div>
-   </div>
+#packJoinModalBtn {
+	background-color: #f32a48;
+	color: white;
+	border: none;
+}
+#packJoinModalBtn:hover {
+	color : white;
+}
+</style>
+<div
+	style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;">
+	<div class="row">
+		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
+			<div class="">
+				<a class="packMainBtn btn" href="<c:url value="/pack/main.do"/>"
+					style="margine-right: 20px">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="MyPackBtn btn" href="<c:url value="/pack/view.do"/>">MY
+						PACK</a>
+				</c:if>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-lg-12">
+			<div id="map"
+				style="height: 400px; width: 100%; overflow: hidden; position: relative; margine-top: 50px;"></div>
+			<p style="color: grey; font-size: .8em">지도를 클릭 시 클릭 된 지점을 기준으로 검색(별 모양 마커를 움직이세요)</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-lg-12 PackMainTop">
+			<table class="col-xs-12 col-md-12">
+				<tr>
+					<th colspan="2" class="text-left">
+						<form class="form-inline" method="post"
+							action="<c:url value="/pack/main.do"/>">
+							<div class="packAddr" style="font-size: 30px;">
+								<span
+									style="font-size: .8em; font-weight: bold; padding-left: 10px;">[<span
+									id="packRegionSearch"></span>] 근처 팩
+								</span> &nbsp;
+							</div>
+							<input type="text" class="form-group" name="searchWord"
+								style="width: 200px; height: 30px; border-radius: 10px; border-color: #333333;" />
+							<button class="searchBtn"
+								style="border: none; background-color: white; font-size: 30px;">
+								<img class="btn-img" src='<c:url value="/images/search.png"/>'
+									style="width: 25px; height: 25px;" />
+							</button>
+						</form>
+					</th>
+					<th><a class="packCreateBtn btn" style="float: right;"
+						href="<c:url value="/pack/create.do"/>">팩 만들기</a></th>
+				</tr>
+			</table>
+		</div>
+	</div>
 </div>
 <div class="row">
-   <div class="col-xs-12 col-lg-12">
-      <div id="map"
-         style="height: 400px; width: 100%; overflow: hidden; position: relative; margine-top: 50px;"></div>
-      <p style="color: grey; font-size: .8em">지도를 클릭 시 클릭 된 지점을 기준으로 검색
-         됩니다(별 모양 마커를 움직이세요)</p>
-   </div>
-</div>
-<div class="row">
-   <div class="col-xs-12 col-lg-12 PackMainTop">
-      <table class="col-xs-12 col-md-12">
-         <tr>
-            <th colspan="2" class="text-left">
-               <form class="form-inline" method="post"
-                  action="<c:url value="/pack/main.do"/>">
-                  <div class="packAddr" style="font-size: 30px;">
-                     <span
-                        style="font-size: .8em; font-weight: bold; padding-left: 10px;">[<span
-                        id="packRegionSearch"></span>] 근처 팩저장
-                     </span> &nbsp;
-                  </div>
-                  <input type="text" class="form-group" name="searchWord"
-                     style="width: 200px; height: 30px; border-radius: 10px; border-color: #333333;" />
-                  <button class="searchBtn"
-                     style="border: none; background-color: white; font-size: 30px;">
-                     <img class="btn-img" src='<c:url value="/images/search.png"/>'
-                        style="width: 25px; height: 25px;" />
-                  </button>
-               </form>
-            </th>
-            <th><a class="packCreateBtn btn" style="float: right;"
-               href="<c:url value="/pack/create.do"/>">팩 만들기</a></th>
-         </tr>
-      </table>
-   </div>
-</div>
-<div class="row">
-   <div class="col-xs-12 col-lg-12" style="margin-top: 20px;">
-      <c:if test="${empty packList }" var="isEmpty">
-         <h3
-            style="height: 40px; font-size: 20px; text-align:center; line-height: 20px;">해당하는
-            팩이 없어요.</h3>
-      </c:if>
-      <c:if test="${!isEmpty}">
-         <c:forEach var="item" items="${packList }">
-            <div>
-               <table class="col-xs-12 col-lg-12">
-                  <tr id="tbPack">
-                     <th class="col-xs-3 col-lg-1"><img style="width: 100%;"
-                        src="<c:url value="/images/pack/${item.packThumbnail}"/>"
-                        alt="팩 마크"></th>
-                     <th style="height: 40px; font-weight:light; line-height: 20px;"><span style="font-size : 1.2em; font-weight:bolder;">${item.packName}</span><br/>${item.packTag}&emsp;#${item.packActTime}&emsp;#${item.packAge}<br />${item.packIntro}</th>
-                     <th colspan="2" class="text-right">
-                        <button class="btn joinPackBtn" id="${item.packID}" style="margin-top: 10px; font-weight: bold; color: white; border: none; background-color: #f32a48;">가입</button>
-                     </th>
-                     <th colspan="2"><hr /></th>
-                  </tr>
-                  <tr>
-                     <th colspan="3"><hr /></th>
-                  </tr>
-               </table>
-            </div>
-         </c:forEach>
-      </c:if>
-   </div>
+	<div class="col-xs-12 col-lg-12" style="margin-top: 20px;">
+		<c:if test="${empty packList }" var="isEmpty">
+			<h3
+				style="height: 40px; font-size: 20px; text-align: center; line-height: 20px;">해당하는
+				팩이 없어요.</h3>
+		</c:if>
+		<c:if test="${!isEmpty}">
+			<c:forEach var="item" items="${packList }">
+				<div>
+					<table class="col-xs-12 col-lg-12">
+						<tr id="tbPack">
+							<th class="col-xs-3 col-lg-1"><img style="width: 100%;"
+								src="<c:url value="/images/pack/${item.packThumbnail}"/>"
+								alt="팩 마크"></th>
+							<th style="height: 40px; font-weight: light; line-height: 20px;"><span
+								style="font-size: 1.2em; font-weight: bolder;">${item.packName}</span><br />${item.packTag}&emsp;#${item.packActTime}&emsp;#${item.packAge}<br />${item.packIntro}</th>
+							<th colspan="2" class="text-right">
+								<button class="btn joinPackBtn" id="${item.packID}"
+									style="margin-top: 10px; font-weight: bold; color: white; border: none; background-color: #f32a48;">가입</button>
+							</th>
+							<th colspan="2"><hr /></th>
+						</tr>
+						<tr>
+							<th colspan="3"><hr /></th>
+						</tr>
+					</table>
+				</div>
+			</c:forEach>
+		</c:if>
+	</div>
 </div>
 <!-- 모달 -->
 <div class="modal fade" id="packJoinModal" data-backdrop="false">
-   <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-         <div class="modal-body">
-            <div class="col-sm-12" id="galleryImgModal" style="margin-top: 10px">
-               <span id="packJoinSpan" style="font-size: 20px;">가입 신청
-                  하시겠습니까?</span>
-            </div>
-         </div>
-         <div class="modal-footer">
-            <button class="btn btn-default" id="packJoinModalBtn">신청</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-         </div>
-      </div>
-   </div>
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-body">
+				<div class="col-sm-12" id="galleryImgModal" style="margin-top: 10px">
+					<span id="packJoinSpan" style="font-size: 20px;">가입 신청
+						하시겠습니까?</span>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-default" id="packJoinModalBtn">신청</button>
+				<button type="button" class="btn btn-default" id="packJoinModalBtn" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- 모달 -->
 
