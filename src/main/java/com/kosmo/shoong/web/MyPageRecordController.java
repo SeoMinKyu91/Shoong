@@ -30,10 +30,10 @@ public class MyPageRecordController {
 
 	@RequestMapping("list.do")
 	   public String mypageMain(@RequestParam Map map ,Model model,HttpServletRequest req) throws IOException {
-		/*유저 id 값 */
-		  //map.put("id","shoong1000@naver.com");
-	    map.put("id", req.getSession().getAttribute("userId").toString());
+	
+	      map.put("id", req.getSession().getAttribute("userId").toString());
 		  List<Map> recordList = service.selectList(map);
+		  
 		  /*record 지도 관련*/
 		  for(Map recordMap:recordList) {
 		    String filePath = req.getServletContext().getRealPath("/upload")+File.separator+recordMap.get("RECORD_FILE_NAME");

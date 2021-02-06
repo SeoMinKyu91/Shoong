@@ -31,15 +31,17 @@ public class MyPageDiaryController {
 
 	@RequestMapping("list.do")
 	   public String mypageDiary(@RequestParam Map map ,Model model,HttpServletRequest req) {
-	       /*유저 id 값 */
-		  //map.put("id","shoong1000@naver.com");
-		  map.put("id", req.getSession().getAttribute("userId").toString());
+
+		    map.put("id", req.getSession().getAttribute("userId").toString());
 		    List<Map> recordlist = service.recordSelectList(map);
 		    for(Map recordMap: recordlist) {
 		    	 String date = recordMap.get("RECORD_DATE").toString().substring(0,10);
 		    	 recordMap.put("RECORD_DATE",date);
+		    	 if(recordMap.get("COURSE_ID") == null) {
+		    		 recordMap.put("COURSE_NAME",String.format("%s월 %s일 라이딩",date.split("-")[1],date.split("-")[2]));
+		    	 }
 		    }
-		    //List recordlist = service.recordSelectList(map);
+		    
 		    List diarylist = service.selectList(map);
 		    model.addAttribute("diaryList",diarylist);
 		    model.addAttribute("recordList",recordlist);

@@ -144,8 +144,8 @@ padding: 10px;
 		         <div class= "col-sm-12 progbar">
 		         <h4>이달의 마일리지</h4>
 		            <div class="progress">
-		              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" style="width: 68%">
-		                 ${totalLength}km
+		              <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="${mileagePercentage}" aria-valuemin="0" aria-valuemax="100" style="width:${mileagePercentage}%">
+		                 ${mileage}
 		              </div>
 		            </div>
 		         </div>

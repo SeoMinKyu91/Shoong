@@ -220,13 +220,72 @@
 							</div>
 						</div>
 					</div><!-- 채팅방 끝 -->
-					
+<style>
+.chat-container {
+	  /*margin: 0px;*/
+	  padding: 0px;
+	  width: 500px;
+	  /*margin: 35px 0px;*/
+	  margin-left: 15%;
+	  margin-right: 15%;
+}
+
+.chat-message {
+	  padding: 6px;
+	  border-radius: 10px;
+	  margin-bottom: 5px;
+}
+
+.bot-message {
+	  background: #4682B4;
+	  max-width: 200px;
+	  color: white;
+	  margin-right: auto;
+}
+
+.human-message {
+	  background: #4B0082;
+	  max-width: 200px;
+	  color: white;
+	  margin-left: auto;
+}
+.input {
+  width: 500px;
+  /*margin: 35px 0px;*/
+  margin-left: 15%;
+  margin-right: 15%;
+   border-radius: 5px;
+}
+    </style>
+<!-- ////////////////////////////////////////////////////////////////////////////////////// -->					
 					<!-- 챗봇 메시지 창 -->
 					<!-- 토탈 heigth:600px이여서 별님이 원하는 크기만큼 설정하시면 될거같아요 -->
-					<div class="chatBot" style="background-color: red;">
-						<div class="chatBotExit">
-							<img class="chatBotExitBtn" src="<c:url value="/images/fa-icons/window-close-regular.svg"/>">
+					<div class="chatBot">
+						<div class="chatRoomTop">
+							<div class="chatBotExit">
+								<img class="chatBotExitBtn" src="<c:url value="/images/fa-icons/window-close-regular.svg"/>">
+							</div>
 						</div>
+						
+						<div class="chatRoomBody">
+							 <div class="chat-container">
+		                        <div class="chat-message col-md-6 bot-message">
+						                                 안녕하세요 챗봇 슝~ 입니다.
+		                        </div>
+				         	</div>	
+						</div>
+						
+						<div class="chatRoomFooter">
+							<input class="input" type="text"  placeholder="질의어를 입력하세요" id="query"/>
+							<div class="chatRoomMessageWriteBtnDiv">
+							 <button id="testBtn">클릿</button> 
+							
+								  <a href="<c:url value='/chatbot/map?location=용인시'/>"> 이동 버튼</a> 
+							</div>
+						</div>
+						
+						<!-- 나가기 -->
+						
 						
 					</div>
 				</div>
@@ -234,6 +293,83 @@
 			</div>
 		</div>
 	</main>
+	<script>
+
+    function sendMessage(message) {
+        console.log('입력메시지:',message)
+        $.ajax({
+        	url:"http://localhost:5000/message?message="+message,
+        	type:'get',
+        	success:receiveResponse,
+        	error:function(request,status,error){
+				console.log('에러');
+				 $('.chat-container').append('<div class="chat-message col-md-5 bot-message">죄송합니다. 연결 실패입니다.</div>')
+		           //스크롤바 아래로 메세지는 받아 오구, 
+		        $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+				}
+        	})
+        	//flask서버로부터 응답을 받으면 receiveResponse콜백함수가 호출됨
+		        function receiveResponse(data) {//data는 flask로부터 받은 응답 {'message':'다이얼로그플로우가 보내준값'}
+		        	 console.log('받은 메시지:',data)
+					if(data.code=="3"){
+						console.log("근처 자전거 가게 오늘 해결 1 순위 ")
+						 $('.chat-container').append('<div class="chat-message col-md-5 bot-message"><a href="<c:url value='/chatbot/map'/>" class="btn">자전거 가게 바로보기</a><br>'+data.msg+'</div>')
+				           //스크롤바 아래로 메세지는 받아 오구, 
+				          $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+				    }else{
+							$('.chat-container').append('<div class="chat-message col-md-5 bot-message">'+data.msg+'</div>')
+							  //스크롤바 아래로 메세지는 받아 오구, 
+							 $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+							console.log("그냥 메세지 ")
+					}
+             }
+           //chat-container에 bot의 응답 추가
+          // $('.chat-container').append('<div class="chat-message col-md-5 bot-message">'+data.message+'</div>')
+           //스크롤바 아래로
+         // $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+        }
+
+      
+	$("#query").on('keypress',function(e) {
+	
+	    if (e.keyCode == 13){
+	        //e.preventDefault();
+	        var query = $(this).val()
+	        console.log(query)
+	        if (!query) {//텍스트를 입력하지 않는 경우
+	          return
+	        }
+	        //chat-container에 사용자의 응답 추가
+	        $('.chat-container').append('<div class="chat-message col-md-5 offset-md-7 human-message"> '+query+'</div>')
+	        // 입력창 클리어
+	        $('#query').val('')
+	        //스크롤바 아래로
+	        $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+	        //메시지 전송
+	        sendMessage(query)
+	    }
+	});
+	
+	$("#testBtn").click(function(){
+		
+
+			$.ajax({
+				  url:"<c:url value="/ajax"/>",
+			   
+			     success: function(data){
+			          console.log(data);
+			     }
+			});
+		
+	})
+	
+	
+    </script>
+    
+    
+    
+    
+    
 	<script>
 	$(function(){
 		var websocket;
