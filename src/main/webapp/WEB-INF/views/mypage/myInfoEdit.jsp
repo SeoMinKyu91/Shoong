@@ -35,28 +35,36 @@ input {
 	color: white;
 	border: none;
 }
+
 #joinBtn:hover {
 	background-color: #f2f2f7;
 }
+
 #userAddr {
 	border: #ced4da 1.5px solid;
 	font-size: .8em;
 	padding-left: 10px;
 }
+
 #bg {
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  opacity: 0.5;
-  /* Preserve aspet ratio */
-  min-width: 100%;
-  min-height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	opacity: 0.5;
+	/* Preserve aspet ratio */
+	min-width: 100%;
+	min-height: 100%;
 }
-.form-horizontal{
+
+.form-horizontal {
 	padding-top: 30px;
 	background-color: white;
-	background-color: rgba( 255, 255, 255, 0.9 );
+	background-color: rgba(255, 255, 255, 0.9);
 	border-radius: 30px;
+}
+.myPageThumbnailModal img{
+	border-radius: 40px;
+	width: 60px;
 }
 </style>
 <!-- 실제 내용 시작 -->
@@ -69,10 +77,22 @@ input {
 		action="<c:url value='/mypage/infoEdit.do'/>">
 		<div class="form-group">
 			<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
-				style="padding-bottom: 30px; text-align: center">
-				<h3 style="font-weight: bold">${memberInfo.USER_ID }님 회원 정보 수정</h3>
+				style="text-align: center">
+				<h3 style="font-weight: bold">${memberInfo.USER_ID }님회원정보수정</h3>
 			</div>
 			<br />
+		</div>
+		<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
+			<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
+				<img
+					style="width: 120px; border-radius: 40px; padding-bottom: 10px;"
+					src="<c:url value="/images/badge/speedBadge.png"/>" alt="뱃지"
+					id="myPageThumbnailProfile">
+			</div>
+			<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
+				<input type="button" id="btnThumbnail" value="프로필사진 바꾸기"
+				style="color: #f32a48; border: none; font-size: 1.1em; background-color: rgba(255, 255, 255, 0.1); text-decoration: underline; padding-bottom: 20px;"/> 
+			</div>
 		</div>
 		<!-- 비밀번호 입력란 -->
 		<div class="form-group">
@@ -153,24 +173,24 @@ input {
 					<option value="017">017</option>
 					<option value="018">018</option>
 					<option value="019">019</option>
-				</select> &nbsp; ㅡ &nbsp; 
-				<c:set var="tel" value="${memberInfo.USERTEL}"/>
-            <input name="userTel2" id="userTel2" type="text"
-               maxlength="4" style="height: 50px; width: 26.5%"
-               OnKeyUp="checkTel();" value="${fn:substring(tel,3,7) }">
-               &nbsp; ㅡ &nbsp;
-            <input
-               name="userTel3" id="userTel3" type="text" maxlength="4"
-               style="height: 50px; width: 26.5%" OnKeyUp="checkTel();" value="${fn:substring(tel,7,11) }"> <br />
-         </div>
+				</select> &nbsp; ㅡ &nbsp;
+				<c:set var="tel" value="${memberInfo.USERTEL}" />
+				<input name="userTel2" id="userTel2" type="text" maxlength="4"
+					style="height: 50px; width: 26.5%" OnKeyUp="checkTel();"
+					value="${fn:substring(tel,3,7) }"> &nbsp; ㅡ &nbsp; <input
+					name="userTel3" id="userTel3" type="text" maxlength="4"
+					style="height: 50px; width: 26.5%" OnKeyUp="checkTel();"
+					value="${fn:substring(tel,7,11) }"> <br />
 			</div>
+		</div>
 		<!-- 활동지역 입력란 -->
 		<div class="form-group">
 			<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userAddr">활동지역</label>
 				<div>
-					<input type="text" class="input" id="userAddr" name="userAddr" 
-						style="font-size:1.1em; height: 50px; width: 100%; padding-left: 10px; border: #ced4da 1.5px solid;" placeholder="${memberInfo.ADDRESS }">
+					<input type="text" class="input" id="userAddr" name="userAddr"
+						style="font-size: 1.1em; height: 50px; width: 100%; padding-left: 10px; border: #ced4da 1.5px solid;"
+						placeholder="${memberInfo.ADDRESS }">
 				</div>
 			</div>
 		</div>
@@ -179,7 +199,7 @@ input {
 				<div id="map"></div>
 				<input type="hidden" id="memberLat" name="memberLat"
 					class="form-group" /> <input type="hidden" id="memberLng"
-					name="memberLng" class="form-group"/>
+					name="memberLng" class="form-group" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -191,7 +211,88 @@ input {
 		</div>
 	</form>
 </div>
+<!-- 팩 썸네일 모달창 시작 -->
+<div class="modal fade" id="thumbnailModal" data-backdrop="false">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<!-- /////////////////////////   나중에 여기 팩뱃지로 바꿔야함      //////////////////////////////// -->
+				<div class="row myPageThumbnailModal">
+					<div class="col-md-2 col-xs-3">
+						<img src="<c:url value="/images/badges/shoongBadge1.png"/>"
+							alt="팩 마크" id="shoongBadge1.png">
+					</div>
+					<div class="col-md-2 col-xs-3">
+						<img src="<c:url value="/images/badges/shoongBadge2.png"/>"
+							alt="팩 마크" id="shoongBadge2.png">
+					</div>
+					<div class="col-md-2 col-xs-3">
+						<img src="<c:url value="/images/badges/shoongBadge3.png"/>"
+							alt="팩 마크" id="shoongBadge3.png">
+					</div>
+					<div class="col-md-2 col-xs-3">
+						<img src="<c:url value="/images/badges/shoongBadge4.png"/>"
+							alt="팩 마크" id="shoongBadge4.png">
+					</div>
+					<div class="col-md-2 col-xs-3">
+						<img src="<c:url value="/images/badges/shoongBadge5.png"/>"
+							alt="팩 마크" id="shoongBadge5.png">
+					</div>
+					<div class="col-md-2 col-xs-3">
+						<img src="<c:url value="/images/badges/shoongBadge6.png"/>"
+							alt="팩 마크" id="shoongBadge6.png">
+					</div>
+					<div class="col-md-2 col-xs-3">
+						<img src="<c:url value="/images/badges/shoongBadge7.png"/>"
+							alt="팩 마크" id="shoongBadge7.png">
+					</div>
+					<div class="col-md-2 col-xs-3">
+						<img src="<c:url value="/images/badges/shoongBadge8.png"/>"
+							alt="팩 마크" id="shoongBadge8.png">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn text-right" data-dismiss="modal"
+					id="btnPackThumbnailOk">선택</button>
+				<button type="button" class="btn btn-info text-right"
+					data-dismiss="modal">닫기</button>
+			</div>
 
+		</div>
+	</div>
+</div>
+<!-- 팩 썸네일 모달창 끝 -->
+<script>
+	$(function() {
+		$('#btnThumbnail').click(function() {
+			$('#thumbnailModal').modal();
+			thumbnailCssReset();
+		})
+	});
+	var myPageThumbnail = "";
+
+	$('.myPageThumbnailModal img').click(function() {
+		myPageThumbnail = $(this).attr('id');
+		thumbnailCssReset();
+		$(this).css('border', '4px solid red');
+
+	})
+
+	$('#btnmyPageThumbnailOk').click(
+			function() {
+				console.log('확인버튼 눌러짐');
+				console.log(myPageThumbnail);
+				$('#myPageThumbnail').prop("value", myPageThumbnail);
+				$('#myPageThumbnailProfile').attr("src",
+						"<c:url value='/images/badges/"+myPageThumbnail+"'/>");
+			})
+
+	function thumbnailCssReset() {
+		$(".myPageThumbnailModal img").css('border', 'none');
+
+	}
+</script>
 <!-- ---------------- 활동지역 맵 스크립트 ----------------- -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=616834812e97e8f82a462cd2cc2e5e4e&libraries=services"></script>
