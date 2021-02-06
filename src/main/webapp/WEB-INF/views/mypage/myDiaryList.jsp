@@ -76,7 +76,8 @@
 }
 
 th{
-   font-size: 2em;
+   font-size: 1.5em;
+   font-weight: normal;
 }
 .animated-text{
 	display:none;
@@ -128,7 +129,7 @@ th{
            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                      <div class="modal-header">
-                          <p>다이어리 추가하기</p>
+                          <h2>다이어리 추가하기</h2>
                      </div>
                      <div class="modal-body">
                            <c:if test="${empty recordList }" var="isEmpty">

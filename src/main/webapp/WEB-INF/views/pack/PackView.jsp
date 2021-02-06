@@ -31,7 +31,19 @@
 	#packComment.col:eq(1){
 		diplay: none;
 	}
+.animated-text{
+	display:none;
+}
+.slider-area{
+	display:none;
+}
+
+body{
+	background-color: #F9F9F9;
+}
 </style>
+<div>
+<div style="border-radius: 10px;box-shadow: 0px 0px 5px #787878;padding: 30px;background-color: white;">
 	<div class="row">
 		<div class="col-lg-12" style="padding-bottom:20px">
 			<div class="">
@@ -49,7 +61,8 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-md-12 col-lg-12">
-			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em;text-align: center">전국일주</p>
+			<h1 style="text-align: center;font-weight: bold">전국일주</h1>
+			<br/>
 			<hr style="background-color: black;height:1px"/>
 			<c:if test="${!empty manager}">
 				<a class="packManageBtn btn" href="<c:url value="/pack/manage.do"/>">
@@ -233,3 +246,5 @@
 				</table>
 			</div>
 		</div>
+	</div>
+</div>

@@ -103,7 +103,7 @@
 
 	<!-- body 시작 -->
 	<main>
-		<div class="slider-area hero-overly"">
+		<div class="slider-area hero-overly">
 			<div
 				class="single-slider hero-overly  slider-height d-flex align-items-center" style="margin-top: 80px;">
 				<div class="container">
@@ -124,7 +124,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="popular-location" style="padding-top:100px; padding-bottom:100px;">
+		<div class="popular-location" style="padding-top:200px; padding-bottom:100px;">
 			<div class="container">
 				<tiles:insertAttribute name="body" />
 				<c:if test="${not empty sessionScope.packId }">
@@ -465,7 +465,6 @@
 				});
 				console.log('웹소켓작업 시작하는 곳');
 				websocketConnect();
-
 				
 				$('.chatRoom').css('display','block');	
 			})
@@ -513,7 +512,6 @@
 					</div>
 				</div>
 				
-
 			</div>
 			<div class="crbMyMessage" style="margin-bottom:10px;">
 				<span style="font-size:12px;margin-right: 5px;">오후12:12</span>

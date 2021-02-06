@@ -115,7 +115,7 @@
 
 <div class="row" style="margin-left: 20px; margin-bottom: 2px; ">
 		
-	<div class="col-lg-12" style="padding-bottom:10px;>
+	<div class="col-lg-12" style="padding-bottom:10px;">
 		<div class="row">
 			<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10" style="padding-top:20px">
 				<a href="<c:url value="/pack/main.do"/>">
