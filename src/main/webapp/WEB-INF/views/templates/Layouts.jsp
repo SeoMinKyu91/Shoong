@@ -31,8 +31,10 @@
 <link rel="stylesheet" href="<c:url value="/css/icomoon.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/open-iconic-bootstrap.min.css"/>">
+<!--  
 <link rel="stylesheet" href="<c:url value="/css/bootstrap-datepicker.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/jquery.timepicker.css"/>">
+-->
 
 <!-- 달력 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.5.0/main.min.css,npm/fullcalendar@5.5.0/main.min.css">
@@ -76,6 +78,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+<!-- bootstrap datetimepicker -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
 </head>
 
 <body>
@@ -733,8 +740,10 @@
 	-->
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
+	<!--  
 	<script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
 	<script src="<c:url value="/js/jquery.timepicker.min.js"/>"></script>
+	-->
 	<!-- 지도 -->
 	<script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
 	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>

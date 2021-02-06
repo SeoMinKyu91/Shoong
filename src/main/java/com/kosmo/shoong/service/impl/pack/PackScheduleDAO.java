@@ -50,8 +50,8 @@ public class PackScheduleDAO implements PackScheduleService{
 
 	@Override
 	public int scheduleJoin(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return sqlMapper.insert("packScheduleJoin",map);
 	}
 
 	@Override
@@ -81,6 +81,17 @@ public class PackScheduleDAO implements PackScheduleService{
 	public Map scheduleSeletOne(Map map) {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectOne("scheduleSelectOne",map);
+	}
+
+	public List<Map> ajaxScheduleList(Map map) {
+		
+		return sqlMapper.selectList("ajaxScheduleList",map);
+		
+	}
+
+	public List<Map> scheduleJoinList(Map map) {
+
+		return sqlMapper.selectList("scheduleJoinList",map);
 	}
 
 }///////////////

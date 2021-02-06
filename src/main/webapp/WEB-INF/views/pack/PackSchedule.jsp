@@ -3,21 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/locales-all.min.js"></script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.5.0/main.min.css,npm/fullcalendar@5.5.0/main.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.0/main.min.css">
-
-<!-- 데이트 피커 -->
-<script src="<c:url value="/js/bootstrap-datepicker.js"/>"></script>
 
 
 
 <style>
-
   body {
     font-size: 12px;
   }
@@ -173,7 +166,7 @@
 
          <div class="modal-footer">
             <button type="button" class="SceduleBtn btn" id="btnPackSchedule">등록</button>
-            <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnPackScheduleClose">닫기</button>
+            <button type="button" class="SceduleBtn btn" id="btnPackScheduleInsertClose">닫기</button>
          </div>
       </div>
    </div>
@@ -210,6 +203,11 @@
                <div class="col-md-10" id="packScheduleViewContent" value="" style="text-align: left;"></div>
             </div>
             <div class="row">
+            	<div class="col-md-2">참가자</div>
+            	<div class="col-md-10" id="packScheduleViewJoiner"></div>
+            </div>
+            
+            <div class="row">
                <div style="display:none;" id="packScheduleViewNo" value="" style="text-align: left;"></div>
             </div>
             
@@ -219,7 +217,7 @@
             <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnPackScheduleUpdate">수정</button>
             <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnPackScheduleDelete">삭제</button>
             <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnPackScheduleJoin">참가</button>
-            <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnPackScheduleClose">닫기</button>
+            <button type="button" class="SceduleBtn btn" id="btnPackScheduleViewClose">닫기</button>
          </div>
       </div>
    </div>
@@ -265,8 +263,8 @@
          </div>
 
          <div class="modal-footer">
-            <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnPackScheduleUpdateOk">수정</button>
-            <button type="button" class="SceduleBtn btn" data-dismiss="modal" id="btnPackScheduleUpdateClose">닫기</button>
+            <button type="button" class="SceduleBtn btn"  id="btnPackScheduleUpdateOk">수정</button>
+            <button type="button" class="SceduleBtn btn"  id="btnPackScheduleUpdateClose">닫기</button>
          </div>
       </div>
    </div>
@@ -299,6 +297,8 @@
    </div>
 </div>
 <!-- 팩 일정 삭제 모달창 끝 -->
+
+
 
 
 
@@ -338,8 +338,10 @@
       calendar.on('dateClick', function(info) {
          console.log(info);
          $('#packScheduleInsertModal').modal();
-         $('#startDatePicker').attr('value',info.dateStr);
-   
+         
+         var clickTime = moment(info.date).format("YYYY-MM-DD hh:mm a");
+         
+         $('#startDatePicker').attr('value',clickTime);
       });
       
       calendar.on('eventClick',function(info){
@@ -362,6 +364,7 @@
                $('#packScheduleViewNo').text(data.packScheduleNo);
                
                
+               
                if(data.isWriter == 'yes'){
                   $('#btnPackScheduleJoin').css('display','none');   
                }
@@ -369,6 +372,13 @@
                   $('#btnPackScheduleUpdate').css('display','none');
                   $('#btnPackScheduleDelete').css('display','none');
                }
+               var str = "";
+               $.each(data.scheduleJoiner,function(index,el){
+            	   console.log(el.NAME);
+            	   str += el.NAME;
+               })
+               console.log(str);
+               $('#packScheduleViewJoiner').text(str);
                
                $('#packScheduleViewModal').modal();
             },
@@ -376,19 +386,18 @@
                console.log('에러 : ', error.responseText);
                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
-
+            
          });
+         
       })
    
       calendar.render();
    })
    
     
-   $('#startDatePicker, #endDatePicker').datepicker({
-      format: "yyyy-mm-dd",
-      startDate: '0',   //달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
-       language : "ko",
-       todayHighlight: true//달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
+   $('#startDatePicker, #endDatePicker').datetimepicker({
+      format: "YYYY-MM-DD hh:mm a",
+      locale:'ko'
       })//여기까지가 기본 사용 방법
    $('#startDatePicker','#endDatePicker').on("changeDate",function(e){
       console.log('들어옴');
@@ -454,6 +463,37 @@
    $('#btnScheduleDeleteOk').click(function(){
       $('#packScheduleDeleteNo').prop('value',$('#packScheduleViewNo').text());
       $('#packScheduleDeleteForm').submit();
+   })
+   
+   //팩 일정등록 닫기
+   $('#btnPackScheduleInsertClose').click(function(){
+	   console.log('팩일정등록 닫기 클릭');
+	   $('#packScheduleInsertModal').modal('hide');
+	   
+   })
+   
+   $('#btnPackScheduleViewClose').click(function(){
+	   console.log('팩일정 상세보기 닫기 클릭');
+	   $('#packScheduleViewModal').modal('hide');
+  	   $('#btnPackScheduleUpdate').css('display','inline-block')
+  	   $('#btnPackScheduleDelete').css('display','inline-block')
+  	   $('#btnPackScheduleJoin').css('display','inline-block')
+   })
+   
+   $('#btnPackScheduleJoin').click(function(){
+	   var packScheduleNo = $('#packScheduleViewNo').text();
+	   $.ajax({
+		   url:"<c:url value="/pack/schedule/join.do"/>",
+		   data:{"packScheduleNo":packScheduleNo,"userId":'${sessionScope.userId}'},
+		   dataType:"text",
+		   type:'post',
+		   success:function(data){
+			   console.log(data);
+		   },
+		   error:function(error){
+			   console.log('에러:'+error.responseText);
+		   }
+	   })
    })
    
 </script>
