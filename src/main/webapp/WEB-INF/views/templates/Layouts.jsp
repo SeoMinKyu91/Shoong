@@ -261,20 +261,24 @@
 	<script>
 	//챗봇관련시작  
 	function getMyRecordChatBot(){
-		
+		var messageDiv ="";
 		$.ajax({
 			url:"<c:url value="/chatbot/record"/>",				
 			dataType:'text',
 			success:function(data){
 				console.log(data)
-				return data;
+				chatBotMessage = '<div class="responesDiv">'+data+'</div><br>'+"더 궁금한게 있으신가요?";
+			    chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage);
+				$('.chat-container').append(chatBotMessageDiv)
+				$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
 			},
 			error:function(request,error){
 				console.log("상태코드:",request.status);
 				console.log("에러:",error);
-				return "사용자 조회 실패 죄송합니다.";
+				messageDiv = "사용자 조회 실패 죄송합니다.";
 			}		
 		})
+
 	}	
 	
     function sendMessage(message) {
@@ -306,12 +310,7 @@
 						$('.chat-container').append(chatBotMessageDiv)
 						$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
 				    }else if(data.code=="4"){//내기록
-				    	recordMessage = getMyRecordChatBot();
-				    	console.log("recordMessage"+recordMessage)
-				    	chatBotMessage = '<div class="responesDiv">'+recordMessage+'</div><br>'+"더 궁금한게 있으신가요?";
-				        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
-						$('.chat-container').append(chatBotMessageDiv)
-						$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+				    	getMyRecordChatBot();
 				    }else if(data.code=="5"){//근처 자전거 보관소
 				    	chatBotMessage = '<div class="responesDiv">'+data.msg+'</div><br>'+"더 궁금한게 있으신가요?";
 				        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
