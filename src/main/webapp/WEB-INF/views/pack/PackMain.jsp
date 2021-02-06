@@ -106,7 +106,7 @@
                   <div class="packAddr" style="font-size: 30px;">
                      <span
                         style="font-size: .8em; font-weight: bold; padding-left: 10px;">[<span
-                        id="packRegionSearch"></span>] 근처 팩
+                        id="packRegionSearch">${searchRegion}</span>] 근처 팩
                      </span> &nbsp;
                   </div>
                   <input type="text" class="form-group" name="searchWord"
@@ -267,7 +267,7 @@
                }
             })
          });
-        var map;
+         var map;
          var clusterer;
          var markerLat;
          var markerLng;
@@ -279,27 +279,24 @@
                var options = { timeout: 3000, maxinumAge: 5000 };
               navigator.geolocation.getCurrentPosition(successCallback,error);
             }
-      
-          
-          //0-1]사용자 위치 구하기 성공시 좌표값 displayKaKaoMap로 넘김
+		 //0-1]사용자 위치 구하기 성공시 좌표값 displayKaKaoMap로 넘김
           function successCallback(position) {
-              
-               <c:if test="${empty searchLat}" var="isEmpty">
-                  var lat = position.coords.latitude;
-                  var lng = position.coords.longitude;
-               displayKaKaoMap(lat, lng);    
-            </c:if>
-            <c:if test="${!isEmpty}">
-                displayKaKaoMap(${searchLat},${searchLng});
-            </c:if>
-              
-               //if문
-               
+        	  SearchMap()   
            }
           //0-2]사용자 위치 구하기 실패시
           function error(position){
-             displayKaKaoMap(37.57801416976735,  126.97658868798284 );
+        	  SearchMap()
           }
+          function SearchMap(){
+        	 <c:if test="${empty searchLat}" var="isEmpty">
+        		 console.log("?????????")
+        		 displayKaKaoMap(37.57801416976735,  126.97658868798284 );
+	         </c:if>
+	         <c:if test="${!isEmpty}">
+	             displayKaKaoMap(${searchLat},${searchLng});
+	         </c:if>
+          }
+          
       
           //1]사용자 뷰에 지도 생성 지도 정보 map에 저장
            function displayKaKaoMap(lat, lng) {
@@ -406,10 +403,7 @@
                          var resionCut = regionArray[0]+" "+regionArray[1];
                          if(resionCut!=Region.innerHTML){
                             Region.innerHTML =resionCut;
-                            if(firstAccess){
                             reSearch(resionCut);
-                            }
-                            firstAccess = true;
                          }
                           break;
                       }

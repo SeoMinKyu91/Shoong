@@ -31,6 +31,9 @@
 		<when test="searchRegion != null">
 			where PACK_ACT_REGION LIKE '%' || #{searchRegion} || '%'
 		</when>
+		<when test="myRegion != null">
+			where PACK_ACT_REGION LIKE '%' || #{myRegion} || '%'
+		</when>
 	</choose>
 	ORDER BY PACK_ID DESC
 </select>
@@ -68,8 +71,8 @@
 </select>
 
 
-<select id="UserAddrCheckSelect" parameterType="java.util.Map" resultType="java.util.Map" >
-	SELECT ADDRESS FROM member_ WHERE USER_ID = #{userId} 
+<select id="selectOneUserAddr" parameterType="String" resultType="java.util.Map" >
+	select j.address, j.user_lat, j.user_lng  from member_ m join useraddr j on m.user_id=j.user_id where j.user_id=#{id}
 </select>
 <select id="packNameSelectOne" parameterType="java.util.Map" resultType="String">
 	
