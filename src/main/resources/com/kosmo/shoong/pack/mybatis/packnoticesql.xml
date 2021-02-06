@@ -21,7 +21,7 @@
 		
 		SELECT * FROM
 		(SELECT T.*,ROWNUM R FROM (SELECT p.*,m.name FROM member_ m JOIN pack_notice p ON m.user_id = p.user_id WHERE p.pack_id = #{packId}
-		ORDER BY pack_notice_no DESC) T)
+		ORDER BY pack_notice_no desc) T)
 		WHERE R BETWEEN #{start} AND #{end}	 
 		
 	</select>

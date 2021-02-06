@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,14 +52,23 @@ public class PackController {
         model.addAttribute("searchRegion",userAddress.get("ADDRESS"));
      }*/
 
+	  HttpSession session = req.getSession(); 
       List<PackDTO> packList=service.selectList(map);
       model.addAttribute("packList",packList);
       if(map.get("searchRegion") != null) {
          model.addAttribute("searchLat",map.get("lat"));
          model.addAttribute("searchLng",map.get("lng"));
+         
+      }
+      
+      if(session.getAttribute("packId") == null) {
+    	  return "pack/PackMain";
+      }
+      else {
+    	  return "forward:/pack/view.do";
       }
 
-      return "pack/PackMain";
+      
    }
    
    //팩 생성 페이지로 이동 get

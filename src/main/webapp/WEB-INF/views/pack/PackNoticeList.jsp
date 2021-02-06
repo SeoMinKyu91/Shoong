@@ -270,8 +270,8 @@
 		<div class="col-md-12">
 			<table class="table table-hover cus">
 				<tr>
-					<th class="text-center col-lg-2 col-xs-1">번호</th>
-					<th class="text-center col-lg-6 col-xs-6">제목</th>
+					<th class="text-center col-lg-2 col-xs-2">번호</th>
+					<th class="text-center col-lg-6 col-xs-5">제목</th>
 					<th class="text-center col-lg-2 col-xs-2">작성자</th>
 					<th class="text-center col-lg-2 col-xs-3">작성일</th>
 				</tr>

@@ -279,19 +279,19 @@ input {
 
 	})
 
-	$('#btnmyPageThumbnailOk').click(
-			function() {
-				console.log('확인버튼 눌러짐');
-				console.log(myPageThumbnail);
-				$('#myPageThumbnail').prop("value", myPageThumbnail);
-				$('#myPageThumbnailProfile').attr("src",
-						"<c:url value='/images/badges/"+myPageThumbnail+"'/>");
-			})
+	$('#btnPackThumbnailOk').click(function() {
+		console.log('프로필 사진 바꾸기 선택 클릭');
+		console.log('확인버튼 눌러짐');
+		console.log(myPageThumbnail);
+		$('#myPageThumbnail').prop("value", myPageThumbnail);
+		$('#myPageThumbnailProfile').attr("src","<c:url value='/images/badges/"+myPageThumbnail+"'/>");
+	})
 
 	function thumbnailCssReset() {
 		$(".myPageThumbnailModal img").css('border', 'none');
 
 	}
+	
 </script>
 <!-- ---------------- 활동지역 맵 스크립트 ----------------- -->
 <script type="text/javascript"
