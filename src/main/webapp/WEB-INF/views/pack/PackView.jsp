@@ -30,16 +30,16 @@
 	#packComment.col:eq(1){
 		diplay: none;
 	}
-.animated-text{
-	display:none;
-}
-.slider-area{
-	display:none;
-}
-
-body{
-	background-color: #F9F9F9;
-}
+	.animated-text{
+		display:none;
+	}
+	.slider-area{
+		display:none;
+	}
+	
+	body{
+		background-color: #F9F9F9;
+	}
 </style>
 <div>
 <div style="border-radius: 10px;box-shadow: 0px 0px 5px #787878;padding: 30px;background-color: white;">
@@ -60,7 +60,7 @@ body{
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-md-12 col-lg-12">
-			<h1 style="text-align: center;font-weight: bold">전국일주</h1>
+			<h1 style="text-align: center;font-weight: bold">${sessionScope.packName}</h1>
 			<br/>
 			<hr style="background-color: black;height:1px"/>
 			<c:if test="${!empty manager}">

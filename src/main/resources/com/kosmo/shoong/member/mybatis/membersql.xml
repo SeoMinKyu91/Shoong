@@ -97,7 +97,7 @@
 	</update>
 	
 	<select id="memberHasPack" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT pack_id FROM pack_join WHERE user_id=#{userId} AND pack_join_accept='yes'
+		select p.pack_id,p.pack_name from pack_join pj join pack p on pj.pack_id = p.pack_id where pj.user_id = #{userId} and pj.pack_join_accept='yes'
 	</select>
 
 	<select id="memberEditList" parameterType="java.util.Map" resultType="java.util.Map">

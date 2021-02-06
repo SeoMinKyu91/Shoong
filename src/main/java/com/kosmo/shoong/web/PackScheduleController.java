@@ -31,11 +31,9 @@ public class PackScheduleController {
 
 	@RequestMapping("calendar.do")
 	public String packCalendar(@RequestParam Map map, Model model,HttpServletRequest req) {
-		System.out.println("calendar.do 잘들어옴");
 		HttpSession session = req.getSession();
 
 		if(session.getAttribute("userId") != null && session.getAttribute("packId") !=null) {
-			System.out.println("아이디,팩pk있음");
 			map.put("userId", session.getAttribute("userId").toString());
 			map.put("packId",session.getAttribute("packId").toString());
 
@@ -43,17 +41,11 @@ public class PackScheduleController {
 			for(Object key:keys) System.out.println(key+":"+map.get(key));
 		}
 
-		//List<Map> list = service.scheduleSelectList(map);
 		List<PackScheduleEventsDTO> jsonForm = service.jsonForm(map);
-		System.out.println("디비에서 가져온값:"+jsonForm.size());
 
 		List<Map> jsonList = new Vector<Map>();
 		for(PackScheduleEventsDTO item : jsonForm) {
 			Map jsonMap = new HashMap();
-			
-			
-			
-			
 			if(item!=null) {
 				jsonMap.put("title", item.getPackScheduleTitle().toString());
 				if(item.getPackScheduleStart()!=null) {
@@ -68,11 +60,6 @@ public class PackScheduleController {
 			jsonList.add(jsonMap);
 		}
 
-		for(Map items : jsonList) {
-			System.out.println("어레이 start:"+items.get("start"));
-			System.out.println("어레이 end:"+items.get("end"));
-		}
-
 		model.addAttribute("calendarJson",JSONArray.toJSONString(jsonList));
 
 		return "pack/PackSchedule";
@@ -83,13 +70,6 @@ public class PackScheduleController {
 		HttpSession session = req.getSession();
 		map.put("userId",session.getAttribute("userId"));
 		map.put("packId",session.getAttribute("packId"));
-		System.out.println("팩 스케줄 등록 들어옴");
-		System.out.println(map.get("userId"));
-		System.out.println(map.get("packId"));
-		System.out.println(map.get("packScheduleTitle"));
-		System.out.println(map.get("packScheduleStart"));
-		System.out.println(map.get("packScheduleEnd"));
-		System.out.println(map.get("packScheduleContent"));
 
 		service.scheduleInsert(map);
 
@@ -99,21 +79,15 @@ public class PackScheduleController {
 	@RequestMapping(value="calendar/ajax.do",produces="text/html; charset=UTF-8")
 	@ResponseBody
 	public String calendarAjax(@RequestParam Map map) {
-
-
-		System.out.println("에이작스 요청 들어옴");
 		JSONObject json = new JSONObject();
-
 		json.put("dbData", service.scheduleSelectList(map));
 
-		System.out.println(json);
 		return json.toJSONString();
 	}
 
 	@RequestMapping(value="schedule/selectOne.do",produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String scheduleSelectOne(@RequestParam Map map,HttpServletRequest req) {
-		System.out.println("컨트롤러 들어올때"+map.get("packScheduleNo"));
 		String userId =  req.getSession().getAttribute("userId").toString();
 		
 		Map selectOne = new HashMap();
@@ -121,15 +95,8 @@ public class PackScheduleController {
 		Map selectJoinList = new HashMap();
 		selectJoinList.put("packScheduleNo", selectOne.get("PACK_SCHEDULE_NO"));
 		List<Map> scheduleJoiner = service.scheduleJoinList(selectJoinList);
-		System.out.println("조인한사람들");
-		for(Map test11 : scheduleJoiner) {
-			System.out.println(test11.get("NAME"));
-		}
-		
-		System.out.println("컨트롤러 나갈때"+selectOne.get("PACK_SCHEDULE_NO"));
 
 		JSONObject json = new JSONObject();
-		System.out.println(selectOne.get("PACK_SCHEDULE_END").toString());
 		
 		json.put("title", selectOne.get("PACK_SCHEDULE_TITLE"));
 		json.put("content", selectOne.get("PACK_SCHEDULE_CONTENT"));
@@ -153,9 +120,6 @@ public class PackScheduleController {
 	@RequestMapping("schedule/update.do")
 	public String scheduleUpdate(@RequestParam Map map,Model model,HttpServletRequest req) {
 
-
-		System.out.println("팩 수정 No:"+map.get("packScheduleNo"));
-
 		service.scheduleUpdate(map);
 
 		return "forward:/pack/calendar.do";
@@ -175,29 +139,8 @@ public class PackScheduleController {
 	public String packScheduleJoin(@RequestParam Map map) {
 		
 		
-		
 		return (int)service.scheduleJoin(map) == 1?"참가 성공":"참가 실패";
 	}
-
-//	@RequestMapping(value="scheduleAjax/list.do",produces="text/html; charset=UTF-8")
-//	@ResponseBody
-//	public String ajaxScheduleSelectList(@RequestParam Map map) {
-//		
-//		List<Map> list = service.ajaxScheduleList(map);
-//		JSONArray jsonArray = new JSONArray();
-//		for(Map schedule:list) {
-//			Map bfSchedule = new HashMap();
-//			
-//			bfSchedule.put("start", schedule.get("PACK_SCHEDULE_START").toString().substring(0,10));
-//			bfSchedule.put("end", schedule.get("PACK_SCHEDULE_END").toString().substring(0,10));
-//			bfSchedule.put("title", schedule.get("PACK_SCHEDULE_TITLE"));
-//			bfSchedule.put("id", schedule.get("PACK_SCHEDULE_NO"));
-//			jsonArray.add(bfSchedule);
-//		}
-//		
-//		return jsonArray.toJSONString();
-//	}
-	
 
 
 

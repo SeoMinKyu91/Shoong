@@ -71,8 +71,5 @@
 <select id="UserAddrCheckSelect" parameterType="java.util.Map" resultType="java.util.Map" >
 	SELECT ADDRESS FROM member_ WHERE USER_ID = #{userId} 
 </select>
-<select id="packNameSelectOne" parameterType="java.util.Map" resultType="String">
-	
-</select>
 
 </mapper>

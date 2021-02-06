@@ -60,13 +60,7 @@ public class PackController {
 
       return "pack/PackMain";
    }
-
-
-
-
-
-
-
+   
    //팩 생성 페이지로 이동 get
    @RequestMapping("create.do")
    public String packCreate() {
@@ -80,8 +74,6 @@ public class PackController {
 
       service.insert(map);
 
-      //원래 user Id 세션에서  받아와야 한다.개발중이니 임시로.
-      System.out.println("packCreateOk:"+req.getSession().getAttribute("userId").toString());
       map.put("userId", req.getSession().getAttribute("userId").toString());
       //마이바티스 처리로 map에 PK 받아왔음. packId에 저장 되어있다
       service.insertCreate(map);
@@ -134,7 +126,6 @@ public class PackController {
             List<PackGalleryDTO> packGalleryList = GalleryList.subList(0, 4);
             model.addAttribute("packGalleryList",packGalleryList);
        }
-       service.packNameSelectOne(map);
       return "pack/PackView";
    }
 
@@ -146,7 +137,6 @@ public class PackController {
 
       int result = service.selectPackName(map);
       String check = "Y";
-      System.out.println(result);
       if(result == 1) {
          check = "N";
       }
@@ -159,8 +149,6 @@ public class PackController {
    @ResponseBody
    public String joinPack(@RequestParam Map map,HttpServletRequest req) {
 
-      System.out.println("팩가입 신청 들어왔습니다");
-      //원래 user Id 세션에서  받아와야 한다.개발중이니 임시로.
       map.put("userId", req.getSession().getAttribute("userId").toString());
       map.put("managerOrUser", "user");
       service.insertJoin(map);

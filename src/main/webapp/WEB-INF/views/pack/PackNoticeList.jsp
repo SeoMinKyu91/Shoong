@@ -92,6 +92,16 @@
       display: inline-block;
       vertical-align: middle;
     }
+    .animated-text{
+		display:none;
+	}
+	.slider-area{
+		display:none;
+	}
+	
+	body{
+		background-color: #F9F9F9;
+	}
 </style>
 
 
@@ -234,8 +244,7 @@
 	</div>
 </div>
 <!-- 팩 공지사항 상세보기 모달창 끝 -->
-
-<div id="colorlib-main" style="padding:20px">
+<div style="border-radius: 10px;box-shadow: 0px 0px 5px #787878;padding: 30px;background-color: white;">
 	<div class="row">
 		<div class="col-lg-12" style="padding-bottom:20px">
 			<div class="">
@@ -258,54 +267,44 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-12">
-			<div class="section-tittle text-center col-lg-12" >
-				<p style="font-size:1.6em;padding-bottom:10px;padding:20px;">&lt;&nbsp;공지사항&nbsp;&gt;</p>
-			</div>
-				
+		<div class="col-md-12">
+			<table class="table table-hover cus">
+				<tr>
+					<th class="text-center col-lg-2 col-xs-1">번호</th>
+					<th class="text-center col-lg-6 col-xs-6">제목</th>
+					<th class="text-center col-lg-2 col-xs-2">작성자</th>
+					<th class="text-center col-lg-2 col-xs-3">작성일</th>
+				</tr>
+				<c:if test="${empty list }" var="isEmpty">
+					<tr class="text-center">
+						<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
+					</tr>
+				</c:if>
+				<c:if test="${!isEmpty}">
+					<c:forEach var="item" items="${list }" varStatus="loop">
+						<tr class="text-center">
+							<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
+							<td class="text-left">${item.packNoticeTitle}</td>
+							<td>${item.userName}</td>
+							<td>${item.packNoticeDate}</td>
+							<td style="display: none;">${item.packNoticeContent }</td>
+							<td style="display: none;">${item.packNoticeNo }</td>
+						</tr>
+					</c:forEach>
+				</c:if>	
+			</table>
 		</div>
 	</div>
-	<div class="container">
+	<c:if test="${!empty manager }">
 		<div class="row">
-			<div class="col-md-12">
-				<table class="table table-hover cus">
-					<tr>
-						<th class="text-center col-lg-2 col-xs-1">번호</th>
-						<th class="text-center col-lg-6 col-xs-6">제목</th>
-						<th class="text-center col-lg-2 col-xs-2">작성자</th>
-						<th class="text-center col-lg-2 col-xs-3">작성일</th>
-					</tr>
-					<c:if test="${empty list }" var="isEmpty">
-						<tr class="text-center">
-							<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
-						</tr>
-					</c:if>
-					<c:if test="${!isEmpty}">
-						<c:forEach var="item" items="${list }" varStatus="loop">
-							<tr class="text-center">
-								<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
-								<td class="text-left">${item.packNoticeTitle}</td>
-								<td>${item.userName}</td>
-								<td>${item.packNoticeDate}</td>
-								<td style="display: none;">${item.packNoticeContent }</td>
-								<td style="display: none;">${item.packNoticeNo }</td>
-							</tr>
-						</c:forEach>
-					</c:if>	
-				</table>
-			</div>
-		</div>
-		<c:if test="${!empty manager }">
-			<div class="row">
-				<div class="col-lg-12 text-right">
-					<button class="submitBtn btn" data-toggle="modal" id="btnNoticeWrite">등록</button>
+			<div class="col-lg-12 text-right">
+				<button class="submitBtn btn" data-toggle="modal" id="btnNoticeWrite">등록</button>
 
-				</div>
 			</div>
-		</c:if>
-		<div class="row">
-			<div class="col-lg-12 text-center">${pagingString }</div>
 		</div>
+	</c:if>
+	<div class="row">
+		<div class="col-lg-12 text-center">${pagingString }</div>
 	</div>
 </div>
 <!-- END COLORLIB-MAIN -->
