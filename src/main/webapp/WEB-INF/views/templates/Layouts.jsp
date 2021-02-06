@@ -712,6 +712,7 @@
 			$('.chatBot').css('display','none');
 		})
 		
+		
 	})
 		
 	</script>
