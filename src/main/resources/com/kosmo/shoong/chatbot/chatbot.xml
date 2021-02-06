@@ -5,8 +5,9 @@
 
 <mapper namespace="com.kosmo.shoong.chatbot.chatbot">
 
-<select id="userAddrSelect" parameterType="String" resultType="String">
-	select ADDRESS from USERADDR where USER_ID =#{id}
-</select>
+	<select id="userAddrSelect" parameterType="String" resultType="String">
+		select ADDRESS from USERADDR where USER_ID =#{id}
+	</select>
+
 
 </mapper>

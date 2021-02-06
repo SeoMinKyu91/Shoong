@@ -78,6 +78,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script 
    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4aaa4b242f112a823dd2ef5541569589&libraries=services,clusterer"></script>
+<style>
+#query{
+  width: 400px;
+  border-radius: 5px;
+  height: 40px;
+  margin: 20px 15%;
+}.responesDiv{
+  background-color: #dddddd;
+  padding: 2px;
+}
+</style>
 </head>
 
 <body>
@@ -225,45 +236,7 @@
 							</div>
 						</div>
 					</div><!-- 채팅방 끝 -->
-<style>
-.chat-container {
-	  /*margin: 0px;*/
-	  padding: 0px;
-	  width: 500px;
-	  /*margin: 35px 0px;*/
-	  margin-left: 15%;
-	  margin-right: 15%;
-}
-
-.chat-message {
-	  padding: 6px;
-	  border-radius: 10px;
-	  margin-bottom: 5px;
-}
-
-.bot-message {
-	  background: #4682B4;
-	  max-width: 200px;
-	  color: white;
-	  margin-right: auto;
-}
-
-.human-message {
-	  background: #4B0082;
-	  max-width: 200px;
-	  color: white;
-	  margin-left: auto;
-}
-.input {
-  width: 500px;
-  /*margin: 35px 0px;*/
-  margin-left: 15%;
-  margin-right: 15%;
-   border-radius: 5px;
-}
-    </style>
-<!-- ////////////////////////////////////////////////////////////////////////////////////// -->					
-					<!-- 챗봇 메시지 창 -->
+				    <!-- 챗봇 메시지 창 -->
 					<!-- 토탈 heigth:600px이여서 별님이 원하는 크기만큼 설정하시면 될거같아요 -->
 					<div class="chatBot">
 						<div class="chatRoomTop">
@@ -272,26 +245,13 @@
 							</div>
 						</div>
 						
-						<div class="chatRoomBody">
-							 <div class="chat-container">
-		                        <div class="chat-message col-md-6 bot-message">
-						                                 안녕하세요 챗봇 슝~ 입니다.
-		                        </div>
-				         	</div>	
-						</div>
+						<div class="chatRoomBody chat-container">
+				        </div>
 						
 						<div class="chatRoomFooter">
-							<input class="input" type="text"  placeholder="질의어를 입력하세요" id="query"/>
-							<div class="chatRoomMessageWriteBtnDiv">
-							 <button id="testBtn">클릿</button> 
-							
-								  <a href="<c:url value='/chatbot/map?location=용인시'/>"> 이동 버튼</a> 
-							</div>
+							<input class="input" type="text"  placeholder="챗봇에게 질문하세요"  id="query"/>
 						</div>
-						
 						<!-- 나가기 -->
-						
-						
 					</div>
 				</div>
 			</c:if>
@@ -299,83 +259,154 @@
 		</div>
 	</main>
 	<script>
-
+	//챗봇관련시작  
+	function getMyRecordChatBot(){
+		
+		$.ajax({
+			url:"<c:url value="/chatbot/record"/>",				
+			dataType:'text',
+			success:function(data){
+				console.log(data)
+				return data;
+			},
+			error:function(request,error){
+				console.log("상태코드:",request.status);
+				console.log("에러:",error);
+				return "사용자 조회 실패 죄송합니다.";
+			}		
+		})
+	}	
+	
     function sendMessage(message) {
-        console.log('입력메시지:',message)
         $.ajax({
         	url:"http://localhost:5000/message?message="+message,
         	type:'get',
         	success:receiveResponse,
         	error:function(request,status,error){
-				console.log('에러');
-				 $('.chat-container').append('<div class="chat-message col-md-5 bot-message">죄송합니다. 연결 실패입니다.</div>')
-		           //스크롤바 아래로 메세지는 받아 오구, 
-		        $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+	        		var chatBotmessageDiv = getChatBotMessageDiv("죄송합니다 연결 실패입니다.")
+					$('.chat-container').append(chatBotmessageDiv)
+			        $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
 				}
         	})
-        	//flask서버로부터 응답을 받으면 receiveResponse콜백함수가 호출됨
+        	    //flask서버로부터 응답을 받으면 receiveResponse콜백함수가 호출됨
 		        function receiveResponse(data) {//data는 flask로부터 받은 응답 {'message':'다이얼로그플로우가 보내준값'}
-		        	 console.log('받은 메시지:',data)
-					if(data.code=="3"){
-						console.log("근처 자전거 가게 오늘 해결 1 순위 ")
-						 $('.chat-container').append('<div class="chat-message col-md-5 bot-message"><a href="<c:url value='/chatbot/map'/>" class="btn">자전거 가게 바로보기</a><br>'+data.msg+'</div>')
-				           //스크롤바 아래로 메세지는 받아 오구, 
-				          $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+		        	console.log('받은 메시지:',data)	
+		        	var chatBotMessage = "";
+		        	var chatBotMessageDiv ="";
+		        	
+		        	
+		        	if(data.code=="3"){//자전거 가게_사용자 위치기반
+		        		 chatBotMessage = '<div class="responesDiv"><a href="<c:url value='/chatbot/map'/>" class="btn">바로보기</a><br>'+data.msg+'</div><br>'+"더 궁금한게 있으신가요?";
+				         chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
+						 $('.chat-container').append(chatBotMessageDiv)
+				         $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+				    }else if(data.code=="2"){//날씨
+				    	chatBotMessage = '<div class="responesDiv">'+data.msg+'</div><br>'+"더 궁금한게 있으신가요?";
+				        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
+						$('.chat-container').append(chatBotMessageDiv)
+						$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+				    }else if(data.code=="4"){//내기록
+				    	recordMessage = getMyRecordChatBot();
+				    	console.log("recordMessage"+recordMessage)
+				    	chatBotMessage = '<div class="responesDiv">'+recordMessage+'</div><br>'+"더 궁금한게 있으신가요?";
+				        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
+						$('.chat-container').append(chatBotMessageDiv)
+						$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+				    }else if(data.code=="5"){//근처 자전거 보관소
+				    	chatBotMessage = '<div class="responesDiv">'+data.msg+'</div><br>'+"더 궁금한게 있으신가요?";
+				        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
+						$('.chat-container').append(chatBotMessageDiv)
+						$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
 				    }else{
-							$('.chat-container').append('<div class="chat-message col-md-5 bot-message">'+data.msg+'</div>')
-							  //스크롤바 아래로 메세지는 받아 오구, 
-							 $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
-							console.log("그냥 메세지 ")
+				    	chatBotMessage = data.msg;
+				        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
+						$('.chat-container').append(chatBotMessageDiv)
+						$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+						
 					}
              }
-           //chat-container에 bot의 응답 추가
-          // $('.chat-container').append('<div class="chat-message col-md-5 bot-message">'+data.message+'</div>')
-           //스크롤바 아래로
-         // $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
-        }
-
+         
+   }
+ 
       
 	$("#query").on('keypress',function(e) {
-	
-	    if (e.keyCode == 13){
-	        //e.preventDefault();
+	   
+		if (e.keyCode == 13){
+	        //고객이 입력한 값 
 	        var query = $(this).val()
-	        console.log(query)
 	        if (!query) {//텍스트를 입력하지 않는 경우
 	          return
 	        }
+	        
+	    	var date = getDate();
+	    	var myMessageDiv = "";
+	        	myMessageDiv += '<div class="crbMyMessage" style="margin-bottom:10px;">';
+	        	myMessageDiv += '<span style="font-size:12px;margin-right: 5px;">'+date+'</span>';
+	        	myMessageDiv += '<div class="crbMyMessageContent">'+query+'</div>';
 	        //chat-container에 사용자의 응답 추가
-	        $('.chat-container').append('<div class="chat-message col-md-5 offset-md-7 human-message"> '+query+'</div>')
+	        $('.chat-container').append(myMessageDiv);
 	        // 입력창 클리어
-	        $('#query').val('')
+	        $('#query').val('');
 	        //스크롤바 아래로
 	        $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
 	        //메시지 전송
-	        sendMessage(query)
+	        sendMessage(query);
 	    }
+	
 	});
 	
-	$("#testBtn").click(function(){
+	function getDate(){
 		
+		var sampleTimestamp = Date.now();
+		var today = new Date(sampleTimestamp);
+		 
+		var hours = today.getHours();
+		var minutes = ("0" + today.getMinutes()).slice(-2);
+		var ampm = "오전";
+		if(hours >= 12 ){
+			hours = hours -12;
+			ampm = "오후";
+		}
+		
+		var date = ampm+" "+hours+":"+minutes;
+		
+		return date;
+	}
 
-			$.ajax({
-				  url:"<c:url value="/ajax"/>",
-			   
-			     success: function(data){
-			          console.log(data);
-			     }
-			});
+	function getChatBotMessageDiv(chatBotMessage){
 		
+		var date = getDate();
+		var chatBotMessageDiv = ""
+    		chatBotMessageDiv += '<div class="crbOthersMessage" style="margin-bottom:10px;">';
+			chatBotMessageDiv += '<div class="crbOthersProfileImg" style="margin-right:10px;">';
+			chatBotMessageDiv += '<img class="" src="<c:url value="/change/img/shooongLogo.png"/>"></div>';
+			chatBotMessageDiv += '<div class="crbOhtersNameAndContent">';
+			chatBotMessageDiv += '<div class="crbOthersProfileName">슝챗봇</div>';
+			chatBotMessageDiv  += '<div style="display:flex;">'
+			chatBotMessageDiv  += '<div class="crbOthersMessageContent" style="max-width:310px;">'+chatBotMessage+'</div>';
+			chatBotMessageDiv  += '<span style="margin-left:10px; font-size:12px; margin-top:12px;">'+date+'</span></div></div></div>';
+			
+
+		return chatBotMessageDiv;
+	}
+	
+	$('.msgTopChatBotImg').click(function(){
+		console.log('챗봇 오픈');
+		$(".chat-container").html("");
+		$('.chatBot').css('display','block');
+		var chatBotmessageDiv = getChatBotMessageDiv("안녕하세요 챗봇 슝~ 입니다.")
+		$('.chat-container').append(chatBotmessageDiv)
+        $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+	});
+	
+	$('.chatBotExitBtn').click(function(){
+		console.log('챗봇 닫기 클릭');
+		$(".chat-container").html("");
+		$('.chatBot').css('display','none');
 	})
+	// 챗봇 관련 끝
 	
 	
-    </script>
-    
-    
-    
-    
-    
-	<script>
 	$(function(){
 		var websocket;
 		var nickname;
@@ -836,18 +867,7 @@
 				
 			});
 		}
-		
-		//챗봇 관련 스크립트
-		$('.msgTopChatBotImg').click(function(){
-			console.log('챗봇 이미지 클릭');
-			$('.chatBot').css('display','block');
-		});
-		
-		$('.chatBotExitBtn').click(function(){
-			console.log('챗봇 닫기 클릭');
-			$('.chatBot').css('display','none');
-		})
-		
+	
 	})
 		
 	</script>

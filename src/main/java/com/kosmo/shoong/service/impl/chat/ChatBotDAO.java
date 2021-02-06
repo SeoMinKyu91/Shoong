@@ -1,5 +1,8 @@
 package com.kosmo.shoong.service.impl.chat;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -17,6 +20,12 @@ public class ChatBotDAO implements ChatBotService{
 	public String userAddrSelect(String id) {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectOne("userAddrSelect",id);
+	}
+
+	@Override
+	public List getRecordList(String id) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectList("chartRecordselectList",id);
 	}
 
 }

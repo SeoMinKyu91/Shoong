@@ -52,7 +52,7 @@ public class MyPageController {
 		for (Map recordMap : recordList) {
 			
 			Map chartMap = new HashMap();
-			float length = Float.valueOf((recordMap.get("DURATION").toString()));
+			float length = Float.valueOf((recordMap.get("RECORD_LENGTH").toString()));
 			chartMap.put("chartLength", String.format("%.1f", length));
 			
 			int time = Integer.valueOf((recordMap.get("DURATION").toString()));
