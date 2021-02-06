@@ -65,15 +65,13 @@ public class PackController {
    }
 
 
-
-
-
-
-
    //팩 생성 페이지로 이동 get
    @RequestMapping("create.do")
-   public String packCreate() {
-
+   public String packCreate(Model model,HttpServletRequest req) {
+	   String id = req.getSession().getAttribute("userId").toString();
+	   Map userAddress =  service.selectOneUserAddr(id);
+	   model.addAttribute("searchLat", userAddress.get("USER_LAT"));
+       model.addAttribute("searchLng",userAddress.get("USER_LNG"));  
       return "pack/PackCreate";
    }
 
