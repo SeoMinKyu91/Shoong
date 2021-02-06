@@ -42,6 +42,8 @@ myBatis 환경설정파일
 			type="com.kosmo.shoong.service.chat.ChatMessageDTO"/>			
 		<typeAlias alias="packAdminDTO"
 			type="com.kosmo.shoong.admin.service.PackAdminDTO" />
+		<typeAlias alias="memberAdminDTO"
+			type="com.kosmo.shoong.admin.service.MemberAdminDTO" />
 	</typeAliases>
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->

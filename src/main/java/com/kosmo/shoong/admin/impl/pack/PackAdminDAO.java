@@ -19,9 +19,9 @@ public class PackAdminDAO implements PackAdminService {
 	private SqlSessionTemplate sqlMapper;
 
 	@Override
-	public List<PackAdminDTO> selectList(Map map) {
+	public List<Map> selectList() {
 		// TODO Auto-generated method stub
-		return sqlMapper.selectList("packList",map);
+		return sqlMapper.selectList("packList");
 	}
 
 	@Override

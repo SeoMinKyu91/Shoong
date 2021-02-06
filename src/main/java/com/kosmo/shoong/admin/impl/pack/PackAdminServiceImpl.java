@@ -17,9 +17,9 @@ public class PackAdminServiceImpl implements PackAdminService {
 	private PackAdminDAO dao;
 
 	@Override
-	public List<PackAdminDTO> selectList(Map map) {
+	public List<Map> selectList() {
 		// TODO Auto-generated method stub
-		return dao.selectList(map);
+		return dao.selectList();
 	}
 
 	@Override
