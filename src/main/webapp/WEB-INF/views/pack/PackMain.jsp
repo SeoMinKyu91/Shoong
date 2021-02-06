@@ -12,14 +12,6 @@
 .slider-area {
    display: none;
 }
-/*
-.form-horizontal {
-   padding-top: 30px;
-   background-color: #f2f2f7;
-   background-color: rgba(255, 255, 255, 0.5);
-   border-radius: 30px;
-}
-*/
 .packCreateBtn {
    color: #f32a48;
    background: none;
@@ -59,25 +51,14 @@
    color: white;
 }
 
-/*
-.PackMainTop input:focus {
-   outline: none;
-}
-*/
-/*
-#accordion table tr:nth-child(1) {
-   font-size: 17px;
-   font-weight: 600;
+#tbPack:hover {
+	background-color: #fff0f2;
 }
 
-#accordion table tr:nth-child(2) {
-   font-size: 7px;
-}
-*/
 </style>
 
 <div class="row">
-   <div class="col-lg-12" style="padding-bottom: 20px">
+   <div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
       <div class="">
          <a class="packMainBtn btn" href="<c:url value="/pack/main.do"/>"
             style="margine-right: 20px">HOME</a>
@@ -89,7 +70,7 @@
    </div>
 </div>
 <div class="row">
-   <div class="col-lg-12">
+   <div class="col-xs-12 col-lg-12">
       <div id="map"
          style="height: 400px; width: 100%; overflow: hidden; position: relative; margine-top: 50px;"></div>
       <p style="color: grey; font-size: .8em">지도를 클릭 시 클릭 된 지점을 기준으로 검색
@@ -97,7 +78,7 @@
    </div>
 </div>
 <div class="row">
-   <div class="col-lg-12 PackMainTop">
+   <div class="col-xs-12 col-lg-12 PackMainTop">
       <table class="col-xs-12 col-md-12">
          <tr>
             <th colspan="2" class="text-left">
@@ -106,7 +87,7 @@
                   <div class="packAddr" style="font-size: 30px;">
                      <span
                         style="font-size: .8em; font-weight: bold; padding-left: 10px;">[<span
-                        id="packRegionSearch"></span>] 근처 팩
+                        id="packRegionSearch"></span>] 근처 팩저장
                      </span> &nbsp;
                   </div>
                   <input type="text" class="form-group" name="searchWord"
@@ -128,36 +109,25 @@
    <div class="col-xs-12 col-lg-12" style="margin-top: 20px;">
       <c:if test="${empty packList }" var="isEmpty">
          <h3
-            style="height: 40px; font-size: 20px; color: white; line-height: 20px;">해당하는
+            style="height: 40px; font-size: 20px; text-align:center; line-height: 20px;">해당하는
             팩이 없어요.</h3>
-         <a class="packCreateBtn btn" style="float: right;" href="<c:url value="/pack/create.do"/>">팩 만들기</a>
       </c:if>
       <c:if test="${!isEmpty}">
          <c:forEach var="item" items="${packList }">
             <div>
-               <table class="col-lg-12">
-                  <tr>
-                     <th class="col-sm-1"><img style="width: 100%;"
+               <table class="col-xs-12 col-lg-12">
+                  <tr id="tbPack">
+                     <th class="col-xs-3 col-lg-1"><img style="width: 100%;"
                         src="<c:url value="/images/pack/${item.packThumbnail}"/>"
                         alt="팩 마크"></th>
-                     <th style="height: 40px; font-size: 20px; line-height: 20px;">${item.packName}</th>
-                  </tr>
-                  <tr>
-                     <th class="col-sm-1" colspan="2"></th>
-                  </tr>
-                  <tr>
-                     <th colspan="2" style="color: #00a8f3; font-size: 12px;"><p
-                           style="margin-left: 20px; margin-top: 10px;">#${item.packTag}
-                           #${item.packActTime} #${item.packAge}</p></th>
-                  </tr>
-                  <tr>
-                     <th colspan="2"><div
-                           style="margin-left: 20px; padding: 7px; width: 92%; height: 80px; border: 1px solid #999999">${item.packIntro}</div></th>
-                  </tr>
-                  <tr>
+                     <th style="height: 40px; font-weight:light; line-height: 20px;"><span style="font-size : 1.2em; font-weight:bolder;">${item.packName}</span><br/>${item.packTag}&emsp;#${item.packActTime}&emsp;#${item.packAge}<br />${item.packIntro}</th>
                      <th colspan="2" class="text-right">
                         <button class="btn joinPackBtn" id="${item.packID}" style="margin-top: 10px; font-weight: bold; color: white; border: none; background-color: #f32a48;">가입</button>
                      </th>
+                     <th colspan="2"><hr /></th>
+                  </tr>
+                  <tr>
+                     <th colspan="3"><hr /></th>
                   </tr>
                </table>
             </div>
@@ -165,50 +135,6 @@
       </c:if>
    </div>
 </div>
-<div class="row">
-   <!-- accordion
-   <div id="accordion" class="col-lg-12" style="padding-bottom: 20px">
-      <c:if test="${empty packList }" var="isEmpty">
-         <h3
-            style="background-color: #ff8827; height: 40px; font-size: 20px; color: white; line-height: 20px;">해당하는
-            팩이 없어요.</h3>
-      </c:if>
-      <c:if test="${!isEmpty}">
-         <c:forEach var="item" items="${packList }">
-            <h3
-               style="background-color: #ff8827; height: 40px; font-size: 20px; color: white; line-height: 20px;">${item.packName}</h3>
-            <div>
-               <table class="col-lg-12">
-                  <tr>
-                     <th class="col-sm-1"><img style="width: 100%;"
-                        src="<c:url value="/images/pack/${item.packThumbnail}"/>"
-                        alt="팩 마크"></th>
-                     <th style="font-size: 20px;">${item.packName}</th>
-                  </tr>
-                  <tr>
-                     <th colspan="2" style="color: #00a8f3; font-size: 12px;"><p
-                           style="margin-left: 20px; margin-top: 10px;">#${item.packTag}
-                           #${item.packActTime} #${item.packAge}</p></th>
-                  </tr>
-                  <tr>
-                     <th colspan="2"><div
-                           style="margin-left: 20px; padding: 7px; width: 92%; height: 80px; border: 1px solid #999999">${item.packIntro}</div></th>
-                  </tr>
-                  <tr>
-                     <th colspan="2" class="text-right">
-                        <button class="btn joinPackBtn" id="${item.packID}"
-                           data-toggle="modal" data-target="#packJoinModal"
-                           style="margin-top: 10px; font-weight: bold; color: white; border: none; background-color: #ff8827">가입</button>
-                     </th>
-                  </tr>
-               </table>
-            </div>
-         </c:forEach>
-      </c:if>
-   </div>-->
-   <!-- accordion-->
-</div>
-<!-- row -->
 <!-- 모달 -->
 <div class="modal fade" id="packJoinModal" data-backdrop="false">
    <div class="modal-dialog modal-sm">
@@ -227,7 +153,6 @@
    </div>
 </div>
 <!-- 모달 -->
-
 
 <script>
    $(function(){
@@ -386,7 +311,6 @@
          
            }); 
           }
-          
 
           function searchAddrFromCoords(coords, callback) {
               geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);     
