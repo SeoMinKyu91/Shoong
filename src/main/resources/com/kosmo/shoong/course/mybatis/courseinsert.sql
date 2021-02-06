@@ -26,4 +26,3 @@ insert into COURSE(COURSE_ID,COURSE_NAME,COURSE_CATE_ID,USER_ID,COURSE_TIME,COUR
 values (109,'해운대 라이딩',102,'shoong1000@naver.com','30','15',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'recordsample9.json');
 insert into COURSE(COURSE_ID,COURSE_NAME,COURSE_CATE_ID,USER_ID,COURSE_TIME,COURSE_LENGTH,COURSE_DATE,COURSE_FILE_NAME) 
 values (110,'벛꽃풍경 라이딩',103,'shoong1000@naver.com','50','55',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'recordsample10.json');
-

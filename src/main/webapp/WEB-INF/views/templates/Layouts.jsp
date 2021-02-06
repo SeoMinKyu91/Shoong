@@ -83,6 +83,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4aaa4b242f112a823dd2ef5541569589&libraries=services,clusterer"></script>
 </head>
 
 <body>
@@ -96,6 +97,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- Preloader eND -->
 	<header>
 		<tiles:insertAttribute name="top" />
 	</header>
@@ -274,7 +276,7 @@
 			*/
 			var userId = '${sessionScope.userId}';
 			var packId = '';
-			if(${sessionScope.packId} != null){
+			if('${sessionScope.packId}' != null){
 				packId = '${sessionScope.packId}'	
 			}
 			console.log(msgTab.css('display'));
@@ -716,6 +718,7 @@
 			$('.chatBot').css('display','none');
 		})
 		
+		
 	})
 		
 	</script>
@@ -749,8 +752,7 @@
 	   src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
 	<script 
 	   src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
-	<script 
-	   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4aaa4b242f112a823dd2ef5541569589&libraries=services,clusterer"></script>
+	
 	
 	<!-- JS here -->
 	<!-- All JS Custom Plugins Link Here here -->

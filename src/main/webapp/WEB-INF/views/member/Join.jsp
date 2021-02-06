@@ -3,29 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
-	rel="stylesheet">
+<!-- ※colorlib-main으로 일단 감싸고 안에다가 작업해야 왼쪽 탑에 안먹히고 작업할 수 있어요 -->
+<!-- 설명이 이해가 잘 안되시면  따로 연락주세요...-->
 <style>
 .slider-area {
 	display: none;
-}
-
-#bg {
-	position: fixed;
-	top: 0;
-	left: 0;
-	opacity: 0.5;
-	/* Preserve aspet ratio */
-	min-width: 100%;
-	min-height: 100%;
-}
-
-.form-horizontal {
-	padding-top: 30px;
-	background-color: #f2f2f7;
-	background-color: rgba(255, 255, 255, 0.9);
-	border-radius: 30px;
 }
 
 input {
@@ -53,21 +35,9 @@ input {
 	color: white;
 	border: none;
 }
-
 #joinBtn:hover {
 	background-color: #f2f2f7;
 }
-
-#emailDuplCheck {
-	float: right;
-	text-decoration: underline;
-	background-color: rgba(255, 255, 255, 0.1);
-}
-
-#emailDuplCheck:hover {
-	color: #ffffff;
-}
-
 #userAddr {
 	border: #ced4da 1.5px solid;
 	font-size: .8em;
@@ -75,11 +45,12 @@ input {
 }
 </style>
 <!-- 실제 내용 시작 -->
-<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
 <div class="col-xs-10 offset-xs-1 col-md-10 offset-md-1"
 	style="padding-bottom: 50px">
 	<form class="form-horizontal" method="post" name="join"
-		onsubmit="return checked()" action="<c:url value='/Member/Join.do'/>">
+		onsubmit="return checked()"
+		style="padding-top: 30px; background-color: #f2f2f7; box-shadow: 0px 0px 5px #000; border-radius: 50px"
+		action="<c:url value='/Member/Join.do'/>">
 		<div class="form-group">
 			<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
 				style="padding-bottom: 30px; text-align: center">
@@ -92,7 +63,8 @@ input {
 				style="padding-bottom: 5px;">
 				<!-- 이메일 입력란 -->
 				<label for="userId">이메일 </label>
-				<Button type="button" id="emailDuplCheck" class="btn btn-sm">
+				<Button type="button" id="emailDuplCheck" class="btn btn-sm"
+					style="float: right; background-color: #f2f2f7;">
 					<span id="duplCheck" role="button"
 						style="color: #f32a48; text-decoration: underline;">중복체크</span>
 				</Button>
@@ -161,24 +133,24 @@ input {
 				<br />
 				<!-- 주민번호 7자리 입력시 생년월일, 나이, 성별 자동 입력 -->
 				<input name="userrrn1" type="text" size="4" maxlength="4"
-					style="border: none; color: gray; background-color: rgba(255, 255, 255, 0.1);"
+					style="border: none; color: gray; background-color: #f2f2f7;"
 					onBlur="checknum(document.join.userrrn1.value)" readonly="readonly"><span
-					style="font-size: .8em; color: gray; background-color: rgba(255, 255, 255, 0.1);">년&nbsp;&nbsp;</span>
+					style="font-size: .8em; color: gray; background-color: #f2f2f7;">년&nbsp;&nbsp;</span>
 				<input name="userrrn2" type="text" size="2" maxlength="2"
-					style="border: none; color: gray; background-color: rgba(255, 255, 255, 0.1);"
+					style="border: none; color: gray; background-color: #f2f2f7;"
 					onBlur="checknum(document.join.userrrn2.value)" readonly="readonly"><span
-					style="font-size: .8em; color: gray; background-color: rgba(255, 255, 255, 0.1);">월&nbsp;&nbsp;</span>
+					style="font-size: .8em; color: gray; background-color: #f2f2f7;">월&nbsp;&nbsp;</span>
 				<input name="userrrn3" type="text" size="2" maxlength="2"
-					style="border: none; color: gray;background-color: rgba(255, 255, 255, 0.1);"
+					style="border: none; color: gray; background-color: #f2f2f7;"
 					onBlur="checknum(document.join.userrrn3.value)" readonly="readonly"><span
-					style="font-size: .8em; color: gray;background-color: rgba(255, 255, 255, 0.1);">일&emsp;&emsp;</span>
+					style="font-size: .8em; color: gray; background-color: #f2f2f7;">일&emsp;&emsp;</span>
 				<input name="userAge" id="userAge" type="text" size="2"
-					style="border: none; color: gray; background-color: rgba(255, 255, 255, 0.1);"
+					style="border: none; color: gray; background-color: #f2f2f7;"
 					maxlength="2" onBlur="checknum(document.join.userAge.value)"
 					readonly="readonly"><span
-					style="font-size: .8em; color: gray; background-color: rgba(255, 255, 255, 0.1);">살&emsp;&emsp;</span>
+					style="font-size: .8em; color: gray; background-color: #f2f2f7;">살&emsp;&emsp;</span>
 				<input name="userGender" type="text" size="3" maxlength="2"
-					style="border: none; color: gray;background-color: rgba(255, 255, 255, 0.1);"
+					style="border: none; color: gray; background-color: #f2f2f7;"
 					onBlur="checknum(document.join.userGender.value)"
 					readonly="readonly"><br />
 			</div>
@@ -207,8 +179,8 @@ input {
 			<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userAddr">활동지역</label>
 				<div>
-					<input type="text" class="input" id="userAddr" name="userAddr"
-						style="font-size: 1.1em; height: 50px; width: 100%; padding-left: 10px; border: #ced4da 1.5px solid;">
+					<input type="text" class="input" id="userAddr" name="userAddr" 
+						style="font-size:1.1em; height: 50px; width: 100%; padding-left: 10px; border: #ced4da 1.5px solid;">
 				</div>
 			</div>
 		</div>
@@ -217,7 +189,7 @@ input {
 				<div id="map"></div>
 				<input type="hidden" id="memberLat" name="memberLat"
 					class="form-group" /> <input type="hidden" id="memberLng"
-					name="memberLng" class="form-group" />
+					name="memberLng" class="form-group"/>
 			</div>
 		</div>
 		<div class="form-group">
@@ -231,8 +203,6 @@ input {
 </div>
 
 <!-- ---------------- 활동지역 맵 스크립트 ----------------- -->
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=616834812e97e8f82a462cd2cc2e5e4e&libraries=services"></script>
 <script>
 	var map;
 	var geocoder = new kakao.maps.services.Geocoder();

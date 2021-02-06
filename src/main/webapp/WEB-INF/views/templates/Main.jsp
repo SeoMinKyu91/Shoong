@@ -4,7 +4,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!-- Popular Locations Start -->
 <div class="row">
-	<div class="col-lg-12">
+	<div class="col-xs-12 col-lg-12">
 		<!-- Section Tittle -->
 		<div class="section-tittle text-center mb-80">
 			<span>Most visited places</span>

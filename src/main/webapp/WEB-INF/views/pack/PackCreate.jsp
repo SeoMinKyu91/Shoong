@@ -3,12 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 제이쿼리 UI용 CSS -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- 제이쿼리 코어용 라이브러리 임베드 -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- 제이쿼리 UI용 라이브러리 임베드 -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
 <style>
 	.packCreateBtn {
 		color:#ff8827;
@@ -216,7 +211,7 @@
 
 	})
 </script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4aaa4b242f112a823dd2ef5541569589&libraries=services"></script>
+<!--  -->
 <script>
 	var map;
 	var geocoder = new kakao.maps.services.Geocoder();

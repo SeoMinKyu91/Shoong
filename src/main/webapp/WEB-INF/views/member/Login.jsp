@@ -3,9 +3,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"
-	rel="stylesheet">
 
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
