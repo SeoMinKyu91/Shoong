@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -79,6 +80,14 @@ public class AndroidController {
 		return "톰캣 서버로 들어왔었다";
 	}
 	*/
+	
+	@CrossOrigin
+	@PostMapping(value="/login",produces="text/plain;charset=UTF-8")
+	public String androidLogin(@RequestParam Map map) {
+		Set keys = map.keySet();
+		for(Object key:keys) System.out.println(key+":"+map.get(key));
+		return "";
+	}
 	
 	//안드 경로 전송
 	//안드 경로 저장

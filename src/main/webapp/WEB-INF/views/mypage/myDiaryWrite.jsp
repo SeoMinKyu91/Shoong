@@ -3,8 +3,8 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
@@ -45,7 +45,6 @@
     border:none;
 }.diaryInfo{
 	margin-top: 40px;
-	font-family:'Nanum Pen Script', cursive;
 }.diaryInfo div{
 	font-size: 25px;
 	outline:none;
@@ -66,13 +65,20 @@
 }#map{
    height: 100%;
 }
+.animated-text{
+	display:none;
+}
+.slider-area{
+	display:none;
+}
+#storyBtn:hover{
+	color: white;
+}
 </style>
 
-	<div id="colorlib-main">
-				
             <div class="modal-body" style="height: 100%;">
             	   <div style="margin-top:10px">
-						<div style="width: 100% ;height: 200px;border:1px solid #666666"> 
+						<div style="width: 100% ;height: 400px;border:1px solid #666666"> 
 							 <div  id="map"></div> 
 						</div>
 					</div>
@@ -83,7 +89,7 @@
 					 <span>내용입력 </span> <br> 
 					 <div class="diaryContent"  id="contentDiv" contenteditable="true"></div>
 				</div>
-				<button id="storyBtn">이미지 스토리 만들기</button>
+				<button id="storyBtn" class="btn btn-primary btn-lg btn-block">이미지 스토리 만들기</button>
 				<div style="margin-top:10px; display:none" id="storyDiv">
 						<form method="post" enctype="multipart/form-data" >
 							 <div id="fileUpload" class="dragAndDropDiv"><span class="dragAndDropDivSpan">스토리 카드를 만들 이미지를 올려주세요</span></div>
@@ -103,7 +109,7 @@
 				</form>
                 
             </div>
-            </div>
+
              
 
 <script>

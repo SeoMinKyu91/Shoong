@@ -2,16 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-
-<!-- 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
--->
-<!-- 모달  -->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- 모달 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+<link rel="stylesheet" href="cards-gallery.css">
 <link rel="stylesheet" href="<c:url value="/css/comment.css?as"/>">
 <script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
 <style>
@@ -79,71 +71,84 @@
 		font-size: 16px;
 		font-weight: bold;
 		margin-right: 2px;
-		
 	}
+	.animated-text{
+		display:none;
+	}
+	.slider-area{
+		display:none;
+	}
+	
+	#bg {
+	  position: fixed; 
+	  top: 0; 
+	  left: 0; 
+	  opacity: 0.5;
+	  /* Preserve aspet ratio */
+	  min-width: 100%;
+	  min-height: 100%;
+	}
+		
 </style>
 
-
-<div id="colorlib-main">
-	<div class="row" style="margin-left: 20px; margin-bottom: 2px;">
-			
-		<div class="col-lg-12" style="padding-bottom:10px">
-			<div class="row">
-				<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10" style="padding-top:20px">
-					<a href="<c:url value="/pack/main.do"/>">
-					<img alt="pack" src="<c:url value="/images/pack/pack.png"/>" style="width: 80px;"></a>&emsp;<a class="packCreateBtn btn" href="<c:url value="/pack/main.do"/>">HOME</a>
-					<c:if test="${!empty sessionScope.packId}">
-						<a class="packCreateBtn btn" href="<c:url value="/pack/view.do"/>">MY PACK</a>
-					</c:if>
-				</div>
-				<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 icons-div" style="padding-top: 17px;">
-					<a id="btn-feed-write"><i class="fas fa-edit fa-2x" style="color: black; margin-left: 5px;"></i></a>
-					<a href="<c:url value="/pack/myComment.do"/>"><i class="far fa-user fa-2x" style="color: black; margin-left: 5px;"></i></a>
-					<a href="<c:url value="/pack/comment.do"/>"><i class="far fa-list-alt"></i></a>
-				</div>
-			</div>
-			
-			
-		</div>
-	</div>
-	<hr style="background-color:black; height:1px; margin: 0px;"/>
-
-	<div class="container" style="margin-top:25px;">
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
+<div class="row" style="margin-left: 20px; margin-bottom: 2px; ">
+		
+	<div class="col-lg-12" style="padding-bottom:10px background-color: lightgrey">
 		<div class="row">
-			<div class="col-lg-offset-2 col-lg-8">
-				<div class="row">
-					<div class="col-lg-12">
-						<c:if test="${empty commentList }" var="isEmpty">
-							<h4>등록된 게시글이 없습니다</h4>	
-						</c:if>
-						<c:if test="${not isEmpty}">
-							<c:forEach items="${commentList}" var="item" varStatus="loop">
-								<c:if test="${not empty item }">
-									<c:forEach items="${item.packCommentImages }" var="image" varStatus="loop" begin="0" end="0">
-										<div class="col-md-4 feed-img">
-											<img alt="기본사진" src="/fileupload/${image }"/>
-											<a href="<c:url value="/pack/comment/view.do?packCommentNo=${item.packCommentNo }"/>">
-												<div class="feed-img-hover">
-													<img src="<c:url value='/images/fa-icons/comment-white.png'/>" style="width:25px;height:25px;">
-													<span>${item.packCommentReplyCount }</span>
-													<img src="<c:url value='/images/fa-icons/heart-white.png'/>"style="width:25px;height:25px;">
-													<span>${item.packCommentLikeCount }</span>
-												</div>
-											</a>
-										</div>
-									</c:forEach>
-								</c:if>
-							</c:forEach>
-						</c:if>	
-					</div>
-				</div>
-				
+			<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10" style="padding-top:20px">
+				<a href="<c:url value="/pack/main.do"/>">
+				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>" style="width: 80px;"></a>&emsp;<a class="packCreateBtn btn" href="<c:url value="/pack/main.do"/>">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="packCreateBtn btn" href="<c:url value="/pack/view.do"/>">MY PACK</a>
+				</c:if>
+			</div>
+			<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 icons-div" style="padding-top: 17px;">
+				<a id="btn-feed-write"><i class="fas fa-edit fa-2x" style="color: black; margin-left: 5px;"></i></a>
+				<a href="<c:url value="/pack/myComment.do"/>"><i class="far fa-user fa-2x" style="color: black; margin-left: 5px;"></i></a>
+				<a href="<c:url value="/pack/comment.do"/>"><i class="far fa-list-alt"></i></a>
 			</div>
 		</div>
+		
 		
 	</div>
 </div>
-<!-- color-lib-main -->
+<hr style="background-color:black; height:1px; margin: 0px;"/>
+
+<div class="container" style="margin-top:25px;">
+	<div class="row">
+		<div class="offset-lg-2 col-lg-8">
+			<div class="row">
+				<div class="col-lg-12">
+					<c:if test="${empty commentList }" var="isEmpty">
+						<h4>등록된 게시글이 없습니다</h4>	
+					</c:if>
+					<c:if test="${not isEmpty}">
+						<c:forEach items="${commentList}" var="item" varStatus="loop">
+							<c:if test="${not empty item }">
+								<c:forEach items="${item.packCommentImages }" var="image" varStatus="loop" begin="0" end="0">
+									<div class="col-md-4 feed-img">
+										<img alt="기본사진" src="/fileupload/${image }"/>
+										<a href="<c:url value="/pack/comment/view.do?packCommentNo=${item.packCommentNo }"/>">
+											<div class="feed-img-hover">
+												<img src="<c:url value='/images/fa-icons/comment-white.png'/>" style="width:25px;height:25px;">
+												<span>${item.packCommentReplyCount }</span>
+												<img src="<c:url value='/images/fa-icons/heart-white.png'/>"style="width:25px;height:25px;">
+												<span>${item.packCommentLikeCount }</span>
+											</div>
+										</a>
+									</div>
+								</c:forEach>
+							</c:if>
+						</c:forEach>
+					</c:if>	
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+</div>
 
 <!-- 피드 글 쓰기 모달 시작 -->
 <div class="modal fade" id="feed-write-modal"
@@ -225,6 +230,7 @@
 
 <script>
 	$(function() {
+		jQuery.noConflict();
 		var objDragAndDrop = $('.feed-img-modal');
 		
 		$('#btn-feed-write').click(function(){

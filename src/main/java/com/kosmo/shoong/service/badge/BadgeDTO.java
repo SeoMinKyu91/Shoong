@@ -8,8 +8,8 @@ import lombok.ToString;
  BADGE_ID                                  NOT NULL NUMBER
  BADGE_NAME                                         NVARCHAR2(30)
  BADGE_REQUIREMENT                                  VARCHAR2(30)
- BEDGE_CATEGORY                                     VARCHAR2(30)
- BADGE_THUMBNAIL 
+ BADGE_CATEGORY                                     VARCHAR2(30)
+ BADGE_THUMBNAIL                                    NVARCHAR2(30)
  */
 @Setter
 @Getter
@@ -20,5 +20,7 @@ public class BadgeDTO {
 	private String badgeRequirement;
 	private String badgeCategory;
 	private String badgeThumbnail;
+	
+	private String userId;
 
 }

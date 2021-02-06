@@ -7,6 +7,7 @@
  RECORD_DURATION                                    NVARCHAR2(10)
  */
 /*레코드 임시 데이터*/ 
+
 insert into RECORD_(record_id,user_id,course_id,record_file_name,record_length,record_date) values (201,'shoong1000@naver.com',101,'recordsample1.json',52.4,'2020-11-14','6000');
 insert into RECORD_(record_id,user_id,course_id,record_file_name,record_length,record_date) values (202,'shoong1000@naver.com',102,'recordsample2.json',22,'2021-11-22','7500');
 insert into RECORD_(record_id,user_id,course_id,record_file_name,record_length,record_date) values (203,'shoong1000@naver.com',103,'recordsample3.json',5.6,'2021-12-3','8500');

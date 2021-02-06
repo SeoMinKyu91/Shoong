@@ -1,0 +1,13 @@
+/* Push알람 sql*/ 
+ 
+CREATE TABLE FCM_TOKENS(
+     ID varchar2(30) PRIMARY KEY,
+     TOKEN VARCHAR2(200)
+     PRIMARY KEY (ID)
+     );
+
+
+
+ CREATE SEQUENCE TOKENS_SEQ
+     NOCACHE
+     NOCYCLE;

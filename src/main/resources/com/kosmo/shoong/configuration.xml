@@ -11,6 +11,7 @@ myBatis 환경설정파일
 <configuration>
 	<!-- 자바빈 별칭 -->
 	<typeAliases>
+		<!-- User -->
 		<typeAlias alias="packDTO"
 			type="com.kosmo.shoong.service.pack.PackDTO" />
 		<typeAlias alias="packGalleryDTO"
@@ -33,11 +34,14 @@ myBatis 환경설정파일
 			type="com.kosmo.shoong.service.member.MemberDTO" />
 		<typeAlias alias="badgeDTO"
 			type="com.kosmo.shoong.service.badge.BadgeDTO" />
+			
+		<!-- Admin -->
 		<typeAlias alias="reportAdminDTO" 
 			type="com.kosmo.shoong.admin.service.ReportAdminDTO"/>
 		<typeAlias alias="chatMessageDTO" 
 			type="com.kosmo.shoong.service.chat.ChatMessageDTO"/>			
-			
+		<typeAlias alias="packAdminDTO"
+			type="com.kosmo.shoong.admin.service.PackAdminDTO" />
 	</typeAliases>
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->

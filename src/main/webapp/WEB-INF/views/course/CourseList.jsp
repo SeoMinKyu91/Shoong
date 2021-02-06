@@ -1,28 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
 <style>
-	.cus {
-		border-top: 2px solid black;
-		border-bottom: 2px solid black;
-	}
-	.cus th {
-		border-bottom: 2px solid black;
-	}
-	
+.cus {
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+}
+
+.cus th {
+	border-bottom: 2px solid black;
+}
+
+
 </style>
 
 <div id="colorlib-main">
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="section-tittle text-center mb-80 col-lg-12" >
-				<h1 style="margin-top: 30px;"> Shoong <small> courseList </small></h1>
+			<div class="section-tittle text-center mb-80 col-lg-12">
+				<h1 style="margin-top: 30px;">
+					Shoong <small> courseList </small>
+				</h1>
 			</div>
 		</div>
 	</div>
 	<hr>
-	
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
@@ -33,7 +38,8 @@
 						<th class="text-center col-lg-2 col-xs-2">작성자</th>
 						<th class="text-center col-lg-2 col-xs-3">작성일</th>
 					</tr>
-					<tr>courseID : ${courseList.courseID}</tr>
+					<tr>courseID : ${courseList.courseID}
+					</tr>
 					<!-- 
 					<c:if test="${empty list }" var="isEmpty">
 						<tr class="text-center">
@@ -72,6 +78,6 @@
 			<div class="col-lg-12 text-center">${pagingString }</div>
 		</div> -->
 	</div>
-	
+
 </div>
 <!-- END COLORLIB-MAIN -->

@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.kosmo.shoong.common.FileUpDownUtils;
+import com.kosmo.shoong.service.impl.badge.BadgeServiceImpl;
 import com.kosmo.shoong.service.impl.record.RecordServiceImpl;
 import com.kosmo.shoong.service.record.RecordDTO;
 
@@ -36,7 +39,10 @@ import com.kosmo.shoong.service.record.RecordDTO;
 public class RecordController {
 	
 	@Resource(name="recordService")
-	public RecordServiceImpl rService;
+	private RecordServiceImpl rService;
+	@Resource(name="badgeService")
+	private BadgeServiceImpl bService;
+	
 	
 	@CrossOrigin
 	@ResponseBody
@@ -79,7 +85,10 @@ public class RecordController {
 			for(String length:lgthList) mileage += Double.parseDouble(length);
 			
 			System.out.println("마일리지:"+mileage);
-			
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("userId", uploadRecord.getUserId());
+			map.put("mileage", String.valueOf(mileage));
+			bService.insertBadge(map);
 		}
 		return flag?"업로드 성공":"업로드 실패";
 	}

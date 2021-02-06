@@ -39,9 +39,9 @@ public class MyPageController {
 
 	@RequestMapping("main.do")
 	public String mypageMain(@RequestParam Map map, Model model, HttpServletRequest req) throws IOException {
+
 		
 		map.put("id", req.getSession().getAttribute("userId").toString());
-	
 
 		/* 코스 관련 */
 		List<Map> recordList = Service.chartRecordselectList(map);
