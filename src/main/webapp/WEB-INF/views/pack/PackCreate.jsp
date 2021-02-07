@@ -3,12 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 제이쿼리 UI용 CSS -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<!-- 제이쿼리 코어용 라이브러리 임베드 -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- 제이쿼리 UI용 라이브러리 임베드 -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
 <style>
 	.packCreateBtn {
 		color:#ff8827;
@@ -21,12 +16,7 @@
 		background-color: #ff8827;
 	}
 </style>
-<<<<<<< HEAD
-
-<div id="colorlib-main" style="padding:10px">
-=======
 <div id="colorlib-main" style="padding:20px">
->>>>>>> refs/remotes/origin/test_master
 	<div class="row">
 		<div class="col-lg-12" style="padding-bottom:20px">
 			<div class="">
@@ -221,7 +211,7 @@
 
 	})
 </script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4aaa4b242f112a823dd2ef5541569589&libraries=services"></script>
+<!--  -->
 <script>
 	var map;
 	var geocoder = new kakao.maps.services.Geocoder();
@@ -232,25 +222,28 @@
 			timeout : 3000,
 			maxinumAge : 5000
 		};
-		navigator.geolocation.getCurrentPosition(successCallback);
-		//이거 실패하는코드도 입력. 경복궁 37.57801416976735  /  126.97658868798284 
-		//실패하면 displayKaKaoMap(lat, lng); 여기에 저값담아보내기
+		navigator.geolocation.getCurrentPosition(successCallback,error);
 	}
 
-	//0-1]사용자 위치 구하기 성공시 좌표값 displayKaKaoMap로 넘김
-	function successCallback(position) {
-
-		var lat = position.coords.latitude;
-		var lng = position.coords.longitude;
-		$("#packLat").val(lat);
-		$("#packLng").val(lng);
-		displayKaKaoMap(lat, lng);
-	}
-
-	//0-2]사용자 위치 구하기 실패시
-	function error(position) {
-		displayKaKaoMap(37.57801416976735, 126.97658868798284);
-	}
+	 //0-1]사용자 위치 구하기 성공시 좌표값 displayKaKaoMap로 넘김/지도 생성 순성상 있어줘야한다.
+      function successCallback(position) {
+    	  SearchMap()   
+       }
+      //0-2]사용자 위치 구하기 실패시
+      function error(position){
+    	  SearchMap()
+      }
+      function SearchMap(){
+    	 <c:if test="${empty searchLat}" var="isEmpty">
+    		 console.log("?????????")
+    		 displayKaKaoMap(37.57801416976735,  126.97658868798284 );
+      </c:if>
+      <c:if test="${!isEmpty}">
+          displayKaKaoMap(${searchLat},${searchLng});
+      </c:if>
+      }
+          
+      
 
 	//1]사용자 뷰에 지도 생성 지도 정보 map에 저장
 	function displayKaKaoMap(lat, lng) {

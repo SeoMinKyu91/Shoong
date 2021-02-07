@@ -3,17 +3,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-
-<!-- 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
--->
-<!-- 모달  -->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- 모달 -->
 <link rel="stylesheet" href="<c:url value="/css/comment.css?as"/>">
 <script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
+
 <style>
 	.feed-bottom-icon img{
 		margin: 6px 0px 6px 15px;
@@ -57,6 +49,7 @@
 		height: 600px;
 		padding: 0px;
 		border: 1px solid black;
+		background-color: white;
 	}
 	.feed-img-carousel{
 		height: 600px;
@@ -99,39 +92,69 @@
 		height: 100%;
 	}
 	
+	.animated-text{
+		display:none;
+	}
+	.slider-area{
+		display:none;
+	}
+	
+	#bg {
+	  position: fixed; 
+	  top: 0; 
+	  left: 0; 
+	  opacity: 1;
+	  /* Preserve aspet ratio */
+	  min-width: 100%;
+	  min-height: 100%;
+	}
+	.packMainBtn {
+		color: #f32a48;
+		background: none;
+		font-weight: bold;
+		border: #f32a48 1px solid;
+	}
+	
+	.packMainBtn:hover {
+		color: white;
+	}
+	.MyPackBtn {
+		color: #f32a48;
+		background: none;
+		font-weight: bold;
+		border: #f32a48 1px solid;
+	}
+
+	.MyPackBtn:hover {
+		color: white;
+	}
+	
+	
 	
 </style>
 
-
-<div id="colorlib-main">
-	<div class="row" style="margin-left: 20px; margin-bottom: 2px;">
-			
-		<div class="col-lg-12" style="padding-bottom:10px">
-			<div class="row">
-				<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10" style="padding-top:20px">
-					<a href="<c:url value="/pack/main.do"/>">
-					<img alt="pack" src="<c:url value="/images/pack/pack.png"/>" style="width: 80px;"></a>&emsp;<a class="packCreateBtn btn" href="<c:url value="/pack/main.do"/>">HOME</a>
-					<c:if test="${!empty sessionScope.packId}">
-						<a class="packCreateBtn btn" href="<c:url value="/pack/view.do"/>">MY PACK</a>
-					</c:if>
-				</div>
-				<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 icons-div" style="padding-top: 17px;">
-					<a id="btn-feed-write"><i class="fas fa-edit fa-2x" style="color: black; margin-left: 5px;"></i></a>
-					<a href="<c:url value="/pack/myComment.do"/>"><i class="far fa-user fa-2x" style="color: black; margin-left: 5px;"></i></a>
-					<a href="<c:url value="/pack/comment.do"/>"><i class="far fa-list-alt"></i></a>
-				</div>
+<div style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;">		
+	<!-- 팩 위에 꺼 -->
+	<div class="row">
+		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
+			<div class="">
+				<a class="packMainBtn btn" href="<c:url value="/pack/main.do"/>" style="margine-right: 20px;">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="MyPackBtn btn" href="<c:url value="/pack/view.do"/>" >MY PACK</a>
+				</c:if>
+				<a class="packMainBtn btn" href="<c:url value="/pack/comment.do"/>">ALL LIST</a>
+				<a class="packMainBtn btn" href="<c:url value="/pack/myComment.do"/>">MY LIST</a>
+				<a class="packMainBtn btn" id="btn-feed-write" style="margine-right: 20px; " href="">WRITE</a>
+				
 			</div>
-			
-			
 		</div>
 	</div>
-	<hr style="background-color:black; height:1px; margin: 0px;"/>
-
-	<div class="container" style="margin-top:50px;">
+	
+	<div class="container" style="margin-top:30px; margin-bottom: 30px;  ">
 		<div class="row">
 			<div class="col-lg-offset-1 col-lg-10">
-				<div class="row">
-					<div class="col-lg-6 feed-view" style="background-color: lightgrey;">
+				<div class="row" >
+					<div class="col-lg-6 feed-view" style="box-shadow: 5px 5px 10px #787878;">
 						<div class="col-12 feed-img-carousel carousel slide" id="feed-img-carousel" data-ride="carousel" data-interval="false">
 							<!-- indicators -->
 							<c:if test="${packCommentView.packCommentImages.size() > 1 }">
@@ -145,7 +168,7 @@
 								</ol>
 							</c:if>
 							<!-- Wrapper for slides -->
-							<div class="carousel-inner" role="listbox" style="height: 600px;">
+							<div class="carousel-inner" role="listbox" style="height: 597px; box-shadow: 5px 5px 5px #787878">
 								<c:forEach items="${packCommentView.packCommentImages }" var="image" varStatus="index">
 									<div <c:if test="${index.index==0 }" var="isFirst"> class="item active"</c:if>
 										<c:if test="${!isFirst }">class="item"</c:if>>
@@ -153,7 +176,7 @@
 									</div>
 								</c:forEach>
 							</div>
-
+	
 							<!-- Controls -->
 							<c:if test="${packCommentView.packCommentImages.size() > 1 }">
 								<a class="left carousel-control"
@@ -173,7 +196,7 @@
 					
 					
 					
-					<div class="col-lg-5 feed-view feed-contents" style="border-left: none;">
+					<div class="col-lg-5 feed-view feed-contents" style="border-left: none;box-shadow: 5px 5px 5px #787878;">
 						<div class="col-lg-12 feed-writer-pr" style="height: 90px; border-bottom: 1px solid lightgrey;">
 							<div class="col-lg-2" style="height: 100%; line-height: 90px;">
 								<img src="<c:url value="/images/person_4.jpg"/>" alt="프로필사진" style="height: 60%; border-radius: 100%; border: 2px solid black;"/>
@@ -237,16 +260,12 @@
 								<span style="cursor: pointer; font-weight: bold">게시</span>
 							</div>
 						</div>
-						
 					</div>
 				</div>
-				
 			</div>
 		</div>
-		
 	</div>
 </div>
-<!-- color-lib-main -->
 
 <!-- 피드 글 쓰기 모달 시작 -->
 <div class="modal fade" id="feed-write-modal"

@@ -17,9 +17,8 @@ public class CourseServiceImpl implements CourseService{
 	private CourseDAO courseDao;
 
 	@Override
-	public int insert(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean insert(Map map) {
+		return courseDao.insert(map);
 	}
 
 	@Override
@@ -45,9 +44,9 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
-	public CourseDTO selectOne(Map map) {
-		// TODO Auto-generated method stub
-		return null;
+	public CourseDTO selectOneByCId(String courseId) {
+		return courseDao.selectOneByCId(courseId);
 	}
+
 
 }

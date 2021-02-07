@@ -151,12 +151,7 @@
       left: 50%;
       transform: translate( -50%, -50% );
 }
-a:link{
-	color:black;
-}
-a:visited{
-	color:black;
-}
+
 
 .feed-top-icon img{
 	border:none;

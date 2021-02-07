@@ -18,9 +18,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
 public class RecordDTO {
 	
 	private String recordId;
@@ -33,5 +30,54 @@ public class RecordDTO {
 	@SerializedName("startTime")
 	private Date recordDate;
 	private String duration;
+	public String getRecordId() {
+		return recordId;
+	}
+	public void setRecordId(String recordId) {
+		this.recordId = recordId;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(String courseId) {
+		this.courseId = courseId;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public String getRecordLength() {
+		return recordLength;
+	}
+	public void setRecordLength(String recordLength) {
+		this.recordLength = recordLength;
+	}
+	public Date getRecordDate() {
+		return recordDate;
+	}
+	public void setRecordDate(Date recordDate) {
+		this.recordDate = recordDate;
+	}
+	public String getDuration() {
+		return duration;
+	}
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
+	
+	@Override
+	public String toString() {
+		return "RecordDTO [recordId=" + recordId + ", userId=" + userId + ", courseId=" + courseId + ", fileName="
+				+ fileName + ", recordLength=" + recordLength + ", recordDate=" + recordDate + ", duration=" + duration
+				+ "]";
+	}
 
 }

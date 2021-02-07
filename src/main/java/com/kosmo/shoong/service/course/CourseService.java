@@ -5,9 +5,9 @@ import java.util.Map;
 
 public interface CourseService {
 
-	CourseDTO selectOne(Map map);
+	CourseDTO selectOneByCId(String courseId);
 	
-	int insert(Map map);
+	boolean insert(Map map);
 	int delete(Map map);
 	int update(Map map);
 	

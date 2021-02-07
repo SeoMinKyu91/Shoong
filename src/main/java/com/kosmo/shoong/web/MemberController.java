@@ -191,12 +191,14 @@ public class MemberController {
 		session = req.getSession();
 		boolean flag = memberService.isMember(map);
 
-		Map mamberHasPack = memberService.memberHasPack(map);
+		Map memberHasPack = memberService.memberHasPack(map);
 		if(flag) {
 			session.setAttribute("userId", map.get("userId"));
-			if(mamberHasPack != null) {
-				System.out.println("memberHasPack:"+mamberHasPack.get("PACK_ID"));
-				session.setAttribute("packId", mamberHasPack.get("PACK_ID"));
+			if(memberHasPack != null) {
+				System.out.println("memberHasPack:"+memberHasPack.get("PACK_ID"));
+				System.out.println(memberHasPack.get("PACK_NAME"));
+				session.setAttribute("packId", memberHasPack.get("PACK_ID"));
+				session.setAttribute("packName", memberHasPack.get("PACK_NAME"));
 
 			}
 
@@ -240,7 +242,8 @@ public class MemberController {
 
 		MemberDTO dto = memberService.selectOne(map);
 		model.addAttribute("name",dto.getUserName());
-
+		
+		
 		List<Map> lists = galleryService.imgFirstList(map);
 		System.out.println(lists);
 		model.addAttribute("imgList", lists);
@@ -257,8 +260,25 @@ public class MemberController {
 	public String myInfoEdit(HttpServletRequest req, Map map, Model model) {
 		map.put("userId", req.getSession().getAttribute("userId").toString());
 		Map memberInfo = memberService.memberEditView(map);
+		
+		
+		List<Map> badgeNames = memberService.memberHasBadgeNames(map);
+		
+		if(badgeNames.size() != 0) {
+			model.addAttribute("memberBadgeGetList",badgeNames);
+		}
+		else {
+			model.addAttribute("memberBadgeGetList","no");
+		}
+		
+		if(memberService.hasProfileImg(map) != null) {
+			model.addAttribute("memberProfileImg",memberService.hasProfileImg(map));
+		}
+		else {
+			model.addAttribute("memberProfileImg","no");
+		}
+		
 		model.addAttribute("memberInfo", memberInfo);
-		System.out.println(memberInfo);
 		return "mypage/myInfoEdit";
 	}
 

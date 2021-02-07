@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kosmo.shoong.pack.mybatis.chatmessage">
+
+	<resultMap type="chatMessageDTO" id="chatMessageResult">
+		<result property="chatMessageNo" column="CHAT_MESSAGE_NO"/>
+		<result property="chatMessageContent" column="CHAT_MESSAGE_CONTENT"/>
+		<result property="chatMessageDate" column="CHAT_MESSAGE_DATE"/>
+		<result property="chatRoomNo" column="CHAT_ROOM_NO"/>
+		<result property="userId" column="USER_ID"/>
+	</resultMap>
+	
+	<select id="packMemberSelectList" parameterType="java.util.Map" resultType="java.util.Map">
+		select m.name, p.user_id 
+		from member_ m join pack_join p on m.user_id = p.user_id
+		where p.pack_id = #{packId}
+	</select>
+	
+	<select id="chatSelectList" parameterType="java.util.Map" resultType="java.util.Map">
+		select cj.chat_room_no,cr.chat_room_title from chat_room_join cj join chat_room cr on cj.chat_room_no = cr.chat_room_no where cj.user_id = #{userId}
+	</select>
+	
+	<select id="chatMessageSelectOne" parameterType="java.lang.String" resultType="java.lang.String">
+		select r.* from (select chat_message_content from chat_message where chat_room_no = ${chatRoomNo} order by chat_message_date desc) r where rownum = 1
+	</select>
+	
+	<select id="chatRoomJoinMember" parameterType="java.lang.String" resultType="java.util.Map">
+		select m.name, cj.user_id, cj.chat_room_join_no from member_ m join chat_room_join cj on m.user_id = cj.user_id where cj.chat_room_no = #{chatRoomNo}
+	</select>
+
+	<select id="chatMessageSelectList" parameterType="java.util.Map" resultType="Map">
+		select m.name,cm.* from chat_message cm join member_ m on cm.user_id = m.user_id where cm.chat_room_no = ${chatRoomNo} order by chat_message_date asc
+	</select>
+	<insert id="chatMessageInsert" parameterType="java.util.Map">
+		insert into chat_message values(seq_chat_message.nextval,#{chatMessageContent},sysdate,#{chatRoomNo},#{userId})
+	</insert>
+
+</mapper>

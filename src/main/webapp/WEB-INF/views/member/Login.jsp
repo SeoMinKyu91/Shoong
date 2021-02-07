@@ -1,74 +1,120 @@
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
 
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-<link rel="stylesheet" href="<c:url value="/css/test.css"/>">
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
 	window.onload = function(){
 		Kakao.init('616834812e97e8f82a462cd2cc2e5e4e');
 	};
 </script>
-<!-- ※colorlib-main으로 일단 감싸고 안에다가 작업해야 왼쪽 탑에 안먹히고 작업할 수 있어요 -->
-<div id="colorlib-main" style="padding-top: 50px">
+<style>
+#loginCheck {
+	background-color : #f32a48;
+	color: white;
+	border : none;
+}
+#loginCheck:hover {
+	background-color: #f2f2f7;
+}
+#guestId {
+	background-color : #f32a48;
+	color: white;
+	border : none;
+}
+#guestId:hover {
+	background-color: #f2f2f7;
+}
+#join {
+	color: #f32a48;
+	background-color: #f2f2f7;
+	text-decoration: underline;
+	background: none;
+}
+#join:hover {
+	color: white;
+	
+}
+#idpwdCheck {
+	color: #f32a48;
+	background-color: #f2f2f7;
+	text-decoration: underline;
+	background: none;
+}
+#idpwdCheck:hover {
+	color: white;
+}
+.animated-text{
+	display:none;
+}
+.slider-area{
+	display:none;
+}
+#bg {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  opacity: 0.5;
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+.form-horizontal{
+	padding-top: 30px;
+	background-color: #f2f2f7;
+	background-color: rgba( 255, 255, 255, 0.5 );
+	border-radius: 30px;
+}
+</style>
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
 	<!-- 위에 딱 붙는게 싫어서 임시로 padding-top: 100px 주었음 수정하고싶으면 수정  -->
-	<div class="container">
-		<div class="col-xs-12 col-md-12">
-			<div class="page-header" style="text-align: center">
-				<a href="<c:url value="/"/>"><img alt="shoongLogo"
-					src="<c:url value="/images/shooongLogo.png"/>"
-					style="width: 100px; padding-bottom: 50px"></a>
-			</div>
-		</div>
-	</div>
 	<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
-		style="padding-bottom: 50px">
+		style="padding-bottom: 30px">
 		<form class="form-horizontal" method="post" name="join"
-			style="background-color: white; box-shadow: 0px 0px 5px #000; border-radius: 100px;"
 			action="<c:url value='/Member/Login.do'/>">
 			<div class="form-group">
 				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
-					style="padding-top: 40px; padding-bottom: 30px; text-align: center">
+					style="padding-bottom: 30px; text-align: center">
 					<h3 style="font-weight: bold">로그인</h3>
 				</div>
-				<div class=" col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			</div>
+			<div class="form-group">
+				<div class=" col-xs-10 offset-xs-1 col-md-6 offset-md-3"
+					style="padding-bottom: 5px;">
 					<input type="text" class="form-control" name="userId" id="userId"
 						style="font-size: .8em;" placeholder="이메일">
 				</div>
-				<h1></h1>
-				<h1></h1>
-				<div class=" col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+				<div class=" col-xs-10 offset-xs-1 col-md-6 offset-md-3"
+					style="padding-bottom: 10px;">
 					<input type="password" class="form-control" name="userPWD"
 						style="font-size: .8em;" id="userPWD" placeholder="비밀번호">
 				</div>
 				<h1></h1>
 				<h1></h1>
-				<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+				<div class="col-xs-10 offset-xs-1 col-md-6 offset-md-3"
+					style="padding-bottom: 10px;">
 					<button type="submit" id="loginCheck" style="font-size: 1em"
 						class="btn btn-primary btn-lg btn-block">로그인</button>
 				</div>
-				<div class="form-group text-center">
+				<div class="col-xs-10 offset-xs-1 col-md-6 offset-md-3 text-center"
+					style="padding-bottom: 10px;">
 					<a href=<c:url value='/Member/GuestLogin.do'/>
 						class="btn btn-block" id="guestId" name="guestId"
-						style="font-size: 1em">비회원 로그인</a> <a
-						href="<c:url value="/Member/Join.do"/>" class="btn" id="join"
-						name="join"><span style="color: grey;">회원이 아닌가요?</span></a> <span
-						style="color: grey; font-size: 1em">/</span> <a
-						href="<c:url value="/Member/IDCheck.do"/>" class="btn"
-						id="idpwdCheck" name="idpwdCheck"><span
-						style="color: grey; font-size: 1em">ID찾기</span></a> <a
-						href="<c:url value="/Member/PWDCheck1.do"/>" class="btn"
-						id="idpwdCheck" name="idpwdCheck"><span
-						style="color: grey; font-size: 1em">PW찾기</span></a>
+						style="font-size: 1em; margine-bottom: 20px;">비회원 로그인</a>
 				</div>
-				<h1></h1>
-				<hr class="line" style="width: 70%" />
-				<h1></h1>
-				<div class="form-group "
-					style="text-align: center; padding-bottom: 50px">
+				<div class="col-xs-10 offset-xs-1 col-md-6 offset-md-3 text-center"
+					style="padding-bottom: 5px;">
+					<a href="<c:url value="/Member/Join.do"/>" class="btn" id="join"
+						name="join">회원이 아닌가요?</a> <span style="color: #f32a48;">/</span> <a
+						href="<c:url value="/Member/IDCheck.do"/>" class="btn"
+						id="idpwdCheck" name="idpwdCheck">ID찾기</a><a
+						href="<c:url value="/Member/PWDCheck1.do"/>" class="btn"
+						id="idpwdCheck" name="idpwdCheck">PW찾기</a>
+					<hr class="line" style="width: 100%;" />
+				</div>
+				<div style="text-align: center; padding-bottom: 50px">
 					<a
 						href="https://kauth.kakao.com/oauth/authorize?response_type=code
 						&client_id=616834812e97e8f82a462cd2cc2e5e4e
@@ -84,10 +130,10 @@
 			</div>
 		</form>
 	</div>
-</div>
 <!-- 카카오 회원가입 -->
 <script type="text/javascript">
 	//게스트 로그인
+$(function() {
 	$('#guestId').click(function(){
 		 $.ajax({
 			 url : "<c:url value='/Member/GuestLogin.do'/>",
@@ -135,4 +181,5 @@
 	  		location.reload();
 	  	}
  });
+});
 </script>

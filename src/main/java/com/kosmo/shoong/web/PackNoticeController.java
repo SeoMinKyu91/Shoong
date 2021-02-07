@@ -53,12 +53,10 @@ public class PackNoticeController {
 			model.addAttribute("manager","manager");
 		}
 		
-		
 		//서비스 호출]
 		//페이징을 위한 로직 시작]
 		//전체 레코드수	
 		int totalRecordCount = service.getTotalRecord(map);	
-		
 		
 		//전체 페이지수
 		int totalPage=(int)Math.ceil((double)totalRecordCount/pageSize);
@@ -97,11 +95,6 @@ public class PackNoticeController {
 		map.put("userId", req.getSession().getAttribute("userId").toString());
 		map.put("packId",req.getSession().getAttribute("packId").toString());
 		
-		//map.put("userID","park");
-		//map.put("packID","2");
-		
-		
-		
 		service.insert(map);
 		
 		return "forward:/pack/notice/list.do";
@@ -111,7 +104,6 @@ public class PackNoticeController {
 	
 	@RequestMapping("notice/Edit.do")
 	public String noticeEdit(@RequestParam Map map, Model model) {
-		
 		service.update(map);
 		
 		model.addAttribute("packNoticeNo",map.get("packNoticeNo"));
@@ -123,7 +115,6 @@ public class PackNoticeController {
 	
 	@RequestMapping("notice/delete.do")
 	public String noticeDelete(@RequestParam Map map,Model model) {
-		
 		
 		service.delete(map);
 		

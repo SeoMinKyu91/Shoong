@@ -1,5 +1,6 @@
 package com.kosmo.shoong.service.impl.member;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -96,6 +97,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public int update(Map map) {
+		System.out.println("임플안");
 		return memberDAO.update(map);
 	}//////update
 
@@ -117,6 +119,27 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public MemberDTO isLogin(MemberDTO member) {
 		return memberDAO.isLogin(member);
+	}
+
+	public int profileImgUpdate(Map map) {
+		return memberDAO.profileImgUpdate(map);
+		
+	}
+
+	public String hasProfileImg(Map map) {
+		
+		return memberDAO.hasProfileImg(map);
+		
+	}
+
+	public int profileImgInsert(Map map) {
+		
+		return memberDAO.profileImgInsert(map);
+		
+	}
+
+	public List<Map> memberHasBadgeNames(Map map) {
+		return memberDAO.memberHasBadgeNames(map);
 	}
 
 }/////////////////////////////////////////////

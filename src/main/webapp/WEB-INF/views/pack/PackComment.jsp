@@ -3,21 +3,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
-
-<!-- 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
--->
-<!-- 모달  -->
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- 모달 -->
-<link rel="stylesheet" href="<c:url value="/css/comment.css?f"/>">
+<link rel="stylesheet" href="<c:url value="/css/comment.css?zaxscd"/>">
 <script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
 
 <style>
 	.feed-bottom-icon img{
-	margin: 6px 0px 6px 15px;
+		margin: 6px 0px 6px 15px;
 	}
 	.packCreateBtn {
 		color:#ff8827;
@@ -82,60 +73,95 @@
 	.replyMore:hover{
 		border-bottom: 1px solid black;
 	}
+	
+	.animated-text{
+		display:none;
+	}
+	.slider-area{
+		display:none;
+	}
+	
+	#bg {
+	  position: fixed; 
+	  top: 0; 
+	  left: 0; 
+	  opacity: 0.5;
+	  /* Preserve aspet ratio */
+	  min-width: 100%;
+	  min-height: 100%;
+	}
+	
+	.packMainBtn {
+		color: #f32a48;
+		background: none;
+		font-weight: bold;
+		border: #f32a48 1px solid;
+	}
+	
+	.packMainBtn:hover {
+		color: white;
+	}
+	.MyPackBtn {
+		color: #f32a48;
+		background: none;
+		font-weight: bold;
+		border: #f32a48 1px solid;
+	}
 
+	.MyPackBtn:hover {
+		color: white;
+	}
+	
 	
 </style>
 
-<div id="colorlib-main">
 	
-	<div class="row" style="margin-left: 20px; margin-bottom: 2px;">
-			
-		<div class="col-lg-12" style="padding-bottom:10px">
-			<div class="row">
-				<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10" style="padding-top:20px">
-					<a href="<c:url value="/pack/main.do"/>">
-					<img alt="pack" src="<c:url value="/images/pack/pack.png"/>" style="width: 80px;"></a>&emsp;<a class="packCreateBtn btn" href="<c:url value="/pack/main.do"/>">HOME</a>
-					<c:if test="${!empty sessionScope.packId}">
-						<a class="packCreateBtn btn" href="<c:url value="/pack/view.do"/>">MY PACK</a>
-					</c:if>
-				</div>
-				<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 icons-div" style="padding-top: 17px;">
-					<a id="btn-feed-write"><i class="fas fa-edit fa-2x" style="color: black; margin-left: 5px;"></i></a>
-					<a href="<c:url value="/pack/myComment.do"/>"><i class="far fa-user fa-2x" style="color: black; margin-left: 5px;"></i></a>
-					<a href="<c:url value="/pack/comment.do"/>"><i class="far fa-list-alt"></i></a>
-				</div>
+	
+<div style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;">			
+	<!-- 팩 위에 꺼 -->
+	<div class="row">
+		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
+			<div class="">
+				<a class="packMainBtn btn" href="<c:url value="/pack/main.do"/>" style="margine-right: 20px;">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="MyPackBtn btn" href="<c:url value="/pack/view.do"/>" >MY PACK</a>
+				</c:if>
+				<a class="packMainBtn btn" href="<c:url value="/pack/comment.do"/>">ALL LIST</a>
+				<a class="packMainBtn btn" href="<c:url value="/pack/myComment.do"/>">MY LIST</a>
+				<a class="packMainBtn btn" id="btn-feed-write" style="margine-right: 20px; " href="">WRITE</a>
+				
 			</div>
-			
-			
 		</div>
 	</div>
-	<hr style="background-color:black; height:1px; margin: 0px;"/>
-
+		
+	<div class="row" style="margin-bottom: 15px;">
+		<div class="col-xs-12 col-md-12 col-lg-12">
+			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em;text-align: center">커뮤니티</p>
+		</div>
+	</div>
+	
 	<!-- 피드 메인 시작 DIV -->
 	<div class="container">
 		<div class="row" id="body-div">
-			<div class="offset-md-2 col-md-8 col-sm-12">
-				<c:if test="${not empty commentList }"
-					var="notempty">
-					<c:forEach items="${commentList }"
-						var="item" varStatus="loop">
-
+			<div class="offset-md-2 col-md-8 col-xs-12">
+				<c:if test="${not empty commentList }" var="notempty">
+					<c:forEach items="${commentList }" var="item" varStatus="loop">
 						<div class="row feed-rows">
-							<div class="feed">
+							<div class="feed" style="box-shadow: 0px 0px 3px #787878">
 								<div class="row feed-inner">
 									<div class="col-md-12">
 										<div class="row feed-row">
 											<!-- 피드 top 시작 -->
 											<div class="col-12 feed-top">
 												<div class="row feed-top-row">
-													<div class="col-2 feed-top-imgs"
+													<div class="col-lg-2 col-xs-3 feed-top-imgs"
 														style="text-align: center;">
 														<!-- 나중에 이미지 사진 교체 해야함 현재는 정확히 어떻게 해야할지 모르겠어서 임시사진 적용 -->
 														<img class="feed-top-img-src"
 															alt="이미지사진"
 															src="<c:url value="/images/image_10.jpg"/>" />
 													</div>
-													<div class="col-7 feed-top-nick">
+													<div class="col-lg-10 col-xs-9 feed-top-nick">
 														<span class="feed-top-nick-span">${item.packCommentWriter }</span>
 													</div>
 												</div>
@@ -161,7 +187,7 @@
 															</c:forEach>
 														</ol>
 													</c:if>
-
+	
 													<!-- Wrapper for slides -->
 													<div class="carousel-inner"
 														role="listbox">
@@ -177,7 +203,7 @@
 															</div>
 														</c:forEach>
 													</div>
-
+	
 													<!-- Controls -->
 													<c:if test="${item.packCommentImages.size() > 1 }">
 														<a class="left carousel-control"
@@ -203,16 +229,16 @@
 											<!-- feed-img-row -->
 										</c:if>
 										<c:if test="!imagesExist">
-
+	
 										</c:if>
 										<!-- 피드 이미지 끝 -->
-
+	
 										<div class="row feed-content-row">
 											<div class="col-12 feed-content">
 												<span>${item.packCommentContent }</span>
 											</div>
 										</div>
-
+	
 										<!-- 피드 bottoms 시작 -->
 										<div class="feed-bottoms">
 											<div class="row feed-bottom-row">
@@ -226,7 +252,7 @@
 													<img class="icon reply-icon" src="<c:url value='/images/fa-icons/comment.png'/>" title="reply"/>
 												</div>
 											</div>
-
+	
 											<div class="row feed-bottom-row">
 												<c:if test="${item.packCommentLikeCount != null}">
 													<div class="col-12 feed-likely-row">
@@ -236,7 +262,7 @@
 													</div>
 												</c:if>
 											</div>
-
+	
 											<div class="row feed-bottom-row"
 												style="margin-top: 10px;">
 												<div class="col-12 feed-reply-show">
@@ -245,18 +271,18 @@
 													<span class="replyMore">모두보기</span>
 												</div>
 											</div>
-
+	
 											<div class="row feed-bottom-row qwerasdf">
 												<c:if
 													test="${not empty item.packCommentReply }">
 													<c:forEach items="${item.packCommentReply }" var="reply" varStatus="loop" begin="0" end="3">
-														<div class="col-lg-11 feed-replys" id="replyNo${reply.packCommentReplyNo }">
+														<div class="col-lg-11 col-xs-10 feed-replys" id="replyNo${reply.packCommentReplyNo }">
 															<span style="margin-left: 15px; font-weight: bold; font-size: 12px;">${reply.packCommentReplyWriter }</span>
 															<span style="margin-left: 15px;">${reply.packCommentReplyContent }</span>
 															
 														</div>
 														<c:if test="${sessionScope.userId eq reply.userId }">
-															<div class="col-lg-1 feed-replys-readmore" id="readmore${reply.packCommentReplyNo }">
+															<div class="col-lg-1 col-xs-2 feed-replys-readmore" id="readmore${reply.packCommentReplyNo }">
 																<i class="fas fa-ellipsis-h reply-readmore" style="font-size: 15px; cursor: pointer; opacity: 0.4;"></i>
 																<input class="replyNo" type="hidden" value="${reply.packCommentReplyNo}">
 															</div>
@@ -264,7 +290,7 @@
 													</c:forEach>
 												</c:if>
 											</div>
-
+	
 											<div class="row feed-bottom-row"
 												style="border-top: 1px solid lightgrey; margin-left: 0px; margin-right: 0px; margin-top: 15px;">
 												<div class="col-10 feed-reply-content">
@@ -284,13 +310,14 @@
 					</c:forEach>
 				</c:if>
 				<c:if test="${!notempty }">
-					<div>등록된 피드가 없습니다</div>
+					<div class="offset-sm-2 col-sm-9" style="margin-top:30px;">
+						<h1>등록된 게시글이 없습니다</h1>
+					</div>
 				</c:if>
 			</div>
 		</div>
 	</div>
 </div>
-<!-- color-lib-main -->
 
 <!-- 피드 글 쓰기 모달 시작 -->
 <div class="modal fade" id="feed-write-modal"
@@ -305,7 +332,7 @@
 				<form action="" class="" id="feed-write-form"
 					method="post" enctype="multipart/form-data">
 					<div class="feed-story"
-						contenteditable="true">글자를 입력해주세요</div>
+						contenteditable="true">회원님의 공유할 이야기를 적어주세요</div>
 					<div class="feed-img-modal">
 						<span class="feed-img-modal-span">Drag
 							& Drop Files Here</span>
@@ -355,7 +382,8 @@
 	$(function() {
 		var objDragAndDrop = $('.feed-img-modal');
 		
-		$('#btn-feed-write').click(function(){
+		$('#btn-feed-write').click(function(e){
+			e.preventDefault()
 			$('#feed-write-modal').modal();
 		})
 		
@@ -367,7 +395,7 @@
 		});		
 		
 		$('#feed-write-cancle').click(function(){
-			$('.feed-story').text("글자를 입력해주세요");
+			$('.feed-story').text("회원님의 공유할 이야기를 적어주세요");
 			$('.feed-story').css('opacity','0.7');
 		})
 		
@@ -667,6 +695,8 @@
 			});
 			
 		});
+		
+		
 		
 	});
 </script>

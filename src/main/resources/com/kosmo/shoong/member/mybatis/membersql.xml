@@ -61,10 +61,6 @@
 		ON d.record_id = t1.record_id) t2 ON i.diary_code = t2.diary_code
 	</select>
 	
-	<select id="showCourse" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT * FROM course c join member_ m ON c.user_id=#{userId}
-	</select>
-	
 	<select id="memberIsMember" parameterType="java.util.Map"
 		resultType="int">
 		SELECT COUNT(*) 
@@ -89,25 +85,34 @@
 		VALUES(#{userId},'Y')
 	</insert>
 	<update id="memberUpdate" parameterType="java.util.Map">
-		UPDATE member_ 
-		<set>
-			<if test="surveyResult!=null">frequency=#{surveyResult},</if>
-			<if test="userPWD!=null">pwd=#{userPWD},</if>
-			<if test="userName!=null">name=#{userName},</if>
-			<if test="userAddr!=null">addr=#{userAddr},</if>
-			<if test="userTel!=null">usertel=#{userTel},</if>
-		</set> 
-		<if test="userId!=null">
-			WHERE user_id=#{userId}
-		</if>
+		UPDATE member_ set pwd = #{userPWDOk}, name = #{userName}, gender = #{userGender}, age = #{userAge}, usertel = #{userTel}
+		where user_id = #{userId} 
+		
 	</update>
 	
 	<select id="memberHasPack" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT pack_id FROM pack_join WHERE user_id=#{userId} AND pack_join_accept='yes'
+		select p.pack_id,p.pack_name from pack_join pj join pack p on pj.pack_id = p.pack_id where pj.user_id = #{userId} and pj.pack_join_accept='yes'
 	</select>
 
 	<select id="memberEditList" parameterType="java.util.Map" resultType="java.util.Map">
 		SELECT * FROM member_ WHERE user_id=#{userId}
 	</select>
+	
+	
+	<select id="hasProfileImg" parameterType="Map" resultType="String">
+		select profile_img_name from member_profile_img where user_id = #{userId}
+	</select>
+	
+	<select id="memberHasBadgeNames" parameterType="Map" resultType="Map">
+		select badge_thumbnail from badge b join user_badge_get ubg on b.badge_id = ubg.badge_id where user_id = #{userId}
+	</select>
+	
+	<update id="profileImgUpdate" parameterType="Map">
+		update MEMBER_PROFILE_IMG set PROFILE_IMG_NAME = #{profileImgName} where user_id = #{userId}
+	</update>
+	
+	<insert id="profileImgInsert">
+		insert into member_profile_img values(SEQ_M_P_IMG.nextval,#{userId},#{profileImgName})
+	</insert>
 	
 </mapper>

@@ -11,6 +11,7 @@ myBatis 환경설정파일
 <configuration>
 	<!-- 자바빈 별칭 -->
 	<typeAliases>
+		<!-- User -->
 		<typeAlias alias="packDTO"
 			type="com.kosmo.shoong.service.pack.PackDTO" />
 		<typeAlias alias="packGalleryDTO"
@@ -31,8 +32,18 @@ myBatis 환경설정파일
 			type="com.kosmo.shoong.service.record.RecordDTO"/>
 		<typeAlias alias="memberDTO"
 			type="com.kosmo.shoong.service.member.MemberDTO" />
+		<typeAlias alias="badgeDTO"
+			type="com.kosmo.shoong.service.badge.BadgeDTO" />
+			
+		<!-- Admin -->
 		<typeAlias alias="reportAdminDTO" 
 			type="com.kosmo.shoong.admin.service.ReportAdminDTO"/>
+		<typeAlias alias="chatMessageDTO" 
+			type="com.kosmo.shoong.service.chat.ChatMessageDTO"/>			
+		<typeAlias alias="packAdminDTO"
+			type="com.kosmo.shoong.admin.service.PackAdminDTO" />
+		<typeAlias alias="memberAdminDTO"
+			type="com.kosmo.shoong.admin.service.MemberAdminDTO" />
 	</typeAliases>
 	
 	<!-- 매퍼파일(SQL쿼리 결과와 자바빈 매핑)의 위치정보 설정 -->
@@ -44,12 +55,15 @@ myBatis 환경설정파일
 		<mapper	resource="com/kosmo/shoong/pack/mybatis/packmanagesql.xml" />
 		<mapper	resource="com/kosmo/shoong/pack/mybatis/packschedulesql.xml" />
 		<mapper resource="com/kosmo/shoong/pack/mybatis/packcommentsql.xml"/>
+		<mapper	resource="com/kosmo/shoong/pack/mybatis/chatmessage.xml"/>
 		<mapper	resource="com/kosmo/shoong/course/mybatis/coursesql.xml" />
 		<mapper	resource="com/kosmo/shoong/record/mybatis/recordsql.xml"/>
 		<mapper	resource="com/kosmo/shoong/member/mybatis/membersql.xml"/>
 		<mapper	resource="com/kosmo/shoong/mypage/mybatis/mypage.xml" />
 		<mapper	resource="com/kosmo/shoong/mypage/mybatis/mypageDiary.xml"/>
 		<mapper	resource="com/kosmo/shoong/mypage/mybatis/mypageRecord.xml"/>
+		<mapper	resource="com/kosmo/shoong/badge/mybatis/badgesql.xml"/>
+		<mapper	resource="com/kosmo/shoong/chatbot/chatbot.xml"/>
 		
 		<!-- 관리자 페이지 매퍼파일-->
 		<mapper	resource="com/kosmo/shoong/admin/mybatis/courseAdminsql.xml"/>
