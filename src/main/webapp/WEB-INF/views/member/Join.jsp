@@ -43,13 +43,44 @@ input {
 	font-size: .8em;
 	padding-left: 10px;
 }
+#bg {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  opacity: 0.5;
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+.form-horizontal{
+	padding-top: 30px;
+	background-color: #f2f2f7;
+	background-color: rgba( 255, 255, 255, 0.9 );
+	border-radius: 30px;
+	position: relative;
+	z-index: 1;
+	box-shadow: 0px 0px 5px #787878;
+}
+#duplCheck{
+	color: #e83e8c;
+	text-decoration: underline;
+}
+#duplCheck:hover{
+	color: white;
+	
+}
+#emailDuplCheck{
+	margin-top: 30px;
+	float: right;
+	background-color: #f2f2f7;
+}
 </style>
 <!-- 실제 내용 시작 -->
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
 <div class="col-xs-10 offset-xs-1 col-md-10 offset-md-1"
 	style="padding-bottom: 50px">
 	<form class="form-horizontal" method="post" name="join"
 		onsubmit="return checked()"
-		style="padding-top: 30px; background-color: #f2f2f7; box-shadow: 0px 0px 5px #000; border-radius: 50px"
 		action="<c:url value='/Member/Join.do'/>">
 		<div class="form-group">
 			<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
@@ -63,10 +94,8 @@ input {
 				style="padding-bottom: 5px;">
 				<!-- 이메일 입력란 -->
 				<label for="userId">이메일 </label>
-				<Button type="button" id="emailDuplCheck" class="btn btn-sm"
-					style="float: right; background-color: #f2f2f7;">
-					<span id="duplCheck" role="button"
-						style="color: #f32a48; text-decoration: underline;">중복체크</span>
+				<Button type="button" id="emailDuplCheck" class="btn btn-sm">
+					<span id="duplCheck" role="button">중복체크</span>
 				</Button>
 				<br />
 				<div style="display: flex; flex-direction: row;">
@@ -133,24 +162,24 @@ input {
 				<br />
 				<!-- 주민번호 7자리 입력시 생년월일, 나이, 성별 자동 입력 -->
 				<input name="userrrn1" type="text" size="4" maxlength="4"
-					style="border: none; color: gray; background-color: #f2f2f7;"
+					style="border: none; color: gray; background-color: transparent !important;"
 					onBlur="checknum(document.join.userrrn1.value)" readonly="readonly"><span
-					style="font-size: .8em; color: gray; background-color: #f2f2f7;">년&nbsp;&nbsp;</span>
+					style="font-size: .8em; color: gray; background-color: transparent !important;">년&nbsp;&nbsp;</span>
 				<input name="userrrn2" type="text" size="2" maxlength="2"
-					style="border: none; color: gray; background-color: #f2f2f7;"
+					style="border: none; color: gray; background-color: transparent !important;"
 					onBlur="checknum(document.join.userrrn2.value)" readonly="readonly"><span
-					style="font-size: .8em; color: gray; background-color: #f2f2f7;">월&nbsp;&nbsp;</span>
+					style="font-size: .8em; color: gray; background-color: transparent !important;">월&nbsp;&nbsp;</span>
 				<input name="userrrn3" type="text" size="2" maxlength="2"
-					style="border: none; color: gray; background-color: #f2f2f7;"
+					style="border: none; color: gray; background-color: transparent !important;"
 					onBlur="checknum(document.join.userrrn3.value)" readonly="readonly"><span
-					style="font-size: .8em; color: gray; background-color: #f2f2f7;">일&emsp;&emsp;</span>
+					style="font-size: .8em; color: gray; background-color: transparent !important;">일&emsp;&emsp;</span>
 				<input name="userAge" id="userAge" type="text" size="2"
-					style="border: none; color: gray; background-color: #f2f2f7;"
+					style="border: none; color: gray; background-color: transparent !important;"
 					maxlength="2" onBlur="checknum(document.join.userAge.value)"
 					readonly="readonly"><span
-					style="font-size: .8em; color: gray; background-color: #f2f2f7;">살&emsp;&emsp;</span>
+					style="font-size: .8em; color: gray; background-color: transparent !important;">살&emsp;&emsp;</span>
 				<input name="userGender" type="text" size="3" maxlength="2"
-					style="border: none; color: gray; background-color: #f2f2f7;"
+					style="border: none; color: gray; background-color: transparent !important;"
 					onBlur="checknum(document.join.userGender.value)"
 					readonly="readonly"><br />
 			</div>
@@ -335,7 +364,7 @@ input {
 		var jumin1 = document.join.userRRN1.value;
 		var yy = date.getFullYear();
 		var birthYear = jumin1.substring(0);
-		if (birthYear > 2) {
+		if (birthYear > 1) {
 			age = yy - (1900 + parseInt(jumin1.substring(0, 2)));
 			document.join.userrrn1.value = 1900 + parseInt(jumin1.substring(0,
 					2));
