@@ -100,6 +100,8 @@ th, td{
                   </div>
                 </div>
               </div>
+              
+              <!-- 멤버 상세 보기 모달 -->
               <div class="modal fade" id="layerpop" >
 				  <div class="modal-dialog">
 				    <div class="modal-content">

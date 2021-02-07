@@ -6,7 +6,8 @@ import java.util.Map;
 
 public interface PackAdminService {
 	
-	List<Map> selectList();
+    List<Map> selectList();
 	int deletePack(Map map);
+	
 		
 }

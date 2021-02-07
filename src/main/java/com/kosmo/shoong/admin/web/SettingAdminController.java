@@ -20,7 +20,7 @@ public class SettingAdminController {
 	@RequestMapping("main.do")
 	   public String settingMain(Model model) {
 	     model.addAttribute("adminList", settingAdminService.adminList());
-	     System.out.println(settingAdminService.adminList());
+
 	      return "admin/Setting.admin";
 	   }
 	

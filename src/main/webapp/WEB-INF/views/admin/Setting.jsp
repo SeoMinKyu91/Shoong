@@ -134,7 +134,7 @@
         System.out.println("토큰값이 전달 되지 않았습니다.");
     }else{
         // 토큰값 전달시 쿼리문 입력할곳임
-        sql = "INSERT INTO FCM_TOKENS(ID,TOKEN) VALUES(TOKENS_SEQ.NEXTVAL,?)";
+        sql = "INSERT INTO FCM_TOKENS(USER_ID,TOKEN) VALUES(TOKENS_SEQ.NEXTVAL,?)";
         psmt = conn.prepareStatement(sql);        
         psmt.setString(1,token);        
         psmt.executeUpdate();
