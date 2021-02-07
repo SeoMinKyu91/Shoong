@@ -108,7 +108,7 @@ body {
 				</div>
 				<div class="col-lg-3 col-xs-3"
 					style="padding-top: 10px; float: right;">
-					<a href="<c:url value="/pack/notice/list.do"/>" class="btn-custom">
+					<a href="<c:url value="/pack/notice/list.do"/>" class="btn-custom" style="float:right;">
 						더보기 <span class="ion-ios-arrow-forward"></span>
 					</a>
 				</div>
@@ -141,12 +141,12 @@ body {
 		</div>
 		<div class="col-lg-5">
 			<div class="row">
-				<div class="col-lg-10 col-xs-9">
+				<div class="col-lg-9 col-xs-9">
 					<p style="font-weight: bold; font-size: 1.5em;">팩 일정</p>
 				</div>
-				<div class="col-lg-2 col-xs-3"
+				<div class="col-lg-3 col-xs-3"
 					style="padding-top: 10px; float: right;">
-					<a href="<c:url value="/pack/calendar.do"/>" class="btn-custom">더보기
+					<a href="<c:url value="/pack/calendar.do"/>" class="btn-custom" style="float:right;">더보기
 						<span class="ion-ios-arrow-forward"></span>
 					</a>
 				</div>
@@ -158,12 +158,12 @@ body {
 	<div class="row">
 		<div class="col-lg-offset-1 col-lg-5 " style="margin-top: 10px;">
 			<div class="row">
-				<div class="col-lg-10 col-xs-9">
+				<div class="col-lg-9 col-xs-9">
 					<p style="font-weight: bold; font-size: 1.5em;">코멘트</p>
 				</div>
-				<div class="col-lg-2 col-xs-3"
+				<div class="col-lg-3 col-xs-3"
 					style="padding-top: 10px; float: right;">
-					<a href="<c:url value="/pack/comment.do"/>" class="btn-custom">더보기
+					<a href="<c:url value="/pack/comment.do"/>" class="btn-custom" style="float:right;">더보기
 						<span class="ion-ios-arrow-forward"></span>
 					</a>
 				</div>
@@ -214,12 +214,12 @@ body {
 		</div>
 		<div class="col-md-5" style="margin-top: 10px;">
 			<div class="row">
-				<div class="col-lg-10 col-xs-9">
+				<div class="col-lg-9 col-xs-9">
 					<p style="font-weight: bold; font-size: 1.5em;">갤러리</p>
 				</div>
-				<div class="col-lg-2 col-xs-3"
+				<div class="col-lg-3 col-xs-3"
 					style="padding-top: 10px; float: right;">
-					<a href="<c:url value="/pack/gallery.do"/>" class="btn-custom">더보기
+					<a href="<c:url value="/pack/gallery.do"/>" class="btn-custom"  style="float:right;">더보기
 						<span class="ion-ios-arrow-forward"></span>
 					</a>
 				</div>
@@ -246,7 +246,7 @@ body {
 					<p style="font-weight: bold; font-size: 1.5em;">코스 목록</p>
 				</div>
 				<div class="col-lg-2 col-xs-3" style="padding-top: 13px;">
-					<a href="#" class="btn-custom">더보기 <span
+					<a href="#" class="btn-custom" style="float:right;">더보기 <span
 						class="ion-ios-arrow-forward"></span>
 					</a>
 				</div>

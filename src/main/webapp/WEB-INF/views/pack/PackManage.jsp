@@ -102,6 +102,7 @@ body {
 			</div>
 		</div>
 	</div>
+	<!-- 
 	<div class="row">
 		<div class="col-xs-12 col-md-12 col-lg-12">
 			<p
@@ -109,6 +110,7 @@ body {
 			<hr style="background-color: black; height: 1px" />
 		</div>
 	</div>
+	 -->
 	<div class="container" style="padding-top: 30px;">
 		<div class="row">
 			<div class="offset-md-2 col-md-8 col-lg-offset-2 col-lg-8">
@@ -131,8 +133,8 @@ body {
 					<div class="row">
 						<div class="col-lg-12 col-xs-12">
 						<br />
-							<p class="col-lg-10 col-xs-12">#${packInfo.PACK_ACT_REGION }&emsp;#${packInfo.PACK_ACT_TIME }&emsp;#${packInfo.PACK_ACT_AGE }</p>
-							<p class="col-lg-10 col-xs-12">${packInfo.PACK_TAG }</p>
+							<p class="col-lg-5 col-xs-12">#${packInfo.PACK_ACT_REGION }&emsp;#${packInfo.PACK_ACT_TIME }&emsp;#${packInfo.PACK_ACT_AGE }</p>
+							<p class="col-lg-3 col-xs-12">${packInfo.PACK_TAG }</p>
 							<p class="col-lg-10 col-xs-12" style="font-size: 15px; line-height: 2.0;">${packInfo.PACK_INTRO}</p>
 						</div>
 					</div>
@@ -158,7 +160,6 @@ body {
 							aria-controls="profile" role="tab" data-toggle="tab">팩 가입자 목록</a>
 						</li>
 					</ul>
-
 					<!-- Tab panes -->
 					<div class="tab-content" style="margin-top: 10px;">
 						<div role="tabpanel" class="tab-pane active" id="home">
@@ -170,7 +171,6 @@ body {
 									</div>
 								</div>
 							</c:if>
-
 							<c:if test="${!noPackJoinList }">
 								<div class="row custom-border"
 									style="font-size: 14px; background-color: #ff8827; color: white;">
@@ -202,9 +202,7 @@ body {
 
 								</c:forEach>
 							</c:if>
-
 						</div>
-
 						<div role="tabpanel" class="tab-pane" id="profile">
 							<div class="row custom-border"
 								style="font-size: 14px; background-color: #fad1af;">
@@ -214,9 +212,6 @@ body {
 									접속일</div>
 								<div class="col-lg-3 col-xs-2" style="font-weight: bold;">직책</div>
 							</div>
-
-
-
 							<c:forEach var="memberList" items="${packMemberList }">
 								<div class="row custom-border" name="test">
 									<div class="col-lg-3 col-xs-2">${memberList.NAME }</div>
