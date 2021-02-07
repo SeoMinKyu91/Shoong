@@ -55,8 +55,6 @@ public class RecordController {
 		
 		String renameFileName = FileUpDownUtils.getNewFileName(path, files.getOriginalFilename());
 		File file = new File(path+File.separator+renameFileName);
-		//System.out.println("file size:"+file.length());
-		//System.out.println("file name:"+file.getName());
 		files.transferTo(file);
 		//파일 읽기
 		BufferedReader br = new BufferedReader(
@@ -74,8 +72,6 @@ public class RecordController {
 		Gson gson = new GsonBuilder().setDateFormat("yyyy_MM_dd_HH_mm").create();
 		JsonParser parser = new JsonParser();
 		JsonElement resultJson = parser.parse(sb.toString());
-		//System.out.println("파싱:"+resultJson.toString());
-		//System.out.println("fromJson:"+gson.fromJson(resultJson.getAsJsonObject().get("properties"), RecordDTO.class));
 		RecordDTO uploadRecord = gson.fromJson(
 				resultJson.getAsJsonObject().get("properties"), RecordDTO.class);
 		boolean flag = rService.insertRecord(uploadRecord);
@@ -92,5 +88,6 @@ public class RecordController {
 		}
 		return flag?"업로드 성공":"업로드 실패";
 	}
+	
 	
 }

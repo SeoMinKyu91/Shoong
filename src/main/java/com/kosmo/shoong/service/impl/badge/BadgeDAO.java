@@ -21,9 +21,7 @@ public class BadgeDAO implements BadgeService{
 	@Override
 	public int insertBadge(Map map) {
 		List<BadgeDTO> badgeList = sqlMapper.selectList("whereIsMyBadge", map);
-		
-		//for(int result:rList) System.out.println(result);
-		//map.put("badgeIdList", rList);
+		if(badgeList.size()==0) return -1;
 		map.put("badgeList", badgeList);
 		Set keys = map.keySet();
 		for(Object key:keys) System.out.println(key+":"+map.get(key));

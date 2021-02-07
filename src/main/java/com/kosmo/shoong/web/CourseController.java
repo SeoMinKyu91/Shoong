@@ -165,11 +165,10 @@ public class CourseController {
 		return gson.toJson(cService.selectOneByCId(courseId));
 	}
 	
-	@RequestMapping("/mainTest.do")
-	public String courseMainTest(Map map) {
-		map.put("user_ID","kim");
+	@PostMapping("/convert/route")
+	public String routeConvert(@RequestParam Map map) {
 		
-		return "/course/CourseMainTest";
+		return null;
 	}
 
 }
