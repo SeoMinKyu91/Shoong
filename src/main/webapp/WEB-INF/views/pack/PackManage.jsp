@@ -144,7 +144,7 @@ body {
 	</div>
 	<div class="container" style="padding-top: 20px;">
 		<div class="row">
-			<div class="offset-md-2 col-md-8 col-lg-offset-2 col-lg-8">
+			<div class="offset-xs-2 col-xs-8 col-lg-offset-2 col-lg-8">
 				<hr>
 			</div>
 		</div>
