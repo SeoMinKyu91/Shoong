@@ -47,16 +47,6 @@ a:visted {
 	color: white;
 }
 
-.MyPackBtn {
-	color: #f32a48;
-	background: none;
-	font-weight: bold;
-	border: #f32a48 1px solid;
-}
-
-.MyPackBtn:hover {
-	color: white;
-}
 
 .custom-border div {
 	margin: 10px 0px 10px 0px;
@@ -84,25 +74,27 @@ a:visted {
 	cursor: pointer;
 }
 
-body {
-	background-color: #F9F9F9;
-}
 #joinMem:active { 
 	color:white;
 }
-
+#bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	opacity: 0.5;
+	/* Preserve aspet ratio */
+	min-width: 100%;
+	min-height: 100%;
+}
 </style>
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
 <div
-	style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;">
+	style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;  position: relative; z-index: 1;">
 	<div class="row">
 		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
 			<div class="">
-				<a class="packMainBtn btn" href="<c:url value="/pack/main.do"/>"
+				<a class="packMainBtn btn" href="<c:url value="/pack/view.do"/>"
 					style="margine-right: 20px">HOME</a>
-				<c:if test="${!empty sessionScope.packId}">
-					<a class="MyPackBtn btn" href="<c:url value="/pack/view.do"/>">MY
-						PACK</a>
-				</c:if>
 			</div>
 		</div>
 	</div>
@@ -158,10 +150,9 @@ body {
 					<!-- Nav tabs -->
 					<ul class="nav nav-pills justify-content-center" role="tablist">
 						<li role="presentation" class="active" id="JoinMem"><a
-							href="#home" aria-controls="home" role="tab" data-toggle="tab"><span style="color : #f32a48;">팩
-								가입신청 목록</span></a></li>
+							href="#home" aria-controls="home" role="tab" data-toggle="tab">팩 가입신청 목록</a></li>
 						<li role="presentation" id="JoinMem"><a href="#profile"
-							aria-controls="profile" role="tab" data-toggle="tab"><span style="color : #f32a48;">팩 가입자 목록</span></a>
+							aria-controls="profile" role="tab" data-toggle="tab">팩 가입자 목록</a>
 						</li>
 					</ul>
 					<!-- Tab panes -->
