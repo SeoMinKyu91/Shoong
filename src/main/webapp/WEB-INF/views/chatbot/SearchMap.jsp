@@ -48,6 +48,15 @@
    height: 37px;
    margin: 10px 0 0 10px;
 }
+
+.animated-text {
+   display: none;
+}
+
+.slider-area {
+   display: none;
+}
+
 </style>
  <h2>[${location}]근처 자전거 가게</h2>
  <br>

@@ -191,12 +191,14 @@ public class MemberController {
 		session = req.getSession();
 		boolean flag = memberService.isMember(map);
 
-		Map mamberHasPack = memberService.memberHasPack(map);
+		Map memberHasPack = memberService.memberHasPack(map);
 		if(flag) {
 			session.setAttribute("userId", map.get("userId"));
-			if(mamberHasPack != null) {
-				System.out.println("memberHasPack:"+mamberHasPack.get("PACK_ID"));
-				session.setAttribute("packId", mamberHasPack.get("PACK_ID"));
+			if(memberHasPack != null) {
+				System.out.println("memberHasPack:"+memberHasPack.get("PACK_ID"));
+				System.out.println(memberHasPack.get("PACK_NAME"));
+				session.setAttribute("packId", memberHasPack.get("PACK_ID"));
+				session.setAttribute("packName", memberHasPack.get("PACK_NAME"));
 
 			}
 

@@ -69,7 +69,7 @@
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
 
 <!-- 채팅  -->
-<link rel="stylesheet" href="<c:url value="/css/chat.css?asddfff"/>">
+<link rel="stylesheet" href="<c:url value="/css/chat.css?aaqsxdc"/>">
 
 <script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
 

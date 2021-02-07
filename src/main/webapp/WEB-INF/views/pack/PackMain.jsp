@@ -2,14 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
-<link rel="stylesheet" href="cards-gallery.css">
-
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
 
 <style>
 .slider-area {
@@ -186,6 +180,12 @@ body {
            packId = $(this).attr("id")
            $('#packJoinModal').modal();
         });
+        
+        $('#packJoinModalCloseBtn').click(function(){
+        	$('#packJoinModal').modal('hide');
+        	$('#packJoinSpan').html('가입 신청 하시겠습니까?');
+        	$('#packJoinModalBtn').css('display','inline-block');
+        })
 /*
          $(function() {
             $("#accordion").accordion({
@@ -209,7 +209,9 @@ body {
                dataType:'text',//서버로 부터 응답 받을 데이타의 형식 설정
                data: "packId="+packId,
                success:function(data){
-                  $("#packJoinSpan").html("가입신청이 완료되었습니다.")
+            	   $('#packJoinModalBtn').css('display','none');
+                   $("#packJoinSpan").html("가입신청이 완료되었습니다.");
+                  
                },
                error:function(error){//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
                   $("#packJoinSpan").html("죄송합니다. 다시시도해주세요")

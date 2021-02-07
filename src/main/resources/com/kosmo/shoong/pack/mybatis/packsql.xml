@@ -74,8 +74,5 @@
 <select id="selectOneUserAddr" parameterType="String" resultType="java.util.Map" >
 	select j.address, j.user_lat, j.user_lng  from member_ m join useraddr j on m.user_id=j.user_id where j.user_id=#{id}
 </select>
-<select id="packNameSelectOne" parameterType="java.util.Map" resultType="String">
-	
-</select>
 
 </mapper>

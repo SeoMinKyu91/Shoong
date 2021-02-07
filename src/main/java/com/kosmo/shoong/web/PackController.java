@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,81 +27,85 @@ import com.kosmo.shoong.service.pack.PackService;
 @Controller
 @RequestMapping("/pack/")
 public class PackController {
+	@Resource(name = "packService")
+	private PackService service;
+	@Resource(name = "packGalleryService")
+	private PackGalleryService galleryService;
+	@Resource(name = "packNoticeService")
+	private PackNoticeServiceImpl packNoticeService;
 
-   @Resource(name="packService")
-   private PackService service;
-   @Resource(name="packGalleryService")
-   private PackGalleryService galleryService;
-   @Resource(name="packNoticeService")
-   private PackNoticeServiceImpl packNoticeService;
+	@Resource(name = "memberService")
+	private MemberServiceImpl memberService;
 
-   @Resource(name = "memberService")
-   private MemberServiceImpl memberService;
+	@RequestMapping("main.do")
+	public String packMain(@RequestParam Map map, Model model, HttpServletRequest req) {
+		System.out.println("내꺼검샘이애");
+		if (map.get("lat") != null) {
+			System.out.println("검샘");
+			model.addAttribute("searchLat", map.get("lat"));
+			model.addAttribute("searchLng", map.get("lng"));
+			model.addAttribute("searchRegion", map.get("searchRegion"));
 
+		} else {
+			System.out.println("내꺼검샘");
+			String id = req.getSession().getAttribute("userId").toString();
+			Map userAddress = service.selectOneUserAddr(id);
+			map.put("myRegion", userAddress.get("ADDRESS"));
+			model.addAttribute("searchRegion", userAddress.get("ADDRESS").toString());
+			model.addAttribute("searchLat", userAddress.get("USER_LAT"));
+			model.addAttribute("searchLng", userAddress.get("USER_LNG"));
+		}
 
-   @RequestMapping("main.do")
-   public String packMain(@RequestParam Map map ,Model model,HttpServletRequest req) {
-	   System.out.println("내꺼검샘이애");
+		List<PackDTO> packList = service.selectList(map);
+		model.addAttribute("packList", packList);
+		/*
+		 * 유저정보에 ADDRESS로는 정확도 부족 lat,lng 받아서 기반 검색. 주석 풀지 마세요. map.put("userId",
+		 * req.getSession().getAttribute("userId").toString()); Map userAddress =
+		 * service.selectOneUserAddr(map); if(userAddress.get("ADDRESS") != null) {
+		 * 
+		 * map.put("searchRegion", userAddress.get("ADDRESS"));
+		 * model.addAttribute("searchRegion",userAddress.get("ADDRESS")); }
+		 */
 
-      if(map.get("lat") != null) {
-    	 System.out.println("검샘");
-         model.addAttribute("searchLat",map.get("lat"));
-         model.addAttribute("searchLng",map.get("lng"));
-         model.addAttribute("searchRegion",map.get("searchRegion"));
-         
-      }else {
-    	 System.out.println("내꺼검샘");
-	     String id = req.getSession().getAttribute("userId").toString();
-	     Map userAddress =  service.selectOneUserAddr(id);
-	     map.put("myRegion", userAddress.get("ADDRESS"));
-	     model.addAttribute("searchRegion",userAddress.get("ADDRESS").toString());
-	     model.addAttribute("searchLat", userAddress.get("USER_LAT"));
-	     model.addAttribute("searchLng",userAddress.get("USER_LNG"));  
-      }
-      
-      List<PackDTO> packList=service.selectList(map);
-      model.addAttribute("packList",packList);
+		if (req.getSession().getAttribute("packId") == null) {
+			return "pack/PackMain";
+		} else {
+			return "forward:/pack/view.do";
+		}
+	}
 
-      return "pack/PackMain";
-   }
+	// 팩 생성 페이지로 이동 get
+	@RequestMapping("create.do")
+	public String packCreate(Model model, HttpServletRequest req) {
+		String id = req.getSession().getAttribute("userId").toString();
+		Map userAddress = service.selectOneUserAddr(id);
+		model.addAttribute("searchLat", userAddress.get("USER_LAT"));
+		model.addAttribute("searchLng", userAddress.get("USER_LNG"));
+		return "pack/PackCreate";
+	}
 
+	// 팩 생성 페이지 - 팩 생성 post
+	@RequestMapping("createOk.do")
+	public String packCreateOk(@RequestParam Map map, HttpServletRequest req) {
 
-   //팩 생성 페이지로 이동 get
-   @RequestMapping("create.do")
-   public String packCreate(Model model,HttpServletRequest req) {
-	   String id = req.getSession().getAttribute("userId").toString();
-	   Map userAddress =  service.selectOneUserAddr(id);
-	   model.addAttribute("searchLat", userAddress.get("USER_LAT"));
-       model.addAttribute("searchLng",userAddress.get("USER_LNG"));  
-      return "pack/PackCreate";
-   }
+		service.insert(map);
 
-   //팩 생성 페이지  - 팩 생성 post
-   @RequestMapping("createOk.do")
-   public String packCreateOk(@RequestParam Map map,HttpServletRequest req) {
+		map.put("userId", req.getSession().getAttribute("userId").toString());
+		// 마이바티스 처리로 map에 PK 받아왔음. packId에 저장 되어있다
+		service.insertCreate(map);
+		service.insertJoin(map);
+		service.insertManager(map);
 
-      service.insert(map);
+		Map mamberHasPack = memberService.memberHasPack(map);
+		if (mamberHasPack != null) {
+			req.getSession().setAttribute("packId", mamberHasPack.get("PACK_ID"));
+		}
 
-      //원래 user Id 세션에서  받아와야 한다.개발중이니 임시로.
-      System.out.println("packCreateOk:"+req.getSession().getAttribute("userId").toString());
-      map.put("userId", req.getSession().getAttribute("userId").toString());
-      //마이바티스 처리로 map에 PK 받아왔음. packId에 저장 되어있다
-      service.insertCreate(map);
-      service.insertJoin(map);
-      service.insertManager(map);
-
-      Map mamberHasPack = memberService.memberHasPack(map);
-      if(mamberHasPack !=null) {
-         req.getSession().setAttribute("packId", mamberHasPack.get("PACK_ID"));
-      }
-
-      return "forward:/pack/main.do";
-   }
-
+		return "forward:/pack/main.do";
+	}
 
 	@RequestMapping("view.do")
 	public String packView(@RequestParam Map map, Model model, HttpServletRequest req) {
-
 		// 로그인 아이디,팩 아이디 설정 나중에 세션에서 값불러오는걸로 대체
 		map.put("loginId", req.getSession().getAttribute("userId").toString());
 		map.put("packId", req.getSession().getAttribute("packId").toString());
@@ -128,46 +133,42 @@ public class PackController {
 
 		List<PackGalleryDTO> GalleryList = galleryService.selectList(map);
 
+		System.out.println("갤럴리 사진이름");
+		
+		for (PackGalleryDTO dto : GalleryList) {
+			System.out.println(dto.getPictureName());
+		}
+
 		if (GalleryList.size() > 4) {
 			List<PackGalleryDTO> packGalleryList = GalleryList.subList(0, 4);
 			model.addAttribute("packGalleryList", packGalleryList);
+		} else {
+			model.addAttribute("packGalleryList", GalleryList);
 		}
 		return "pack/PackView";
 	}
 
+	@RequestMapping(value="checkPackName.do",produces="text/html; charset=UTF-8")
+	@ResponseBody
+	public String checkPackName(@RequestParam Map map) {
+		int result = service.selectPackName(map);
+		String check = "Y";
+		if (result == 1) {
+			check = "N";
+		}
+		return check;
+	}//////////////
 
-   @RequestMapping(value="checkPackName.do",produces = "text/html; charset=UTF-8")
-   @ResponseBody
-   public String checkPackName(@RequestParam Map map) {
-
-
-      int result = service.selectPackName(map);
-      String check = "Y";
-      System.out.println(result);
-      if(result == 1) {
-         check = "N";
-      }
-
-      return check;
-   }//////////////
-
-   //팩 가입 신청
-   @RequestMapping(value="joinPack.do",produces = "text/html; charset=UTF-8")
-   @ResponseBody
-   public String joinPack(@RequestParam Map map,HttpServletRequest req) {
-
-      System.out.println("팩가입 신청 들어왔습니다");
-      //원래 user Id 세션에서  받아와야 한다.개발중이니 임시로.
-      map.put("userId", req.getSession().getAttribute("userId").toString());
-      map.put("managerOrUser", "user");
-      service.insertJoin(map);
-      //필요x반환값 void 로 바꾸기
-      String check = "Y";
-      return check;
-   }//////////////
-   
-   
-
-
+	// 팩 가입 신청
+	@RequestMapping(value = "joinPack.do", produces = "text/html; charset=UTF-8")
+	@ResponseBody
+	public String joinPack(@RequestParam Map map, HttpServletRequest req) {
+		map.put("userId", req.getSession().getAttribute("userId").toString());
+		map.put("managerOrUser", "user");
+		service.insertJoin(map);
+		// 필요x반환값 void 로 바꾸기
+		String check = "Y";
+		return check;
+	}//////////////
 
 }
