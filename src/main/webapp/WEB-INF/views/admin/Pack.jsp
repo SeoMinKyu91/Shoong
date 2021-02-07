@@ -66,7 +66,7 @@
 			                          		<th scope="row">1</th>
 					                          <td>${pack.PACK_NAME}</td>
 					                          <td>${pack.PACK_ACT_REGION}</td>
-					                          <td>가길동</td>
+					                          <td>${PACK_Manager.USER_ID}</td>
 		                        	</tr>
 			                	</c:forEach>
 			            	</c:if>
@@ -148,8 +148,6 @@
                             <th class="column-title">Location </th>
                             <th class="column-title">Head Count </th>
                             <th class="column-title">caution</th>
-                            <th class="column-title no-link last"><span class="nobr">Action</span>
-                            </th>
                             <th class="bulk-actions" colspan="7">
                               <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                             </th>
@@ -158,25 +156,21 @@
 
                         <tbody>
                         
+		                    <c:if test="${not empty packList}">
+								<c:forEach var="pack" items="${packList }" varStatus="loop">
                           <tr class="even pointer" data-toggle="modal" data-target="#packViewModal">
                             <td class="a-center ">
                               <input type="checkbox" class="flat" name="table_records">
                             </td>
-		                    <c:if test="${not empty packList}">
-								<c:forEach var="pack" items="${packList }" varStatus="loop">
-		                            <td class=" ">${pack.packID}</td>
-		                            <td class=" ">${pack.packName} </td>
-		                            <td class=" ">Dec 24 2020</td>
-		                            <td class=" ">${pack.packActRegion }</td>
-		                            <td class=" ">20</td>
-		                            <td class="a-right a-right ">1</td>
-		                            <td class=" last">
-		                            	<button type="button" class="btn btn-default btn-xs btn-warning">!</button>
-		                            	<button type="button" class="btn btn-default btn-xs btn-danger">X</button>
-		                            </td>
+		                            <td>${pack.PACK_ID}</td>
+		                            <td>${pack.PACK_NAME} </td>
+		                            <td>Dec 24 2020</td>
+		                            <td>${pack.PACK_ACT_REGION}</td>
+		                            <td>20</td>
+		                            <td>1</td>
+                          </tr>
                            		</c:forEach>
                             </c:if>
-                          </tr>
                         </tbody>
                       </table>
                     </div>
@@ -296,6 +290,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-primary">수정</button>
+			        <button type="button" class="btn btn-danger">삭제</button>
 			        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 			      </div>
 			    </div>
