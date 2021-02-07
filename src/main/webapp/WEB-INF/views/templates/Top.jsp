@@ -49,7 +49,6 @@
 										<li><a href="<c:url value="/mypage/main.do"/>">MY
 												PAGE</a></li>
 										<li><a href="<c:url value="/pack/main.do"/>">PACK</a></li>
-										<li><a href="<c:url value="/course/mainTest.do"/>">COURSE</a></li>
 									</c:if>
 									<c:if test="${empty sessionScope.userId}" var="isNotLogin">
 										<li><a href="<c:url value="/Member/Join.do"/>">JOIN</a></li>
@@ -63,7 +62,7 @@
 									<c:if test="${!isNotId}">
 									</c:if>
 									<c:if test="${not empty sessionScope.userId}">
-										<li><a href="<c:url value="/course/navi.do"/>">Course&Record</a></li>
+										<li><a href="<c:url value="/course/navi.do"/>">SHOONG</a></li>
 									</c:if>
 									<li><a id="naviModalBtn" href="#">ROUTE UPLOAD</a></li>
 									<li><a href="<c:url value="/admin/home/main.do"/>">관리자페이지</a></li>
