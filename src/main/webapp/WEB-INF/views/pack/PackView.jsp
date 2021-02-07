@@ -75,8 +75,7 @@ body {
 	background-color: #F9F9F9;
 }
 </style>
-<div
-	style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;">
+<div style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;">
 	<div class="row">
 		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
 			<div class="">
@@ -232,8 +231,8 @@ body {
 				</c:if>
 				<c:if test="${!isEmpty}">
 					<c:forEach var="item" items="${packGalleryList }">
-						<img style="width: 45%; height: 100px;"
-							src=/fileupload/${item.pictureName} alt="팩갤러리 사진">
+						<img style="width: 49%; height: 100px; margin-bottom: 5px;"
+							src="/fileupload/${item.pictureName}" alt="팩갤러리 사진">
 					</c:forEach>
 				</c:if>
 			</div>

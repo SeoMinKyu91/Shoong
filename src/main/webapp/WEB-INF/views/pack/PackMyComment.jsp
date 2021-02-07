@@ -86,68 +86,83 @@
 	  min-width: 100%;
 	  min-height: 100%;
 	}
+	.packMainBtn {
+		color: #f32a48;
+		background: none;
+		font-weight: bold;
+		border: #f32a48 1px solid;
+	}
+	
+	.packMainBtn:hover {
+		color: white;
+	}
+	.MyPackBtn {
+		color: #f32a48;
+		background: none;
+		font-weight: bold;
+		border: #f32a48 1px solid;
+	}
+
+	.MyPackBtn:hover {
+		color: white;
+	}
 		
 </style>
-
-<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
-<div class="row" style="margin-left: 20px; margin-bottom: 2px; ">
-		
-	<div class="col-lg-12" style="padding-bottom:10px background-color: lightgrey">
-		<div class="row">
-			<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10" style="padding-top:20px">
-				<a href="<c:url value="/pack/main.do"/>">
-				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>" style="width: 80px;"></a>&emsp;<a class="packCreateBtn btn" href="<c:url value="/pack/main.do"/>">HOME</a>
-				<c:if test="${!empty sessionScope.packId}">
-					<a class="packCreateBtn btn" href="<c:url value="/pack/view.do"/>">MY PACK</a>
-				</c:if>
-			</div>
-			<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 icons-div" style="padding-top: 17px;">
-				<a id="btn-feed-write"><i class="fas fa-edit fa-2x" style="color: black; margin-left: 5px;"></i></a>
-				<a href="<c:url value="/pack/myComment.do"/>"><i class="far fa-user fa-2x" style="color: black; margin-left: 5px;"></i></a>
-				<a href="<c:url value="/pack/comment.do"/>"><i class="far fa-list-alt"></i></a>
-			</div>
-		</div>
-		
-		
-	</div>
-</div>
-<hr style="background-color:black; height:1px; margin: 0px;"/>
-
-<div class="container" style="margin-top:25px;">
+<div style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;">
+	<!-- 팩 위에 꺼 -->
 	<div class="row">
-		<div class="offset-lg-2 col-lg-8">
-			<div class="row">
-				<div class="col-lg-12">
-					<c:if test="${empty commentList }" var="isEmpty">
-						<h4>등록된 게시글이 없습니다</h4>	
-					</c:if>
-					<c:if test="${not isEmpty}">
-						<c:forEach items="${commentList}" var="item" varStatus="loop">
-							<c:if test="${not empty item }">
-								<c:forEach items="${item.packCommentImages }" var="image" varStatus="loop" begin="0" end="0">
-									<div class="col-md-4 feed-img">
-										<img alt="기본사진" src="/fileupload/${image }"/>
-										<a href="<c:url value="/pack/comment/view.do?packCommentNo=${item.packCommentNo }"/>">
-											<div class="feed-img-hover">
-												<img src="<c:url value='/images/fa-icons/comment-white.png'/>" style="width:25px;height:25px;">
-												<span>${item.packCommentReplyCount }</span>
-												<img src="<c:url value='/images/fa-icons/heart-white.png'/>"style="width:25px;height:25px;">
-												<span>${item.packCommentLikeCount }</span>
-											</div>
-										</a>
-									</div>
-								</c:forEach>
-							</c:if>
-						</c:forEach>
-					</c:if>	
-				</div>
+		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
+			<div class="">
+				<a class="packMainBtn btn" href="<c:url value="/pack/main.do"/>" style="margine-right: 20px;">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="MyPackBtn btn" href="<c:url value="/pack/view.do"/>" >MY PACK</a>
+				</c:if>
+				<a class="packMainBtn btn" href="<c:url value="/pack/comment.do"/>">ALL LIST</a>
+				<a class="packMainBtn btn" href="<c:url value="/pack/myComment.do"/>">MY LIST</a>
+				<a class="packMainBtn btn" id="btn-feed-write" style="margine-right: 20px; " href="">WRITE</a>
+				
 			</div>
-			
 		</div>
 	</div>
+		
+		
+	<hr style="background-color:black; height:1px; margin: 0px;"/>
 	
+	<div class="container" style="margin-top:25px;">
+		<div class="row">
+			<div class="offset-lg-2 col-lg-8">
+				<div class="row">
+					<div class="col-lg-12">
+						<c:if test="${empty commentList }" var="isEmpty">
+							<h4>등록된 게시글이 없습니다</h4>	
+						</c:if>
+						<c:if test="${not isEmpty}">
+							<c:forEach items="${commentList}" var="item" varStatus="loop">
+								<c:if test="${not empty item }">
+									<c:forEach items="${item.packCommentImages }" var="image" varStatus="loop" begin="0" end="0">
+										<div class="col-md-4 feed-img">
+											<img alt="기본사진" src="/fileupload/${image }"/>
+											<a href="<c:url value="/pack/comment/view.do?packCommentNo=${item.packCommentNo }"/>">
+												<div class="feed-img-hover">
+													<img src="<c:url value='/images/fa-icons/comment-white.png'/>" style="width:25px;height:25px;">
+													<span>${item.packCommentReplyCount }</span>
+													<img src="<c:url value='/images/fa-icons/heart-white.png'/>"style="width:25px;height:25px;">
+													<span>${item.packCommentLikeCount }</span>
+												</div>
+											</a>
+										</div>
+									</c:forEach>
+								</c:if>
+							</c:forEach>
+						</c:if>	
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
 </div>
-
 <!-- 피드 글 쓰기 모달 시작 -->
 <div class="modal fade" id="feed-write-modal"
 	data-backdrop="false">
@@ -161,7 +176,7 @@
 				<form action="" class="" id="feed-write-form"
 					method="post" enctype="multipart/form-data">
 					<div class="feed-story"
-						contenteditable="true">글자를 입력해주세요</div>
+						contenteditable="true">회원님의 공유할 이야기를 적어주세요</div>
 					<div class="feed-img-modal">
 						<span class="feed-img-modal-span">Drag
 							& Drop Files Here</span>
@@ -201,7 +216,7 @@
 				<form action="" class="" id="feed-update-form"
 					method="post" enctype="multipart/form-data">
 					<div class="feed-story"
-						contenteditable="true">글자를 입력해주세요</div>
+						contenteditable="true">회원님의 공유할 이야기를 적어주세요</div>
 					<div class="feed-img-modal">
 						<span class="feed-img-modal-span">Drag
 							& Drop Files Here</span>
@@ -230,7 +245,8 @@
 	$(function() {
 		var objDragAndDrop = $('.feed-img-modal');
 		
-		$('#btn-feed-write').click(function(){
+		$('#btn-feed-write').click(function(e){
+			e.preventDefault();
 			$('#feed-write-modal').modal();
 		})
 		
@@ -242,7 +258,7 @@
 		});		
 		
 		$('#feed-write-cancle').click(function(){
-			$('.feed-story').text("글자를 입력해주세요");
+			$('.feed-story').text("회원님의 공유할 이야기를 적어주세요");
 			$('.feed-story').css('opacity','0.7');
 		})
 		
@@ -450,7 +466,7 @@
 		$('.closeButton').click(function(){
 			console.log('닫기 버튼 클릭');
 			imgarr.splice(0,imgarr.length);
-			$('.feed-story').html("글자를 입력해주세요");
+			$('.feed-story').html("회원님의 공유할 이야기를 적어주세요");
 			$('.feed-story').css('opacity',0.7);
 			$('.feed-img-modal').html("<span class='feed-img-modal-span'>Drag & Drop Files Here</span>");
 			

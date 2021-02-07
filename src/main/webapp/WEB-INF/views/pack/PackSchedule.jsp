@@ -88,25 +88,35 @@
 	
 	/*달력 요일 뿌려주는 부분*/
 	.fc-col-header-cell{
-		background-color: red;
+		background-color: #052b52;
+		color:white;
+	}
+	
+	.fc-view{
+		box-shadow: 3px 3px 10px #787878;
 	}
 	
 	
+	
 </style>
-<div class="container">
+<div style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;">
+	<!--  
 	<div class="row">
-		<div class="col-lg-12" style="padding-bottom:20px">
+		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
 			<div class="">
-				<a href="<c:url value="/pack/main.do"/>">
-				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
-					style="width: 80px;"></a>
-				&emsp;<a class="packCreateBtn btn" 
-					href="<c:url value="/pack/main.do"/>">HOME</a>
+				<a class="packMainBtn btn" href="<c:url value="/pack/main.do"/>"
+					style="margine-right: 20px">HOME</a>
 				<c:if test="${!empty sessionScope.packId}">
-					<a class="packCreateBtn btn"
-						href="<c:url value="/pack/view.do"/>">MY PACK</a>
+					<a class="MyPackBtn btn" href="<c:url value="/pack/view.do"/>">MY
+						PACK</a>
 				</c:if>
 			</div>
+		</div>
+	</div>
+	-->
+	<div class="row" style="margin-top:30px;margin-bottom:30px;">
+		<div class="offset-lg-1 col-lg-10">
+			<div id="calendar"></div>
 		</div>
 	</div>
 </div>
@@ -121,20 +131,17 @@
 	</div>
 </div>
 -->
-<div class="col-lg-8">
-	<div id="calendar"></div>
-</div>
+
     
   
   
-   <!-- END COLORLIB-MAIN -->
 
 <!-- 팩 일정 등록 모달창 시작 -->
 <div class="modal fade" id="packScheduleInsertModal" data-backdrop="false">
    <div class="modal-dialog modal-lg">
       <div class="modal-content">
-         <div class="modal-header">
-            <h4 class="modal-title"style="margin: 5px;">일정 등록</h4>
+         <div class="modal-header" style="background-color: #052b52;">
+            <h4 class="modal-title"style="margin: 5px; color:white;">일정 등록</h4>
          </div>
 
          <div class="modal-body">
@@ -177,11 +184,17 @@
 <div class="modal fade" id="packScheduleViewModal" data-backdrop="false">
    <div class="modal-dialog modal-lg">
       <div class="modal-content">
-         <div class="modal-header">
-            <h4 class="modal-title"style="margin: 5px;font-weight:bold;">일정 상세보기</h4>
+         <div class="modal-header" style="background-color: #052b52;">
+            <h4 class="modal-title"style="margin: 5px; color: white;">일정 상세보기</h4>
          </div>
 
          <div class="modal-body">
+         
+         
+         
+         
+         
+         
             <div class="row">
                <div class="col-md-2" style="text-align: left;font-weight:bold;">제목</div>
                <div class="col-md-10" id="packScheduleViewTitle" value="" style="text-align: left;"></div>
@@ -211,6 +224,11 @@
                <div style="display:none;" id="packScheduleViewNo" value="" style="text-align: left;"></div>
             </div>
             
+            
+            
+            
+            
+            
          </div>
 
          <div class="modal-footer">
@@ -231,7 +249,7 @@
    <div class="modal-dialog modal-lg">
       <div class="modal-content">
          <div class="modal-header">
-            <h4 class="modal-title" style="margin: 5px;font-weight:bold;">일정 수정</h4>
+            <h4 class="modal-title" style="margin: 5px;font-weight:bold;">일정 수정!!!!</h4>
          </div>
 
          <div class="modal-body">
@@ -263,8 +281,8 @@
          </div>
 
          <div class="modal-footer">
-            <button type="button" class="SceduleBtn btn"  id="btnPackScheduleUpdateOk">수정</button>
-            <button type="button" class="SceduleBtn btn"  id="btnPackScheduleUpdateClose">닫기</button>
+            <button type="button" class="SceduleBtn btn" id="btnPackScheduleUpdateOk">수정</button>
+            <button type="button" class="SceduleBtn btn" id="btnPackScheduleUpdateClose">닫기</button>
          </div>
       </div>
    </div>
@@ -392,108 +410,122 @@
       })
    
       calendar.render();
+      
+      
+		 $('#startDatePicker, #endDatePicker').datetimepicker({
+		    	 format: "YYYY-MM-DD hh:mm a",
+	     		 locale:'ko'	
+		     })//여기까지가 기본 사용 방법
+		 $('#startDatePicker','#endDatePicker').on("changeDate",function(e){
+		    console.log('들어옴');
+		 })
+		 
+		 $('#btnPackSchedule').click(function(){
+				if($('#packScheduleTitle').val() == ''){
+				alert('제목을 입력해주세요');
+				$('#packScheduleTitle').focus();
+				return;
+			}
+				if($('#startDatePicker').val() == ''){
+				alert('시작 날짜를 입력해주세요');
+				$('#startDatePicker').focus();
+				return;
+			}
+				if($('#endDatePicker').val() == ''){
+				alert('끝 날짜를 입력해주세요');
+				$('#endDatePicker').focus();
+				return;
+			}
+				if($('#packScheduleContent').val() == ''){
+				alert('내용을 입력해주세요');
+				$('#packScheduleContent').focus();
+				return;
+			}
+			   
+		  
+		  	$('#packSchedule').submit();
+		 });
+		 
+		 $('#btnPackScheduleClose').click(function(){
+		    $('#endDatePicker').prop('value',"");
+		 });
+		 
+		 $('#btnPackScheduleUpdate').click(function(){
+		    $('#packScheduleTitleUpdate').prop('value',$('#packScheduleViewTitle').text());
+		    $('#startDatePickerUpdate').prop('value',$('#packScheduleViewStart').text());
+		    $('#endDatePickerUpdate').prop('value',$('#packScheduleViewEnd').text());
+		    $('#packScheduleContentUpdate').prop('value',$('#packScheduleViewContent').text());
+		    $('#packScheduleNoUpdate').prop('value',$('#packScheduleViewNo').text());
+		    
+		    $('#startDatePickerUpdate, #endDatePickerUpdate').datetimepicker({
+		    	 format: "YYYY-MM-DD hh:mm a",
+			     locale:'ko'
+		    });
+		    
+		    $('#packSchedulUpdateModal').modal();
+		 });
+		 
+		 $('#btnPackScheduleUpdateOk').click(function(){
+		    console.log('수정버튼 들어옴');
+		    $('#packScheduleUpdate').submit();
+		 });
+		 
+		 $('#btnPackScheduleDelete').click(function(){
+		    console.log('삭제버튼 들어옴')
+		    $('#packScheduelDeleteModal').modal();
+		    
+		 });
+		 
+		 $('#btnScheduleDeleteOk').click(function(){
+		    $('#packScheduleDeleteNo').prop('value',$('#packScheduleViewNo').text());
+		    $('#packScheduleDeleteForm').submit();
+		 })
+		 
+		 //팩 일정등록 닫기
+		 $('#btnPackScheduleInsertClose').click(function(){
+		  console.log('팩일정등록 닫기 클릭');
+		  $('#packScheduleInsertModal').modal('hide');
+		  
+		 })
+		 
+		 $('#btnPackScheduleViewClose').click(function(){
+		 	console.log('팩일정 상세보기 닫기 클릭');
+		 	$('#packScheduleViewModal').modal('hide');
+		    $('#btnPackScheduleUpdate').css('display','inline-block')
+		    $('#btnPackScheduleDelete').css('display','inline-block')
+		    $('#btnPackScheduleJoin').css('display','inline-block')
+		 })
+		 
+		 $('#btnPackScheduleJoin').click(function(){
+		  var packScheduleNo = $('#packScheduleViewNo').text();
+			  $.ajax({
+				   url:"<c:url value="/pack/schedule/join.do"/>",
+				   data:{"packScheduleNo":packScheduleNo,"userId":'${sessionScope.userId}'},
+				   dataType:"text",
+				   type:'post',
+				   success:function(data){
+					   console.log(data);
+				   },
+				   error:function(error){
+					   console.log('에러:'+error.responseText);
+				   }
+			  })
+		 })
+		 
+		 //일정수정 모달창 닫기 버튼 클릭
+		 $('#btnPackScheduleUpdateClose').click(function(){
+			 console.log('팩모달수정 닫기 클릭')
+		 	 $('#packSchedulUpdateModal').modal('hide');
+		 })
+      
+      
+      
+      
+      
+      
    })
    
     
-   $('#startDatePicker, #endDatePicker').datetimepicker({
-      format: "YYYY-MM-DD hh:mm a",
-      locale:'ko'
-      })//여기까지가 기본 사용 방법
-   $('#startDatePicker','#endDatePicker').on("changeDate",function(e){
-      console.log('들어옴');
-   })
-   
-   $('#btnPackSchedule').click(function(){
-		if($('#packScheduleTitle').val() == ''){
-			alert('제목을 입력해주세요');
-			$('#packScheduleTitle').focus();
-			return;
-		}
-		if($('#startDatePicker').val() == ''){
-			alert('시작 날짜를 입력해주세요');
-			$('#startDatePicker').focus();
-			return;
-		}
-		if($('#endDatePicker').val() == ''){
-			alert('끝 날짜를 입력해주세요');
-			$('#endDatePicker').focus();
-			return;
-		}
-		if($('#packScheduleContent').val() == ''){
-			alert('내용을 입력해주세요');
-			$('#packScheduleContent').focus();
-			return;
-		}
-			   
-	   
-	   	$('#packSchedule').submit();
-   });
-   
-   $('#btnPackScheduleClose').click(function(){
-      $('#endDatePicker').prop('value',"");
-   });
-   
-   $('#btnPackScheduleUpdate').click(function(){
-      $('#packScheduleTitleUpdate').prop('value',$('#packScheduleViewTitle').text());
-      $('#startDatePickerUpdate').prop('value',$('#packScheduleViewStart').text());
-      $('#endDatePickerUpdate').prop('value',$('#packScheduleViewEnd').text());
-      $('#packScheduleContentUpdate').prop('value',$('#packScheduleViewContent').text());
-      $('#packScheduleNoUpdate').prop('value',$('#packScheduleViewNo').text());
-      
-      $('#startDatePickerUpdate, #endDatePickerUpdate').datepicker({
-         format: "yyyy-mm-dd",
-         startDate: '0',   //달력에서 선택 할 수 있는 가장 빠른 날짜. 이전으로는 선택 불가능 ( d : 일 m : 달 y : 년 w : 주)
-          language : "ko"
-      });
-      
-      $('#packSchedulUpdateModal').modal();
-   });
-   
-   $('#btnPackScheduleUpdateOk').click(function(){
-      console.log('수정버튼 들어옴');
-      $('#packScheduleUpdate').submit();
-   });
-   
-   $('#btnPackScheduleDelete').click(function(){
-      console.log('삭제버튼 들어옴')
-      $('#packScheduelDeleteModal').modal();
-      
-   });
-   
-   $('#btnScheduleDeleteOk').click(function(){
-      $('#packScheduleDeleteNo').prop('value',$('#packScheduleViewNo').text());
-      $('#packScheduleDeleteForm').submit();
-   })
-   
-   //팩 일정등록 닫기
-   $('#btnPackScheduleInsertClose').click(function(){
-	   console.log('팩일정등록 닫기 클릭');
-	   $('#packScheduleInsertModal').modal('hide');
-	   
-   })
-   
-   $('#btnPackScheduleViewClose').click(function(){
-	   console.log('팩일정 상세보기 닫기 클릭');
-	   $('#packScheduleViewModal').modal('hide');
-  	   $('#btnPackScheduleUpdate').css('display','inline-block')
-  	   $('#btnPackScheduleDelete').css('display','inline-block')
-  	   $('#btnPackScheduleJoin').css('display','inline-block')
-   })
-   
-   $('#btnPackScheduleJoin').click(function(){
-	   var packScheduleNo = $('#packScheduleViewNo').text();
-	   $.ajax({
-		   url:"<c:url value="/pack/schedule/join.do"/>",
-		   data:{"packScheduleNo":packScheduleNo,"userId":'${sessionScope.userId}'},
-		   dataType:"text",
-		   type:'post',
-		   success:function(data){
-			   console.log(data);
-		   },
-		   error:function(error){
-			   console.log('에러:'+error.responseText);
-		   }
-	   })
-   })
+
    
 </script>

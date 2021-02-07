@@ -108,142 +108,157 @@
 	  min-width: 100%;
 	  min-height: 100%;
 	}
+	.packMainBtn {
+		color: #f32a48;
+		background: none;
+		font-weight: bold;
+		border: #f32a48 1px solid;
+	}
+	
+	.packMainBtn:hover {
+		color: white;
+	}
+	.MyPackBtn {
+		color: #f32a48;
+		background: none;
+		font-weight: bold;
+		border: #f32a48 1px solid;
+	}
+
+	.MyPackBtn:hover {
+		color: white;
+	}
 	
 	
 	
 </style>
 
-<div class="row" style="margin-left: 20px; margin-bottom: 2px; ">
-		
-	<div class="col-lg-12" style="padding-bottom:10px;">
-		<div class="row">
-			<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10" style="padding-top:20px">
-				<a href="<c:url value="/pack/main.do"/>">
-				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>" style="width: 80px;"></a>&emsp;<a class="packCreateBtn btn" href="<c:url value="/pack/main.do"/>">HOME</a>
+<div style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;">		
+	<!-- 팩 위에 꺼 -->
+	<div class="row">
+		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
+			<div class="">
+				<a class="packMainBtn btn" href="<c:url value="/pack/main.do"/>" style="margine-right: 20px;">HOME</a>
 				<c:if test="${!empty sessionScope.packId}">
-					<a class="packCreateBtn btn" href="<c:url value="/pack/view.do"/>">MY PACK</a>
+					<a class="MyPackBtn btn" href="<c:url value="/pack/view.do"/>" >MY PACK</a>
 				</c:if>
-			</div>
-			<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 icons-div" style="padding-top: 17px;">
-				<a id="btn-feed-write"><i class="fas fa-edit fa-2x" style="color: black; margin-left: 5px;"></i></a>
-				<a href="<c:url value="/pack/myComment.do"/>"><i class="far fa-user fa-2x" style="color: black; margin-left: 5px;"></i></a>
-				<a href="<c:url value="/pack/comment.do"/>"><i class="far fa-list-alt"></i></a>
+				<a class="packMainBtn btn" href="<c:url value="/pack/comment.do"/>">ALL LIST</a>
+				<a class="packMainBtn btn" href="<c:url value="/pack/myComment.do"/>">MY LIST</a>
+				<a class="packMainBtn btn" id="btn-feed-write" style="margine-right: 20px; " href="">WRITE</a>
+				
 			</div>
 		</div>
-		
-		
 	</div>
-</div>
-<hr style="background-color:black; height:1px; margin: 0px;"/>
-
-<div class="container" style="margin-top:50px;">
-	<div class="row">
-		<div class="col-lg-offset-1 col-lg-10">
-			<div class="row">
-				<div class="col-lg-6 feed-view">
-					<div class="col-12 feed-img-carousel carousel slide" id="feed-img-carousel" data-ride="carousel" data-interval="false">
-						<!-- indicators -->
-						<c:if test="${packCommentView.packCommentImages.size() > 1 }">
-							<ol class="carousel-indicators">
-								<c:forEach items="${packCommentView.packCommentImages }" var="i" varStatus="index">
-									<li <c:if test="${index.index==0 }"> class="active"</c:if>
-										data-target="#feed-img-carousel"
-										data-slide-to="${index.index}">
-									</li>
+	
+	<div class="container" style="margin-top:30px; margin-bottom: 30px;  ">
+		<div class="row">
+			<div class="col-lg-offset-1 col-lg-10">
+				<div class="row" >
+					<div class="col-lg-6 feed-view" style="box-shadow: 5px 5px 10px #787878;">
+						<div class="col-12 feed-img-carousel carousel slide" id="feed-img-carousel" data-ride="carousel" data-interval="false">
+							<!-- indicators -->
+							<c:if test="${packCommentView.packCommentImages.size() > 1 }">
+								<ol class="carousel-indicators">
+									<c:forEach items="${packCommentView.packCommentImages }" var="i" varStatus="index">
+										<li <c:if test="${index.index==0 }"> class="active"</c:if>
+											data-target="#feed-img-carousel"
+											data-slide-to="${index.index}">
+										</li>
+									</c:forEach>
+								</ol>
+							</c:if>
+							<!-- Wrapper for slides -->
+							<div class="carousel-inner" role="listbox" style="height: 597px; box-shadow: 5px 5px 5px #787878">
+								<c:forEach items="${packCommentView.packCommentImages }" var="image" varStatus="index">
+									<div <c:if test="${index.index==0 }" var="isFirst"> class="item active"</c:if>
+										<c:if test="${!isFirst }">class="item"</c:if>>
+										<img class="feed-img-src" src="/fileupload/${image }" alt="기본사진" style="height: 600px; width: 100%;"/>
+									</div>
 								</c:forEach>
-							</ol>
-						</c:if>
-						<!-- Wrapper for slides -->
-						<div class="carousel-inner" role="listbox" style="height: 600px;">
-							<c:forEach items="${packCommentView.packCommentImages }" var="image" varStatus="index">
-								<div <c:if test="${index.index==0 }" var="isFirst"> class="item active"</c:if>
-									<c:if test="${!isFirst }">class="item"</c:if>>
-									<img class="feed-img-src" src="/fileupload/${image }" alt="기본사진" style="height: 600px; width: 100%;"/>
-								</div>
-							</c:forEach>
-						</div>
-
-						<!-- Controls -->
-						<c:if test="${packCommentView.packCommentImages.size() > 1 }">
-							<a class="left carousel-control"
-								href="#feed-img-carousel"
-								role="button" data-slide="prev"
-								style="background-color: none;">
-								<span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="opacity: 0.2;"></span> 
-								<span class="sr-only">Previous</span>
-							</a>
-							<a class="right carousel-control" href="#feed-img-carousel" role="button" data-slide="next">
-								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="opacity: 0.2;"></span> 
-								<span class="sr-only">Next</span>
-							</a>
-						</c:if>
-					</div>
-				</div>
-				
-				
-				
-				<div class="col-lg-5 feed-view feed-contents" style="border-left: none;">
-					<div class="col-lg-12 feed-writer-pr" style="height: 90px; border-bottom: 1px solid lightgrey;">
-						<div class="col-lg-2" style="height: 100%; line-height: 90px;">
-							<img src="<c:url value="/images/person_4.jpg"/>" alt="프로필사진" style="height: 60%; border-radius: 100%; border: 2px solid black;"/>
-						</div>
-						<div class="col-lg-8">	
-							<span style="margin-left: 5px; font-size: 15px; font-weight: bold">${packCommentView.packCommentWriter }</span>
-						</div>
-						<div class="col-lg-1">
-							<div class="dropdown">
-								<i class="fas fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 20px; margin-left: 15px; cursor: pointer;"></i>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-								    <li role="presentation"><a role="menuitem" class="feed-update" tabindex="-1">수정</a></li>
-								    <li role="presentation"><a role="menuitem" class="feed-delete" tabindex="-1">삭제</a></li>
-							 	</ul>
 							</div>
-							
-							
+	
+							<!-- Controls -->
+							<c:if test="${packCommentView.packCommentImages.size() > 1 }">
+								<a class="left carousel-control"
+									href="#feed-img-carousel"
+									role="button" data-slide="prev"
+									style="background-color: none;">
+									<span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="opacity: 0.2;"></span> 
+									<span class="sr-only">Previous</span>
+								</a>
+								<a class="right carousel-control" href="#feed-img-carousel" role="button" data-slide="next">
+									<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="opacity: 0.2;"></span> 
+									<span class="sr-only">Next</span>
+								</a>
+							</c:if>
 						</div>
-					</div>
-					<div class="col-lg-12 feed-content" style="height: 120px;overflow:scroll; padding: 20px;">
-						<span style="font-size: 18px;">${packCommentView.packCommentContent }</span>							
-					</div>
-					<div class="col-lg-12 feed-reply-list" style="height: 250px; border-top:1px solid lightgrey; overflow: scroll;">
-						<c:if test="${not empty packCommentView.packCommentReply }" var="exist">
-							<c:forEach items="${packCommentView.packCommentReply }" var="reply">
-								<div class="row feed-reply" style="padding: 10px;">
-									<div class="col-lg-2">
-										<div class="img-reply">
-											<img src="<c:url value="/images/person_2.jpg"/>" style="border-radius: 100%; width: 100%; height: 100%; border:1px solid black;"/>
-										</div>
-									</div>
-									<div class="col-lg-10" style="padding-top:8px; padding-left: 0px;">
-										<span style="font-weight: bold; font-size: 12px;">${reply.packCommentReplyWriter }</span><span style="font-size:14px; margin-left:20px;">${reply.packCommentReplyContent }</span>
-									</div>
-								</div>
-							</c:forEach>
-						</c:if>
-					</div>
-					<div class="col-lg-12 feed-icons" style="height: 80px;border-top:1px solid lightgrey;border-bottom:1px solid lightgrey;">
-						<div class="row" style="margin: 0px; padding: 0px;">
-							<div class="col-lg-1 feed-icon-like">
-									<img class="icon" src="<c:url value="/images/fa-icons/heart-regular.svg"/>" alt="좋아요이미지" title="좋아요" style="width: 25px; height: 25px;">
-							</div>
-							<div class="col-lg-1 feed-icon-reply">
-								<img class="icon" src="<c:url value="/images/fa-icons/comment-regular.svg"/>" alt="" title="댓글"/>
-							</div>
-						</div>
-						<div class="row" style="margin:0px;; padding: 0px;">
-							<div class="col-lg-12" style="padding-bottom:0px;">
-								<span>좋아요 ${packCommentView.packCommentLikeCount } 개</span>
-							</div>
-						</div>
-						
 					</div>
 					
-					<div class="col-lg-12 feed-reply-write" style="height: 58px;">
-						<div class="col-lg-10 feed-reply-div">
-							<input type="text" class="feed-reply-write-input" placeholder="댓글달기" style="width:100%; height: 100%; border:none;outline: none;">
+					
+					
+					<div class="col-lg-5 feed-view feed-contents" style="border-left: none;box-shadow: 5px 5px 5px #787878;">
+						<div class="col-lg-12 feed-writer-pr" style="height: 90px; border-bottom: 1px solid lightgrey;">
+							<div class="col-lg-2" style="height: 100%; line-height: 90px;">
+								<img src="<c:url value="/images/person_4.jpg"/>" alt="프로필사진" style="height: 60%; border-radius: 100%; border: 2px solid black;"/>
+							</div>
+							<div class="col-lg-8">	
+								<span style="margin-left: 5px; font-size: 15px; font-weight: bold">${packCommentView.packCommentWriter }</span>
+							</div>
+							<div class="col-lg-1">
+								<div class="dropdown">
+									<i class="fas fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 20px; margin-left: 15px; cursor: pointer;"></i>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+									    <li role="presentation"><a role="menuitem" class="feed-update" tabindex="-1">수정</a></li>
+									    <li role="presentation"><a role="menuitem" class="feed-delete" tabindex="-1">삭제</a></li>
+								 	</ul>
+								</div>
+								
+								
+							</div>
 						</div>
-						<div class="col-lg-2 feed-reply-div" style="padding-left: 20px;padding-top: 5px;">
-							<span style="cursor: pointer; font-weight: bold">게시</span>
+						<div class="col-lg-12 feed-content" style="height: 120px;overflow:scroll; padding: 20px;">
+							<span style="font-size: 18px;">${packCommentView.packCommentContent }</span>							
+						</div>
+						<div class="col-lg-12 feed-reply-list" style="height: 250px; border-top:1px solid lightgrey; overflow: scroll;">
+							<c:if test="${not empty packCommentView.packCommentReply }" var="exist">
+								<c:forEach items="${packCommentView.packCommentReply }" var="reply">
+									<div class="row feed-reply" style="padding: 10px;">
+										<div class="col-lg-2">
+											<div class="img-reply">
+												<img src="<c:url value="/images/person_2.jpg"/>" style="border-radius: 100%; width: 100%; height: 100%; border:1px solid black;"/>
+											</div>
+										</div>
+										<div class="col-lg-10" style="padding-top:8px; padding-left: 0px;">
+											<span style="font-weight: bold; font-size: 12px;">${reply.packCommentReplyWriter }</span><span style="font-size:14px; margin-left:20px;">${reply.packCommentReplyContent }</span>
+										</div>
+									</div>
+								</c:forEach>
+							</c:if>
+						</div>
+						<div class="col-lg-12 feed-icons" style="height: 80px;border-top:1px solid lightgrey;border-bottom:1px solid lightgrey;">
+							<div class="row" style="margin: 0px; padding: 0px;">
+								<div class="col-lg-1 feed-icon-like">
+										<img class="icon" src="<c:url value="/images/fa-icons/heart-regular.svg"/>" alt="좋아요이미지" title="좋아요" style="width: 25px; height: 25px;">
+								</div>
+								<div class="col-lg-1 feed-icon-reply">
+									<img class="icon" src="<c:url value="/images/fa-icons/comment-regular.svg"/>" alt="" title="댓글"/>
+								</div>
+							</div>
+							<div class="row" style="margin:0px;; padding: 0px;">
+								<div class="col-lg-12" style="padding-bottom:0px;">
+									<span>좋아요 ${packCommentView.packCommentLikeCount } 개</span>
+								</div>
+							</div>
+							
+						</div>
+						
+						<div class="col-lg-12 feed-reply-write" style="height: 58px;">
+							<div class="col-lg-10 feed-reply-div">
+								<input type="text" class="feed-reply-write-input" placeholder="댓글달기" style="width:100%; height: 100%; border:none;outline: none;">
+							</div>
+							<div class="col-lg-2 feed-reply-div" style="padding-left: 20px;padding-top: 5px;">
+								<span style="cursor: pointer; font-weight: bold">게시</span>
+							</div>
 						</div>
 					</div>
 				</div>

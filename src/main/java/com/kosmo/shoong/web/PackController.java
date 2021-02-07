@@ -52,21 +52,21 @@ public class PackController {
         model.addAttribute("searchRegion",userAddress.get("ADDRESS"));
      }*/
 
-	  HttpSession session = req.getSession(); 
-      List<PackDTO> packList=service.selectList(map);
-      model.addAttribute("packList",packList);
-      if(map.get("searchRegion") != null) {
-         model.addAttribute("searchLat",map.get("lat"));
-         model.addAttribute("searchLng",map.get("lng"));
+	   HttpSession session = req.getSession(); 
+	   List<PackDTO> packList=service.selectList(map);
+	   model.addAttribute("packList",packList);
+	   if(map.get("searchRegion") != null) {
+		   model.addAttribute("searchLat",map.get("lat"));
+		   model.addAttribute("searchLng",map.get("lng"));
          
-      }
+	   }
       
-      if(session.getAttribute("packId") == null) {
-    	  return "pack/PackMain";
-      }
-      else {
-    	  return "forward:/pack/view.do";
-      }
+	   if(session.getAttribute("packId") == null) {
+		   return "pack/PackMain";
+	   }
+	   else {
+		   return "forward:/pack/view.do";
+	   }
 
       
    }
@@ -131,10 +131,18 @@ public class PackController {
 
 
       List<PackGalleryDTO> GalleryList=galleryService.selectList(map);
+      
+      System.out.println("갤럴리 사진이름");
+      for(PackGalleryDTO dto : GalleryList) {
+    	  System.out.println(dto.getPictureName());
+      }
 
        if(GalleryList.size() > 4) {
-            List<PackGalleryDTO> packGalleryList = GalleryList.subList(0, 4);
-            model.addAttribute("packGalleryList",packGalleryList);
+           List<PackGalleryDTO> packGalleryList = GalleryList.subList(0, 4);
+           model.addAttribute("packGalleryList",packGalleryList);
+       }
+       else {
+    	   model.addAttribute("packGalleryList",GalleryList);
        }
       return "pack/PackView";
    }

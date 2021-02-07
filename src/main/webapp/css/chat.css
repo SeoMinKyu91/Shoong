@@ -39,9 +39,15 @@
 	z-index: 300;
 	border-radius: 100%;
 	position: fixed;
-	top: 85%;
-	left: 96%;
-	background-color: lightgrey;
+	right: 31px;
+	bottom: 78px;
+	background-color: #eb566c;
+}
+
+@media ( max-width : 575px) {
+	.message {
+		right: 16px
+	}
 }
 
 .messageImg {
