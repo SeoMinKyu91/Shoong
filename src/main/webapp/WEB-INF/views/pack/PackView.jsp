@@ -205,7 +205,7 @@ body {
 		<div class="col-lg-5 ">
 			<div class="row">
 				<div class="col-lg-9 col-xs-9">
-					<p style="font-weight: bold; font-size: 1.5em;">코멘트</p>
+					<p style="font-weight: bold; font-size: 1.5em;">커뮤니티</p>
 				</div>
 				<div class="col-lg-3 col-xs-3"
 					style="padding-top: 10px; float: right;">

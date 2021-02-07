@@ -101,14 +101,14 @@
 	.packMainBtn:hover {
 		color: white;
 	}
-	.MyPackBtn {
+	.packCommentBtn {
 		color: #f32a48;
 		background: none;
 		font-weight: bold;
-		border: #f32a48 1px solid;
+		border: none;
+		float : right;
 	}
-
-	.MyPackBtn:hover {
+	.packCommentBtn:hover {
 		color: white;
 	}
 	
@@ -116,19 +116,17 @@
 </style>
 
 	
-	
-<div style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;">			
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
+<div
+	style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white; position: relative; z-index: 1;">		
 	<!-- 팩 위에 꺼 -->
 	<div class="row">
 		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
 			<div class="">
-				<a class="packMainBtn btn" href="<c:url value="/pack/main.do"/>" style="margine-right: 20px;">HOME</a>
-				<c:if test="${!empty sessionScope.packId}">
-					<a class="MyPackBtn btn" href="<c:url value="/pack/view.do"/>" >MY PACK</a>
-				</c:if>
-				<a class="packMainBtn btn" href="<c:url value="/pack/comment.do"/>">ALL LIST</a>
-				<a class="packMainBtn btn" href="<c:url value="/pack/myComment.do"/>">MY LIST</a>
-				<a class="packMainBtn btn" id="btn-feed-write" style="margine-right: 20px; " href="">WRITE</a>
+				<a class="packMainBtn btn" href="<c:url value="/pack/view.do"/>" style="margine-right: 20px;">HOME</a>
+				<a class="packCommentBtn btn" href="<c:url value="/pack/comment.do"/>">ALL LIST</a>
+				<a class="packCommentBtn btn" href="<c:url value="/pack/myComment.do"/>">MY LIST</a>
+				<a class="packCommentBtn btn" id="btn-feed-write" style="margine-right: 20px; " href="">WRITE</a>
 				
 			</div>
 		</div>
