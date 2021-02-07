@@ -23,20 +23,6 @@
 	<div class="main-header">
 		<div class="col-xs-12 col-lg-12 header-bottom header-sticky">
 			<div class="container-fluid">
-			<!--  
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						style="background-color: white" data-toggle="collapse"
-						data-target="#collapse-menu">
-						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href='<c:url value="/MainPage.kosmo"/>'>
-						<img
-							src="<c:url value="/change/img/shooongLogo.png"/>"
-							style="width: 25px; height: 25px">&emsp; <span id="shooongSpan">SHOOONG.</span></a>
-				</div>
-				-->
 				<div class="row align-items-center">
 					<!-- Logo -->
 					<div class="col-xl-2 col-lg-2 col-md-1">
@@ -48,7 +34,7 @@
 					</div>
 					<div class="col-xs-10 col-lg-10">
 						<!-- Main-menu -->
-						<div class="main-menu f-right d-none d-block">
+						<div class="main-menu f-right d-none d-sm-block">
 							<nav>
 								<ul class="navigation">
 									<li><a href="<c:url value="/"/>">HOME</a></li>
