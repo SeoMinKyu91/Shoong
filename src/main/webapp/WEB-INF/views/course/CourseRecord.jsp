@@ -23,7 +23,6 @@
 ul li {
 	font-weight: bold;
 	font-size: 1em;
-	padding-bottom: 10px;
 }
 
 ul li label {
@@ -252,24 +251,117 @@ ul li label {
 	height: 150%;
 }
 
+.custom-border div {
+	margin: 10px 0px 10px 0px;
+}
+
+.custom-border:nth-child(2n+1) {
+	background-color: white;
+}
+
+.custom-border:hover {
+	background-color: #f7e7da;
+}
+
+.custom-border:nth-child(1):hover {
+	background-color: white;
+}
+
 @media ( min-width : 992px) .container {
 	width
 	
 	
-	:
+	
+	
+	
+	
+	
 	
 	 
+	
+	
+	
+	
+	
+	
+	
+	
+	:
+	
+	
+	
+	
+	
+	
+	
+	
+	 
+	
+	
+	
+	
+	
+	
+	
 	
 	970px
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	;
 }
-.team-img > img{
+
+.team-img>img {
 	width: 100%;
 	height: 100%;
 }
 
+#courseTable {
+	font-weight: bold;
+	padding-bottom: 15px;
+	padding-top: 15px;
+	background-color: #052b52;
+	color: white;
+}
+
+#courselist {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: #cde3fa 1px solid;
+	background-color: white;
+}
+
+#recordTable {
+	font-weight: bold;
+	padding-bottom: 15px;
+	padding-top: 15px;
+	background-color: #052b52;
+	color: white;
+}
+
+#recordlist {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: #cde3fa 1px solid;
+	background-color: white;
+}
+
+body {
+	background-color: #faf7f7;
+}
 </style>
 <!-- 본문 시작 -->
 <!-- 본문 탭 시작 -->
@@ -390,51 +482,42 @@ ul li label {
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
 			<li role="presentation" class="active"><a href="#courseList"
-				aria-controls="home" role="tab" data-toggle="tab">코스 목록</a></li>
+				style="color: #f32a48" aria-controls="home" role="tab"
+				data-toggle="tab">코스 목록</a></li>
 			<li role="presentation"><a href="#recordList"
-				aria-controls="profile" role="tab" data-toggle="tab">내 기록</a></li>
+				style="color: #f32a48" aria-controls="profile" role="tab"
+				data-toggle="tab">내 기록</a></li>
 			<li role="presentation"><a href="#messages"
-				aria-controls="messages" role="tab" data-toggle="tab">관광/맛집</a></li>
+				style="color: #f32a48" aria-controls="messages" role="tab"
+				data-toggle="tab">관광/맛집</a></li>
 		</ul>
-
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="courseList">
-				<div class="row">
-					<div class="col-md-12">
-						<table class="table table-hover cus">
-							<tr>
-								<th class="text-center col-lg-2 col-xs-1">카테고리</th>
-								<th class="text-center col-lg-2 col-xs-1">코스명</th>
-								<th class="text-center col-lg-1 col-xs-1">길이</th>
-								<th class="text-center col-lg-1 col-xs-1">시간</th>
-								<th class="text-center col-lg-2 col-xs-3">등록일</th>
-							</tr>
-							<c:if test="${empty courseList}" var="isEmpty">
-								<tr class="text-center">
-									<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
-								</tr>
-							</c:if>
-							<c:if test="${!isEmpty}">
-								<c:forEach var="item" items="${courseList}" varStatus="loop">
-									<tr class="text-center">
-										<td class="text-left">${item.courseCateName}</td>
-										<td class="text-left">${item.courseName}</td>
-										<td>${item.courseLength}</td>
-										<td>${item.courseTime}</td>
-										<td><fmt:formatDate var="dResult"
-												pattern="yy-MM-dd HH:mm" value="${item.courseRegiDate}" />
-											<c:out value="${dResult}" /></td>
-										<td style="display: none;">${item.courseId}</td>
-										<!-- 
-											<td style="display: none;">${item.courseRegion }</td>
-											 -->
-									</tr>
-								</c:forEach>
-							</c:if>
-						</table>
+				<div class="text-center col-lg-2 col-xs-1" id="courseTable">카테고리</div>
+				<div class="text-center col-lg-3 col-xs-1" id="courseTable">코스명</div>
+				<div class="text-center col-lg-2 col-xs-1" id="courseTable">길이(km)</div>
+				<div class="text-center col-lg-2 col-xs-1" id="courseTable">시간(분)</div>
+				<div class="text-center col-lg-3 col-xs-3" id="courseTable">등록일</div>
+				<c:if test="${empty courseList}" var="isEmpty">
+					<div class="text-center col-lg-12">
+						<div class="text-center">등록된 게시물이 없어요</div>
 					</div>
-				</div>
+				</c:if>
+				<c:if test="${!isEmpty}">
+					<c:forEach var="item" items="${courseList}" varStatus="loop">
+						<div class="text-center col-lg-2 col-xs-1" id="courselist">${item.courseCateName}</div>
+						<div class="text-center col-lg-3 col-xs-1" id="courselist">${item.courseName}</div>
+						<div class="text-center col-lg-2 col-xs-1" id="courselist">${item.courseLength}</div>
+						<div class="text-center col-lg-2 col-xs-1" id="courselist">${item.courseTime}</div>
+						<div class="text-center col-lg-3 col-xs-3" id="courselist">
+							<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm"
+								value="${item.courseRegiDate}" />
+							<c:out value="${dResult}" />
+						</div>
+						<div style="display: none;">${item.courseId}</div>
+					</c:forEach>
+				</c:if>
 				<c:if test="${!empty manager }">
 					<div class="row">
 						<div class="col-lg-12 text-right">
@@ -445,36 +528,28 @@ ul li label {
 				</c:if>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="recordList">
-				<div class="row">
-					<div class="col-md-12">
-						<table class="table table-hover cus">
-							<tr>
-								<th class="text-center col-lg-2 col-xs-1">파일</th>
-								<th class="text-center col-lg-6 col-xs-6">길이</th>
-								<th class="text-center col-lg-2 col-xs-2">시간</th>
-								<th class="text-center col-lg-2 col-xs-3">일자</th>
-							</tr>
-							<c:if test="${empty recordList}" var="isEmpty">
-								<tr class="text-center">
-									<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
-								</tr>
-							</c:if>
-							<c:if test="${!isEmpty}">
-								<c:forEach var="item" items="${recordList}" varStatus="loop">
-									<tr class="text-center">
-										<td class="text-left">${item.fileName}</td>
-										<td>${item.recordLength}km</td>
-										<td>${item.duration}분</td>
-										<td><fmt:formatDate var="dResult"
-												pattern="yy-MM-dd HH:mm" value="${item.recordDate}" /> <c:out
-												value="${dResult}" /></td>
-										<td style="display: none;">${item.recordId}</td>
-									</tr>
-								</c:forEach>
-							</c:if>
-						</table>
+				<div class="text-center col-lg-3 col-xs-1" id="recordTable">파일</div>
+				<div class="text-center col-lg-3 col-xs-1" id="recordTable">길이(km)</div>
+				<div class="text-center col-lg-3 col-xs-1" id="recordTable">시간(분)</div>
+				<div class="text-center col-lg-3 col-xs-1" id="recordTable">일자</div>
+				<c:if test="${empty recordList}" var="isEmpty">
+					<div class="text-center col-lg-12">
+						<div class="test-center">등록된 게시물이 없어요</div>
 					</div>
-				</div>
+				</c:if>
+				<c:if test="${!isEmpty}">
+					<c:forEach var="item" items="${recordList}" varStatus="loop">
+						<div class="text-center col-lg-3 col-xs-1" id="recordlist">${item.fileName}</div>
+						<div class="text-center col-lg-3 col-xs-1" id="recordlist">${item.recordLength}km</div>
+						<div class="text-center col-lg-3 col-xs-1" id="recordlist">${item.duration}분</div>
+						<div class="text-center col-lg-3 col-xs-1" id="recordlist">
+							<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm"
+								value="${item.recordDate}" />
+							<c:out value="${dResult}" />
+						</div>
+						<div style="display: none;">${item.recordId}</div>
+					</c:forEach>
+				</c:if>
 				<c:if test="${!empty manager }">
 					<div class="row">
 						<div class="col-lg-12 text-right">
@@ -485,50 +560,64 @@ ul li label {
 				</c:if>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="messages">
-				<div class="row">
-					<div class="container">
-						<div class="row">
-							<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-								<div class="single-team mb-30">
-									<div class="team-img">
-										<img src="<c:url value="/change/img/gallery/home_blog1.png"/>" alt="">
-									</div>
-									<div class="team-caption">
-										<h3>
-											<a href="blog.html">The Best SPA Salons For Your
-												Relaxation</a>
-										</h3>
-										<p>October 6, 2020by Steve</p>
-									</div>
-								</div>
+				<div class="row" style="padding: 10px;">
+					<div class="col-lg-6 col-xs-6">
+						<div class="list-img">
+							<img src="<c:url value ='/change/img/gallery/list1.png'/>" alt=""
+								style="width: 100%; height: 200px;">
+							<!-- <span>Open</span> -->
+						</div>
+						<div class="list-caption">
+							<span>Open</span>
+							<h3>
+								<a href="listing_details.html">Saintmartine</a>
+							</h3>
+							<p>700/D, Kings road, Green lane, 85/ London</p>
+						</div>
+					</div>
+					<div class="col-lg-6 col-xs-6">
+						<div class="single-listing mb-30">
+							<div class="list-img">
+								<img src="<c:url value ='/change/img/gallery/list2.png'/>"
+									alt="" style="width: 100%; height: 200px;">
+								<!-- <span>Open</span> -->
 							</div>
-							<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-								<div class="single-team mb-30">
-									<div class="team-img">
-										<img src="<c:url value="/change/img/gallery/home_blog2.png"/>" alt="">
-									</div>
-									<div class="team-caption">
-										<h3>
-											<a href="blog.html">The Best SPA Salons For Your
-												Relaxation</a>
-										</h3>
-										<p>October 6, 2020by Steve</p>
-									</div>
-								</div>
+							<div class="list-caption">
+								<span>Open</span>
+								<h3>
+									<a href="listing_details.html">Saintmartine</a>
+								</h3>
+								<p>700/D, Kings road, Green lane, 85/ London</p>
 							</div>
-							<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-								<div class="single-team mb-30">
-									<div class="team-img">
-										<img src="<c:url value="/change/img/gallery/home_blog3.png"/>" alt="">
-									</div>
-									<div class="team-caption">
-										<h3>
-											<a href="blog.html">The Best SPA Salons For Your
-												Relaxation</a>
-										</h3>
-										<p>October 6, 2020by Steve</p>
-									</div>
-								</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-xs-6">
+						<div class="list-img">
+							<img src="<c:url value ='/change/img/gallery/list1.png'/>" alt=""
+								style="width: 100%; height: 200px;">
+							<!-- <span>Open</span> -->
+						</div>
+						<div class="list-caption">
+							<span>Open</span>
+							<h3>
+								<a href="listing_details.html">Saintmartine</a>
+							</h3>
+							<p>700/D, Kings road, Green lane, 85/ London</p>
+						</div>
+					</div>
+					<div class="col-lg-6 col-xs-6">
+						<div class="single-listing mb-30">
+							<div class="list-img">
+								<img src="<c:url value ='/change/img/gallery/list2.png'/>"
+									alt="" style="width: 100%; height: 200px;">
+								<!-- <span>Open</span> -->
+							</div>
+							<div class="list-caption">
+								<span>Open</span>
+								<h3>
+									<a href="listing_details.html">Saintmartine</a>
+								</h3>
+								<p>700/D, Kings road, Green lane, 85/ London</p>
 							</div>
 						</div>
 					</div>
