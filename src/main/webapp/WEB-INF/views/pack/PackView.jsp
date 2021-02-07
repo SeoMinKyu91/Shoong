@@ -70,12 +70,23 @@
 .btn-custom {
 	color: #f32a48;
 }
-
+#bg {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  opacity: 0.5;
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+/*
 body {
 	background-color: #F9F9F9;
 }
+*/
 </style>
-<div style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;">
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
+<div style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white; position: relative; z-index: 1;">
 	<div class="row">
 		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
 			<div class="">

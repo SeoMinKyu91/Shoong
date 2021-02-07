@@ -51,15 +51,11 @@
 }
 
 .joinPackBtn:hover {
-	color : white;
+	color: white;
 }
 
 #tbPack:hover {
 	background-color: #fff0f2;
-}
-
-body {
-	background-color: #F9F9F9;
 }
 
 #packJoinModalBtn {
@@ -67,12 +63,24 @@ body {
 	color: white;
 	border: none;
 }
+
 #packJoinModalBtn:hover {
-	color : white;
+	color: white;
+}
+
+#bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	opacity: 0.5;
+	/* Preserve aspet ratio */
+	min-width: 100%;
+	min-height: 100%;
 }
 </style>
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
 <div
-	style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;">
+	style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white; position: relative; z-index: 1;">
 	<div class="row">
 		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
 			<div class="">
@@ -89,7 +97,8 @@ body {
 		<div class="col-xs-12 col-lg-12">
 			<div id="map"
 				style="height: 400px; width: 100%; overflow: hidden; position: relative; margine-top: 50px;"></div>
-			<p style="color: grey; font-size: .8em">지도를 클릭 시 클릭 된 지점을 기준으로 검색(별 모양 마커를 움직이세요)</p>
+			<p style="color: grey; font-size: .8em">지도를 클릭 시 클릭 된 지점을 기준으로
+				검색(별 모양 마커를 움직이세요)</p>
 		</div>
 	</div>
 	<div class="row">
@@ -120,37 +129,38 @@ body {
 			</table>
 		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="col-xs-12 col-lg-12" style="margin-top: 20px;">
-		<c:if test="${empty packList }" var="isEmpty">
-			<h3
-				style="height: 40px; font-size: 20px; text-align: center; line-height: 20px;">해당하는
-				팩이 없어요.</h3>
-		</c:if>
-		<c:if test="${!isEmpty}">
-			<c:forEach var="item" items="${packList }">
-				<div>
-					<table class="col-xs-12 col-lg-12">
-						<tr id="tbPack">
-							<th class="col-xs-3 col-lg-1"><img style="width: 100%;"
-								src="<c:url value="/images/pack/${item.packThumbnail}"/>"
-								alt="팩 마크"></th>
-							<th style="height: 40px; font-weight: light; line-height: 20px;"><span
-								style="font-size: 1.2em; font-weight: bolder;">${item.packName}</span><br />${item.packTag}&emsp;#${item.packActTime}&emsp;#${item.packAge}<br />${item.packIntro}</th>
-							<th colspan="2" class="text-right">
-								<button class="btn joinPackBtn" id="${item.packID}"
-									style="margin-top: 10px; font-weight: bold; color: white; border: none; background-color: #f32a48;">가입</button>
-							</th>
-							<th colspan="2"><hr /></th>
-						</tr>
-						<tr>
-							<th colspan="3"><hr /></th>
-						</tr>
-					</table>
-				</div>
-			</c:forEach>
-		</c:if>
+
+	<div class="row">
+		<div class="col-xs-12 col-lg-12" style="margin-top: 20px;">
+			<c:if test="${empty packList }" var="isEmpty">
+				<h3
+					style="height: 40px; font-size: 20px; text-align: center; line-height: 20px;">해당하는
+					팩이 없어요.</h3>
+			</c:if>
+			<c:if test="${!isEmpty}">
+				<c:forEach var="item" items="${packList }">
+					<div>
+						<table class="col-xs-12 col-lg-12">
+							<tr id="tbPack">
+								<th class="col-xs-3 col-lg-1"><img style="width: 100%;"
+									src="<c:url value="/images/pack/${item.packThumbnail}"/>"
+									alt="팩 마크"></th>
+								<th style="height: 40px; font-weight: light; line-height: 20px;"><span
+									style="font-size: 1.2em; font-weight: bolder;">${item.packName}</span><br />${item.packTag}&emsp;#${item.packActTime}&emsp;#${item.packAge}<br />${item.packIntro}</th>
+								<th colspan="2" class="text-right">
+									<button class="btn joinPackBtn" id="${item.packID}"
+										style="margin-top: 10px; font-weight: bold; color: white; border: none; background-color: #f32a48;">가입</button>
+								</th>
+								<th colspan="2"><hr /></th>
+							</tr>
+							<tr>
+								<th colspan="3"><hr /></th>
+							</tr>
+						</table>
+					</div>
+				</c:forEach>
+			</c:if>
+		</div>
 	</div>
 </div>
 <!-- 모달 -->
@@ -165,7 +175,8 @@ body {
 			</div>
 			<div class="modal-footer">
 				<button class="btn btn-default" id="packJoinModalBtn">신청</button>
-				<button type="button" class="btn btn-default" id="packJoinModalBtn" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default" id="packJoinModalBtn"
+					data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
