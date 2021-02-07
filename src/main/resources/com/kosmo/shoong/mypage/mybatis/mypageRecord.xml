@@ -9,17 +9,18 @@
 	
 <select id="mypageRecordSelectList" parameterType="java.util.Map" resultType="java.util.Map">
 
-select R.* , C.COURSE_NAME from RECORD_ R join COURSE C on 
-   			 R.COURSE_ID = C.COURSE_ID where R.USER_ID = #{id}
-	
+	select R.* , C.COURSE_NAME from RECORD_ R  left join COURSE C on 
+	R.COURSE_ID = C.COURSE_ID where R.USER_ID = #{id}
+
 </select>
 	
 <select id="mypageRecordSelectOne" parameterType="java.util.Map" resultType="java.util.Map">
-SELECT * 
-FROM(
-    select * from RECORD_  where USER_ID = #{id}
-    ORDER BY ROWNUM DESC)
-WHERE ROWNUM = 1
+	SELECT * 
+	FROM(
+	    select * from RECORD_  where USER_ID = #{id}
+	    ORDER BY ROWNUM DESC)
+	WHERE ROWNUM = 1
 	
 </select>	
+
 </mapper>

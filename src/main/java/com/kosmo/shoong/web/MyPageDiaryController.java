@@ -27,27 +27,28 @@ public class MyPageDiaryController {
 	private MyPageDiaryService service;
 
 	@RequestMapping("list.do")
-	public String mypageDiary(@RequestParam Map map, Model model, HttpServletRequest req) {
-		/* 유저 id 값 */
-		// map.put("id","shoong1000@naver.com");
-		map.put("id", req.getSession().getAttribute("userId").toString());
-		List<Map> recordlist = service.recordSelectList(map);
-		for (Map recordMap : recordlist) {
-			String date = recordMap.get("RECORD_DATE").toString().substring(0, 10);
-			recordMap.put("RECORD_DATE", date);
-		}
-		// List recordlist = service.recordSelectList(map);
-		List diarylist = service.selectList(map);
-		model.addAttribute("diaryList", diarylist);
-		model.addAttribute("recordList", recordlist);
-		// 실사용은 아래에
+	public String mypageDiary(@RequestParam Map map ,Model model,HttpServletRequest req) {
 
+		    map.put("id", req.getSession().getAttribute("userId").toString());
+		    List<Map> recordlist = service.recordSelectList(map);
+		    for(Map recordMap: recordlist) {
+		    	 String date = recordMap.get("RECORD_DATE").toString().substring(0,10);
+		    	 recordMap.put("RECORD_DATE",date);
+		    	 if(recordMap.get("COURSE_ID") == null) {
+		    		 recordMap.put("COURSE_NAME",String.format("%s월 %s일 라이딩",date.split("-")[1],date.split("-")[2]));
+		    	 }
+		    }
+		    
+		    List diarylist = service.selectList(map);
+		    model.addAttribute("diaryList",diarylist);
+		    model.addAttribute("recordList",recordlist);
+		
 		return "mypage/myDiaryList";
 	}
 
 	@RequestMapping(value = "write.do", method = RequestMethod.GET)
 	public String mypageDiaryWritePage(@RequestParam Map map, Model model, HttpServletRequest req) throws IOException {
-		// map.put("id","shoong1000@naver.com");
+		
 		model.addAttribute("recordId", map.get("recordId"));
 		map.put("id", req.getSession().getAttribute("userId").toString());
 

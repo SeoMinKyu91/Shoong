@@ -19,10 +19,6 @@ public class ChatMessageDAO implements ChatMessageService{
 	@Override
 	public List<Map> packMemberSelectList(Map map) {
 		
-		
-		
-		
-		
 		return sqlMapper.selectList("packMemberSelectList",map);
 		
 	}

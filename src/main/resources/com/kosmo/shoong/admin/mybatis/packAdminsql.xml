@@ -5,22 +5,8 @@
   
 <mapper namespace="com.kosmo.shoong.admin.mybatis.packAdminsql">
 	
-	<resultMap type="packAdminDTO" id="packAdminDTOResult">
-		<!-- 
-		property:자바빈의 속성명
-		column:테이블의 컬럼(조회결과의 컬럼들 의미)
-		 -->
-		<result property="packID" column="PACK_ID"/>
-		<result property="packName" column="PACK_NAME"/>
-		<result property="packTag" column="PACK_TAG"/>
-		<result property="packActRegion" column="PACK_ACT_REGION"/>
-		<result property="packActTime" column="PACK_ACT_TIME"/>
-		<result property="packThumbnail" column="PACK_THUMBNAIL"/>
-		<result property="packLat" column="PACK_LAT"/>
-		<result property="packLng" column="PACK_LNG"/>
-</resultMap>
 	
-	<select id="packList" resultType="java.util.Map" resultMap="packAdminDTOResult">
+	<select id="packList" resultType="java.util.Map" >
 		SELECT * FROM PACK
 	</select>
 	

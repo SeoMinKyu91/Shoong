@@ -16,7 +16,6 @@
 </select>
 	
 <select id="chartRecordselectList" parameterType="java.util.Map" resultType="java.util.Map">
-		
 SELECT*FROM RECORD_ WHERE RECORD_DATE  <![CDATA[>]]>= TRUNC(SYSDATE,'MM') AND
 							 LAST_DAY(SYSDATE)  <![CDATA[>]]>= RECORD_DATE AND
 							 USER_ID =#{id}

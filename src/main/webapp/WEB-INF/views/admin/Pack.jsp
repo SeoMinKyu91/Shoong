@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- class="right_col 이 DiV안에서 작업하지 않으면 깨져요. -->
 <div class="right_col" role="main">
 	<!-- title -->
@@ -61,11 +61,11 @@
                       	</thead>
                       	<tbody>
 		                	<c:if test="${not empty packList}">
-								<c:forEach var="item" items="${packList }" varStatus="loop">
+								<c:forEach var="pack" items="${packList }" varStatus="loop">
 		                        	<tr data-toggle="modal" data-target="#packViewModal">
 			                          		<th scope="row">1</th>
-					                          <td>${item.packName}</td>
-					                          <td>${item.packActRegion }</td>
+					                          <td>${pack.PACK_NAME}</td>
+					                          <td>${pack.PACK_ACT_REGION}</td>
 					                          <td>가길동</td>
 		                        	</tr>
 			                	</c:forEach>
@@ -163,17 +163,16 @@
                               <input type="checkbox" class="flat" name="table_records">
                             </td>
 		                    <c:if test="${not empty packList}">
-								<c:forEach var="item" items="${packList }" varStatus="loop">
-		                            <td class=" ">${item.packID}</td>
-		                            <td class=" ">${item.packName} </td>
+								<c:forEach var="pack" items="${packList }" varStatus="loop">
+		                            <td class=" ">${pack.packID}</td>
+		                            <td class=" ">${pack.packName} </td>
 		                            <td class=" ">Dec 24 2020</td>
-		                            <td class=" ">${item.packActRegion }</td>
+		                            <td class=" ">${pack.packActRegion }</td>
 		                            <td class=" ">20</td>
 		                            <td class="a-right a-right ">1</td>
 		                            <td class=" last">
 		                            	<button type="button" class="btn btn-default btn-xs btn-warning">!</button>
 		                            	<button type="button" class="btn btn-default btn-xs btn-danger">X</button>
-		                            </a>
 		                            </td>
                            		</c:forEach>
                             </c:if>

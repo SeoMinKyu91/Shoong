@@ -7,8 +7,10 @@
 
 	
 	<select id="DiaryRecordSelectList" parameterType="java.util.Map" resultType="java.util.Map">
-		select R.* , C.COURSE_NAME from RECORD_ R join COURSE C on 
-   			 R.COURSE_ID = C.COURSE_ID where R.USER_ID = #{id}
+	
+   		select R.* , C.COURSE_NAME from RECORD_ R  left join COURSE C on 
+			R.COURSE_ID = C.COURSE_ID where R.USER_ID = #{id}
+   			 
 	</select>
 	
 	<select id="DiaryRecordSelectOne" parameterType="java.util.Map" resultType="java.util.Map">
