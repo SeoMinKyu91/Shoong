@@ -36,12 +36,18 @@ public class MyPageController {
 	
 	@Resource(name = "memberService")
 	private MemberServiceImpl memberService;
-
 	@RequestMapping("main.do")
 	public String mypageMain(@RequestParam Map map, Model model, HttpServletRequest req) throws IOException {
 
 		
 		map.put("id", req.getSession().getAttribute("userId").toString());
+		map.put("userId",req.getSession().getAttribute("userId").toString());
+		if(memberService.hasProfileImg(map) != null) {
+			model.addAttribute("memberProfileImg",memberService.hasProfileImg(map));
+		}
+		else {
+			model.addAttribute("memberProfileImg","no");
+		}
 
 		/* 코스 관련 */
 		List<Map> recordList = service.chartRecordselectList(map);
@@ -114,16 +120,20 @@ public class MyPageController {
 	@RequestMapping(value = "infoEdit.do", method = RequestMethod.POST)
 	public String infoEdit(HttpServletRequest req, @RequestParam Map map, Model model) {
 		map.put("userId", req.getSession().getAttribute("userId").toString());
-		//Map info = new HashMap();
-		//info.put("userId", req.getSession().getAttribute("userId").toString());
-		System.out.println(map);
-		//for(Object key:map.keySet()) {
-		//	if(map.get(key)!=null) {
-		//		info.put(key, map.get(key));
-		//	}
-		//}
-		//System.out.println(info);
-		System.out.println(map);
+		
+		System.out.println("비밀번호 :"+map.get("userPWDOk"));
+		System.out.println("이름 :"+map.get("userName"));
+		System.out.println("성별 :"+map.get("userGender"));
+		System.out.println("나이 :"+map.get("userAge"));
+		
+		String phoneNumber = "";
+		phoneNumber += map.get("userTel1");
+		phoneNumber += map.get("userTel2");
+		phoneNumber += map.get("userTel3");
+		System.out.println("폰번:"+phoneNumber);
+		System.out.println("이미지이름:"+map.get("profileImgName"));
+		map.put("userTel", phoneNumber);
+		
 		int res = memberService.update(map);
 		System.out.println(res);
 		if (res==0) {
@@ -132,9 +142,26 @@ public class MyPageController {
 		else {
 			System.out.println("성공");
 		}
+		
+		System.out.println("11111111111111111111");
+		System.out.println("빈문자열임?:"+map.get("profileImgName"));
+		
+		if(map.get("profileImgName") != "") {
+			System.out.println("안으로 들어옴");
+			if(memberService.hasProfileImg(map) != "") {
+				memberService.profileImgUpdate(map);
+			}
+			else {
+				memberService.profileImgInsert(map);
+			}
+
+		}
+				
+		
+		
 		Map memberInfo = memberService.memberEditView(map);
 		model.addAttribute("memberInfo", memberInfo);
-		return "mypage/myInfoEdit";
+		return "forward:/mypage/main.do";
 	}
 
 

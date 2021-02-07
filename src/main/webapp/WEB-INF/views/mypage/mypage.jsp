@@ -127,8 +127,12 @@ padding: 10px;
 	   <div class="row col-xs-12" id="inlineInfo">
 	         <div style="display: inline-block; width: 80%;">
 	            <c:if test="${not empty sessionScope.userId}" var="isEmpty">		
-	            												<!-- 이미지 넣기 -->		
-		            <img class="badgeImg" src='<c:url value="/images/badge/speedBadge.png"/>' alt="뱃지이미지">      
+        			<c:if test="${memberProfileImg eq 'no'}" var="notExit">
+		            	<img class="badgeImg" src='<c:url value="/images/badges/shoongBadge6.png"/>' alt="뱃지이미지">
+		            </c:if>
+		            <c:if test="${!notExit }">
+				        <img class="badgeImg" src='<c:url value="/images/badges/${memberProfileImg }"/>' alt="뱃지이미지">
+		            </c:if>      
 		            <strong class="namebar">${sessionScope.userId}</strong>
 		            <a href='<c:url value="/Member/myInfoEdit.do"/>' class="btn btn-primary" id="loginCheck">정보수정</a>
 		        </c:if>		
@@ -302,8 +306,8 @@ function mapRecordUpload(map){
 	map.on('load', function(){ // 이부분 있어야 바로 로드 가능
 	<c:if test="${!empty mapRecord}">
 	var data = ${mapRecord}
-	var json = data.features[0];
-	console.log('data:%O',data.features[0]);
+	var json = data;
+	console.log('data:%O',data);
 	
 	map.addSource('route', {
 		"type":"geojson",
@@ -322,7 +326,7 @@ function mapRecordUpload(map){
 			'line-width': 8
 		}
 	});
-	map.setCenter(data.features[0].geometry.coordinates[0][0]);
+	map.setCenter(json.geometry.coordinates[0][0]);
 	map.setZoom(11);
 </c:if>
 });

@@ -36,8 +36,7 @@ public class MyPageDAO implements MyPageService {
 
 	@Override
 	public int update(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlMapper.update("mypageUpdate",map); 
 	}
 
 	@Override

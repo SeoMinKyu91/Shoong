@@ -875,6 +875,21 @@ body {
 	Number.prototype.zf = function(len) {
 		return this.toString().zf(len);
 	};
+	
+	function saveToFile_Chrome(fileName, content) {
+		var blob = new Blob([content], { type: 'text/plain' });
+	    objURL = window.URL.createObjectURL(blob);
+	            
+	    // 이전에 생성된 메모리 해제
+	    if (window.__Xr_objURL_forCreatingFile__) {
+	        window.URL.revokeObjectURL(window.__Xr_objURL_forCreatingFile__);
+	    }
+	    window.__Xr_objURL_forCreatingFile__ = objURL;
+	    var a = document.createElement('a');
+	    a.download = fileName;
+	    a.href = objURL;
+	    a.click();
+	}
 
 	$(function() {
 
@@ -883,16 +898,30 @@ body {
 						'<style type="text/css">.modal .modal-body {max-height: '
 								+ ($('body').height() * .8)
 								+ 'px;overflow-y: auto;}.modal-open .modal{overflow-y: hidden !important;}</style>');
-
+		/*
 		$.ajax('<c:url value="/courseTest/gpxkml/address.kml"/>').done(
 				function(xml) {
 					console.log(toGeoJSON.kml(xml));
 				});
-
-		$.ajax('<c:url value="/courseTest/gpxkml/20201018_114312.gpx"/>').done(
+		*/
+		/*
+		$.ajax('<c:url value="/gpxkml/오천자전거길.gpx.gpx"/>').done(
 				function(xml) {
-					console.log(toGeoJSON.gpx(xml));
+					var json = JSON.stringify(toGeoJSON.gpx(xml));
+					saveToFile_Chrome("output.json",json);
+					$.ajax({
+						url : "<c:url value='/course/convert/route'/>",
+						type : "post",
+						dataType : "json",
+						data : {
+							"fileName" : $('#imgArry').val()
+						},
+						success : function(data) {
+							
+						}
+					});
 				});
+		*/
 
 		$('#naviModalBtn').click(function() {
 			console.log('클릭모달버튼');
@@ -998,8 +1027,7 @@ body {
 						function() {
 							console.log("로드 버튼 누름");
 
-							$
-									.ajax({
+							$.ajax({
 										url : "<c:url value='/course/routeLoad'/>",
 										type : "post",
 										dataType : "json",
