@@ -77,16 +77,6 @@ label {
 	display: none;
 }
 
-#bg {
-	position: fixed;
-	top: 0;
-	left: 0;
-	opacity: 0.5;
-	/* Preserve aspet ratio */
-	min-width: 100%;
-	min-height: 100%;
-}
-
 /*달력 요일 뿌려주는 부분*/
 .fc-col-header-cell {
 	background-color: #052b52;

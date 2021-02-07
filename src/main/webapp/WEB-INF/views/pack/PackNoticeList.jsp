@@ -21,18 +21,6 @@
 	cursor: pointer;
 }
 
-.packCreateBtn {
-	color: #f32a48;
-	background-color: white;
-	font-weight: bold;
-	border: none;
-}
-
-.packCreateBtn:hover {
-	color: white;
-	background-color: #f32a48;
-}
-
 .submitBtn {
 	color: white;
 	background-color: #f32a48;
@@ -115,8 +103,14 @@
 	display: none;
 }
 
-body {
-	background-color: #F9F9F9;
+#bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	opacity: 0.5;
+	/* Preserve aspet ratio */
+	min-width: 100%;
+	min-height: 100%;
 }
 
 .packMainBtn {
@@ -129,21 +123,10 @@ body {
 .packMainBtn:hover {
 	color: white;
 }
-
-.MyPackBtn {
-	color: #f32a48;
-	background: none;
-	font-weight: bold;
-	border: #f32a48 1px solid;
-}
-
-.MyPackBtn:hover {
-	color: white;
-}
 </style>
-
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
 <div
-	style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;">
+	style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;  position: relative; z-index: 1;">
 	<div class="row">
 		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
 			<div class="">

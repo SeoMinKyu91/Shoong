@@ -22,17 +22,6 @@
 	vertical-align: middle;
 }
 
-.packCreateBtn {
-	color: #ff8827;
-	background-color: white;
-	font-weight: bold;
-	border: none;
-}
-
-.packCreateBtn:hover {
-	color: white;
-	background-color: #ff8827;
-}
 
 .popular-location .single-location {
 	position: relative;
@@ -68,7 +57,7 @@
 
 .plusImgBtn {
 	color: white;
-	background-color: #ff8827;
+	background-color: #f32a48;
 	font-weight: bold;
 	border: none;
 	float: right;
@@ -104,7 +93,7 @@
 	width: 100%;
 	margin-top: 15px;
 	height: 200px;
-	border: 2px dashed #ff8827;
+	border: 1px solid #777777;
 	color: #777777;
 	text-align: center;
 }
@@ -130,7 +119,7 @@
 
 .addImageBtn {
 	color: white;
-	background-color: #ff8827;
+	background-color: #f32a48;
 	font-weight: bold;
 	border: none;
 }
@@ -160,18 +149,34 @@
 	font-size: 1.7em;
 	text-align: center;
 }
+
+.packMainBtn {
+	color: #f32a48;
+	background: none;
+	font-weight: bold;
+	border: #f32a48 1px solid;
+}
+
+.packMainBtn:hover {
+	color: white;
+}
 </style>
 <img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="" />
 <div
 	style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white; position: relative; z-index: 1;">
 	<div class="row">
-		<div class="col-lg-12" style="padding-bottom: 20px"></div>
+		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
+			<div class="">
+				<a class="packMainBtn btn" href="<c:url value="/pack/view.do"/>"
+					style="margine-right: 20px">HOME</a>
+			</div>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-md-12 col-lg-12">
 			<p class="ptagTitle">갤러리</p>
 			<button class="plusImgBtn btn" type="button" data-toggle="modal"
-					data-target="#galleryModal">&nbsp;사진추가&nbsp;</button>
+					data-target="#galleryModal">사진추가</button>
 			<br/>
 			<hr style="background-color: black; height: 1px" />
 		</div>
@@ -187,7 +192,7 @@
 			</c:if>
 			<c:if test="${!isEmpty}">
 				<c:forEach var="item" items="${packGalleryList }">
-					<div class="col-lg-3 col-md-6 col-sm-6">
+					<div class="col-lg-3 col-xs-6">
 						<div class="single-location mb-30 ">
 							<div class="location-img galleryImg">
 								<img src="/fileupload/${item.pictureName}" alt="팩갤러리 사진">
@@ -209,10 +214,10 @@
 					<h4 style="font-weight: bold;">사진 올리기</h4>
 				</div>
 				<div class="modal-body">
-					<div class="col-sm-12" style="margin-top: 10px">
+					<div class="col-xs-12" style="margin-top: 10px">
 						<form method="post" enctype="multipart/form-data"
-							class="col-sm-12">
-							<div id="fileUpload" class="dragAndDropDiv col-sm-12">
+							class="col-xs-12">
+							<div id="fileUpload" class="dragAndDropDiv col-xs-12">
 								<span class="dragAndDropDivSpan">여기에 이미지를 드래그하세요</span>
 							</div>
 							<input type="file" name="fileUpload" id="fileUpload"
