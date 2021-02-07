@@ -34,6 +34,9 @@
 					</div>
 					<div class="col-xs-10 col-lg-10">
 						<!-- Main-menu -->
+						<!--  
+						<div class="main-menu f-right d-none d-block">
+						-->
 						<div class="main-menu f-right d-none d-sm-block">
 							<nav>
 								<ul class="navigation">

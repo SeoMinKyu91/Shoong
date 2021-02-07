@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.JsonArray;
 import com.kosmo.shoong.service.impl.pack.PackScheduleServiceImpl;
 import com.kosmo.shoong.service.pack.PackScheduleEventsDTO;
 
@@ -30,11 +31,9 @@ public class PackScheduleController {
 
 	@RequestMapping("calendar.do")
 	public String packCalendar(@RequestParam Map map, Model model,HttpServletRequest req) {
-		System.out.println("calendar.do 잘들어옴");
 		HttpSession session = req.getSession();
 
 		if(session.getAttribute("userId") != null && session.getAttribute("packId") !=null) {
-			System.out.println("아이디,팩pk있음");
 			map.put("userId", session.getAttribute("userId").toString());
 			map.put("packId",session.getAttribute("packId").toString());
 
@@ -42,32 +41,23 @@ public class PackScheduleController {
 			for(Object key:keys) System.out.println(key+":"+map.get(key));
 		}
 
-		//List<Map> list = service.scheduleSelectList(map);
 		List<PackScheduleEventsDTO> jsonForm = service.jsonForm(map);
-		System.out.println("디비에서 가져온값:"+jsonForm.size());
 
 		List<Map> jsonList = new Vector<Map>();
 		for(PackScheduleEventsDTO item : jsonForm) {
 			Map jsonMap = new HashMap();
-//			System.out.println("start:"+item.getPackScheduleStart());
-//			System.out.println("end:"+item.getPackScheduleEnd());
 			if(item!=null) {
 				jsonMap.put("title", item.getPackScheduleTitle().toString());
 				if(item.getPackScheduleStart()!=null) {
-					jsonMap.put("start", item.getPackScheduleStart().toString());
+					jsonMap.put("start", item.getPackScheduleStart().substring(0,10));
 				}
 				if(item.getPackScheduleEnd() != null) {
-					jsonMap.put("end", item.getPackScheduleEnd().toString());
+					jsonMap.put("end", item.getPackScheduleEnd().substring(0,10));
 				}
 				
 				jsonMap.put("id", item.getPackId());
 			}
 			jsonList.add(jsonMap);
-		}
-
-		for(Map items : jsonList) {
-			System.out.println("어레이 start:"+items.get("start"));
-			System.out.println("어레이 end:"+items.get("end"));
 		}
 
 		model.addAttribute("calendarJson",JSONArray.toJSONString(jsonList));
@@ -81,11 +71,6 @@ public class PackScheduleController {
 		map.put("userId",session.getAttribute("userId"));
 		map.put("packId",session.getAttribute("packId"));
 
-		System.out.println(map.get("packScheduleTitle"));
-		System.out.println(map.get("packScheduleStart"));
-		System.out.println(map.get("packScheduleEnd"));
-		System.out.println(map.get("packScheduleContent"));
-
 		service.scheduleInsert(map);
 
 		return "forward:/pack/calendar.do";
@@ -94,30 +79,24 @@ public class PackScheduleController {
 	@RequestMapping(value="calendar/ajax.do",produces="text/html; charset=UTF-8")
 	@ResponseBody
 	public String calendarAjax(@RequestParam Map map) {
-
-
-		System.out.println("에이작스 요청 들어옴");
 		JSONObject json = new JSONObject();
-
 		json.put("dbData", service.scheduleSelectList(map));
 
-		System.out.println(json);
 		return json.toJSONString();
 	}
 
 	@RequestMapping(value="schedule/selectOne.do",produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String scheduleSelectOne(@RequestParam Map map,HttpServletRequest req) {
-		System.out.println("컨트롤러 들어올때"+map.get("packScheduleNo"));
 		String userId =  req.getSession().getAttribute("userId").toString();
+		
 		Map selectOne = new HashMap();
 		selectOne = service.scheduleSelectOne(map);
-
-
-		System.out.println("컨트롤러 나갈때"+selectOne.get("PACK_SCHEDULE_NO"));
+		Map selectJoinList = new HashMap();
+		selectJoinList.put("packScheduleNo", selectOne.get("PACK_SCHEDULE_NO"));
+		List<Map> scheduleJoiner = service.scheduleJoinList(selectJoinList);
 
 		JSONObject json = new JSONObject();
-		System.out.println(selectOne.get("PACK_SCHEDULE_END").toString());
 		
 		json.put("title", selectOne.get("PACK_SCHEDULE_TITLE"));
 		json.put("content", selectOne.get("PACK_SCHEDULE_CONTENT"));
@@ -132,6 +111,7 @@ public class PackScheduleController {
 		else {
 			json.put("isWriter", "no;");
 		}
+		json.put("scheduleJoiner",scheduleJoiner);
 
 
 		return json.toJSONString();
@@ -139,9 +119,6 @@ public class PackScheduleController {
 
 	@RequestMapping("schedule/update.do")
 	public String scheduleUpdate(@RequestParam Map map,Model model,HttpServletRequest req) {
-
-
-		System.out.println("팩 수정 No:"+map.get("packScheduleNo"));
 
 		service.scheduleUpdate(map);
 
@@ -156,8 +133,14 @@ public class PackScheduleController {
 
 		return "forward:/pack/calendar.do";
 	}
-
-
+	
+	@RequestMapping(value="schedule/join.do",produces = "text/html; charset=UTF-8")
+	@ResponseBody
+	public String packScheduleJoin(@RequestParam Map map) {
+		
+		
+		return (int)service.scheduleJoin(map) == 1?"참가 성공":"참가 실패";
+	}
 
 
 

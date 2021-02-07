@@ -44,13 +44,11 @@ public class PackGalleryController {
 
 	@RequestMapping("pictureInput.do")
 	public String packGalleryinput(@RequestParam Map map,HttpSession session) {
-		System.out.println("a"+map.get("imgArry").toString());
 		String[] imgArray = map.get("imgArry").toString().split(",");
 		for(String imgName : imgArray) {
 			Map imgMap = new HashMap();
 			imgMap.put("pictureName", imgName);
-			//팩 joinId 세션에서 가져 와야 한다.#{}
-			System.out.println(session.getAttribute("userId"));
+			
 			imgMap.put("userId", session.getAttribute("userId"));
 			service.insert(imgMap);
 		}
@@ -92,8 +90,6 @@ public class PackGalleryController {
 	@RequestMapping(value = "/fileUpload/post",produces = "text/html; charset=UTF-8") //ajax에서 호출하는 부분
     @ResponseBody
     public String upload(MultipartHttpServletRequest multipartRequest)  throws IllegalStateException, IOException { //Multipart로 받는다.
-
-
        //1]서버의 물리적 경로 얻기
 	   String filePath=multipartRequest.getServletContext().getRealPath("/upload");
        Iterator<String> itr =  multipartRequest.getFileNames();
@@ -103,13 +99,11 @@ public class PackGalleryController {
 
         while (itr.hasNext()) { //받은 파일들을 모두 돌린다.
 
-
         	MultipartFile upload= multipartRequest.getFile(itr.next());
-
 
             renameFilename = FileUpDownUtils.getNewFileName(filePath, upload.getOriginalFilename());
 
-    		 System.out.println("renameFilename"+renameFilename);
+            System.out.println("renameFilename"+renameFilename);
 
             fileFullPath = filePath+File.separator+renameFilename; //파일 전체 경로
             File file = new File(fileFullPath);
@@ -136,7 +130,6 @@ public class PackGalleryController {
 	@ResponseBody
 	public String delete(@RequestParam Map map) {
     	//여기서 서버에서 삭제하는 로직 짜야함. 아직 안짬.
-
 
     	System.out.println((String)map.get("filename"));
 		return "삭제된 파일이름은 : "+(String)map.get("filename");

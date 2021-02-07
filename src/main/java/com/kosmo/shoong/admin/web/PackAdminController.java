@@ -10,6 +10,6 @@ public class PackAdminController {
 	@RequestMapping("main.do")
 	   public String packMain() {
 	     
-	      return "admin/Pack.admin";
+	     return "admin/Pack.admin";
 	   }
 }

@@ -20,32 +20,37 @@
 	</resultMap>
 	
 	<select id="whereIsMyBadge" parameterType="java.util.Map" resultMap="badgeDTOResult">
+		<!-- 
 		SELECT *
 		FROM BADGE
 		WHERE BADGE_CATEGORY='마일리지'
 		AND TO_NUMBER(BADGE_REQUIREMENT) <![CDATA[<=]]>  TO_NUMBER(#{mileage})
-		<!-- 
-		AND BADGE_ID <![CDATA[>=]]> (SELECT MAX(BADGE_ID) FROM USER_BADGE_GET WHERE USER_ID=#{userId})
 		 -->
+		SELECT * 
+		FROM badge 
+		WHERE BADGE_CATEGORY='마일리지'
+		AND TO_NUMBER(BADGE_REQUIREMENT) <![CDATA[<=]]>  TO_NUMBER(#{mileage})
+		AND badge_id NOT IN(
+			SELECT badge_id 
+			FROM user_badge_get 
+			WHERE user_id=#{userId})
 	</select>
 
 	<insert id="insertMileageBadge" parameterType="java.util.Map">
 		<!-- 
-		<selectKey resultType="integer" order="BEFORE" keyProperty="badgeIdList">
-			SELECT BADGE_ID
-			FROM BADGE
-			WHERE BADGE_CATEGORY='마일리지'
-			AND TO_NUMBER(BADGE_REQUIREMENT) <![CDATA[>]]>= TO_NUMBER(#{mileage})
-		</selectKey>
-		 -->
 		<foreach collection="badgeList" item="badge" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
-		INTO user_badge_get(badge_get_id,badge_id,user_id,get_date) 
-		VALUES (seq_b_u_get.NEXTVAL,#{badge.badgeId},#{userId},SYSDATE)
+			INTO user_badge_get
+			VALUES (seq_b_u_get.NEXTVAL,#{badge.badgeId},#{userId},SYSDATE)
 		</foreach>
-		 <!-- 
-		INSERT INTO USER_BADGE_GET 
-		VALUES (#{badgeId},#{userId},SYSDATE)
 		 -->
+		INSERT INTO user_badge_get
+		SELECT seq_b_u_get.NEXTVAL, A.* FROM (
+		<foreach item="badge" collection="badgeList" separator="UNION ALL ">
+			SELECT #{badge.badgeId},#{userId},SYSDATE
+			FROM DUAL
+		</foreach>) A
+		
+		
 	</insert>
 
 </mapper>
