@@ -127,8 +127,12 @@ padding: 10px;
 	   <div class="row col-xs-12" id="inlineInfo">
 	         <div style="display: inline-block; width: 80%;">
 	            <c:if test="${not empty sessionScope.userId}" var="isEmpty">		
-	            												<!-- 이미지 넣기 -->		
-		            <img class="badgeImg" src='<c:url value="/images/badge/speedBadge.png"/>' alt="뱃지이미지">      
+        			<c:if test="${memberProfileImg eq 'no'}" var="notExit">
+		            	<img class="badgeImg" src='<c:url value="/images/badges/shoongBadge6.png"/>' alt="뱃지이미지">
+		            </c:if>
+		            <c:if test="${!notExit }">
+				        <img class="badgeImg" src='<c:url value="/images/badges/${memberProfileImg }"/>' alt="뱃지이미지">
+		            </c:if>      
 		            <strong class="namebar">${sessionScope.userId}</strong>
 		            <a href='<c:url value="/Member/myInfoEdit.do"/>' class="btn btn-primary" id="loginCheck">정보수정</a>
 		        </c:if>		
