@@ -252,24 +252,41 @@ ul li label {
 	height: 150%;
 }
 
-@media ( min-width : 992px) .container {
-	width
-	
-	
-	:
-	
-	 
-	
-	970px
-	
-	
-	;
+.custom-border div {
+	margin: 10px 0px 10px 0px;
 }
-.team-img > img{
+
+.custom-border:nth-child(2n+1) {
+	background-color: white;
+}
+
+.custom-border:hover {
+	background-color: #f7e7da;
+}
+
+.custom-border:nth-child(1):hover {
+	background-color: white;
+}
+
+@media ( min-width : 992px) .container {
+	width : 970px;
+}
+
+.team-img>img {
 	width: 100%;
 	height: 100%;
 }
 
+
+#courseTable {
+	font-weight: bold;
+	padding-bottom : 5px;
+	border-bottom: #052b52 1px solid;
+}
+
+body {
+	background-color: #F9F9F9;
+}
 </style>
 <!-- 본문 시작 -->
 <!-- 본문 탭 시작 -->
@@ -396,44 +413,34 @@ ul li label {
 			<li role="presentation"><a href="#messages"
 				aria-controls="messages" role="tab" data-toggle="tab">관광/맛집</a></li>
 		</ul>
-
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="courseList">
-				<div class="row">
-					<div class="col-md-12">
-						<table class="table table-hover cus">
-							<tr>
-								<th class="text-center col-lg-2 col-xs-1">카테고리</th>
-								<th class="text-center col-lg-2 col-xs-1">코스명</th>
-								<th class="text-center col-lg-1 col-xs-1">길이</th>
-								<th class="text-center col-lg-1 col-xs-1">시간</th>
-								<th class="text-center col-lg-2 col-xs-3">등록일</th>
-							</tr>
-							<c:if test="${empty courseList}" var="isEmpty">
-								<tr class="text-center">
-									<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
-								</tr>
-							</c:if>
-							<c:if test="${!isEmpty}">
-								<c:forEach var="item" items="${courseList}" varStatus="loop">
-									<tr class="text-center">
-										<td class="text-left">${item.courseCateName}</td>
-										<td class="text-left">${item.courseName}</td>
-										<td>${item.courseLength}</td>
-										<td>${item.courseTime}</td>
-										<td><fmt:formatDate var="dResult"
-												pattern="yy-MM-dd HH:mm" value="${item.courseRegiDate}" />
-											<c:out value="${dResult}" /></td>
-										<td style="display: none;">${item.courseId}</td>
-										<!-- 
-											<td style="display: none;">${item.courseRegion }</td>
-											 -->
-									</tr>
-								</c:forEach>
-							</c:if>
-						</table>
-					</div>
+				<div class="row custom-border">
+					<div class="text-center col-lg-2 col-xs-1" id="courseTable">카테고리</div>
+					<div class="text-center col-lg-3 col-xs-1" id="courseTable">코스명</div>
+					<div class="text-center col-lg-2 col-xs-1" id="courseTable">길이(km)</div>
+					<div class="text-center col-lg-2 col-xs-1" id="courseTable">시간(분)</div>
+					<div class="text-center col-lg-3 col-xs-3" id="courseTable">등록일</div>
+					<c:if test="${empty courseList}" var="isEmpty">
+						<div class="text-center col-lg-12 custom-border">
+							<div class="text-center">등록된 게시물이 없어요</div>
+						</div>
+					</c:if>
+					<c:if test="${!isEmpty}">
+						<c:forEach var="item" items="${courseList}" varStatus="loop">
+							<div class="text-center col-lg-2 col-xs-1">${item.courseCateName}</div>
+							<div class="text-center col-lg-3 col-xs-1">${item.courseName}</div>
+							<div class="text-center col-lg-2 col-xs-1">${item.courseLength}</div>
+							<div class="text-center col-lg-2 col-xs-1">${item.courseTime}</div>
+							<div class="text-center col-lg-3 col-xs-3">
+								<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm"
+									value="${item.courseRegiDate}" />
+								<c:out value="${dResult}" />
+							</div>
+							<div style="display: none;">${item.courseId}</div>
+						</c:forEach>
+					</c:if>
 				</div>
 				<c:if test="${!empty manager }">
 					<div class="row">
@@ -445,7 +452,7 @@ ul li label {
 				</c:if>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="recordList">
-				<div class="row">
+				<div class="row custom-border">
 					<div class="col-md-12">
 						<table class="table table-hover cus">
 							<tr>
@@ -491,7 +498,8 @@ ul li label {
 							<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 								<div class="single-team mb-30">
 									<div class="team-img">
-										<img src="<c:url value="/change/img/gallery/home_blog1.png"/>" alt="">
+										<img src="<c:url value="/change/img/gallery/home_blog1.png"/>"
+											alt="">
 									</div>
 									<div class="team-caption">
 										<h3>
@@ -505,7 +513,8 @@ ul li label {
 							<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 								<div class="single-team mb-30">
 									<div class="team-img">
-										<img src="<c:url value="/change/img/gallery/home_blog2.png"/>" alt="">
+										<img src="<c:url value="/change/img/gallery/home_blog2.png"/>"
+											alt="">
 									</div>
 									<div class="team-caption">
 										<h3>
@@ -519,7 +528,8 @@ ul li label {
 							<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
 								<div class="single-team mb-30">
 									<div class="team-img">
-										<img src="<c:url value="/change/img/gallery/home_blog3.png"/>" alt="">
+										<img src="<c:url value="/change/img/gallery/home_blog3.png"/>"
+											alt="">
 									</div>
 									<div class="team-caption">
 										<h3>
