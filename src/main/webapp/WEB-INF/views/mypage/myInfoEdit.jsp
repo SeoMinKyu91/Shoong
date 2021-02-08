@@ -84,10 +84,14 @@ input {
 		</div>
 		<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 			<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
-				<img
-					style="width: 120px; border-radius: 40px; padding-bottom: 10px;"
-					src="<c:url value="/images/badge/speedBadge.png"/>" alt="뱃지"
-					id="myPageThumbnailProfile">
+				<c:if test="${memberProfileImg eq 'no'}" var="noImg">
+					<img style="width: 120px; border-radius: 40px; padding-bottom: 10px;" class="profileImgOk"
+						src="<c:url value="/images/badges/shoongBadge6.png"/>" alt="뱃지" id="shoongBadge6.png">
+				</c:if>
+				<c:if test="${!noImg}">
+					<img style="width: 120px; border-radius: 40px; padding-bottom: 10px;" class="profileImgOk"
+						src="<c:url value="/images/badges/${memberProfileImg }"/>" alt="뱃지" id="${memberProfileImg }">
+				</c:if>
 			</div>
 			<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
 				<input type="button" id="btnThumbnail" value="프로필사진 바꾸기"
@@ -98,8 +102,8 @@ input {
 		<div class="form-group">
 			<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userPWD">비밀번호<span style="font-size: .8em">&nbsp;(4~12자의
-						영문 대소문자와 숫자로만 입력)</span></label> <br /> <input type="password" id="userPWD"
-					name="userPWD" minlength="4" maxlength="12"
+						영문 대소문자와 숫자로만 입력)</span></label> <br /> 
+				<input type="password" id="userPWD" name="userPWD" minlength="4" maxlength="12"
 					style="font-size: .8em; height: 50px; width: 100%"
 					value="${memberInfo.PWD }">
 			</div>
@@ -107,12 +111,11 @@ input {
 		<!-- 비밀번호 확인 입력란 -->
 		<div class="form-group">
 			<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
-				<label for="userPWDOk">비밀번호 확인</label> <br /> <input
-					type="password" class="input" id="userPWDOk" name="userPWDOk"
-					minlength="4" maxlength="12"
-					style="font-size: .8em; height: 50px; width: 100%"
-					placeholder="위와 같은 비밀번호를 입력하세요"> <span id="passwordCheck"
-					style="font-size: .8em; color: gray"></span>
+				<label for="userPWDOk">비밀번호 확인</label> <br /> 
+				<input type="password" class="input" id="userPWDOk" name="userPWDOk"
+					minlength="4" maxlength="12" style="font-size: .8em; height: 50px; width: 100%"
+					placeholder="위와 같은 비밀번호를 입력하세요"> 
+					<span id="passwordCheck" style="font-size: .8em; color: gray"></span>
 			</div>
 		</div>
 		<!-- 이름 입력란 -->
@@ -177,8 +180,8 @@ input {
 				<c:set var="tel" value="${memberInfo.USERTEL}" />
 				<input name="userTel2" id="userTel2" type="text" maxlength="4"
 					style="height: 50px; width: 26.5%" OnKeyUp="checkTel();"
-					value="${fn:substring(tel,3,7) }"> &nbsp; ㅡ &nbsp; <input
-					name="userTel3" id="userTel3" type="text" maxlength="4"
+					value="${fn:substring(tel,3,7) }"> &nbsp; ㅡ &nbsp; 
+				<input name="userTel3" id="userTel3" type="text" maxlength="4"
 					style="height: 50px; width: 26.5%" OnKeyUp="checkTel();"
 					value="${fn:substring(tel,7,11) }"> <br />
 			</div>
@@ -203,6 +206,9 @@ input {
 			</div>
 		</div>
 		<div class="form-group">
+			<input type="hidden" id="profileImgName" name="profileImgName"/>
+		</div>
+		<div class="form-group">
 			<div class=" col-xs-10 offset-xs-1 col-md-8 offset-md-2"
 				style="padding-bottom: 60px; margin-bottom: 40px">
 				<button type="submit" id="joinBtn"
@@ -218,38 +224,20 @@ input {
 			<div class="modal-body">
 				<!-- /////////////////////////   나중에 여기 팩뱃지로 바꿔야함      //////////////////////////////// -->
 				<div class="row myPageThumbnailModal">
-					<div class="col-md-2 col-xs-3">
-						<img src="<c:url value="/images/badges/shoongBadge1.png"/>"
-							alt="팩 마크" id="shoongBadge1.png">
-					</div>
-					<div class="col-md-2 col-xs-3">
-						<img src="<c:url value="/images/badges/shoongBadge2.png"/>"
-							alt="팩 마크" id="shoongBadge2.png">
-					</div>
-					<div class="col-md-2 col-xs-3">
-						<img src="<c:url value="/images/badges/shoongBadge3.png"/>"
-							alt="팩 마크" id="shoongBadge3.png">
-					</div>
-					<div class="col-md-2 col-xs-3">
-						<img src="<c:url value="/images/badges/shoongBadge4.png"/>"
-							alt="팩 마크" id="shoongBadge4.png">
-					</div>
-					<div class="col-md-2 col-xs-3">
-						<img src="<c:url value="/images/badges/shoongBadge5.png"/>"
-							alt="팩 마크" id="shoongBadge5.png">
-					</div>
-					<div class="col-md-2 col-xs-3">
-						<img src="<c:url value="/images/badges/shoongBadge6.png"/>"
-							alt="팩 마크" id="shoongBadge6.png">
-					</div>
-					<div class="col-md-2 col-xs-3">
-						<img src="<c:url value="/images/badges/shoongBadge7.png"/>"
-							alt="팩 마크" id="shoongBadge7.png">
-					</div>
-					<div class="col-md-2 col-xs-3">
-						<img src="<c:url value="/images/badges/shoongBadge8.png"/>"
-							alt="팩 마크" id="shoongBadge8.png">
-					</div>
+					<c:if test="${memberBadgeGetList eq 'no'}" var="noExit">
+						<div class="col-lg-12" style="text-align: center;">
+							<h2>획득한 뱃지가 없습니다</h2>
+						</div>						
+					</c:if>
+					<c:if test="${!noExit }">
+						<c:forEach items="${memberBadgeGetList }" var="item">
+							<div class="col-md-2 col-xs-3">
+								<img src="<c:url value="/images/badges/${item.BADGE_THUMBNAIL }"/>"
+									alt="팩 마크" id="${item.BADGE_THUMBNAIL }">
+							</div>
+						</c:forEach>
+					</c:if>
+					
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -266,6 +254,7 @@ input {
 <script>
 	$(function() {
 		$('#btnThumbnail').click(function() {
+			$('#profileImgName').val("");
 			$('#thumbnailModal').modal();
 			thumbnailCssReset();
 		})
@@ -284,7 +273,8 @@ input {
 		console.log('확인버튼 눌러짐');
 		console.log(myPageThumbnail);
 		$('#myPageThumbnail').prop("value", myPageThumbnail);
-		$('#myPageThumbnailProfile').attr("src","<c:url value='/images/badges/"+myPageThumbnail+"'/>");
+		$('.profileImgOk').attr("src","<c:url value='/images/badges/"+myPageThumbnail+"'/>");
+		$('#profileImgName').val(myPageThumbnail);
 	})
 
 	function thumbnailCssReset() {

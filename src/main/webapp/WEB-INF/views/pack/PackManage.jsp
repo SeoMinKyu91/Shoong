@@ -47,16 +47,6 @@ a:visted {
 	color: white;
 }
 
-.MyPackBtn {
-	color: #f32a48;
-	background: none;
-	font-weight: bold;
-	border: #f32a48 1px solid;
-}
-
-.MyPackBtn:hover {
-	color: white;
-}
 
 .custom-border div {
 	margin: 10px 0px 10px 0px;
@@ -84,21 +74,27 @@ a:visted {
 	cursor: pointer;
 }
 
-body {
-	background-color: #F9F9F9;
+#joinMem:active { 
+	color:white;
+}
+#bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	opacity: 0.5;
+	/* Preserve aspet ratio */
+	min-width: 100%;
+	min-height: 100%;
 }
 </style>
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
 <div
-	style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;">
+	style="border-radius: 10px; box-shadow: 0px 0px 5px #787878; padding: 30px; background-color: white;  position: relative; z-index: 1;">
 	<div class="row">
 		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
 			<div class="">
-				<a class="packMainBtn btn" href="<c:url value="/pack/main.do"/>"
+				<a class="packMainBtn btn" href="<c:url value="/pack/view.do"/>"
 					style="margine-right: 20px">HOME</a>
-				<c:if test="${!empty sessionScope.packId}">
-					<a class="MyPackBtn btn" href="<c:url value="/pack/view.do"/>">MY
-						PACK</a>
-				</c:if>
 			</div>
 		</div>
 	</div>
@@ -116,7 +112,7 @@ body {
 			<div class="offset-md-2 col-md-8 col-lg-offset-2 col-lg-8">
 				<div class="row">
 					<div class="col-lg-4 col-xs-4">
-						<img style="width: 100%; height: 100%; border-radius: 40px;"
+						<img style="width: 100%; height: 100%;"
 							src="<c:url value="/images/pack/${packInfo.PACK_THUMBNAIL }"/>"
 							alt="팩 마크">
 					</div>
@@ -144,7 +140,7 @@ body {
 	</div>
 	<div class="container" style="padding-top: 20px;">
 		<div class="row">
-			<div class="offset-md-2 col-md-8 col-lg-offset-2 col-lg-8">
+			<div class="offset-xs-2 col-xs-8 col-lg-offset-2 col-lg-8">
 				<hr>
 			</div>
 		</div>
@@ -154,8 +150,7 @@ body {
 					<!-- Nav tabs -->
 					<ul class="nav nav-pills justify-content-center" role="tablist">
 						<li role="presentation" class="active" id="JoinMem"><a
-							href="#home" aria-controls="home" role="tab" data-toggle="tab">팩
-								가입신청 목록</a></li>
+							href="#home" aria-controls="home" role="tab" data-toggle="tab">팩 가입신청 목록</a></li>
 						<li role="presentation" id="JoinMem"><a href="#profile"
 							aria-controls="profile" role="tab" data-toggle="tab">팩 가입자 목록</a>
 						</li>
@@ -173,29 +168,28 @@ body {
 							</c:if>
 							<c:if test="${!noPackJoinList }">
 								<div class="row custom-border"
-									style="font-size: 14px; background-color: #ff8827; color: white;">
-									<div class="col-lg-2 col-xs-2" style="font-weight: bold;">이름</div>
-									<div class="col-lg-2 col-xs-2" style="font-weight: bold;">나이</div>
-									<div class="col-lg-3 col-xs-5" style="font-weight: bold;">가입
-										신청일</div>
-									<div class="col-lg-3 col-xs-3" style="font-weight: bold;">활동량</div>
+									style="font-size: 14px; background-color: #052b52; color: white;">
+									<div class="col-lg-2 col-xs-3" style="font-weight: bold; font-size : .9em;">이름</div>
+									<div class="col-lg-2 col-xs-2" style="font-weight: bold; font-size : .9em;">나이</div>
+									<div class="col-lg-3 col-xs-3" style="font-weight: bold; font-size : .9em;">신청일</div>
+									<div class="text-left col-lg-3 col-xs-3" style="font-weight: bold; font-size : .9em;">활동량</div>
+									<div class="col-lg-2 col-xs-1 surakGujul"></div>
+									
 								</div>
 								<c:forEach var="list" items="${packJoinList}">
 									<div class="row custom-border joinList">
-										<div class="col-lg-2 col-xs-2">${list.NAME}</div>
-										<div class="col-lg-2 col-xs-1">${list.AGE}</div>
-										<div class="col-lg-3 col-xs-3">${list.PACK_JOIN_DATE}</div>
-										<div class="col-lg-3 col-xs-4">${list.FREQUENCY}</div>
-										<div class="col-lg-1 col-xs-1 surak">
+										<div class="col-lg-2 col-xs-3" style="font-size : .8em; line-height: 30px;">${list.NAME}</div>
+										<div class="col-lg-2 col-xs-2" style="font-size : .8em; line-height: 30px;">${list.AGE}</div>
+										<div class="col-lg-3 col-xs-3" style="font-size : .8em; line-height: 30px;">${list.PACK_JOIN_DATE}</div>
+										<div class="text-left col-lg-3 col-xs-2" style="font-size : .8em; line-height: 30px;">${list.FREQUENCY}</div>
+										<div class="col-lg-2 col-xs-2 surak" style="font-size : .8em; line-height: 30px;">
 											<a
 												href="<c:url value="/pack/joinOk.do?packJoinNo=${list.PACK_JOIN_NO}&packID=${list.PACK_ID }&userID=${list.USER_ID }"/>">
-												<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+												<span class="glyphicon glyphicon-ok" aria-hidden="true" style="color:blue;"></span>
 											</a>
-										</div>
-										<div class="col-lg-1 col-xs-1 gujul">
 											<a
 												href="<c:url value="/pack/joinNo.do?packJoinNo=${list.PACK_JOIN_NO}"/>">
-												<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+												<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:red;"></span>
 											</a>
 										</div>
 									</div>
@@ -205,19 +199,18 @@ body {
 						</div>
 						<div role="tabpanel" class="tab-pane" id="profile">
 							<div class="row custom-border"
-								style="font-size: 14px; background-color: #fad1af;">
-								<div class="col-lg-3 col-xs-2" style="font-weight: bold;">이름</div>
-								<div class="col-lg-2 col-xs-2" style="font-weight: bold;">나이</div>
-								<div class="col-lg-3 col-xs-5" style="font-weight: bold;">최근
-									접속일</div>
-								<div class="col-lg-3 col-xs-2" style="font-weight: bold;">직책</div>
+								style="font-size: 14px; background-color: #052b52; color:white">
+								<div class="col-lg-3 col-xs-3" style="font-weight: bold; font-size : .9em;">이름</div>
+								<div class="col-lg-2 col-xs-2" style="font-weight: bold; font-size : .9em;">나이</div>
+								<div class="col-lg-3 col-xs-4" style="font-weight: bold; font-size : .9em;">최근 접속일</div>
+								<div class="col-lg-3 col-xs-2" style="font-weight: bold; font-size : .9em;">직책</div>
 							</div>
 							<c:forEach var="memberList" items="${packMemberList }">
 								<div class="row custom-border" name="test">
-									<div class="col-lg-3 col-xs-2">${memberList.NAME }</div>
-									<div class="col-lg-2 col-xs-2">30</div>
-									<div class="col-lg-3 col-xs-5">${memberList.LASTCONNECT }</div>
-									<div class="col-lg-3 col-xs-2">${memberList.AUTHORITY }</div>
+									<div class="col-lg-3 col-xs-3" style="font-size : .8em;">${memberList.NAME }</div>
+									<div class="col-lg-2 col-xs-2" style="font-size : .8em;">30</div>
+									<div class="col-lg-3 col-xs-4" style="font-size : .8em;">${memberList.LASTCONNECT }</div>
+									<div class="col-lg-3 col-xs-2" style="font-size : .8em;">${memberList.AUTHORITY }</div>
 									<c:if test="${memberList.AUTHORITY eq '회원'}">
 										<div class="col-lg-1 col-xs-1 gujul">
 											<a

@@ -36,8 +36,8 @@ public class MyPageServiceImpl implements MyPageService{
 
 	@Override
 	public int update(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return dao.update(map);
 	}
 
 	@Override

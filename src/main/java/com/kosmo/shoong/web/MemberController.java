@@ -242,7 +242,8 @@ public class MemberController {
 
 		MemberDTO dto = memberService.selectOne(map);
 		model.addAttribute("name",dto.getUserName());
-
+		
+		
 		List<Map> lists = galleryService.imgFirstList(map);
 		System.out.println(lists);
 		model.addAttribute("imgList", lists);
@@ -259,6 +260,24 @@ public class MemberController {
 	public String myInfoEdit(HttpServletRequest req, Map map, Model model) {
 		map.put("userId", req.getSession().getAttribute("userId").toString());
 		Map memberInfo = memberService.memberEditView(map);
+		
+		
+		List<Map> badgeNames = memberService.memberHasBadgeNames(map);
+		
+		if(badgeNames.size() != 0) {
+			model.addAttribute("memberBadgeGetList",badgeNames);
+		}
+		else {
+			model.addAttribute("memberBadgeGetList","no");
+		}
+		
+		if(memberService.hasProfileImg(map) != null) {
+			model.addAttribute("memberProfileImg",memberService.hasProfileImg(map));
+		}
+		else {
+			model.addAttribute("memberProfileImg","no");
+		}
+		
 		model.addAttribute("memberInfo", memberInfo);
 		return "mypage/myInfoEdit";
 	}

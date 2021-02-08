@@ -7,17 +7,19 @@
 
 
 	
-<select id="mainDiarySelectList" parameterType="java.util.Map" resultType="java.util.Map">
-	select * from 
-	(SELECT S.*,
-	    (SELECT count(*) FROM DIARY_IMG C WHERE C.DIARY_CODE = S.DIARY_CODE)AS DIARY_IMG_COUNT
-	 FROM DIARY S where  USER_ID = #{id}  order by DIARY_CODE desc)d
-	 where rownum <![CDATA[<]]> =6
-</select>
+	<select id="mainDiarySelectList" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from 
+		(SELECT S.*,
+		    (SELECT count(*) FROM DIARY_IMG C WHERE C.DIARY_CODE = S.DIARY_CODE)AS DIARY_IMG_COUNT
+		 FROM DIARY S where  USER_ID = #{id}  order by DIARY_CODE desc)d
+		 where rownum <![CDATA[<]]> =6
+	</select>
+		
+	<select id="chartRecordselectList" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT*FROM RECORD_ WHERE RECORD_DATE  <![CDATA[>]]>= TRUNC(SYSDATE,'MM') AND
+								 LAST_DAY(SYSDATE)  <![CDATA[>]]>= RECORD_DATE AND
+								 USER_ID =#{id}
+	</select>
 	
-<select id="chartRecordselectList" parameterType="java.util.Map" resultType="java.util.Map">
-SELECT*FROM RECORD_ WHERE RECORD_DATE  <![CDATA[>]]>= TRUNC(SYSDATE,'MM') AND
-							 LAST_DAY(SYSDATE)  <![CDATA[>]]>= RECORD_DATE AND
-							 USER_ID =#{id}
-</select>
+	
 </mapper>

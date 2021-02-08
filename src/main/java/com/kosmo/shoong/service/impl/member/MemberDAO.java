@@ -1,5 +1,6 @@
 package com.kosmo.shoong.service.impl.member;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -80,6 +81,22 @@ public class MemberDAO implements MemberService{
 	@Override
 	public MemberDTO isLogin(MemberDTO member) {
 		return sqlMapper.selectOne("memberIsLogin",member);
+	}
+
+	public int profileImgUpdate(Map map) {
+		return sqlMapper.update("profileImgUpdate",map);
+	}
+
+	public String hasProfileImg(Map map) {
+		return sqlMapper.selectOne("hasProfileImg",map);
+	}
+
+	public int profileImgInsert(Map map) {
+		return sqlMapper.insert("profileImgInsert",map);
+	}
+
+	public List<Map> memberHasBadgeNames(Map map) {
+		return sqlMapper.selectList("memberHasBadgeNames",map);
 	}
 
 

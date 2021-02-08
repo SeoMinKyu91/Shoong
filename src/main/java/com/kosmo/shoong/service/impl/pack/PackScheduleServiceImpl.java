@@ -93,6 +93,16 @@ public class PackScheduleServiceImpl implements PackScheduleService{
 		return dao.scheduleJoinList(map);
 	}
 
+	public String userName(Map map) {
+		return dao.userName(map);
+	}
+
+	public int isJoined(Map map) {
+		
+		return dao.isJoined(map);
+		
+	}
+
 	
 
 }/////////////////class
