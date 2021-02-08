@@ -96,6 +96,12 @@
 		box-shadow: 3px 3px 10px #787878;
 	}
 	
+	.userThumbnailImg{
+		border-radius: 100%;
+		width: 50px;
+		height: 50px;
+	}
+	
 	
 	
 </style>
@@ -185,16 +191,41 @@
    <div class="modal-dialog modal-lg">
       <div class="modal-content">
          <div class="modal-header" style="background-color: #052b52;">
-            <h4 class="modal-title"style="margin: 5px; color: white;">일정 상세보기</h4>
+            <h4 class="modal-title packScheduleViewTitle" style="margin: 5px; color: white;"></h4>
          </div>
 
          <div class="modal-body">
+         	<!--  bbbbbbbbbbbbb -->
+         	
+         	<div class="row" style="padding: 15px; margin-top: 0px;">
+         		<div class="col-lg-12" style="margin-bottom:20px;">
+         			<img src="" id="userThumbnailImgInModal">
+         			<span style="font-size: 16px; margin-left: 10px;" id="packScheduleViewWriter"></span>
+       			</div>
+         		<div class="col-lg-12 bg-light p-5" style="border: #ff8827 1px solid;border-radius: 10px; padding:10px;">
+         			<div class="col-lg-12" style="text-align: left;">
+         				<span class="glyphicon glyphicon-calendar" style="color:#052b52; font-size: 20px;">
+         				<span id="packScheduleViewStart" style="color:black;"></span> ~ 
+         				<span id="packScheduleViewEnd" style="color:black;"></span> 
+         			</div>
+         			<div class="col-lg-12" id="packScheduleViewContent" 
+         				style="border: #ff8827 1px solid; min-height: 200px; margin-top: 20px; 
+         					background-color: white; border-radius: 10px; padding: 15px; font-size: 16px; text-align: left">
+         			</div>
+         			<div class="col-lg-12" id="packScheduleJoinerList" style="text-align: left; margin-top: 15px; line-height: 40px;">
+         				<img src="<c:url value="/images/fa-icons/user-check-solid.svg"/>" style="width: 30px; height: 30px; color:#052b52 ">
+         				<span style="font-size: 16px; margin-left: 25px;" id="joinerSpan"></span> 
+         			</div>
+         		</div>
+         		<div class="row">
+               		<div style="display:none;" id="packScheduleViewNo" value="" style="text-align: left;"></div>
+       			 </div>
+            
+         	</div>
          
          
          
-         
-         
-         
+         	<!--  
             <div class="row">
                <div class="col-md-2" style="text-align: left;font-weight:bold;">제목</div>
                <div class="col-md-10" id="packScheduleViewTitle" value="" style="text-align: left;"></div>
@@ -219,10 +250,7 @@
             	<div class="col-md-2">참가자</div>
             	<div class="col-md-10" id="packScheduleViewJoiner"></div>
             </div>
-            
-            <div class="row">
-               <div style="display:none;" id="packScheduleViewNo" value="" style="text-align: left;"></div>
-            </div>
+            -->
             
             
             
@@ -248,8 +276,8 @@
 <div class="modal fade" id="packSchedulUpdateModal" data-backdrop="false">
    <div class="modal-dialog modal-lg">
       <div class="modal-content">
-         <div class="modal-header">
-            <h4 class="modal-title" style="margin: 5px;font-weight:bold;">일정 수정!!!!</h4>
+         <div class="modal-header" style="background-color: #052b52;">
+            <h4 class="modal-title" style="margin: 5px;font-weight:bold;color:white">일정 수정</h4>
          </div>
 
          <div class="modal-body">
@@ -364,6 +392,7 @@
       
       calendar.on('eventClick',function(info){
          console.log('이벤트 클릭');
+         //aaaaaa
          $.ajax({
             url : "<c:url value="/pack/schedule/selectOne.do"/>",//요청할 서버의 URL주소
             type : 'post',//데이타 전송방식(디폴트는 get방식) 
@@ -374,14 +403,24 @@
             },
             success : function(data) {
                console.log('들어옴');
-               $('#packScheduleViewTitle').text(data.title);
-               $('#packScheduleViewWriter').text(data.userId);
+               $('.packScheduleViewTitle').text(data.title);
+               $('#packScheduleViewWriter').text(data.name);
                $('#packScheduleViewStart').text(data.start);
                $('#packScheduleViewEnd').text(data.end);
                $('#packScheduleViewContent').text(data.content);
                $('#packScheduleViewNo').text(data.packScheduleNo);
                
+               if(data.memberProfileImgs == 'no'){
+            	   $('#userThumbnailImgInModal').prop('src',"<c:url value="/images/badges/shoongBadge6.png"/>")
+               }
+               else{
+            	   var str = data.memberProfileImgs;
+            	   $('#userThumbnailImgInModal').prop('src',"<c:url value='/images/badges/"+str+"'/>")
+               }
+               $('#userThumbnailImgInModal').css('width','50px')
+               $('#userThumbnailImgInModal').css('height','50px')
                
+	           
                
                if(data.isWriter == 'yes'){
                   $('#btnPackScheduleJoin').css('display','none');   
@@ -390,19 +429,24 @@
                   $('#btnPackScheduleUpdate').css('display','none');
                   $('#btnPackScheduleDelete').css('display','none');
                }
+               
+               if(data.isJoined == 'yes'){
+            	   $('#btnPackScheduleJoin').css('display','none');    
+               }
                var str = "";
+               console.log('아아아아아아아')
+               console.log(data.scheduleJoiner);
                $.each(data.scheduleJoiner,function(index,el){
-            	   console.log(el.NAME);
-            	   str += el.NAME;
+            	   console.log("참가자이름"+el.NAME);
+            	   str += "#"+el.NAME+"  ";
                })
                console.log(str);
-               $('#packScheduleViewJoiner').text(str);
+               $('#joinerSpan').html(str);
                
                $('#packScheduleViewModal').modal();
             },
             error : function(request, error) {//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
                console.log('에러 : ', error.responseText);
-               alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
             
          });
@@ -422,25 +466,31 @@
 		 
 		 $('#btnPackSchedule').click(function(){
 				if($('#packScheduleTitle').val() == ''){
-				alert('제목을 입력해주세요');
-				$('#packScheduleTitle').focus();
-				return;
-			}
+					alert('제목을 입력해주세요');
+					$('#packScheduleTitle').focus();
+					return;
+				}
 				if($('#startDatePicker').val() == ''){
-				alert('시작 날짜를 입력해주세요');
-				$('#startDatePicker').focus();
-				return;
-			}
+					alert('시작 날짜를 입력해주세요');
+					$('#startDatePicker').focus();
+					return;
+				}
 				if($('#endDatePicker').val() == ''){
-				alert('끝 날짜를 입력해주세요');
-				$('#endDatePicker').focus();
-				return;
-			}
+					alert('끝 날짜를 입력해주세요');
+					$('#endDatePicker').focus();
+					return;
+				}
 				if($('#packScheduleContent').val() == ''){
-				alert('내용을 입력해주세요');
-				$('#packScheduleContent').focus();
-				return;
-			}
+					alert('내용을 입력해주세요');
+					$('#packScheduleContent').focus();
+					return;
+				}
+				var start = moment($('#startDatePicker').val());
+				var end = moment($('#endDatePicker').val());
+				if(start > end){
+					alert('시작 날짜가 끝 날짜보다 크면 안됩니다.');
+					return;
+				}
 			   
 		  
 		  	$('#packSchedule').submit();
@@ -451,7 +501,7 @@
 		 });
 		 
 		 $('#btnPackScheduleUpdate').click(function(){
-		    $('#packScheduleTitleUpdate').prop('value',$('#packScheduleViewTitle').text());
+		    $('#packScheduleTitleUpdate').prop('value',$('.packScheduleViewTitle').text());
 		    $('#startDatePickerUpdate').prop('value',$('#packScheduleViewStart').text());
 		    $('#endDatePickerUpdate').prop('value',$('#packScheduleViewEnd').text());
 		    $('#packScheduleContentUpdate').prop('value',$('#packScheduleViewContent').text());
@@ -467,6 +517,34 @@
 		 
 		 $('#btnPackScheduleUpdateOk').click(function(){
 		    console.log('수정버튼 들어옴');
+    		if($('#packScheduleTitleUpdate').val() == ''){
+				alert('제목을 입력해주세요');
+				$('#packScheduleTitleUpdate').focus();
+				return;
+			}
+			if($('#startDatePickerUpdate').val() == ''){
+				alert('시작 날짜를 입력해주세요');
+				$('#startDatePickerUpdate').focus();
+				return;
+			}
+			if($('#endDatePickerUpdate').val() == ''){
+				alert('끝 날짜를 입력해주세요');
+				$('#endDatePickerUpdate').focus();
+				return;
+			}
+			if($('#packScheduleContentUpdate').val() == ''){
+				alert('내용을 입력해주세요');
+				$('#packScheduleContentUpdate').focus();
+				return;
+			}
+			var start = moment($('#startDatePickerUpdate').val());
+			var end = moment($('#endDatePickerUpdate').val());
+			if(start > end){
+				alert('시작 날짜가 끝 날짜보다 크면 안됩니다.');
+				return;
+			}
+		    
+		    
 		    $('#packScheduleUpdate').submit();
 		 });
 		 
@@ -485,6 +563,10 @@
 		 $('#btnPackScheduleInsertClose').click(function(){
 		  console.log('팩일정등록 닫기 클릭');
 		  $('#packScheduleInsertModal').modal('hide');
+		  $('#packScheduleTitle').val("");
+		  $('#startDatePicker').val("");
+		  $('#endDatePicker').val("");
+		  $('#packScheduleContent').val("");
 		  
 		 })
 		 
@@ -498,6 +580,7 @@
 		 
 		 $('#btnPackScheduleJoin').click(function(){
 		  var packScheduleNo = $('#packScheduleViewNo').text();
+		  console.log(packScheduleNo);
 			  $.ajax({
 				   url:"<c:url value="/pack/schedule/join.do"/>",
 				   data:{"packScheduleNo":packScheduleNo,"userId":'${sessionScope.userId}'},

@@ -55,15 +55,25 @@
 	</select>
 	
 	<insert id="packScheduleJoin" parameterType="java.util.Map">
-		<selectKey keyProperty="pack_join_no" order="BEFORE" resultType="int">
-			select pack_join_no from pack_join where user_id = #{userId}
-		</selectKey>
-		insert into pack_schedule_join values(#{packScheduleNo},#{pack_join_no})
+		
+		insert into pack_schedule_join values(#{packScheduleNo},#{packJoinNo})
 	</insert>
 	
 	<select id="scheduleJoinList" parameterType="Map" resultType="Map">
-		select m.name from 
-		pack_join pj join pack_schedule_join psj on pj.pack_join_no = psj.pack_join_no join member_ m on pj.user_id = m.user_id where pack_schedule_no = #{packScheduleNo}
+		select m.name from pack_schedule_join psj join pack_join pj on psj.pack_join_no = pj.pack_join_no join member_ m on pj.user_id = m.user_id 
+		where psj.pack_schedule_no =#{packScheduleNo}  
+	</select>
+	
+	<select id="userName" parameterType="Map" resultType="String">
+		select name from member_ where user_id = #{scheduleUserId}
+	</select>
+	
+	<select id="memberPackJoinNo" parameterType="Map" resultType="int">
+		select pack_join_no from pack_join where user_id =#{userId}
+	</select>
+	
+	<select id="isJoined" parameterType="Map" resultType="int">
+		select count(*) from pack_join pj join pack_schedule_join psj on pj.pack_join_no = psj.pack_join_no where pj.user_id = #{userId} and psj.pack_schedule_no = ${packScheduleNo}
 	</select>
 
 </mapper>

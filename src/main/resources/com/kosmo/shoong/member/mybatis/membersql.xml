@@ -115,4 +115,5 @@
 		insert into member_profile_img values(SEQ_M_P_IMG.nextval,#{userId},#{profileImgName})
 	</insert>
 	
+	
 </mapper>
