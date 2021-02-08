@@ -5,4 +5,12 @@
   
 <mapper namespace="com.kosmo.shoong.admin.mybatis.packAdminsql">
 	
+	
+	<select id="packList" resultType="java.util.Map" >
+		SELECT * FROM PACK
+	</select>
+	
+	<delete id="packDelete" parameterType="java.util.Map">
+		DELETE FROM PACK WHERE PACK_ID = #{packID}
+	</delete>
 </mapper>

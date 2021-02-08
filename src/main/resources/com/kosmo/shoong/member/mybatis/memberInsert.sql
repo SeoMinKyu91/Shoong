@@ -21,7 +21,7 @@ INSERT INTO verify VALUES('shoong1700@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1800@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1900@naver.com', 'Y');
 
-INSERT INTO useraddr VALUES('shoong1000@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
+INSERT INTO useraddr VALUES('shoong1000@naver.com', '서울특별시 구로구',37.488004666666676,126.85213716666668);
 INSERT INTO useraddr VALUES('shoong1100@naver.com', '경기도 용인시',37.324501882069015,127.25959003827327);
 INSERT INTO useraddr VALUES('shoong1200@naver.com', '경기도 성남시',37.40953083324051,127.07590473712015);
 INSERT INTO useraddr VALUES('shoong1300@naver.com', '경기도 용인시',37.25030499290375,127.14752182834968);

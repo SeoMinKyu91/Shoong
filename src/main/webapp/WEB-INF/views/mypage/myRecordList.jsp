@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <style>
 .map {
@@ -14,16 +12,21 @@
 	width: 100%;
 	height: 400px;
 }
+.animated-text{
+	display:none;
+}
+.slider-area{
+	display:none;
+}
+h1 {
+	text-align: center;
+}
+
 </style>
+    <h1>나의 라이딩</h1>
+    <hr/><br/>
 
-
-<div id="colorlib-main">
 	<div class="container">
-		<div class="row">
-			<div class="col-xs-12">
-				<h1>나의 라이딩</h1>
-			</div>
-		</div>	
 		<div class="row">
 			<c:if test="${empty recordList }" var="isEmpty">
 	                  <h3>기록이 없어요</h3>
@@ -43,11 +46,7 @@
 	    	  </c:if>
 		</div><!--row-->
 	</div><!--cotainer-->
-</div><!--colorlib-main-->
-
 <script>
-
-
 // 너무 느리다.. 방법이 없나 생각해보기.. 레코드 뽑는 개수 지정?
 function mapStart(recordId,mapRecord){
 	mapboxgl.accessToken = 'pk.eyJ1Ijoid2t1bmdoOTMiLCJhIjoiY2tpd2hpNnZ0MHF3YzMwcnd5ZG1obzh2biJ9.EW26scaL6pDX7yQhFNnwMw';
@@ -70,8 +69,8 @@ function mapStart(recordId,mapRecord){
 	map.on('load', function(){ // 이부분 있어야 바로 로드 가능
 		
 		var data = mapRecord
-		var json = data.features[0];
-		console.log('data:%O',data.features[0]);
+		var json = data;
+		console.log('data:%O',json);
 
 		map.addSource('route', {
 			"type":"geojson",
@@ -90,7 +89,7 @@ function mapStart(recordId,mapRecord){
 				'line-width': 8
 			}
 		});
-		map.setCenter(data.features[0].geometry.coordinates[0][0]);
+		map.setCenter(json.geometry.coordinates[0][0]);
 		map.setZoom(10);
 	})
 }//mapStart()

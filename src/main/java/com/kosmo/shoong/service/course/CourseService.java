@@ -5,13 +5,12 @@ import java.util.Map;
 
 public interface CourseService {
 
-	List<Map> selectList(Map map);
+	CourseDTO selectOneByCId(String courseId);
 	
-	CourseDTO selectOne(Map map);
-	
-	int insert(Map map);
+	boolean insert(Map map);
 	int delete(Map map);
 	int update(Map map);
 	
 	List<Map> showCourse(Map map);
+	List<CourseDTO> selectList();
 }

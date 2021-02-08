@@ -3,8 +3,8 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
@@ -14,8 +14,8 @@
 	 display: inline-block;    
      position: relative
 }.img{
-   	width: 90px;
-    height:90px;
+   	width: 180px;
+    height:180px;
 }.imgdeletemark{
     display: none;   
 	text-align: center;
@@ -45,7 +45,6 @@
     border:none;
 }.diaryInfo{
 	margin-top: 40px;
-	font-family:'Nanum Pen Script', cursive;
 }.diaryInfo div{
 	font-size: 25px;
 	outline:none;
@@ -56,7 +55,6 @@
 	margin-bottom: 20px;
 }.diaryInfo .diaryTitle{
 	width: 100%;
-	
 }.diaryInfo .diaryContent{
 	height: 200px;
 	width: 100%;
@@ -67,13 +65,20 @@
 }#map{
    height: 100%;
 }
+.animated-text{
+	display:none;
+}
+.slider-area{
+	display:none;
+}
+#storyBtn:hover{
+	color: white;
+}
 </style>
 
-	<div id="colorlib-main">
-				
             <div class="modal-body" style="height: 100%;">
             	   <div style="margin-top:10px">
-						<div style="width: 100% ;height: 200px;border:1px solid #666666"> 
+						<div style="width: 100% ;height: 400px;border:1px solid #666666"> 
 							 <div  id="map"></div> 
 						</div>
 					</div>
@@ -84,7 +89,7 @@
 					 <span>내용입력 </span> <br> 
 					 <div class="diaryContent"  id="contentDiv" contenteditable="true"></div>
 				</div>
-				<button id="storyBtn">이미지 스토리 만들기</button>
+				<button id="storyBtn" class="btn btn-primary btn-lg btn-block">이미지 스토리 만들기</button>
 				<div style="margin-top:10px; display:none" id="storyDiv">
 						<form method="post" enctype="multipart/form-data" >
 							 <div id="fileUpload" class="dragAndDropDiv"><span class="dragAndDropDivSpan">스토리 카드를 만들 이미지를 올려주세요</span></div>
@@ -104,7 +109,7 @@
 				</form>
                 
             </div>
-            </div>
+
              
 
 <script>
@@ -146,14 +151,14 @@
             $(this).css('border', '2px dotted #0B85A1');
             e.preventDefault();
             var files = e.originalEvent.dataTransfer.files;
-            if (files.length > 3) {
-                alert('이미지는 3개까지 올릴 수 있습니다.');
+            if (files.length >= 5) {
+                alert('이미지는 5개까지 올릴 수 있습니다.');
                 return;
             }
             var size =$("#imgArry").val().split(",").length+files.length;
             console.log(size)   
-            if(size > 3){
-                alert('이미지는 3개까지 올릴 수 있습니다.');
+            if(size >= 5){
+                alert('이미지는 5개까지 올릴 수 있습니다.');
                  return;
             }    
 
@@ -288,8 +293,8 @@
 			<c:if test="${!empty mapRecord}">
 		
 			var data = ${mapRecord}
-			var json = data.features[0];
-			console.log('data:%O',data.features[0]);
+			var json = data;
+			console.log('data:%O',data);
 			
 			map.addSource('route', {
 				"type":"geojson",
@@ -308,7 +313,7 @@
 					'line-width': 8
 				}
 			});
-			map.setCenter(data.features[0].geometry.coordinates[0][0]);
+			map.setCenter(json.geometry.coordinates[0][0]);
 			map.setZoom(11);
 		</c:if>
 		});

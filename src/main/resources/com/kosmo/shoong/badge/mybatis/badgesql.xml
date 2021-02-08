@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 
+ BADGE_ID                                  NOT NULL NUMBER
+ BADGE_NAME                                         NVARCHAR2(30)
+ BADGE_REQUIREMENT                                  VARCHAR2(30)
+ BEDGE_CATEGORY                                     VARCHAR2(30)
+ BADGE_THUMBNAIL                                    NVARCHAR2(30)
+ -->
+<mapper namespace="com.kosmo.shoong.badge.mybatis.badgesql">
+
+	<resultMap type="badgeDTO" id="badgeDTOResult">
+		<result property="badgeId" column="BADGE_ID"/>
+		<result property="badgeName" column="BADGE_NAME"/>
+		<result property="badgeRequirement" column="BADGE_REQUIREMENT"/>
+		<result property="badgeCategory" column="BEDGE_CATEGORY"/>
+		<result property="badgeThumbnail" column="BADGE_THUMBNAIL"/>
+	</resultMap>
+	
+	<select id="whereIsMyBadge" parameterType="java.util.Map" resultMap="badgeDTOResult">
+		<!-- 
+		SELECT *
+		FROM BADGE
+		WHERE BADGE_CATEGORY='마일리지'
+		AND TO_NUMBER(BADGE_REQUIREMENT) <![CDATA[<=]]>  TO_NUMBER(#{mileage})
+		 -->
+		SELECT * 
+		FROM badge 
+		WHERE BADGE_CATEGORY='마일리지'
+		AND TO_NUMBER(BADGE_REQUIREMENT) <![CDATA[<=]]>  TO_NUMBER(#{mileage})
+		AND badge_id NOT IN(
+			SELECT badge_id 
+			FROM user_badge_get 
+			WHERE user_id=#{userId})
+	</select>
+
+	<insert id="insertMileageBadge" parameterType="java.util.Map">
+		<!-- 
+		<foreach collection="badgeList" item="badge" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
+			INTO user_badge_get
+			VALUES (seq_b_u_get.NEXTVAL,#{badge.badgeId},#{userId},SYSDATE)
+		</foreach>
+		 -->
+		INSERT INTO user_badge_get
+		SELECT seq_b_u_get.NEXTVAL, A.* FROM (
+		<foreach item="badge" collection="badgeList" separator="UNION ALL ">
+			SELECT #{badge.badgeId},#{userId},SYSDATE
+			FROM DUAL
+		</foreach>) A
+		
+		
+	</insert>
+
+</mapper>

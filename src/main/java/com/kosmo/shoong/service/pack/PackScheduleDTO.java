@@ -7,11 +7,11 @@ public class PackScheduleDTO {
 	private String packScheduleNo;
 	private String userId;
 	private String packId;
-	private Date packScheduleStart;
-	private Date packScheduleEnd;
+	private String packScheduleStart;
+	private String packScheduleEnd;
 	private String packScheduleTitle;
 	private String packScheduleContent;
-
+	
 	public String getPackScheduleNo() {
 		return packScheduleNo;
 	}
@@ -30,16 +30,16 @@ public class PackScheduleDTO {
 	public void setPackId(String packId) {
 		this.packId = packId;
 	}
-	public Date getPackScheduleStart() {
+	public String getPackScheduleStart() {
 		return packScheduleStart;
 	}
-	public void setPackScheduleStart(Date packScheduleStart) {
+	public void setPackScheduleStart(String packScheduleStart) {
 		this.packScheduleStart = packScheduleStart;
 	}
-	public Date getPackScheduleEnd() {
+	public String getPackScheduleEnd() {
 		return packScheduleEnd;
 	}
-	public void setPackScheduleEnd(Date packScheduleEnd) {
+	public void setPackScheduleEnd(String packScheduleEnd) {
 		this.packScheduleEnd = packScheduleEnd;
 	}
 	public String getPackScheduleTitle() {
@@ -54,5 +54,7 @@ public class PackScheduleDTO {
 	public void setPackScheduleContent(String packScheduleContent) {
 		this.packScheduleContent = packScheduleContent;
 	}
+
+	
 
 }///////////class

@@ -18,4 +18,6 @@ public interface PackService {
 	
 	//팩 이름 체크
 	int selectPackName(Map map);
+	
+	Map selectOneUserAddr(String id);
 }

@@ -20,15 +20,8 @@ public class CourseDAO implements CourseService {
 	private SqlSessionTemplate sqlMapper;
 
 	@Override
-	public List<Map> selectList(Map map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int insert(Map map) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean insert(Map map) {
+		return sqlMapper.insert("courseInsert", map)==1?true:false;
 	}
 
 	@Override
@@ -42,21 +35,21 @@ public class CourseDAO implements CourseService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	@Override
-	public CourseDTO selectOne(Map map) {		
-		return sqlMapper.selectOne("courseSelectOne", map);
-	}
+	
 	@Override
 	public List<Map> showCourse(Map map) {
 		Set keys = map.keySet();
 		for(Object key:keys) System.out.println(key+"-:-"+map.get(key));
 		return sqlMapper.selectList("showCourse",map);
 	}
-	/*
+	
 	@Override
-	public CourseDTO selectone(Map map) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CourseDTO> selectList() {
+		return sqlMapper.selectList("courseSelect");
 	}
-	*/
+
+	@Override
+	public CourseDTO selectOneByCId(String courseId) {
+		return sqlMapper.selectOne("courseSelectByCId", courseId);
+	}
 }

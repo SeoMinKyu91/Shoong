@@ -61,10 +61,6 @@
 		ON d.record_id = t1.record_id) t2 ON i.diary_code = t2.diary_code
 	</select>
 	
-	<select id="showCourse" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT * FROM course c join member_ m ON c.user_id=#{userId}
-	</select>
-	
 	<select id="memberIsMember" parameterType="java.util.Map"
 		resultType="int">
 		SELECT COUNT(*) 
@@ -91,11 +87,9 @@
 	<update id="memberUpdate" parameterType="java.util.Map">
 		UPDATE member_ 
 		<set>
-			<if test="surveyResult!=null">frequency=#{surveyResult},</if>
-			<if test="userPWD!=null">pwd=#{userPWD},</if>
-			<if test="userName!=null">name=#{userName},</if>
-			<if test="userAddr!=null">addr=#{userAddr},</if>
-			<if test="userTel!=null">usertel=#{userTel},</if>
+			<if test="userPWD!=null">pwd=#{userPWD}</if>
+			<if test="userName!=null">name=#{userName}</if>
+			<if test="userTel!=null">usertel=#{userTel}</if>
 		</set> 
 		<if test="userId!=null">
 			WHERE user_id=#{userId}
@@ -103,7 +97,7 @@
 	</update>
 	
 	<select id="memberHasPack" parameterType="java.util.Map" resultType="java.util.Map">
-		SELECT pack_id FROM pack_join WHERE user_id=#{userId} AND pack_join_accept='yes'
+		select p.pack_id,p.pack_name from pack_join pj join pack p on pj.pack_id = p.pack_id where pj.user_id = #{userId} and pj.pack_join_accept='yes'
 	</select>
 
 	<select id="memberEditList" parameterType="java.util.Map" resultType="java.util.Map">

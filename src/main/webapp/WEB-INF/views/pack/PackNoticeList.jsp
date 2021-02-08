@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
 <style>
 	.cus {
 		border-top: 1px solid white;
@@ -11,7 +10,7 @@
 	.cus th {
 		border-top: 1px solid white;
 		border-bottom: 1px solid white;
-		background-color : #ff8827;
+		background-color : #052b52;
 		color:white;
 		font-size:1em;
 	}
@@ -93,7 +92,99 @@
       display: inline-block;
       vertical-align: middle;
     }
+    .animated-text{
+		display:none;
+	}
+	.slider-area{
+		display:none;
+	}
+	
+	body{
+		background-color: #F9F9F9;
+	}
+	
+	.packMainBtn {
+		color: #f32a48;
+		background: none;
+		font-weight: bold;
+		border: #f32a48 1px solid;
+	}
+	
+	.packMainBtn:hover {
+		color: white;
+	}
+	.MyPackBtn {
+		color: #f32a48;
+		background: none;
+		font-weight: bold;
+		border: #f32a48 1px solid;
+	}
+
+	.MyPackBtn:hover {
+		color: white;
+	}
+	
 </style>
+
+<div style="border-radius: 10px;box-shadow: 0px 0px 5px #787878;padding: 30px;background-color: white;">
+	<div class="row">
+		<div class="col-xs-12 col-lg-12" style="padding-bottom: 20px">
+			<div class="">
+				<a class="packMainBtn btn" href="<c:url value="/pack/main.do"/>"
+					style="margine-right: 20px">HOME</a>
+				<c:if test="${!empty sessionScope.packId}">
+					<a class="MyPackBtn btn" href="<c:url value="/pack/view.do"/>">MY
+						PACK</a>
+				</c:if>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 30px;">
+		<div class="col-xs-12 col-md-12 col-lg-12">
+			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em;text-align: center">공지사항</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-hover cus">
+				<tr >
+					<th class="text-center col-lg-2 col-xs-2">번호</th>
+					<th class="text-center col-lg-6 col-xs-5">제목</th>
+					<th class="text-center col-lg-2 col-xs-2">작성자</th>
+					<th class="text-center col-lg-2 col-xs-3">작성일</th>
+				</tr>
+				<c:if test="${empty list }" var="isEmpty">
+					<tr class="text-center">
+						<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
+					</tr>
+				</c:if>
+				<c:if test="${!isEmpty}">
+					<c:forEach var="item" items="${list }" varStatus="loop">
+						<tr class="text-center">
+							<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
+							<td class="text-left">${item.packNoticeTitle}</td>
+							<td>${item.userName}</td>
+							<td>${item.packNoticeDate}</td>
+							<td style="display: none;">${item.packNoticeContent }</td>
+							<td style="display: none;">${item.packNoticeNo }</td>
+						</tr>
+					</c:forEach>
+				</c:if>	
+			</table>
+		</div>
+	</div>
+	<c:if test="${!empty manager }">
+		<div class="row">
+			<div class="col-lg-12 text-right">
+				<button class="submitBtn btn" data-toggle="modal" id="btnNoticeWrite">등록</button>
+
+			</div>
+		</div>
+	</c:if>
+	<div class="row">
+		<div class="col-lg-12 text-center">${pagingString }</div>
+	</div>
+</div>
 
 
 <!-- 팩 공지사항 등록 모달창 시작 -->
@@ -236,80 +327,6 @@
 </div>
 <!-- 팩 공지사항 상세보기 모달창 끝 -->
 
-<div id="colorlib-main" style="padding:20px">
-	<div class="row">
-		<div class="col-lg-12" style="padding-bottom:20px">
-			<div class="">
-				<a href="<c:url value="/pack/main.do"/>">
-				<img alt="pack" src="<c:url value="/images/pack/pack.png"/>"
-					style="width: 80px;"></a>
-				&emsp;<a class="packCreateBtn btn" 
-					href="<c:url value="/pack/main.do"/>">HOME</a>
-				<c:if test="${!empty sessionScope.packId}">
-					<a class="packCreateBtn btn"
-						href="<c:url value="/pack/view.do"/>">MY PACK</a>
-				</c:if>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xs-12 col-md-12 col-lg-12">
-			<p style="padding-top:14px;padding-left:10px;color:black;font-weight: bold;font-size:1.7em;text-align: center">전국일주</p>
-			<hr style="background-color: black;height:1px"/>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="section-tittle text-center col-lg-12" >
-				<p style="font-size:1.6em;padding-bottom:10px;padding:20px;">&lt;&nbsp;공지사항&nbsp;&gt;</p>
-			</div>
-				
-		</div>
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<table class="table table-hover cus">
-					<tr>
-						<th class="text-center col-lg-2 col-xs-1">번호</th>
-						<th class="text-center col-lg-6 col-xs-6">제목</th>
-						<th class="text-center col-lg-2 col-xs-2">작성자</th>
-						<th class="text-center col-lg-2 col-xs-3">작성일</th>
-					</tr>
-					<c:if test="${empty list }" var="isEmpty">
-						<tr class="text-center">
-							<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
-						</tr>
-					</c:if>
-					<c:if test="${!isEmpty}">
-						<c:forEach var="item" items="${list }" varStatus="loop">
-							<tr class="text-center">
-								<td>${totalRecordCount - (((nowPage - 1) * pageSize) + loop.index)}</td>
-								<td class="text-left">${item.packNoticeTitle}</td>
-								<td>${item.userName}</td>
-								<td>${item.packNoticeDate}</td>
-								<td style="display: none;">${item.packNoticeContent }</td>
-								<td style="display: none;">${item.packNoticeNo }</td>
-							</tr>
-						</c:forEach>
-					</c:if>	
-				</table>
-			</div>
-		</div>
-		<c:if test="${!empty manager }">
-			<div class="row">
-				<div class="col-lg-12 text-right">
-					<button class="submitBtn btn" data-toggle="modal" id="btnNoticeWrite">등록</button>
-
-				</div>
-			</div>
-		</c:if>
-		<div class="row">
-			<div class="col-lg-12 text-center">${pagingString }</div>
-		</div>
-	</div>
-</div>
-<!-- END COLORLIB-MAIN -->
 
 <script>
 	$(function() {

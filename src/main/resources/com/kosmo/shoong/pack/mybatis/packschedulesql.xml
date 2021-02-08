@@ -23,7 +23,8 @@
 	</resultMap>
 
 	<insert id="scheduleInsert" parameterType="java.util.Map">
-		insert into pack_schedule values(SEQ_P_SCHEDULE.NEXTVAL,#{userId},#{packId},#{packScheduleStart},#{packScheduleEnd},#{packScheduleTitle},#{packScheduleContent})
+		insert into pack_schedule 
+		values(SEQ_P_SCHEDULE.NEXTVAL,#{userId},#{packId},#{packScheduleStart},#{packScheduleEnd},#{packScheduleTitle},#{packScheduleContent})
 	</insert>
 	
 	<select id="scheduleSelectList" parameterType="java.util.Map" resultType="java.util.Map">
@@ -48,5 +49,21 @@
 	<delete id="scheduleDelete" parameterType="java.util.Map">
 		delete from pack_schedule where pack_schedule_no = #{packScheduleNo}
 	</delete>
+	
+	<select id="ajaxScheduleList" parameterType="java.util.Map" resultType="Map">
+		select * from pack_schedule where pack_id = #{packId}
+	</select>
+	
+	<insert id="packScheduleJoin" parameterType="java.util.Map">
+		<selectKey keyProperty="pack_join_no" order="BEFORE" resultType="int">
+			select pack_join_no from pack_join where user_id = #{userId}
+		</selectKey>
+		insert into pack_schedule_join values(#{packScheduleNo},#{pack_join_no})
+	</insert>
+	
+	<select id="scheduleJoinList" parameterType="Map" resultType="Map">
+		select m.name from 
+		pack_join pj join pack_schedule_join psj on pj.pack_join_no = psj.pack_join_no join member_ m on pj.user_id = m.user_id where pack_schedule_no = #{packScheduleNo}
+	</select>
 
 </mapper>

@@ -25,40 +25,114 @@
 		 -->
 	</resultMap>
 
-	<insert id="packCommentWrite" parameterType="java.util.Map">
-		<selectKey keyProperty="pack_join_no" order="BEFORE" resultType="int">
-			select pack_join_no from pack_join where user_id = #{userId}
-		</selectKey>
-		insert into pack_comment values(SEQ_P_COMMENT.nextval,#{pack_join_no},#{packCommentContent},sysdate)
-	</insert>
-	
-	<insert id="packCommentImgWrite" parameterType="java.util.Map">
-		<selectKey keyProperty="pack_comment_no" order="BEFORE" resultType="int">
-			select pack_comment_no from 
-			(select rownum,pack_comment_no from pack_comment where pack_join_no = 
-			(select pack_join_no from pack_join where user_id = #{userId}) order by pack_comment_no desc) where rownum = '1'
-		</selectKey>
-		insert into pack_comment_img values(#{pack_comment_no},#{packCommentImgName})
-	</insert>
-	
-	<select id="packCommentSelectList" parameterType="java.util.Map" resultMap="packCommentDTOResult">
-		SELECT (select name from member_ where user_id = p.user_id and p.pack_join_no = c.pack_join_no) packCommentWriter,
-		c.pack_comment_content packCommentContent,
-		c.pack_comment_no packCommentNo,
-		(select count(*) from pack_comment_like where pack_comment_no = c.pack_comment_no) packCommentLikeCount,
-		(select count(*) from pack_comment_reply where pack_comment_no = c.pack_comment_no) packCommentReplyCount
-		FROM pack_join p join pack_comment c on p.pack_join_no = c.pack_join_no where p.pack_id = #{packId} 
-		ORDER BY packCommentNo DESC
-	</select>
-	
-	<select id="packCommentImageList" parameterType="java.lang.String" resultType="java.lang.String">
-		select pack_comment_img_name from pack_comment_img where pack_comment_no = #{packCommentNo}
-	</select>
-	
-	<select id="packCommentReplyList" parameterType="java.lang.String" resultType="packCommentReplyDTO">
-		select rp.pack_comment_reply_content packCommentReplyContent, m.name packCommentReplyWriter 
-		from member_ m join pack_comment_reply rp on m.user_id = rp.user_id 
-		where pack_comment_no = #{packCommentNo}
-	</select>
+
+<insert id="packCommentWrite" parameterType="java.util.Map">
+	<selectKey keyProperty="pack_join_no" order="BEFORE" resultType="int">
+		select pack_join_no from pack_join where user_id = #{userId}
+	</selectKey>
+	insert into pack_comment values(SEQ_P_COMMENT.nextval,#{pack_join_no},#{packCommentContent},sysdate)
+</insert>
+
+<insert id="packCommentImgWrite" parameterType="java.util.Map">
+	<selectKey keyProperty="pack_comment_no" order="BEFORE" resultType="int">
+		select pack_comment_no from 
+		(select rownum,pack_comment_no from pack_comment where pack_join_no = 
+		(select pack_join_no from pack_join where user_id = #{userId}) order by pack_comment_no desc) where rownum = '1'
+	</selectKey>
+	insert into pack_comment_img values(#{pack_comment_no},#{packCommentImgName})
+</insert>
+
+<select id="packCommentSelectList" parameterType="java.util.Map" resultMap="packCommentDTOResult">
+	SELECT (select name from member_ where user_id = p.user_id and p.pack_join_no = c.pack_join_no) packCommentWriter,
+	c.pack_comment_content packCommentContent,
+	c.pack_comment_no packCommentNo,
+	(select count(*) from pack_comment_like where pack_comment_no = c.pack_comment_no) packCommentLikeCount,
+	(select count(*) from pack_comment_reply where pack_comment_no = c.pack_comment_no) packCommentReplyCount
+	FROM pack_join p join pack_comment c on p.pack_join_no = c.pack_join_no where p.pack_id = #{packId} 
+	ORDER BY packCommentNo DESC
+</select>
+
+<select id="packCommentImageList" parameterType="java.lang.String" resultType="java.lang.String">
+	select pack_comment_img_name from pack_comment_img where pack_comment_no = #{packCommentNo}
+</select>
+<select id="packCommentReplyList" parameterType="java.lang.String" resultType="packCommentReplyDTO">
+	select rp.pack_comment_reply_no packCommentReplyNo, rp.pack_comment_reply_content packCommentReplyContent, m.name packCommentReplyWriter, m.user_id userId 
+	from member_ m join pack_comment_reply rp on m.user_id = rp.user_id 
+	where pack_comment_no = #{packCommentNo} order by pack_comment_reply_no asc
+</select>
+
+<select id="myCommentList" parameterType="java.util.Map" resultMap="packCommentDTOResult">
+	SELECT (select name from member_ where user_id = p.user_id and p.pack_join_no = c.pack_join_no) packCommentWriter,
+	c.pack_comment_content packCommentContent,
+	c.pack_comment_no packCommentNo,
+	(select count(*) from pack_comment_like where pack_comment_no = c.pack_comment_no) packCommentLikeCount,
+	(select count(*) from pack_comment_reply where pack_comment_no = c.pack_comment_no) packCommentReplyCount
+	FROM pack_join p join pack_comment c on p.pack_join_no = c.pack_join_no where p.pack_id = #{packId} and p.user_id = #{userId}
+	ORDER BY packCommentNo DESC
+</select>
+
+<select id="packCommentSelectOne" parameterType="java.util.Map" resultType="java.util.Map">
+	select pack_comment_no, pack_comment_content from pack_comment where pack_comment_no = #{packCommentNo}
+</select>
+
+<update id="packCommentUpdate" parameterType="java.util.Map">
+	update pack_comment set pack_comment_content = #{packCommentContent} where pack_comment_no = #{packCommentNo}
+</update>
+
+<select id="packCommentView" parameterType="java.util.Map" resultMap="packCommentDTOResult">
+	SELECT (select name from member_ where user_id = p.user_id and p.pack_join_no = c.pack_join_no) packCommentWriter,
+	c.pack_comment_content packCommentContent,
+	c.pack_comment_no packCommentNo,
+	(select count(*) from pack_comment_like where pack_comment_no = c.pack_comment_no) packCommentLikeCount,
+	(select count(*) from pack_comment_reply where pack_comment_no = c.pack_comment_no) packCommentReplyCount
+	FROM pack_join p join pack_comment c on p.pack_join_no = c.pack_join_no where p.pack_id = #{packId} and c.pack_comment_no = #{packCommentNo}
+</select>
+
+<delete id="packCommentDelete" parameterType="java.util.Map">
+	delete pack_comment where pack_comment_no = #{packCommentNo}
+</delete>
+
+<delete id="packCommentImgDelete" parameterType="java.util.Map">
+	delete pack_comment_img where pack_comment_no = #{packCommentNo}
+</delete>
+<insert id="packCommentImgUpdate" parameterType="java.util.Map">
+	insert into pack_comment_img values(#{packCommentNo},#{packCommentImgName})
+</insert>
+
+<insert id="packCommentReplyInsert" parameterType="java.util.Map">
+	insert into pack_comment_reply values(SEQ_P_COMMENT_REPLY.nextval,#{userId},#{replyContent},sysdate,#{packCommentNo})
+</insert>
+<select id="packCommentReplySelectOne" parameterType="java.util.Map" resultType="java.util.Map">
+	select (select name from member_ where user_id =#{userId}) name,r.* from (select * from pack_comment_reply order by pack_comment_reply_no desc) r where rownum = 1
+</select>
+
+<delete id="packCommentReplyDelete" parameterType="java.util.Map">
+	delete pack_comment_reply where pack_comment_reply_no = #{packCommentReplyNo}
+</delete>
+
+<select id="packCommentLike" parameterType="java.util.Map" resultType="java.lang.String">
+	select count(*) from pack_comment_like where pack_comment_no = #{packCommentNo} and user_id = #{userId}
+</select>
+<delete id="packCommentLikeDelete">
+	delete pack_comment_like where pack_comment_no = #{packCommentNo} and user_id = #{userId}
+</delete>
+<insert id="packCommentLikeInsert">
+	insert into pack_comment_like values(#{userId},#{packCommentNo})
+</insert>
+
+<select id="packCommentLikeCount" parameterType="java.util.Map" resultType="java.lang.String">
+	select count(*) from pack_comment_like where pack_comment_no = #{packCommentNo}
+</select>
+<select id="packCommentReplyCount" parameterType="java.util.Map" resultType="java.lang.String">
+	select count(*) from pack_comment_reply where pack_comment_no = #{packCommentNo}
+</select>
+
+<select id="packCommentReplyMore" parameterType="java.util.Map" resultType="java.util.Map">
+	select *
+	from ( select rownum as rownumber,r.pack_comment_reply_content, r.pack_comment_reply_no,r.pack_comment_no,r.user_id
+   	from ( select * from pack_comment_reply order by pack_comment_no asc) r
+   	where r.pack_comment_no=24) t
+	where  t.rownum <![CDATA[>]]> 4
+</select>
 
 </mapper>

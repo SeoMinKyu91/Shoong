@@ -150,7 +150,35 @@
       top: 50%;
       left: 50%;
       transform: translate( -50%, -50% );
-} 
+}
+
+
+.feed-top-icon img{
+	border:none;
+	height: 30px;	
+}
+.feed-top-icon img:hover{
+	text-decoration: none;
+	
+}
+.feed-top-icon-button{
+	border:none;
+	background-color: white;
+}
+
+.feed-top-icon-button:hover{
+	text-decoration: none;
+	background-color: white;
+}
+.feed-top-icon-button:active{
+	text-decoration: none;
+}
+.feed-top-icon-button:focus{
+	outline:none;
+	background-color: white;
+}
+.feed-top-icon-button:
+
 
 
 
