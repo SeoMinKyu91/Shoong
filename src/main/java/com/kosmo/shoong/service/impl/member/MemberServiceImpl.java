@@ -142,4 +142,9 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.memberHasBadgeNames(map);
 	}
 
+
+	public String memberName(Map map) {
+		return memberDAO.memberName(map);
+	}
+
 }/////////////////////////////////////////////

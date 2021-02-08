@@ -69,7 +69,7 @@
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css" rel="stylesheet" />
 
 <!-- 채팅  -->
-<link rel="stylesheet" href="<c:url value="/css/chat.css?aaccqwcq"/>">
+<link rel="stylesheet" href="<c:url value="/css/chat.css?aaqsxdc"/>">
 
 <script src="https://kit.fontawesome.com/4f2219bca6.js" crossorigin="anonymous"></script>
 
@@ -140,25 +140,23 @@
 				<tiles:insertAttribute name="body" />
 				<c:if test="${not empty sessionScope.packId }">
 				<div class="message">
-					<img class="messageImg" src="<c:url value="/images/chat.svg"/>" title="채팅">
+					<img class="messageImg" src="<c:url value="/images/fa-icons/comment-regular.svg"/>">
 					<!-- 채팅방 -->
 					<div class="chatRoom">
 						 
-						<div class="chatRoomTop" style="text-align: center;">
+						<div class="chatRoomTop">
 							<!-- 
 							<div class="chatRoomTopImgs">
 								<img class="" src="<c:url value="/images/person_1.jpg"/>">
 							</div>
 							<div class="chatRoomTopName">세계일주</div>
 							-->
-							<img src="<c:url value='/change/img/shooongLogo.png'/>" style="width: 60px;height: 60px; margin-top: 10px;margin-left: 20px;">
-							<h3 style="color: white;margin-left: 10px;padding-top: 5px;">SHOOONG.</h3>
 							<div class="chatRoomExit">
-								<img class="chatRoomExitBtn" src="<c:url value="/images/fa-icons/window-close-regular.svg"/>" style="color: white;">
+								<img class="chatRoomExitBtn" src="<c:url value="/images/fa-icons/window-close-regular.svg"/>">
 							</div>
 						</div>
 						
-						<div class="chatRoomBody" style="background-color: #dfdfff;">
+						<div class="chatRoomBody">
 							<!--  
 							<div class="crbOthersMessage" style="margin-bottom: 10px;">
 								<div class="crbOthersProfileImg">
@@ -187,7 +185,7 @@
 							-->
 							<input type="text" class="chatRoomMessageWrite">
 							<div class="chatRoomMessageWriteBtnDiv">
-								<button class="chatRoomMessageWriteBtn" style="background-color:#052b52;color: white; margin-right: 10px;border-radius: 3px;">전송</button>
+								<button class="chatRoomMessageWriteBtn">전송</button>
 							</div>
 						</div>
 					</div><!-- 채팅방 끝 -->
@@ -209,10 +207,6 @@
 						<!-- 나가기 -->
 					</div>
 				</div>
-				<div>
-					<img src="<c:url value="/images/speech-bubble.svg"/>" class="msgTopChatBotImg" title="챗봇">
-				</div>
-				
 			</c:if>
 			</div>
 		</div>
@@ -387,15 +381,18 @@
 		//메시지 btn 클릭시
 		$('.messageImg').click(function(){
 			console.log('메시지클릭');
-			if($('.chatRoom').css('display') == 'none'){
+			var chatRoom =$('.chatRoom');
+			if(chatRoom.css('display','none')){
 				websocketConnect();
-				$('.chatRoom').css('display','block');
+				chatRoom.css('display','block');
 			}
 			else{
 				websocket.close();
-				$('.chatRoom').css('display','none');
 			}
 		})
+		
+		
+		
 		
 		
 		//채팅방 닫기 클릭
@@ -413,6 +410,14 @@
 			<div class="chatRoomTopName">세계일주</div>
 			*/
 		})
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		function appendChatMessage(chatMessageNo,chatMessageContent,chatMessageDate,chatRoomNo,userId,name){
@@ -472,10 +477,12 @@
 		
 		//채팅방 전송버튼 클릭
 		$('.chatRoomMessageWriteBtn').click(function(){
-			console.log('채팅방 전송버튼');
 			var chatContent = $('.chatRoomMessageWrite').val();
 			
 			console.log("채팅방 전송 버튼 클릭")
+			if(chatContent != ''){
+				ajaxChatMessageInsert();
+			}
 			
 			sendMessage();
 		})
@@ -515,9 +522,8 @@
 			var nickname = json.nickname;
 			var msg = json.message;
 			var date = json.messageTime;
-			var profileImg = json.profileImg;
 			
-			appendWebOthersMessage(nickname,msg,date,profileImg);
+			appendWebOthersMessage(nickname,msg,date);
 			
 		};
 		
@@ -527,9 +533,14 @@
 			var chatContent = $('.chatRoomMessageWrite').val();
 			if(keyValue==13){
 				if(chatContent !=''){
+					ajaxChatMessageInsert();
 					sendMessage();
 				}	
 			}
+			
+			
+			
+			
 		})
 		
 		function sendMessage(){
@@ -547,12 +558,11 @@
 				}
 				
 				var userData = new Object();
-				userData.nickname = '${sessionScope.chat.memberName}'
-				userData.profileImg = '${sessionScope.chat.profileImg}'
+				userData.nickname = $('.msgBodyMyProfileName').html();
 				userData.message = $('.chatRoomMessageWrite').val();
 				userData.messageTime = replaceNowTime;
 				var json = JSON.stringify(userData);
-				nickname = '${sessionScope.chat.memberName}'
+				nickname = $('.msgBodyMyProfileName').html();
 				console.log('sendMessage들어옴');
 				
 				console.log(replaceNowTime);
@@ -578,11 +588,11 @@
 			$(".chatRoomBody").scrollTop($(".chatRoomBody")[0].scrollHeight);
 		};
 		
-		function appendWebOthersMessage(nickname,msg,date,profileImg){
+		function appendWebOthersMessage(nickname,msg,date){
 			var str = '';
 			str += '<div class="crbOthersMessage" style="margin-bottom:10px;">';
 			str += '<div class="crbOthersProfileImg" style="margin-right:10px;">';
-			str += '<img class="" src="<c:url value="/images/badges/'+profileImg+'"/>"></div>';
+			str += '<img class="" src="<c:url value="/images/person_2.jpg"/>"></div>';
 			str += '<div class="crbOhtersNameAndContent">';
 			str += '<div class="crbOthersProfileName">'+nickname+'</div>';
 			str += '<div style="display:flex;">'
