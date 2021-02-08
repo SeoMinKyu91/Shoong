@@ -268,60 +268,7 @@ ul li label {
 }
 
 @media ( min-width : 992px) .container {
-	width
-	
-	
-	
-	
-	
-	
-	
-	
-	 
-	
-	
-	
-	
-	
-	
-	
-	
-	:
-	
-	
-	
-	
-	
-	
-	
-	
-	 
-	
-	
-	
-	
-	
-	
-	
-	
-	970px
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	;
+	width : 970px;
 }
 
 .team-img>img {
