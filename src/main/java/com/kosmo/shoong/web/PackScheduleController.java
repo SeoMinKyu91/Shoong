@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.JsonArray;
+import com.kosmo.shoong.service.impl.member.MemberServiceImpl;
 import com.kosmo.shoong.service.impl.pack.PackScheduleServiceImpl;
 import com.kosmo.shoong.service.pack.PackScheduleEventsDTO;
 
@@ -29,6 +30,9 @@ public class PackScheduleController {
 	@Resource(name="scheduleServiceImpl")
 	private PackScheduleServiceImpl service;
 
+	@Resource(name = "memberService")
+	private MemberServiceImpl memberService;
+	
 	@RequestMapping("calendar.do")
 	public String packCalendar(@RequestParam Map map, Model model,HttpServletRequest req) {
 		HttpSession session = req.getSession();
@@ -89,6 +93,7 @@ public class PackScheduleController {
 	@ResponseBody
 	public String scheduleSelectOne(@RequestParam Map map,HttpServletRequest req) {
 		String userId =  req.getSession().getAttribute("userId").toString();
+		map.put("userId",userId);
 		
 		Map selectOne = new HashMap();
 		selectOne = service.scheduleSelectOne(map);
@@ -97,20 +102,41 @@ public class PackScheduleController {
 		List<Map> scheduleJoiner = service.scheduleJoinList(selectJoinList);
 
 		JSONObject json = new JSONObject();
+		String scheduleUserId = (String) selectOne.get("USER_ID");
+		map.put("scheduleUserId", scheduleUserId);
 		
 		json.put("title", selectOne.get("PACK_SCHEDULE_TITLE"));
 		json.put("content", selectOne.get("PACK_SCHEDULE_CONTENT"));
-		json.put("start", selectOne.get("PACK_SCHEDULE_START").toString().substring(0,10));
-		json.put("end", selectOne.get("PACK_SCHEDULE_END").toString().substring(0,10));
+		json.put("start", selectOne.get("PACK_SCHEDULE_START").toString());
+		json.put("end", selectOne.get("PACK_SCHEDULE_END").toString());
 		json.put("packScheduleNo", selectOne.get("PACK_SCHEDULE_NO"));
 		json.put("userId", selectOne.get("USER_ID"));
 		json.put("packId", selectOne.get("PACK_ID"));
+		json.put("name",service.userName(map));
+		
+		if(service.isJoined(map)==0) {
+			json.put("isJoined", "no");
+		}
+		else {
+			json.put("isJoined","yes");
+		}
+		
+		String profileImgName = memberService.hasProfileImg(map);
+		if(profileImgName != null) {
+			json.put("memberProfileImgs", profileImgName);
+		}
+		else {
+			json.put("memberProfileImgs","no");
+		}
+		
 		if(userId.toLowerCase().equals(selectOne.get("USER_ID").toString().toLowerCase())){
 			json.put("isWriter", "yes");
 		}
 		else {
 			json.put("isWriter", "no;");
 		}
+		
+		
 		json.put("scheduleJoiner",scheduleJoiner);
 
 
@@ -137,7 +163,8 @@ public class PackScheduleController {
 	@RequestMapping(value="schedule/join.do",produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String packScheduleJoin(@RequestParam Map map) {
-		
+		System.out.println("!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println(map.get("packScheduleNo"));
 		
 		return (int)service.scheduleJoin(map) == 1?"참가 성공":"참가 실패";
 	}
