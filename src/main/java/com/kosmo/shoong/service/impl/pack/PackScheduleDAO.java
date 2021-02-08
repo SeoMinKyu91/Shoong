@@ -50,7 +50,8 @@ public class PackScheduleDAO implements PackScheduleService{
 
 	@Override
 	public int scheduleJoin(Map map) {
-		
+		int packJoinNo = sqlMapper.selectOne("memberPackJoinNo",map);
+		map.put("packJoinNo", packJoinNo);
 		return sqlMapper.insert("packScheduleJoin",map);
 	}
 
@@ -79,8 +80,9 @@ public class PackScheduleDAO implements PackScheduleService{
 	}
 
 	public Map scheduleSeletOne(Map map) {
-		// TODO Auto-generated method stub
-		return sqlMapper.selectOne("scheduleSelectOne",map);
+		Map schedule = sqlMapper.selectOne("scheduleSelectOne",map);
+		schedule.put("memberProfileImg", sqlMapper.selectOne("hasProfileImg",map));
+		return schedule; 
 	}
 
 	public List<Map> ajaxScheduleList(Map map) {
@@ -90,8 +92,15 @@ public class PackScheduleDAO implements PackScheduleService{
 	}
 
 	public List<Map> scheduleJoinList(Map map) {
-
 		return sqlMapper.selectList("scheduleJoinList",map);
+	}
+
+	public String userName(Map map) {
+		return sqlMapper.selectOne("userName",map);
+	}
+
+	public int isJoined(Map map) {
+		return sqlMapper.selectOne("isJoined",map);
 	}
 
 }///////////////
