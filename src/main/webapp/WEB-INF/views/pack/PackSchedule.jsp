@@ -275,56 +275,6 @@ label {
             
          </div>
 
-
-
-
-
-
-				<div class="row">
-					<div class="col-md-2" style="text-align: left; font-weight: bold;">제목</div>
-					<div class="col-md-10" id="packScheduleViewTitle" value=""
-						style="text-align: left;"></div>
-				</div>
-				<div class="row">
-					<div class="col-md-2" style="text-align: left; font-weight: bold;">글쓴이</div>
-					<div class="col-md-10" id="packScheduleViewWriter" value=""
-						style="text-align: left;"></div>
-				</div>
-				<div class="row">
-					<div class="col-md-2" style="text-align: left; font-weight: bold;">시작
-						날짜</div>
-					<div class="col-md-10" id="packScheduleViewStart" value=""
-						style="text-align: left;"></div>
-				</div>
-				<div class="row">
-					<div class="col-md-2" style="text-align: left; font-weight: bold;">끝
-						날짜</div>
-					<div class="col-md-10" id="packScheduleViewEnd" value=""
-						style="text-align: left;"></div>
-				</div>
-				<div class="row">
-					<div class="col-md-2" style="text-align: left; font-weight: bold;">글
-						내용</div>
-					<div class="col-md-10" id="packScheduleViewContent" value=""
-						style="text-align: left;"></div>
-				</div>
-				<div class="row">
-					<div class="col-md-2">참가자</div>
-					<div class="col-md-10" id="packScheduleViewJoiner"></div>
-				</div>
-
-				<div class="row">
-					<div style="display: none;" id="packScheduleViewNo" value=""
-						style="text-align: left;"></div>
-				</div>
-
-
-
-
-
-
-			</div>
-
 			<div class="modal-footer">
 				<button type="button" class="SceduleBtn btn" data-dismiss="modal"
 					id="btnPackScheduleUpdate">수정</button>

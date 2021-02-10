@@ -99,5 +99,14 @@ public class MemberDAO implements MemberService{
 		return sqlMapper.selectList("memberHasBadgeNames",map);
 	}
 
+	public Map chat(Map map) {
+		// TODO Auto-generated method stub
+		return sqlMapper.selectOne("chat",map);
+	}
+
+	public String memberName(Map map) {
+		return sqlMapper.selectOne("memberName",map);
+	}
+
 
 }////////////class

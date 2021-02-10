@@ -1,5 +1,6 @@
 package com.kosmo.shoong.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -9,6 +10,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -207,6 +209,20 @@ public class MemberController {
 			session.setAttribute("error", "아이디와 비밀번호가 일치하지 않습니다.");
 			return "redirect:/Member/Login.do";
 		}
+		String profileImg = memberService.hasProfileImg(map);
+		String memberName = memberService.memberName(map);
+		if(profileImg == null) {
+			profileImg = "shoongBadge6.png";
+		}
+		if(memberName != null) {
+			Map chat = new HashMap();
+			chat.put("profileImg", profileImg);
+			chat.put("memberName",memberName);
+			session.setAttribute("chat", chat);
+		}
+		
+		
+		
 		//로그인 후 메인페이지로 이동
 		return "/templates/Main";
 	}////loginOk

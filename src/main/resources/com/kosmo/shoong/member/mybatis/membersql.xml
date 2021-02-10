@@ -115,5 +115,8 @@
 		insert into member_profile_img values(SEQ_M_P_IMG.nextval,#{userId},#{profileImgName})
 	</insert>
 	
+	<select id="memberName" parameterType="Map" resultType="String">
+		select name from member_ where user_id = #{userId}
+	</select>
 	
 </mapper>
