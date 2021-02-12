@@ -12,4 +12,5 @@ public class HomeAdminController {
 	     
 		return "admin/Home.admin";
 	   }
+	
 }
