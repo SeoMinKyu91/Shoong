@@ -304,7 +304,10 @@ body {
 			<li role="presentation"><a href="#recordList"
 				style="color: #f32a48" aria-controls="profile" role="tab"
 				data-toggle="tab">내 기록</a></li>
-			<li role="presentation"><a href="#messages"
+			<li role="presentation"><a href="#messages1"
+				style="color: #f32a48" aria-controls="messages" role="tab"
+				data-toggle="tab">관광/맛집</a></li>
+			<li role="presentation"><a href="#messages2"
 				style="color: #f32a48" aria-controls="messages" role="tab"
 				data-toggle="tab">관광/맛집</a></li>
 		</ul>
@@ -384,7 +387,8 @@ body {
 					</div>
 				</c:if>
 			</div>
-			<div role="tabpanel" class="tab-pane" id="messages">
+			<!-- 맛집 크롤링 tap pane 끝-->
+			<div role="tabpanel" class="tab-pane" id="messages1">
 				<div class="row" style="padding: 10px;">
 					<div class="col-lg-6 col-xs-6">
 						<div class="list-img">
@@ -400,22 +404,12 @@ body {
 							<p>700/D, Kings road, Green lane, 85/ London</p>
 						</div>
 					</div>
-					<div class="col-lg-6 col-xs-6">
-						<div class="single-listing mb-30">
-							<div class="list-img">
-								<img src="<c:url value ='/change/img/gallery/list2.png'/>"
-									alt="" style="width: 100%; height: 200px;">
-								<!-- <span>Open</span> -->
-							</div>
-							<div class="list-caption">
-								<span>Open</span>
-								<h3>
-									<a href="listing_details.html">Saintmartine</a>
-								</h3>
-								<p>700/D, Kings road, Green lane, 85/ London</p>
-							</div>
-						</div>
-					</div>
+				</div>
+			</div>
+			<!-- 크롤링 tap pane 끝-->
+			<!-- 관광 크롤링 tap pane 끝-->
+			<div role="tabpanel" class="tab-pane" id="messages2">
+				<div class="row" style="padding: 10px;">
 					<div class="col-lg-6 col-xs-6">
 						<div class="list-img">
 							<img src="<c:url value ='/change/img/gallery/list1.png'/>" alt=""
@@ -430,24 +424,9 @@ body {
 							<p>700/D, Kings road, Green lane, 85/ London</p>
 						</div>
 					</div>
-					<div class="col-lg-6 col-xs-6">
-						<div class="single-listing mb-30">
-							<div class="list-img">
-								<img src="<c:url value ='/change/img/gallery/list2.png'/>"
-									alt="" style="width: 100%; height: 200px;">
-								<!-- <span>Open</span> -->
-							</div>
-							<div class="list-caption">
-								<span>Open</span>
-								<h3>
-									<a href="listing_details.html">Saintmartine</a>
-								</h3>
-								<p>700/D, Kings road, Green lane, 85/ London</p>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
+			<!-- 크롤링 tap pane 끝-->
 		</div>
 	</div>
 	<!-- 본문 탭 끝 -->
@@ -1388,15 +1367,38 @@ body {
 					console.log("성공");
 					console.log("리시브데이터:%O",data);
 					const matzipList = data.places;
+					var imageListStr="";
 					matzipList.forEach(function(elt, i, array) {
-						
+						imageListStr += 
+							'<div class="row" style="padding: 10px;"><div class="col-lg-6 col-xs-6"><div class="list-img"><img src="'+elt.url+'" style="width: 75%; height: 150px;"></div><div class="list-caption"><h3><span>'+elt.name+'</span><p>'+elt.addr+'</p></h3></div></div></div>'						
 					});
+					$('#messages1').html(imageListStr);
 					//console.log("첫번째",matzipList[0].addr);
 				},
 				error:function(request,status,error){
 					console.log("실패",request,status,error);
 				}
 			});		
+			$.ajax({
+				url:"http://localhost:5000/places/janggwan?lat="+e.lngLat.lat+"&lng="+e.lngLat.lng,
+				type:"get",
+				//success:receiverecommandresponse,
+				success:function(data){
+					console.log("성공");
+					console.log("리시브데이터:%O",data);
+					const matzipList = data.places;
+					var imageListStr="";
+					matzipList.forEach(function(elt, i, array) {
+						imageListStr += 
+							'<div class="row" style="padding: 10px;"><div class="col-lg-6 col-xs-6"><div class="list-img"><img src="'+elt.url+'" style="width: 75%; height: 150px;"></div><div class="list-caption"><h3><span>'+elt.name+'</span><p>'+elt.addr+'</p></h3></div></div></div>'						
+					});
+					$('#messages2').html(imageListStr);
+					//console.log("첫번째",matzipList[0].addr);
+				},
+				error:function(request,status,error){
+					console.log("실패",request,status,error);
+				}
+			});	
 		});
 		
 		/*
