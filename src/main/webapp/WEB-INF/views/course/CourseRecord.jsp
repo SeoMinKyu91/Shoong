@@ -268,60 +268,7 @@ ul li label {
 }
 
 @media ( min-width : 992px) .container {
-	width
-	
-	
-	
-	
-	
-	
-	
-	
-	 
-	
-	
-	
-	
-	
-	
-	
-	
-	:
-	
-	
-	
-	
-	
-	
-	
-	
-	 
-	
-	
-	
-	
-	
-	
-	
-	
-	970px
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	;
+	width : 970px;
 }
 
 .team-img>img {
@@ -329,7 +276,7 @@ ul li label {
 	height: 100%;
 }
 
-#courseTable {
+#courseTable>div {
 	font-weight: bold;
 	padding-bottom: 15px;
 	padding-top: 15px;
@@ -337,14 +284,14 @@ ul li label {
 	color: white;
 }
 
-#courselist {
+#courselist>div {
 	padding-top: 15px;
 	padding-bottom: 15px;
 	border-bottom: #cde3fa 1px solid;
 	background-color: white;
 }
 
-#recordTable {
+#recordTable>div {
 	font-weight: bold;
 	padding-bottom: 15px;
 	padding-top: 15px;
@@ -352,7 +299,7 @@ ul li label {
 	color: white;
 }
 
-#recordlist {
+#recordlist>div {
 	padding-top: 15px;
 	padding-bottom: 15px;
 	border-bottom: #cde3fa 1px solid;
@@ -367,115 +314,7 @@ body {
 <!-- 본문 탭 시작 -->
 <div class="row mainbody">
 	<div class="col-md-6 col-xs-12" id="map"></div>
-	<%-- 
-	<div class="col-md-6" role="navigation">
-		<ul class="nav nav-tabs" style="list-style: none">
-			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#courseList">코스 목록</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#recordList">내 기록</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#spotRestaurant">관광/맛집</a></li>
-		</ul>
-		<div class="tab-content">
-			<!-- 코스 리스트 시작 -->
-			<!-- 기존에 있는 코스가 보임 -->
-			<div class="tab-pane active" id="courseList">
-				<div class="row">
-					<div class="col-md-12">
-						<table class="table table-hover cus">
-							<tr>
-								<th class="text-center col-lg-2 col-xs-1">카테고리</th>
-								<th class="text-center col-lg-2 col-xs-1">코스명</th>
-								<th class="text-center col-lg-1 col-xs-1">길이</th>
-								<th class="text-center col-lg-1 col-xs-1">시간</th>
-								<th class="text-center col-lg-2 col-xs-3">등록일</th>
-							</tr>
-							<c:if test="${empty courseList}" var="isEmpty">
-								<tr class="text-center">
-									<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
-								</tr>
-							</c:if>
-							<c:if test="${!isEmpty}">
-								<c:forEach var="item" items="${courseList}" varStatus="loop">
-									<tr class="text-center">
-										<td class="text-left">${item.courseCateName}</td>
-										<td class="text-left">${item.courseName}</td>
-										<td>${item.courseLength}</td>
-										<td>${item.courseTime}</td>
-										<td><fmt:formatDate var="dResult"
-												pattern="yy-MM-dd HH:mm" value="${item.courseRegiDate}" /> <c:out
-												value="${dResult}" /></td>
-										<td style="display: none;">${item.courseId}</td>
-										<!-- 
-											<td style="display: none;">${item.courseRegion }</td>
-											 -->
-									</tr>
-								</c:forEach>
-							</c:if>
-						</table>
-					</div>
-				</div>
-				<c:if test="${!empty manager }">
-					<div class="row">
-						<div class="col-lg-12 text-right">
-							<button class="submitBtn btn" data-toggle="modal"
-								id="btnNoticeWrite">등록</button>
-
-						</div>
-					</div>
-				</c:if>
-			</div>
-			<!-- 코스 리스트 끝 -->
-			<!-- 레코드 리스트 시작 -->
-			<!-- 레코드 중에서 코스로 등록하지 않은 레코드가 보임 -->
-			<div class="tab-pane fade" id="recordList">
-				<div class="row">
-					<div class="col-md-12">
-						<table class="table table-hover cus">
-							<tr>
-								<th class="text-center col-lg-2 col-xs-1">파일</th>
-								<th class="text-center col-lg-6 col-xs-6">길이</th>
-								<th class="text-center col-lg-2 col-xs-2">시간</th>
-								<th class="text-center col-lg-2 col-xs-3">일자</th>
-							</tr>
-							<c:if test="${empty recordList}" var="isEmpty">
-								<tr class="text-center">
-									<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
-								</tr>
-							</c:if>
-							<c:if test="${!isEmpty}">
-								<c:forEach var="item" items="${recordList}" varStatus="loop">
-									<tr class="text-center">
-										<td class="text-left">${item.fileName}</td>
-										<td>${item.recordLength}km</td>
-										<td>${item.duration}분</td>
-										<td><fmt:formatDate var="dResult"
-												pattern="yy-MM-dd HH:mm" value="${item.recordDate}" /> <c:out
-												value="${dResult}" /></td>
-										<td style="display: none;">${item.recordId}</td>
-									</tr>
-								</c:forEach>
-							</c:if>
-						</table>
-					</div>
-				</div>
-				<c:if test="${!empty manager }">
-					<div class="row">
-						<div class="col-lg-12 text-right">
-							<button class="submitBtn btn" data-toggle="modal"
-								id="btnNoticeWrite">등록</button>
-						</div>
-					</div>
-				</c:if>
-			</div>
-			<!-- 관광정보 뿌리기 시작-->
-			<div class="tab-pane fade" id="spotRestaurant">
-				<div class="row"></div>
-			</div>
-			<!-- 관광정보 뿌리기 끝-->
-		</div>
-		--%>
+	
 	<!-- 탭 메뉴 및 정보 -->
 	<div role="tabpanel" class="menuVar col-md-6 col-xs-12">
 
@@ -487,18 +326,23 @@ body {
 			<li role="presentation"><a href="#recordList"
 				style="color: #f32a48" aria-controls="profile" role="tab"
 				data-toggle="tab">내 기록</a></li>
-			<li role="presentation"><a href="#messages"
+			<li role="presentation"><a href="#messages1"
+				style="color: #f32a48" aria-controls="messages" role="tab"
+				data-toggle="tab">관광/맛집</a></li>
+			<li role="presentation"><a href="#messages2"
 				style="color: #f32a48" aria-controls="messages" role="tab"
 				data-toggle="tab">관광/맛집</a></li>
 		</ul>
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="courseList">
-				<div class="text-center col-lg-2 col-xs-1" id="courseTable">카테고리</div>
-				<div class="text-center col-lg-3 col-xs-1" id="courseTable">코스명</div>
-				<div class="text-center col-lg-2 col-xs-1" id="courseTable">길이(km)</div>
-				<div class="text-center col-lg-2 col-xs-1" id="courseTable">시간(분)</div>
-				<div class="text-center col-lg-3 col-xs-3" id="courseTable">등록일</div>
+				<div id="courseTable">
+					<div class="text-center col-lg-2 col-xs-1">카테고리</div>
+					<div class="text-center col-lg-3 col-xs-1">코스명</div>
+					<div class="text-center col-lg-2 col-xs-1">길이(km)</div>
+					<div class="text-center col-lg-2 col-xs-1">시간(분)</div>
+					<div class="text-center col-lg-3 col-xs-3">등록일</div>
+				</div>
 				<c:if test="${empty courseList}" var="isEmpty">
 					<div class="text-center col-lg-12">
 						<div class="text-center">등록된 게시물이 없어요</div>
@@ -506,16 +350,18 @@ body {
 				</c:if>
 				<c:if test="${!isEmpty}">
 					<c:forEach var="item" items="${courseList}" varStatus="loop">
-						<div class="text-center col-lg-2 col-xs-1" id="courselist">${item.courseCateName}</div>
-						<div class="text-center col-lg-3 col-xs-1" id="courselist">${item.courseName}</div>
-						<div class="text-center col-lg-2 col-xs-1" id="courselist">${item.courseLength}</div>
-						<div class="text-center col-lg-2 col-xs-1" id="courselist">${item.courseTime}</div>
-						<div class="text-center col-lg-3 col-xs-3" id="courselist">
+					<div id="courselist">
+						<div class="text-center col-lg-2 col-xs-1">${item.courseCateName}</div>
+						<div class="text-center col-lg-3 col-xs-1">${item.courseName}</div>
+						<div class="text-center col-lg-2 col-xs-1">${item.courseLength}</div>
+						<div class="text-center col-lg-2 col-xs-1">${item.courseTime}</div>
+						<div class="text-center col-lg-3 col-xs-3">
 							<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm"
 								value="${item.courseRegiDate}" />
 							<c:out value="${dResult}" />
 						</div>
 						<div style="display: none;">${item.courseId}</div>
+					</div>
 					</c:forEach>
 				</c:if>
 				<c:if test="${!empty manager }">
@@ -528,10 +374,12 @@ body {
 				</c:if>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="recordList">
-				<div class="text-center col-lg-3 col-xs-1" id="recordTable">파일</div>
-				<div class="text-center col-lg-3 col-xs-1" id="recordTable">길이(km)</div>
-				<div class="text-center col-lg-3 col-xs-1" id="recordTable">시간(분)</div>
-				<div class="text-center col-lg-3 col-xs-1" id="recordTable">일자</div>
+				<div id="recordTable">
+					<div class="text-center col-lg-4 col-xs-1">파일</div>
+					<div class="text-center col-lg-3 col-xs-1">길이(km)</div>
+					<div class="text-center col-lg-2 col-xs-1">시간(분)</div>
+					<div class="text-center col-lg-3 col-xs-1">일자</div>
+				</div>
 				<c:if test="${empty recordList}" var="isEmpty">
 					<div class="text-center col-lg-12">
 						<div class="test-center">등록된 게시물이 없어요</div>
@@ -539,15 +387,17 @@ body {
 				</c:if>
 				<c:if test="${!isEmpty}">
 					<c:forEach var="item" items="${recordList}" varStatus="loop">
-						<div class="text-center col-lg-3 col-xs-1" id="recordlist">${item.fileName}</div>
-						<div class="text-center col-lg-3 col-xs-1" id="recordlist">${item.recordLength}km</div>
-						<div class="text-center col-lg-3 col-xs-1" id="recordlist">${item.duration}분</div>
-						<div class="text-center col-lg-3 col-xs-1" id="recordlist">
+					<div id="recordlist">
+						<div class="text-center col-lg-4 col-xs-1">${item.fileName}</div>
+						<div class="text-center col-lg-3 col-xs-1">${item.recordLength}km</div>
+						<div class="text-center col-lg-2 col-xs-1">${item.duration}분</div>
+						<div class="text-center col-lg-3 col-xs-1">
 							<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm"
 								value="${item.recordDate}" />
 							<c:out value="${dResult}" />
 						</div>
 						<div style="display: none;">${item.recordId}</div>
+					</div>
 					</c:forEach>
 				</c:if>
 				<c:if test="${!empty manager }">
@@ -559,7 +409,8 @@ body {
 					</div>
 				</c:if>
 			</div>
-			<div role="tabpanel" class="tab-pane" id="messages">
+			<!-- 맛집 크롤링 tap pane 끝-->
+			<div role="tabpanel" class="tab-pane" id="messages1">
 				<div class="row" style="padding: 10px;">
 					<div class="col-lg-6 col-xs-6">
 						<div class="list-img">
@@ -575,22 +426,12 @@ body {
 							<p>700/D, Kings road, Green lane, 85/ London</p>
 						</div>
 					</div>
-					<div class="col-lg-6 col-xs-6">
-						<div class="single-listing mb-30">
-							<div class="list-img">
-								<img src="<c:url value ='/change/img/gallery/list2.png'/>"
-									alt="" style="width: 100%; height: 200px;">
-								<!-- <span>Open</span> -->
-							</div>
-							<div class="list-caption">
-								<span>Open</span>
-								<h3>
-									<a href="listing_details.html">Saintmartine</a>
-								</h3>
-								<p>700/D, Kings road, Green lane, 85/ London</p>
-							</div>
-						</div>
-					</div>
+				</div>
+			</div>
+			<!-- 크롤링 tap pane 끝-->
+			<!-- 관광 크롤링 tap pane 끝-->
+			<div role="tabpanel" class="tab-pane" id="messages2">
+				<div class="row" style="padding: 10px;">
 					<div class="col-lg-6 col-xs-6">
 						<div class="list-img">
 							<img src="<c:url value ='/change/img/gallery/list1.png'/>" alt=""
@@ -605,24 +446,9 @@ body {
 							<p>700/D, Kings road, Green lane, 85/ London</p>
 						</div>
 					</div>
-					<div class="col-lg-6 col-xs-6">
-						<div class="single-listing mb-30">
-							<div class="list-img">
-								<img src="<c:url value ='/change/img/gallery/list2.png'/>"
-									alt="" style="width: 100%; height: 200px;">
-								<!-- <span>Open</span> -->
-							</div>
-							<div class="list-caption">
-								<span>Open</span>
-								<h3>
-									<a href="listing_details.html">Saintmartine</a>
-								</h3>
-								<p>700/D, Kings road, Green lane, 85/ London</p>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
+			<!-- 크롤링 tap pane 끝-->
 		</div>
 	</div>
 	<!-- 본문 탭 끝 -->
@@ -693,10 +519,10 @@ body {
 					<div class="form-group">
 						<select class="form-control" name="courseCateId" id="courseCateId">
 							<option value="0" style="color: #888888;">==선택하세요==</option>
-							<option value="2" style="color: #888888;">감성코스</option>
-							<option value="3" style="color: #888888;">맛집코스</option>
-							<option value="4" style="color: #888888;">숨겨진코스</option>
-							<option value="5" style="color: #888888;">도전코스</option>
+							<option value="101" style="color: #888888;">감성코스</option>
+							<option value="102" style="color: #888888;">맛집코스</option>
+							<option value="103" style="color: #888888;">숨겨진코스</option>
+							<option value="104" style="color: #888888;">도전코스</option>
 						</select>
 					</div>
 					<label for="courseTime" style="float: left;">소요 예상 시간</label>
@@ -1023,8 +849,7 @@ body {
 
 		//load
 		$(".modal-footer button:eq(0)")
-				.click(
-						function() {
+				.click(function() {
 							console.log("로드 버튼 누름");
 
 							$.ajax({
@@ -1274,10 +1099,11 @@ body {
 		var courseId = "";
 
 		//코스 목록 클릭시 모달 창
-		$("#courseList .cus tr").click(function() {
+		//$("#courseList .cus tr").click(function() {
+		$("#courseList #courselist").click(function() {
 			$('.viewBtn').show();
 
-			courseId = $(this).children().eq(5).text();
+			courseId = $(this).children().eq(5).text().trim();
 
 			$.ajax({
 				url : "<c:url value='/course/viewcourse'/>",
@@ -1294,24 +1120,24 @@ body {
 					courseTime = json.courseTime;
 					courseRegiDate = json.courseRegiDate;
 					courseIntro = json.courseIntro;
-
-					$("#mdCourseNo").append("코스 이름 : " + courseName);
-					$("#mdCourseUserID").append("코스 길이 : " + courseLength);
-					$("#mdCourseTitle").append("코스 시간 : " + courseTime);
-					$("#mdCoursePostdate").append("등록 일자 : " + courseRegiDate);
-					$("#mdCourseContent").append("" + courseIntro);
+					
+					$("#mdCourseNo").html("코스 이름 : " + courseName);
+					$("#mdCourseUserID").html("코스 이름 : " + courseLength);
+					$("#mdCourseTitle").html("코스 이름 : " + courseTime);
+					$("#mdCoursePostdate").html("코스 이름 : " + courseRegiDate);
+					$("#mdCourseContent").html("코스 이름 : " + courseIntro);
 
 					$.ajax({
 						url : "<c:url value='/course/routeLoad'/>",
 						type : "post",
 						dataType : "json",
 						data : {
-							"fileName" : json.courseFileName
+							"fileName":json.courseFileName
 						},
 						success : function(data) {
 							map4.addSource('route', {
-								"type" : "geojson",
-								"data" : data
+								"type":"geojson",
+								"data":data
 							});
 							map4.addLayer({
 								'id' : 'route',
@@ -1323,7 +1149,7 @@ body {
 								},
 								'paint' : {
 									'line-color' : '#ff0000',
-									'line-width' : 8
+									'line-width' : 6
 								}
 							});
 							map4.setCenter(data.geometry.coordinates[0][0]);
@@ -1344,7 +1170,7 @@ body {
 		});
 
 		//내 기록 상세보기 모달 내용 삭제
-		$("#btnNoticeViewClose").click(function() {
+		$("#btnCourseViewClose").click(function() {
 			modalContentDelete();
 			$('body').css("overflow", "scroll");
 			if (map4.getSource('route')) {
@@ -1361,32 +1187,22 @@ body {
 
 		//테이블 클릭시 모달창 띄우기
 		//내 기록 상세보기  속성값 설정 해주기
-		$("#recordList .cus tr").click(function() {
+		//$("#recordList .cus tr").click(function() {
+		$("#recordList #recordlist").click(function() {
 			$('.viewBtn').show();
 			var userId = "${sessionScope.userId}";
 			console.log('테이블 a태그 클릭', userId);
-			fileName = $(this).children().eq(0).text();
+			fileName = $(this).children().eq(0).text().trim();
 			recordLength = $(this).children().eq(1).text();
 			recordDuration = $(this).children().eq(2).text();
 			recordDate = $(this).children().eq(3).text();
 			recordNo = $(this).children().eq(4).text();
 
-			/*
-			if(userId === title){
-				console.log(userId,'와',title);
-				//$('.viewBtn').attr("hidden","false");
-				$('.viewBtn').show();
-			} else {
-				console.log(userId,'와',title,'달라');
-				$('.viewBtn').hide();
-			}
-			 */
-
-			$("#mdNo").append("파일 : " + fileName);
-			$("#mdUserID").append("길이 : " + recordLength);
-			$("#mdTitle").append("시간 : " + recordDuration);
-			$("#mdPostdate").append("일자 : " + recordDate);
-			$("#mdContent").append("" + recordNo);
+			$("#mdNo").html("파일 : " + fileName);
+			$("#mdUserID").html("길이 : " + recordLength);
+			$("#mdTitle").html("시간 : " + recordDuration);
+			$("#mdPostdate").html("일자 : " + recordDate);
+			$("#mdContent").html("" + recordNo);
 
 			//루트 가져오기
 			$.ajax({
@@ -1394,7 +1210,7 @@ body {
 				type : "post",
 				dataType : "json",
 				data : {
-					"fileName" : fileName
+					"fileName":fileName
 				},
 				success : function(data) {
 					console.log('요청 성공');
@@ -1417,9 +1233,10 @@ body {
 						},
 						'paint' : {
 							'line-color' : '#ff0000',
-							'line-width' : 8
+							'line-width' : 6
 						}
 					});
+					
 					map2.setCenter(json.geometry.coordinates[0][0]);
 					map2.setZoom(11);
 
@@ -1452,7 +1269,6 @@ body {
 			$("#courseId").attr("value", fileName);
 			$("#courseTime").attr("value", recordDuration);
 			$("#courseLength").attr("value", recordLength);
-			//$("#packNoticeEditTitle").attr("value",title);
 
 			//지도 띄우기
 			//루트 가져오기
@@ -1484,7 +1300,7 @@ body {
 						},
 						'paint' : {
 							'line-color' : '#ff0000',
-							'line-width' : 8
+							'line-width' : 6
 						}
 					});
 					map3.setCenter(json.geometry.coordinates[0][0]);
@@ -1542,7 +1358,7 @@ body {
 			$('#packNoticeDeleteForm').submit();
 		});
 
-		//공지사항 상세보기 모달내용 삭제 함수
+		//상세보기 모달내용 삭제 함수
 		function modalContentDelete() {
 			console.log("모달 닫기 클릭");
 			attrDelete();
@@ -1567,6 +1383,56 @@ body {
 			e.preventDefault()
 			$(this).tab('show')
 		})
+		
+		map.on('click',function(e){
+			console.log("클릭한 좌표:",e.lngLat.lat,":",e.lngLat.lng);
+			$.ajax({
+				url:"http://localhost:5000/places/matzip?lat="+e.lngLat.lat+"&lng="+e.lngLat.lng,
+				type:"get",
+				//success:receiverecommandresponse,
+				success:function(data){
+					console.log("성공");
+					console.log("리시브데이터:%O",data);
+					const matzipList = data.places;
+					var imageListStr="";
+					matzipList.forEach(function(elt, i, array) {
+						imageListStr += 
+							'<div class="row" style="padding: 10px;"><div class="col-lg-6 col-xs-6"><div class="list-img"><img src="'+elt.url+'" style="width: 75%; height: 150px;"></div><div class="list-caption"><h3><span>'+elt.name+'</span><p>'+elt.addr+'</p></h3></div></div></div>'						
+					});
+					$('#messages1').html(imageListStr);
+					//console.log("첫번째",matzipList[0].addr);
+				},
+				error:function(request,status,error){
+					console.log("실패",request,status,error);
+				}
+			});		
+			$.ajax({
+				url:"http://localhost:5000/places/janggwan?lat="+e.lngLat.lat+"&lng="+e.lngLat.lng,
+				type:"get",
+				//success:receiverecommandresponse,
+				success:function(data){
+					console.log("성공");
+					console.log("리시브데이터:%O",data);
+					const matzipList = data.places;
+					var imageListStr="";
+					matzipList.forEach(function(elt, i, array) {
+						imageListStr += 
+							'<div class="row" style="padding: 10px;"><div class="col-lg-6 col-xs-6"><div class="list-img"><img src="'+elt.url+'" style="width: 75%; height: 150px;"></div><div class="list-caption"><h3><span>'+elt.name+'</span><p>'+elt.addr+'</p></h3></div></div></div>'						
+					});
+					$('#messages2').html(imageListStr);
+					//console.log("첫번째",matzipList[0].addr);
+				},
+				error:function(request,status,error){
+					console.log("실패",request,status,error);
+				}
+			});	
+		});
+		
+		/*
+		function receiverecommandresponse(data){
+			console.log("리시브데이터:%O",data);
+		}
+		*/
 
 	});
 </script>
