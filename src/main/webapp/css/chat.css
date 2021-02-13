@@ -41,7 +41,7 @@
 	position: fixed;
 	right: 31px;
 	bottom: 78px;
-	background-color: #eb566c;
+	background-color: none;
 }
 
 @media ( max-width : 575px) {
@@ -59,13 +59,36 @@
 	cursor: pointer;
 }
 
+
+.msgTopChatBotImg{
+	width: 50px;
+	height: 50px;
+	z-index: 300;
+	border-radius: 100%;
+	position: fixed;
+	right: 31px;
+	bottom: 138px;
+	background-color: #eb566c; 
+}
+
+@media ( max-width : 575px){
+	.msgTopChatBotImg{
+		right: 16px
+	}
+}
+
+.msgTopChatBotImg:hover{
+	cursor: pointer;
+	
+}
+
 .msgTab {
-	width: 500px;
+	width: 400px;
 	height: 600px;
 	position: absolute;
 	border-radius: 30px;
 	top: -600px;
-	left: -500px;
+	left: -400px;
 	background-color: white;
 	border: 1px solid black;
 	display: none;
@@ -226,12 +249,12 @@
 
 
 .chatRoom {
-	width: 500px;
+	width: 400px;
 	height: 600px;
 	position: absolute;
 	border-radius: 30px;
 	top: -600px;
-	left: -500px;
+	left: -400px;
 	background-color: white;
 	border: 1px solid black;
 	display: none;
@@ -239,6 +262,7 @@
 }
 
 .chatRoomTop {
+	background-color:#052b52;
 	height: 80px;
 	border-bottom: 1px solid black;
 	border-top-left-radius: 30px;
@@ -358,12 +382,12 @@
 }
 
 .chatBot {
-	width: 500px;
+	width: 400px;
 	height: 600px;
 	position: absolute;
 	border-radius: 30px;
 	top: -600px;
-	left: -500px;
+	left: -400px;
 	background-color: white;
 	border: 1px solid black;
 	display: none;
