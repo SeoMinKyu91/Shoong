@@ -12,7 +12,7 @@
 </resultMap>
 
 <select id="PackGallerySelectList" parameterType="java.util.Map" resultMap="packGalleryDTOResult">
-	SELECT * from PACK_GALLERY
+	SELECT * from pack_gallery where pack_join_no = (select pack_join_no from pack_join where user_id = #{userId})
 </select>
 
 <insert id="PackGalleryInsert" parameterType="java.util.Map">
