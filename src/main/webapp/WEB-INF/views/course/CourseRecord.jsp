@@ -17,7 +17,7 @@
 }
 */
 .nav-link {
-	color: #ff8827;
+	color: #f32a48;
 }
 
 ul li {
@@ -27,14 +27,6 @@ ul li {
 
 ul li label {
 	padding-right: 10px;
-}
-
-.my-box {
-	border: 5px lightgrey solid;
-	list-style: none;
-	padding: 35px;
-	height: 448px;
-	background-color: white;
 }
 
 .mapboxgl-ctrl-geocoder {
@@ -48,12 +40,6 @@ ul li label {
 
 .single-location:hover .location-img img {
 	transform: scale(1.1)
-}
-
-#graph {
-	max-width: 100%;
-	height: 25vh;
-	min-height: 200px;
 }
 
 .plusImage {
@@ -144,68 +130,56 @@ ul li label {
 	cursor: pointer;
 }
 
-.packCreateBtn {
-	color: #ff8827;
-	background-color: white;
-	font-weight: bold;
-	border: none;
-}
-
-.packCreateBtn:hover {
-	color: white;
-	background-color: #ff8827;
-}
-
 .submitBtn {
 	color: white;
-	background-color: #ff8827;
+	background-color: #f32a48;
 	font-weight: bold;
 	border: none;
 }
 
 .closeBtn {
 	color: white;
-	background-color: #ff8827;
+	background-color: #f32a48;
 	font-weight: bold;
 	border: none;
 }
 
 .insertBtn {
 	color: white;
-	background-color: #ff8827;
+	background-color: #ff32a48;
 	font-weight: bold;
 	border: none;
 }
 
 #packNoticeForm {
 	background-color: white;
-	border: #ff8827 1px solid;
+	border: #f32a48 1px solid;
 	border-radius: 10px;
 }
 
 #packNoticeEditForm {
 	background-color: white;
-	border: #ff8827 1px solid;
+	border: #f32a48 1px solid;
 	border-radius: 10px;
 }
 
 .deleteBtn {
 	color: white;
-	background-color: #ff8827;
+	background-color: #f32a48;
 	font-weight: bold;
 	border: none;
 }
 
 .editBtn {
 	color: white;
-	background-color: #ff8827;
+	background-color: #f32a48;
 	font-weight: bold;
 	border: none;
 }
 
 .viewBtn {
 	color: white;
-	background-color: #ff8827;
+	background-color: #f32a48;
 	font-weight: bold;
 	border: none;
 }
@@ -235,11 +209,6 @@ ul li label {
 
 .container {
 	margin-left: 50px;
-}
-
-.section-padding30 {
-	padding-top: 120px;
-	padding-bottom: 10px;
 }
 
 .mainbody {
@@ -306,17 +275,26 @@ ul li label {
 	background-color: white;
 }
 
+.menuVar {
+	padding-left: 10px;
+}
+
 body {
 	background-color: #faf7f7;
+}
+
+#btnNoticeWrite {
+	color:white;
+	background-color: #f32a48;
 }
 </style>
 <!-- 본문 시작 -->
 <!-- 본문 탭 시작 -->
-<div class="row mainbody">
-	<div class="col-md-6 col-xs-12" id="map"></div>
+<div class="mainbody">
+	<div class="col-lg-6 col-xs-12" id="map"></div>
 	
 	<!-- 탭 메뉴 및 정보 -->
-	<div role="tabpanel" class="menuVar col-md-6 col-xs-12">
+	<div role="tabpanel" class="menuVar col-lg-6 col-xs-12">
 
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
@@ -333,25 +311,25 @@ body {
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="courseList">
-				<div id="courseTable">
-					<div class="text-center col-lg-2 col-xs-1">카테고리</div>
-					<div class="text-center col-lg-3 col-xs-1">코스명</div>
-					<div class="text-center col-lg-2 col-xs-1">길이(km)</div>
-					<div class="text-center col-lg-2 col-xs-1">시간(분)</div>
+				<div class="row" id="courseTable">
+					<div class="text-center col-lg-2 col-xs-2">카테고리</div>
+					<div class="text-center col-lg-3 col-xs-3">코스명</div>
+					<div class="text-center col-lg-2 col-xs-2">길이(km)</div>
+					<div class="text-center col-lg-2 col-xs-2">시간(분)</div>
 					<div class="text-center col-lg-3 col-xs-3">등록일</div>
 				</div>
 				<c:if test="${empty courseList}" var="isEmpty">
-					<div class="text-center col-lg-12">
+					<div class="text-center col-xs-12 col-lg-12">
 						<div class="text-center">등록된 게시물이 없어요</div>
 					</div>
 				</c:if>
 				<c:if test="${!isEmpty}">
 					<c:forEach var="item" items="${courseList}" varStatus="loop">
-					<div id="courselist">
-						<div class="text-center col-lg-2 col-xs-1">${item.courseCateName}</div>
-						<div class="text-center col-lg-3 col-xs-1">${item.courseName}</div>
-						<div class="text-center col-lg-2 col-xs-1">${item.courseLength}</div>
-						<div class="text-center col-lg-2 col-xs-1">${item.courseTime}</div>
+					<div class="row" id="courselist">
+						<div class="text-center col-lg-2 col-xs-2">${item.courseCateName}</div>
+						<div class="text-center col-lg-3 col-xs-3">${item.courseName}</div>
+						<div class="text-center col-lg-2 col-xs-2">${item.courseLength}</div>
+						<div class="text-center col-lg-2 col-xs-2">${item.courseTime}</div>
 						<div class="text-center col-lg-3 col-xs-3">
 							<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm"
 								value="${item.courseRegiDate}" />
@@ -371,11 +349,11 @@ body {
 				</c:if>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="recordList">
-				<div id="recordTable">
-					<div class="text-center col-lg-4 col-xs-1">파일</div>
-					<div class="text-center col-lg-3 col-xs-1">길이(km)</div>
-					<div class="text-center col-lg-2 col-xs-1">시간(분)</div>
-					<div class="text-center col-lg-3 col-xs-1">일자</div>
+				<div class="row" id="recordTable">
+					<div class="text-center col-lg-4 col-xs-4">파일</div>
+					<div class="text-center col-lg-3 col-xs-3">길이(km)</div>
+					<div class="text-center col-lg-2 col-xs-2">시간(분)</div>
+					<div class="text-center col-lg-3 col-xs-3">일자</div>
 				</div>
 				<c:if test="${empty recordList}" var="isEmpty">
 					<div class="text-center col-lg-12">
@@ -384,11 +362,11 @@ body {
 				</c:if>
 				<c:if test="${!isEmpty}">
 					<c:forEach var="item" items="${recordList}" varStatus="loop">
-					<div id="recordlist">
-						<div class="text-center col-lg-4 col-xs-1">${item.fileName}</div>
-						<div class="text-center col-lg-3 col-xs-1">${item.recordLength}km</div>
-						<div class="text-center col-lg-2 col-xs-1">${item.duration}분</div>
-						<div class="text-center col-lg-3 col-xs-1">
+					<div class="row" id="recordlist">
+						<div class="text-center col-lg-4 col-xs-4">${item.fileName}</div>
+						<div class="text-center col-lg-3 col-xs-3">${item.recordLength}km</div>
+						<div class="text-center col-lg-2 col-xs-2">${item.duration}분</div>
+						<div class="text-center col-lg-3 col-xs-3">
 							<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm"
 								value="${item.recordDate}" />
 							<c:out value="${dResult}" />
@@ -504,11 +482,6 @@ body {
 		</div>
 	</div>
 </div>
-<!-- 높이 그래프 시작 -->
-<div class="row" style="padding-top: 50px; padding-left: 10px">
-	<div class="col-xs-10 offset-xs-1 col-md-7" id="graph"></div>
-</div>
-<!-- 높이 그래프 끝 -->
 <!-- 코스 등록 모달창 시작 -->
 <div class="modal fade" id="noticeEdit" data-backdrop="false">
 	<div class="modal-dialog modal-lg">
