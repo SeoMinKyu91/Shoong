@@ -418,8 +418,14 @@ insert into pack_notice values(1213,'shoong1200@naver.com','1200','설날 공지
 insert into pack_notice values(1214,'shoong1200@naver.com','1200','설날 이후 모임 공지',sysdate,'설날 이후 같이 라이딩을 자제 부탁드립니다');
 
 /* ================================================= Badge Insert ===========================================================*/
-INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'새싹','0','마일리지','starter_badge.jpg');
-INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'비기너','1','마일리지','beginner_badge.jpg');
-INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'걸음마','5','마일리지','first_step_badge.jpg');
-INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'동네 산책','10','마일리지','walk_badge.jpg');
-INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'동네 한바퀴','15','마일리지','circle_badge.jpg');
+INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'새싹','0','마일리지','shoongBadge1.png');
+INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'비기너','1','마일리지','shoongBadge2.png');
+INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'걸음마','5','마일리지','shoongBadge3.png');
+INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'동네 산책','10','마일리지','shoongBadge4.png');
+INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'동네 한바퀴','15','마일리지','shoongBadge5.png');
+
+INSERT INTO USER_BADGE_GET VALUES(1001,1,'shoong1000@naver.com',sysdate);
+INSERT INTO USER_BADGE_GET VALUES(1002,2,'shoong1000@naver.com',sysdate);
+INSERT INTO USER_BADGE_GET VALUES(1003,3,'shoong1000@naver.com',sysdate);
+INSERT INTO USER_BADGE_GET VALUES(1004,4,'shoong1000@naver.com',sysdate);
+INSERT INTO USER_BADGE_GET VALUES(1005,5,'shoong1000@naver.com',sysdate);

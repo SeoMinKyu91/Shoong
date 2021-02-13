@@ -291,7 +291,7 @@ ul li label {
 	background-color: white;
 }
 
-#recordTable {
+#recordTable>div {
 	font-weight: bold;
 	padding-bottom: 15px;
 	padding-top: 15px;
@@ -299,7 +299,7 @@ ul li label {
 	color: white;
 }
 
-#recordlist {
+#recordlist>div {
 	padding-top: 15px;
 	padding-bottom: 15px;
 	border-bottom: #cde3fa 1px solid;
@@ -385,10 +385,10 @@ body {
 				<c:if test="${!isEmpty}">
 					<c:forEach var="item" items="${recordList}" varStatus="loop">
 					<div id="recordlist">
-						<div class="text-center col-lg-4 col-xs-1" id="recordlist">${item.fileName}</div>
-						<div class="text-center col-lg-3 col-xs-1" id="recordlist">${item.recordLength}km</div>
-						<div class="text-center col-lg-2 col-xs-1" id="recordlist">${item.duration}분</div>
-						<div class="text-center col-lg-3 col-xs-1" id="recordlist">
+						<div class="text-center col-lg-4 col-xs-1">${item.fileName}</div>
+						<div class="text-center col-lg-3 col-xs-1">${item.recordLength}km</div>
+						<div class="text-center col-lg-2 col-xs-1">${item.duration}분</div>
+						<div class="text-center col-lg-3 col-xs-1">
 							<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm"
 								value="${item.recordDate}" />
 							<c:out value="${dResult}" />
@@ -1124,7 +1124,7 @@ body {
 		$("#courseList #courselist").click(function() {
 			$('.viewBtn').show();
 
-			courseId = $(this).children().eq(5).text();
+			courseId = $(this).children().eq(5).text().trim();
 
 			$.ajax({
 				url : "<c:url value='/course/viewcourse'/>",
@@ -1142,13 +1142,6 @@ body {
 					courseRegiDate = json.courseRegiDate;
 					courseIntro = json.courseIntro;
 					
-					/*
-					$("#mdCourseNo").append("코스 이름 : " + courseName);
-					$("#mdCourseUserID").append("코스 길이 : " + courseLength);
-					$("#mdCourseTitle").append("코스 시간 : " + courseTime);
-					$("#mdCoursePostdate").append("등록 일자 : " + courseRegiDate);
-					$("#mdCourseContent").append("" + courseIntro);
-					*/
 					$("#mdCourseNo").html("코스 이름 : " + courseName);
 					$("#mdCourseUserID").html("코스 이름 : " + courseLength);
 					$("#mdCourseTitle").html("코스 이름 : " + courseTime);
@@ -1160,12 +1153,12 @@ body {
 						type : "post",
 						dataType : "json",
 						data : {
-							"fileName" : json.courseFileName
+							"fileName":json.courseFileName
 						},
 						success : function(data) {
 							map4.addSource('route', {
-								"type" : "geojson",
-								"data" : data
+								"type":"geojson",
+								"data":data
 							});
 							map4.addLayer({
 								'id' : 'route',
@@ -1177,7 +1170,7 @@ body {
 								},
 								'paint' : {
 									'line-color' : '#ff0000',
-									'line-width' : 8
+									'line-width' : 6
 								}
 							});
 							map4.setCenter(data.geometry.coordinates[0][0]);
@@ -1220,30 +1213,12 @@ body {
 			$('.viewBtn').show();
 			var userId = "${sessionScope.userId}";
 			console.log('테이블 a태그 클릭', userId);
-			fileName = $(this).children().eq(0).text();
+			fileName = $(this).children().eq(0).text().trim();
 			recordLength = $(this).children().eq(1).text();
 			recordDuration = $(this).children().eq(2).text();
 			recordDate = $(this).children().eq(3).text();
 			recordNo = $(this).children().eq(4).text();
 
-			/*
-			if(userId === title){
-				console.log(userId,'와',title);
-				//$('.viewBtn').attr("hidden","false");
-				$('.viewBtn').show();
-			} else {
-				console.log(userId,'와',title,'달라');
-				$('.viewBtn').hide();
-			}
-			 */
-			
-			/*
-			$("#mdNo").append("파일 : " + fileName);
-			$("#mdUserID").append("길이 : " + recordLength);
-			$("#mdTitle").append("시간 : " + recordDuration);
-			$("#mdPostdate").append("일자 : " + recordDate);
-			$("#mdContent").append("" + recordNo);
-			*/
 			$("#mdNo").html("파일 : " + fileName);
 			$("#mdUserID").html("길이 : " + recordLength);
 			$("#mdTitle").html("시간 : " + recordDuration);
@@ -1256,7 +1231,7 @@ body {
 				type : "post",
 				dataType : "json",
 				data : {
-					"fileName" : fileName
+					"fileName":fileName
 				},
 				success : function(data) {
 					console.log('요청 성공');
@@ -1264,7 +1239,6 @@ body {
 					console.log('data:%O', data);
 					//json = data.features[0];
 					json = data;
-					
 
 					map2.addSource('route', {
 						"type" : "geojson",
@@ -1280,7 +1254,7 @@ body {
 						},
 						'paint' : {
 							'line-color' : '#ff0000',
-							'line-width' : 8
+							'line-width' : 6
 						}
 					});
 					
@@ -1316,7 +1290,6 @@ body {
 			$("#courseId").attr("value", fileName);
 			$("#courseTime").attr("value", recordDuration);
 			$("#courseLength").attr("value", recordLength);
-			//$("#packNoticeEditTitle").attr("value",title);
 
 			//지도 띄우기
 			//루트 가져오기
@@ -1348,7 +1321,7 @@ body {
 						},
 						'paint' : {
 							'line-color' : '#ff0000',
-							'line-width' : 8
+							'line-width' : 6
 						}
 					});
 					map3.setCenter(json.geometry.coordinates[0][0]);
@@ -1431,6 +1404,33 @@ body {
 			e.preventDefault()
 			$(this).tab('show')
 		})
+		
+		map.on('click',function(e){
+			console.log("클릭한 좌표:",e.lngLat.lat,":",e.lngLat.lng);
+			$.ajax({
+				url:"http://localhost:5000/places/matzip?lat="+e.lngLat.lat+"&lng="+e.lngLat.lng,
+				type:"get",
+				//success:receiverecommandresponse,
+				success:function(data){
+					console.log("성공");
+					console.log("리시브데이터:%O",data);
+					const matzipList = data.places;
+					matzipList.forEach(function(elt, i, array) {
+						
+					});
+					//console.log("첫번째",matzipList[0].addr);
+				},
+				error:function(request,status,error){
+					console.log("실패",request,status,error);
+				}
+			});		
+		});
+		
+		/*
+		function receiverecommandresponse(data){
+			console.log("리시브데이터:%O",data);
+		}
+		*/
 
 	});
 </script>
