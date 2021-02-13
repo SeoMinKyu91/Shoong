@@ -85,8 +85,7 @@ public class CourseController {
 	@PostMapping(value = "/routeLoad",produces = "text/html; charset=UTF-8")
 	@ResponseBody
 	public String routeLoad(
-			@RequestParam String fileName,HttpServletRequest req)
-											throws IOException {
+			@RequestParam String fileName,HttpServletRequest req) throws IOException {
 	
 		String filePath = req.getServletContext().getRealPath("/upload")+File.separator+fileName;
 		System.out.println("routePath:"+filePath);
@@ -94,6 +93,7 @@ public class CourseController {
 				new BufferedReader(
 						new InputStreamReader(
 								new FileInputStream(new File(filePath))));
+		
 		StringBuffer sb = new StringBuffer();
 
 		int data = -1;
@@ -104,7 +104,6 @@ public class CourseController {
 		}
 		if(br!=null) br.close();
 		return sb.toString();
-		
 	}
 	
 	//웹 json file 업로드
