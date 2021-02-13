@@ -1,6 +1,6 @@
 /* ================================================= Member Insert ===========================================================*/
 /* =================================================팩장에 해당하는 유저 생성 ===========================================================*/
-INSERT INTO member_ VALUES('shoong1000@naver.com','1234','장동건','남성',25,'01000001000',sysdate,sysdate,132);
+INSERT INTO member_ VALUES('shoong1000@naver.com','1234','우경환','남성',29,'01000001000',sysdate,sysdate,132);
 INSERT INTO member_ VALUES('shoong1100@naver.com','1234','한지민','여성',30,'010000001100',sysdate,sysdate,132);
 INSERT INTO member_ VALUES('shoong1200@naver.com','1234','이동건','남성',45,'01000001200',sysdate,sysdate,132);
 INSERT INTO member_ VALUES('shoong1300@naver.com','1234','이나영','여성',33,'01000001300',sysdate,sysdate,132);
@@ -22,7 +22,7 @@ INSERT INTO verify VALUES('shoong1700@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1800@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1900@naver.com', 'Y');
 
-INSERT INTO useraddr VALUES('shoong1000@naver.com', '서울특별시 구로구',37.488004666666676,126.85213716666668);
+INSERT INTO useraddr VALUES('shoong1000@naver.com', '서울특별시 구로구',37.478987,126.878826);
 INSERT INTO useraddr VALUES('shoong1100@naver.com', '경기도 용인시',37.324501882069015,127.25959003827327);
 INSERT INTO useraddr VALUES('shoong1200@naver.com', '경기도 성남시',37.40953083324051,127.07590473712015);
 INSERT INTO useraddr VALUES('shoong1300@naver.com', '경기도 용인시',37.25030499290375,127.14752182834968);
@@ -34,45 +34,51 @@ INSERT INTO useraddr VALUES('shoong1800@naver.com', '경기도 성남시',37.399
 INSERT INTO useraddr VALUES('shoong1900@naver.com', '경기도 용인시',37.289404999999995,127.1252265);
 
 /* =================================================1000번팩 가입 완료한 유저 생성 ===========================================================*/
-INSERT INTO member_ VALUES('shoong1001@naver.com','1234','양현모','남성',21,'01000001001',sysdate,sysdate,132);
-INSERT INTO member_ VALUES('shoong1002@naver.com','1234','영비','남성',24,'01000001002',sysdate,sysdate,132);
-INSERT INTO member_ VALUES('shoong1003@naver.com','1234','김지범','남성',21,'01000001003',sysdate,sysdate,132);
-INSERT INTO member_ VALUES('shoong1004@naver.com','1234','라키','남성',28,'01000001004',sysdate,sysdate,132);
-INSERT INTO member_ VALUES('shoong1005@naver.com','1234','진지희','여성',25,'01000001005',sysdate,sysdate,132);
+INSERT INTO member_ VALUES('shoong1001@naver.com','1234','전별','여성',26,'01000001001',sysdate,sysdate,132);
+INSERT INTO member_ VALUES('shoong1002@naver.com','1234','이은선','여성',22,'01000001002',sysdate,sysdate,132);
+INSERT INTO member_ VALUES('shoong1003@naver.com','1234','김유경','여성',28,'01000001003',sysdate,sysdate,132);
+INSERT INTO member_ VALUES('shoong1004@naver.com','1234','김종현','남성',29,'01000001004',sysdate,sysdate,132);
+INSERT INTO member_ VALUES('shoong1005@naver.com','1234','백웅기','남성',28,'01000001005',sysdate,sysdate,132);
+/*
 INSERT INTO member_ VALUES('shoong1006@naver.com','1234','채영','여성',29,'01000001006',sysdate,sysdate,132);
 INSERT INTO member_ VALUES('shoong1007@naver.com','1234','쯔위','여성',24,'01000001007',sysdate,sysdate,132);
 INSERT INTO member_ VALUES('shoong1008@naver.com','1234','이나은','여성',23,'01000001008',sysdate,sysdate,132);
 INSERT INTO member_ VALUES('shoong1009@naver.com','1234','김소혜','여성',27,'01000001009',sysdate,sysdate,132);
 INSERT INTO member_ VALUES('shoong1010@naver.com','1234','김도연','여성',26,'01000001010',sysdate,sysdate,132);
+*/
 
 INSERT INTO verify VALUES('shoong1001@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1002@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1003@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1004@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1005@naver.com', 'Y');
+/*
 INSERT INTO verify VALUES('shoong1006@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1007@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1008@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1009@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1010@naver.com', 'Y');
+*/
 
 INSERT INTO useraddr VALUES('shoong1001@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
 INSERT INTO useraddr VALUES('shoong1002@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
 INSERT INTO useraddr VALUES('shoong1003@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
 INSERT INTO useraddr VALUES('shoong1004@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
 INSERT INTO useraddr VALUES('shoong1005@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
+/*
 INSERT INTO useraddr VALUES('shoong1006@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
 INSERT INTO useraddr VALUES('shoong1007@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
 INSERT INTO useraddr VALUES('shoong1008@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
 INSERT INTO useraddr VALUES('shoong1009@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
 INSERT INTO useraddr VALUES('shoong1010@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
+*/
 
 /* =================================================1000번팩 가입 미 완료한 유저 생성 ===========================================================*/
-INSERT INTO member_ VALUES('shoong1011@naver.com','1234','이선빈','여성',21,'01000001011',sysdate,sysdate,132);
-INSERT INTO member_ VALUES('shoong1012@naver.com','1234','강지영','여성',28,'01000001012',sysdate,sysdate,132);
-INSERT INTO member_ VALUES('shoong1013@naver.com','1234','수지','남성',28,'01000001013',sysdate,sysdate,132);
-INSERT INTO member_ VALUES('shoong1014@naver.com','1234','남태현','남성',22,'01000001014',sysdate,sysdate,132);
-INSERT INTO member_ VALUES('shoong1015@naver.com','1234','김민규','남성',29,'01000001015',sysdate,sysdate,132);
+INSERT INTO member_ VALUES('shoong1011@naver.com','1234','이동규','남성',26,'01000001011',sysdate,sysdate,132);
+INSERT INTO member_ VALUES('shoong1012@naver.com','1234','서민규','남성',31,'01000001012',sysdate,sysdate,132);
+INSERT INTO member_ VALUES('shoong1013@naver.com','1234','양민혁','남성',26,'01000001013',sysdate,sysdate,132);
+INSERT INTO member_ VALUES('shoong1014@naver.com','1234','김우석','남성',26,'01000001014',sysdate,sysdate,132);
+INSERT INTO member_ VALUES('shoong1015@naver.com','1234','최민정','여성',29,'01000001015',sysdate,sysdate,132);
 
 INSERT INTO verify VALUES('shoong1011@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1012@naver.com', 'Y');
@@ -201,25 +207,25 @@ INSERT INTO course_cate VALUES (104,'도전코스','course_cate_challenge.jpg');
 
 /*==============================================course 추가====================================================*/
 insert into COURSE(COURSE_ID,COURSE_NAME,COURSE_CATE_ID,USER_ID,COURSE_TIME,COURSE_LENGTH,COURSE_DATE,COURSE_FILE_NAME) 
-values (101,'한강 라이딩',101,'shoong1000@naver.com','120','58',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'recordsample1.json');
+values (101,'한강 라이딩',101,'shoong1000@naver.com','120','58',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'coursesample1.json');
 insert into COURSE(COURSE_ID,COURSE_NAME,COURSE_CATE_ID,USER_ID,COURSE_TIME,COURSE_LENGTH,COURSE_DATE,COURSE_FILE_NAME) 
-values (102,'소양강 라이딩',104,'shoong1000@naver.com','93','80',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'recordsample2.json');
+values (102,'소양강 라이딩',104,'shoong1000@naver.com','93','80',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'coursesample2.json');
 insert into COURSE(COURSE_ID,COURSE_NAME,COURSE_CATE_ID,USER_ID,COURSE_TIME,COURSE_LENGTH,COURSE_DATE,COURSE_FILE_NAME) 
-values (103,'막국수가 있는 라이딩',102,'shoong1000@naver.com','12','3',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'recordsample3.json');
+values (103,'막국수가 있는 라이딩',102,'shoong1000@naver.com','12','3',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'coursesample3.json');
 insert into COURSE(COURSE_ID,COURSE_NAME,COURSE_CATE_ID,USER_ID,COURSE_TIME,COURSE_LENGTH,COURSE_DATE,COURSE_FILE_NAME) 
-values (104,'단풍길 라이딩',104,'shoong1000@naver.com','100','180',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'recordsample4.json');
+values (104,'단풍길 라이딩',104,'shoong1000@naver.com','100','180',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'coursesample4.json');
 insert into COURSE(COURSE_ID,COURSE_NAME,COURSE_CATE_ID,USER_ID,COURSE_TIME,COURSE_LENGTH,COURSE_DATE,COURSE_FILE_NAME) 
-values (105,'팔당댐 라이딩',101,'shoong1000@naver.com','91','71',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'recordsample5.json');
+values (105,'팔당댐 라이딩',101,'shoong1000@naver.com','91','71',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'coursesample5.json');
 insert into COURSE(COURSE_ID,COURSE_NAME,COURSE_CATE_ID,USER_ID,COURSE_TIME,COURSE_LENGTH,COURSE_DATE,COURSE_FILE_NAME) 
-values (106,'동해바다 라이딩',104,'shoong1000@naver.com','60','45',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'recordsample6.json');
+values (106,'동해바다 라이딩',104,'shoong1000@naver.com','60','45',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'coursesample6.json');
 insert into COURSE(COURSE_ID,COURSE_NAME,COURSE_CATE_ID,USER_ID,COURSE_TIME,COURSE_LENGTH,COURSE_DATE,COURSE_FILE_NAME) 
-values (107,'제주도 한바퀴 라이딩',103,'shoong1000@naver.com','180','210',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'recordsample7.json');
+values (107,'제주도 한바퀴 라이딩',103,'shoong1000@naver.com','180','210',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'coursesample7.json');
 insert into COURSE(COURSE_ID,COURSE_NAME,COURSE_CATE_ID,USER_ID,COURSE_TIME,COURSE_LENGTH,COURSE_DATE,COURSE_FILE_NAME) 
-values (108,'북한강 라이딩',104,'shoong1000@naver.com','45','30',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'recordsample8.json');
+values (108,'북한강 라이딩',104,'shoong1000@naver.com','45','30',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'coursesample8.json');
 insert into COURSE(COURSE_ID,COURSE_NAME,COURSE_CATE_ID,USER_ID,COURSE_TIME,COURSE_LENGTH,COURSE_DATE,COURSE_FILE_NAME) 
-values (109,'해운대 라이딩',102,'shoong1000@naver.com','30','15',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'recordsample9.json');
+values (109,'해운대 라이딩',102,'shoong1000@naver.com','30','15',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'coursesample9.json');
 insert into COURSE(COURSE_ID,COURSE_NAME,COURSE_CATE_ID,USER_ID,COURSE_TIME,COURSE_LENGTH,COURSE_DATE,COURSE_FILE_NAME) 
-values (110,'벛꽃풍경 라이딩',103,'shoong1000@naver.com','50','55',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'recordsample10.json');
+values (110,'벛꽃풍경 라이딩',103,'shoong1000@naver.com','50','55',TO_DATE('21-01-31 20:41:00','YY-MM-DD HH24:MI:SS'),'coursesample10.json');
 
 /* ================================================= Record Insert ===========================================================*/
 
@@ -244,8 +250,8 @@ insert into DIARY values(305,205,'shoong1000@naver.com','또 왔다 소양강','
 insert into DIARY values(306,206,'shoong1000@naver.com','맑은 하늘이 이쁘다','제목6_메인_내용','2021-1-5','diary_th_sample6.jpg');
 insert into DIARY values(307,207,'shoong1000@naver.com','인생 사진','제목7_메인_내용','2021-1-6','diary_th_sample7.jpg');
 insert into DIARY values(308,208,'shoong1000@naver.com','꽃이 핀 날','제목8_메인_내용','2021-1-9','diary_th_sample8.jpg');
-insert into DIARY values(309,209,'shoong1000@naver.com','인생 자전거 사진','제목9_메인_내용','2021-1-16','diary_th_sample9.jpg');
-insert into DIARY values(310,210,'shoong1000@naver.com','어느 맑은 날','제목10_메인_내용','2021-1-17','diary_th_sample10.jpg');
+insert into DIARY values(309,209,'shoong1000@naver.com','인생 자전거 사진','바닷길 이쁜 사진들~','2021-1-16','diary_th_sample9.jpg');
+insert into DIARY values(310,210,'shoong1000@naver.com','어느 맑은 날','팩 사람들이랑 자전거 여행~','2021-1-17','diary_th_sample10.jpg');
 
 insert into DIARY_IMG values(401,301,'diaryImg_sample1_1.jpg','소제목1','소제목1 내용');
 insert into DIARY_IMG values(402,301,'diaryImg_sample1_2.jpg','소제목2','소제목2 내용');
@@ -263,15 +269,15 @@ insert into DIARY_IMG values(413,306,'diaryImg_sample1_1.jpg','소제목1','소�
 insert into DIARY_IMG values(414,307,'diaryImg_sample1_2.jpg','소제목1','소제목1 내용');
 insert into DIARY_IMG values(415,309,'diaryImg_sample1_3.jpg','소제목1','소제목1 내용');
 insert into DIARY_IMG values(416,309,'diaryImg_sample1_4.jpg','소제목1','소제목2 내용');
-insert into DIARY_IMG values(417,310,'diaryImg_sample2_1.jpg','소제목1','소제목1 내용');
-insert into DIARY_IMG values(418,310,'diaryImg_sample2_2.jpg','소제목2','소제목2 내용');
-insert into DIARY_IMG values(419,310,'diaryImg_sample2_3.jpg','소제목3','소제목3 내용');
-insert into DIARY_IMG values(420,310,'diaryImg_sample3_1.jpg','소제목4','소제목4 내용');
+insert into DIARY_IMG values(417,310,'diaryImg_sample2_1.jpg','시작한지 얼마 안된 우리들','아직은 쌩쌩한 우리들, 완주를 하겠다는 일념으로 열심히 서로 도우면서 달려가고 있는중~');
+insert into DIARY_IMG values(418,310,'diaryImg_sample2_2.jpg','선선한 강바람','강을 따라 난 자전거 길!! 이쁜 경치 보면서 라이딩');
+insert into DIARY_IMG values(419,310,'diaryImg_sample2_3.jpg','날씨좋고~ 바람좋고~','화창하고 맑은 하늘 팀원이 찍어준 사진~');
+insert into DIARY_IMG values(420,310,'diaryImg_sample3_1.jpg','돌아가기 전 우리가 왔던길을 다시보며','처음에는 힘들었지만, 이렇게 완주를 다하고 난뒤 코스를 찍으니 뿌듯함과 성취감이 가득');
 
 
 /* ================================================= Pack Insert ===========================================================*/
 /* =================================================팩 생성 ===========================================================*/
-insert into pack values(1000,'전국일주','#전국일주#맛집탐방','서울특별시 구로구','주 1회','20대','다같이화목한분위기로자전거탑시다~','packLogo1.png',37.488004666666676,126.85213716666668);
+insert into pack values(1000,'전국일주','#전국일주#맛집탐방','서울특별시 구로구','주 1회','20대','다같이화목한분위기로자전거탑시다~','packLogo1.png',37.478987,126.878826);
 insert into PACK values(1100,'동네 한바퀴','#맛집투어#오솔길','경기도 용인시','주 1회','30대','다같이 돌자 동네 한바퀴~','packLogo1.png',37.324501882069015,127.25959003827327);
 insert into PACK values(1200,'호잇호잇','#공원#오솔길','경기도 성남시','주 4회 이상','40대','자전거를 좋아하시는분 같이 탑시다','packLogo5.png',37.40953083324051,127.07590473712015);
 insert into PACK values(1300,'페달의 민족','#맛집투어#여행','경기도 용인시','주 2~3회','30대','30대 회사원들이 많습니다~','packLogo3.png',37.25030499290375,127.14752182834968);
@@ -321,11 +327,13 @@ insert into pack_join values(1002,'shoong1002@naver.com',1000,sysdate,'yes',sysd
 insert into pack_join values(1003,'shoong1003@naver.com',1000,sysdate,'yes',sysdate);
 insert into pack_join values(1004,'shoong1004@naver.com',1000,sysdate,'yes',sysdate);
 insert into pack_join values(1005,'shoong1005@naver.com',1000,sysdate,'yes',sysdate);
+/*
 insert into pack_join values(1006,'shoong1006@naver.com',1000,sysdate,'yes',sysdate);
 insert into pack_join values(1007,'shoong1007@naver.com',1000,sysdate,'yes',sysdate);
 insert into pack_join values(1008,'shoong1008@naver.com',1000,sysdate,'yes',sysdate);
 insert into pack_join values(1009,'shoong1009@naver.com',1000,sysdate,'yes',sysdate);
 insert into pack_join values(1010,'shoong1010@naver.com',1000,sysdate,'yes',sysdate);
+*/
 
 insert into pack_join values(1101,'shoong1101@naver.com',1100,sysdate,'yes',sysdate);
 insert into pack_join values(1102,'shoong1102@naver.com',1100,sysdate,'yes',sysdate);
@@ -417,15 +425,28 @@ insert into pack_notice values(1212,'shoong1200@naver.com','1200','부팩장 공
 insert into pack_notice values(1213,'shoong1200@naver.com','1200','설날 공지',sysdate,'설날 코로나 조심하시고 즐겁게 보내세요');
 insert into pack_notice values(1214,'shoong1200@naver.com','1200','설날 이후 모임 공지',sysdate,'설날 이후 같이 라이딩을 자제 부탁드립니다');
 
-/* ================================================= Badge Insert ===========================================================*/
-INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'새싹','0','마일리지','shoongBadge1.png');
-INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'비기너','1','마일리지','shoongBadge2.png');
-INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'걸음마','5','마일리지','shoongBadge3.png');
-INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'동네 산책','10','마일리지','shoongBadge4.png');
-INSERT INTO BADGE VALUES(SEQ_BADGE.NEXTVAL,'동네 한바퀴','15','마일리지','shoongBadge5.png');
 
-INSERT INTO USER_BADGE_GET VALUES(1001,1,'shoong1000@naver.com',sysdate);
-INSERT INTO USER_BADGE_GET VALUES(1002,2,'shoong1000@naver.com',sysdate);
-INSERT INTO USER_BADGE_GET VALUES(1003,3,'shoong1000@naver.com',sysdate);
-INSERT INTO USER_BADGE_GET VALUES(1004,4,'shoong1000@naver.com',sysdate);
-INSERT INTO USER_BADGE_GET VALUES(1005,5,'shoong1000@naver.com',sysdate);
+/* 팩 갤러리 */
+insert into pack_gallery values(1001,'packgallery1.jpg',1000);
+insert into pack_gallery values(1002,'packgallery2.jpg',1000);
+insert into pack_gallery values(1003,'packgallery3.jpg',1000);
+insert into pack_gallery values(1004,'packgallery4.jpg',1000);
+insert into pack_gallery values(1005,'packgallery5.jpg',1000);
+insert into pack_gallery values(1006,'packgallery6.jpg',1000);
+insert into pack_gallery values(1007,'packgallery7.jpg',1000);
+
+/* ================================================= Badge Insert ===========================================================*/
+INSERT INTO BADGE VALUES(1001,'새싹','0','마일리지','shoongBadge1.png');
+INSERT INTO BADGE VALUES(1002,'비기너','1','마일리지','shoongBadge2.png');
+INSERT INTO BADGE VALUES(1003,'걸음마','5','마일리지','shoongBadge3.png');
+INSERT INTO BADGE VALUES(1004,'동네 산책','10','마일리지','shoongBadge4.png');
+INSERT INTO BADGE VALUES(1005,'동네 한바퀴','15','마일리지','shoongBadge5.png');
+
+INSERT INTO USER_BADGE_GET VALUES(1001,1001,'shoong1000@naver.com',sysdate);
+INSERT INTO USER_BADGE_GET VALUES(1002,1002,'shoong1000@naver.com',sysdate);
+INSERT INTO USER_BADGE_GET VALUES(1003,1003,'shoong1000@naver.com',sysdate);
+INSERT INTO USER_BADGE_GET VALUES(1004,1004,'shoong1000@naver.com',sysdate);
+INSERT INTO USER_BADGE_GET VALUES(1005,1005,'shoong1000@naver.com',sysdate);
+
+/* shoong1000 프로필 이미지 설정*/
+insert into member_profile_img values(1001,'shoong1000@naver.com','shoongBadge4.png');

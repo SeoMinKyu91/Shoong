@@ -154,7 +154,7 @@
 							<img src="<c:url value='/change/img/shooongLogo.png'/>" style="width: 60px;height: 60px; margin-top: 10px;margin-left: 20px;">
 							<h3 style="color: white;margin-left: 10px;padding-top: 5px;">SHOOONG.</h3>
 							<div class="chatRoomExit">
-								<img class="chatRoomExitBtn" src="<c:url value="/images/fa-icons/window-close-regular.svg"/>" style="color: white;">
+								<img class="chatRoomExitBtn" src="<c:url value="/images/closebutton.png"/>" style="color: white;">
 							</div>
 						</div>
 						
@@ -195,8 +195,10 @@
 					<!-- 토탈 heigth:600px이여서 별님이 원하는 크기만큼 설정하시면 될거같아요 -->
 					<div class="chatBot">
 						<div class="chatRoomTop">
+							<img src="<c:url value='/change/img/shooongLogo.png'/>" style="width: 60px;height: 60px; margin-top: 10px;margin-left: 20px;">
+							<h3 style="color: white;margin-left: 10px;padding-top: 5px;">SHOOONG.</h3>
 							<div class="chatBotExit">
-								<img class="chatBotExitBtn" src="<c:url value="/images/fa-icons/window-close-regular.svg"/>">
+								<img class="chatBotExitBtn" src="<c:url value="/images/closebutton.png"/>">
 							</div>
 						</div>
 						
@@ -499,19 +501,13 @@
 		}
 		
 		var open = function(){
-			//서버로 연결한 사람의 정보(닉네임) 전송
-			//msg:kim가(이) 입장했어요
-			//사용자가 입력한 닉네임 저장
 			nickname = $('.msgBodyMyProfileName').html();
 			wsocket.send('msg:'+nickname+"가(이) 입장했어요");
 			appendMessage('연결되었어요');
 		}
 		
 		var receiveMessage = function(e){//e는 message이벤트 객체
-			//서버로부터 받은 데이타는 이벤트객체(e).data속성에 저장되어 있다
-			console.log('서버로부터 데이터 받을때 호출되는 콜백함수');
 			var json = JSON.parse(e.data);
-			console.log(json);
 			var nickname = json.nickname;
 			var msg = json.message;
 			var date = json.messageTime;
@@ -522,7 +518,6 @@
 		};
 		
 		$('.chatRoomMessageWrite').on('keypress',function(e){
-			console.log('e.keycode:$s,e.which:%s',e.keyCode,e.which);
 			var keyValue = e.keyCode? e.keyCode : e.which;
 			var chatContent = $('.chatRoomMessageWrite').val();
 			if(keyValue==13){
@@ -533,8 +528,6 @@
 		})
 		
 		function sendMessage(){
-			console.log('sendMessage함수');
-			console.log($('.chatRoomMessageWrite').val());
 			if($('.chatRoomMessageWrite').val().trim()!=""){
 				var Time = moment();
 				var nowTime = Time.format('a hh:mm')
@@ -545,7 +538,6 @@
 				else{
 					replaceNowTime = nowTime.replace('pm','오후');
 				}
-				
 				var userData = new Object();
 				userData.nickname = '${sessionScope.chat.memberName}'
 				userData.profileImg = '${sessionScope.chat.profileImg}'
@@ -553,9 +545,6 @@
 				userData.messageTime = replaceNowTime;
 				var json = JSON.stringify(userData);
 				nickname = '${sessionScope.chat.memberName}'
-				console.log('sendMessage들어옴');
-				
-				console.log(replaceNowTime);
 				websocket.send(json);
 				appendWebMyMessage($('.chatRoomMessageWrite').val(),replaceNowTime);
 				$('.chatRoomMessageWrite').val("");

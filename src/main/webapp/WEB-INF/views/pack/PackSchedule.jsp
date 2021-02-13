@@ -385,8 +385,6 @@ label {
 <script>
    
    $(function(){
-      console.log(${calendarJson})
-      
       var calendarEl = document.getElementById('calendar');
    
       var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -395,9 +393,9 @@ label {
             center : 'title',
             right : 'dayGridMonth,dayGridWeek,dayGridDay'
          },
-         navLinks : true, // can click day/week names to navigate views
+         navLinks : true,
          editable : true,
-         dayMaxEvents : true, // allow "more" link when too many events
+         dayMaxEvents : true,
          locale : 'ko',
          timezone : 'local',
          firstDay : 0,
@@ -411,8 +409,6 @@ label {
               <c:if test="${!emp}"  >
                     ${calendarJson}
               </c:if>
-          
-         
       });
       //클릭시 모달창 제어
       calendar.on('dateClick', function(info) {
@@ -425,12 +421,10 @@ label {
       });
       
       calendar.on('eventClick',function(info){
-         console.log('이벤트 클릭');
-         //aaaaaa
          $.ajax({
-            url : "<c:url value="/pack/schedule/selectOne.do"/>",//요청할 서버의 URL주소
-            type : 'post',//데이타 전송방식(디폴트는 get방식) 
-            dataType : 'json',//서버로 부터 응답 받을 데이타의 형식 설정
+            url : "<c:url value="/pack/schedule/selectOne.do"/>",
+            type : 'post',
+            dataType : 'json',
             data : {
                "packId" : ${sessionScope.packId},
                "packScheduleNo" : info.event.id
@@ -453,9 +447,6 @@ label {
                }
                $('#userThumbnailImgInModal').css('width','50px')
                $('#userThumbnailImgInModal').css('height','50px')
-               
-	           
-               
                if(data.isWriter == 'yes'){
                   $('#btnPackScheduleJoin').css('display','none');   
                }
@@ -463,23 +454,17 @@ label {
                   $('#btnPackScheduleUpdate').css('display','none');
                   $('#btnPackScheduleDelete').css('display','none');
                }
-               
                if(data.isJoined == 'yes'){
             	   $('#btnPackScheduleJoin').css('display','none');    
                }
                var str = "";
-               console.log('아아아아아아아')
-               console.log(data.scheduleJoiner);
                $.each(data.scheduleJoiner,function(index,el){
-            	   console.log("참가자이름"+el.NAME);
             	   str += "#"+el.NAME+"  ";
                })
-               console.log(str);
                $('#joinerSpan').html(str);
-               
                $('#packScheduleViewModal').modal();
             },
-            error : function(request, error) {//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
+            error : function(request, error) {
                console.log('에러 : ', error.responseText);
             }
             
