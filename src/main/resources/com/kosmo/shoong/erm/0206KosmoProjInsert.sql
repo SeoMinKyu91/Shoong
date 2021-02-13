@@ -39,39 +39,18 @@ INSERT INTO member_ VALUES('shoong1002@naver.com','1234','이은선','여성',22
 INSERT INTO member_ VALUES('shoong1003@naver.com','1234','김유경','여성',28,'01000001003',sysdate,sysdate,132);
 INSERT INTO member_ VALUES('shoong1004@naver.com','1234','김종현','남성',29,'01000001004',sysdate,sysdate,132);
 INSERT INTO member_ VALUES('shoong1005@naver.com','1234','백웅기','남성',28,'01000001005',sysdate,sysdate,132);
-/*
-INSERT INTO member_ VALUES('shoong1006@naver.com','1234','채영','여성',29,'01000001006',sysdate,sysdate,132);
-INSERT INTO member_ VALUES('shoong1007@naver.com','1234','쯔위','여성',24,'01000001007',sysdate,sysdate,132);
-INSERT INTO member_ VALUES('shoong1008@naver.com','1234','이나은','여성',23,'01000001008',sysdate,sysdate,132);
-INSERT INTO member_ VALUES('shoong1009@naver.com','1234','김소혜','여성',27,'01000001009',sysdate,sysdate,132);
-INSERT INTO member_ VALUES('shoong1010@naver.com','1234','김도연','여성',26,'01000001010',sysdate,sysdate,132);
-*/
 
 INSERT INTO verify VALUES('shoong1001@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1002@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1003@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1004@naver.com', 'Y');
 INSERT INTO verify VALUES('shoong1005@naver.com', 'Y');
-/*
-INSERT INTO verify VALUES('shoong1006@naver.com', 'Y');
-INSERT INTO verify VALUES('shoong1007@naver.com', 'Y');
-INSERT INTO verify VALUES('shoong1008@naver.com', 'Y');
-INSERT INTO verify VALUES('shoong1009@naver.com', 'Y');
-INSERT INTO verify VALUES('shoong1010@naver.com', 'Y');
-*/
 
 INSERT INTO useraddr VALUES('shoong1001@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
 INSERT INTO useraddr VALUES('shoong1002@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
 INSERT INTO useraddr VALUES('shoong1003@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
 INSERT INTO useraddr VALUES('shoong1004@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
 INSERT INTO useraddr VALUES('shoong1005@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
-/*
-INSERT INTO useraddr VALUES('shoong1006@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
-INSERT INTO useraddr VALUES('shoong1007@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
-INSERT INTO useraddr VALUES('shoong1008@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
-INSERT INTO useraddr VALUES('shoong1009@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
-INSERT INTO useraddr VALUES('shoong1010@naver.com', '서울시 구로구',37.488004666666676,126.85213716666668);
-*/
 
 /* =================================================1000번팩 가입 미 완료한 유저 생성 ===========================================================*/
 INSERT INTO member_ VALUES('shoong1011@naver.com','1234','이동규','남성',26,'01000001011',sysdate,sysdate,132);
@@ -327,13 +306,6 @@ insert into pack_join values(1002,'shoong1002@naver.com',1000,sysdate,'yes',sysd
 insert into pack_join values(1003,'shoong1003@naver.com',1000,sysdate,'yes',sysdate);
 insert into pack_join values(1004,'shoong1004@naver.com',1000,sysdate,'yes',sysdate);
 insert into pack_join values(1005,'shoong1005@naver.com',1000,sysdate,'yes',sysdate);
-/*
-insert into pack_join values(1006,'shoong1006@naver.com',1000,sysdate,'yes',sysdate);
-insert into pack_join values(1007,'shoong1007@naver.com',1000,sysdate,'yes',sysdate);
-insert into pack_join values(1008,'shoong1008@naver.com',1000,sysdate,'yes',sysdate);
-insert into pack_join values(1009,'shoong1009@naver.com',1000,sysdate,'yes',sysdate);
-insert into pack_join values(1010,'shoong1010@naver.com',1000,sysdate,'yes',sysdate);
-*/
 
 insert into pack_join values(1101,'shoong1101@naver.com',1100,sysdate,'yes',sysdate);
 insert into pack_join values(1102,'shoong1102@naver.com',1100,sysdate,'yes',sysdate);
