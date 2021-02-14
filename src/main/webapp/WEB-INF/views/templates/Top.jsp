@@ -40,7 +40,6 @@
 						<div class="main-menu f-right d-none d-sm-block">
 							<nav>
 								<ul class="navigation">
-									<li><a href="<c:url value="/"/>">HOME</a></li>
 									<c:if test="${empty sessionScope.userId}" var="isNotLogin">
 										<li><a href="<c:url value="/Member/Login.do"/>">LOGIN</a></li>
 									</c:if>
