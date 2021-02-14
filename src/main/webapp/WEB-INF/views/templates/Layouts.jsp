@@ -219,9 +219,19 @@
 			</div>
 		</div>
 	</main>
+	<!-- 챗봇, json 전달 용 -->
+	<form action="<c:url value='/chatbot/map/api'/>" method="post" style="display: none">
+		<input id="bicycleLocation" name="location" />
+		<input id="bicycleApi" name="api" />
+		<textarea id="bicycleApiJson" name="bicycleApiJson"></textarea>	
+		<button id="bicycleApiBtn" type="submit"></button>
+	</form>
 	<script>
 	
-	//챗봇관련시작  
+	//챗봇관련시작 
+	function bicycleApiTrigger(){
+		$('#bicycleApiBtn').trigger('click');
+	}
 	function getMyRecordChatBot(){
 		var messageDiv ="";
 		$.ajax({
@@ -274,7 +284,20 @@
 				    }else if(data.code=="4"){//내기록
 				    	getMyRecordChatBot();
 				    }else if(data.code=="5"){//근처 자전거 보관소
-				    	chatBotMessage = '<div class="responesDiv">'+data.msg+'</div><br>'+"더 궁금한게 있으신가요?";
+				    	$("#bicycleApi").val("storage");
+				    	$("#bicycleLocation").val(data.location);
+				    	$("#bicycleApiJson").html(JSON.stringify(data.infoList));
+				    	console.log($("#bicycleApiJson").html());
+				    	chatBotMessage = '<div class="responesDiv"><button onclick="bicycleApiTrigger()" class="btn">지도보기</button><br>'+data.msg+'</div><br>'+"더 궁금한게 있으신가요?";
+				        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
+						$('.chat-container').append(chatBotMessageDiv)
+						$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+				    }else if(data.code=="6"){//근처 자전거 대여소
+				    	$("#bicycleApi").val("lend");
+				    	$("#bicycleLocation").val(data.location);
+				    	$("#bicycleApiJson").html(JSON.stringify(data.infoList));
+				    	console.log($("#bicycleApiJson").html());
+				    	chatBotMessage = '<div class="responesDiv"><button onclick="bicycleApiTrigger()" class="btn">지도보기</button><br>'+data.msg+'</div><br>'+"더 궁금한게 있으신가요?";
 				        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
 						$('.chat-container').append(chatBotMessageDiv)
 						$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
