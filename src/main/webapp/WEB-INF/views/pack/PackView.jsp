@@ -5,17 +5,6 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
-.packCreateBtn {
-	color: #f32a48;
-	background-color: white;
-	font-weight: bold;
-	border: none;
-}
-
-.packCreateBtn:hover {
-	color: white;
-	background-color: #f32a48;
-}
 
 .packManageBtn {
 	float: right;
@@ -217,8 +206,8 @@ body {
 			<table class="table table-hover" id="packComment">
 				<tr id="tableTitle">
 					<th class="text-center">번호</th>
-					<th class="text-center">작성자</th>
 					<th class="text-center">제목</th>
+					<th class="text-center">작성자</th>
 					<th class="text-center">작성일</th>
 					<th class="text-center"><span
 						class="glyphicon glyphicon-heart"></span></th>
@@ -330,7 +319,7 @@ body {
 		<div class="col-lg-offset-1 col-lg-10" style="margin-top: 10px;">
 			<div class="row">
 				<div class="col-lg-10 col-xs-9">
-					<p style="font-weight: bold; font-size: 1.5em;">코스 목록</p>
+					<p style="font-weight: bold; font-size: 1.5em;">회원 랭킹</p>
 				</div>
 				<div class="col-lg-2 col-xs-3" style="padding-top: 13px;">
 					<a href="#" class="btn-custom" style="float: right;">더보기 <span
@@ -340,34 +329,29 @@ body {
 			</div>
 			<table class="table table-hover">
 				<tr id="tableTitle">
-					<th class="text-center">번호</th>
-					<th class="text-center">제목</th>
-					<th class="text-center">작성자</th>
-					<th class="text-center">작성일</th>
+					<th class="text-center">랭킹</th>
+					<th class="text-center">이름</th>
+					<th class="text-center">마일리지</th>
 				</tr>
 				<tr class="text-center">
 					<td>1</td>
-					<td class="text-left ">제목1</td>
-					<td>작성자1</td>
-					<td>10</td>
+					<td class="text-center">장동건</td>
+					<td>132</td>
 				</tr>
 				<tr class="text-center">
 					<td>2</td>
-					<td class="text-left">제목2</td>
-					<td>작성자2</td>
-					<td>20</td>
+					<td class="text-center">원빈</td>
+					<td>131</td>
 				</tr>
 				<tr class="text-center">
 					<td>3</td>
-					<td class="text-left">제목3</td>
-					<td>작성자3</td>
-					<td>30</td>
+					<td class="text-center">현빈</td>
+					<td>130</td>
 				</tr>
 				<tr class="text-center">
 					<td>4</td>
-					<td class="text-left">제목4</td>
-					<td>작성자4</td>
-					<td>40</td>
+					<td class="text-center">공유</td>
+					<td>129</td>
 				</tr>
 			</table>
 		</div>
