@@ -96,7 +96,7 @@ ul li {
 
 #packNoticeForm {
 	background-color: white;
-	border: #f32a48 1px solid;
+	border: #d3e2f2 1px solid;
 	border-radius: 10px;
 }
 
@@ -246,6 +246,27 @@ body {
     position: relative;
     z-index: 0;
 }
+.modal-header {
+	background-color : #052b52;
+	color : white;
+	font-weight : bold;
+	font-size : 1.1em;
+}
+#mdCourseUserID {
+	font-weight : bold;
+}
+#mdCourseTitle {
+	font-weight : bold;
+}
+.modal-body {
+	background-color : #f5faff;
+}
+#mdUserID {
+	font-weight : bold;
+}
+#mdTitle {
+	font-weight : bold;
+}
 </style>
 <!-- 본문 시작 -->
 <!-- 본문 탭 시작 -->
@@ -326,8 +347,8 @@ body {
 					<c:forEach var="item" items="${recordList}" varStatus="loop">
 					<div class="row" id="recordlist">
 						<div class="text-center col-lg-4 col-xs-4">${item.fileName}</div>
-						<div class="text-center col-lg-3 col-xs-3">${item.recordLength}km</div>
-						<div class="text-center col-lg-2 col-xs-2">${item.duration}분</div>
+						<div class="text-center col-lg-3 col-xs-3">${item.recordLength}</div>
+						<div class="text-center col-lg-2 col-xs-2">${item.duration}</div>
 						<div class="text-center col-lg-3 col-xs-3">
 							<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm"
 								value="${item.recordDate}" />
@@ -376,7 +397,7 @@ body {
 				<h4 class="modal-title" style="margin: 5px;">코스 등록</h4>
 			</div>
 			<div class="modal-body">
-				<form action="" class="bg-light p-5 contact-form"
+				<form action="" class="p-5"
 					id="packNoticeForm">
 					<div class="form-group">
 						<input type="text" class="form-control" name="courseFileName"
@@ -384,7 +405,7 @@ body {
 					</div>
 					<label for="map3" style="float: left;">코스</label><br />
 					<div class="form-group">
-						<div id="map3" style="height: 300px; width: 550px;"></div>
+						<div id="map3" style="height: 300px; width: 390px;"></div>
 					</div>
 					<div class="form-group">
 						<input type="text" class="form-control" name="courseId"
@@ -469,18 +490,18 @@ body {
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<div id="mdNo"></div>
-				<div id="mdPostdate"></div>
+				<div class="col-xs-12 col-lg-12" id="mdNo"></div>
 			</div>
 
-			<div class="modal-body" style="height: 400px;">
-				<div class="row" style="margin: 10px;">
-					<div id="mdUserID"></div>
-					&nbsp;&nbsp;
-					<div id="mdTitle"></div>
-					<br /> <br />
+			<div class="modal-body" style="height: 400px; padding-top:5px;">
+				<div class="row">
+					<div class="col-xs-12 col-lg-offset-6 col-lg-6 text-right" id="mdPostdate"  style="padding-bottom:10px;"></div>
+					<br />
+					<div class="col-xs-12 col-lg-12 text-left" id="mdUserID"></div>
+					<div class="col-xs-12 col-lg-12 text-left" id="mdTitle"></div>
+					<br />
 					<div id="map2"
-						style="height: 300px; padding-top: 20px; width: 550px; padding-top: 20px;"></div>
+						style="height: 300px; padding-top: 20px; width: 550px;"></div>
 				</div>
 			</div>
 
@@ -502,16 +523,16 @@ body {
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<div id="mdCourseNo"></div>
-				<div id="mdCoursePostdate"></div>
+				<div class="col-xs-12 col-lg-12" id="mdCourseNo"></div>
 			</div>
 
-			<div class="modal-body" style="height: 400px;">
-				<div class="row" style="margin: 10px;">
-					<div id="mdCourseUserID"></div>
-					&nbsp;&nbsp;
-					<div id="mdCourseTitle"></div>
-					<br /> <br />
+			<div class="modal-body" style="height: 400px; padding-top:5px;">
+				<div class="row">
+					<div class="col-xs-12 col-lg-offset-6 col-lg-6 text-right" id="mdCoursePostdate" style="padding-bottom:10px;"></div>
+					<br />
+					<div class="col-xs-12 col-lg-12 text-left" id="mdCourseUserID"></div>
+					<div class="col-xs-12 col-lg-12 text-left" id="mdCourseTitle"></div>
+					<br />
 					<div id="map4"
 						style="height: 300px; padding-top: 20px; width: 550px;"></div>
 				</div>
@@ -808,9 +829,9 @@ body {
 					courseIntro = json.courseIntro;
 					
 					$("#mdCourseNo").html(courseName);
-					$("#mdCourseUserID").html("거리 : " + courseLength + "km");
-					$("#mdCourseTitle").html("탄 시간 : "+ courseTime + "분");
-					$("#mdCoursePostdate").html("등록 날짜 : " + courseRegiDate);
+					$("#mdCourseUserID").html('<span class="glyphicon glyphicon-road" aria-hidden="true"></span> 거리 : '+ courseLength +'km');
+					$("#mdCourseTitle").html('<span class="glyphicon glyphicon-time" aria-hidden="true"></span> 탄 시간 : '+ courseTime + '분');
+					$("#mdCoursePostdate").html(courseRegiDate);
 					$("#mdCourseContent").html("코스 소개 " + courseIntro);
 
 					$.ajax({
@@ -884,10 +905,10 @@ body {
 			recordDate = $(this).children().eq(3).text();
 			recordNo = $(this).children().eq(4).text();
 
-			$("#mdNo").html("파일 : " + fileName);
-			$("#mdUserID").html("길이 : " + recordLength);
-			$("#mdTitle").html("시간 : " + recordDuration);
-			$("#mdPostdate").html("일자 : " + recordDate);
+			$("#mdNo").html(fileName);
+			$("#mdUserID").html('<span class="glyphicon glyphicon-road" aria-hidden="true"></span> 거리 : '+ recordLength + 'km');
+			$("#mdTitle").html('<span class="glyphicon glyphicon-time" aria-hidden="true"></span> 시간 : ' + recordDuration + '분');
+			$("#mdPostdate").html(recordDate);
 			$("#mdContent").html("" + recordNo);
 
 			//루트 가져오기
