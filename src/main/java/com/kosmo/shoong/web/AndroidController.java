@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.kosmo.shoong.service.course.CourseService;
+import com.kosmo.shoong.service.impl.course.CourseServiceImpl;
 import com.kosmo.shoong.service.impl.member.MemberServiceImpl;
 import com.kosmo.shoong.service.member.MemberDTO;
 import com.kosmo.shoong.service.record.RecordDTO;
@@ -38,7 +40,7 @@ public class AndroidController {
 	private MemberServiceImpl memberservice;
 	
 	@Resource(name="courseService")
-	private CourseService service;
+	private CourseServiceImpl cService;
 	
 	/**/
 	//안드 로그인
@@ -80,6 +82,15 @@ public class AndroidController {
 		return "톰캣 서버로 들어왔었다";
 	}
 	*/
+	
+	@CrossOrigin
+	@GetMapping(value="/course/json",produces="text/plain;charset=UTF-8")
+	public String androidCourse() {
+		Gson gson = new Gson();
+		String result = gson.toJson(cService.selectList());
+		System.out.println("/course/json 요청");
+		return result;
+	}
 	
 	@CrossOrigin
 	@PostMapping(value="/login",produces="text/plain;charset=UTF-8")
