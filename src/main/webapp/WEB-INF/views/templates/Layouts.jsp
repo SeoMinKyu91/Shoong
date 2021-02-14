@@ -258,8 +258,18 @@
 			</div>
 		</div>
 	</main>
+	<form action="<c:url value='/chatbot/map/api'/>" method="post" style="display: none">
+		<input id="bicycleLocation" name="location" />
+		<input id="bicycleApi" name="api" />
+		<textarea id="bicycleApiJson" name="bicycleApiJson"></textarea>	
+		<button id="bicycleApiBtn" type="submit"></button>
+	</form>
 	<script>
 	//챗봇관련시작  
+	function bicycleApiTrigger(){
+		$('#bicycleApiBtn').trigger('click');
+	}
+	
 	function getMyRecordChatBot(){
 		var messageDiv ="";
 		$.ajax({
@@ -280,7 +290,7 @@
 		})
 
 	}	
-	
+	//사용자가 챗봇과의 메세지창에 글을 입력했을때 호출되는 함수. Flask 서버로 요청을 보낸다.
     function sendMessage(message) {
         $.ajax({
         	url:"http://localhost:5000/message?message="+message,
@@ -292,37 +302,49 @@
 			        $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
 				}
         	})
-        	    //flask서버로부터 응답을 받으면 receiveResponse콜백함수가 호출됨
-		        function receiveResponse(data) {//data는 flask로부터 받은 응답 {'message':'다이얼로그플로우가 보내준값'}
-		        	console.log('받은 메시지:',data)	
-		        	var chatBotMessage = "";
-		        	var chatBotMessageDiv ="";
-		        	
-		        	
-		        	if(data.code=="3"){//자전거 가게_사용자 위치기반
-		        		 chatBotMessage = '<div class="responesDiv"><a href="<c:url value='/chatbot/map'/>" class="btn">바로보기</a><br>'+data.msg+'</div><br>'+"더 궁금한게 있으신가요?";
-				         chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
-						 $('.chat-container').append(chatBotMessageDiv)
-				         $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
-				    }else if(data.code=="2"){//날씨
-				    	chatBotMessage = '<div class="responesDiv">'+data.msg+'</div><br>'+"더 궁금한게 있으신가요?";
-				        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
-						$('.chat-container').append(chatBotMessageDiv)
-						$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
-				    }else if(data.code=="4"){//내기록
-				    	getMyRecordChatBot();
-				    }else if(data.code=="5"){//근처 자전거 보관소
-				    	chatBotMessage = '<div class="responesDiv">'+data.msg+'</div><br>'+"더 궁금한게 있으신가요?";
-				        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
-						$('.chat-container').append(chatBotMessageDiv)
-						$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
-				    }else{
-				    	chatBotMessage = data.msg;
-				        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
-						$('.chat-container').append(chatBotMessageDiv)
-						$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
-						
-					}
+        	//flask서버로부터 응답을 받으면 receiveResponse콜백함수가 호출됨
+		    function receiveResponse(data) {//data는 flask로부터 받은 응답 json형태로 응답.
+	        	var chatBotMessage = "";
+	        	var chatBotMessageDiv ="";
+	
+	        	if(data.code=="3"){//자전거 가게_사용자 위치기반
+	        		 chatBotMessage =  '<div class="responesDiv"><a href="<c:url value='/chatbot/map'/>" '
+	        		 chatBotMessage += 'class="btn">지도보기</a><br>'+data.msg+'</div><br>'+"더 궁금한게 있으신가요?";
+			         chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
+					 $('.chat-container').append(chatBotMessageDiv)
+			         $(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+			    }else if(data.code=="2"){//날씨
+			    	chatBotMessage = '<div class="responesDiv">'+data.msg+'</div><br>'+"더 궁금한게 있으신가요?";
+			        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
+					$('.chat-container').append(chatBotMessageDiv)
+					$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+			    }else if(data.code=="4"){//내기록
+			    	getMyRecordChatBot();
+			    }else if(data.code=="5"){//근처 자전거 보관소
+			    	$("#bicycleApi").val("storage");
+			    	$("#bicycleLocation").val(data.location);
+			    	$("#bicycleApiJson").html(JSON.stringify(data.infoList));
+			    	console.log($("#bicycleApiJson").html());
+			    	chatBotMessage = '<div class="responesDiv"><button onclick="bicycleApiTrigger()" class="btn">지도보기</button><br>'+data.msg+'</div><br>'+"더 궁금한게 있으신가요?";
+			        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
+					$('.chat-container').append(chatBotMessageDiv)
+					$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+			    }else if(data.code=="6"){//근처 자전거 보관소
+			    	$("#bicycleApi").val("lend");
+			    	$("#bicycleLocation").val(data.location);
+			    	$("#bicycleApiJson").html(JSON.stringify(data.infoList));
+			    	console.log($("#bicycleApiJson").html());
+			    	chatBotMessage = '<div class="responesDiv"><button onclick="bicycleApiTrigger()" class="btn">지도보기</button><br>'+data.msg+'</div><br>'+"더 궁금한게 있으신가요?";
+			        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
+					$('.chat-container').append(chatBotMessageDiv)
+					$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+			    }else{
+			    	chatBotMessage = data.msg;
+			        chatBotMessageDiv = getChatBotMessageDiv(chatBotMessage)
+					$('.chat-container').append(chatBotMessageDiv)
+					$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);
+					
+				}
              }
          
    }

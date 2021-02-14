@@ -205,6 +205,7 @@ input {
 <!-- ---------------- 활동지역 맵 스크립트 ----------------- -->
 <script>
 	var map;
+	
 	var geocoder = new kakao.maps.services.Geocoder();
 	//0]사용자 위치 구하기
 	if (navigator.geolocation) {
@@ -212,20 +213,22 @@ input {
 			timeout : 3000,
 			maxinumAge : 5000
 		};
-		navigator.geolocation.getCurrentPosition(successCallback);
-		//이거 실패하는코드도 입력. 경복궁 37.57801416976735  /  126.97658868798284 
-		//실패하면 displayKaKaoMap(lat, lng); 여기에 저값담아보내기
+		navigator.geolocation.getCurrentPosition(successCallback,error);
 	}
 
-	//0-1]사용자 위치 구하기 성공시 좌표값 displayKaKaoMap로 넘김
+	//0-1]사용자 위치 구하기 성공시. 지도에 사용자 위치 표시.
 	function successCallback(position) {
-
 		var lat = position.coords.latitude;
 		var lng = position.coords.longitude;
 		$("#memberLat").val(lat);
 		$("#memberLng").val(lng);
 		displayKaKaoMap(lat, lng);
 	}
+	
+	//0-2]사용자 위치 구하기 실패시, 임시 좌표 기준으로 지도에 표시. 경복궁좌표
+    function error(position){
+    	displayKaKaoMap(37.57801416976735, 126.97658868798284);
+    }
 
 	//1]사용자 뷰에 지도 생성 지도 정보 map에 저장
 	function displayKaKaoMap(lat, lng) {

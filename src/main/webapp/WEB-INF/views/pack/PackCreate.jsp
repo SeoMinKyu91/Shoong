@@ -217,7 +217,6 @@
 	var geocoder = new kakao.maps.services.Geocoder();
 	//0]사용자 위치 구하기
 	if (navigator.geolocation) {
-
 		var options = {
 			timeout : 3000,
 			maxinumAge : 5000

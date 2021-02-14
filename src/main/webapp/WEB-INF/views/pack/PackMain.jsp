@@ -271,7 +271,7 @@
          var clusterer;
          var markerLat;
          var markerLng;
-         var geocoder = new kakao.maps.services.Geocoder(); 
+        
          //0]사용자 위치 구하기
          
          
@@ -302,13 +302,13 @@
            function displayKaKaoMap(lat, lng) {
               var mapContainer = document.getElementById('map');
                   mapOption = {
-                   center: new kakao.maps.LatLng(lat, lng), // 현재 위치 중심으로 지도의 중심좌표
+                   center: new kakao.maps.LatLng(lat, lng), // 사용자 주소 중심으로 지도의 중심좌표
                    level:11
                };
 
                map = new kakao.maps.Map(mapContainer, mapOption); 
                //맵 컨트롤
-               var mapTypeControl = new kakao.maps.MapTypeControl();
+              var mapTypeControl = new kakao.maps.MapTypeControl();
               // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의! TOPRIGHT는 오른쪽 위
               map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
               // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
@@ -316,39 +316,37 @@
               map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
              //클러스터 
               clustererCreate();
-              //주소
+             //주소
              searchAddrFromCoords(map.getCenter(), displayCenterInfo);
              displayCentermarker(map);
              addeventmap(map);
          }
          
-          /////
+          //2]클러스터 생성 함수 
           function clustererCreate(){
-             
-              clusterer = new kakao.maps.MarkerClusterer({
-                     map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-                     averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-                     minLevel: 8// 클러스터 할 최소 지도 레벨 
-                });
-              // 데이터에서 좌표 값을 가지고 마커를 표시합니다
-
+             //클러스터 생성
+             clusterer = new kakao.maps.MarkerClusterer({
+                    map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+                    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+                    minLevel: 8// 클러스터 할 최소 지도 레벨 
+             });
+             //데이터에서 좌표 값을 가지고 마커를 표시합니다
              var markerPosition= null;
              var marker=null;
-               <c:forEach var="item" items="${packList }">
-               
-                  // 마커가 표시될 위치입니다  
+             <c:forEach var="item" items="${packList }">
+                  //마커가 표시될 위치입니다  
                   markerPosition  = new kakao.maps.LatLng(${item.packLat}, ${item.packLng}); 
-                  
-                  // 마커를 생성합니다
+                  //마커를 생성합니다
                   marker = new kakao.maps.Marker({
                       position: markerPosition
                   });
-                  
+                  //생성된 마커를 클러스터에 담습니다.
                   clusterer.addMarker(marker);      
                </c:forEach>
-
-             }
+               
+           }//clustererCreate() 끝
           
+            
           /////////////////////////////주소 관련 ////////////////////
           //주소 클릭 마커 없앨시 삭제
          var marker;
@@ -367,51 +365,54 @@
           }   
           //주소 클릭 마커 없앨시 삭제
           
+            var firstAccess = false;
+          
+          //지오코더 객체 생성
+          var geocoder = new kakao.maps.services.Geocoder(); 
           
           //지도에 이벤트를 등록합니다
           function addeventmap(map) {
-            kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-                
-                   //주소 클릭 마커 없앨시 삭제
-                     marker.setPosition(mouseEvent.latLng);
-                     marker.setMap(map);
-                     //주소 클릭 마커 없앨시 삭제
-                     markerLat = mouseEvent.latLng.getLat();
-                     markerLng = mouseEvent.latLng.getLng();
-                     //
-                     searchAddrFromCoords(mouseEvent.latLng, displayCenterInfo);
-         
-           }); 
+        	 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+             	//지도에 클릭된 위치 마커표시
+                marker.setPosition(mouseEvent.latLng);
+                marker.setMap(map);
+                //마커 위도 경도 변수에 저장 
+                markerLat = mouseEvent.latLng.getLat();
+                markerLng = mouseEvent.latLng.getLng();
+                //클릭된 위치를 기반으로 주소값 받아오기 (위도경도,콜백함수) 
+                searchAddrFromCoords(mouseEvent.latLng, displayCenterInfo);
+           	 }); 
           }
           
-
+          //위도경도 기준으로 주소 반환
           function searchAddrFromCoords(coords, callback) {
               geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);     
           }
-
-          //행정동 위치 구해서 띄어주느 함수 
-          var firstAccess = false;
+          
+          //searchAddrFromCoords의콜백 함수, 변화된 주소 값을 기준으로 팩리스트를 재요청한다.
           function displayCenterInfo(result, status) {
-
+			 //주소값을 정상적으로 응답 받았을시.
              if (status === kakao.maps.services.Status.OK) {
-                  var Region = document.getElementById('packRegionSearch');
+                 //주소검색창
+            	 var Region = document.getElementById('packRegionSearch');
 
-                  for(var i = 0; i < result.length; i++) {
+                 for(var i = 0; i < result.length; i++) {
                       // 행정동의 region_type 값은 'H' 이므로
                       if (result[i].region_type === 'H') {
+                    	 //응답 받은 행정동의 앞에서부터 두 주소만 남긴후 제거
                          var regionArray = result[i].address_name.split(" ");
                          var resionCut = regionArray[0]+" "+regionArray[1];
                          if(resionCut!=Region.innerHTML){
                             Region.innerHTML =resionCut;
+                            //아래 함수에서 주소를 기반으로location.href 실행. 주소를 기반으로한 팩리스트가 담긴 페이지 요청
                             reSearch(resionCut);
                          }
                           break;
                       }
                   }
-              } 
-              
+              }    
           }
-
+		  //사용자가 검색한 지역을 기반으로 
           function reSearch(searchRegion) {
              location.href = "<c:url value='/pack/main.do?lat="+markerLat+"&lng="+markerLng+"&searchRegion="+searchRegion+"'/>";
           }
