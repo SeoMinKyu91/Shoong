@@ -12,7 +12,6 @@
 <style>
 .gallery-block{
    padding-bottom: 60px;
-   padding-top: 60px;
 }
 
 .gallery-block .heading{

@@ -2,11 +2,9 @@
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-<link rel="stylesheet" href="<c:url value="/css/test.css"/>">
-<!-- 여기에 자기가 css새로운거 적용시려고 하면 link걸어서 추가하면 됩니다 -->
-<!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
 <style>
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
@@ -78,12 +76,7 @@ hr {
 .text-black-50 {
   color: rgba(0, 0, 0, 0.5) !important;
 }
-.d-none {
-  display: none !important;
-}
-  .d-lg-block {
-    display: block !important;
-  }
+
 .animated-text{
 	display:none;
 }
@@ -207,8 +200,8 @@ function mapRecordUpload(map){
 			'line-cap': 'round'
 		},
 		'paint': {
-			'line-color': '#ff0000',
-			'line-width': 8
+			'line-color' : '#24d900',
+			'line-width' : 3
 		}
 	});
 	map.setCenter(json.geometry.coordinates[0][0]);

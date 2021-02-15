@@ -5,112 +5,163 @@
 
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
 <style>
-.imgdiv{
-     margin:8px;
-	 display: inline-block;    
-     position: relative
-}.img{
-   	width: 180px;
-    height:180px;
-}.imgdeletemark{
-    display: none;   
+.imgdiv {
+	margin: 8px;
+	display: inline-block;
+	position: relative
+}
+
+.img {
+	width: 180px;
+	height: 180px;
+}
+
+.imgdeletemark {
+	display: none;
 	text-align: center;
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate( -50%, -50% );
-}.dragAndDropDiv {
-	width:100%;
-   	margin-top: 15px;
-   	height: 200px;
-    border: 2px dashed #777777;
-    color: #777777;
-    text-align: center;
-		
-}.dragAndDropDivSpan{
-	line-height: 200px;
-    vertical-align: middle;
-    font-size:150%;
+	transform: translate(-50%, -50%);
+}
 
-}.dragAndDropBtn{
-   	margin-top: 10px;
-    background-color : #ffffff;
-    color: #777777;
-    text-align: center;
-    font-size:100%;
-    border:none;
-}.diaryInfo{
+.dragAndDropDiv {
+	width: 100%;
+	margin-top: 15px;
+	height: 200px;
+	border: 2px dashed #777777;
+	color: #777777;
+	text-align: center;
+}
+
+.dragAndDropDivSpan {
+	line-height: 200px;
+	vertical-align: middle;
+	font-size: 150%;
+}
+
+.dragAndDropBtn {
+	margin-top: 10px;
+	background-color: #ffffff;
+	color: #777777;
+	text-align: center;
+	font-size: 100%;
+	border: none;
+}
+
+.diaryInfo {
 	margin-top: 40px;
-}.diaryInfo div{
+}
+
+.diaryInfo div {
 	font-size: 25px;
-	outline:none;
-	background-color: #ebebeb;
+	outline: none;
+	background-color: #EFF8FB;
 	display: inline-block;
 	height: 41px;
 	line-height: 41px;
 	margin-bottom: 20px;
-}.diaryInfo .diaryTitle{
+}
+
+.diaryInfo .diaryTitle {
 	width: 100%;
-}.diaryInfo .diaryContent{
+	font-size: 20px;
+}
+
+.diaryInfo .diaryContent {
 	height: 200px;
 	width: 100%;
+	font-size: 20px;
 }
-.diaryInfo span{
+
+.diaryInfo span {
 	width: 100%;
-	font-size: 25px;
-}#map{
-   height: 100%;
+	font-size: 22px;
 }
-.animated-text{
-	display:none;
+
+#map {
+	height: 100%;
 }
-.slider-area{
-	display:none;
+
+.animated-text {
+	display: none;
 }
-#storyBtn:hover{
+
+.slider-area {
+	display: none;
+}
+
+#storyBtn:hover {
 	color: white;
 }
+
+#bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	opacity: 0.5;
+	/* Preserve aspet ratio */
+	min-width: 100%;
+	min-height: 100%;
+}
+
+.mainDiv {
+	border-radius: 10px;
+	box-shadow: 0px 0px 5px #787878;
+	padding: 30px;
+	background-color: white;
+	position: relative;
+	z-index: 1;
+}
+
 </style>
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
+<div class="mainDiv">
+	<div class="modal-body" style="height: 100%;">
+		<div style="margin-top: 10px">
+			<div style="width: 100%; height: 400px; border: 1px solid #666666">
+				<div id="map"></div>
+			</div>
+		</div>
 
-            <div class="modal-body" style="height: 100%;">
-            	   <div style="margin-top:10px">
-						<div style="width: 100% ;height: 400px;border:1px solid #666666"> 
-							 <div  id="map"></div> 
-						</div>
-					</div>
-           			
-				 <div class="diaryInfo">
-				     <span>제목입력</span><br> 
-					 <div class="diaryTitle"  id="titleDiv" contenteditable="true"></div>
-					 <span>내용입력 </span> <br> 
-					 <div class="diaryContent"  id="contentDiv" contenteditable="true"></div>
+		<div class="diaryInfo">
+			<span>▶ 제목입력</span><br><br/>
+			<div class="diaryTitle" id="titleDiv" contenteditable="true"></div><br/><br/>
+			<span>▶ 내용입력 </span> <br><br/>
+			<div class="diaryContent" id="contentDiv" contenteditable="true"></div>
+		</div>
+		<button id="storyBtn" class="btn btn-primary btn-lg btn-block">이미지
+			스토리 만들기</button>
+		<div style="margin-top: 10px; display: none" id="storyDiv">
+			<form method="post" enctype="multipart/form-data">
+				<div id="fileUpload" class="dragAndDropDiv">
+					<span class="dragAndDropDivSpan">스토리 카드를 만들 이미지를 올려주세요</span>
 				</div>
-				<button id="storyBtn" class="btn btn-primary btn-lg btn-block">이미지 스토리 만들기</button>
-				<div style="margin-top:10px; display:none" id="storyDiv">
-						<form method="post" enctype="multipart/form-data" >
-							 <div id="fileUpload" class="dragAndDropDiv"><span class="dragAndDropDivSpan">스토리 카드를 만들 이미지를 올려주세요</span></div>
-							 <input type="file" name="fileUpload" id="fileUpload" style="display:none;" multiple/>
-						</form>
-						<button class="dragAndDropBtn col-sm-1 col-sm-offset-11">사진추가</button>
-				</div>
-            </div>
-			<div class="modal-footer"> 
-            	<form method="post" action="<c:url value="/mypage/diary/write.do"/>">
-            		<input class="form-control" name="title" id="title"  type="hidden">
-            		<input class="form-control" name="content" id="content"  type="hidden">
-					<input class="form-control" name="imgArry" id="imgArry"  type="hidden">
-					<input class="form-control" name="recordId" value="${recordId}"  type="hidden">
-					<button type="submit" id="myStorySave" class="btn btn-default">저장</button>	
-					<a type="button" class="btn btn-default" data-dismiss="modal">닫기</a>
-				</form>
-                
-            </div>
+				<input type="file" name="fileUpload" id="fileUpload"
+					style="display: none;" multiple />
+			</form>
+			<button class="dragAndDropBtn col-sm-1 col-sm-offset-11">사진추가</button>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<form method="post" action="<c:url value="/mypage/diary/write.do"/>">
+			<input class="form-control" name="title" id="title" type="hidden">
+			<input class="form-control" name="content" id="content" type="hidden">
+			<input class="form-control" name="imgArry" id="imgArry" type="hidden">
+			<input class="form-control" name="recordId" value="${recordId}"
+				type="hidden">
+			<button type="submit" id="myStorySave" class="btn btn-default">저장</button>
+			<a type="button" class="btn btn-default" data-dismiss="modal">닫기</a>
+		</form>
 
-             
+	</div>
+</div>
+
 
 <script>
 
@@ -309,8 +360,8 @@
 					'line-cap': 'round'
 				},
 				'paint': {
-					'line-color': '#ff0000',
-					'line-width': 8
+					'line-color' : '#24d900',
+					'line-width' : 3
 				}
 			});
 			map.setCenter(json.geometry.coordinates[0][0]);
@@ -325,4 +376,4 @@
 		})//로드시 스타트
 </script>
 
-				
+

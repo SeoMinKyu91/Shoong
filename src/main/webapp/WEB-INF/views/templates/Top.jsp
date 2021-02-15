@@ -40,7 +40,6 @@
 						<div class="main-menu f-right d-none d-sm-block">
 							<nav>
 								<ul class="navigation">
-									<li><a href="<c:url value="/"/>">HOME</a></li>
 									<c:if test="${empty sessionScope.userId}" var="isNotLogin">
 										<li><a href="<c:url value="/Member/Login.do"/>">LOGIN</a></li>
 									</c:if>
@@ -64,7 +63,6 @@
 									<c:if test="${not empty sessionScope.userId}">
 										<li><a href="<c:url value="/course/navi.do"/>">SHOONG</a></li>
 									</c:if>
-									<li><a id="naviModalBtn" href="#">ROUTE UPLOAD</a></li>
 									<li><a href="<c:url value="/admin/home/main.do"/>">관리자페이지</a></li>
 								</ul>
 							</nav>
