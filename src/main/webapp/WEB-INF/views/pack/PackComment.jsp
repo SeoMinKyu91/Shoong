@@ -184,11 +184,8 @@
 													</c:if>
 	
 													<!-- Wrapper for slides -->
-													<div class="carousel-inner"
-														role="listbox">
-														<c:forEach
-															items="${item.packCommentImages }"
-															var="image" varStatus="index">
+													<div class="carousel-inner" role="listbox">
+														<c:forEach items="${item.packCommentImages }" var="image" varStatus="index">
 															<div
 																<c:if test="${index.index==0 }" var="isFirst"> class="item active"</c:if>
 																<c:if test="${!isFirst }">class="item"</c:if>>
