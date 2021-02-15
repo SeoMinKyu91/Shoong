@@ -26,9 +26,9 @@
 	<select id="courseSelectByCId" parameterType="String" resultMap="courseDTOResult">
 		SELECT * FROM course WHERE course_id=#{value}
 	</select>
-	
 	<select id="courseSelect" resultMap="courseDTOResult">
-		SELECT c.*,cc.course_cate_name FROM course c
+		SELECT c.COURSE_ID,c.COURSE_CATE_ID,c.USER_ID,c.COURSE_NAME,c.COURSE_INTRO,c.COURSE_TIME,c.COURSE_LENGTH,TO_DATE(c.COURSE_DATE,'YY/MM/DD HH24:MI') COURSE_DATE,c.COURSE_FILE_NAME,cc.course_cate_name 
+		FROM course c
 		JOIN course_cate cc ON c.course_cate_id=cc.course_cate_id
 	</select>
 	

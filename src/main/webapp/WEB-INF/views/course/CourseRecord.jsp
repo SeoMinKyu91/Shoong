@@ -6,35 +6,10 @@
 <script src="<c:url value="/js/togeojson.js"/>"></script>
 
 <style>
-/*
-.mapboxgl-popup {
-	max-width: 200px;
-}
-
-.mapboxgl-popup-content {
-	text-align: center;
-	font-family: 'Open Sans', sans-serif;
-}
-*/
-.nav-link {
-	color: #ff8827;
-}
 
 ul li {
 	font-weight: bold;
 	font-size: 1em;
-}
-
-ul li label {
-	padding-right: 10px;
-}
-
-.my-box {
-	border: 5px lightgrey solid;
-	list-style: none;
-	padding: 35px;
-	height: 448px;
-	background-color: white;
 }
 
 .mapboxgl-ctrl-geocoder {
@@ -48,12 +23,6 @@ ul li label {
 
 .single-location:hover .location-img img {
 	transform: scale(1.1)
-}
-
-#graph {
-	max-width: 100%;
-	height: 25vh;
-	min-height: 200px;
 }
 
 .plusImage {
@@ -99,113 +68,61 @@ ul li label {
 	transform: translate(-50%, -50%);
 }
 
-.dragAndDropDiv {
-	width: 100%;
-	margin-top: 15px;
-	height: 200px;
-	border: 2px dashed #777777;
-	color: #777777;
-	text-align: center;
-}
-
-.dragAndDropDivSpan {
-	line-height: 200px;
-	vertical-align: middle;
-	font-size: 150%;
-}
-
-.dragAndDropBtn {
-	margin-top: 10px;
-	border: 1px solid #777777;
-	background-color: #ffffff;
-	color: #777777;
-	text-align: center;
-	font-size: 100%;
-}
-
 #naviImgModal img {
 	width: 100%;
 }
 
-.cus {
-	border-top: 1px solid white;
-	border-bottom: 1px solid white;
-}
-
-.cus th {
-	border-top: 1px solid white;
-	border-bottom: 1px solid white;
-	background-color: #ff8827;
-	color: white;
-	font-size: 1em;
-}
-
-.cus td {
-	cursor: pointer;
-}
-
-.packCreateBtn {
-	color: #ff8827;
-	background-color: white;
-	font-weight: bold;
-	border: none;
-}
-
-.packCreateBtn:hover {
-	color: white;
-	background-color: #ff8827;
-}
 
 .submitBtn {
 	color: white;
-	background-color: #ff8827;
+	background-color: #f32a48;
 	font-weight: bold;
 	border: none;
 }
 
 .closeBtn {
 	color: white;
-	background-color: #ff8827;
+	background-color: #f32a48;
 	font-weight: bold;
 	border: none;
 }
 
 .insertBtn {
 	color: white;
-	background-color: #ff8827;
+	background-color: #f32a48;
 	font-weight: bold;
 	border: none;
 }
 
 #packNoticeForm {
 	background-color: white;
-	border: #ff8827 1px solid;
+	border: #d3e2f2 1px solid;
 	border-radius: 10px;
 }
 
 #packNoticeEditForm {
 	background-color: white;
-	border: #ff8827 1px solid;
+	border: #f32a48 1px solid;
 	border-radius: 10px;
 }
 
 .deleteBtn {
 	color: white;
-	background-color: #ff8827;
+	background-color: #f32a48;
 	font-weight: bold;
 	border: none;
 }
 
 .editBtn {
 	color: white;
-	background-color: #ff8827;
+	background-color: #f32a48;
 	font-weight: bold;
 	border: none;
 }
 
 .viewBtn {
 	color: white;
-	background-color: #ff8827;
+	background-color: #f32a48;
 	font-weight: bold;
 	border: none;
 }
@@ -234,12 +151,7 @@ ul li label {
 }
 
 .container {
-	margin-left: 50px;
-}
-
-.section-padding30 {
-	padding-top: 120px;
-	padding-bottom: 10px;
+	margin-left : 20px;
 }
 
 .mainbody {
@@ -250,25 +162,8 @@ ul li label {
 #map {
 	height: 150%;
 }
-
-.custom-border div {
-	margin: 10px 0px 10px 0px;
-}
-
-.custom-border:nth-child(2n+1) {
-	background-color: white;
-}
-
-.custom-border:hover {
-	background-color: #f7e7da;
-}
-
-.custom-border:nth-child(1):hover {
-	background-color: white;
-}
-
 @media ( min-width : 992px) .container {
-	width : 970px;
+	width : 900px;
 }
 
 .team-img>img {
@@ -280,6 +175,7 @@ ul li label {
 	font-weight: bold;
 	padding-bottom: 15px;
 	padding-top: 15px;
+	padding-left : 20px;
 	background-color: #052b52;
 	color: white;
 }
@@ -287,11 +183,12 @@ ul li label {
 #courselist>div {
 	padding-top: 15px;
 	padding-bottom: 15px;
+	padding-left : 20px;
 	border-bottom: #cde3fa 1px solid;
 	background-color: white;
 }
 
-#recordTable {
+#recordTable>div {
 	font-weight: bold;
 	padding-bottom: 15px;
 	padding-top: 15px;
@@ -299,24 +196,85 @@ ul li label {
 	color: white;
 }
 
-#recordlist {
+#recordlist>div {
 	padding-top: 15px;
 	padding-bottom: 15px;
+	padding-left : 20px;
 	border-bottom: #cde3fa 1px solid;
 	background-color: white;
 }
 
+
 body {
 	background-color: #faf7f7;
+}
+
+#btnNoticeWrite {
+	color:white;
+	background-color: #f32a48;
+}
+
+.tab-content {
+	overflow: auto;
+	height:600px;
+	text-align : center;
+}
+
+.modal.modal-center {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .modal.modal-center:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog.modal-center {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.list-caption {
+    border: 1px solid #e1ebf7;
+    padding: 15px 20px 15px 20px;
+    border-top: 0;
+    position: relative;
+    z-index: 0;
+}
+.modal-header {
+	background-color : #052b52;
+	color : white;
+	font-weight : bold;
+	font-size : 1.1em;
+}
+#mdCourseUserID {
+	font-weight : bold;
+}
+#mdCourseTitle {
+	font-weight : bold;
+}
+.modal-body {
+	background-color : #f5faff;
+}
+#mdUserID {
+	font-weight : bold;
+}
+#mdTitle {
+	font-weight : bold;
 }
 </style>
 <!-- 본문 시작 -->
 <!-- 본문 탭 시작 -->
-<div class="row mainbody">
-	<div class="col-md-6 col-xs-12" id="map"></div>
+<div class="mainbody">
+	<div class="col-lg-6 col-xs-12" id="map"></div>
 	
 	<!-- 탭 메뉴 및 정보 -->
-	<div role="tabpanel" class="menuVar col-md-6 col-xs-12">
+	<div role="tabpanel" class="menuVar col-lg-6 col-xs-12">
 
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
@@ -326,32 +284,35 @@ body {
 			<li role="presentation"><a href="#recordList"
 				style="color: #f32a48" aria-controls="profile" role="tab"
 				data-toggle="tab">내 기록</a></li>
-			<li role="presentation"><a href="#messages"
+			<li role="presentation"><a href="#messages1"
 				style="color: #f32a48" aria-controls="messages" role="tab"
-				data-toggle="tab">관광/맛집</a></li>
+				data-toggle="tab">맛집</a></li>
+			<li role="presentation"><a href="#messages2"
+				style="color: #f32a48" aria-controls="messages" role="tab"
+				data-toggle="tab">관광지</a></li>
 		</ul>
 		<!-- Tab panes -->
 		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="courseList">
-				<div id="courseTable">
-					<div class="text-center col-lg-2 col-xs-1">카테고리</div>
-					<div class="text-center col-lg-3 col-xs-1">코스명</div>
-					<div class="text-center col-lg-2 col-xs-1">길이(km)</div>
-					<div class="text-center col-lg-2 col-xs-1">시간(분)</div>
+				<div class="row" id="courseTable">
+					<div class="text-center col-lg-2 col-xs-2">카테고리</div>
+					<div class="text-center col-lg-3 col-xs-3">코스명</div>
+					<div class="text-center col-lg-2 col-xs-2">길이(km)</div>
+					<div class="text-center col-lg-2 col-xs-2">시간(분)</div>
 					<div class="text-center col-lg-3 col-xs-3">등록일</div>
 				</div>
 				<c:if test="${empty courseList}" var="isEmpty">
-					<div class="text-center col-lg-12">
+					<div class="text-center col-xs-12 col-lg-12">
 						<div class="text-center">등록된 게시물이 없어요</div>
 					</div>
 				</c:if>
 				<c:if test="${!isEmpty}">
 					<c:forEach var="item" items="${courseList}" varStatus="loop">
-					<div id="courselist">
-						<div class="text-center col-lg-2 col-xs-1">${item.courseCateName}</div>
-						<div class="text-center col-lg-3 col-xs-1">${item.courseName}</div>
-						<div class="text-center col-lg-2 col-xs-1">${item.courseLength}</div>
-						<div class="text-center col-lg-2 col-xs-1">${item.courseTime}</div>
+					<div class="row" id="courselist">
+						<div class="text-center col-lg-2 col-xs-2">${item.courseCateName}</div>
+						<div class="text-center col-lg-3 col-xs-3">${item.courseName}</div>
+						<div class="text-center col-lg-2 col-xs-2">${item.courseLength}</div>
+						<div class="text-center col-lg-2 col-xs-2">${item.courseTime}</div>
 						<div class="text-center col-lg-3 col-xs-3">
 							<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm"
 								value="${item.courseRegiDate}" />
@@ -371,11 +332,11 @@ body {
 				</c:if>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="recordList">
-				<div id="recordTable">
-					<div class="text-center col-lg-4 col-xs-1">파일</div>
-					<div class="text-center col-lg-3 col-xs-1">길이(km)</div>
-					<div class="text-center col-lg-2 col-xs-1">시간(분)</div>
-					<div class="text-center col-lg-3 col-xs-1">일자</div>
+				<div class="row" id="recordTable">
+					<div class="text-center col-lg-4 col-xs-4">파일</div>
+					<div class="text-center col-lg-3 col-xs-3">길이(km)</div>
+					<div class="text-center col-lg-2 col-xs-2">시간(분)</div>
+					<div class="text-center col-lg-3 col-xs-3">일자</div>
 				</div>
 				<c:if test="${empty recordList}" var="isEmpty">
 					<div class="text-center col-lg-12">
@@ -384,11 +345,11 @@ body {
 				</c:if>
 				<c:if test="${!isEmpty}">
 					<c:forEach var="item" items="${recordList}" varStatus="loop">
-					<div id="recordlist">
-						<div class="text-center col-lg-4 col-xs-1" id="recordlist">${item.fileName}</div>
-						<div class="text-center col-lg-3 col-xs-1" id="recordlist">${item.recordLength}km</div>
-						<div class="text-center col-lg-2 col-xs-1" id="recordlist">${item.duration}분</div>
-						<div class="text-center col-lg-3 col-xs-1" id="recordlist">
+					<div class="row" id="recordlist">
+						<div class="text-center col-lg-4 col-xs-4">${item.fileName}</div>
+						<div class="text-center col-lg-3 col-xs-3">${item.recordLength}</div>
+						<div class="text-center col-lg-2 col-xs-2">${item.duration}</div>
+						<div class="text-center col-lg-3 col-xs-3">
 							<fmt:formatDate var="dResult" pattern="yy-MM-dd HH:mm"
 								value="${item.recordDate}" />
 							<c:out value="${dResult}" />
@@ -406,118 +367,37 @@ body {
 					</div>
 				</c:if>
 			</div>
-			<div role="tabpanel" class="tab-pane" id="messages">
-				<div class="row" style="padding: 10px;">
-					<div class="col-lg-6 col-xs-6">
-						<div class="list-img">
-							<img src="<c:url value ='/change/img/gallery/list1.png'/>" alt=""
-								style="width: 100%; height: 200px;">
-							<!-- <span>Open</span> -->
-						</div>
-						<div class="list-caption">
-							<span>Open</span>
-							<h3>
-								<a href="listing_details.html">Saintmartine</a>
-							</h3>
-							<p>700/D, Kings road, Green lane, 85/ London</p>
-						</div>
-					</div>
-					<div class="col-lg-6 col-xs-6">
-						<div class="single-listing mb-30">
-							<div class="list-img">
-								<img src="<c:url value ='/change/img/gallery/list2.png'/>"
-									alt="" style="width: 100%; height: 200px;">
-								<!-- <span>Open</span> -->
-							</div>
-							<div class="list-caption">
-								<span>Open</span>
-								<h3>
-									<a href="listing_details.html">Saintmartine</a>
-								</h3>
-								<p>700/D, Kings road, Green lane, 85/ London</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 col-xs-6">
-						<div class="list-img">
-							<img src="<c:url value ='/change/img/gallery/list1.png'/>" alt=""
-								style="width: 100%; height: 200px;">
-							<!-- <span>Open</span> -->
-						</div>
-						<div class="list-caption">
-							<span>Open</span>
-							<h3>
-								<a href="listing_details.html">Saintmartine</a>
-							</h3>
-							<p>700/D, Kings road, Green lane, 85/ London</p>
-						</div>
-					</div>
-					<div class="col-lg-6 col-xs-6">
-						<div class="single-listing mb-30">
-							<div class="list-img">
-								<img src="<c:url value ='/change/img/gallery/list2.png'/>"
-									alt="" style="width: 100%; height: 200px;">
-								<!-- <span>Open</span> -->
-							</div>
-							<div class="list-caption">
-								<span>Open</span>
-								<h3>
-									<a href="listing_details.html">Saintmartine</a>
-								</h3>
-								<p>700/D, Kings road, Green lane, 85/ London</p>
-							</div>
-						</div>
+			<!-- 맛집 크롤링 tap pane 끝-->
+			<div role="tabpanel" class="tab-pane" id="messages1">
+				<div class="row">
+					<div class="col-lg-12 col-xs-12">
+						<span style="font-size:2em; color:grey;line-height:500px;">불러오는 중입니다.</span>
 					</div>
 				</div>
 			</div>
+			<!-- 크롤링 tap pane 끝-->
+			<!-- 관광 크롤링 tap pane 끝-->
+			<div role="tabpanel" class="tab-pane" id="messages2">
+				<div class="row">
+					<div class="col-lg-12 col-xs-12">
+						<span style="font-size:2em; color:grey;line-height:500px;">불러오는 중입니다.</span>
+					</div>
+				</div>
+			</div>
+			<!-- 크롤링 tap pane 끝-->
 		</div>
 	</div>
 	<!-- 본문 탭 끝 -->
-	<div class="modal fade" id="naviModal" data-backdrop="false">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4>기록 올리기</h4>
-				</div>
-				<div class="modal-body">
-					<div class="col-sm-12" style="margin-top: 10px">
-						<form method="post" enctype="multipart/form-data"
-							class="col-sm-12">
-							<div id="fileUpload" class="dragAndDropDiv col-sm-12">
-								<span class="dragAndDropDivSpan">Drag & Drop Route Files
-									Here</span>
-							</div>
-							<input type="file" name="fileUpload" id="fileUpload"
-								style="display: none;" multiple />
-						</form>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<form method="post" action="<c:url value="/pack/pictureInput.do"/>">
-						<input class="form-control" name="imgArry" id="imgArry"
-							type="hidden">
-					</form>
-					<button type="button" class="btn btn-default">Load</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
 </div>
-<!-- 높이 그래프 시작 -->
-<div class="row" style="padding-top: 50px; padding-left: 10px">
-	<div class="col-xs-10 offset-xs-1 col-md-7" id="graph"></div>
-</div>
-<!-- 높이 그래프 끝 -->
 <!-- 코스 등록 모달창 시작 -->
 <div class="modal fade" id="noticeEdit" data-backdrop="false">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" style="margin: 5px;">코스 등록</h4>
 			</div>
 			<div class="modal-body">
-				<form action="" class="bg-light p-5 contact-form"
+				<form action="" class="p-5"
 					id="packNoticeForm">
 					<div class="form-group">
 						<input type="text" class="form-control" name="courseFileName"
@@ -525,7 +405,7 @@ body {
 					</div>
 					<label for="map3" style="float: left;">코스</label><br />
 					<div class="form-group">
-						<div id="map3" style="height: 300px; width: 550px;"></div>
+						<div id="map3" style="height: 300px; width: 390px;"></div>
 					</div>
 					<div class="form-group">
 						<input type="text" class="form-control" name="courseId"
@@ -607,21 +487,21 @@ body {
 
 <!-- 기록 상세보기 모달창 시작 -->
 <div class="modal fade" id="noticeView" data-backdrop="false">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<div id="mdNo"></div>
-				<div id="mdPostdate"></div>
+				<div class="col-xs-12 col-lg-12" id="mdNo"></div>
 			</div>
 
-			<div class="modal-body" style="height: 400px;">
-				<div class="row" style="margin: 10px;">
-					<div id="mdUserID"></div>
-					&nbsp;&nbsp;
-					<div id="mdTitle"></div>
-					<br /> <br />
+			<div class="modal-body" style="height: 400px; padding-top:5px;">
+				<div class="row">
+					<div class="col-xs-12 col-lg-offset-6 col-lg-6 text-right" id="mdPostdate"  style="padding-bottom:10px;"></div>
+					<br />
+					<div class="col-xs-12 col-lg-12 text-left" id="mdUserID"></div>
+					<div class="col-xs-12 col-lg-12 text-left" id="mdTitle"></div>
+					<br />
 					<div id="map2"
-						style="height: 300px; padding-top: 20px; width: 550px; padding-top: 20px;"></div>
+						style="height: 300px; padding-top: 20px; width: 550px;"></div>
 				</div>
 			</div>
 
@@ -639,22 +519,22 @@ body {
 <!-- 기록 상세보기 모달창 끝 -->
 
 <!-- 코스 상세보기 모달창 시작 -->
-<div class="modal fade" id="courseView" data-backdrop="false">
-	<div class="modal-dialog modal-lg">
+<div class="modal modal-center fade" id="courseView" data-backdrop="false">
+	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<div id="mdCourseNo"></div>
-				<div id="mdCoursePostdate"></div>
+				<div class="col-xs-12 col-lg-12" id="mdCourseNo"></div>
 			</div>
 
-			<div class="modal-body" style="height: 400px;">
-				<div class="row" style="margin: 10px;">
-					<div id="mdCourseUserID"></div>
-					&nbsp;&nbsp;
-					<div id="mdCourseTitle"></div>
-					<br /> <br />
+			<div class="modal-body" style="height: 400px; padding-top:5px;">
+				<div class="row">
+					<div class="col-xs-12 col-lg-offset-6 col-lg-6 text-right" id="mdCoursePostdate" style="padding-bottom:10px;"></div>
+					<br />
+					<div class="col-xs-12 col-lg-12 text-left" id="mdCourseUserID"></div>
+					<div class="col-xs-12 col-lg-12 text-left" id="mdCourseTitle"></div>
+					<br />
 					<div id="map4"
-						style="height: 300px; padding-top: 20px; width: 550px; padding-top: 20px;"></div>
+						style="height: 300px; padding-top: 20px; width: 550px;"></div>
 				</div>
 			</div>
 
@@ -668,7 +548,6 @@ body {
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 <!-- 코스 상세보기 모달창 끝 -->
 <!-- 본문 끝 -->
@@ -737,14 +616,13 @@ body {
 	    a.href = objURL;
 	    a.click();
 	}
-
+	
+	$('style').append('.modal .modal-body {max-height: '
+			+ ($('body').height() * .6)
+			+ 'px;overflow-y: auto;}.modal-open .modal{overflow-y: hidden !important;}');
+	
 	$(function() {
 
-		$('head')
-				.append(
-						'<style type="text/css">.modal .modal-body {max-height: '
-								+ ($('body').height() * .8)
-								+ 'px;overflow-y: auto;}.modal-open .modal{overflow-y: hidden !important;}</style>');
 		/*
 		$.ajax('<c:url value="/courseTest/gpxkml/address.kml"/>').done(
 				function(xml) {
@@ -868,198 +746,6 @@ body {
 		//geojson
 		var json;
 
-		//load
-		$(".modal-footer button:eq(0)")
-				.click(function() {
-							console.log("로드 버튼 누름");
-
-							$.ajax({
-										url : "<c:url value='/course/routeLoad'/>",
-										type : "post",
-										dataType : "json",
-										data : {
-											"fileName" : $('#imgArry').val()
-										},
-										success : function(data) {
-											console.log('요청 성공');
-											//console.log('data:%O',data.features[0]);
-											console.log('data:%O', data);
-											//json = data.features[0];
-											json = data;
-
-											map.addSource('route', {
-												"type" : "geojson",
-												"data" : json
-											});
-											map.addLayer({
-												'id' : 'route',
-												'type' : 'line',
-												'source' : 'route',
-												'layout' : {
-													'line-join' : 'round',
-													'line-cap' : 'round'
-												},
-												'paint' : {
-													'line-color' : '#ff0000',
-													'line-width' : 8
-												}
-											});
-											map
-													.setCenter(json.geometry.coordinates[0][0]);
-											map.setZoom(11);
-
-											var length = turf.length(json, {
-												units : 'kilometers'
-											});
-											console.log('lenght:', length);
-
-											//등록,거리
-											$('.form-horizontal li:eq(4) span')
-													.html(
-															new Date()
-																	.format("yyyy년 MM월 dd일 a/p hh시 mm분 ss초"));
-											$('.form-horizontal li:eq(3) span')
-													.html(length + "km");
-
-											$('#naviModal').modal("toggle");
-										}
-									});
-
-							// 		$(".modal-footer button:eq(2)").click();
-						});
-
-		// 이미지 다운로드 모달 정보 변경 
-		$(".galleryImg")
-				.click(
-						function() {
-							var fileName = $(this).next().val()
-							var imgDownloadHref = '<c:url value="/pack/fileDownload.do?filename='
-									+ fileName + '"/>'
-							var imgDeleteHref = '<c:url value="/pack/fileDelete.do?filename='
-									+ fileName + '"/>'
-							$("#fileDownloadATag")
-									.attr("href", imgDownloadHref)
-							$("#fileDeleteATag").attr("href", imgDeleteHref)
-							$('#galleryImgModal').html($(this).html());
-							$('#galleryViewModal').modal();
-						});
-
-		//이미지 드래그앤 드랍.
-		var objDragAndDrop = $(".dragAndDropDiv");
-
-		$(document).on("dragenter", ".dragAndDropDiv", function(e) {
-			e.stopPropagation();
-			e.preventDefault();
-			$(this).css('border', '2px solid #0B85A1');
-		});
-		$(document).on("dragover", ".dragAndDropDiv", function(e) {
-			e.stopPropagation();
-			e.preventDefault();
-		});
-		$(document).on("drop", ".dragAndDropDiv", function(e) {
-			$(this).css('border', '2px dotted #0B85A1');
-			e.preventDefault();
-			var files = e.originalEvent.dataTransfer.files;
-			if (files.length > 1) {
-				alert('루트는 1개까지 올릴 수 있습니다.');
-				return;
-			}
-			var size = $("#imgArry").val().split(",").length + files.length;
-			console.log(size)
-			if (size > 2) {
-				alert('루트는 1개까지 올릴 수 있습니다.');
-				return;
-			}
-
-			handleFileUpload(files, objDragAndDrop);
-		});
-
-		//1]drag 영역 클릭시 파일 선택창
-		$(".dragAndDropBtn").on('click', function(e) {
-			$('input[type=file]').trigger('click');
-		});
-		$('input[type=file]').on('change', function(e) {
-			var files = e.originalEvent.target.files;
-			handleFileUpload(files, objDragAndDrop);
-		});
-		//1-1]만들어진 다이브 클릭시는 삭제 
-
-		//2]서버에 파일 전송 메소드
-		function handleFileUpload(files, obj) {
-			for (var i = 0; i < files.length; i++) {
-				var fd = new FormData();
-				fd.append('file', files[i]);
-				sendFileToServer(fd);
-			}
-		}
-
-		var rowCount = 0;
-
-		//4] Ajax 이용 해서 서버에 이미지 저장하는 핵심로직
-
-		function sendFileToServer(formData) {
-			var extraData = {}; //Extra Data.
-			var jqXHR = $.ajax({
-				url : "<c:url value='/course/fileUpload'/>",
-				type : "POST",
-				contentType : false,
-				processData : false,
-				cache : false,
-				data : formData,
-				dataType : 'json',
-				success : function(data) {
-					console.log(data);
-					imgarr.push(data.fileName);
-					imageDivShow()
-				}
-			});
-
-		}//파일저장 
-
-		//5] Ajax 이용 해서 서버에 이미지 삭제하기 
-		function deleteFileToServer(filename) {
-			$.ajax({
-				url : "<c:url value="/pack/filedelete/post"/>",//요청할 서버의 URL주소
-				type : 'post',//데이타 전송방식(디폴트는 get방식) 
-				dataType : 'text',//서버로 부터 응답 받을 데이타의 형식 설정
-				data : "filename=" + filename,
-				success : function(data) {
-					console.log(data);
-					imgarr.splice(imgarr.indexOf(filename), 1);
-					imageDivShow();
-					if (map.getSource('route')) {
-						map.removeLayer('route');
-						map.removeSource('route');
-					}
-				},
-				error : function(error) {//서버로부터 비정상적인 응답을 받았을때 호출되는 콜백함수
-					console.log('에러 : ', error.responseText);
-				}
-			});
-		}
-
-		//6]파일 추가 삭제 후 다이브 다시띄우기.
-		function imageDivShow() {
-			var str = '';
-			for (var i = 0; i < imgarr.length; i++) {
-				str += "<div class='imgdiv' id='"+imgarr[i]+"'><img class='img'  src=/fileupload/"+imgarr[i]+"><div class='imgdeletemark'>삭제</div></div>";
-			}
-			$("#fileUpload").html(str);
-			//이미지에 호버 이벤트 걸기
-			$(".imgdiv").hover(function() {
-				$(this).children().eq(1).css("display", "block");
-				$(this).children().eq(0).css("opacity", 0.4);
-			}, function() {
-				$(this).children().eq(1).css("display", "none");
-				$(this).children().eq(0).css("opacity", 1.0);
-			});
-			$(".imgdiv").click(function() {
-				deleteFileToServer($(this).attr('id'))
-			});
-
-			$('#imgArry').val(imgarr);
-		}
-
 		$('#btnNoticeWrite').on('click', function(e) {
 			console.log('btnNoticeWrite 버튼 클릭');
 			$('#noticeWrite').modal('show');
@@ -1124,7 +810,7 @@ body {
 		$("#courseList #courselist").click(function() {
 			$('.viewBtn').show();
 
-			courseId = $(this).children().eq(5).text();
+			courseId = $(this).children().eq(5).text().trim();
 
 			$.ajax({
 				url : "<c:url value='/course/viewcourse'/>",
@@ -1142,30 +828,23 @@ body {
 					courseRegiDate = json.courseRegiDate;
 					courseIntro = json.courseIntro;
 					
-					/*
-					$("#mdCourseNo").append("코스 이름 : " + courseName);
-					$("#mdCourseUserID").append("코스 길이 : " + courseLength);
-					$("#mdCourseTitle").append("코스 시간 : " + courseTime);
-					$("#mdCoursePostdate").append("등록 일자 : " + courseRegiDate);
-					$("#mdCourseContent").append("" + courseIntro);
-					*/
-					$("#mdCourseNo").html("코스 이름 : " + courseName);
-					$("#mdCourseUserID").html("코스 이름 : " + courseLength);
-					$("#mdCourseTitle").html("코스 이름 : " + courseTime);
-					$("#mdCoursePostdate").html("코스 이름 : " + courseRegiDate);
-					$("#mdCourseContent").html("코스 이름 : " + courseIntro);
+					$("#mdCourseNo").html(courseName);
+					$("#mdCourseUserID").html('<span class="glyphicon glyphicon-road" aria-hidden="true"></span> 거리 : '+ courseLength +'km');
+					$("#mdCourseTitle").html('<span class="glyphicon glyphicon-time" aria-hidden="true"></span> 탄 시간 : '+ courseTime + '분');
+					$("#mdCoursePostdate").html(courseRegiDate);
+					$("#mdCourseContent").html("코스 소개 " + courseIntro);
 
 					$.ajax({
 						url : "<c:url value='/course/routeLoad'/>",
 						type : "post",
 						dataType : "json",
 						data : {
-							"fileName" : json.courseFileName
+							"fileName":json.courseFileName
 						},
 						success : function(data) {
 							map4.addSource('route', {
-								"type" : "geojson",
-								"data" : data
+								"type":"geojson",
+								"data":data
 							});
 							map4.addLayer({
 								'id' : 'route',
@@ -1176,8 +855,8 @@ body {
 									'line-cap' : 'round'
 								},
 								'paint' : {
-									'line-color' : '#ff0000',
-									'line-width' : 8
+									'line-color' : '#24d900',
+									'line-width' : 3
 								}
 							});
 							map4.setCenter(data.geometry.coordinates[0][0]);
@@ -1220,34 +899,16 @@ body {
 			$('.viewBtn').show();
 			var userId = "${sessionScope.userId}";
 			console.log('테이블 a태그 클릭', userId);
-			fileName = $(this).children().eq(0).text();
+			fileName = $(this).children().eq(0).text().trim();
 			recordLength = $(this).children().eq(1).text();
 			recordDuration = $(this).children().eq(2).text();
 			recordDate = $(this).children().eq(3).text();
 			recordNo = $(this).children().eq(4).text();
 
-			/*
-			if(userId === title){
-				console.log(userId,'와',title);
-				//$('.viewBtn').attr("hidden","false");
-				$('.viewBtn').show();
-			} else {
-				console.log(userId,'와',title,'달라');
-				$('.viewBtn').hide();
-			}
-			 */
-			
-			/*
-			$("#mdNo").append("파일 : " + fileName);
-			$("#mdUserID").append("길이 : " + recordLength);
-			$("#mdTitle").append("시간 : " + recordDuration);
-			$("#mdPostdate").append("일자 : " + recordDate);
-			$("#mdContent").append("" + recordNo);
-			*/
-			$("#mdNo").html("파일 : " + fileName);
-			$("#mdUserID").html("길이 : " + recordLength);
-			$("#mdTitle").html("시간 : " + recordDuration);
-			$("#mdPostdate").html("일자 : " + recordDate);
+			$("#mdNo").html(fileName);
+			$("#mdUserID").html('<span class="glyphicon glyphicon-road" aria-hidden="true"></span> 거리 : '+ recordLength + 'km');
+			$("#mdTitle").html('<span class="glyphicon glyphicon-time" aria-hidden="true"></span> 시간 : ' + recordDuration + '분');
+			$("#mdPostdate").html(recordDate);
 			$("#mdContent").html("" + recordNo);
 
 			//루트 가져오기
@@ -1256,7 +917,7 @@ body {
 				type : "post",
 				dataType : "json",
 				data : {
-					"fileName" : fileName
+					"fileName":fileName
 				},
 				success : function(data) {
 					console.log('요청 성공');
@@ -1264,7 +925,6 @@ body {
 					console.log('data:%O', data);
 					//json = data.features[0];
 					json = data;
-					
 
 					map2.addSource('route', {
 						"type" : "geojson",
@@ -1279,8 +939,8 @@ body {
 							'line-cap' : 'round'
 						},
 						'paint' : {
-							'line-color' : '#ff0000',
-							'line-width' : 8
+							'line-color' : '#24d900',
+							'line-width' : 3
 						}
 					});
 					
@@ -1316,7 +976,6 @@ body {
 			$("#courseId").attr("value", fileName);
 			$("#courseTime").attr("value", recordDuration);
 			$("#courseLength").attr("value", recordLength);
-			//$("#packNoticeEditTitle").attr("value",title);
 
 			//지도 띄우기
 			//루트 가져오기
@@ -1347,8 +1006,8 @@ body {
 							'line-cap' : 'round'
 						},
 						'paint' : {
-							'line-color' : '#ff0000',
-							'line-width' : 8
+							'line-color' : '#24d900',
+							'line-width' : 3
 						}
 					});
 					map3.setCenter(json.geometry.coordinates[0][0]);
@@ -1431,6 +1090,56 @@ body {
 			e.preventDefault()
 			$(this).tab('show')
 		})
+		
+		map.on('click',function(e){
+			console.log("클릭한 좌표:",e.lngLat.lat,":",e.lngLat.lng);
+			$.ajax({
+				url:"http://localhost:5000/places/matzip?lat="+e.lngLat.lat+"&lng="+e.lngLat.lng,
+				type:"get",
+				//success:receiverecommandresponse,
+				success:function(data){
+					console.log("성공");
+					console.log("리시브데이터:%O",data);
+					const matzipList = data.places;
+					var imageListStr="";
+					matzipList.forEach(function(elt, i, array) {
+						imageListStr += 
+							'<div class="col-lg-4 col-xs-4"><div class="list-img"><img src="'+elt.url+'" style="width: 100%; height: 200px;"></div><div class="list-caption"><h5><span>'+elt.name+"(💛"+elt.score+")"+'</span><p style="font-size:.9em">'+elt.addr+'</p></h5></div></div>'						
+					});
+					$('#messages1').html(imageListStr);
+					//console.log("첫번째",matzipList[0].addr);
+				},
+				error:function(request,status,error){
+					console.log("실패",request,status,error);
+				}
+			});		
+			$.ajax({
+				url:"http://localhost:5000/places/janggwan?lat="+e.lngLat.lat+"&lng="+e.lngLat.lng,
+				type:"get",
+				//success:receiverecommandresponse,
+				success:function(data){
+					console.log("성공");
+					console.log("리시브데이터:%O",data);
+					const matzipList = data.places;
+					var imageListStr="";
+					matzipList.forEach(function(elt, i, array) {
+						imageListStr += 
+							'<div class="col-lg-4 col-xs-4"><div class="list-img"><img src="'+elt.url+'" style="width: 100%; height: 200px;"></div><div class="list-caption"><h5><span>'+elt.name+"(💛"+elt.score+")"+'</span><p style="font-size:.9em">'+elt.addr+'</p></h5></div></div>'						
+					});
+					$('#messages2').html(imageListStr);
+					//console.log("첫번째",matzipList[0].addr);
+				},
+				error:function(request,status,error){
+					console.log("실패",request,status,error);
+				}
+			});	
+		});
+		
+		/*
+		function receiverecommandresponse(data){
+			console.log("리시브데이터:%O",data);
+		}
+		*/
 
 	});
 </script>

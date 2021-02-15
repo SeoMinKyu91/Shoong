@@ -109,6 +109,7 @@ public class PackController {
 		// 로그인 아이디,팩 아이디 설정 나중에 세션에서 값불러오는걸로 대체
 		map.put("loginId", req.getSession().getAttribute("userId").toString());
 		map.put("packId", req.getSession().getAttribute("packId").toString());
+		map.put("userId", req.getSession().getAttribute("userId").toString());
 
 		// 관리자 확인용
 		if (packNoticeService.isManager(map)) {

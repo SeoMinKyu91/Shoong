@@ -34,7 +34,8 @@ public class PackGalleryController {
 
 	//팩 메인 페이지로  이동get
 	@RequestMapping("gallery.do")
-	public String packGallery(@RequestParam Map map ,Model model) {
+	public String packGallery(@RequestParam Map map ,Model model,HttpSession session) {
+		map.put("userId",session.getAttribute("userId"));
 
 		List<PackGalleryDTO> packGalleryList=service.selectList(map);
 		model.addAttribute("packGalleryList",packGalleryList);
