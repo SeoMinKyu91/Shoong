@@ -119,7 +119,9 @@ padding: 10px;
 #loginCheck:hover {
 	background-color: #f2f2f7;
 }
-
+.mb-30{
+	margin-bottom: 10px;
+}
 </style>
 <img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt=""/>
    <div class="lineMain">
