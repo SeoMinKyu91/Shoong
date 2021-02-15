@@ -82,13 +82,33 @@ th{
 	padding-top: 70px;
 	
 }
+#bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	opacity: 0.5;
+	/* Preserve aspet ratio */
+	min-width: 100%;
+	min-height: 100%;
+}
+
+.mainDiv {
+	border-radius: 10px;
+	box-shadow: 0px 0px 5px #787878;
+	padding: 30px;
+	background-color: white;
+	position: relative;
+	z-index: 1;
+	padding-top: 60px;
+}
 </style>
 
-
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
+<div class="mainDiv">
     <section class="gallery-block cards-gallery">
-       <div class="container">
            <div class="heading">
-             <h2>My Riding Diary<small class="test1">추가하기</small></h2>
+             <h2>My Riding Diary</h2>
+             <button type="button" class="btn btn-default test1">추가하기</button>
            </div>
            <br/>
            <div class="row">
@@ -114,7 +134,6 @@ th{
                 </c:forEach>
              </c:if>
            </div>
-       </div>
     </section>   
     <!-- 모달 -->
       
@@ -149,7 +168,7 @@ th{
                 </div>
            </div>
       </div>
-      
+</div>
       <script>
       	jQuery.noConflict();
       	$(function(){
