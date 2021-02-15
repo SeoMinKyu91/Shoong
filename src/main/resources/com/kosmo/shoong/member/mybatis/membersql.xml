@@ -85,9 +85,19 @@
 		VALUES(#{userId},'Y')
 	</insert>
 	<update id="memberUpdate" parameterType="java.util.Map">
-		UPDATE member_ set pwd = #{userPWDOk}, name = #{userName}, gender = #{userGender}, age = #{userAge}, usertel = #{userTel}
-		where user_id = #{userId} 
-		
+		UPDATE member_ set frequency=#{surveyResult} 
+	</update>
+	
+	<update id="memberEditDo" parameterType="java.util.Map">
+		UPDATE member_ 
+			<trim prefix="SET" suffixOverrides=",">
+				<if test="userPWD!=null">pwd=#{userPWD},</if>
+				<if test="userName!=null">name=#{userName},</if>
+				<if test="userGender!=null">gender=#{userGender},</if>
+				<if test="userAge!=null">age=#{userAge},</if>
+				<if test="userTel!=null">usertel=#{userTel},</if>
+			</trim>
+		WHERE user_id=#{userId}
 	</update>
 	
 	<select id="memberHasPack" parameterType="java.util.Map" resultType="java.util.Map">
@@ -118,5 +128,7 @@
 	<select id="memberName" parameterType="Map" resultType="String">
 		select name from member_ where user_id = #{userId}
 	</select>
+	
+	
 	
 </mapper>

@@ -134,7 +134,7 @@ public class MyPageController {
 		System.out.println("이미지이름:"+map.get("profileImgName"));
 		map.put("userTel", phoneNumber);
 		
-		int res = memberService.update(map);
+		int res = memberService.memberEdit(map);
 		System.out.println(res);
 		if (res==0) {
 			System.out.println("실패");
