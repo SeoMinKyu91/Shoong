@@ -2,7 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
+<style>
+ul li a {
+	font-size : 1.2em;
+}
+</style>
 <!-- Footer Start-->
         <div class="footer-area">
             <div class="container">
@@ -13,7 +17,9 @@
                                 <div class="single-footer-caption mb-30">
                                     <!-- logo -->
                                     <div class="footer-logo">
-                                        <a href="index.html"><img src="<c:url value='/change/img/logo/logo2_footer.png'/>" alt=""></a>
+                                        <a href="<c:url value="/"/>" id="homeAtag"><img
+										src="<c:url value='/change/img/shooongLogo.png'/>"
+										style="width: 50px;">&emsp; <span id="shooongSpan">SHOOONG.</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -23,10 +29,21 @@
                                 <div class="footer-tittle">
                                     <h4>Quick Link</h4>
                                     <ul>
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">Listing</a></li>
-                                        <li><a href="#">About</a></li>
-                                        <li><a href="#">Contact</a></li>
+                                        <li><a href="<c:url value="/"/>" id="homeAtag">HOME</a></li>
+                                        <c:if test="${empty sessionScope.userId}" var="isNotLogin">
+											<li><a href="<c:url value="/Member/Join.do"/>">JOIN</a></li>
+										</c:if>
+										<c:if test="${empty sessionScope.userId}" var="isNotLogin">
+											<li><a href="<c:url value="/Member/Login.do"/>">LOGIN</a></li>
+										</c:if>
+										<c:if test="${!isNotLogin}">
+											<li><a href="<c:url value="/Member/Logout.do"/>">LOGOUT</a></li>
+											<li><a href="<c:url value="/mypage/main.do"/>">MY PAGE</a></li>
+											<li><a href="<c:url value="/pack/main.do"/>">PACK</a></li>
+										</c:if>
+										<c:if test="${not empty sessionScope.userId}">
+											<li><a href="<c:url value="/course/navi.do"/>">SHOONG</a></li>
+										</c:if>
                                     </ul>
                                 </div>
                             </div>
@@ -34,12 +51,14 @@
                         <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                             <div class="single-footer-caption mb-50">
                                 <div class="footer-tittle">
-                                    <h4>Categories</h4>
+                                    <h4>PACK</h4>
                                     <ul>
-                                        <li><a href="#">Reasonable Hotel</a></li>
-                                        <li><a href="#">Popular Restaurant</a></li>
-                                        <li><a href="#">Easy Shopping</a></li>
-                                        <li><a href="#">Night Life</a></li>     
+                                    	<c:if test="${!isNotLogin}">
+                                        	<li><a href="<c:url value="/pack/notice/list.do"/>">NOTICE</a></li>
+                                        	<li><a href="<c:url value="/pack/comment.do"/>">COMMUNNITY</a></li>
+                                        	<li><a href="<c:url value="/pack/gallery.do"/>">GALLERY</a></li>
+                                        	<li><a href="<c:url value="/pack/rank.do"/>">RANKING</a></li>
+                                        </c:if>
                                     </ul>
                                 </div>
                             </div>
