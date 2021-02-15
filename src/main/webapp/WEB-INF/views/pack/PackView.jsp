@@ -165,14 +165,19 @@ body {
 			<br />
 			<hr style="background-color: black; height: 1px" />
 			<div class="">
-				<a class="packMainBtn btn" href="<c:url value="/pack/calendar.do"/>"
-					style="margine-right: 20px"><span
-					class="glyphicon glyphicon-calendar"></span>&nbsp;팩 일정</a>
+				<a class="packMainBtn btn" href="<c:url value="/pack/calendar.do"/>" style="margin-right: 20px">
+					<span class="glyphicon glyphicon-calendar"></span>&nbsp;팩 일정
+				</a>
+			</div>
+			<div class="">
+				<a class="packMainBtn btn" href="<c:url value="/pack/comment.do"/>" style="margin-right: 20px">
+					<span class="glyphicon glyphicon-list-alt"></span>&nbsp;커뮤니티
+				</a>
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-lg-offset-1 col-lg-5">
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-lg-offset-1 col-lg-10">
 			<div class="row">
 				<div class="col-lg-9 col-xs-9">
 					<p style="font-weight: bold; font-size: 1.5em;">공지사항</p>
@@ -210,63 +215,7 @@ body {
 				</c:if>
 			</table>
 		</div>
-		<!-- 여기에 코멘트 -->
-		<div class="col-lg-5 ">
-			<div class="row">
-				<div class="col-lg-9 col-xs-9">
-					<p style="font-weight: bold; font-size: 1.5em;">커뮤니티</p>
-				</div>
-				<div class="col-lg-3 col-xs-3"
-					style="padding-top: 10px; float: right;">
-					<a href="<c:url value="/pack/comment.do"/>" class="btn-custom"
-						style="float: right;">더보기 <span class="ion-ios-arrow-forward"></span>
-					</a>
-				</div>
-			</div>
-			<table class="table table-hover" id="packComment">
-				<tr id="tableTitle">
-					<th class="text-center">번호</th>
-					<th class="text-center">제목</th>
-					<th class="text-center">작성자</th>
-					<th class="text-center">작성일</th>
-					<th class="text-center"><span
-						class="glyphicon glyphicon-heart"></span></th>
-				</tr>
-				<c:if test="${empty list}" var="isEmpty">
-					<tr class="text-center">
-						<td colspan="4" class="test-center">등록된 게시물이 없어요</td>
-					</tr>
-				</c:if>
-				<tr class="text-center">
-					<td>4</td>
-					<td class="text-left ">제목4</td>
-					<td>장동건</td>
-					<td>2021-01-20</td>
-					<td>1</td>
-				</tr>
-				<tr class="text-center">
-					<td>3</td>
-					<td class="text-left">제목3</td>
-					<td>장동건</td>
-					<td>2021-01-20</td>
-					<td>2</td>
-				</tr>
-				<tr class="text-center">
-					<td>2</td>
-					<td class="text-left">제목2</td>
-					<td>장동건</td>
-					<td>2021-01-20</td>
-					<td>3</td>
-				</tr>
-				<tr class="text-center">
-					<td>1</td>
-					<td class="text-left">제목1</td>
-					<td>장동건</td>
-					<td>2021-01-20</td>
-					<td>4</td>
-				</tr>
-			</table>
-		</div>
+		
 	</div>
 	<!-- row -->
 	<div class="row" style="margin-bottom: 30px;">
