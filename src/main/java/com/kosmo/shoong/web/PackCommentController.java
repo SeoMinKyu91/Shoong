@@ -29,6 +29,7 @@ import com.kosmo.shoong.service.impl.member.MemberServiceImpl;
 import com.kosmo.shoong.service.impl.pack.PackCommentServiceImpl;
 import com.kosmo.shoong.service.pack.PackCommentDTO;
 import com.kosmo.shoong.service.pack.PackCommentReplyDTO;
+import com.kosmo.shoong.service.pack.PackGalleryService;
 
 @Controller
 @RequestMapping("/pack/")
@@ -39,6 +40,9 @@ public class PackCommentController {
 	
 	@Resource(name = "memberService")
 	private MemberServiceImpl memberService;
+	
+	@Resource(name="packGalleryService")
+	private PackGalleryService galleryService;
 
 	@RequestMapping(value="comment.do")
 	public String packComment(@RequestParam Map map, HttpServletRequest req, Model model) {
@@ -67,6 +71,8 @@ public class PackCommentController {
 		if(commentList != null) {
 			model.addAttribute("commentList",commentList);
 		}
+		
+		
 		
 		
 		
