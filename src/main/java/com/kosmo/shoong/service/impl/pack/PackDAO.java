@@ -70,4 +70,9 @@ public class PackDAO implements PackService {
 		// TODO Auto-generated method stub
 		return sqlMapper.selectOne("selectOneUserAddr",id);
 	}
+
+	public List<Map> selectRankList(Map map) {
+
+		return sqlMapper.selectList("packRankList",map);
+	}
 }
