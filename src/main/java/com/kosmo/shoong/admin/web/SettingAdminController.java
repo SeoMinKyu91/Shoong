@@ -23,9 +23,4 @@ public class SettingAdminController {
 
 	      return "admin/Setting.admin";
 	   }
-	@RequestMapping("./pushToPhone.do")
-	public String FCM() {
-		
-		return "admin/Setting.admin";
-	}
 }
