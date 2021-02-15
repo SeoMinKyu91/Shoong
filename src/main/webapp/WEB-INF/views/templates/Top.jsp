@@ -45,8 +45,7 @@
 									</c:if>
 									<c:if test="${!isNotLogin}">
 										<li><a href="<c:url value="/Member/Logout.do"/>">LOGOUT</a></li>
-										<li><a href="<c:url value="/mypage/main.do"/>">MY
-												PAGE</a></li>
+										<li><a href="<c:url value="/mypage/main.do"/>">MY PAGE</a></li>
 										<li><a href="<c:url value="/pack/main.do"/>">PACK</a></li>
 									</c:if>
 									<c:if test="${empty sessionScope.userId}" var="isNotLogin">

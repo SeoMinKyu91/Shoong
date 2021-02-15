@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.kosmo.shoong.service.chat.ChatBotService;
 
 @Controller
@@ -81,7 +78,7 @@ public class ChatBotController {
 	}
 	
 	@RequestMapping(value = "map/api")
-	public String bicycleStorage(@RequestParam Map map,Model model) throws ParseException, JsonParseException, JsonMappingException, IOException {
+	public String bicycleStorage(@RequestParam Map map,Model model) throws ParseException, IOException {
 	 
 		String jsonStr = map.get("bicycleApiJson").toString();
 	
@@ -97,12 +94,12 @@ public class ChatBotController {
             for( int i = 0; i < jsonSize; i++ )
             {	Map jsonMap = null;
             	JSONObject jsonObj = (JSONObject)jsonArray.get(i);
-            	jsonMap = new ObjectMapper().readValue(jsonObj.toJSONString(),Map.class) ;
+            	jsonMap = new Gson().fromJson(jsonObj.toJSONString(),Map.class) ;
                 list.add( jsonMap );
             }
         }
-	     
-	    model.addAttribute("location",map.get("location").toString());
+		
+		model.addAttribute("location",map.get("location").toString());
 	    
 	    if(map.get("api").toString().equals("storage")) {
 	    	 model.addAttribute("storageList",list);
@@ -113,5 +110,6 @@ public class ChatBotController {
 	     }
 	
 	}     
+	
 	
 }

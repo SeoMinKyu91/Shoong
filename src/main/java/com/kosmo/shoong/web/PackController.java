@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.shoong.service.impl.member.MemberServiceImpl;
 import com.kosmo.shoong.service.impl.pack.PackNoticeServiceImpl;
+import com.kosmo.shoong.service.impl.pack.PackServiceImpl;
 import com.kosmo.shoong.service.pack.PackDTO;
 import com.kosmo.shoong.service.pack.PackGalleryDTO;
 import com.kosmo.shoong.service.pack.PackGalleryService;
@@ -28,7 +29,7 @@ import com.kosmo.shoong.service.pack.PackService;
 @RequestMapping("/pack/")
 public class PackController {
 	@Resource(name = "packService")
-	private PackService service;
+	private PackServiceImpl service;
 	@Resource(name = "packGalleryService")
 	private PackGalleryService galleryService;
 	@Resource(name = "packNoticeService")
@@ -146,6 +147,10 @@ public class PackController {
 		} else {
 			model.addAttribute("packGalleryList", GalleryList);
 		}
+		
+		List<Map> rank = service.selectRankList(map);
+		model.addAttribute("packRank",rank);
+		
 		return "pack/PackView";
 	}
 
@@ -171,5 +176,22 @@ public class PackController {
 		String check = "Y";
 		return check;
 	}//////////////
+	
+	
+	@RequestMapping("rank.do")
+	public String packRank(@RequestParam Map map, Model model,HttpSession session) {
+		map.put("packId", session.getAttribute("packId"));
+		List<Map> rank = service.selectRankList(map);
+		System.out.println("가보자가보자~~");
+		for(Map item : rank) {
+			System.out.println(item.get("NAME")+"의 마일리지:"+item.get("MILEAGE"));
+		}
+		
+		model.addAttribute("packRank",rank);
+		
+		return "/pack/PackRank";
+	}
+	
+	
 
 }

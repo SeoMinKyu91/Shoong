@@ -9,10 +9,19 @@ import lombok.ToString;
 public class PackCommentDTO {
 	private String packCommentNo;
 	private String packCommentWriter;
+	private String memberProfileImg;
 	private List<String> packCommentImages;
 	private String packCommentContent;
 	private String packCommentLikeCount;
 	private String packCommentReplyCount;
+	
+	
+	public String getMemberProfileImg() {
+		return memberProfileImg;
+	}
+	public void setMemberProfileImg(String memberProfileImg) {
+		this.memberProfileImg = memberProfileImg;
+	}
 	private List<PackCommentReplyDTO> packCommentReply;
 	private String packCommentLike;
 	

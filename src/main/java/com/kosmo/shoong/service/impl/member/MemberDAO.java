@@ -2,6 +2,7 @@ package com.kosmo.shoong.service.impl.member;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -56,11 +57,19 @@ public class MemberDAO implements MemberService{
 //	public int delete(Map map) {
 //		return sqlMapper.delete("memberDelete", map);
 //	}//////delete
-
+	//활동량 설문조사에 대한 memberUpdate (회원정보수정 아님)
 	@Override
 	public int update(Map map) {
-		System.out.println("dad안");
 		return sqlMapper.update("memberUpdate", map);
+	}///////update
+	
+	@Override
+	public int memberEdit(Map map) {
+		System.out.println("dad안");
+		Set keys = map.keySet();
+		for(Object key:keys) System.out.println(key+":"+map.get(key).toString());
+		int res = sqlMapper.update("memberEditDo", map);
+		return res;
 	}///////update
 
 	@Override

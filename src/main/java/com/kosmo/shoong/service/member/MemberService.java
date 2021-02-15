@@ -15,8 +15,9 @@ public interface MemberService {
 	int insert(Map map);
 //	int delete(Map map);
 	int update(Map map);
-	MemberDTO selectOne(Map map);
+	int memberEdit(Map map);
 	
+	MemberDTO selectOne(Map map);
 	Map memberEditView(Map map);
 	
 }//////interface

@@ -69,5 +69,10 @@ public class PackServiceImpl implements PackService{
 		// TODO Auto-generated method stub
 		return packDAO.selectOneUserAddr(id);
 	}
+
+	public List<Map> selectRankList(Map map) {
+		
+		return packDAO.selectRankList(map);
+	}
 	
 }

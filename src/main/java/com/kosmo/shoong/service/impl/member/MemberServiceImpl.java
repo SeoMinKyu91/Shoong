@@ -100,6 +100,12 @@ public class MemberServiceImpl implements MemberService{
 		System.out.println("임플안");
 		return memberDAO.update(map);
 	}//////update
+	//활동량 설문조사에 대한 memberUpdate (회원정보수정 아님)
+	@Override
+	public int memberEdit(Map map) {
+		System.out.println("임플안");
+		return memberDAO.memberEdit(map);
+	}//////update
 
 	@Override
 	public MemberDTO selectOne(Map map) {
