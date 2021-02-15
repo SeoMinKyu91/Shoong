@@ -154,10 +154,7 @@
 												<div class="row feed-top-row">
 													<div class="col-lg-2 col-xs-3 feed-top-imgs"
 														style="text-align: center;">
-														<!-- 나중에 이미지 사진 교체 해야함 현재는 정확히 어떻게 해야할지 모르겠어서 임시사진 적용 -->
-														<img class="feed-top-img-src"
-															alt="이미지사진"
-															src="<c:url value="/images/image_10.jpg"/>" />
+														<img class="feed-top-img-src" alt="이미지사진" src="<c:url value="/images/badges/${item.memberProfileImg }"/>" />
 													</div>
 													<div class="col-lg-10 col-xs-9 feed-top-nick">
 														<span class="feed-top-nick-span">${item.packCommentWriter }</span>

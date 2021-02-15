@@ -199,7 +199,7 @@
 					<div class="col-lg-5 feed-view feed-contents" style="border-left: none;box-shadow: 5px 5px 5px #787878;">
 						<div class="col-lg-12 feed-writer-pr" style="height: 90px; border-bottom: 1px solid lightgrey;">
 							<div class="col-lg-2" style="height: 100%; line-height: 90px;">
-								<img src="<c:url value="/images/person_4.jpg"/>" alt="프로필사진" style="height: 60%; border-radius: 100%; border: 2px solid black;"/>
+								<img src="<c:url value="/images/badges/${packCommentView.memberProfileImg }"/>" alt="프로필사진" style="height: 60%; border-radius: 100%; border: 2px solid black;"/>
 							</div>
 							<div class="col-lg-8">	
 								<span style="margin-left: 5px; font-size: 15px; font-weight: bold">${packCommentView.packCommentWriter }</span>
