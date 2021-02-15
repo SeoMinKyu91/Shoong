@@ -5,17 +5,6 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
-.packCreateBtn {
-	color: #f32a48;
-	background-color: white;
-	font-weight: bold;
-	border: none;
-}
-
-.packCreateBtn:hover {
-	color: white;
-	background-color: #f32a48;
-}
 
 .packManageBtn {
 	float: right;
@@ -139,6 +128,26 @@ body {
 .carousel-indicators li.active {
 	background: #555;
 }
+
+#gallery{
+	height: 300px;
+	
+}
+.carousel-control.left {
+	background-image: linear-gradient(to right, rgba(0, 0, 0, .5) 0,
+		rgba(0, 0, 0, .0001) 0%);
+	width: 60px;
+}
+.carousel-control.right {
+	background-image: linear-gradient(to right, rgba(0, 0, 0, .5) 0,
+		rgba(0, 0, 0, .0001) 0%);
+	width: 60px;
+}
+.carousel{
+	padding: 0px;
+	border: 2px solid #052b52;
+	box-shadow: 5px 5px 5px #787878;
+}
 </style>
 <img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
 <div
@@ -217,8 +226,8 @@ body {
 			<table class="table table-hover" id="packComment">
 				<tr id="tableTitle">
 					<th class="text-center">번호</th>
-					<th class="text-center">작성자</th>
 					<th class="text-center">제목</th>
+					<th class="text-center">작성자</th>
 					<th class="text-center">작성일</th>
 					<th class="text-center"><span
 						class="glyphicon glyphicon-heart"></span></th>
@@ -260,7 +269,7 @@ body {
 		</div>
 	</div>
 	<!-- row -->
-	<div class="row">
+	<div class="row" style="margin-bottom: 30px;">
 		<div class="col-lg-offset-1 col-lg-10 " style="margin-top: 10px;">
 			<div class="col-lg-9 col-xs-9">
 				<p style="font-weight: bold; font-size: 1.5em;">갤러리</p>
@@ -271,57 +280,72 @@ body {
 					style="float: right;">더보기 <span class="ion-ios-arrow-forward"></span>
 				</a>
 			</div>
-			<div id="gallery">
+			<div id="gallery" class="col-lg-12 col-xs-12">
 				<c:if test="${empty packGalleryList}" var="isEmpty">
 					<br />
-					<!-- 
-					<h3 style="text-align: center; color: grey">갤러리에 사진이 없어요.</h3> -->
-					<div class="container-xl">
-							<div class="col-md-12  mx-auto">
-								<div id="myCarousel" class="carousel slide" data-ride="carousel"
-									data-interval="0">
-									<!-- Wrapper for carousel items -->
-									<div class="carousel-inner">
-										<div class="carousel-item active">
-											<div class="row">
-												<div class="col-sm-4">
-													<div class="img-box">
-														<img src="<c:url value='/change/img/elements/a.jpg'/>" class="img-fluid"
-															alt="">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="img-box">
-														<img src="<c:url value='/change/img/elements/a2.jpg'/>" class="img-fluid"
-															alt="">
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="img-box">
-														<img src="<c:url value='/change/img/elements/d.jpg'/>" class="img-fluid"
-															alt="">
-													</div>
-												</div>
-												
-											</div>
-										</div>
+					<h3 style="text-align: center; color: grey;height: 260px;line-height: 250px;">갤러리에 사진이 없어요.</h3>
+					<!--  
+						<img style="width: 49%; height: 100px; margin-bottom: 5px;" src="/fileupload/${item.pictureName}" alt="팩갤러리 사진">
+						-->
+				</c:if>
+				
+				<c:if test="${!isEmpty}" var="gallery">
+					<div class="row" style="height: 300px;">
+						
+						<div class="col-lg-12 col-xs-12 carousel slide" id="galleryImgs" data-ride="carousel" data-interval="false"> 
+							<!-- indicators -->
+							<c:if test="${packGalleryList.size() > 1 }">
+								<ol class="carousel-indicators">
+									<c:forEach items="${packGalleryList}"
+										var="i" varStatus="index">
+										<li <c:if test="${index.index==0 }"> class="active"</c:if>
+											data-target="#galleryImgs"
+											data-slide-to="${index.index}">
+										</li>
+									</c:forEach>
+								</ol>
+							</c:if>
+
+							<!-- Wrapper for slides -->
+							<div class="carousel-inner" role="listbox" >
+								<c:forEach
+									items="${packGalleryList }"
+									var="galleryDTO" varStatus="index">
+									<div
+										<c:if test="${index.index==0 }" var="isFirst"> class="item active"</c:if>
+										<c:if test="${!isFirst }">class="item"</c:if> style="width: 100%;">
+										<img class="gallery-img-src"
+											src="/fileupload/${galleryDTO.pictureName }"
+											alt="기본사진" style="height: 300px; width: 100%;"/>
 									</div>
-									<!-- Carousel controls -->
-									<a class="carousel-control-prev" href="#myCarousel"
-										data-slide="prev"> <i class="fa fa-chevron-left"></i>
-									</a> <a class="carousel-control-next" href="#myCarousel"
-										data-slide="next"> <i class="fa fa-chevron-right"></i>
-									</a>
-								</div>
+								</c:forEach>
 							</div>
+
+							<!-- Controls -->
+							<c:if test="${packGalleryList.size() > 1 }">
+								<a class="left carousel-control"
+									href="#galleryImgs"
+									role="button" data-slide="prev"
+									style="background-color: none;">
+									<span
+										class="glyphicon glyphicon-chevron-left"
+										aria-hidden="true"></span> <span
+										class="sr-only">Previous</span>
+								</a>
+								<a class="right carousel-control"
+									href="#galleryImgs"
+									role="button" data-slide="next">
+									<span
+										class="glyphicon glyphicon-chevron-right"
+										aria-hidden="true"></span> <span
+										class="sr-only">Next</span>
+								</a>
+							</c:if>
+						</div>
 					</div>
+					<!-- feed-img-row -->
 				</c:if>
-				<c:if test="${!isEmpty}">
-					<c:forEach var="item" items="${packGalleryList }">
-						<img style="width: 49%; height: 100px; margin-bottom: 5px;"
-							src="/fileupload/${item.pictureName}" alt="팩갤러리 사진">
-					</c:forEach>
-				</c:if>
+				
 			</div>
 		</div>
 	</div>
@@ -330,7 +354,7 @@ body {
 		<div class="col-lg-offset-1 col-lg-10" style="margin-top: 10px;">
 			<div class="row">
 				<div class="col-lg-10 col-xs-9">
-					<p style="font-weight: bold; font-size: 1.5em;">코스 목록</p>
+					<p style="font-weight: bold; font-size: 1.5em;">회원 랭킹</p>
 				</div>
 				<div class="col-lg-2 col-xs-3" style="padding-top: 13px;">
 					<a href="#" class="btn-custom" style="float: right;">더보기 <span
@@ -340,34 +364,29 @@ body {
 			</div>
 			<table class="table table-hover">
 				<tr id="tableTitle">
-					<th class="text-center">번호</th>
-					<th class="text-center">제목</th>
-					<th class="text-center">작성자</th>
-					<th class="text-center">작성일</th>
+					<th class="text-center">랭킹</th>
+					<th class="text-center">이름</th>
+					<th class="text-center">마일리지</th>
 				</tr>
 				<tr class="text-center">
 					<td>1</td>
-					<td class="text-left ">제목1</td>
-					<td>작성자1</td>
-					<td>10</td>
+					<td class="text-center">장동건</td>
+					<td>132</td>
 				</tr>
 				<tr class="text-center">
 					<td>2</td>
-					<td class="text-left">제목2</td>
-					<td>작성자2</td>
-					<td>20</td>
+					<td class="text-center">원빈</td>
+					<td>131</td>
 				</tr>
 				<tr class="text-center">
 					<td>3</td>
-					<td class="text-left">제목3</td>
-					<td>작성자3</td>
-					<td>30</td>
+					<td class="text-center">현빈</td>
+					<td>130</td>
 				</tr>
 				<tr class="text-center">
 					<td>4</td>
-					<td class="text-left">제목4</td>
-					<td>작성자4</td>
-					<td>40</td>
+					<td class="text-center">공유</td>
+					<td>129</td>
 				</tr>
 			</table>
 		</div>

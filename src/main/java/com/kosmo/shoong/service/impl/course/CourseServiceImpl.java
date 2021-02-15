@@ -1,5 +1,6 @@
 package com.kosmo.shoong.service.impl.course;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +41,10 @@ public class CourseServiceImpl implements CourseService{
 	
 	@Override
 	public List<CourseDTO> selectList() {
-		return courseDao.selectList();
+		List<CourseDTO> list = courseDao.selectList();
+		//SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm");
+		//for(CourseDTO item:list) item.setCourseRegiDate(sdf.));
+		return list;
 	}
 
 	@Override

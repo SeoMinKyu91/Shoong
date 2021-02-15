@@ -181,9 +181,9 @@
 			<hr style="background-color: black; height: 1px" />
 		</div>
 	</div>
-	<div class="container">
 
-		<div class="row">
+	<div class="row">
+		<div class="col-lg-12 col-xs-12">
 			<c:if test="${empty packGalleryList }" var="isEmpty">
 				<!-- <h4>갤러리에 사진이 없어요.</h4> -->
 				<img src="<c:url value='/change/img/elements/a.jpg'/>" class="img-thumbnail">
@@ -203,7 +203,6 @@
 
 				</c:forEach>
 			</c:if>
-
 		</div>
 	</div>
 
