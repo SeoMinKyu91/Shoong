@@ -11,10 +11,20 @@
 <!-- ※colorlib-main으로 일단 감싸고 안에다가 작업해야 왼쪽 탑에 안먹히고 작업할 수 있어요 -->
 <!-- 설명이 이해가 잘 안되시면  따로 연락주세요...-->
 <style>
+.slider-area {
+	display: none;
+}
+
 input {
 	border: #ced4da 1.5px solid;
 	font-size: .8em;
 	padding-left: 10px
+}
+
+.input {
+	border: #ced4da 1.5px solid;
+	font-size: .8em;
+	padding-left: 10px;
 }
 
 #map {
@@ -24,9 +34,29 @@ input {
 	position: relative;
 	margin-bottom: 50px;
 }
+#bg {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  opacity: 0.5;
+  /* Preserve aspet ratio */
+  min-width: 100%;
+  min-height: 100%;
+}
+.form-horizontal{
+	padding-top: 30px;
+	background-color: #f2f2f7;
+	background-color: rgba( 255, 255, 255, 0.9 );
+	border-radius: 30px;
+	position: relative;
+	z-index: 1;
+	box-shadow: 0px 0px 5px #787878;
+}
 </style>
-<div id="colorlib-main" style="padding-top: 100px">
-	<!-- 위에 딱 붙는게 싫어서 임시로 padding-top: 100px 주었음 수정하고싶으면 수정  -->
+<img src="<c:url value='/change/img/MainPicture.jpg'/>" id="bg" alt="">
+<div class="col-xs-10 offset-xs-1 col-md-10 offset-md-1"
+	style="padding-bottom: 50px">
+	<!-- 위에 딱 붙는게 싫어서 임시로 padding-top: 100px 주었음 수정하고싶으면 수정  
 	<div class="container">
 		<div class="col-xs-12 col-md-12">
 			<div class="page-header" style="text-align: center">
@@ -35,48 +65,51 @@ input {
 					style="width: 100px; padding-bottom: 50px"></a>
 			</div>
 		</div>
-	</div>
-	<!-- 실제 내용 시작 -->
-	<div class="col-xs-10 offset-xs-1 col-md-10 offset-md-1"
-		style="padding-bottom: 50px">
+	</div>-->
 		<form class="form-horizontal" method="post" name="join"
 			onsubmit="return checked()"
-			style="background-color: white; box-shadow: 0px 0px 5px #000; border-radius: 100px;"
 			action="<c:url value='/kakao/KakaoJoin.do'/>">
 			<div class="form-group">
-				<div class="col-xs-10 offset-xs-1 col-md-6 offset-md-3"
-					style="padding-top: 40px; padding-bottom: 40px; text-align: center">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2"
+					style="padding-bottom: 30px; text-align: center">
 					<h3 style="font-weight: bold">추가 정보 입력</h3>
 				</div>
-				<div class=" col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 					<!-- 이메일 입력란 -->
 					<input type="hidden" id="userId" name="userId"
 						style="font-size: .8em; height: 50px;" value="${userInfo.email}"> <br />
 				</div>
 			</div>
 			<!-- 비밀번호 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<div class="form-group">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userPWD">비밀번호(4~12자의 영문 대소문자와 숫자로만 입력)</label> <input
 					type="password" class="form-control input-sm" id="userPWD"
 					name="userPWD" minlength="4" maxlength="12" style="font-size: .8em"
 					placeholder="비밀번호를 입력하세요"> <br />
+				</div>
 			</div>
 			<!-- 비밀번호 확인 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<div class="form-group">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userPWDOk">비밀번호 확인</label> <input type="password"
 					class="form-control input-sm" id="userPWDOk" name="userPWDOk"
 					minlength="4" maxlength="12" style="font-size: .8em"
 					placeholder="위와 같은 비밀번호를 입력하세요"> <span id="passwordCheck"
 					style="font-size: .8em; color: gray"></span>
+				</div>
 			</div>
 			<!-- 이름 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<div class="form-group">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userName">이름</label> <input type="text"
 					class="form-control input-sm" id="userName" name="userName"
 					style="font-size: .8em" placeholder="이름을 입력하세요"><br />
+				</div>
 			</div>
 			<!-- 생년월일 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<div class="form-group">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userRRN">생년월일</label> <br /> <input name="userRRN1"
 					id="userRRN1" type="text" size="25" maxlength="6"
 					OnKeyUp="check();" onChange="inputbirthNage(); inputGender()"
@@ -107,9 +140,11 @@ input {
 					name="userGender" type="hidden" size="3" maxlength="2"
 					style="border: none; color: gray" value="${userInfo.gender}"
 					onBlur="checknum(document.join.userGender.value)"><br />
+				</div>
 			</div>
 			<!-- 연락처 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<div class="form-group">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userTel">연락처</label><br /> <select name="userTel1"
 					id="userTel1"
 					style="font-size: .8em; height: 50px; width: 26.5%; padding-left: 10px; border: #ced4da 1.5px solid;">
@@ -124,28 +159,33 @@ input {
 					OnKeyUp="checkTel();">&nbsp; ㅡ &nbsp; <input
 					name="userTel3" id="userTel3" type="text" maxlength="4"
 					style="height: 50px; width: 26.5%" OnKeyUp="checkTel();"> <br />
+				</div>
 			</div>
 			<!-- 활동지역 입력란 -->
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<div class="form-group">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<label for="userAddr">활동지역</label>
 				<div>
 					<input type="text" class="form-control" id="userAddr"
 						name="userAddr" style="font-size: .8em">
 				</div>
+				</div>
 			</div>
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3">
+			<div class="form-group">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<div id="map"></div>
 				<input type="hidden" id="memberLat" name="memberLat"
 					class="form-group" /> <input type="hidden" id="memberLng"
 					name="memberLng" class="form-group" />
+				</div>
 			</div>
-			<div class="form-group col-xs-10 offset-xs-1 col-md-6 offset-md-3"
-				style="padding-bottom: 50px">
+			<div class="form-group" style="padding-bottom: 50px">
+				<div class="col-xs-10 offset-xs-1 col-md-8 offset-md-2">
 				<button type="submit" class="btn btn-primary btn-lg btn-block">가입하기</button>
+				</div>
 			</div>
 		</form>
 	</div>
-</div>
 
 <!-- -----------------입력시 변환 스크립트---------------- -->
 <script>
