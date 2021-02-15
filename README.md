@@ -1,6 +1,6 @@
 # Shoong
 Kosmo 7기 슝 프로젝트팀 입니다.
-    _edit by suggom_
+    _edit by 우경환_
 
 > 사전 작업
 > 1. Tomcat 9 사양의 서버를 생성한다
@@ -31,7 +31,9 @@ Kosmo 7기 슝 프로젝트팀 입니다.
 >     path="/fileupload" relodabl="true"/>
 > ```
 > * 리얼패쓰/upload가 없으면 서버 실행 도중 에러생성됨
-> 7. db 계정 생성 후 /Shoong/src/main/resources/com/kosmo/shoong/erm에 KosmoProj.sql 실행 테이블 생성
-> 8. /Shoong/src/main/resources/com/kosmo/shoong/pack/mybatis/packinsert.sql 실행
-> 9. /Shoong/src/main/resources/com/kosmo/shoong/mypage/mybatis/mypageinsert.sql 실행
+> 7. db 계정 생성 후 /Shoong/src/main/resources/com/kosmo/shoong/erm에 0206KosmoProj.sql 실행하여 테이블을 생성 실행 테이블 생성
+> 8. /Shoong/src/main/resources/com/kosmo/shoong/erm에 0215KosmoProjInsert.sql
+> 9. 생성한 독 베이스 경로에 공유한 upload 폴더 추가
+> 10. https://github.com/suggom/ShoongFlask 챗봇에 필요한 플라스크 서버와 앱 프로젝트
+> 11. https://github.com/suggom/Shooong 경로 추적 서비스에 필요한 안드로이드 프로젝트
  
