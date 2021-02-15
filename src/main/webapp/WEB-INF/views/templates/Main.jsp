@@ -141,6 +141,10 @@
 	width: 306px;
 	height: 230px;
 }
+.list-img > img {
+	width: 500px;
+	height: 300px;
+}
 
 </style>
 <!-- Popular Locations Start -->
@@ -162,11 +166,11 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-listing mb-30">
 						<div class="list-img">
-							<img src="<c:url value='/change/img/gallery/list1.png'/>" alt="">
+							<img src="<c:url value='/change/img/gallery/jatoo1.jpg'/>" alt="">
 						</div>
 						<div class="list-caption">
 							<h3>
-								<a href='<c:url value="#"/>'>Saintmartine</a>
+								<a href='<c:url value="#"/>'>동부3고개~사나사계곡 누릉지백숙</a>
 							</h3>
 						</div>
 					</div>
@@ -174,11 +178,11 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-listing mb-30">
 						<div class="list-img">
-							<img src="<c:url value='/change/img/gallery/list2.png'/>" alt="">
+							<img src="<c:url value='/change/img/gallery/jatoo2.jpg'/>" alt="">
 						</div>
 						<div class="list-caption">
 							<h3>
-								<a href='<c:url value="#"/>'>Saintmartine</a>
+								<a href='<c:url value="#"/>'>북악스카이웨이 초소</a>
 							</h3>
 						</div>
 					</div>
@@ -186,11 +190,11 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-listing mb-30">
 						<div class="list-img">
-							<img src="<c:url value='/change/img/gallery/list3.png'/>" alt="">
+							<img src="<c:url value='/change/img/gallery/jatoo3.jpg'/>" alt="">
 						</div>
 						<div class="list-caption">
 							<h3>
-								<a href='<c:url value="#"/>'>Saintmartine</a>
+								<a href='<c:url value="#"/>'>이포보_여주보 왕복</a>
 							</h3>
 						</div>
 					</div>
@@ -201,11 +205,11 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-listing mb-30">
 						<div class="list-img">
-							<img src="<c:url value='/change/img/gallery/list1.png'/>" alt="">
+							<img src="<c:url value='/change/img/gallery/jatoo4.jpg'/>" alt="">
 						</div>
 						<div class="list-caption">
 							<h3>
-								<a href='<c:url value="#"/>'>Saintmartine</a>
+								<a href='<c:url value="#"/>'>동해종주 하프코스</a>
 							</h3>
 						</div>
 					</div>
@@ -213,11 +217,11 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-listing mb-30">
 						<div class="list-img">
-							<img src="<c:url value='/change/img/gallery/list2.png'/>" alt="">
+							<img src="<c:url value='/change/img/gallery/jatoo5.jpg'/>" alt="">
 						</div>
 						<div class="list-caption">
 							<h3>
-								<a href='<c:url value="#"/>'>Saintmartine</a>
+								<a href='<c:url value="#"/>'>가오리코스</a>
 							</h3>
 						</div>
 					</div>
@@ -225,11 +229,11 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-listing mb-30">
 						<div class="list-img">
-							<img src="<c:url value='/change/img/gallery/list3.png'/>" alt="">
+							<img src="<c:url value='/change/img/gallery/jatoo6.jpg'/>" alt="">
 						</div>
 						<div class="list-caption">
 							<h3>
-								<a href='<c:url value="#"/>'>Saintmartine</a>
+								<a href='<c:url value="#"/>'>팔당토끼굴회귀_동부3고개-황금리-분원리</a>
 							</h3>
 						</div>
 					</div>
@@ -274,5 +278,24 @@
 
 			next.children(':first-child').clone().appendTo($(this));
 		}
+	});
+	
+	$(function(){
+		$.ajax({
+			url:"http://localhost:5000/jatoo?region=sj",
+			type:"get",
+			success:function(data){
+				console.log("성공");
+				console.log("리시브데이터:%O",data);
+				const routeList = data.routes
+				var routeListStr = "";
+				routeList.forEach(function(elt, i, array){
+					
+				});
+			},
+			error:function(request,status,error){
+				console.log("실패",request,status,error);
+			}
+		});
 	});
 </script>
