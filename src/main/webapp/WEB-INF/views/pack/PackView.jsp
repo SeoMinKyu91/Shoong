@@ -145,7 +145,7 @@ body {
 }
 .carousel{
 	padding: 0px;
-	border: 2px solid #052b52;
+	border: 1px solid #052b52;
 	box-shadow: 5px 5px 5px #787878;
 }
 </style>
@@ -176,8 +176,8 @@ body {
 			</div>
 		</div>
 	</div>
-	<div class="row" style="margin-top: 20px;">
-		<div class="col-lg-offset-1 col-lg-10">
+	<div class="row" style="margin-top: 30px;">
+		<div class="col-xs-12 col-lg-offset-1 col-lg-10">
 			<div class="row">
 				<div class="col-lg-9 col-xs-9">
 					<p style="font-weight: bold; font-size: 1.5em;">공지사항</p>
@@ -218,118 +218,116 @@ body {
 		
 	</div>
 	<!-- row -->
-	<div class="row" style="margin-bottom: 30px;">
-		<div class="col-lg-offset-1 col-lg-10 " style="margin-top: 10px;">
-			<div class="col-lg-9 col-xs-9" style="padding-left:0px;">
-				<p style="font-weight: bold; font-size: 1.5em;">갤러리</p>
-			</div>
-			<div class="col-lg-3 col-xs-3"
-				style="padding-top: 10px; float: right;">
-				<a href="<c:url value="/pack/gallery.do"/>" class="btn-custom"
-					style="float: right;">더보기 <span class="ion-ios-arrow-forward"></span>
-				</a>
-			</div>
-			<div id="gallery" class="col-lg-12 col-xs-12">
-				<c:if test="${empty packGalleryList}" var="isEmpty">
-					<br />
-					<h3 style="text-align: center; color: grey;height: 260px;line-height: 250px;">갤러리에 사진이 없어요.</h3>
-					<!--  
-						<img style="width: 49%; height: 100px; margin-bottom: 5px;" src="/fileupload/${item.pictureName}" alt="팩갤러리 사진">
-						-->
-				</c:if>
-				
-				<c:if test="${!isEmpty}" var="gallery">
-					<div class="row" style="height: 300px;">
-						
-						<div class="col-lg-12 col-xs-12 carousel slide" id="galleryImgs" data-ride="carousel" data-interval="false"> 
-							<!-- indicators -->
-							<c:if test="${packGalleryList.size() > 1 }">
-								<ol class="carousel-indicators">
-									<c:forEach items="${packGalleryList}"
-										var="i" varStatus="index">
-										<li <c:if test="${index.index==0 }"> class="active"</c:if>
-											data-target="#galleryImgs"
-											data-slide-to="${index.index}">
-										</li>
+	<div class="row" style="margin-bottom: 70px;">
+		<div class="col-xs-12 col-lg-offset-1 col-lg-10">
+			<div class="col-xs-6 col-lg-6 " style="margin-top: 10px; padding-left:0px;">
+				<div class="col-lg-9 col-xs-9">
+					<p style="font-weight: bold; font-size: 1.5em;">갤러리</p>
+				</div>
+				<div class="col-lg-3 col-xs-3"
+					style="padding-top: 10px; float: right;">
+					<a href="<c:url value="/pack/gallery.do"/>" class="btn-custom"
+						style="float: right;">더보기 <span class="ion-ios-arrow-forward"></span>
+					</a>
+				</div>
+				<div id="gallery" class="col-xs-12 col-lg-12">
+					<c:if test="${empty packGalleryList}" var="isEmpty">
+						<br />
+						<h3 style="text-align: center; color: grey;height: 260px;line-height: 250px;">갤러리에 사진이 없어요.</h3>
+						<!--  
+							<img style="width: 49%; height: 100px; margin-bottom: 5px;" src="/fileupload/${item.pictureName}" alt="팩갤러리 사진">
+							-->
+					</c:if>
+					
+					<c:if test="${!isEmpty}" var="gallery">
+						<div class="row" style="height: 300px;">
+							<div class="col-xs-12 col-lg-12 carousel slide" id="galleryImgs" data-ride="carousel" data-interval="false"> 
+								<!-- indicators -->
+								<c:if test="${packGalleryList.size() > 1 }">
+									<ol class="carousel-indicators">
+										<c:forEach items="${packGalleryList}"
+											var="i" varStatus="index">
+											<li <c:if test="${index.index==0 }"> class="active"</c:if>
+												data-target="#galleryImgs"
+												data-slide-to="${index.index}">
+											</li>
+										</c:forEach>
+									</ol>
+								</c:if>
+	
+								<!-- Wrapper for slides -->
+								<div class="carousel-inner" role="listbox" >
+									<c:forEach
+										items="${packGalleryList }"
+										var="galleryDTO" varStatus="index">
+										<div
+											<c:if test="${index.index==0 }" var="isFirst"> class="item active"</c:if>
+											<c:if test="${!isFirst }">class="item"</c:if> style="width: 100%;">
+											<img class="gallery-img-src"
+												src="/fileupload/${galleryDTO.pictureName }"
+												alt="기본사진" style="height: 300px; width: 100%;"/>
+										</div>
 									</c:forEach>
-								</ol>
-							</c:if>
-
-							<!-- Wrapper for slides -->
-							<div class="carousel-inner" role="listbox" >
-								<c:forEach
-									items="${packGalleryList }"
-									var="galleryDTO" varStatus="index">
-									<div
-										<c:if test="${index.index==0 }" var="isFirst"> class="item active"</c:if>
-										<c:if test="${!isFirst }">class="item"</c:if> style="width: 100%;">
-										<img class="gallery-img-src"
-											src="/fileupload/${galleryDTO.pictureName }"
-											alt="기본사진" style="height: 300px; width: 100%;"/>
-									</div>
-								</c:forEach>
+								</div>
+	
+								<!-- Controls -->
+								<c:if test="${packGalleryList.size() > 1 }">
+									<a class="left carousel-control"
+										href="#galleryImgs"
+										role="button" data-slide="prev"
+										style="background-color: none;">
+										<span
+											class="glyphicon glyphicon-chevron-left"
+											aria-hidden="true"></span> <span
+											class="sr-only">Previous</span>
+									</a>
+									<a class="right carousel-control"
+										href="#galleryImgs"
+										role="button" data-slide="next">
+										<span
+											class="glyphicon glyphicon-chevron-right"
+											aria-hidden="true"></span> <span
+											class="sr-only">Next</span>
+									</a>
+								</c:if>
 							</div>
-
-							<!-- Controls -->
-							<c:if test="${packGalleryList.size() > 1 }">
-								<a class="left carousel-control"
-									href="#galleryImgs"
-									role="button" data-slide="prev"
-									style="background-color: none;">
-									<span
-										class="glyphicon glyphicon-chevron-left"
-										aria-hidden="true"></span> <span
-										class="sr-only">Previous</span>
-								</a>
-								<a class="right carousel-control"
-									href="#galleryImgs"
-									role="button" data-slide="next">
-									<span
-										class="glyphicon glyphicon-chevron-right"
-										aria-hidden="true"></span> <span
-										class="sr-only">Next</span>
-								</a>
-							</c:if>
 						</div>
+						<!-- feed-img-row -->
+					</c:if>
+				</div>
+			</div>
+			<div class="col-xs-6 col-lg-6" style="margin-top: 10px; padding-right:0px;">
+				<div class="row">
+					<div class="col-lg-9 col-xs-9">
+						<p style="font-weight: bold; font-size: 1.5em;">회원 랭킹</p>
 					</div>
-					<!-- feed-img-row -->
-				</c:if>
-				
+					<div class="col-lg-3 col-xs-3" style="padding-top: 13px;">
+						<a href="<c:url value="/pack/rank.do"/>" class="btn-custom" style="float: right;">더보기 <span
+							class="ion-ios-arrow-forward"></span>
+						</a>
+					</div>
+				</div>
+				<table class="table table-hover">
+					<tr id="tableTitle">
+						<th class="text-center">랭킹</th>
+						<th class="text-center">이름</th>
+						<th class="text-center">마일리지</th>
+					</tr>
+					<c:forEach items="${packRank }" var="item" begin="0" end="6" varStatus="loop">
+						<tr class="text-center">
+							<td>${loop.index+1 }</td>
+							<td class="text-center">${item.NAME }</td>
+							<c:if test="${empty item.MILEAGE}" var="noMileage">
+								<td>0</td>
+							</c:if>
+							<c:if test="${!noMileage }">
+								<td>${item.MILEAGE }</td>
+							</c:if>
+						</tr>
+					</c:forEach>
+				</table>
 			</div>
 		</div>
 	</div>
 	<!-- row -->
-	<div class="row">
-		<div class="col-lg-offset-1 col-lg-10" style="margin-top: 10px;">
-			<div class="row">
-				<div class="col-lg-10 col-xs-9">
-					<p style="font-weight: bold; font-size: 1.5em;">회원 랭킹</p>
-				</div>
-				<div class="col-lg-2 col-xs-3" style="padding-top: 13px;">
-					<a href="<c:url value="/pack/rank.do"/>" class="btn-custom" style="float: right;">더보기 <span
-						class="ion-ios-arrow-forward"></span>
-					</a>
-				</div>
-			</div>
-			<table class="table table-hover">
-				<tr id="tableTitle">
-					<th class="text-center">랭킹</th>
-					<th class="text-center">이름</th>
-					<th class="text-center">마일리지</th>
-				</tr>
-				<c:forEach items="${packRank }" var="item" begin="0" end="2" varStatus="loop">
-					<tr class="text-center">
-						<td>${loop.index+1 }</td>
-						<td class="text-center">${item.NAME }</td>
-						<c:if test="${empty item.MILEAGE}" var="noMileage">
-							<td>0</td>
-						</c:if>
-						<c:if test="${!noMileage }">
-							<td>${item.MILEAGE }</td>
-						</c:if>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
-	</div>
 </div>
