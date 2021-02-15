@@ -154,10 +154,7 @@
 												<div class="row feed-top-row">
 													<div class="col-lg-2 col-xs-3 feed-top-imgs"
 														style="text-align: center;">
-														<!-- 나중에 이미지 사진 교체 해야함 현재는 정확히 어떻게 해야할지 모르겠어서 임시사진 적용 -->
-														<img class="feed-top-img-src"
-															alt="이미지사진"
-															src="<c:url value="/images/image_10.jpg"/>" />
+														<img class="feed-top-img-src" alt="이미지사진" src="<c:url value="/images/badges/${item.memberProfileImg }"/>" />
 													</div>
 													<div class="col-lg-10 col-xs-9 feed-top-nick">
 														<span class="feed-top-nick-span">${item.packCommentWriter }</span>
@@ -187,11 +184,8 @@
 													</c:if>
 	
 													<!-- Wrapper for slides -->
-													<div class="carousel-inner"
-														role="listbox">
-														<c:forEach
-															items="${item.packCommentImages }"
-															var="image" varStatus="index">
+													<div class="carousel-inner" role="listbox">
+														<c:forEach items="${item.packCommentImages }" var="image" varStatus="index">
 															<div
 																<c:if test="${index.index==0 }" var="isFirst"> class="item active"</c:if>
 																<c:if test="${!isFirst }">class="item"</c:if>>

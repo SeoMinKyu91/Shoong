@@ -1,11 +1,16 @@
 package com.kosmo.shoong.web;
 import java.util.Map;
-import java.util.HashMap;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonParseException;
+//import com.fasterxml.jackson.databind.JsonMappingException;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.shoong.service.chat.ChatBotService;
-import com.kosmo.shoong.service.mypage.MyPageRecordService;
 
 @Controller
 @RequestMapping("/chatbot/")
@@ -72,6 +79,40 @@ public class ChatBotController {
 		
 	return recordDiv;
 	}
+	/*
+	@RequestMapping(value = "map/api")
+	public String bicycleStorage(@RequestParam Map map,Model model) throws ParseException, JsonParseException, JsonMappingException, IOException {
+	 
+		String jsonStr = map.get("bicycleApiJson").toString();
 	
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse( jsonStr );
+		JSONArray jsonArray =  (JSONArray) obj;
+		
+		List<Map> list = new ArrayList<Map>();
+	     
+		if( jsonArray != null )
+        {
+            int jsonSize = jsonArray.size();
+            for( int i = 0; i < jsonSize; i++ )
+            {	Map jsonMap = null;
+            	JSONObject jsonObj = (JSONObject)jsonArray.get(i);
+            	jsonMap = new ObjectMapper().readValue(jsonObj.toJSONString(),Map.class) ;
+                list.add( jsonMap );
+            }
+        }
+	     
+	    model.addAttribute("location",map.get("location").toString());
+	    
+	    if(map.get("api").toString().equals("storage")) {
+	    	 model.addAttribute("storageList",list);
+		     return "chatbot/StorageMap";
+	     }else{
+	    	 model.addAttribute("lendList",list);
+		     return "chatbot/LendMap";
+	     }
+	
+	}     
+	*/
 	
 }

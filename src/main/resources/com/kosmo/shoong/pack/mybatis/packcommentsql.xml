@@ -44,6 +44,7 @@
 
 <select id="packCommentSelectList" parameterType="java.util.Map" resultMap="packCommentDTOResult">
 	SELECT (select name from member_ where user_id = p.user_id and p.pack_join_no = c.pack_join_no) packCommentWriter,
+	(select profile_img_name from member_profile_img where user_id = p.user_id) memberProfileImg,
 	c.pack_comment_content packCommentContent,
 	c.pack_comment_no packCommentNo,
 	(select count(*) from pack_comment_like where pack_comment_no = c.pack_comment_no) packCommentLikeCount,
@@ -81,6 +82,7 @@
 
 <select id="packCommentView" parameterType="java.util.Map" resultMap="packCommentDTOResult">
 	SELECT (select name from member_ where user_id = p.user_id and p.pack_join_no = c.pack_join_no) packCommentWriter,
+	(select profile_img_name from member_profile_img where user_id = p.user_id) memberProfileImg,
 	c.pack_comment_content packCommentContent,
 	c.pack_comment_no packCommentNo,
 	(select count(*) from pack_comment_like where pack_comment_no = c.pack_comment_no) packCommentLikeCount,

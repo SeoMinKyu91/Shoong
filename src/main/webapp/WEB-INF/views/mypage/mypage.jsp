@@ -271,33 +271,6 @@ function mapStart(){
 		zoom : 11
 	})
 
-	map.addControl(new MapboxDirections({
-		accessToken : mapboxgl.accessToken
-	}), 'bottom-left');
-	
-	//주소검색기 컨트롤러 얻어옴
-	var geocoder = new MapboxGeocoder({
-		accessToken : mapboxgl.accessToken,
-		mapboxgl : mapboxgl
-	});
-	
-
-	//맵박스 현재위치 컨트롤러
-	map.addControl(new mapboxgl.GeolocateControl({
-		positionOptions : {
-			enableHighAccuracy : true
-		},
-		trackUserLocation : true
-	}));
-	
-	//지오코더가 결과를 반환할 때 마커를 생성한다
-	geocoder.on('result', function(data) {
-		// Capture the result coordinates
-		var point = data.result.center; 
-		// Add the marker to the map at the result coordinates
-		marker.setLngLat(point).addTo(map); 
-	});
-	
 	mapRecordUpload(map);
 	
 }//mapStart()
@@ -322,12 +295,12 @@ function mapRecordUpload(map){
 			'line-cap': 'round'
 		},
 		'paint': {
-			'line-color': '#ff0000',
-			'line-width': 8
+			'line-color' : '#24d900',
+			'line-width' : 3
 		}
 	});
 	map.setCenter(json.geometry.coordinates[0][0]);
-	map.setZoom(11);
+	map.setZoom(10);
 </c:if>
 });
 }//mapRecordUpload()
