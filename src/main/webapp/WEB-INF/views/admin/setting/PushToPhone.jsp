@@ -23,11 +23,9 @@
     pageEncoding="UTF-8"%>
     
 <%!
-	//token값저장용
+
 	ArrayList<String> tokens = new ArrayList<String>();  	
 	 
-	//Firebase Console->프로젝트 선택->설정->프로젝트 설정
-	//->클라우드 메시징->서버키 복사
 	final String apiKey = "AAAAJ2Qak8w:APA91bGejFe733-bo1ojzuZprIKJQ8hMCzjc1vD24TM_ulcfnhwmSBMEH9RfAMvtNtmb3BSR5QeGFwSpTovd4fw5v0c6Rne_FauVikJlgLmYsaq5O3-6mhWpHBc7VbSW17VXI3KmyZAt";
 	String gcmURL ="https://fcm.googleapis.com/fcm/send";	
 	JSONArray resultArray = new JSONArray();
@@ -43,13 +41,7 @@
 		    httpConn.setRequestProperty("Content-Type", "application/json");
 		    httpConn.setRequestProperty("Authorization", "key=" + apiKey);
 		   
-		    //백그라운드일때도   onMessageReceived를 호출하려면 키값을 data로 설정해야한다  
-		    //notification일때는 백그라운드 상태에서 onMessageReceived가 호출이 안된다.
-		    /*
-		    {"data":{"제목키값":"제목","내용키값":"내용"},"to":"메시지는 보낼 토큰값"}
-		    
-		    */
-		    
+
 			String msg =String.format("{\"data\":{\"dataTitle\":\"%s\",\"dataBody\":\"%s\"},\"to\":\"%s\"}",title,message,token);
 		    OutputStream os = httpConn.getOutputStream();
 		    
