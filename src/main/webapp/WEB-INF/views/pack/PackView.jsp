@@ -220,7 +220,7 @@ body {
 	<!-- row -->
 	<div class="row" style="margin-bottom: 30px;">
 		<div class="col-lg-offset-1 col-lg-10 " style="margin-top: 10px;">
-			<div class="col-lg-9 col-xs-9">
+			<div class="col-lg-9 col-xs-9" style="padding-left:0px;">
 				<p style="font-weight: bold; font-size: 1.5em;">갤러리</p>
 			</div>
 			<div class="col-lg-3 col-xs-3"
@@ -306,7 +306,7 @@ body {
 					<p style="font-weight: bold; font-size: 1.5em;">회원 랭킹</p>
 				</div>
 				<div class="col-lg-2 col-xs-3" style="padding-top: 13px;">
-					<a href="#" class="btn-custom" style="float: right;">더보기 <span
+					<a href="<c:url value="/pack/rank.do"/>" class="btn-custom" style="float: right;">더보기 <span
 						class="ion-ios-arrow-forward"></span>
 					</a>
 				</div>
@@ -317,26 +317,18 @@ body {
 					<th class="text-center">이름</th>
 					<th class="text-center">마일리지</th>
 				</tr>
-				<tr class="text-center">
-					<td>1</td>
-					<td class="text-center">장동건</td>
-					<td>132</td>
-				</tr>
-				<tr class="text-center">
-					<td>2</td>
-					<td class="text-center">원빈</td>
-					<td>131</td>
-				</tr>
-				<tr class="text-center">
-					<td>3</td>
-					<td class="text-center">현빈</td>
-					<td>130</td>
-				</tr>
-				<tr class="text-center">
-					<td>4</td>
-					<td class="text-center">공유</td>
-					<td>129</td>
-				</tr>
+				<c:forEach items="${packRank }" var="item" begin="0" end="2" varStatus="loop">
+					<tr class="text-center">
+						<td>${loop.index+1 }</td>
+						<td class="text-center">${item.NAME }</td>
+						<c:if test="${empty item.MILEAGE}" var="noMileage">
+							<td>0</td>
+						</c:if>
+						<c:if test="${!noMileage }">
+							<td>${item.MILEAGE }</td>
+						</c:if>
+					</tr>
+				</c:forEach>
 			</table>
 		</div>
 	</div>

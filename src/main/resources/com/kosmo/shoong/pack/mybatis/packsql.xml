@@ -75,4 +75,13 @@
 	select j.address, j.user_lat, j.user_lng  from member_ m join useraddr j on m.user_id=j.user_id where j.user_id=#{id}
 </select>
 
+<select id="packRankList" parameterType="Map" resultType="Map">
+	select m.name,mod(sum(r.record_length),60) mileage from 
+	member_ m join pack_join pj on m.user_id = pj.user_id
+	left outer join record_ r on m.user_id = r.user_id
+	where pj.pack_id = #{packId} and pj.pack_join_accept = 'yes' 
+	group by m.name
+	order by mileage asc
+</select>
+
 </mapper>
