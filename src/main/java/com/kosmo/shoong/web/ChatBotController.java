@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.databind.JsonMappingException;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.shoong.service.chat.ChatBotService;
 
 @Controller
@@ -79,7 +79,7 @@ public class ChatBotController {
 		
 	return recordDiv;
 	}
-	
+	/*
 	@RequestMapping(value = "map/api")
 	public String bicycleStorage(@RequestParam Map map,Model model) throws ParseException, JsonParseException, JsonMappingException, IOException {
 	 
@@ -113,5 +113,6 @@ public class ChatBotController {
 	     }
 	
 	}     
+	*/
 	
 }

@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.JsonObject;
 import com.kosmo.shoong.common.FileUpDownUtils;
+import com.kosmo.shoong.service.impl.member.MemberServiceImpl;
 import com.kosmo.shoong.service.impl.pack.PackCommentServiceImpl;
 import com.kosmo.shoong.service.pack.PackCommentDTO;
 import com.kosmo.shoong.service.pack.PackCommentReplyDTO;
@@ -35,6 +36,9 @@ public class PackCommentController {
 	
 	@Resource(name="packCommentService")
 	private PackCommentServiceImpl service;
+	
+	@Resource(name = "memberService")
+	private MemberServiceImpl memberService;
 
 	@RequestMapping(value="comment.do")
 	public String packComment(@RequestParam Map map, HttpServletRequest req, Model model) {
@@ -54,10 +58,15 @@ public class PackCommentController {
 		
 		List<PackCommentDTO> commentList = service.packCommentMainSelectList(map);
 		
+		for(PackCommentDTO dto : commentList) {
+			if(dto.getMemberProfileImg() == null) {
+				dto.setMemberProfileImg("shoongBadge6.png");
+			}
+		}
+		
 		if(commentList != null) {
 			model.addAttribute("commentList",commentList);
 		}
-		
 		
 		
 		
@@ -91,15 +100,18 @@ public class PackCommentController {
 		map.put("packId", session.getAttribute("packId"));
 		map.put("userId", session.getAttribute("userId"));
 		
-		PackCommentDTO dto = service.packCommentView(map);
-		if(dto.getPackCommentReply() !=null) {
-			List<PackCommentReplyDTO> rpdto = dto.getPackCommentReply();
+		PackCommentDTO commentView = service.packCommentView(map);
+		if(commentView.getMemberProfileImg() == null) {
+			commentView.setMemberProfileImg("shoongBadge6.png");
+		}
+		if(commentView.getPackCommentReply() !=null) {
+			List<PackCommentReplyDTO> rpdto = commentView.getPackCommentReply();
 			for(PackCommentReplyDTO r1 : rpdto) {
 				System.out.println("댓글내용:"+r1.getPackCommentReplyContent());
 				System.out.println("댓글단놈:"+r1.getPackCommentReplyWriter());
 			}
 		}
-		model.addAttribute("packCommentView",dto);
+		model.addAttribute("packCommentView",commentView);
 		return "pack/PackCommentView";
 	}
 	
