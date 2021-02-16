@@ -146,6 +146,7 @@
 	height: 300px;
 }
 
+
 </style>
 <!-- Popular Locations Start -->
 <div class="row">
@@ -163,7 +164,7 @@
 		<!-- Wrapper for slides -->
 		<div class="carousel-inner" role="listbox">
 			<div class="item active">
-				<div class="col-lg-4 col-md-6">
+				<div class="col-lg-4 col-xs-6">
 					<div class="single-listing mb-30">
 						<div class="list-img">
 							<img src="<c:url value='/change/img/gallery/jatoo1.jpg'/>" alt="">
@@ -175,7 +176,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6">
+				<div class="col-lg-4 col-xs-6">
 					<div class="single-listing mb-30">
 						<div class="list-img">
 							<img src="<c:url value='/change/img/gallery/jatoo2.jpg'/>" alt="">
@@ -202,7 +203,7 @@
 				<div class="carousel-caption">...</div>
 			</div>
 			<div class="item">
-				<div class="col-lg-4 col-md-6">
+				<div class="col-lg-4 col-xs-6">
 					<div class="single-listing mb-30">
 						<div class="list-img">
 							<img src="<c:url value='/change/img/gallery/jatoo4.jpg'/>" alt="">
@@ -214,7 +215,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6">
+				<div class="col-lg-4 col-xs-6">
 					<div class="single-listing mb-30">
 						<div class="list-img">
 							<img src="<c:url value='/change/img/gallery/jatoo5.jpg'/>" alt="">
